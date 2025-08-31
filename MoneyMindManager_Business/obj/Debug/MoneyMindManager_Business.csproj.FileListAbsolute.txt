@@ -1,0 +1,13 @@
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Business\bin\Debug\MoneyMindManager_Business.dll
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Business\bin\Debug\MoneyMindManager_Business.pdb
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Business\bin\Debug\MoneyMindManagerGlobal.dll
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Business\bin\Debug\MoneyMindManager_DataAccess.dll
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Business\bin\Debug\KhaledUtils.dll
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Business\bin\Debug\MoneyMindManagerGlobal.pdb
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Business\bin\Debug\MoneyMindManager_DataAccess.pdb
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Business\bin\Debug\KhaledUtils.pdb
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Business\obj\Debug\MoneyMindManager_Business.csproj.AssemblyReference.cache
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Business\obj\Debug\MoneyMindManager_Business.csproj.CoreCompileInputs.cache
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Business\obj\Debug\MoneyMin.5A25C1F2.Up2Date
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Business\obj\Debug\MoneyMindManager_Business.dll
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Business\obj\Debug\MoneyMindManager_Business.pdb

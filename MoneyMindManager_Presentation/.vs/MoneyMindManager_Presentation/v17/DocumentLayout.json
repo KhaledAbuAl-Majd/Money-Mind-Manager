@@ -1,0 +1,69 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\Visual Studio\\source\\Projects\\External Projects\\Money Mind Manager\\Project\\MonyeMindManager\\MoneyMindManager_Presentation\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F453BF16-D51A-4E57-BCC5-DEA98DBE47DF}|MoneyMindManager_Presentation.csproj|e:\\visual studio\\source\\projects\\external projects\\money mind manager\\project\\monyemindmanager\\moneymindmanager_presentation\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{F453BF16-D51A-4E57-BCC5-DEA98DBE47DF}|MoneyMindManager_Presentation.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F453BF16-D51A-4E57-BCC5-DEA98DBE47DF}|MoneyMindManager_Presentation.csproj|E:\\Visual Studio\\source\\Projects\\External Projects\\Money Mind Manager\\Project\\MonyeMindManager\\MoneyMindManager_Presentation\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F453BF16-D51A-4E57-BCC5-DEA98DBE47DF}|MoneyMindManager_Presentation.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{6d4078d1-5951-4ed1-ac0e-0a8099c1cce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "E:\\Visual Studio\\source\\Projects\\External Projects\\Money Mind Manager\\Project\\MonyeMindManager\\MoneyMindManager_Presentation\\Form1.cs",
+              "RelativeDocumentMoniker": "Form1.cs",
+              "ToolTip": "E:\\Visual Studio\\source\\Projects\\External Projects\\Money Mind Manager\\Project\\MonyeMindManager\\MoneyMindManager_Presentation\\Form1.cs",
+              "RelativeToolTip": "Form1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-31T17:35:38.377Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.cs [Design]",
+              "DocumentMoniker": "E:\\Visual Studio\\source\\Projects\\External Projects\\Money Mind Manager\\Project\\MonyeMindManager\\MoneyMindManager_Presentation\\Form1.cs",
+              "RelativeDocumentMoniker": "Form1.cs",
+              "ToolTip": "E:\\Visual Studio\\source\\Projects\\External Projects\\Money Mind Manager\\Project\\MonyeMindManager\\MoneyMindManager_Presentation\\Form1.cs [Design]",
+              "RelativeToolTip": "Form1.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-31T17:35:32.117Z",
+              "EditorCaption": " [Design]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

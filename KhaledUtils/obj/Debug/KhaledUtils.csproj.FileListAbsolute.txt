@@ -1,0 +1,12 @@
+E:\Visual Studio\source\My Libraryies\KhaledUtils\bin\Debug\KhaledUtils.dll
+E:\Visual Studio\source\My Libraryies\KhaledUtils\bin\Debug\KhaledUtils.pdb
+E:\Visual Studio\source\My Libraryies\KhaledUtils\obj\Debug\KhaledUtils.csproj.AssemblyReference.cache
+E:\Visual Studio\source\My Libraryies\KhaledUtils\obj\Debug\KhaledUtils.csproj.CoreCompileInputs.cache
+E:\Visual Studio\source\My Libraryies\KhaledUtils\obj\Debug\KhaledUtils.dll
+E:\Visual Studio\source\My Libraryies\KhaledUtils\obj\Debug\KhaledUtils.pdb
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\KhaledUtils\bin\Debug\KhaledUtils.dll
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\KhaledUtils\bin\Debug\KhaledUtils.pdb
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\KhaledUtils\obj\Debug\KhaledUtils.csproj.AssemblyReference.cache
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\KhaledUtils\obj\Debug\KhaledUtils.csproj.CoreCompileInputs.cache
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\KhaledUtils\obj\Debug\KhaledUtils.dll
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\KhaledUtils\obj\Debug\KhaledUtils.pdb
