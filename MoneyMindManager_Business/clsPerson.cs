@@ -25,14 +25,14 @@ namespace MoneyMindManager_Business
 
         private async Task<bool> _AddNewPerson()
         {
-            personID = await clsPersonData.AddNewPerson(personName, address, email, phone, Convert.ToInt32(accountID), notes);
+            PersonID = await clsPersonData.AddNewPerson(PersonName, Address, Email, Phone, Convert.ToInt32(AccountID), Notes);
 
-            return (personID != null);
+            return (PersonID != null);
         }
 
         private async Task<bool> _UpdatePerson()
         {
-            return await clsPersonData.UpdatePerson(Convert.ToInt32(personID), personName, address, email, phone, notes);
+            return await clsPersonData.UpdatePerson(Convert.ToInt32(PersonID), PersonName, Address, Email, Phone, Notes);
         }
 
         public async Task<bool> Save()
@@ -63,8 +63,8 @@ namespace MoneyMindManager_Business
             if (personColumns == null)
                 return null;
 
-            return new clsPerson(personColumns.personID, personColumns.personName, personColumns.address,
-                personColumns.email, personColumns.phone, personColumns.accountID, personColumns.notes);
+            return new clsPerson(personColumns.PersonID, personColumns.PersonName, personColumns.Address,
+                personColumns.Email, personColumns.Phone, personColumns.AccountID, personColumns.Notes);
         }
 
         public static async Task<bool> DeletePersonByID(int personID)

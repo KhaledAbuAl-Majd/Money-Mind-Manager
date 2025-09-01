@@ -3,10 +3,7 @@
   "WorkspaceRootPath": "E:\\Visual Studio\\source\\Projects\\External Projects\\Money Mind Manager\\Project\\MonyeMindManager\\MoneyMindManager_Presentation\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F9541440-5DD1-4791-B0F2-0FFA87A7CE59}|..\\MoneyMindManager_Business\\MoneyMindManager_Business.csproj|e:\\visual studio\\source\\projects\\external projects\\money mind manager\\project\\monyemindmanager\\moneymindmanager_business\\clsperson.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A08EAB9A-E679-412A-BAE1-FC4089EEB044}|..\\MoneyMindManager_DataAccess\\MoneyMindManager_DataAccess.csproj|e:\\visual studio\\source\\projects\\external projects\\money mind manager\\project\\monyemindmanager\\moneymindmanager_dataaccess\\clspersondata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A08EAB9A-E679-412A-BAE1-FC4089EEB044}|..\\MoneyMindManager_DataAccess\\MoneyMindManager_DataAccess.csproj|e:\\visual studio\\source\\projects\\external projects\\money mind manager\\project\\monyemindmanager\\moneymindmanager_dataaccess\\clsuserdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -16,21 +13,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "clsPerson.cs",
-              "DocumentMoniker": "E:\\Visual Studio\\source\\Projects\\External Projects\\Money Mind Manager\\Project\\MonyeMindManager\\MoneyMindManager_Business\\clsPerson.cs",
-              "RelativeDocumentMoniker": "..\\MoneyMindManager_Business\\clsPerson.cs",
-              "ToolTip": "E:\\Visual Studio\\source\\Projects\\External Projects\\Money Mind Manager\\Project\\MonyeMindManager\\MoneyMindManager_Business\\clsPerson.cs",
-              "RelativeToolTip": "..\\MoneyMindManager_Business\\clsPerson.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADgAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-01T15:08:40.921Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
@@ -49,15 +33,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "clsPersonData.cs",
-              "DocumentMoniker": "E:\\Visual Studio\\source\\Projects\\External Projects\\Money Mind Manager\\Project\\MonyeMindManager\\MoneyMindManager_DataAccess\\clsPersonData.cs",
-              "RelativeDocumentMoniker": "..\\MoneyMindManager_DataAccess\\clsPersonData.cs",
-              "ToolTip": "E:\\Visual Studio\\source\\Projects\\External Projects\\Money Mind Manager\\Project\\MonyeMindManager\\MoneyMindManager_DataAccess\\clsPersonData.cs",
-              "RelativeToolTip": "..\\MoneyMindManager_DataAccess\\clsPersonData.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAMwAsAAAAlAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "clsUserData.cs",
+              "DocumentMoniker": "E:\\Visual Studio\\source\\Projects\\External Projects\\Money Mind Manager\\Project\\MonyeMindManager\\MoneyMindManager_DataAccess\\clsUserData.cs",
+              "RelativeDocumentMoniker": "..\\MoneyMindManager_DataAccess\\clsUserData.cs",
+              "ToolTip": "E:\\Visual Studio\\source\\Projects\\External Projects\\Money Mind Manager\\Project\\MonyeMindManager\\MoneyMindManager_DataAccess\\clsUserData.cs",
+              "RelativeToolTip": "..\\MoneyMindManager_DataAccess\\clsUserData.cs",
+              "ViewState": "AgIAAD8BAAAAAAAAAAAnwDQBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-01T09:38:30.749Z",
+              "WhenOpened": "2025-09-01T15:40:04.175Z",
               "EditorCaption": ""
             }
           ]

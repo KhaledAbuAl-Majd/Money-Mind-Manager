@@ -13,34 +13,34 @@ namespace MoneyMindManager_DataAccess
     {
         public class clsPersonColumns
         {
-            public Nullable<int> personID { get; set; }
-            public string personName { get; set; } 
-            public string address { get; set; } 
-            public string email { get; set; } 
-            public string phone { get; set; }
-            public Nullable<int> accountID { get; set; }
-            public string notes { get; set; } 
+            public Nullable<int> PersonID { get; set; }
+            public string PersonName { get; set; } 
+            public string Address { get; set; } 
+            public string Email { get; set; } 
+            public string Phone { get; set; }
+            public Nullable<int> AccountID { get; set; }
+            public string Notes { get; set; } 
 
             public clsPersonColumns(int? personID,string personName,string address,string email,string phone,int?accountID,string notes)
             {
-                this.personID = personID;
-                this.personName = personName;
-                this.address = address;
-                this.email = email;
-                this.phone = phone;
-                this.accountID = accountID;
-                this.notes = notes;
+                this.PersonID = personID;
+                this.PersonName = personName;
+                this.Address = address;
+                this.Email = email;
+                this.Phone = phone;
+                this.AccountID = accountID;
+                this.Notes = notes;
             }
        
             public clsPersonColumns()
             {
-                this.personID = null;
-                this.personName = null;
-                this.address = null;
-                this.email = null;
-                this.phone = null;
-                this.accountID = null;
-                this.notes = null;
+                this.PersonID = null;
+                this.PersonName = null;
+                this.Address = null;
+                this.Email = null;
+                this.Phone = null;
+                this.AccountID = null;
+                this.Notes = null;
             }
         }
 
@@ -187,7 +187,7 @@ namespace MoneyMindManager_DataAccess
         }
 
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
-        /// <returns>Object of clsPersonColumns, if person is not found it will return null</returns>
+        /// <returns>Object of clsUserColumns, if person is not found it will return null</returns>
         public static async Task<clsPersonColumns> GetPersonInfoByID(int personID, bool RaiseEventOnErrorOccured = true)
         {
             clsPersonColumns personData = null;
@@ -214,7 +214,7 @@ namespace MoneyMindManager_DataAccess
                                 string email = (reader["Email"] == System.DBNull.Value) ? null : reader["Email"] as string;
                                 string phone = (reader["Phone"] == System.DBNull.Value) ? null : reader["Phone"] as string;
                                 Nullable<int> accountID = Convert.ToInt32(reader["AccountID"]);
-                                //Nullable<int> accountID = reader["AccountID"] as int?;
+                                //Nullable<int> AccountID = reader["AccountID"] as int?;
                                 string notes = (reader["Notes"] == System.DBNull.Value) ? null : reader["Notes"] as string;
 
                                 personData = new clsPersonColumns(personID, personName, address, email, phone, accountID, notes);
@@ -236,7 +236,7 @@ namespace MoneyMindManager_DataAccess
             return personData;
         }
 
-        /// <param name="personID">personID of person you wnat to find</param>
+        /// <param name="personID">PersonID of person you wnat to find</param>
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>true if person exist, false if person not exist</returns>
         public static async Task<bool> IsPersonExistByID(int personID, bool RaiseEventOnErrorOccured = true)
