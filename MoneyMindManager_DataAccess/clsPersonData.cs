@@ -13,7 +13,7 @@ namespace MoneyMindManager_DataAccess
     {
         public class clsPersonColumns
         {
-            public Nullable<int> PersonID { get; set; }
+            public Nullable<int> PersonID { get;protected set; }
             public string PersonName { get; set; } 
             public string Address { get; set; } 
             public string Email { get; set; } 
@@ -76,7 +76,7 @@ namespace MoneyMindManager_DataAccess
                         await connection.OpenAsync();
                         await command.ExecuteNonQueryAsync();
 
-                        if (int.TryParse(outputnewPersonID.Value?.ToString(), out int parsingResult))
+                        if (outputnewPersonID.Value != DBNull.Value && (int.TryParse(outputnewPersonID.Value?.ToString(), out int parsingResult)))
                         {
                             newPersonID = parsingResult;
                         }

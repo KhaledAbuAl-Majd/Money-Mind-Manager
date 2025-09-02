@@ -56,6 +56,7 @@ namespace MoneyMindManager_Business
             return false;
         }
 
+        /// <returns>Object of clsUserColumns, if person is not found it will return null</returns>
         public static async Task<clsPerson> FindPersonByID(int personID)
         {
             clsPersonData.clsPersonColumns personColumns = await clsPersonData.GetPersonInfoByID(personID);

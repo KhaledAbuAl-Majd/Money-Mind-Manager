@@ -3,7 +3,7 @@
   "WorkspaceRootPath": "E:\\Visual Studio\\source\\Projects\\External Projects\\Money Mind Manager\\Project\\MonyeMindManager\\MoneyMindManager_Presentation\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A08EAB9A-E679-412A-BAE1-FC4089EEB044}|..\\MoneyMindManager_DataAccess\\MoneyMindManager_DataAccess.csproj|e:\\visual studio\\source\\projects\\external projects\\money mind manager\\project\\monyemindmanager\\moneymindmanager_dataaccess\\clsuserdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F9541440-5DD1-4791-B0F2-0FFA87A7CE59}|..\\MoneyMindManager_Business\\MoneyMindManager_Business.csproj|e:\\visual studio\\source\\projects\\external projects\\money mind manager\\project\\monyemindmanager\\moneymindmanager_business\\clsuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,14 +34,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "clsUserData.cs",
-              "DocumentMoniker": "E:\\Visual Studio\\source\\Projects\\External Projects\\Money Mind Manager\\Project\\MonyeMindManager\\MoneyMindManager_DataAccess\\clsUserData.cs",
-              "RelativeDocumentMoniker": "..\\MoneyMindManager_DataAccess\\clsUserData.cs",
-              "ToolTip": "E:\\Visual Studio\\source\\Projects\\External Projects\\Money Mind Manager\\Project\\MonyeMindManager\\MoneyMindManager_DataAccess\\clsUserData.cs",
-              "RelativeToolTip": "..\\MoneyMindManager_DataAccess\\clsUserData.cs",
-              "ViewState": "AgIAAD8BAAAAAAAAAAAnwDQBAAAAAAAAAAAAAA==",
+              "Title": "clsUser.cs",
+              "DocumentMoniker": "E:\\Visual Studio\\source\\Projects\\External Projects\\Money Mind Manager\\Project\\MonyeMindManager\\MoneyMindManager_Business\\clsUser.cs",
+              "RelativeDocumentMoniker": "..\\MoneyMindManager_Business\\clsUser.cs",
+              "ToolTip": "E:\\Visual Studio\\source\\Projects\\External Projects\\Money Mind Manager\\Project\\MonyeMindManager\\MoneyMindManager_Business\\clsUser.cs",
+              "RelativeToolTip": "..\\MoneyMindManager_Business\\clsUser.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAcwEcAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-01T15:40:04.175Z",
+              "WhenOpened": "2025-09-02T06:12:25.826Z",
               "EditorCaption": ""
             }
           ]

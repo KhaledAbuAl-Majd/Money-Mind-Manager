@@ -13,7 +13,7 @@ namespace MoneyMindManager_DataAccess
     {
         public class clsUserColumns
         {
-            public Nullable<int> UserID { get; set; }
+            public Nullable<int> UserID { get;protected set; }
             public string UserName { get; set; }
             public Nullable<int> PersonID { get; set; }
             public Nullable<int> Permissions { get; set; }
@@ -21,7 +21,7 @@ namespace MoneyMindManager_DataAccess
             /// <summary>
             /// Hashed Password [Hash(Password + Salt) ]
             /// </summary>
-            public string Password { get; set; }
+            public string Password { get;protected set; }
             public string Salt { get; set; }
             public bool IsActive { get; set; }
             public string Notes { get; set; }
@@ -60,7 +60,7 @@ namespace MoneyMindManager_DataAccess
 
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>New UserID if Success, if failed return null</returns>
-        public static async Task<Nullable<int>> AddNewUser(string userName,int personID, int permissions, string password, string salt,
+        public static async Task<Nullable<int>> AddNewUser(string userName,int personID, int? permissions, string password, string salt,
             bool isActive,int accountID, string notes, bool RaiseEventOnErrorOccured = true)
         {
             int? newUserID = null;
@@ -73,7 +73,7 @@ namespace MoneyMindManager_DataAccess
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
-                        command.Parameters.AddWithValue("@UserName", userName);
+                        command.Parameters.AddWithValue("@UserName", (string.IsNullOrEmpty(userName)) ? DBNull.Value : (object)userName);
                         command.Parameters.AddWithValue("@PersonID", personID);
                         command.Parameters.AddWithValue("@Permissions", (object)permissions ?? System.DBNull.Value);
                         command.Parameters.AddWithValue("@Password", password);
@@ -92,7 +92,7 @@ namespace MoneyMindManager_DataAccess
                         await connection.OpenAsync();
                         await command.ExecuteNonQueryAsync();
 
-                        if (int.TryParse(outputnewUserID.Value?.ToString(), out int parsingResult))
+                        if (outputnewUserID.Value != DBNull.Value && (int.TryParse(outputnewUserID.Value?.ToString(), out int parsingResult)))
                         {
                             newUserID = parsingResult;
                         }
@@ -116,7 +116,7 @@ namespace MoneyMindManager_DataAccess
 
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>Updating Result</returns>
-        public static async Task<bool> UpdateUser(int userID, int personID, int permissions, bool isActive,
+        public static async Task<bool> UpdateUser(int userID,string userName, int personID, int? permissions, bool isActive,
             string notes, bool RaiseEventOnErrorOccured = true)
         {
             bool result = false;
@@ -130,6 +130,7 @@ namespace MoneyMindManager_DataAccess
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
                         command.Parameters.AddWithValue("@UserID", userID);
+                        command.Parameters.AddWithValue("@UserName", (string.IsNullOrEmpty(userName)) ? DBNull.Value : (object)userName);
                         command.Parameters.AddWithValue("@PersonID", personID);
                         command.Parameters.AddWithValue("@Permissions", (object)permissions?? System.DBNull.Value);
                         command.Parameters.AddWithValue("@IsActive", isActive);
@@ -300,10 +301,112 @@ namespace MoneyMindManager_DataAccess
             return userData;
         }
 
-        /// <param name="personID">PersonID of person you wnat to find</param>
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
-        /// <returns>true if person exist, false if person not exist</returns>
-        public static async Task<bool> IsPersonExistByID(int personID, bool RaiseEventOnErrorOccured = true)
+        /// <returns>Object of clsUserColumns, if user is not found it will return null</returns>
+        public static async Task<clsUserColumns> GetUserInfoByUserName(string userName, bool RaiseEventOnErrorOccured = true)
+        {
+            clsUserColumns userData = null;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("[dbo].[SP_GetUserByUserName]", connection))
+                    {
+                        command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("@UserName", (string.IsNullOrEmpty(userName)) ? DBNull.Value : (object)userName);
+
+                        await connection.OpenAsync();
+
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            if (await reader.ReadAsync())
+                            {
+                                Nullable<int> userID = Convert.ToInt32(reader["UserID"]);
+                                Nullable<int> personID = Convert.ToInt32(reader["PersonID"]);
+                                Nullable<int> permissions = (reader["Permissions"] == DBNull.Value) ? null : Convert.ToInt32(reader["Permissions"]) as int?;
+                                string password = (reader["Password"] == DBNull.Value) ? null : reader["Password"] as string;
+                                string salt = (reader["Salt"] == DBNull.Value) ? null : reader["Salt"] as string;
+                                bool isActive = Convert.ToBoolean(reader["IsActive"]);
+                                string notes = (reader["Notes"] == DBNull.Value) ? null : reader["Notes"] as string;
+                                Nullable<int> accountID = Convert.ToInt32(reader["AccountID"]);
+                                bool isDeleted = Convert.ToBoolean(reader["IsDeleted"]);
+
+                                userData = new clsUserColumns(userID, userName, personID, permissions, password, salt, isActive, notes, accountID, isDeleted);
+                            }
+                            else
+                                userData = null;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                userData = null;
+
+                if (RaiseEventOnErrorOccured)
+                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+            }
+
+            return userData;
+        }
+
+        /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
+        /// <returns>Object of clsUserColumns, if user is not found it will return null</returns>
+        public static async Task<clsUserColumns> GetUserInfoByPersonID(int personID, bool RaiseEventOnErrorOccured = true)
+        {
+            clsUserColumns userData = null;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("[dbo].[SP_GetUserByPersonID]", connection))
+                    {
+                        command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("@PersonID", personID);
+
+                        await connection.OpenAsync();
+
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            if (await reader.ReadAsync())
+                            {
+                                Nullable<int> userID = Convert.ToInt32(reader["UserID"]);
+                                string userName = (reader["UserName"] == DBNull.Value) ? null : reader["UserName"] as string;
+                                Nullable<int> permissions = (reader["Permissions"] == DBNull.Value) ? null : Convert.ToInt32(reader["Permissions"]) as int?;
+                                string password = (reader["Password"] == DBNull.Value) ? null : reader["Password"] as string;
+                                string salt = (reader["Salt"] == DBNull.Value) ? null : reader["Salt"] as string;
+                                bool isActive = Convert.ToBoolean(reader["IsActive"]);
+                                string notes = (reader["Notes"] == DBNull.Value) ? null : reader["Notes"] as string;
+                                Nullable<int> accountID = Convert.ToInt32(reader["AccountID"]);
+                                bool isDeleted = Convert.ToBoolean(reader["IsDeleted"]);
+
+                                userData = new clsUserColumns(userID, userName, personID, permissions, password, salt, isActive, notes, accountID, isDeleted);
+                            }
+                            else
+                                userData = null;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                userData = null;
+
+                if (RaiseEventOnErrorOccured)
+                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+            }
+
+            return userData;
+        }
+
+        /// <param name="userID">UserID of user you want to find</param>
+        /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
+        /// <returns>true if user exist, false if user not exist</returns>
+        public static async Task<bool> IsUserExistByUserID(int userID, bool RaiseEventOnErrorOccured = true)
         {
             bool isExist = false;
 
@@ -311,7 +414,49 @@ namespace MoneyMindManager_DataAccess
             {
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_IsPersonExistByID]", connection))
+                    using (SqlCommand command = new SqlCommand("[dbo].[SP_IsUserExistByUserID]", connection))
+                    {
+                        command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("@UserID", userID);
+
+                        SqlParameter retunValue = new SqlParameter("@ReturnVal", SqlDbType.Int)
+                        {
+                            Direction = System.Data.ParameterDirection.ReturnValue
+                        };
+
+                        command.Parameters.Add(retunValue);
+
+                        await connection.OpenAsync();
+                        await command.ExecuteNonQueryAsync();
+
+                        isExist = (retunValue.Value != DBNull.Value) && (Convert.ToInt32(retunValue.Value) == 1);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                isExist = false;
+
+                if (RaiseEventOnErrorOccured)
+                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+            }
+
+            return isExist;
+        }
+
+        /// <param name="personID">PersonID of user you want to find</param>
+        /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
+        /// <returns>true if user exist, false if user not exist</returns>
+        public static async Task<bool> IsUserExistByPersonID(int personID, bool RaiseEventOnErrorOccured = true)
+        {
+            bool isExist = false;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("[dbo].[SP_IsUserExistByPersonID]", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
@@ -340,6 +485,85 @@ namespace MoneyMindManager_DataAccess
             }
 
             return isExist;
+        }
+
+        /// <param name="userName">userName of user you want to find</param>
+        /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
+        /// <returns>true if user exist, false if user not exist</returns>
+        public static async Task<bool> IsUserExistByUserName(string userName, bool RaiseEventOnErrorOccured = true)
+        {
+            bool isExist = false;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("[dbo].[SP_IsUserExistByUserName]", connection))
+                    {
+                        command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("@UserName", userName);
+
+                        SqlParameter retunValue = new SqlParameter("@ReturnVal", SqlDbType.Int)
+                        {
+                            Direction = System.Data.ParameterDirection.ReturnValue
+                        };
+
+                        command.Parameters.Add(retunValue);
+
+                        await connection.OpenAsync();
+                        await command.ExecuteNonQueryAsync();
+
+                        isExist = (retunValue.Value != DBNull.Value) && (Convert.ToInt32(retunValue.Value) == 1);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                isExist = false;
+
+                if (RaiseEventOnErrorOccured)
+                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+            }
+
+            return isExist;
+        }
+
+        /// <returns>UserSalt, if failed return null</returns>
+        public static async Task<string> GetUserSaltByUserName(string userName, bool RaiseEventOnErrorOccured = true)
+        {
+            string salt = null;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("[dbo].[SP_GetUserSaltByUserName]", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@UserName", (string.IsNullOrEmpty(userName)) ? DBNull.Value : (object)userName);
+
+                        SqlParameter outputUserSalt = new SqlParameter("@Salt", SqlDbType.VarChar)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+
+                        await connection.OpenAsync();
+                        await command.ExecuteNonQueryAsync();
+
+                        salt = (outputUserSalt.Value == DBNull.Value) ? null : outputUserSalt.Value as string;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                salt = null;
+
+                if (RaiseEventOnErrorOccured)
+                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+            }
+
+            return salt;
         }
     }
 }
