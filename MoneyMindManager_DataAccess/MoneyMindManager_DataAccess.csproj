@@ -42,7 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="clsCurrenciesData.cs" />
+    <Compile Include="clsBalanceAccountData.cs" />
+    <Compile Include="clsCurrencyData.cs" />
     <Compile Include="clsDataAccessSettings.cs" />
     <Compile Include="clsPersonData.cs" />
     <Compile Include="clsUserData.cs" />

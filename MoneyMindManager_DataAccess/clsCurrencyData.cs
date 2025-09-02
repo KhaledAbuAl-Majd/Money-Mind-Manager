@@ -9,22 +9,22 @@ using MoneyMindManagerGlobal;
 
 namespace MoneyMindManager_DataAccess
 {
-    public static class clsCurrenciesData
+    public static class clsCurrencyData
     {
-        public class clsCurrenciesColumns
+        public class clsCurrencyColumns
         {
             public byte CurrencyID { get; }
             public string CurrencyName { get; }
             public string CurrencySymbol { get; }
 
-            public clsCurrenciesColumns(byte currencyID,string currencyName,string currencySymbol)
+            public clsCurrencyColumns(byte currencyID,string currencyName,string currencySymbol)
             {
                 this.CurrencyID = currencyID;
                 this.CurrencyName = currencyName;
                 this.CurrencySymbol = currencySymbol;
             }
 
-            //public clsCurrenciesColumns()
+            //public clsCurrencyColumns()
             //{
             //    this.CurrencyID = null;
             //    this.CurrencyName = null;
@@ -33,9 +33,9 @@ namespace MoneyMindManager_DataAccess
         }
 
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
-        public static async Task<clsCurrenciesColumns> GetCurrencyInfoByCurrencyID(byte currencyID, bool RaiseEventOnErrorOccured = true)
+        public static async Task<clsCurrencyColumns> GetCurrencyInfoByCurrencyID(byte currencyID, bool RaiseEventOnErrorOccured = true)
         {
-            clsCurrenciesColumns currencyData = null;
+            clsCurrencyColumns currencyData = null;
 
             try
             {
@@ -43,6 +43,7 @@ namespace MoneyMindManager_DataAccess
                 {
                     using(SqlCommand command = new SqlCommand("[dbo].[SP_GetCurrencyByCurrencyID]", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.AddWithValue("@CurrencyID", currencyID);
 
                         await connection.OpenAsync();
@@ -54,7 +55,7 @@ namespace MoneyMindManager_DataAccess
                                 string currencyName = (reader["CurrencyName"] == DBNull.Value) ? null : reader["CurrencyName"] as string;
                                 string currencySymbol = (reader["CurrencySymbol"] == DBNull.Value) ? null : reader["CurrencySymbol"] as string;
 
-                                currencyData = new clsCurrenciesColumns(currencyID, currencyName, currencySymbol);
+                                currencyData = new clsCurrencyColumns(currencyID, currencyName, currencySymbol);
                             }
                             else
                                 currencyData = null;
@@ -74,9 +75,9 @@ namespace MoneyMindManager_DataAccess
         }
 
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
-        public static async Task<clsCurrenciesColumns> GetCurrencyInfoByCurrencyName(string currencyName, bool RaiseEventOnErrorOccured = true)
+        public static async Task<clsCurrencyColumns> GetCurrencyInfoByCurrencyName(string currencyName, bool RaiseEventOnErrorOccured = true)
         {
-            clsCurrenciesColumns currencyData = null;
+            clsCurrencyColumns currencyData = null;
 
             try
             {
@@ -84,6 +85,7 @@ namespace MoneyMindManager_DataAccess
                 {
                     using(SqlCommand command = new SqlCommand("[dbo].[SP_GetCurrencyByCurrencyName]", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.AddWithValue("@CurrencyName", currencyName);
 
                         await connection.OpenAsync();
@@ -95,7 +97,7 @@ namespace MoneyMindManager_DataAccess
                                 byte currencyID = Convert.ToByte(reader["CurrencyID"]);
                                 string currencySymbol = (reader["CurrencySymbol"] == DBNull.Value) ? null : reader["CurrencySymbol"] as string;
 
-                                currencyData = new clsCurrenciesColumns(currencyID, currencyName, currencySymbol);
+                                currencyData = new clsCurrencyColumns(currencyID, currencyName, currencySymbol);
                             }
                             else
                                 currencyData = null;
@@ -124,6 +126,8 @@ namespace MoneyMindManager_DataAccess
                 {
                     using (SqlCommand command = new SqlCommand("SP_GetAllCurrencies", connection))
                     {
+                        command.CommandType = CommandType.StoredProcedure;
+
                         await connection.OpenAsync();
 
                         using (SqlDataReader reader = await command.ExecuteReaderAsync())
