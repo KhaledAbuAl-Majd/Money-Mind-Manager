@@ -18,10 +18,10 @@ namespace MoneyMindManager_DataAccess
             public string Address { get; set; } 
             public string Email { get; set; } 
             public string Phone { get; set; }
-            public Nullable<int> AccountID { get; set; }
+            public Nullable<short> AccountID { get; set; }
             public string Notes { get; set; } 
 
-            public clsPersonColumns(int? personID,string personName,string address,string email,string phone,int?accountID,string notes)
+            public clsPersonColumns(int? personID,string personName,string address,string email,string phone,short?accountID,string notes)
             {
                 this.PersonID = personID;
                 this.PersonName = personName;
@@ -47,7 +47,7 @@ namespace MoneyMindManager_DataAccess
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>New PersonID if Success, if failed return null</returns>
         public static async Task<Nullable<int>> AddNewPerson(string personName, string address, string email, string phone,
-            int accountID, string notes, bool RaiseEventOnErrorOccured = true)
+            short accountID, string notes, bool RaiseEventOnErrorOccured = true)
         {
             int? newPersonID = null;
 
@@ -213,7 +213,7 @@ namespace MoneyMindManager_DataAccess
                                 string address = (reader["Address"] == System.DBNull.Value) ? null : reader["Address"] as string;
                                 string email = (reader["Email"] == System.DBNull.Value) ? null : reader["Email"] as string;
                                 string phone = (reader["Phone"] == System.DBNull.Value) ? null : reader["Phone"] as string;
-                                Nullable<int> accountID = Convert.ToInt32(reader["AccountID"]);
+                                Nullable<short> accountID = Convert.ToInt16(reader["AccountID"]);
                                 //Nullable<int> AccountID = reader["AccountID"] as int?;
                                 string notes = (reader["Notes"] == System.DBNull.Value) ? null : reader["Notes"] as string;
 

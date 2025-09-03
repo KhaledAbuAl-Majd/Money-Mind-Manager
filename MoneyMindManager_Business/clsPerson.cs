@@ -11,21 +11,24 @@ namespace MoneyMindManager_Business
     {
         public enum enMode { AddNew, Update };
         public enMode Mode { get; private set; } = enMode.AddNew;
+        public clsAccount AccountInfo { get; private set; }
 
         public clsPerson() : base()
         {
             Mode = enMode.AddNew;
+            AccountInfo = null;
         }
 
-        private clsPerson(int? personID, string personName, string address, string email, string phone, int? accountID, string notes)
-            : base(personID, personName, address, email, phone, accountID, notes)
+        private clsPerson(int? personID, string personName, string address, string email, string phone, short accountID,
+            string notes, clsAccount accountInfo) : base(personID, personName, address, email, phone, accountID, notes)
         {
             Mode = enMode.Update;
+            this.AccountInfo = accountInfo;
         }
 
         private async Task<bool> _AddNewPerson()
         {
-            PersonID = await clsPersonData.AddNewPerson(PersonName, Address, Email, Phone, Convert.ToInt32(AccountID), Notes);
+            PersonID = await clsPersonData.AddNewPerson(PersonName, Address, Email, Phone, Convert.ToInt16(AccountID), Notes);
 
             return (PersonID != null);
         }
@@ -33,6 +36,13 @@ namespace MoneyMindManager_Business
         private async Task<bool> _UpdatePerson()
         {
             return await clsPersonData.UpdatePerson(Convert.ToInt32(PersonID), PersonName, Address, Email, Phone, Notes);
+        }
+
+        async Task<bool> _RefeshCompositionObjects()
+        {
+            AccountInfo = await clsAccount.FindAccountByAccountID(Convert.ToInt16(AccountID));
+
+            return (AccountInfo != null);
         }
 
         public async Task<bool> Save()
@@ -44,7 +54,7 @@ namespace MoneyMindManager_Business
                         if (await _AddNewPerson())
                         {
                             Mode = enMode.Update;
-                            return true;
+                            return await _RefeshCompositionObjects();
                         }
                         else
                             return false;
@@ -64,8 +74,13 @@ namespace MoneyMindManager_Business
             if (personColumns == null)
                 return null;
 
+            clsAccount accountInfo = await clsAccount.FindAccountByAccountID(Convert.ToInt16(personColumns.AccountID));
+
+            if (accountInfo == null)
+                return null;
+
             return new clsPerson(personColumns.PersonID, personColumns.PersonName, personColumns.Address,
-                personColumns.Email, personColumns.Phone, personColumns.AccountID, personColumns.Notes);
+                personColumns.Email, personColumns.Phone, Convert.ToInt16(personColumns.AccountID), personColumns.Notes, accountInfo);
         }
 
         public static async Task<bool> DeletePersonByID(int personID)

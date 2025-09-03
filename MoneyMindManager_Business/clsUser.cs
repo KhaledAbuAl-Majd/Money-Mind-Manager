@@ -14,26 +14,28 @@ namespace MoneyMindManager_Business
     {
         public enum enMode { AddNew, Update };
         public enMode Mode { get; private set; } = enMode.AddNew;
-        clsPerson PersonInfo { get; set; }
-
+        public clsPerson PersonInfo { get; private set; }
+        public clsAccount AccountInfo { get; private set; }
         public clsUser() : base()
         {
             Mode = enMode.AddNew;
             PersonInfo = null;
+            AccountInfo = null;
         }
 
         private clsUser(int? userID, string userName, int? personID, int? permissions, string password,
-            string salt, bool isActive, string notes, int? accountID, bool isDeleted, clsPerson personInfo)
-            : base(userID, userName, personID, permissions, password, salt, isActive, notes, accountID, isDeleted)
+            string salt, bool isActive, string notes, int? accountID, bool isDeleted, clsPerson personInfo, clsAccount accountInfo)
+            : base(userID, userName, personID, permissions, password, salt, isActive, notes, Convert.ToInt16(accountID), isDeleted)
         {
-            Mode = enMode.Update;
-            PersonInfo = personInfo;
+            this.Mode = enMode.Update;
+            this.PersonInfo = personInfo;
+            this.AccountInfo = accountInfo;
         }
-        
+
         private async Task<bool> _AddNewUser()
         {
             UserID = await clsUserData.AddNewUser(UserName, Convert.ToInt32(PersonID), Permissions, Password, Salt,
-                IsActive, Convert.ToInt32(AccountID), Notes);
+                IsActive, Convert.ToInt16(AccountID), Notes);
 
             return (UserID != null);
         }
@@ -46,8 +48,9 @@ namespace MoneyMindManager_Business
         async Task<bool> _RefeshCompositionObjects()
         {
             PersonInfo = await clsPerson.FindPersonByID(Convert.ToInt32(this.PersonID));
+            AccountInfo = await clsAccount.FindAccountByAccountID(Convert.ToInt16(AccountID));
 
-            return (PersonInfo != null);
+            return ((PersonInfo != null) && (AccountInfo != null));
         }
 
         public async Task<bool> Save()
@@ -89,12 +92,12 @@ namespace MoneyMindManager_Business
         /// <returns>Changing password result</returns>
         public async Task<bool> ChangePassword(string oldPassword, string newPassword)
         {
-            string oldHashedPassword = clsHashing.ComputeHash(clsHashing.GetSaltedPassword(oldPassword, this.Salt));
+            string oldHashedPassword = HashingPassowrd(oldPassword, this.Salt);
             var newHashedPasswordWithSalt = clsHashing.HashPasswordWithSalt(newPassword);
             string newHashedPassword = newHashedPasswordWithSalt.HashedPassword;
             string newSalt = newHashedPasswordWithSalt.Salt;
 
-            bool result = await clsUserData.ChangeUserPassword(Convert.ToInt32(this.UserID),oldHashedPassword,newHashedPassword,newSalt);
+            bool result = await clsUserData.ChangeUserPassword(Convert.ToInt32(this.UserID), oldHashedPassword, newHashedPassword, newSalt);
 
             if (result)
             {
@@ -106,6 +109,37 @@ namespace MoneyMindManager_Business
                 return false;
         }
 
+        /// <summary>
+        /// Login
+        /// </summary>
+        /// <param name="userName">the entered userName</param>
+        /// <param name="password">the entered password (Normal - NotHashed)</param>
+        /// <returns>Object of clsUserColumns, if user is not found it will return null</returns>
+        public static async Task<clsUser> FindUserByUserNameAndPassword_Login(string userName, string enteredpassword)
+        {
+            string salt = await GetUserSaltByUserName(userName);
+
+            if (salt == null)
+                return null;
+
+            string hashedPassword = HashingPassowrd(enteredpassword, salt);
+
+            clsUserData.clsUserColumns userColumns = await clsUserData.GetUserInfoByUserNameAndPassword_Login(userName, hashedPassword);
+
+            if (userColumns == null)
+                return null;
+
+            clsPerson personInfo = await clsPerson.FindPersonByID(Convert.ToInt32(userColumns.PersonID));
+            clsAccount accountInfo = await clsAccount.FindAccountByAccountID(Convert.ToInt16(userColumns.AccountID));
+
+            if ((personInfo == null) || (accountInfo == null))
+                return null;
+
+            return new clsUser(userColumns.UserID, userColumns.UserName, userColumns.PersonID, userColumns.Permissions,
+                userColumns.Password, userColumns.Salt, userColumns.IsActive, userColumns.Notes, userColumns.AccountID,
+                userColumns.IsDeleted, personInfo, accountInfo);
+        }
+
         /// <returns>Object of clsUserColumns, if user is not found it will return null</returns>
         public static async Task<clsUser> FindUserByUserID(int userID)
         {
@@ -115,12 +149,14 @@ namespace MoneyMindManager_Business
                 return null;
 
             clsPerson personInfo = await clsPerson.FindPersonByID(Convert.ToInt32(userColumns.PersonID));
+            clsAccount accountInfo = await clsAccount.FindAccountByAccountID(Convert.ToInt16(userColumns.AccountID));
 
-            if (personInfo == null)
+            if ((personInfo == null) || (accountInfo == null))
                 return null;
 
-            return new clsUser(userColumns.UserID, userColumns.UserName, userColumns.PersonID, userColumns.Permissions, userColumns.Password,
-                userColumns.Salt, userColumns.IsActive, userColumns.Notes, userColumns.AccountID, userColumns.IsDeleted, personInfo);
+            return new clsUser(userColumns.UserID, userColumns.UserName, userColumns.PersonID, userColumns.Permissions,
+                userColumns.Password, userColumns.Salt, userColumns.IsActive, userColumns.Notes, userColumns.AccountID,
+                userColumns.IsDeleted, personInfo, accountInfo);
         }
 
         /// <returns>Object of clsUserColumns, if user is not found it will return null</returns>
@@ -132,12 +168,14 @@ namespace MoneyMindManager_Business
                 return null;
 
             clsPerson personInfo = await clsPerson.FindPersonByID(Convert.ToInt32(userColumns.PersonID));
+            clsAccount accountInfo = await clsAccount.FindAccountByAccountID(Convert.ToInt16(userColumns.AccountID));
 
-            if (personInfo == null)
+            if ((personInfo == null) || (accountInfo == null))
                 return null;
 
-            return new clsUser(userColumns.UserID, userColumns.UserName, userColumns.PersonID, userColumns.Permissions, userColumns.Password,
-                userColumns.Salt, userColumns.IsActive, userColumns.Notes, userColumns.AccountID, userColumns.IsDeleted, personInfo);
+            return new clsUser(userColumns.UserID, userColumns.UserName, userColumns.PersonID, userColumns.Permissions,
+                userColumns.Password, userColumns.Salt, userColumns.IsActive, userColumns.Notes, userColumns.AccountID,
+                userColumns.IsDeleted, personInfo, accountInfo);
         }
 
         /// <returns>Object of clsUserColumns, if user is not found it will return null</returns>
@@ -149,12 +187,14 @@ namespace MoneyMindManager_Business
                 return null;
 
             clsPerson personInfo = await clsPerson.FindPersonByID(Convert.ToInt32(userColumns.PersonID));
+            clsAccount accountInfo = await clsAccount.FindAccountByAccountID(Convert.ToInt16(userColumns.AccountID));
 
-            if (personInfo == null)
+            if ((personInfo == null) || (accountInfo == null))
                 return null;
 
-            return new clsUser(userColumns.UserID, userColumns.UserName, userColumns.PersonID, userColumns.Permissions, userColumns.Password,
-                userColumns.Salt, userColumns.IsActive, userColumns.Notes, userColumns.AccountID, userColumns.IsDeleted, personInfo);
+            return new clsUser(userColumns.UserID, userColumns.UserName, userColumns.PersonID, userColumns.Permissions,
+                userColumns.Password, userColumns.Salt, userColumns.IsActive, userColumns.Notes, userColumns.AccountID,
+                userColumns.IsDeleted, personInfo, accountInfo);
         }
 
         public static async Task<bool> DeleteUserByUserID(int userID)
@@ -164,7 +204,7 @@ namespace MoneyMindManager_Business
 
         public async Task<bool> RefreshData()
         {
-           clsUser freshUser = await clsUser.FindUserByUserID(Convert.ToInt32(this.UserID));
+            clsUser freshUser = await clsUser.FindUserByUserID(Convert.ToInt32(this.UserID));
 
             if (freshUser == null)
                 return false;
@@ -179,7 +219,9 @@ namespace MoneyMindManager_Business
             this.Notes = freshUser.Notes;
             this.AccountID = freshUser.AccountID;
             this.IsDeleted = freshUser.IsDeleted;
+
             this.PersonInfo = freshUser.PersonInfo;
+            this.AccountInfo = freshUser.AccountInfo;
 
             return true;
         }
@@ -188,6 +230,17 @@ namespace MoneyMindManager_Business
         public static async Task<string> GetUserSaltByUserName(string userName)
         {
             return await clsUserData.GetUserSaltByUserName(userName);
+        }
+
+        /// <summary>
+        /// Hashing passowrd
+        /// </summary>
+        /// <param name="enteredPassword">the entered password (Normal - NotHashed)</param>
+        /// <param name="salt">the user salt</param>
+        /// <returns>return hashed password</returns>
+        public static string HashingPassowrd(string enteredPassword,string salt)
+        {
+            return clsHashing.ComputeHash(clsHashing.GetSaltedPassword(enteredPassword, salt));
         }
     }
 }

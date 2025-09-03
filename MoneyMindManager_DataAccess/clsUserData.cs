@@ -25,11 +25,11 @@ namespace MoneyMindManager_DataAccess
             public string Salt { get; set; }
             public bool IsActive { get; set; }
             public string Notes { get; set; }
-            public Nullable<int> AccountID { get; set; }
+            public Nullable<short> AccountID { get; set; }
             public bool IsDeleted { get; set; }
 
             public clsUserColumns(int? userID, string userName,int? personID, int? permissions, string password, string salt
-                , bool isActive, string notes, int? accountID,bool isDeleted)
+                , bool isActive, string notes, short? accountID,bool isDeleted)
             {
                 this.UserID = userID;
                 this.UserName = userName;
@@ -61,7 +61,7 @@ namespace MoneyMindManager_DataAccess
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>New UserID if Success, if failed return null</returns>
         public static async Task<Nullable<int>> AddNewUser(string userName,int personID, int? permissions, string password, string salt,
-            bool isActive,int accountID, string notes, bool RaiseEventOnErrorOccured = true)
+            bool isActive,short accountID, string notes, bool RaiseEventOnErrorOccured = true)
         {
             int? newUserID = null;
 
@@ -252,6 +252,60 @@ namespace MoneyMindManager_DataAccess
 
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>Object of clsUserColumns, if user is not found it will return null</returns>
+        public static async Task<clsUserColumns> GetUserInfoByUserNameAndPassword_Login(string userName,string password, bool RaiseEventOnErrorOccured = true)
+        {
+            clsUserColumns userData = null;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("SP_GetUserByUserNameAndPassword_Login", connection))
+                    {
+                        command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("@UserName", userName);
+                        command.Parameters.AddWithValue("@Password", password);
+
+                        await connection.OpenAsync();
+
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            if (await reader.ReadAsync())
+                            {
+                                Nullable<int> userID = Convert.ToInt32(reader["UserID"]);
+                                Nullable<int> personID = Convert.ToInt32(reader["PersonID"]);
+                                Nullable<int> permissions = (reader["Permissions"] == DBNull.Value) ? null : Convert.ToInt32(reader["Permissions"]) as int?;
+                                string salt = (reader["Salt"] == DBNull.Value) ? null : reader["Salt"] as string;
+                                bool isActive = Convert.ToBoolean(reader["IsActive"]);
+                                string notes = (reader["Notes"] == DBNull.Value) ? null : reader["Notes"] as string;
+                                short accountID = Convert.ToInt16(reader["AccountID"]);
+                                bool isDeleted = Convert.ToBoolean(reader["IsDeleted"]);
+
+                                userData = new clsUserColumns(userID, userName, personID, permissions, password, salt, isActive, notes, accountID, isDeleted);
+                            }
+                            else
+                                userData = null;
+
+                            if (userData == null)
+                                throw new Exception("فشلت عملية تسجيل الدخول");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                userData = null;
+
+                if (RaiseEventOnErrorOccured)
+                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+            }
+
+            return userData;
+        }
+
+        /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
+        /// <returns>Object of clsUserColumns, if user is not found it will return null</returns>
         public static async Task<clsUserColumns> GetUserInfoByUserID(int userID, bool RaiseEventOnErrorOccured = true)
         {
             clsUserColumns userData = null;
@@ -279,7 +333,7 @@ namespace MoneyMindManager_DataAccess
                                 string salt = (reader["Salt"] == DBNull.Value) ? null : reader["Salt"] as string;
                                 bool isActive = Convert.ToBoolean(reader["IsActive"]);
                                 string notes = (reader["Notes"] == DBNull.Value) ? null : reader["Notes"] as string;
-                                Nullable<int> accountID = Convert.ToInt32(reader["AccountID"]);
+                                short accountID = Convert.ToInt16(reader["AccountID"]);
                                 bool isDeleted = Convert.ToBoolean(reader["IsDeleted"]);
 
                                 userData = new clsUserColumns(userID, userName, personID, permissions, password, salt, isActive, notes, accountID, isDeleted);
@@ -330,7 +384,7 @@ namespace MoneyMindManager_DataAccess
                                 string salt = (reader["Salt"] == DBNull.Value) ? null : reader["Salt"] as string;
                                 bool isActive = Convert.ToBoolean(reader["IsActive"]);
                                 string notes = (reader["Notes"] == DBNull.Value) ? null : reader["Notes"] as string;
-                                Nullable<int> accountID = Convert.ToInt32(reader["AccountID"]);
+                                short accountID = Convert.ToInt16(reader["AccountID"]);
                                 bool isDeleted = Convert.ToBoolean(reader["IsDeleted"]);
 
                                 userData = new clsUserColumns(userID, userName, personID, permissions, password, salt, isActive, notes, accountID, isDeleted);
@@ -381,7 +435,7 @@ namespace MoneyMindManager_DataAccess
                                 string salt = (reader["Salt"] == DBNull.Value) ? null : reader["Salt"] as string;
                                 bool isActive = Convert.ToBoolean(reader["IsActive"]);
                                 string notes = (reader["Notes"] == DBNull.Value) ? null : reader["Notes"] as string;
-                                Nullable<int> accountID = Convert.ToInt32(reader["AccountID"]);
+                                short accountID = Convert.ToInt16(reader["AccountID"]);
                                 bool isDeleted = Convert.ToBoolean(reader["IsDeleted"]);
 
                                 userData = new clsUserColumns(userID, userName, personID, permissions, password, salt, isActive, notes, accountID, isDeleted);
