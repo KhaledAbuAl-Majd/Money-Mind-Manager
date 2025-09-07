@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="clsDataColumns.cs" />
     <Compile Include="clsGlobalEvents.cs" />
     <Compile Include="clsHashing.cs" />
     <Compile Include="clsLogger.cs" />

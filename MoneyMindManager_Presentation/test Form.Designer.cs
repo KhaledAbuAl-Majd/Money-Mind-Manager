@@ -33,7 +33,7 @@
             // 
             // khaledGuna2TextBox1
             // 
-            this.khaledGuna2TextBox1.AllowWhiteSpace = false;
+            this.khaledGuna2TextBox1.AllowWhiteSpace = true;
             this.khaledGuna2TextBox1.ApplyTrimAtTextBoxValue = false;
             this.khaledGuna2TextBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.khaledGuna2TextBox1.DefaultText = "";
@@ -77,6 +77,7 @@
             this.khaledGuna2TextBox1.SelectedText = "";
             this.khaledGuna2TextBox1.Size = new System.Drawing.Size(200, 36);
             this.khaledGuna2TextBox1.TabIndex = 0;
+            this.khaledGuna2TextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.khaledGuna2TextBox1.TextProperties.MinLength = ((short)(0));
             this.khaledGuna2TextBox1.TextProperties.MinLengthOption = false;
             this.khaledGuna2TextBox1.TextProperties.PhoneProperties.AllowPlusSign = true;

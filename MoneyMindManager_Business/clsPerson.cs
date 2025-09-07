@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MoneyMindManager_DataAccess;
+using MoneyMindManagerGlobal;
+using static MoneyMindManagerGlobal.clsDataColumns.PersonClassess;
 
 namespace MoneyMindManager_Business
 {
-    public class clsPerson : clsPersonData.clsPersonColumns
+    public class clsPerson : clsPersonColumns
     {
-        public enum enMode { AddNew, Update };
-        public enMode Mode { get; private set; } = enMode.AddNew;
+        enum enMode { AddNew, Update };
+        private enMode Mode { get; set; } = enMode.AddNew;
         public clsAccount AccountInfo { get; private set; }
 
         public clsPerson() : base()
@@ -69,7 +73,7 @@ namespace MoneyMindManager_Business
         /// <returns>Object of clsUserColumns, if person is not found it will return null</returns>
         public static async Task<clsPerson> FindPersonByID(int personID)
         {
-            clsPersonData.clsPersonColumns personColumns = await clsPersonData.GetPersonInfoByID(personID);
+           clsPersonColumns personColumns = await clsPersonData.GetPersonInfoByID(personID);
 
             if (personColumns == null)
                 return null;
@@ -91,6 +95,29 @@ namespace MoneyMindManager_Business
         public static async Task<bool> IsPersonExistByID(int personID)
         {
             return await clsPersonData.IsPersonExistByID(personID);
+        }
+
+        /// <summary>
+        /// Get All People For Account Using Paging [10 rows per page]
+        /// </summary>
+        /// <param name="accountID">The current AccountID</param>
+        /// <param name="pageNumber">The page Number you want to get rows of it</param>
+        /// <returns>object of clsGetAllPeople : if error happend, return null</returns>
+        public static async Task<clsGetAllPeople> GetAllPeople(short accountID, short pageNumber)
+        {
+            return await clsPersonData.GetAllPeople(accountID, pageNumber);
+        }
+
+        /// <summary>
+        /// Get All People For Account Using Paging [10 rows per page]
+        /// </summary>
+        /// <param name="accountID">The current AccountID</param>
+        /// <param name="pageNumber">The page Number you want to get rows of it</param>
+        /// <param name="personID">The personID you want to search for</param>
+        /// <returns>object of clsGetAllPeople : if error happend, return null</returns>
+        public static async Task<clsGetAllPeople> GetAllPeopleByPersonID(short accountID, short pageNumber,int personID)
+        {
+            return await clsPersonData.GetAllPeopleByPersonID(accountID, pageNumber,personID);
         }
     }
 }

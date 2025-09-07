@@ -7,10 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using MoneyMindManager_DataAccess;
 using MoneyMindManagerGlobal;
+using static MoneyMindManagerGlobal.clsDataColumns;
 
 namespace MoneyMindManager_Business
 {
-    public class clsUser : clsUserData.clsUserColumns
+    public class clsUser : clsUserColumns
     {
         public enum enMode { AddNew, Update };
         public enMode Mode { get; private set; } = enMode.AddNew;
@@ -124,7 +125,7 @@ namespace MoneyMindManager_Business
 
             string hashedPassword = HashingPassowrd(enteredpassword, salt);
 
-            clsUserData.clsUserColumns userColumns = await clsUserData.GetUserInfoByUserNameAndPassword_Login(userName, hashedPassword);
+            clsUserColumns userColumns = await clsUserData.GetUserInfoByUserNameAndPassword_Login(userName, hashedPassword);
 
             if (userColumns == null)
                 return null;
@@ -143,7 +144,7 @@ namespace MoneyMindManager_Business
         /// <returns>Object of clsUserColumns, if user is not found it will return null</returns>
         public static async Task<clsUser> FindUserByUserID(int userID)
         {
-            clsUserData.clsUserColumns userColumns = await clsUserData.GetUserInfoByUserID(userID);
+            clsUserColumns userColumns = await clsUserData.GetUserInfoByUserID(userID);
 
             if (userColumns == null)
                 return null;
@@ -162,7 +163,7 @@ namespace MoneyMindManager_Business
         /// <returns>Object of clsUserColumns, if user is not found it will return null</returns>
         public static async Task<clsUser> FindUserByUserName(string userName)
         {
-            clsUserData.clsUserColumns userColumns = await clsUserData.GetUserInfoByUserName(userName);
+            clsUserColumns userColumns = await clsUserData.GetUserInfoByUserName(userName);
 
             if (userColumns == null)
                 return null;
@@ -181,7 +182,7 @@ namespace MoneyMindManager_Business
         /// <returns>Object of clsUserColumns, if user is not found it will return null</returns>
         public static async Task<clsUser> FindUserByPersonID(int personID)
         {
-            clsUserData.clsUserColumns userColumns = await clsUserData.GetUserInfoByPersonID(personID);
+            clsUserColumns userColumns = await clsUserData.GetUserInfoByPersonID(personID);
 
             if (userColumns == null)
                 return null;
