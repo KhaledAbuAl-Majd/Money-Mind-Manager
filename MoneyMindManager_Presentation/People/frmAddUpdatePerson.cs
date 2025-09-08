@@ -77,7 +77,7 @@ namespace MoneyMindManager_Presentation.People
         {
             if (!ValidateChildren())
             {
-                clsGlobal_Presentation.ShowMessage("بعض الحقول غير صحيحة, قم بوضع المؤشر على العلامات الحمراء لرؤية الخطأ", "خطأ في التحقق", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                clsGlobal_Presentation.ShowMessage("تم العثور على حقول غير صالحة. ضع المؤشر على العلامات الحمراء لعرض سبب الخطأ.", "خطأ في التحقق", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 

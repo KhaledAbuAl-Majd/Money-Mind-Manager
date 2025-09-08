@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPeople));
-            this.guna2DataGridView1 = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.gdgvPeople = new Guna.UI2.WinForms.Guna2DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.lblTotalRecordsNumber = new System.Windows.Forms.Label();
             this.lblCurrentPageOfNumberOfPages = new System.Windows.Forms.Label();
@@ -47,85 +47,88 @@
             this.label3 = new System.Windows.Forms.Label();
             this.gcbFilterBy = new Guna.UI2.WinForms.Guna2ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.lblNoRecordsMessage = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2DataGridView1)).BeginInit();
+            this.lblNoRecordsFoundMessage = new System.Windows.Forms.Label();
+            this.kgtxtFilterValue = new KhaledControlLibrary1.KhaledGuna2TextBox();
+            this.SearchAfterTimerFinish = new System.Windows.Forms.Timer(this.components);
+            this.lblUserMessage = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.gdgvPeople)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
-            // guna2DataGridView1
+            // gdgvPeople
             // 
-            this.guna2DataGridView1.AllowUserToAddRows = false;
-            this.guna2DataGridView1.AllowUserToDeleteRows = false;
-            this.guna2DataGridView1.AllowUserToResizeColumns = false;
-            this.guna2DataGridView1.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
-            this.guna2DataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.guna2DataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
-            this.guna2DataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.guna2DataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Raised;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Menu;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.guna2DataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.guna2DataGridView1.ColumnHeadersHeight = 35;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.NullValue = "N/A";
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.guna2DataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
-            this.guna2DataGridView1.GridColor = System.Drawing.Color.White;
-            this.guna2DataGridView1.Location = new System.Drawing.Point(29, 279);
-            this.guna2DataGridView1.MultiSelect = false;
-            this.guna2DataGridView1.Name = "guna2DataGridView1";
-            this.guna2DataGridView1.ReadOnly = true;
-            this.guna2DataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.guna2DataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.guna2DataGridView1.RowHeadersVisible = false;
-            this.guna2DataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.guna2DataGridView1.RowTemplate.Height = 40;
-            this.guna2DataGridView1.Size = new System.Drawing.Size(1067, 359);
-            this.guna2DataGridView1.TabIndex = 0;
-            this.guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
-            this.guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.Font = null;
-            this.guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty;
-            this.guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty;
-            this.guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty;
-            this.guna2DataGridView1.ThemeStyle.BackColor = System.Drawing.Color.White;
-            this.guna2DataGridView1.ThemeStyle.GridColor = System.Drawing.Color.White;
-            this.guna2DataGridView1.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            this.guna2DataGridView1.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Raised;
-            this.guna2DataGridView1.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2DataGridView1.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
-            this.guna2DataGridView1.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.guna2DataGridView1.ThemeStyle.HeaderStyle.Height = 35;
-            this.guna2DataGridView1.ThemeStyle.ReadOnly = true;
-            this.guna2DataGridView1.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
-            this.guna2DataGridView1.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.guna2DataGridView1.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2DataGridView1.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            this.guna2DataGridView1.ThemeStyle.RowsStyle.Height = 40;
-            this.guna2DataGridView1.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.guna2DataGridView1.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            this.guna2DataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.guna2DataGridView1_CellFormatting);
+            this.gdgvPeople.AllowUserToAddRows = false;
+            this.gdgvPeople.AllowUserToDeleteRows = false;
+            this.gdgvPeople.AllowUserToResizeColumns = false;
+            this.gdgvPeople.AllowUserToResizeRows = false;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.White;
+            this.gdgvPeople.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
+            this.gdgvPeople.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
+            this.gdgvPeople.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.gdgvPeople.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Raised;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Menu;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gdgvPeople.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            this.gdgvPeople.ColumnHeadersHeight = 35;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle11.NullValue = "N/A";
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gdgvPeople.DefaultCellStyle = dataGridViewCellStyle11;
+            this.gdgvPeople.GridColor = System.Drawing.Color.White;
+            this.gdgvPeople.Location = new System.Drawing.Point(29, 279);
+            this.gdgvPeople.MultiSelect = false;
+            this.gdgvPeople.Name = "gdgvPeople";
+            this.gdgvPeople.ReadOnly = true;
+            this.gdgvPeople.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gdgvPeople.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            this.gdgvPeople.RowHeadersVisible = false;
+            this.gdgvPeople.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.gdgvPeople.RowTemplate.Height = 40;
+            this.gdgvPeople.Size = new System.Drawing.Size(1067, 359);
+            this.gdgvPeople.TabIndex = 0;
+            this.gdgvPeople.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
+            this.gdgvPeople.ThemeStyle.AlternatingRowsStyle.Font = null;
+            this.gdgvPeople.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty;
+            this.gdgvPeople.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty;
+            this.gdgvPeople.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty;
+            this.gdgvPeople.ThemeStyle.BackColor = System.Drawing.Color.White;
+            this.gdgvPeople.ThemeStyle.GridColor = System.Drawing.Color.White;
+            this.gdgvPeople.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            this.gdgvPeople.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Raised;
+            this.gdgvPeople.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gdgvPeople.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
+            this.gdgvPeople.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.gdgvPeople.ThemeStyle.HeaderStyle.Height = 35;
+            this.gdgvPeople.ThemeStyle.ReadOnly = true;
+            this.gdgvPeople.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
+            this.gdgvPeople.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.gdgvPeople.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gdgvPeople.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            this.gdgvPeople.ThemeStyle.RowsStyle.Height = 40;
+            this.gdgvPeople.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            this.gdgvPeople.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            this.gdgvPeople.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.guna2DataGridView1_CellFormatting);
             // 
             // label1
             // 
@@ -217,7 +220,7 @@
             this.kgtxtPageNumber.ForeColor = System.Drawing.Color.Black;
             this.kgtxtPageNumber.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtPageNumber.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Number;
-            this.kgtxtPageNumber.IsRequired = false;
+            this.kgtxtPageNumber.IsRequired = true;
             this.kgtxtPageNumber.Location = new System.Drawing.Point(175, 652);
             this.kgtxtPageNumber.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtPageNumber.MaxLength = 150;
@@ -243,8 +246,8 @@
             this.kgtxtPageNumber.NumberProperties.IntegerNumberProperties.AllowNegative = false;
             this.kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValue = 0;
             this.kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValueOption = false;
-            this.kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MinValue = 0;
-            this.kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MinValueOption = false;
+            this.kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MinValue = 1;
+            this.kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MinValueOption = true;
             this.kgtxtPageNumber.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
             this.kgtxtPageNumber.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
             this.kgtxtPageNumber.PlaceholderForeColor = System.Drawing.Color.Gray;
@@ -265,12 +268,14 @@
             this.toolTip1.SetToolTip(this.kgtxtPageNumber, "رقم الصفحة الحالية, أدخل رقم الصفحة التي تريد التنقل إليها");
             this.kgtxtPageNumber.TrimEnd = true;
             this.kgtxtPageNumber.TrimStart = false;
-            this.kgtxtPageNumber.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxtPageNumber_OnValidationError);
-            this.kgtxtPageNumber.OnValidationSuccess += new System.Action<object, System.ComponentModel.CancelEventArgs>(this.kgtxtPageNumber_OnValidationSuccess);
+            this.kgtxtPageNumber.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxt_OnValidationError);
+            this.kgtxtPageNumber.OnValidationSuccess += new System.Action<object, System.ComponentModel.CancelEventArgs>(this.kgtxt_OnValidationSuccess);
+            this.kgtxtPageNumber.TextChanged += new System.EventHandler(this.kgtxtPageNumber_TextChanged);
             // 
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
+            this.errorProvider1.RightToLeft = true;
             // 
             // lblCurrentPageRecordsCount
             // 
@@ -318,6 +323,7 @@
             this.gcbFilterBy.Size = new System.Drawing.Size(157, 36);
             this.gcbFilterBy.TabIndex = 12;
             this.gcbFilterBy.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.gcbFilterBy.SelectedIndexChanged += new System.EventHandler(this.gcbFilterBy_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -330,18 +336,98 @@
             this.label2.TabIndex = 13;
             this.label2.Text = "تصفية حسب :";
             // 
-            // lblNoRecordsMessage
+            // lblNoRecordsFoundMessage
             // 
-            this.lblNoRecordsMessage.AutoSize = true;
-            this.lblNoRecordsMessage.Font = new System.Drawing.Font("Segoe Script", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNoRecordsMessage.ForeColor = System.Drawing.Color.Red;
-            this.lblNoRecordsMessage.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.lblNoRecordsMessage.Location = new System.Drawing.Point(425, 352);
-            this.lblNoRecordsMessage.Name = "lblNoRecordsMessage";
-            this.lblNoRecordsMessage.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.lblNoRecordsMessage.Size = new System.Drawing.Size(306, 42);
-            this.lblNoRecordsMessage.TabIndex = 14;
-            this.lblNoRecordsMessage.Text = "لا يوجد نتائج مطباقة لبحثك !";
+            this.lblNoRecordsFoundMessage.Font = new System.Drawing.Font("Segoe Script", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNoRecordsFoundMessage.ForeColor = System.Drawing.Color.Red;
+            this.lblNoRecordsFoundMessage.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.lblNoRecordsFoundMessage.Location = new System.Drawing.Point(40, 352);
+            this.lblNoRecordsFoundMessage.Name = "lblNoRecordsFoundMessage";
+            this.lblNoRecordsFoundMessage.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.lblNoRecordsFoundMessage.Size = new System.Drawing.Size(1039, 42);
+            this.lblNoRecordsFoundMessage.TabIndex = 14;
+            this.lblNoRecordsFoundMessage.Text = "لا يوجد نتائج مطباقة لبحثك !";
+            this.lblNoRecordsFoundMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // kgtxtFilterValue
+            // 
+            this.kgtxtFilterValue.AllowWhiteSpace = false;
+            this.kgtxtFilterValue.ApplyTrimAtTextBoxValue = false;
+            this.kgtxtFilterValue.AutoRoundedCorners = true;
+            this.kgtxtFilterValue.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.kgtxtFilterValue.DefaultText = "";
+            this.kgtxtFilterValue.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.kgtxtFilterValue.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.kgtxtFilterValue.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.kgtxtFilterValue.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.kgtxtFilterValue.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.kgtxtFilterValue.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kgtxtFilterValue.ForeColor = System.Drawing.Color.Black;
+            this.kgtxtFilterValue.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.kgtxtFilterValue.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
+            this.kgtxtFilterValue.IsRequired = false;
+            this.kgtxtFilterValue.Location = new System.Drawing.Point(665, 225);
+            this.kgtxtFilterValue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.kgtxtFilterValue.Name = "kgtxtFilterValue";
+            this.kgtxtFilterValue.NumberProperties.DecimalNumberProperties.AllowNegative = true;
+            this.kgtxtFilterValue.NumberProperties.DecimalNumberProperties.MaxValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.kgtxtFilterValue.NumberProperties.DecimalNumberProperties.MaxValueOption = false;
+            this.kgtxtFilterValue.NumberProperties.DecimalNumberProperties.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.kgtxtFilterValue.NumberProperties.DecimalNumberProperties.MinValueOption = false;
+            this.kgtxtFilterValue.NumberProperties.FloatNumberProperties.AllowNegative = true;
+            this.kgtxtFilterValue.NumberProperties.FloatNumberProperties.MaxValue = 0F;
+            this.kgtxtFilterValue.NumberProperties.FloatNumberProperties.MaxValueOption = false;
+            this.kgtxtFilterValue.NumberProperties.FloatNumberProperties.MinValue = 0F;
+            this.kgtxtFilterValue.NumberProperties.FloatNumberProperties.MinValueOption = false;
+            this.kgtxtFilterValue.NumberProperties.IntegerNumberProperties.AllowNegative = true;
+            this.kgtxtFilterValue.NumberProperties.IntegerNumberProperties.MaxValue = 0;
+            this.kgtxtFilterValue.NumberProperties.IntegerNumberProperties.MaxValueOption = false;
+            this.kgtxtFilterValue.NumberProperties.IntegerNumberProperties.MinValue = 0;
+            this.kgtxtFilterValue.NumberProperties.IntegerNumberProperties.MinValueOption = false;
+            this.kgtxtFilterValue.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
+            this.kgtxtFilterValue.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
+            this.kgtxtFilterValue.PlaceholderText = "";
+            this.kgtxtFilterValue.SelectedText = "";
+            this.kgtxtFilterValue.Size = new System.Drawing.Size(157, 36);
+            this.kgtxtFilterValue.TabIndex = 15;
+            this.kgtxtFilterValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.kgtxtFilterValue.TextProperties.MinLength = ((short)(0));
+            this.kgtxtFilterValue.TextProperties.MinLengthOption = false;
+            this.kgtxtFilterValue.TextProperties.PhoneProperties.AllowPlusSign = true;
+            this.kgtxtFilterValue.TextProperties.PhoneProperties.MaxPhoneLength = ((byte)(15));
+            this.kgtxtFilterValue.TextProperties.TextFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.enTextFormat.None;
+            this.kgtxtFilterValue.TrimEnd = false;
+            this.kgtxtFilterValue.TrimStart = false;
+            this.kgtxtFilterValue.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxt_OnValidationError);
+            this.kgtxtFilterValue.OnValidationSuccess += new System.Action<object, System.ComponentModel.CancelEventArgs>(this.kgtxt_OnValidationSuccess);
+            this.kgtxtFilterValue.TextChanged += new System.EventHandler(this.kgtxtFilterValue_TextChanged);
+            this.kgtxtFilterValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.kgtxtFilterValue_KeyPress);
+            // 
+            // SearchAfterTimerFinish
+            // 
+            this.SearchAfterTimerFinish.Interval = 400;
+            this.SearchAfterTimerFinish.Tick += new System.EventHandler(this.SearchAfterTimerFinish_Tick);
+            // 
+            // lblUserMessage
+            // 
+            this.lblUserMessage.Font = new System.Drawing.Font("Segoe Script", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUserMessage.ForeColor = System.Drawing.Color.Red;
+            this.lblUserMessage.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.lblUserMessage.Location = new System.Drawing.Point(40, 394);
+            this.lblUserMessage.Name = "lblUserMessage";
+            this.lblUserMessage.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.lblUserMessage.Size = new System.Drawing.Size(1044, 42);
+            this.lblUserMessage.TabIndex = 16;
+            this.lblUserMessage.Text = "\"تم العثور على حقول غير صالحة. ضع المؤشر على العلامات الحمراء لعرض سبب الخطأ.\"";
+            this.lblUserMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // frmPeople
             // 
@@ -350,7 +436,9 @@
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1128, 737);
-            this.Controls.Add(this.lblNoRecordsMessage);
+            this.Controls.Add(this.lblUserMessage);
+            this.Controls.Add(this.kgtxtFilterValue);
+            this.Controls.Add(this.lblNoRecordsFoundMessage);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.gcbFilterBy);
             this.Controls.Add(this.lblCurrentPageRecordsCount);
@@ -361,12 +449,12 @@
             this.Controls.Add(this.lblCurrentPageOfNumberOfPages);
             this.Controls.Add(this.lblTotalRecordsNumber);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.guna2DataGridView1);
+            this.Controls.Add(this.gdgvPeople);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmPeople";
             this.Text = "frmPeople";
             this.Load += new System.EventHandler(this.frmPeople_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.guna2DataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gdgvPeople)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -375,7 +463,7 @@
 
         #endregion
 
-        private Guna.UI2.WinForms.Guna2DataGridView guna2DataGridView1;
+        private Guna.UI2.WinForms.Guna2DataGridView gdgvPeople;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblTotalRecordsNumber;
         private System.Windows.Forms.Label lblCurrentPageOfNumberOfPages;
@@ -388,6 +476,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private Guna.UI2.WinForms.Guna2ComboBox gcbFilterBy;
-        private System.Windows.Forms.Label lblNoRecordsMessage;
+        private System.Windows.Forms.Label lblNoRecordsFoundMessage;
+        private KhaledControlLibrary1.KhaledGuna2TextBox kgtxtFilterValue;
+        private System.Windows.Forms.Timer SearchAfterTimerFinish;
+        private System.Windows.Forms.Label lblUserMessage;
     }
 }

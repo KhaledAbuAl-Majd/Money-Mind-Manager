@@ -128,6 +128,7 @@
             this.guna2Button3.Size = new System.Drawing.Size(201, 48);
             this.guna2Button3.TabIndex = 2;
             this.guna2Button3.Text = "لمحة عامة";
+            this.guna2Button3.Click += new System.EventHandler(this.guna2Button3_Click);
             // 
             // gpnlRightBar
             // 

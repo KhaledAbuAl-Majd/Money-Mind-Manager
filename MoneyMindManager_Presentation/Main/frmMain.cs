@@ -20,7 +20,7 @@ namespace MoneyMindManager_Presentation.Main
             InitializeComponent();
         }
 
-        void _LoadFormAtPanelContainer(Form frm)
+        void _LoadFormAtPanelContainer(Form frm,bool clearOldControls)
         {
             if (frm == null)
                 return;
@@ -29,7 +29,9 @@ namespace MoneyMindManager_Presentation.Main
             frm.FormBorderStyle = FormBorderStyle.None;
             frm.Dock = DockStyle.Fill;
 
-            gpnlFormContainer.Controls.Clear();
+            if (clearOldControls)
+                gpnlFormContainer.Controls.Clear();
+
             gpnlFormContainer.Controls.Add(frm);
             frm.Show();
         }
@@ -53,9 +55,14 @@ namespace MoneyMindManager_Presentation.Main
 
         private void guna2Button2_Click(object sender, EventArgs e)
         {
-            _LoadFormAtPanelContainer(new frmPeople());
+            _LoadFormAtPanelContainer(new frmPeople(),true);
 
             //new frmPeople().Show();
+        }
+
+        private void guna2Button3_Click(object sender, EventArgs e)
+        {
+            _LoadFormAtPanelContainer(new frmAddUpdatePerson(),true);
         }
     }
 }

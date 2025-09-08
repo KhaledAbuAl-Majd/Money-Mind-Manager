@@ -119,5 +119,17 @@ namespace MoneyMindManager_Business
         {
             return await clsPersonData.GetAllPeopleByPersonID(accountID, pageNumber,personID);
         }
+
+        /// <summary>
+        /// Get All People By Person Name For Account Using Paging [10 rows per page]
+        /// </summary>
+        /// <param name="accountID">The current AccountID</param>
+        /// <param name="pageNumber">The page Number you want to get rows of it</param>
+        /// <param name="personName">The person name you want to search for</param>
+        /// <returns>object of clsGetAllPeople : if error happend, return null</returns>
+        public static async Task<clsGetAllPeople> GetAllPeopleByPersonName(short accountID, short pageNumber, string personName)
+        {
+            return await clsPersonData.GetAllPeopleByPersonName(accountID, pageNumber, personName);
+        }
     }
 }

@@ -7,8 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using KhaledControlLibrary1;
 using MoneyMindManager_Business;
 using MoneyMindManager_Presentation.Global;
+using MoneyMindManagerGlobal;
+using static Guna.UI2.Native.WinApi;
 
 namespace MoneyMindManager_Presentation.People
 {
@@ -19,31 +22,85 @@ namespace MoneyMindManager_Presentation.People
             InitializeComponent();
         }
 
+        bool _searchByPageNumber = false;
+
         short _pageNumber = 1;
-        async Task _LoadDataAtDataGridView(short pageNumber)
+
+        bool _CheckValidationChildren()
         {
-            var result = await clsPerson.GetAllPeople(2, pageNumber);
+            if (!ValidateChildren())
+            {
+                gdgvPeople.DataSource = null;
+                lblNoRecordsFoundMessage.Visible = true;
+                lblUserMessage.Text = "تم العثور على حقول غير صالحة. ضع المؤشر على العلامات الحمراء لعرض سبب الخطأ.";
+                lblUserMessage.Visible = true;
+                //clsGlobal_Presentation.ShowMessage("تم العثور على حقول غير صالحة. ضع المؤشر على العلامات الحمراء لعرض سبب الخطأ.", "خطأ في التحقق", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                lblCurrentPageRecordsCount.Text = "0";
+                lblTotalRecordsNumber.Text = "0";
+                lblCurrentPageOfNumberOfPages.Text = string.Concat("1", "   من   ", "0", "  صفحات");
+                return false;
+            }
+
+            return true;
+        }
+        async Task _LoadDataAtDataGridView()
+        {
+            SearchAfterTimerFinish.Stop();
+
+            if (!_CheckValidationChildren())
+                return;
+
+            //_pageNumber = Convert.ToInt16(kgtxtPageNumber.ValidatedText);
+
+            clsDataColumns.PersonClassess.clsGetAllPeople result = null;
+
+            if (gcbFilterBy.Text == "بدون" || string.IsNullOrEmpty(kgtxtFilterValue.ValidatedText))
+            {
+                result = await clsPerson.GetAllPeople(2, _pageNumber);
+            }
+            else if (gcbFilterBy.Text == "معرف الشخص")
+            {
+                int personID = Convert.ToInt32(kgtxtFilterValue.ValidatedText);
+                result = await clsPerson.GetAllPeopleByPersonID(2, _pageNumber, personID);
+            }
+            else if (gcbFilterBy.Text == "اسم الشخص")
+            {
+                string personName = kgtxtFilterValue.ValidatedText;
+                result = await clsPerson.GetAllPeopleByPersonName(2, _pageNumber, personName);
+            }
+            else
+                return;
 
             if (result == null)
                 return;
 
-            if (result.dtPeople.Rows.Count > 0)
+            if (result.dtPeople.Rows.Count == 0)
             {
-                lblNoRecordsMessage.Visible = false;
-                guna2DataGridView1.DataSource = result.dtPeople;
+                lblNoRecordsFoundMessage.Visible = true;
+                lblUserMessage.Visible = true;
+                gdgvPeople.DataSource = null;
             }
             else
             {
-                lblNoRecordsMessage.Visible = true;
+                lblNoRecordsFoundMessage.Visible = false;
+                lblUserMessage.Visible = false;
+                gdgvPeople.DataSource = result.dtPeople;
             }
 
-                _pageNumber = result.CurrentPageNumber;
+            //MessageBox.Show(gdgvPeople.Rows.Count.ToString());
+
+
+            //this._pageNumber = result.CurrentPageNumber;
+
+            _searchByPageNumber = false;
             kgtxtPageNumber.Text = result.CurrentPageNumber.ToString();
+            _searchByPageNumber = true;
+
             lblTotalRecordsNumber.Text = result.RecordsCount.ToString();
             lblCurrentPageOfNumberOfPages.Text = string.Concat(result.CurrentPageNumber, "   من   ", result.NumberOfPages, "  صفحات");
             kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValueOption = true;
-            kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValue = result.NumberOfPages;
-            lblCurrentPageRecordsCount.Text = guna2DataGridView1.Rows.Count.ToString();
+            kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValue = (result.NumberOfPages < 1) ? 1 : result.NumberOfPages;
+            lblCurrentPageRecordsCount.Text = gdgvPeople.Rows.Count.ToString();
 
             if (result.CurrentPageNumber >= result.NumberOfPages)
                 gibtnNextPage.Enabled = false;
@@ -52,60 +109,52 @@ namespace MoneyMindManager_Presentation.People
                 gibtnPreviousPage.Enabled = false;
 
             //
-            //guna2DataGridView1.Columns["PersonID"].HeaderText = "معرف الشخص";
-            //guna2DataGridView1.Columns["PersonID"].Width = 120;
 
-            //guna2DataGridView1.Columns["PersonName"].HeaderText = "اسم الشخص";
-            //guna2DataGridView1.Columns["PersonName"].Width = 250;
-
-            //guna2DataGridView1.Columns["Address"].HeaderText = "العنوان";
-            //guna2DataGridView1.Columns["Address"].Width = 290;
-
-            //guna2DataGridView1.Columns["Email"].HeaderText = "البريد الإلكتروني";
-            //guna2DataGridView1.Columns["Email"].Width = 260;
-
-            //guna2DataGridView1.Columns["Phone"].HeaderText = "رقم الهاتف";
-            //guna2DataGridView1.Columns["Phone"].Width = 140;
-
-            //guna2DataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
-        }
-
-        private async void frmPeople_Load(object sender, EventArgs e)
-        {
-            lblNoRecordsMessage.Visible = false;
-           await _LoadDataAtDataGridView(1);
-            //guna2DataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-
-            if (guna2DataGridView1.Rows.Count > 0)
+            if (gdgvPeople.Rows.Count > 0)
             {
-                guna2DataGridView1.Columns["PersonID"].HeaderText = "معرف الشخص";
-                guna2DataGridView1.Columns["PersonID"].Width = 120;
+                gdgvPeople.Columns["PersonID"].HeaderText = "معرف الشخص";
+                gdgvPeople.Columns["PersonID"].Width = 120;
 
-                guna2DataGridView1.Columns["PersonName"].HeaderText = "اسم الشخص";
-                guna2DataGridView1.Columns["PersonName"].Width = 250;
+                gdgvPeople.Columns["PersonName"].HeaderText = "اسم الشخص";
+                gdgvPeople.Columns["PersonName"].Width = 250;
 
-                guna2DataGridView1.Columns["Address"].HeaderText = "العنوان";
-                guna2DataGridView1.Columns["Address"].Width = 290;
+                gdgvPeople.Columns["Address"].HeaderText = "العنوان";
+                gdgvPeople.Columns["Address"].Width = 290;
 
-                guna2DataGridView1.Columns["Email"].HeaderText = "البريد الإلكتروني";
-                guna2DataGridView1.Columns["Email"].Width = 260;
+                gdgvPeople.Columns["Email"].HeaderText = "البريد الإلكتروني";
+                gdgvPeople.Columns["Email"].Width = 260;
 
-                guna2DataGridView1.Columns["Phone"].HeaderText = "رقم الهاتف";
-                guna2DataGridView1.Columns["Phone"].Width = 140;
+                gdgvPeople.Columns["Phone"].HeaderText = "رقم الهاتف";
+                gdgvPeople.Columns["Phone"].Width = 140;
             }
         }
 
-        private void kgtxtPageNumber_OnValidationError(object sender, KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs e)
+        void _FilterData()
         {
-            e.CancelEventArgs.Cancel = true;
-            errorProvider1.SetError(kgtxtPageNumber, clsUtils.GetValidationErrorTypeString(e.validationErrorType, kgtxtPageNumber));
+
         }
 
-        private void kgtxtPageNumber_OnValidationSuccess(object arg1, CancelEventArgs arg2)
+        private void frmPeople_Load(object sender, EventArgs e)
         {
+            _searchByPageNumber = false;
+            kgtxtPageNumber.Text = "1";
+            lblNoRecordsFoundMessage.Visible = false;
+            lblUserMessage.Visible = false;
+            gcbFilterBy.SelectedIndex = 0;
+        }
+
+        private void kgtxt_OnValidationError(object sender, KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs e)
+        {
+            KhaledGuna2TextBox kgtxt = (KhaledGuna2TextBox)sender;
+            e.CancelEventArgs.Cancel = true;
+            errorProvider1.SetError(kgtxt, clsUtils.GetValidationErrorTypeString(e.validationErrorType, kgtxt));
+        }
+
+        private void kgtxt_OnValidationSuccess(object arg1, CancelEventArgs arg2)
+        {
+            KhaledGuna2TextBox kgtxt = (KhaledGuna2TextBox)arg1;
             arg2.Cancel = false;
-            errorProvider1.SetError(kgtxtPageNumber, null);
+            errorProvider1.SetError(kgtxt, null);
         }
 
         private void guna2DataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -120,13 +169,86 @@ namespace MoneyMindManager_Presentation.People
         private async void gibtnNextPage_Click(object sender, EventArgs e)
         {
             ++_pageNumber;
-            await _LoadDataAtDataGridView(_pageNumber);
+            await _LoadDataAtDataGridView();
         }
 
         private async void gibtnPreviousPage_Click(object sender, EventArgs e)
         {
             --_pageNumber;
-            await _LoadDataAtDataGridView(_pageNumber);
+            await _LoadDataAtDataGridView();
+        }
+
+        private async void gcbFilterBy_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(gcbFilterBy.Text == "بدون")
+            {
+                kgtxtFilterValue.Visible = false;
+                await _LoadDataAtDataGridView();
+                return;
+            }
+
+            kgtxtFilterValue.Text = "";
+            SearchAfterTimerFinish.Stop();
+            await _LoadDataAtDataGridView();
+
+            kgtxtFilterValue.Visible = true;
+
+            if (gcbFilterBy.Text == "معرف الشخص")
+            {
+                kgtxtFilterValue.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Number;
+                kgtxtFilterValue.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
+                kgtxtFilterValue.AllowWhiteSpace = false;
+                kgtxtFilterValue.IsRequired = false;
+                kgtxtFilterValue.TrimEnd = false;
+                kgtxtFilterValue.TrimStart = false;
+                kgtxtFilterValue.NumberProperties.IntegerNumberProperties.AllowNegative = false;
+                kgtxtFilterValue.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
+                return;
+            }
+
+            if (gcbFilterBy.Text == "اسم الشخص")
+            {
+                kgtxtFilterValue.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
+                kgtxtFilterValue.AllowWhiteSpace = true;
+                kgtxtFilterValue.IsRequired = false;
+                kgtxtFilterValue.TrimEnd = false;
+                kgtxtFilterValue.TrimStart = false;
+                return;
+            }
+
+        }
+
+        private void kgtxtFilterValue_TextChanged(object sender, EventArgs e)
+        {
+            SearchAfterTimerFinish.Stop();
+            SearchAfterTimerFinish.Start();
+        }
+
+        private async void SearchAfterTimerFinish_Tick(object sender, EventArgs e)
+        {
+           await _LoadDataAtDataGridView();
+        }
+
+        private void kgtxtPageNumber_TextChanged(object sender, EventArgs e)
+        {
+            if (!_searchByPageNumber || !_CheckValidationChildren())
+                return;
+
+            _pageNumber = Convert.ToInt16(kgtxtPageNumber.ValidatedText);
+
+            //await _LoadDataAtDataGridView();
+
+            SearchAfterTimerFinish.Stop();
+            SearchAfterTimerFinish.Start();
+        }
+
+        private async void kgtxtFilterValue_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(e.KeyChar == (char)Keys.Enter)
+            {
+                SearchAfterTimerFinish.Stop();
+                await _LoadDataAtDataGridView();
+            }
         }
     }
 }
