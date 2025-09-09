@@ -42,8 +42,10 @@
             this.lblPersonID = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.guna2Panel1.SuspendLayout();
+            this.guna2Panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // kgtxtNotes
@@ -66,7 +68,7 @@
             this.kgtxtNotes.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtNotes.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
             this.kgtxtNotes.IsRequired = false;
-            this.kgtxtNotes.Location = new System.Drawing.Point(312, 224);
+            this.kgtxtNotes.Location = new System.Drawing.Point(342, 160);
             this.kgtxtNotes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtNotes.MaxLength = 200;
             this.kgtxtNotes.Multiline = true;
@@ -137,7 +139,7 @@
             this.kgtxtPhone.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtPhone.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Text;
             this.kgtxtPhone.IsRequired = false;
-            this.kgtxtPhone.Location = new System.Drawing.Point(312, 153);
+            this.kgtxtPhone.Location = new System.Drawing.Point(342, 89);
             this.kgtxtPhone.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtPhone.MaxLength = 20;
             this.kgtxtPhone.Name = "kgtxtPhone";
@@ -207,7 +209,7 @@
             this.kgtxtEmail.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtEmail.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Text;
             this.kgtxtEmail.IsRequired = false;
-            this.kgtxtEmail.Location = new System.Drawing.Point(5, 153);
+            this.kgtxtEmail.Location = new System.Drawing.Point(29, 89);
             this.kgtxtEmail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtEmail.MaxLength = 255;
             this.kgtxtEmail.Name = "kgtxtEmail";
@@ -276,7 +278,7 @@
             this.kgtxtAddress.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtAddress.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
             this.kgtxtAddress.IsRequired = false;
-            this.kgtxtAddress.Location = new System.Drawing.Point(5, 224);
+            this.kgtxtAddress.Location = new System.Drawing.Point(29, 160);
             this.kgtxtAddress.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtAddress.MaxLength = 300;
             this.kgtxtAddress.Multiline = true;
@@ -346,7 +348,7 @@
             this.kgtxtPersonName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtPersonName.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
             this.kgtxtPersonName.IsRequired = true;
-            this.kgtxtPersonName.Location = new System.Drawing.Point(312, 88);
+            this.kgtxtPersonName.Location = new System.Drawing.Point(342, 24);
             this.kgtxtPersonName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtPersonName.MaxLength = 150;
             this.kgtxtPersonName.Name = "kgtxtPersonName";
@@ -404,9 +406,9 @@
             // 
             this.lblHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHeader.ForeColor = System.Drawing.Color.Red;
-            this.lblHeader.Location = new System.Drawing.Point(6, 9);
+            this.lblHeader.Location = new System.Drawing.Point(12, 30);
             this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(614, 62);
+            this.lblHeader.Size = new System.Drawing.Size(1139, 62);
             this.lblHeader.TabIndex = 10;
             this.lblHeader.Text = "إضافة شخص";
             this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -434,8 +436,9 @@
             this.gbtnSave.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnSave.ImageSize = new System.Drawing.Size(25, 25);
             this.gbtnSave.IndicateFocus = true;
-            this.gbtnSave.Location = new System.Drawing.Point(467, 343);
+            this.gbtnSave.Location = new System.Drawing.Point(497, 279);
             this.gbtnSave.Name = "gbtnSave";
+            this.gbtnSave.PressedColor = System.Drawing.Color.White;
             this.gbtnSave.Size = new System.Drawing.Size(128, 45);
             this.gbtnSave.TabIndex = 5;
             this.gbtnSave.Text = "حفظ";
@@ -464,8 +467,9 @@
             this.gbtnClose.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnClose.ImageSize = new System.Drawing.Size(25, 25);
             this.gbtnClose.IndicateFocus = true;
-            this.gbtnClose.Location = new System.Drawing.Point(331, 343);
+            this.gbtnClose.Location = new System.Drawing.Point(361, 279);
             this.gbtnClose.Name = "gbtnClose";
+            this.gbtnClose.PressedColor = System.Drawing.Color.White;
             this.gbtnClose.Size = new System.Drawing.Size(128, 45);
             this.gbtnClose.TabIndex = 6;
             this.gbtnClose.Text = "غلق";
@@ -500,10 +504,32 @@
             this.guna2Panel1.Controls.Add(this.lblPersonID);
             this.guna2Panel1.Controls.Add(this.label2);
             this.guna2Panel1.CustomizableEdges.TopRight = false;
-            this.guna2Panel1.Location = new System.Drawing.Point(51, 88);
+            this.guna2Panel1.Location = new System.Drawing.Point(75, 24);
             this.guna2Panel1.Name = "guna2Panel1";
             this.guna2Panel1.Size = new System.Drawing.Size(237, 41);
             this.guna2Panel1.TabIndex = 98;
+            // 
+            // guna2Panel2
+            // 
+            this.guna2Panel2.BackColor = System.Drawing.Color.Transparent;
+            this.guna2Panel2.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.guna2Panel2.BorderRadius = 20;
+            this.guna2Panel2.BorderThickness = 2;
+            this.guna2Panel2.Controls.Add(this.guna2Panel1);
+            this.guna2Panel2.Controls.Add(this.gbtnClose);
+            this.guna2Panel2.Controls.Add(this.gbtnSave);
+            this.guna2Panel2.Controls.Add(this.kgtxtNotes);
+            this.guna2Panel2.Controls.Add(this.kgtxtPhone);
+            this.guna2Panel2.Controls.Add(this.kgtxtEmail);
+            this.guna2Panel2.Controls.Add(this.kgtxtAddress);
+            this.guna2Panel2.Controls.Add(this.kgtxtPersonName);
+            this.guna2Panel2.FillColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.guna2Panel2.Location = new System.Drawing.Point(262, 106);
+            this.guna2Panel2.Name = "guna2Panel2";
+            this.guna2Panel2.ShadowDecoration.Color = System.Drawing.Color.Transparent;
+            this.guna2Panel2.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(0, 0, 5, 5);
+            this.guna2Panel2.Size = new System.Drawing.Size(654, 358);
+            this.guna2Panel2.TabIndex = 0;
             // 
             // frmAddUpdatePerson
             // 
@@ -513,23 +539,17 @@
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.Color.White;
             this.CancelButton = this.gbtnClose;
-            this.ClientSize = new System.Drawing.Size(621, 400);
-            this.Controls.Add(this.guna2Panel1);
-            this.Controls.Add(this.gbtnClose);
-            this.Controls.Add(this.gbtnSave);
+            this.ClientSize = new System.Drawing.Size(1163, 737);
+            this.Controls.Add(this.guna2Panel2);
             this.Controls.Add(this.lblHeader);
-            this.Controls.Add(this.kgtxtNotes);
-            this.Controls.Add(this.kgtxtPhone);
-            this.Controls.Add(this.kgtxtEmail);
-            this.Controls.Add(this.kgtxtAddress);
-            this.Controls.Add(this.kgtxtPersonName);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmAddUpdatePerson";
             this.Text = "إضافة شخص";
             this.Load += new System.EventHandler(this.frmAddUpdatePerson_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
+            this.guna2Panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -548,5 +568,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblPersonID;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
+        private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
     }
 }

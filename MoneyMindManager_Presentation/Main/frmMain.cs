@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MoneyMindManager_Business;
 using MoneyMindManager_Presentation.People;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -15,9 +16,16 @@ namespace MoneyMindManager_Presentation.Main
 {
     public partial class frmMain : Form
     {
-        public frmMain()
+        int _userID;
+        public frmMain(int userID)
         {
             InitializeComponent();
+            _userID = userID;
+        }
+
+        public void AddNewForm(Form frm)
+        {
+            _LoadFormAtPanelContainer(frm, false);
         }
 
         void _LoadFormAtPanelContainer(Form frm,bool clearOldControls)
@@ -34,6 +42,7 @@ namespace MoneyMindManager_Presentation.Main
 
             gpnlFormContainer.Controls.Add(frm);
             frm.Show();
+            frm.BringToFront();
         }
 
         private void gbtnOverOview_Click(object sender, EventArgs e)
@@ -41,15 +50,20 @@ namespace MoneyMindManager_Presentation.Main
             //MessageBox.Show("kk");
         }
 
-        private void frmMain_Load(object sender, EventArgs e)
+        private async void frmMain_Load(object sender, EventArgs e)
         {
+            clsUser user = await clsUser.FindUserByUserID(_userID);
+
+            if (user == null)
+            {
+                this.Close();
+                return;
+            }
+
+            clsGlobal_Presentation.CurrentUser = user;
+            clsGlobal_Presentation.MainForm = this;
+
             gbtnOverOview.PerformClick();
-
-            //string text = "10.5";
-
-            //bool result = int.TryParse(text, NumberStyles.AllowLeadingSign | NumberStyles.AllowCurrencySymbol | NumberStyles.AllowThousands, CultureInfo.InvariantCulture, out int number);
-
-            //MessageBox.Show(result.ToString());
 
         }
 
@@ -57,12 +71,17 @@ namespace MoneyMindManager_Presentation.Main
         {
             _LoadFormAtPanelContainer(new frmPeople(),true);
 
-            //new frmPeople().Show();
+            //MessageBox.Show(gpnlFormContainer.Controls.Count.ToString());
         }
 
         private void guna2Button3_Click(object sender, EventArgs e)
         {
             _LoadFormAtPanelContainer(new frmAddUpdatePerson(),true);
+        }
+
+        private void gbtnUsers_Click(object sender, EventArgs e)
+        {
+            _LoadFormAtPanelContainer(new FrmUsers(), true);
         }
     }
 }

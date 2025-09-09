@@ -22,6 +22,7 @@ namespace MoneyMindManager_Presentation.People
             InitializeComponent();
         }
 
+        bool _IsHeaderCreated = false;
         bool _searchByPageNumber = false;
 
         short _pageNumber = 1;
@@ -31,6 +32,7 @@ namespace MoneyMindManager_Presentation.People
             if (!ValidateChildren())
             {
                 gdgvPeople.DataSource = null;
+                _IsHeaderCreated = false;
                 lblNoRecordsFoundMessage.Visible = true;
                 lblUserMessage.Text = "تم العثور على حقول غير صالحة. ضع المؤشر على العلامات الحمراء لعرض سبب الخطأ.";
                 lblUserMessage.Visible = true;
@@ -38,6 +40,9 @@ namespace MoneyMindManager_Presentation.People
                 lblCurrentPageRecordsCount.Text = "0";
                 lblTotalRecordsNumber.Text = "0";
                 lblCurrentPageOfNumberOfPages.Text = string.Concat("1", "   من   ", "0", "  صفحات");
+                _pageNumber = 1;
+                gibtnNextPage.Enabled = false;
+                gibtnNextPage.Enabled = false;
                 return false;
             }
 
@@ -54,19 +59,21 @@ namespace MoneyMindManager_Presentation.People
 
             clsDataColumns.PersonClassess.clsGetAllPeople result = null;
 
+            short accountID = Convert.ToInt16(clsGlobal_Presentation.CurrentUser.AccountID);
+
             if (gcbFilterBy.Text == "بدون" || string.IsNullOrEmpty(kgtxtFilterValue.ValidatedText))
             {
-                result = await clsPerson.GetAllPeople(2, _pageNumber);
+                result = await clsPerson.GetAllPeople(accountID, _pageNumber);
             }
             else if (gcbFilterBy.Text == "معرف الشخص")
             {
                 int personID = Convert.ToInt32(kgtxtFilterValue.ValidatedText);
-                result = await clsPerson.GetAllPeopleByPersonID(2, _pageNumber, personID);
+                result = await clsPerson.GetAllPeopleByPersonID(accountID, _pageNumber, personID);
             }
             else if (gcbFilterBy.Text == "اسم الشخص")
             {
                 string personName = kgtxtFilterValue.ValidatedText;
-                result = await clsPerson.GetAllPeopleByPersonName(2, _pageNumber, personName);
+                result = await clsPerson.GetAllPeopleByPersonName(accountID, _pageNumber, personName);
             }
             else
                 return;
@@ -79,6 +86,8 @@ namespace MoneyMindManager_Presentation.People
                 lblNoRecordsFoundMessage.Visible = true;
                 lblUserMessage.Visible = true;
                 gdgvPeople.DataSource = null;
+                _IsHeaderCreated = false;
+                _pageNumber = 1;
             }
             else
             {
@@ -87,55 +96,60 @@ namespace MoneyMindManager_Presentation.People
                 gdgvPeople.DataSource = result.dtPeople;
             }
 
-            //MessageBox.Show(gdgvPeople.Rows.Count.ToString());
-
-
-            //this._pageNumber = result.CurrentPageNumber;
-
             _searchByPageNumber = false;
-            kgtxtPageNumber.Text = result.CurrentPageNumber.ToString();
+            kgtxtPageNumber.Text = _pageNumber.ToString();
             _searchByPageNumber = true;
 
             lblTotalRecordsNumber.Text = result.RecordsCount.ToString();
-            lblCurrentPageOfNumberOfPages.Text = string.Concat(result.CurrentPageNumber, "   من   ", result.NumberOfPages, "  صفحات");
+            lblCurrentPageOfNumberOfPages.Text = string.Concat(_pageNumber, "   من   ", result.NumberOfPages, "  صفحات");
             kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValueOption = true;
             kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValue = (result.NumberOfPages < 1) ? 1 : result.NumberOfPages;
             lblCurrentPageRecordsCount.Text = gdgvPeople.Rows.Count.ToString();
 
-            if (result.CurrentPageNumber >= result.NumberOfPages)
-                gibtnNextPage.Enabled = false;
-
-            if (result.CurrentPageNumber == 1 || result.CurrentPageNumber == 0)
-                gibtnPreviousPage.Enabled = false;
-
+            gibtnNextPage.Enabled = (_pageNumber < result.NumberOfPages);
+            gibtnPreviousPage.Enabled = (_pageNumber > 1);
             //
 
-            if (gdgvPeople.Rows.Count > 0)
+            if (!_IsHeaderCreated && gdgvPeople.Rows.Count > 0)
             {
                 gdgvPeople.Columns["PersonID"].HeaderText = "معرف الشخص";
                 gdgvPeople.Columns["PersonID"].Width = 120;
 
                 gdgvPeople.Columns["PersonName"].HeaderText = "اسم الشخص";
-                gdgvPeople.Columns["PersonName"].Width = 250;
+                gdgvPeople.Columns["PersonName"].Width = 267;
 
                 gdgvPeople.Columns["Address"].HeaderText = "العنوان";
-                gdgvPeople.Columns["Address"].Width = 290;
+                gdgvPeople.Columns["Address"].Width = 280;
 
                 gdgvPeople.Columns["Email"].HeaderText = "البريد الإلكتروني";
-                gdgvPeople.Columns["Email"].Width = 260;
+                gdgvPeople.Columns["Email"].Width = 280;
 
                 gdgvPeople.Columns["Phone"].HeaderText = "رقم الهاتف";
-                gdgvPeople.Columns["Phone"].Width = 140;
+                gdgvPeople.Columns["Phone"].Width = 160;
+
+                _IsHeaderCreated = true;
             }
         }
 
-        void _FilterData()
+        void _AddNewPerson()
         {
+            frmAddUpdatePerson frm = new frmAddUpdatePerson();
+            frm.OnCloseAndSaved += FrmAddUpdatePerson_OnCloseAndSaved;
+            clsGlobal_Presentation.MainForm.AddNewForm(frm);
+        }
 
+        void _ShowPersonInfo()
+        {
+            int personID = Convert.ToInt32(gdgvPeople.CurrentRow.Cells[0].Value);
+
+            frmPersonInfo frm = new frmPersonInfo(personID);
+            frm.OnEditingPersonAndFormClosed += FrmAddUpdatePerson_OnCloseAndSaved;
+            clsGlobal_Presentation.MainForm.AddNewForm(frm);
         }
 
         private void frmPeople_Load(object sender, EventArgs e)
         {
+            _IsHeaderCreated = false;
             _searchByPageNumber = false;
             kgtxtPageNumber.Text = "1";
             lblNoRecordsFoundMessage.Visible = false;
@@ -159,7 +173,7 @@ namespace MoneyMindManager_Presentation.People
 
         private void guna2DataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if(e.Value == null || e.Value == DBNull.Value)
+            if (e.Value == null || e.Value == DBNull.Value)
             {
                 //e.CellStyle.BackColor = Color.LightYellow; // خلفية
                 e.CellStyle.ForeColor = Color.Red;
@@ -180,7 +194,8 @@ namespace MoneyMindManager_Presentation.People
 
         private async void gcbFilterBy_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(gcbFilterBy.Text == "بدون")
+            _pageNumber = 1;
+            if (gcbFilterBy.Text == "بدون")
             {
                 kgtxtFilterValue.Visible = false;
                 await _LoadDataAtDataGridView();
@@ -226,7 +241,7 @@ namespace MoneyMindManager_Presentation.People
 
         private async void SearchAfterTimerFinish_Tick(object sender, EventArgs e)
         {
-           await _LoadDataAtDataGridView();
+            await _LoadDataAtDataGridView();
         }
 
         private void kgtxtPageNumber_TextChanged(object sender, EventArgs e)
@@ -244,11 +259,62 @@ namespace MoneyMindManager_Presentation.People
 
         private async void kgtxtFilterValue_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if(e.KeyChar == (char)Keys.Enter)
+            if (e.KeyChar == (char)Keys.Enter)
             {
                 SearchAfterTimerFinish.Stop();
                 await _LoadDataAtDataGridView();
             }
+        }
+
+        private void gbtnAddPerson_Click(object sender, EventArgs e)
+        {
+            _AddNewPerson();
+        }
+
+        private void FrmAddUpdatePerson_OnCloseAndSaved()
+        {
+            _pageNumber = 1;
+            gcbFilterBy.SelectedIndex = (gcbFilterBy.SelectedIndex == 0) ? 1 : 0;
+        }
+
+        private void gtsmAddPerson_Click(object sender, EventArgs e)
+        {
+            _AddNewPerson();
+        }
+
+        private void gtsmEditPerson_Click(object sender, EventArgs e)
+        {
+            int personID = Convert.ToInt32(gdgvPeople.CurrentRow.Cells[0].Value);
+
+            frmAddUpdatePerson frm = new frmAddUpdatePerson(personID);
+            frm.OnCloseAndSaved += FrmAddUpdatePerson_OnCloseAndSaved;
+            clsGlobal_Presentation.MainForm.AddNewForm(frm);
+        }
+
+        private async void gtsmDeletePerson_Click(object sender, EventArgs e)
+        {
+            if (clsGlobalMessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف هذا الشخص", "طلب مواقفقة", MessageBoxButtons.OKCancel,
+                MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
+            {
+                int personID = Convert.ToInt32(gdgvPeople.CurrentRow.Cells[0].Value);
+
+                if (await clsPerson.DeletePersonByID(personID))
+                {
+                    _pageNumber = 1;
+                    gcbFilterBy.SelectedIndex = (gcbFilterBy.SelectedIndex == 0) ? 1 : 0;
+                }
+            }
+
+        }
+
+        private void gtsmPersonData_Click(object sender, EventArgs e)
+        {
+            _ShowPersonInfo();
+        }
+
+        private void gdgvPeople_DoubleClick(object sender, EventArgs e)
+        {
+            _ShowPersonInfo();
         }
     }
 }

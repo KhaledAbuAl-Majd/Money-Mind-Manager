@@ -16,6 +16,12 @@ namespace MoneyMindManager_Business
         enum enMode { AddNew, Update };
         private enMode Mode { get; set; } = enMode.AddNew;
         public clsAccount AccountInfo { get; private set; }
+        //public clsUser CreatedByUserInfo { get; private set; }
+
+        public async Task<clsUser> GetCreatedbyUserInfo()
+        {
+          return  await clsUser.FindUserByUserID(Convert.ToInt32(CreatedByUserID));
+        }
 
         public clsPerson() : base()
         {
@@ -24,15 +30,20 @@ namespace MoneyMindManager_Business
         }
 
         private clsPerson(int? personID, string personName, string address, string email, string phone, short accountID,
-            string notes, clsAccount accountInfo) : base(personID, personName, address, email, phone, accountID, notes)
+            string notes, clsAccount accountInfo, int? createdByUserID, DateTime createdDate) :
+            base(personID, personName, address, email, phone, accountID, notes,createdByUserID,createdDate)
         {
             Mode = enMode.Update;
             this.AccountInfo = accountInfo;
+            //this.CreatedByUserInfo = createdByUserInfo;
         }
 
         private async Task<bool> _AddNewPerson()
         {
-            PersonID = await clsPersonData.AddNewPerson(PersonName, Address, Email, Phone, Convert.ToInt16(AccountID), Notes);
+            this.CreatedDate = DateTime.Now;
+
+            PersonID = await clsPersonData.AddNewPerson(PersonName, Address, Email, Phone,
+                Convert.ToInt16(AccountID), Notes, Convert.ToInt32(CreatedByUserID));
 
             return (PersonID != null);
         }
@@ -45,6 +56,7 @@ namespace MoneyMindManager_Business
         async Task<bool> _RefeshCompositionObjects()
         {
             AccountInfo = await clsAccount.FindAccountByAccountID(Convert.ToInt16(AccountID));
+
 
             return (AccountInfo != null);
         }
@@ -73,18 +85,20 @@ namespace MoneyMindManager_Business
         /// <returns>Object of clsUserColumns, if person is not found it will return null</returns>
         public static async Task<clsPerson> FindPersonByID(int personID)
         {
-           clsPersonColumns personColumns = await clsPersonData.GetPersonInfoByID(personID);
+            clsPersonColumns personColumns = await clsPersonData.GetPersonInfoByID(personID);
 
             if (personColumns == null)
                 return null;
 
             clsAccount accountInfo = await clsAccount.FindAccountByAccountID(Convert.ToInt16(personColumns.AccountID));
 
-            if (accountInfo == null)
+
+            if (accountInfo == null )
                 return null;
 
-            return new clsPerson(personColumns.PersonID, personColumns.PersonName, personColumns.Address,
-                personColumns.Email, personColumns.Phone, Convert.ToInt16(personColumns.AccountID), personColumns.Notes, accountInfo);
+            return new clsPerson(personColumns.PersonID, personColumns.PersonName, personColumns.Address, personColumns.Email,
+                personColumns.Phone, Convert.ToInt16(personColumns.AccountID), personColumns.Notes, accountInfo,
+                personColumns.CreatedByUserID, personColumns.CreatedDate);
         }
 
         public static async Task<bool> DeletePersonByID(int personID)
@@ -130,6 +144,25 @@ namespace MoneyMindManager_Business
         public static async Task<clsGetAllPeople> GetAllPeopleByPersonName(short accountID, short pageNumber, string personName)
         {
             return await clsPersonData.GetAllPeopleByPersonName(accountID, pageNumber, personName);
+        }
+
+        public async Task<bool> RefreshData()
+        {
+            clsPerson freshPerson = await clsPerson.FindPersonByID(Convert.ToInt32(PersonID));
+
+            if (freshPerson == null)
+                return false;
+
+            this.PersonName = freshPerson.PersonName;
+            this.Address = freshPerson.Address;
+            this.Email = freshPerson.Email;
+            this.PersonName = freshPerson.Phone;
+            this.AccountID = freshPerson.AccountID;
+            this.Notes = freshPerson.Notes;
+            this.CreatedByUserID = freshPerson.CreatedByUserID;
+            this.CreatedDate = freshPerson.CreatedDate;
+
+            return true;
         }
     }
 }

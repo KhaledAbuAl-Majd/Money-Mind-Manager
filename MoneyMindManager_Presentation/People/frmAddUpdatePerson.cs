@@ -16,6 +16,9 @@ namespace MoneyMindManager_Presentation.People
 {
     public partial class frmAddUpdatePerson : Form
     {
+        public event Action OnCloseAndSaved;
+
+        bool _isSaved = false;
         enum enMode { AddNew, Update };
         enMode Mode { get; set; }
 
@@ -47,17 +50,18 @@ namespace MoneyMindManager_Presentation.People
             _PersonID = null;
             _Person = new clsPerson();
             lblPersonID.Text = "N/A";
+            kgtxtPersonName.Focus();
         }
 
         async Task _UpdateMode()
         {
-            ChangeHeaderValue("تحديث بيانات شخص");
+            ChangeHeaderValue("تعديل بيانات شخص");
 
             clsPerson searchedPerson = await clsPerson.FindPersonByID(Convert.ToInt32(_PersonID));
 
             if (searchedPerson == null)
             {
-                clsGlobal_Presentation.ShowErrorMessage("فشل تحميل بيانات الشخص");
+                clsGlobalMessageBoxs.ShowErrorMessage("فشل تحميل بيانات الشخص");
                 this.Close();
                 return;
             }
@@ -77,7 +81,7 @@ namespace MoneyMindManager_Presentation.People
         {
             if (!ValidateChildren())
             {
-                clsGlobal_Presentation.ShowMessage("تم العثور على حقول غير صالحة. ضع المؤشر على العلامات الحمراء لعرض سبب الخطأ.", "خطأ في التحقق", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                clsGlobalMessageBoxs.ShowValidateChildrenFailedMessage();
                 return;
             }
 
@@ -87,22 +91,25 @@ namespace MoneyMindManager_Presentation.People
             _Person.AccountID = clsGlobal_Presentation.CurrentUser?.AccountID;
             _Person.Address = kgtxtAddress.ValidatedText;
             _Person.Notes = kgtxtNotes.ValidatedText;
-            
+            _Person.CreatedByUserID = clsGlobal_Presentation.CurrentUser.UserID;
 
             if (await _Person.Save())
             {
                 if(Mode == enMode.AddNew)
                 {
-                    clsGlobal_Presentation.ShowMessage($"تم إضافة الشخص بنجاج بمعرف [{_Person.PersonID}]", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    clsGlobalMessageBoxs.ShowMessage($"تم إضافة الشخص بنجاج بمعرف [{_Person.PersonID}]", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     Mode = enMode.Update;
                     _PersonID = _Person.PersonID;
-                    ChangeHeaderValue("تحديث بيانات شخص");
+                    lblPersonID.Text = _PersonID.ToString();
+                    ChangeHeaderValue("تعديل بيانات شخص");
                 }
                 else if (Mode == enMode.Update)
                 {
-                    clsGlobal_Presentation.ShowMessage("تم تحديث بيانات الشخص بنجاح", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    clsGlobalMessageBoxs.ShowMessage("تم تعديل بيانات الشخص بنجاح", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+
+                _isSaved = true;
             }
         }
 
@@ -146,6 +153,9 @@ namespace MoneyMindManager_Presentation.People
 
         private void gbtnClose_Click(object sender, EventArgs e)
         {
+            if (_isSaved)
+                OnCloseAndSaved?.Invoke();
+
             this.Close();
         }
 

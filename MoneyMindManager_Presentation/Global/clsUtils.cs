@@ -130,5 +130,7 @@ namespace MoneyMindManager_Presentation.Global
 
             return errorMessage;
         }
+
+
     }
 }

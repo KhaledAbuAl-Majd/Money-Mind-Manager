@@ -7,7 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using MoneyMindManager_DataAccess;
 using MoneyMindManagerGlobal;
-using static MoneyMindManagerGlobal.clsDataColumns;
+using static MoneyMindManagerGlobal.clsDataColumns.clsUserClassess;
+using static MoneyMindManagerGlobal.clsDataColumns.PersonClassess;
 
 namespace MoneyMindManager_Business
 {
@@ -144,12 +145,13 @@ namespace MoneyMindManager_Business
         /// <returns>Object of clsUserColumns, if user is not found it will return null</returns>
         public static async Task<clsUser> FindUserByUserID(int userID)
         {
-            clsUserColumns userColumns = await clsUserData.GetUserInfoByUserID(userID);
+            var userColumns = await clsUserData.GetUserInfoByUserID(userID);
 
             if (userColumns == null)
                 return null;
 
             clsPerson personInfo = await clsPerson.FindPersonByID(Convert.ToInt32(userColumns.PersonID));
+
             clsAccount accountInfo = await clsAccount.FindAccountByAccountID(Convert.ToInt16(userColumns.AccountID));
 
             if ((personInfo == null) || (accountInfo == null))
@@ -242,6 +244,17 @@ namespace MoneyMindManager_Business
         public static string HashingPassowrd(string enteredPassword,string salt)
         {
             return clsHashing.ComputeHash(clsHashing.GetSaltedPassword(enteredPassword, salt));
+        }
+
+        /// <summary>
+        /// Get All Users For Account Using Paging [10 rows per page]
+        /// </summary>
+        /// <param name="accountID">The current AccountID</param>
+        /// <param name="pageNumber">The page Number you want to get rows of it</param>
+        /// <returns>object of clsGetAllPeople : if error happend, return null</returns>
+        public static async Task<clsGetAllUsers> GetAllUsers(short accountID, short pageNumber)
+        {
+            return await clsUserData.GetAllUsers(accountID, pageNumber);
         }
     }
 }

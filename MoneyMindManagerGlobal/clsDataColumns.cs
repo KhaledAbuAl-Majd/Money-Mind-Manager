@@ -20,8 +20,11 @@ namespace MoneyMindManagerGlobal
                 public string Phone { get; set; }
                 public Nullable<short> AccountID { get; set; }
                 public string Notes { get; set; }
+                public int? CreatedByUserID { get; set; }
+                public DateTime CreatedDate { get; protected set; }
 
-                public clsPersonColumns(int? personID, string personName, string address, string email, string phone, short? accountID, string notes)
+                public clsPersonColumns(int? personID, string personName, string address, string email, string phone,
+                    short? accountID, string notes, int? createdByUserID, DateTime createdDate)
                 {
                     this.PersonID = personID;
                     this.PersonName = personName;
@@ -30,6 +33,8 @@ namespace MoneyMindManagerGlobal
                     this.Phone = phone;
                     this.AccountID = accountID;
                     this.Notes = notes;
+                    this.CreatedByUserID = createdByUserID;
+                    this.CreatedDate = createdDate;
                 }
 
                 public clsPersonColumns()
@@ -41,6 +46,8 @@ namespace MoneyMindManagerGlobal
                     this.Phone = null;
                     this.AccountID = null;
                     this.Notes = null;
+                    this.CreatedByUserID = null;
+                    this.CreatedDate = DateTime.Now;
                 }
             }
 
@@ -48,64 +55,85 @@ namespace MoneyMindManagerGlobal
             {
                 public DataTable dtPeople;
                 public short NumberOfPages = 0;
-                public short CurrentPageNumber = 0;
+                //public short CurrentPageNumber = 0;
                 public int RecordsCount = 0;
 
-                public clsGetAllPeople(DataTable dtPeople,short numberOfPages,short currentPageNumber,int recordsCount)
+                public clsGetAllPeople(DataTable dtPeople,short numberOfPages,int recordsCount)
                 {
                     this.dtPeople = dtPeople;
                     this.NumberOfPages = numberOfPages;
-                    this.CurrentPageNumber = currentPageNumber;
+                    //this.CurrentPageNumber = currentPageNumber;
                     this.RecordsCount = recordsCount;
                 }
             }
         }
 
-        public class clsUserColumns
+        public static class clsUserClassess
         {
-            public Nullable<int> UserID { get; protected set; }
-            public string UserName { get; set; }
-            public Nullable<int> PersonID { get; set; }
-            public Nullable<int> Permissions { get; set; }
-
-            /// <summary>
-            /// Hashed Password [Hash(Password + Salt) ]
-            /// </summary>
-            public string Password { get; protected set; }
-            public string Salt { get; set; }
-            public bool IsActive { get; set; }
-            public string Notes { get; set; }
-            public Nullable<short> AccountID { get; set; }
-            public bool IsDeleted { get; set; }
-
-            public clsUserColumns(int? userID, string userName, int? personID, int? permissions, string password, string salt
-                , bool isActive, string notes, short? accountID, bool isDeleted)
+            public class clsUserColumns
             {
-                this.UserID = userID;
-                this.UserName = userName;
-                this.PersonID = personID;
-                this.Permissions = permissions;
-                this.Password = password;
-                this.Salt = salt;
-                this.IsActive = isActive;
-                this.Notes = notes;
-                this.AccountID = accountID;
-                this.IsDeleted = isDeleted;
+                public Nullable<int> UserID { get; protected set; }
+                public string UserName { get; set; }
+                public Nullable<int> PersonID { get; set; }
+                public Nullable<int> Permissions { get; set; }
+
+                /// <summary>
+                /// Hashed Password [Hash(Password + Salt) ]
+                /// </summary>
+                public string Password { get; protected set; }
+                public string Salt { get; set; }
+                public bool IsActive { get; set; }
+                public string Notes { get; set; }
+                public Nullable<short> AccountID { get; set; }
+                public bool IsDeleted { get; set; }
+
+                public clsUserColumns(int? userID, string userName, int? personID, int? permissions, string password, string salt
+                    , bool isActive, string notes, short? accountID, bool isDeleted)
+                {
+                    this.UserID = userID;
+                    this.UserName = userName;
+                    this.PersonID = personID;
+                    this.Permissions = permissions;
+                    this.Password = password;
+                    this.Salt = salt;
+                    this.IsActive = isActive;
+                    this.Notes = notes;
+                    this.AccountID = accountID;
+                    this.IsDeleted = isDeleted;
+                }
+
+                public clsUserColumns()
+                {
+                    this.UserID = null;
+                    this.UserName = null;
+                    this.PersonID = null;
+                    this.Permissions = null;
+                    this.Password = null;
+                    this.Salt = null;
+                    this.IsActive = true;
+                    this.Notes = null;
+                    this.AccountID = null;
+                    this.IsDeleted = false;
+                }
             }
 
-            public clsUserColumns()
+            public class clsGetAllUsers
             {
-                this.UserID = null;
-                this.UserName = null;
-                this.PersonID = null;
-                this.Permissions = null;
-                this.Password = null;
-                this.Salt = null;
-                this.IsActive = true;
-                this.Notes = null;
-                this.AccountID = null;
-                this.IsDeleted = false;
+                public DataTable dtUsers;
+                public short NumberOfPages = 0;
+                //public short CurrentPageNumber = 0;
+                public int RecordsCount = 0;
+
+                public clsGetAllUsers(DataTable dtUsers, short numberOfPages, int recordsCount)
+                {
+                    this.dtUsers = dtUsers;
+                    this.NumberOfPages = numberOfPages;
+                    //this.CurrentPageNumber = currentPageNumber;
+                    this.RecordsCount = recordsCount;
+                }
             }
+
         }
+
     }
 }

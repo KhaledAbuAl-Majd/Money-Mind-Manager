@@ -15,7 +15,7 @@ namespace MoneyMindManager_DataAccess
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>New PersonID if Success, if failed return null</returns>
         public static async Task<Nullable<int>> AddNewPerson(string personName, string address, string email, string phone,
-            short accountID, string notes, bool RaiseEventOnErrorOccured = true)
+            short accountID, string notes,int createdByUserID, bool RaiseEventOnErrorOccured = true)
         {
             int? newPersonID = null;
 
@@ -33,6 +33,7 @@ namespace MoneyMindManager_DataAccess
                         command.Parameters.AddWithValue("@Phone", string.IsNullOrEmpty(phone) ? System.DBNull.Value : (object)phone);
                         command.Parameters.AddWithValue("@AccountID", accountID);
                         command.Parameters.AddWithValue("@Notes", string.IsNullOrEmpty(notes) ? System.DBNull.Value : (object)notes);
+                        command.Parameters.AddWithValue("@CreatedByUserID", createdByUserID);
 
                         SqlParameter outputnewPersonID = new SqlParameter("@NewPersonID", System.Data.SqlDbType.Int)
                         {
@@ -54,6 +55,9 @@ namespace MoneyMindManager_DataAccess
                         //newPersonID = outputnewPersonID?.Value as int?;
                     }
                 }
+
+                if (newPersonID == null)
+                    throw new Exception("فشت العمية");
             }
             catch (Exception ex)
             {
@@ -184,14 +188,19 @@ namespace MoneyMindManager_DataAccess
                                 Nullable<short> accountID = Convert.ToInt16(reader["AccountID"]);
                                 //Nullable<int> AccountID = reader["AccountID"] as int?;
                                 string notes = (reader["Notes"] == System.DBNull.Value) ? null : reader["Notes"] as string;
+                                Nullable<int> createdByUserID = Convert.ToInt32(reader["CreatedByUserID"]);
+                                DateTime createdDate = Convert.ToDateTime(reader["CreatedDate"]);
 
-                                personData = new clsPersonColumns(personID, personName, address, email, phone, accountID, notes);
+                                personData = new clsPersonColumns(personID, personName, address, email, phone, accountID, notes,createdByUserID,createdDate);
                             }
                             else
                                 personData = null;
                         }
                     }
                 }
+
+                if (personData == null)
+                    throw new Exception("فشت العملية");
             }
             catch (Exception ex)
             {
@@ -290,7 +299,7 @@ namespace MoneyMindManager_DataAccess
                             short numberOfPages = Convert.ToInt16(outputNumberOfPages.Value);
                             short recordsCount = Convert.ToInt16(outputRecordsCount.Value);
 
-                            allPeople = new clsGetAllPeople(dtPeople, numberOfPages, pageNumber, recordsCount);
+                            allPeople = new clsGetAllPeople(dtPeople, numberOfPages, recordsCount);
                         }
                     }
                 }
@@ -352,7 +361,7 @@ namespace MoneyMindManager_DataAccess
                             short numberOfPages = Convert.ToInt16(outputNumberOfPages.Value);
                             short recordsCount = Convert.ToInt16(outputRecordsCount.Value);
 
-                            allPeople = new clsGetAllPeople(dtPeople, numberOfPages, pageNumber, recordsCount);
+                            allPeople = new clsGetAllPeople(dtPeople, numberOfPages, recordsCount);
                         }
                     }
                 }
@@ -414,7 +423,7 @@ namespace MoneyMindManager_DataAccess
                             short numberOfPages = Convert.ToInt16(outputNumberOfPages.Value);
                             short recordsCount = Convert.ToInt16(outputRecordsCount.Value);
 
-                            allPeople = new clsGetAllPeople(dtPeople, numberOfPages, pageNumber, recordsCount);
+                            allPeople = new clsGetAllPeople(dtPeople, numberOfPages, recordsCount);
                         }
                     }
                 }
