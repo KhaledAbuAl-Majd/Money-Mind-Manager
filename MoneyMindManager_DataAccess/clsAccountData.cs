@@ -7,35 +7,13 @@ using System.Text;
 using System.Threading.Tasks;
 using MoneyMindManagerGlobal;
 using static MoneyMindManager_DataAccess.clsUserData;
+using static MoneyMindManagerGlobal.clsDataColumns.clsAccountClasses;
 
 namespace MoneyMindManager_DataAccess
 {
     public static class clsAccountData
     {
-        public class clsAccountColumns
-        {
-            public short AccountID { get; }
-            public string AccountName { get; set; }
-            public DateTime CreatedDate { get; protected set; }
-            public bool IsActive { get; set; }
-            public byte DefaultCurrencyID { get; protected set; }
-            public string Description { get; set; }
-            public int CurrentBalanceAccountID { get; protected set;}
-            public int SavingBalanceAccountID { get; protected set; }
-
-            public clsAccountColumns(short accountID,string accountName,DateTime createdDate,bool isActive,byte defaultCurrencyID,
-                string description,int currentBalanceAccountID,int savingBalanceAccountID)
-            {
-                this.AccountID = accountID;
-                this.AccountName = accountName;
-                this.CreatedDate = createdDate;
-                this.IsActive = isActive;
-                this.DefaultCurrencyID = defaultCurrencyID;
-                this.Description = description;
-                this.CurrentBalanceAccountID = currentBalanceAccountID;
-                this.SavingBalanceAccountID = savingBalanceAccountID;
-            }
-        }
+       
 
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>New AccountID if Success, if failed return null</returns>

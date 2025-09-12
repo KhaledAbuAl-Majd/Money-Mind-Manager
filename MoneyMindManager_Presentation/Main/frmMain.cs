@@ -52,6 +52,8 @@ namespace MoneyMindManager_Presentation.Main
 
         private async void frmMain_Load(object sender, EventArgs e)
         {
+            this.Enabled = false;
+
             clsUser user = await clsUser.FindUserByUserID(_userID);
 
             if (user == null)
@@ -59,6 +61,8 @@ namespace MoneyMindManager_Presentation.Main
                 this.Close();
                 return;
             }
+
+            this.Enabled = true;
 
             clsGlobal_Presentation.CurrentUser = user;
             clsGlobal_Presentation.MainForm = this;

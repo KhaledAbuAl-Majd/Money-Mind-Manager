@@ -124,7 +124,7 @@
   <data name="gtsmPersonInfo.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wQAADsEBuJFr7QAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAD8bSURBVHhe7d0H
+        vwAADr8BOAVTJAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAD8bSURBVHhe7d0H
         tBRV2u7x9yQOOWcEARFQQAUVCeZRAUExDCiKgSiSVIJEBQlmBUExZ70zOqOOccwYUdExjXFGZ8SMKBkU
         076rmu5vqP0WcOiu7j616/+s9Vv3Lj+Fqere+31On+oqEUIIIVFKNRHZU0T6iMhwEZkpIjeKyH0i8oyI
         /ENEPhWRlUmrRMQk/b7FP/82+e+9JyLPJf/760VkroicJSJ9k39Pdft/ACGEEEKylxoicmByGN8gIotF
@@ -1771,9 +1771,6 @@
         In4vIn4lIn4yIr4uIp68/LXgUP8PPcfNLGIOmowAAAAASUVORK5CYII=
 </value>
   </data>
-  <metadata name="kgtxtPageNumber.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <metadata name="errorProvider1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>124, 17</value>
   </metadata>

@@ -6,32 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MoneyMindManagerGlobal;
+using static MoneyMindManagerGlobal.clsDataColumns.clsCurrencyClasses;
 
 namespace MoneyMindManager_DataAccess
 {
     public static class clsCurrencyData
     {
-        public class clsCurrencyColumns
-        {
-            public byte CurrencyID { get; }
-            public string CurrencyName { get; }
-            public string CurrencySymbol { get; }
-
-            public clsCurrencyColumns(byte currencyID,string currencyName,string currencySymbol)
-            {
-                this.CurrencyID = currencyID;
-                this.CurrencyName = currencyName;
-                this.CurrencySymbol = currencySymbol;
-            }
-
-            //public clsCurrencyColumns()
-            //{
-            //    this.CurrencyID = null;
-            //    this.CurrencyName = null;
-            //    this.CurrencySymbol = null;
-            //}
-        }
-
+        
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         public static async Task<clsCurrencyColumns> GetCurrencyInfoByCurrencyID(byte currencyID, bool RaiseEventOnErrorOccured = true)
         {
@@ -62,6 +43,9 @@ namespace MoneyMindManager_DataAccess
                         }
                     }
                 }
+
+                if (currencyData == null)
+                    throw new Exception("فشلت العملية");
             }
             catch (Exception ex)
             {
@@ -104,6 +88,9 @@ namespace MoneyMindManager_DataAccess
                         }
                     }
                 }
+
+                if (currencyData == null)
+                    throw new Exception("فشلت العملية");
             }
             catch (Exception ex)
             {
@@ -136,6 +123,9 @@ namespace MoneyMindManager_DataAccess
                         }
                     }
                 }
+
+                if (dtCurrencies == null)
+                    throw new Exception("فشلت العملية");
             }
             catch (Exception ex)
             {

@@ -37,11 +37,11 @@
             this.gbtnOverOview = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
             this.gpnlRightBar = new Guna.UI2.WinForms.Guna2Panel();
+            this.gbtnUsers = new Guna.UI2.WinForms.Guna2Button();
             this.gpnlTopBar = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2DragControl2 = new Guna.UI2.WinForms.Guna2DragControl(this.components);
             this.guna2DragControl3 = new Guna.UI2.WinForms.Guna2DragControl(this.components);
             this.gpnlFormContainer = new Guna.UI2.WinForms.Guna2Panel();
-            this.gbtnUsers = new Guna.UI2.WinForms.Guna2Button();
             this.gpnlRightBar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,6 +75,7 @@
             // 
             this.gbtnOverOview.BackColor = System.Drawing.Color.Transparent;
             this.gbtnOverOview.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            this.gbtnOverOview.Cursor = System.Windows.Forms.Cursors.Hand;
             this.gbtnOverOview.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.gbtnOverOview.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.gbtnOverOview.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -98,6 +99,7 @@
             // 
             this.guna2Button2.BackColor = System.Drawing.Color.Transparent;
             this.guna2Button2.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            this.guna2Button2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2Button2.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.guna2Button2.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.guna2Button2.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -126,43 +128,16 @@
             this.gpnlRightBar.CustomBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.gpnlRightBar.CustomBorderThickness = new System.Windows.Forms.Padding(1, 0, 0, 0);
             this.gpnlRightBar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.gpnlRightBar.Location = new System.Drawing.Point(1163, 0);
+            this.gpnlRightBar.Location = new System.Drawing.Point(1210, 0);
             this.gpnlRightBar.Name = "gpnlRightBar";
             this.gpnlRightBar.Size = new System.Drawing.Size(263, 809);
             this.gpnlRightBar.TabIndex = 3;
-            // 
-            // gpnlTopBar
-            // 
-            this.gpnlTopBar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gpnlTopBar.Location = new System.Drawing.Point(0, 0);
-            this.gpnlTopBar.Name = "gpnlTopBar";
-            this.gpnlTopBar.Size = new System.Drawing.Size(1163, 72);
-            this.gpnlTopBar.TabIndex = 4;
-            // 
-            // guna2DragControl2
-            // 
-            this.guna2DragControl2.DockIndicatorTransparencyValue = 0.6D;
-            this.guna2DragControl2.TargetControl = this.gpnlTopBar;
-            this.guna2DragControl2.UseTransparentDrag = true;
-            // 
-            // guna2DragControl3
-            // 
-            this.guna2DragControl3.DockIndicatorTransparencyValue = 0.6D;
-            this.guna2DragControl3.TargetControl = this.gpnlRightBar;
-            this.guna2DragControl3.UseTransparentDrag = true;
-            // 
-            // gpnlFormContainer
-            // 
-            this.gpnlFormContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gpnlFormContainer.Location = new System.Drawing.Point(0, 72);
-            this.gpnlFormContainer.Name = "gpnlFormContainer";
-            this.gpnlFormContainer.Size = new System.Drawing.Size(1163, 737);
-            this.gpnlFormContainer.TabIndex = 5;
             // 
             // gbtnUsers
             // 
             this.gbtnUsers.BackColor = System.Drawing.Color.Transparent;
             this.gbtnUsers.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            this.gbtnUsers.Cursor = System.Windows.Forms.Cursors.Hand;
             this.gbtnUsers.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.gbtnUsers.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.gbtnUsers.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -182,12 +157,40 @@
             this.gbtnUsers.Text = "المستخدمين";
             this.gbtnUsers.Click += new System.EventHandler(this.gbtnUsers_Click);
             // 
+            // gpnlTopBar
+            // 
+            this.gpnlTopBar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.gpnlTopBar.Location = new System.Drawing.Point(0, 0);
+            this.gpnlTopBar.Name = "gpnlTopBar";
+            this.gpnlTopBar.Size = new System.Drawing.Size(1210, 72);
+            this.gpnlTopBar.TabIndex = 4;
+            // 
+            // guna2DragControl2
+            // 
+            this.guna2DragControl2.DockIndicatorTransparencyValue = 0.6D;
+            this.guna2DragControl2.TargetControl = this.gpnlTopBar;
+            this.guna2DragControl2.UseTransparentDrag = true;
+            // 
+            // guna2DragControl3
+            // 
+            this.guna2DragControl3.DockIndicatorTransparencyValue = 0.6D;
+            this.guna2DragControl3.TargetControl = this.gpnlRightBar;
+            this.guna2DragControl3.UseTransparentDrag = true;
+            // 
+            // gpnlFormContainer
+            // 
+            this.gpnlFormContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gpnlFormContainer.Location = new System.Drawing.Point(0, 72);
+            this.gpnlFormContainer.Name = "gpnlFormContainer";
+            this.gpnlFormContainer.Size = new System.Drawing.Size(1210, 737);
+            this.gpnlFormContainer.TabIndex = 5;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1426, 809);
+            this.ClientSize = new System.Drawing.Size(1473, 809);
             this.Controls.Add(this.gpnlFormContainer);
             this.Controls.Add(this.gpnlTopBar);
             this.Controls.Add(this.gpnlRightBar);

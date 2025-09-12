@@ -1,4 +1,6 @@
-﻿namespace MoneyMindManager_Presentation
+﻿using System.ComponentModel;
+
+namespace MoneyMindManager_Presentation
 {
     partial class FrmUsers
     {
@@ -48,16 +50,17 @@
             this.kgtxtPageNumber = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.gibtnNextPage = new Guna.UI2.WinForms.Guna2ImageButton();
             this.gibtnPreviousPage = new Guna.UI2.WinForms.Guna2ImageButton();
-            this.gbtnAddPerson = new Guna.UI2.WinForms.Guna2Button();
+            this.gbtnAddUser = new Guna.UI2.WinForms.Guna2Button();
             this.lblCurrentPageOfNumberOfPages = new System.Windows.Forms.Label();
             this.lblTotalRecordsNumber = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.gtsmDeletePerson = new System.Windows.Forms.ToolStripMenuItem();
-            this.gtsmEditPerson = new System.Windows.Forms.ToolStripMenuItem();
-            this.gtsmAddPerson = new System.Windows.Forms.ToolStripMenuItem();
-            this.gtsmPersonInfo = new System.Windows.Forms.ToolStripMenuItem();
+            this.gtsmDeleteUser = new System.Windows.Forms.ToolStripMenuItem();
+            this.gtsmEditUser = new System.Windows.Forms.ToolStripMenuItem();
+            this.gtsmAddUser = new System.Windows.Forms.ToolStripMenuItem();
+            this.gtsmUserInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.guna2ContextMenuStrip1 = new Guna.UI2.WinForms.Guna2ContextMenuStrip();
             this.gdgvUser = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.gcbIsActive = new Guna.UI2.WinForms.Guna2ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.guna2ContextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gdgvUser)).BeginInit();
@@ -69,7 +72,7 @@
             this.lblHeader.ForeColor = System.Drawing.Color.Red;
             this.lblHeader.Location = new System.Drawing.Point(12, 24);
             this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(1139, 62);
+            this.lblHeader.Size = new System.Drawing.Size(1186, 62);
             this.lblHeader.TabIndex = 34;
             this.lblHeader.Text = "المستخدمين";
             this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -79,7 +82,7 @@
             this.lblUserMessage.Font = new System.Drawing.Font("Segoe Script", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUserMessage.ForeColor = System.Drawing.Color.Red;
             this.lblUserMessage.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.lblUserMessage.Location = new System.Drawing.Point(40, 397);
+            this.lblUserMessage.Location = new System.Drawing.Point(61, 397);
             this.lblUserMessage.Name = "lblUserMessage";
             this.lblUserMessage.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblUserMessage.Size = new System.Drawing.Size(1085, 42);
@@ -90,6 +93,7 @@
             // SearchAfterTimerFinish
             // 
             this.SearchAfterTimerFinish.Interval = 400;
+            this.SearchAfterTimerFinish.Tick += new System.EventHandler(this.SearchAfterTimerFinish_Tick);
             // 
             // kgtxtFilterValue
             // 
@@ -108,7 +112,7 @@
             this.kgtxtFilterValue.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtFilterValue.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
             this.kgtxtFilterValue.IsRequired = false;
-            this.kgtxtFilterValue.Location = new System.Drawing.Point(691, 151);
+            this.kgtxtFilterValue.Location = new System.Drawing.Point(712, 151);
             this.kgtxtFilterValue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtFilterValue.Name = "kgtxtFilterValue";
             this.kgtxtFilterValue.NumberProperties.DecimalNumberProperties.AllowNegative = true;
@@ -149,7 +153,7 @@
             this.kgtxtFilterValue.TrimEnd = false;
             this.kgtxtFilterValue.TrimStart = false;
             this.kgtxtFilterValue.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxt_OnValidationError);
-            this.kgtxtFilterValue.OnValidationSuccess += new System.Action<object, System.ComponentModel.CancelEventArgs>(this.kgtxt_OnValidationSuccess);
+            this.kgtxtFilterValue.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxt_OnValidationSuccess);
             this.kgtxtFilterValue.TextChanged += new System.EventHandler(this.kgtxtFilterValue_TextChanged);
             this.kgtxtFilterValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.kgtxtFilterValue_KeyPress);
             // 
@@ -158,7 +162,7 @@
             this.lblNoRecordsFoundMessage.Font = new System.Drawing.Font("Segoe Script", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNoRecordsFoundMessage.ForeColor = System.Drawing.Color.Red;
             this.lblNoRecordsFoundMessage.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.lblNoRecordsFoundMessage.Location = new System.Drawing.Point(40, 355);
+            this.lblNoRecordsFoundMessage.Location = new System.Drawing.Point(61, 355);
             this.lblNoRecordsFoundMessage.Name = "lblNoRecordsFoundMessage";
             this.lblNoRecordsFoundMessage.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblNoRecordsFoundMessage.Size = new System.Drawing.Size(1092, 42);
@@ -170,7 +174,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(1039, 156);
+            this.label2.Location = new System.Drawing.Point(1060, 156);
             this.label2.Name = "label2";
             this.label2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label2.Size = new System.Drawing.Size(97, 24);
@@ -194,9 +198,11 @@
             this.gcbFilterBy.ItemHeight = 30;
             this.gcbFilterBy.Items.AddRange(new object[] {
             "بدون",
-            "معرف الشخص",
-            "اسم الشخص"});
-            this.gcbFilterBy.Location = new System.Drawing.Point(873, 151);
+            "معرف المستخدم",
+            "اسم المستخدم",
+            "اسم الشخص",
+            "الفعالية"});
+            this.gcbFilterBy.Location = new System.Drawing.Point(894, 151);
             this.gcbFilterBy.Name = "gcbFilterBy";
             this.gcbFilterBy.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.gcbFilterBy.Size = new System.Drawing.Size(157, 36);
@@ -207,7 +213,7 @@
             // lblCurrentPageRecordsCount
             // 
             this.lblCurrentPageRecordsCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCurrentPageRecordsCount.Location = new System.Drawing.Point(806, 688);
+            this.lblCurrentPageRecordsCount.Location = new System.Drawing.Point(827, 688);
             this.lblCurrentPageRecordsCount.Name = "lblCurrentPageRecordsCount";
             this.lblCurrentPageRecordsCount.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblCurrentPageRecordsCount.Size = new System.Drawing.Size(114, 24);
@@ -218,7 +224,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(931, 688);
+            this.label3.Location = new System.Drawing.Point(952, 688);
             this.label3.Name = "label3";
             this.label3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label3.Size = new System.Drawing.Size(205, 24);
@@ -250,7 +256,7 @@
             this.kgtxtPageNumber.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtPageNumber.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Number;
             this.kgtxtPageNumber.IsRequired = true;
-            this.kgtxtPageNumber.Location = new System.Drawing.Point(175, 655);
+            this.kgtxtPageNumber.Location = new System.Drawing.Point(196, 655);
             this.kgtxtPageNumber.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtPageNumber.MaxLength = 150;
             this.kgtxtPageNumber.Name = "kgtxtPageNumber";
@@ -298,7 +304,7 @@
             this.kgtxtPageNumber.TrimEnd = true;
             this.kgtxtPageNumber.TrimStart = false;
             this.kgtxtPageNumber.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxt_OnValidationError);
-            this.kgtxtPageNumber.OnValidationSuccess += new System.Action<object, System.ComponentModel.CancelEventArgs>(this.kgtxt_OnValidationSuccess);
+            this.kgtxtPageNumber.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxt_OnValidationSuccess);
             this.kgtxtPageNumber.TextChanged += new System.EventHandler(this.kgtxtPageNumber_TextChanged);
             // 
             // gibtnNextPage
@@ -311,7 +317,7 @@
             this.gibtnNextPage.ImageOffset = new System.Drawing.Point(0, 0);
             this.gibtnNextPage.ImageRotate = 0F;
             this.gibtnNextPage.ImageSize = new System.Drawing.Size(25, 25);
-            this.gibtnNextPage.Location = new System.Drawing.Point(701, 655);
+            this.gibtnNextPage.Location = new System.Drawing.Point(722, 655);
             this.gibtnNextPage.Name = "gibtnNextPage";
             this.gibtnNextPage.PressedState.ImageSize = new System.Drawing.Size(64, 64);
             this.gibtnNextPage.Size = new System.Drawing.Size(40, 42);
@@ -330,7 +336,7 @@
             this.gibtnPreviousPage.ImageOffset = new System.Drawing.Point(0, 0);
             this.gibtnPreviousPage.ImageRotate = 0F;
             this.gibtnPreviousPage.ImageSize = new System.Drawing.Size(25, 25);
-            this.gibtnPreviousPage.Location = new System.Drawing.Point(423, 655);
+            this.gibtnPreviousPage.Location = new System.Drawing.Point(444, 655);
             this.gibtnPreviousPage.Name = "gibtnPreviousPage";
             this.gibtnPreviousPage.PressedState.ImageSize = new System.Drawing.Size(64, 64);
             this.gibtnPreviousPage.Size = new System.Drawing.Size(40, 42);
@@ -339,41 +345,41 @@
             this.gibtnPreviousPage.UseTransparentBackground = true;
             this.gibtnPreviousPage.Click += new System.EventHandler(this.gibtnPreviousPage_Click);
             // 
-            // gbtnAddPerson
+            // gbtnAddUser
             // 
-            this.gbtnAddPerson.Animated = true;
-            this.gbtnAddPerson.AutoRoundedCorners = true;
-            this.gbtnAddPerson.BackColor = System.Drawing.Color.Transparent;
-            this.gbtnAddPerson.BorderColor = System.Drawing.Color.DimGray;
-            this.gbtnAddPerson.BorderThickness = 1;
-            this.gbtnAddPerson.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.gbtnAddPerson.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.gbtnAddPerson.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.gbtnAddPerson.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.gbtnAddPerson.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.gbtnAddPerson.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.gbtnAddPerson.FillColor = System.Drawing.Color.White;
-            this.gbtnAddPerson.FocusedColor = System.Drawing.SystemColors.MenuHighlight;
-            this.gbtnAddPerson.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbtnAddPerson.ForeColor = System.Drawing.Color.Black;
-            this.gbtnAddPerson.HoverState.FillColor = System.Drawing.Color.SlateBlue;
-            this.gbtnAddPerson.HoverState.ForeColor = System.Drawing.Color.White;
-            this.gbtnAddPerson.Image = ((System.Drawing.Image)(resources.GetObject("gbtnAddPerson.Image")));
-            this.gbtnAddPerson.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.gbtnAddPerson.ImageSize = new System.Drawing.Size(30, 30);
-            this.gbtnAddPerson.IndicateFocus = true;
-            this.gbtnAddPerson.Location = new System.Drawing.Point(29, 146);
-            this.gbtnAddPerson.Name = "gbtnAddPerson";
-            this.gbtnAddPerson.PressedColor = System.Drawing.Color.White;
-            this.gbtnAddPerson.Size = new System.Drawing.Size(196, 41);
-            this.gbtnAddPerson.TabIndex = 33;
-            this.gbtnAddPerson.Text = "إضافة شخص";
-            this.gbtnAddPerson.Click += new System.EventHandler(this.gbtnAddPerson_Click);
+            this.gbtnAddUser.Animated = true;
+            this.gbtnAddUser.AutoRoundedCorners = true;
+            this.gbtnAddUser.BackColor = System.Drawing.Color.Transparent;
+            this.gbtnAddUser.BorderColor = System.Drawing.Color.DimGray;
+            this.gbtnAddUser.BorderThickness = 1;
+            this.gbtnAddUser.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gbtnAddUser.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.gbtnAddUser.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnAddUser.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnAddUser.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.gbtnAddUser.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.gbtnAddUser.FillColor = System.Drawing.Color.White;
+            this.gbtnAddUser.FocusedColor = System.Drawing.SystemColors.MenuHighlight;
+            this.gbtnAddUser.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnAddUser.ForeColor = System.Drawing.Color.Black;
+            this.gbtnAddUser.HoverState.FillColor = System.Drawing.Color.SlateBlue;
+            this.gbtnAddUser.HoverState.ForeColor = System.Drawing.Color.White;
+            this.gbtnAddUser.Image = ((System.Drawing.Image)(resources.GetObject("gbtnAddUser.Image")));
+            this.gbtnAddUser.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.gbtnAddUser.ImageSize = new System.Drawing.Size(30, 30);
+            this.gbtnAddUser.IndicateFocus = true;
+            this.gbtnAddUser.Location = new System.Drawing.Point(50, 146);
+            this.gbtnAddUser.Name = "gbtnAddUser";
+            this.gbtnAddUser.PressedColor = System.Drawing.Color.White;
+            this.gbtnAddUser.Size = new System.Drawing.Size(196, 41);
+            this.gbtnAddUser.TabIndex = 33;
+            this.gbtnAddUser.Text = "إضافة مستخدم";
+            this.gbtnAddUser.Click += new System.EventHandler(this.gbtnAddPerson_Click);
             // 
             // lblCurrentPageOfNumberOfPages
             // 
             this.lblCurrentPageOfNumberOfPages.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCurrentPageOfNumberOfPages.Location = new System.Drawing.Point(458, 659);
+            this.lblCurrentPageOfNumberOfPages.Location = new System.Drawing.Point(479, 659);
             this.lblCurrentPageOfNumberOfPages.Name = "lblCurrentPageOfNumberOfPages";
             this.lblCurrentPageOfNumberOfPages.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblCurrentPageOfNumberOfPages.Size = new System.Drawing.Size(249, 30);
@@ -384,7 +390,7 @@
             // lblTotalRecordsNumber
             // 
             this.lblTotalRecordsNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalRecordsNumber.Location = new System.Drawing.Point(850, 659);
+            this.lblTotalRecordsNumber.Location = new System.Drawing.Point(871, 659);
             this.lblTotalRecordsNumber.Name = "lblTotalRecordsNumber";
             this.lblTotalRecordsNumber.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblTotalRecordsNumber.Size = new System.Drawing.Size(114, 24);
@@ -395,54 +401,57 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(981, 659);
+            this.label1.Location = new System.Drawing.Point(1002, 659);
             this.label1.Name = "label1";
             this.label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label1.Size = new System.Drawing.Size(155, 24);
             this.label1.TabIndex = 20;
             this.label1.Text = "# عدد الصفوف الكلية : ";
             // 
-            // gtsmDeletePerson
+            // gtsmDeleteUser
             // 
-            this.gtsmDeletePerson.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gtsmDeletePerson.Image = ((System.Drawing.Image)(resources.GetObject("gtsmDeletePerson.Image")));
-            this.gtsmDeletePerson.Name = "gtsmDeletePerson";
-            this.gtsmDeletePerson.Size = new System.Drawing.Size(212, 36);
-            this.gtsmDeletePerson.Text = "حذف";
+            this.gtsmDeleteUser.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gtsmDeleteUser.Image = ((System.Drawing.Image)(resources.GetObject("gtsmDeleteUser.Image")));
+            this.gtsmDeleteUser.Name = "gtsmDeleteUser";
+            this.gtsmDeleteUser.Size = new System.Drawing.Size(214, 36);
+            this.gtsmDeleteUser.Text = "حذف";
             // 
-            // gtsmEditPerson
+            // gtsmEditUser
             // 
-            this.gtsmEditPerson.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gtsmEditPerson.Image = ((System.Drawing.Image)(resources.GetObject("gtsmEditPerson.Image")));
-            this.gtsmEditPerson.Name = "gtsmEditPerson";
-            this.gtsmEditPerson.Size = new System.Drawing.Size(212, 36);
-            this.gtsmEditPerson.Text = "تعديل";
+            this.gtsmEditUser.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gtsmEditUser.Image = ((System.Drawing.Image)(resources.GetObject("gtsmEditUser.Image")));
+            this.gtsmEditUser.Name = "gtsmEditUser";
+            this.gtsmEditUser.Size = new System.Drawing.Size(214, 36);
+            this.gtsmEditUser.Text = "تعديل";
+            this.gtsmEditUser.Click += new System.EventHandler(this.gtsmEditUser_Click);
             // 
-            // gtsmAddPerson
+            // gtsmAddUser
             // 
-            this.gtsmAddPerson.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gtsmAddPerson.Image = ((System.Drawing.Image)(resources.GetObject("gtsmAddPerson.Image")));
-            this.gtsmAddPerson.Name = "gtsmAddPerson";
-            this.gtsmAddPerson.Size = new System.Drawing.Size(212, 36);
-            this.gtsmAddPerson.Text = "إضافة شخص";
+            this.gtsmAddUser.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gtsmAddUser.Image = ((System.Drawing.Image)(resources.GetObject("gtsmAddUser.Image")));
+            this.gtsmAddUser.Name = "gtsmAddUser";
+            this.gtsmAddUser.Size = new System.Drawing.Size(214, 36);
+            this.gtsmAddUser.Text = "إضافة مستخدم";
+            this.gtsmAddUser.Click += new System.EventHandler(this.gtsmAddUser_Click);
             // 
-            // gtsmPersonInfo
+            // gtsmUserInfo
             // 
-            this.gtsmPersonInfo.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gtsmPersonInfo.Image = ((System.Drawing.Image)(resources.GetObject("gtsmPersonInfo.Image")));
-            this.gtsmPersonInfo.Name = "gtsmPersonInfo";
-            this.gtsmPersonInfo.Size = new System.Drawing.Size(212, 36);
-            this.gtsmPersonInfo.Text = "معلمومات الشخص";
+            this.gtsmUserInfo.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gtsmUserInfo.Image = ((System.Drawing.Image)(resources.GetObject("gtsmUserInfo.Image")));
+            this.gtsmUserInfo.Name = "gtsmUserInfo";
+            this.gtsmUserInfo.Size = new System.Drawing.Size(214, 36);
+            this.gtsmUserInfo.Text = "معلومات المستخدم";
+            this.gtsmUserInfo.Click += new System.EventHandler(this.gtsmUserInfo_Click);
             // 
             // guna2ContextMenuStrip1
             // 
             this.guna2ContextMenuStrip1.BackColor = System.Drawing.Color.Snow;
             this.guna2ContextMenuStrip1.ImageScalingSize = new System.Drawing.Size(30, 30);
             this.guna2ContextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.gtsmPersonInfo,
-            this.gtsmAddPerson,
-            this.gtsmEditPerson,
-            this.gtsmDeletePerson});
+            this.gtsmUserInfo,
+            this.gtsmAddUser,
+            this.gtsmEditUser,
+            this.gtsmDeleteUser});
             this.guna2ContextMenuStrip1.Name = "guna2ContextMenuStrip1";
             this.guna2ContextMenuStrip1.RenderStyle.ArrowColor = System.Drawing.Color.FromArgb(((int)(((byte)(151)))), ((int)(((byte)(143)))), ((int)(((byte)(255)))));
             this.guna2ContextMenuStrip1.RenderStyle.BorderColor = System.Drawing.Color.Gainsboro;
@@ -453,7 +462,7 @@
             this.guna2ContextMenuStrip1.RenderStyle.SelectionForeColor = System.Drawing.Color.White;
             this.guna2ContextMenuStrip1.RenderStyle.SeparatorColor = System.Drawing.Color.Gainsboro;
             this.guna2ContextMenuStrip1.RenderStyle.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
-            this.guna2ContextMenuStrip1.Size = new System.Drawing.Size(213, 148);
+            this.guna2ContextMenuStrip1.Size = new System.Drawing.Size(215, 148);
             // 
             // gdgvUser
             // 
@@ -490,7 +499,7 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.gdgvUser.DefaultCellStyle = dataGridViewCellStyle3;
             this.gdgvUser.GridColor = System.Drawing.Color.White;
-            this.gdgvUser.Location = new System.Drawing.Point(29, 201);
+            this.gdgvUser.Location = new System.Drawing.Point(50, 201);
             this.gdgvUser.MultiSelect = false;
             this.gdgvUser.Name = "gdgvUser";
             this.gdgvUser.ReadOnly = true;
@@ -531,21 +540,47 @@
             this.gdgvUser.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             this.gdgvUser.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.guna2DataGridView1_CellFormatting);
             // 
+            // gcbIsActive
+            // 
+            this.gcbIsActive.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.gcbIsActive.AutoRoundedCorners = true;
+            this.gcbIsActive.BackColor = System.Drawing.Color.Transparent;
+            this.gcbIsActive.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gcbIsActive.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.gcbIsActive.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.gcbIsActive.DropDownWidth = 150;
+            this.gcbIsActive.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.gcbIsActive.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.gcbIsActive.Font = new System.Drawing.Font("Segoe UI", 11.25F);
+            this.gcbIsActive.ForeColor = System.Drawing.Color.Black;
+            this.gcbIsActive.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.gcbIsActive.ItemHeight = 30;
+            this.gcbIsActive.Items.AddRange(new object[] {
+            "الكل",
+            "فعال",
+            "موقوف"});
+            this.gcbIsActive.Location = new System.Drawing.Point(712, 151);
+            this.gcbIsActive.Name = "gcbIsActive";
+            this.gcbIsActive.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.gcbIsActive.Size = new System.Drawing.Size(157, 36);
+            this.gcbIsActive.TabIndex = 35;
+            this.gcbIsActive.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.gcbIsActive.SelectedIndexChanged += new System.EventHandler(this.gcbIsActive_SelectedIndexChanged);
+            // 
             // FrmUsers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1163, 737);
+            this.ClientSize = new System.Drawing.Size(1210, 737);
             this.Controls.Add(this.lblHeader);
             this.Controls.Add(this.lblUserMessage);
-            this.Controls.Add(this.kgtxtFilterValue);
             this.Controls.Add(this.lblNoRecordsFoundMessage);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.gcbFilterBy);
             this.Controls.Add(this.lblCurrentPageRecordsCount);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.gbtnAddPerson);
+            this.Controls.Add(this.gbtnAddUser);
             this.Controls.Add(this.kgtxtPageNumber);
             this.Controls.Add(this.gibtnNextPage);
             this.Controls.Add(this.lblCurrentPageOfNumberOfPages);
@@ -553,6 +588,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.gibtnPreviousPage);
             this.Controls.Add(this.gdgvUser);
+            this.Controls.Add(this.gcbIsActive);
+            this.Controls.Add(this.kgtxtFilterValue);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FrmUsers";
             this.Text = "FrmUsers";
@@ -577,7 +614,7 @@
         private System.Windows.Forms.Label lblCurrentPageRecordsCount;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ErrorProvider errorProvider1;
-        private Guna.UI2.WinForms.Guna2Button gbtnAddPerson;
+        private Guna.UI2.WinForms.Guna2Button gbtnAddUser;
         private KhaledControlLibrary1.KhaledGuna2TextBox kgtxtPageNumber;
         private System.Windows.Forms.ToolTip toolTip1;
         private Guna.UI2.WinForms.Guna2ImageButton gibtnNextPage;
@@ -587,9 +624,10 @@
         private Guna.UI2.WinForms.Guna2ImageButton gibtnPreviousPage;
         private Guna.UI2.WinForms.Guna2DataGridView gdgvUser;
         private Guna.UI2.WinForms.Guna2ContextMenuStrip guna2ContextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem gtsmPersonInfo;
-        private System.Windows.Forms.ToolStripMenuItem gtsmAddPerson;
-        private System.Windows.Forms.ToolStripMenuItem gtsmEditPerson;
-        private System.Windows.Forms.ToolStripMenuItem gtsmDeletePerson;
+        private System.Windows.Forms.ToolStripMenuItem gtsmUserInfo;
+        private System.Windows.Forms.ToolStripMenuItem gtsmAddUser;
+        private System.Windows.Forms.ToolStripMenuItem gtsmEditUser;
+        private System.Windows.Forms.ToolStripMenuItem gtsmDeleteUser;
+        private Guna.UI2.WinForms.Guna2ComboBox gcbIsActive;
     }
 }

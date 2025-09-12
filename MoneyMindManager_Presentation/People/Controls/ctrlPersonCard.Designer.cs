@@ -67,7 +67,7 @@
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(485, 29);
+            this.label1.Location = new System.Drawing.Point(459, 29);
             this.label1.Name = "label1";
             this.label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label1.Size = new System.Drawing.Size(112, 24);
@@ -77,7 +77,7 @@
             // lblPersonID
             // 
             this.lblPersonID.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPersonID.Location = new System.Drawing.Point(315, 29);
+            this.lblPersonID.Location = new System.Drawing.Point(289, 29);
             this.lblPersonID.Name = "lblPersonID";
             this.lblPersonID.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblPersonID.Size = new System.Drawing.Size(130, 24);
@@ -88,7 +88,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(503, 78);
+            this.label4.Location = new System.Drawing.Point(477, 78);
             this.label4.Name = "label4";
             this.label4.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label4.Size = new System.Drawing.Size(94, 24);
@@ -100,7 +100,7 @@
             this.guna2PictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.guna2PictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox1.Image")));
             this.guna2PictureBox1.ImageRotate = 0F;
-            this.guna2PictureBox1.Location = new System.Drawing.Point(451, 26);
+            this.guna2PictureBox1.Location = new System.Drawing.Point(425, 26);
             this.guna2PictureBox1.Name = "guna2PictureBox1";
             this.guna2PictureBox1.Size = new System.Drawing.Size(36, 27);
             this.guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -113,7 +113,7 @@
             this.guna2PictureBox2.BackColor = System.Drawing.Color.Transparent;
             this.guna2PictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox2.Image")));
             this.guna2PictureBox2.ImageRotate = 0F;
-            this.guna2PictureBox2.Location = new System.Drawing.Point(461, 78);
+            this.guna2PictureBox2.Location = new System.Drawing.Point(435, 78);
             this.guna2PictureBox2.Name = "guna2PictureBox2";
             this.guna2PictureBox2.Size = new System.Drawing.Size(36, 27);
             this.guna2PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -126,7 +126,7 @@
             this.guna2PictureBox3.BackColor = System.Drawing.Color.Transparent;
             this.guna2PictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox3.Image")));
             this.guna2PictureBox3.ImageRotate = 0F;
-            this.guna2PictureBox3.Location = new System.Drawing.Point(503, 324);
+            this.guna2PictureBox3.Location = new System.Drawing.Point(477, 324);
             this.guna2PictureBox3.Name = "guna2PictureBox3";
             this.guna2PictureBox3.Size = new System.Drawing.Size(36, 27);
             this.guna2PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -138,7 +138,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(535, 323);
+            this.label6.Location = new System.Drawing.Point(509, 323);
             this.label6.Name = "label6";
             this.label6.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label6.Size = new System.Drawing.Size(62, 24);
@@ -150,7 +150,7 @@
             this.guna2PictureBox4.BackColor = System.Drawing.Color.Transparent;
             this.guna2PictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox4.Image")));
             this.guna2PictureBox4.ImageRotate = 0F;
-            this.guna2PictureBox4.Location = new System.Drawing.Point(476, 121);
+            this.guna2PictureBox4.Location = new System.Drawing.Point(450, 121);
             this.guna2PictureBox4.Name = "guna2PictureBox4";
             this.guna2PictureBox4.Size = new System.Drawing.Size(36, 27);
             this.guna2PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -162,7 +162,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(513, 127);
+            this.label8.Location = new System.Drawing.Point(487, 127);
             this.label8.Name = "label8";
             this.label8.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label8.Size = new System.Drawing.Size(84, 24);
@@ -174,7 +174,7 @@
             this.guna2PictureBox5.BackColor = System.Drawing.Color.Transparent;
             this.guna2PictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox5.Image")));
             this.guna2PictureBox5.ImageRotate = 0F;
-            this.guna2PictureBox5.Location = new System.Drawing.Point(438, 225);
+            this.guna2PictureBox5.Location = new System.Drawing.Point(412, 225);
             this.guna2PictureBox5.Name = "guna2PictureBox5";
             this.guna2PictureBox5.Size = new System.Drawing.Size(36, 27);
             this.guna2PictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -186,7 +186,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(476, 225);
+            this.label10.Location = new System.Drawing.Point(450, 225);
             this.label10.Name = "label10";
             this.label10.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label10.Size = new System.Drawing.Size(121, 24);
@@ -198,7 +198,7 @@
             this.guna2PictureBox6.BackColor = System.Drawing.Color.Transparent;
             this.guna2PictureBox6.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox6.Image")));
             this.guna2PictureBox6.ImageRotate = 0F;
-            this.guna2PictureBox6.Location = new System.Drawing.Point(484, 273);
+            this.guna2PictureBox6.Location = new System.Drawing.Point(458, 273);
             this.guna2PictureBox6.Name = "guna2PictureBox6";
             this.guna2PictureBox6.Size = new System.Drawing.Size(36, 27);
             this.guna2PictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -210,7 +210,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(520, 274);
+            this.label12.Location = new System.Drawing.Point(494, 274);
             this.label12.Name = "label12";
             this.label12.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label12.Size = new System.Drawing.Size(77, 24);
@@ -222,7 +222,7 @@
             this.guna2PictureBox8.BackColor = System.Drawing.Color.Transparent;
             this.guna2PictureBox8.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox8.Image")));
             this.guna2PictureBox8.ImageRotate = 0F;
-            this.guna2PictureBox8.Location = new System.Drawing.Point(419, 171);
+            this.guna2PictureBox8.Location = new System.Drawing.Point(393, 171);
             this.guna2PictureBox8.Name = "guna2PictureBox8";
             this.guna2PictureBox8.Size = new System.Drawing.Size(36, 27);
             this.guna2PictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -234,7 +234,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(455, 176);
+            this.label16.Location = new System.Drawing.Point(429, 176);
             this.label16.Name = "label16";
             this.label16.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label16.Size = new System.Drawing.Size(143, 24);
@@ -262,7 +262,7 @@
             this.kgtxtPersonName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtPersonName.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
             this.kgtxtPersonName.IsRequired = false;
-            this.kgtxtPersonName.Location = new System.Drawing.Point(79, 72);
+            this.kgtxtPersonName.Location = new System.Drawing.Point(53, 72);
             this.kgtxtPersonName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtPersonName.MaxLength = 150;
             this.kgtxtPersonName.Name = "kgtxtPersonName";
@@ -331,7 +331,7 @@
             this.kgtxtUserNameOfCreatedUser.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtUserNameOfCreatedUser.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
             this.kgtxtUserNameOfCreatedUser.IsRequired = false;
-            this.kgtxtUserNameOfCreatedUser.Location = new System.Drawing.Point(79, 170);
+            this.kgtxtUserNameOfCreatedUser.Location = new System.Drawing.Point(53, 170);
             this.kgtxtUserNameOfCreatedUser.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtUserNameOfCreatedUser.MaxLength = 150;
             this.kgtxtUserNameOfCreatedUser.Name = "kgtxtUserNameOfCreatedUser";
@@ -400,7 +400,7 @@
             this.kgtxtEmail.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtEmail.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
             this.kgtxtEmail.IsRequired = false;
-            this.kgtxtEmail.Location = new System.Drawing.Point(79, 219);
+            this.kgtxtEmail.Location = new System.Drawing.Point(53, 219);
             this.kgtxtEmail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtEmail.MaxLength = 150;
             this.kgtxtEmail.Name = "kgtxtEmail";
@@ -469,7 +469,7 @@
             this.kgtxtNotes.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtNotes.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
             this.kgtxtNotes.IsRequired = false;
-            this.kgtxtNotes.Location = new System.Drawing.Point(79, 268);
+            this.kgtxtNotes.Location = new System.Drawing.Point(53, 268);
             this.kgtxtNotes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtNotes.MaxLength = 150;
             this.kgtxtNotes.Name = "kgtxtNotes";
@@ -522,7 +522,7 @@
             this.guna2PictureBox9.BackColor = System.Drawing.Color.Transparent;
             this.guna2PictureBox9.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox9.Image")));
             this.guna2PictureBox9.ImageRotate = 0F;
-            this.guna2PictureBox9.Location = new System.Drawing.Point(168, 26);
+            this.guna2PictureBox9.Location = new System.Drawing.Point(142, 26);
             this.guna2PictureBox9.Name = "guna2PictureBox9";
             this.guna2PictureBox9.Size = new System.Drawing.Size(36, 27);
             this.guna2PictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -533,17 +533,18 @@
             // lblCreatedDate
             // 
             this.lblCreatedDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCreatedDate.Location = new System.Drawing.Point(6, 29);
+            this.lblCreatedDate.Location = new System.Drawing.Point(9, 29);
             this.lblCreatedDate.Name = "lblCreatedDate";
-            this.lblCreatedDate.Size = new System.Drawing.Size(156, 24);
+            this.lblCreatedDate.Size = new System.Drawing.Size(127, 24);
             this.lblCreatedDate.TabIndex = 29;
             this.lblCreatedDate.Text = "N/A";
+            this.lblCreatedDate.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(210, 26);
+            this.label5.Location = new System.Drawing.Point(184, 26);
             this.label5.Name = "label5";
             this.label5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label5.Size = new System.Drawing.Size(99, 24);
@@ -571,7 +572,7 @@
             this.kgtxtAddress.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtAddress.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
             this.kgtxtAddress.IsRequired = false;
-            this.kgtxtAddress.Location = new System.Drawing.Point(79, 317);
+            this.kgtxtAddress.Location = new System.Drawing.Point(53, 317);
             this.kgtxtAddress.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtAddress.MaxLength = 150;
             this.kgtxtAddress.Name = "kgtxtAddress";
@@ -640,7 +641,7 @@
             this.kgtxtPhoneNumber.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtPhoneNumber.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
             this.kgtxtPhoneNumber.IsRequired = false;
-            this.kgtxtPhoneNumber.Location = new System.Drawing.Point(79, 121);
+            this.kgtxtPhoneNumber.Location = new System.Drawing.Point(53, 121);
             this.kgtxtPhoneNumber.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtPhoneNumber.MaxLength = 150;
             this.kgtxtPhoneNumber.Name = "kgtxtPhoneNumber";
@@ -711,7 +712,7 @@
             this.gbtnEditPerson.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnEditPerson.ImageSize = new System.Drawing.Size(30, 30);
             this.gbtnEditPerson.IndicateFocus = true;
-            this.gbtnEditPerson.Location = new System.Drawing.Point(201, 378);
+            this.gbtnEditPerson.Location = new System.Drawing.Point(185, 378);
             this.gbtnEditPerson.Name = "gbtnEditPerson";
             this.gbtnEditPerson.PressedColor = System.Drawing.Color.White;
             this.gbtnEditPerson.Size = new System.Drawing.Size(196, 41);
@@ -750,7 +751,7 @@
             this.Controls.Add(this.guna2PictureBox1);
             this.Controls.Add(this.lblPersonID);
             this.Name = "ctrlPersonCard";
-            this.Size = new System.Drawing.Size(602, 436);
+            this.Size = new System.Drawing.Size(579, 436);
             this.Load += new System.EventHandler(this.ctrlPersonCard_Load);
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox2)).EndInit();

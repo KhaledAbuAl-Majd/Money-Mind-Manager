@@ -44,11 +44,11 @@
             this.guna2Panel2.BorderThickness = 2;
             this.guna2Panel2.Controls.Add(this.gbtnClose);
             this.guna2Panel2.FillColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.guna2Panel2.Location = new System.Drawing.Point(251, 113);
+            this.guna2Panel2.Location = new System.Drawing.Point(265, 113);
             this.guna2Panel2.Name = "guna2Panel2";
             this.guna2Panel2.ShadowDecoration.Color = System.Drawing.Color.Transparent;
             this.guna2Panel2.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(0, 0, 5, 5);
-            this.guna2Panel2.Size = new System.Drawing.Size(665, 527);
+            this.guna2Panel2.Size = new System.Drawing.Size(672, 527);
             this.guna2Panel2.TabIndex = 12;
             // 
             // gbtnClose
@@ -74,7 +74,7 @@
             this.gbtnClose.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnClose.ImageSize = new System.Drawing.Size(25, 25);
             this.gbtnClose.IndicateFocus = true;
-            this.gbtnClose.Location = new System.Drawing.Point(485, 465);
+            this.gbtnClose.Location = new System.Drawing.Point(502, 469);
             this.gbtnClose.Name = "gbtnClose";
             this.gbtnClose.PressedColor = System.Drawing.Color.White;
             this.gbtnClose.Size = new System.Drawing.Size(128, 45);
@@ -88,7 +88,7 @@
             this.lblHeader.ForeColor = System.Drawing.Color.Red;
             this.lblHeader.Location = new System.Drawing.Point(12, 21);
             this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(1139, 62);
+            this.lblHeader.Size = new System.Drawing.Size(1186, 62);
             this.lblHeader.TabIndex = 11;
             this.lblHeader.Text = "معلومات الشخص";
             this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -96,7 +96,7 @@
             // ctrlPersonCard1
             // 
             this.ctrlPersonCard1.BackColor = System.Drawing.Color.White;
-            this.ctrlPersonCard1.Location = new System.Drawing.Point(262, 140);
+            this.ctrlPersonCard1.Location = new System.Drawing.Point(300, 140);
             this.ctrlPersonCard1.Name = "ctrlPersonCard1";
             this.ctrlPersonCard1.Size = new System.Drawing.Size(602, 432);
             this.ctrlPersonCard1.TabIndex = 0;
@@ -107,7 +107,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1163, 737);
+            this.ClientSize = new System.Drawing.Size(1210, 737);
             this.Controls.Add(this.lblHeader);
             this.Controls.Add(this.ctrlPersonCard1);
             this.Controls.Add(this.guna2Panel2);

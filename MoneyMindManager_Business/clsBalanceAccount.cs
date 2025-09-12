@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MoneyMindManager_DataAccess;
+using static MoneyMindManagerGlobal.clsDataColumns.clsBalanceAccountClasses;
 
 namespace MoneyMindManager_Business
 {
-    public class clsBalanceAccount : clsBalanceAccountData.clsBalanceAccountColumns
+    public class clsBalanceAccount : clsBalanceAccountColumns
     {
         public enum enMode { AddNew, Update };
 
@@ -38,7 +39,7 @@ namespace MoneyMindManager_Business
 
         public static async Task<clsBalanceAccount> FindBalanceAccount(int balanceAccountID)
         {
-            clsBalanceAccountData.clsBalanceAccountColumns balanceAccountColumns = await clsBalanceAccountData.GetBalanceAccountInfoByBalanceAccountID(balanceAccountID);
+            clsBalanceAccountColumns balanceAccountColumns = await clsBalanceAccountData.GetBalanceAccountInfoByBalanceAccountID(balanceAccountID);
 
             if (balanceAccountColumns == null)
                 return null;

@@ -1,4 +1,6 @@
-﻿namespace MoneyMindManager_Presentation.People
+﻿using System.ComponentModel;
+
+namespace MoneyMindManager_Presentation.People
 {
     partial class frmAddUpdatePerson
     {
@@ -116,7 +118,7 @@
             this.kgtxtNotes.TrimEnd = false;
             this.kgtxtNotes.TrimStart = false;
             this.kgtxtNotes.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxtPersonName_OnValidationError);
-            this.kgtxtNotes.OnValidationSuccess += new System.Action<object, System.ComponentModel.CancelEventArgs>(this.kgtxtPersonName_OnValidationSuccess);
+            this.kgtxtNotes.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxtPersonName_OnValidationSuccess);
             this.kgtxtNotes.TextChanged += new System.EventHandler(this.kgtxtNotes_TextChanged);
             // 
             // kgtxtPhone
@@ -186,7 +188,7 @@
             this.kgtxtPhone.TrimEnd = false;
             this.kgtxtPhone.TrimStart = false;
             this.kgtxtPhone.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxtPersonName_OnValidationError);
-            this.kgtxtPhone.OnValidationSuccess += new System.Action<object, System.ComponentModel.CancelEventArgs>(this.kgtxtPersonName_OnValidationSuccess);
+            this.kgtxtPhone.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxtPersonName_OnValidationSuccess);
             this.kgtxtPhone.TextChanged += new System.EventHandler(this.kgtxtPhone_TextChanged);
             // 
             // kgtxtEmail
@@ -256,7 +258,7 @@
             this.kgtxtEmail.TrimEnd = false;
             this.kgtxtEmail.TrimStart = false;
             this.kgtxtEmail.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxtPersonName_OnValidationError);
-            this.kgtxtEmail.OnValidationSuccess += new System.Action<object, System.ComponentModel.CancelEventArgs>(this.kgtxtPersonName_OnValidationSuccess);
+            this.kgtxtEmail.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxtPersonName_OnValidationSuccess);
             // 
             // kgtxtAddress
             // 
@@ -326,7 +328,7 @@
             this.kgtxtAddress.TrimEnd = false;
             this.kgtxtAddress.TrimStart = false;
             this.kgtxtAddress.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxtPersonName_OnValidationError);
-            this.kgtxtAddress.OnValidationSuccess += new System.Action<object, System.ComponentModel.CancelEventArgs>(this.kgtxtPersonName_OnValidationSuccess);
+            this.kgtxtAddress.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxtPersonName_OnValidationSuccess);
             // 
             // kgtxtPersonName
             // 
@@ -395,7 +397,7 @@
             this.kgtxtPersonName.TrimEnd = true;
             this.kgtxtPersonName.TrimStart = false;
             this.kgtxtPersonName.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxtPersonName_OnValidationError);
-            this.kgtxtPersonName.OnValidationSuccess += new System.Action<object, System.ComponentModel.CancelEventArgs>(this.kgtxtPersonName_OnValidationSuccess);
+            this.kgtxtPersonName.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxtPersonName_OnValidationSuccess);
             this.kgtxtPersonName.TextChanged += new System.EventHandler(this.kgtxtPersonName_TextChanged);
             // 
             // errorProvider1
@@ -408,7 +410,7 @@
             this.lblHeader.ForeColor = System.Drawing.Color.Red;
             this.lblHeader.Location = new System.Drawing.Point(12, 30);
             this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(1139, 62);
+            this.lblHeader.Size = new System.Drawing.Size(1186, 62);
             this.lblHeader.TabIndex = 10;
             this.lblHeader.Text = "إضافة شخص";
             this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -498,11 +500,12 @@
             // 
             // guna2Panel1
             // 
-            this.guna2Panel1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.guna2Panel1.BorderColor = System.Drawing.Color.Gray;
             this.guna2Panel1.BorderRadius = 8;
             this.guna2Panel1.BorderThickness = 1;
             this.guna2Panel1.Controls.Add(this.lblPersonID);
             this.guna2Panel1.Controls.Add(this.label2);
+            this.guna2Panel1.CustomizableEdges.BottomRight = false;
             this.guna2Panel1.CustomizableEdges.TopRight = false;
             this.guna2Panel1.Location = new System.Drawing.Point(75, 24);
             this.guna2Panel1.Name = "guna2Panel1";
@@ -524,7 +527,7 @@
             this.guna2Panel2.Controls.Add(this.kgtxtAddress);
             this.guna2Panel2.Controls.Add(this.kgtxtPersonName);
             this.guna2Panel2.FillColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.guna2Panel2.Location = new System.Drawing.Point(262, 106);
+            this.guna2Panel2.Location = new System.Drawing.Point(281, 106);
             this.guna2Panel2.Name = "guna2Panel2";
             this.guna2Panel2.ShadowDecoration.Color = System.Drawing.Color.Transparent;
             this.guna2Panel2.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(0, 0, 5, 5);
@@ -539,7 +542,7 @@
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.Color.White;
             this.CancelButton = this.gbtnClose;
-            this.ClientSize = new System.Drawing.Size(1163, 737);
+            this.ClientSize = new System.Drawing.Size(1210, 737);
             this.Controls.Add(this.guna2Panel2);
             this.Controls.Add(this.lblHeader);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

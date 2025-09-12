@@ -29,6 +29,10 @@ namespace MoneyMindManager_Presentation.Global
                     errorMessage = "هذا الحقل مطلوب";
                     break;
 
+                case KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs.enValidationErrorType.WhiteSapceError:
+                    errorMessage = "غير مسموح بالمسافات, برجاء إدخال قيمة صالحة";
+                    break;
+
                 case KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs.enValidationErrorType.NotValidIntegerNumber:
                     errorMessage = "برجاء إدخال رقم صحيح";
                     break;

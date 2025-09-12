@@ -1,4 +1,6 @@
-﻿namespace MoneyMindManager_Presentation.People
+﻿using System.ComponentModel;
+
+namespace MoneyMindManager_Presentation.People
 {
     partial class frmPeople
     {
@@ -98,7 +100,7 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.gdgvPeople.DefaultCellStyle = dataGridViewCellStyle3;
             this.gdgvPeople.GridColor = System.Drawing.Color.White;
-            this.gdgvPeople.Location = new System.Drawing.Point(29, 198);
+            this.gdgvPeople.Location = new System.Drawing.Point(50, 198);
             this.gdgvPeople.MultiSelect = false;
             this.gdgvPeople.Name = "gdgvPeople";
             this.gdgvPeople.ReadOnly = true;
@@ -201,7 +203,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(981, 656);
+            this.label1.Location = new System.Drawing.Point(1002, 656);
             this.label1.Name = "label1";
             this.label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label1.Size = new System.Drawing.Size(155, 24);
@@ -211,7 +213,7 @@
             // lblTotalRecordsNumber
             // 
             this.lblTotalRecordsNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalRecordsNumber.Location = new System.Drawing.Point(850, 656);
+            this.lblTotalRecordsNumber.Location = new System.Drawing.Point(871, 656);
             this.lblTotalRecordsNumber.Name = "lblTotalRecordsNumber";
             this.lblTotalRecordsNumber.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblTotalRecordsNumber.Size = new System.Drawing.Size(114, 24);
@@ -221,7 +223,7 @@
             // lblCurrentPageOfNumberOfPages
             // 
             this.lblCurrentPageOfNumberOfPages.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCurrentPageOfNumberOfPages.Location = new System.Drawing.Point(458, 656);
+            this.lblCurrentPageOfNumberOfPages.Location = new System.Drawing.Point(479, 656);
             this.lblCurrentPageOfNumberOfPages.Name = "lblCurrentPageOfNumberOfPages";
             this.lblCurrentPageOfNumberOfPages.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblCurrentPageOfNumberOfPages.Size = new System.Drawing.Size(249, 30);
@@ -239,7 +241,7 @@
             this.gibtnNextPage.ImageOffset = new System.Drawing.Point(0, 0);
             this.gibtnNextPage.ImageRotate = 0F;
             this.gibtnNextPage.ImageSize = new System.Drawing.Size(25, 25);
-            this.gibtnNextPage.Location = new System.Drawing.Point(701, 652);
+            this.gibtnNextPage.Location = new System.Drawing.Point(722, 652);
             this.gibtnNextPage.Name = "gibtnNextPage";
             this.gibtnNextPage.PressedState.ImageSize = new System.Drawing.Size(64, 64);
             this.gibtnNextPage.Size = new System.Drawing.Size(40, 42);
@@ -258,7 +260,7 @@
             this.gibtnPreviousPage.ImageOffset = new System.Drawing.Point(0, 0);
             this.gibtnPreviousPage.ImageRotate = 0F;
             this.gibtnPreviousPage.ImageSize = new System.Drawing.Size(25, 25);
-            this.gibtnPreviousPage.Location = new System.Drawing.Point(423, 652);
+            this.gibtnPreviousPage.Location = new System.Drawing.Point(444, 652);
             this.gibtnPreviousPage.Name = "gibtnPreviousPage";
             this.gibtnPreviousPage.PressedState.ImageSize = new System.Drawing.Size(64, 64);
             this.gibtnPreviousPage.Size = new System.Drawing.Size(40, 42);
@@ -288,7 +290,7 @@
             this.kgtxtPageNumber.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtPageNumber.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Number;
             this.kgtxtPageNumber.IsRequired = true;
-            this.kgtxtPageNumber.Location = new System.Drawing.Point(175, 652);
+            this.kgtxtPageNumber.Location = new System.Drawing.Point(196, 652);
             this.kgtxtPageNumber.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtPageNumber.MaxLength = 150;
             this.kgtxtPageNumber.Name = "kgtxtPageNumber";
@@ -336,7 +338,7 @@
             this.kgtxtPageNumber.TrimEnd = true;
             this.kgtxtPageNumber.TrimStart = false;
             this.kgtxtPageNumber.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxt_OnValidationError);
-            this.kgtxtPageNumber.OnValidationSuccess += new System.Action<object, System.ComponentModel.CancelEventArgs>(this.kgtxt_OnValidationSuccess);
+            this.kgtxtPageNumber.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxt_OnValidationSuccess);
             this.kgtxtPageNumber.TextChanged += new System.EventHandler(this.kgtxtPageNumber_TextChanged);
             // 
             // errorProvider1
@@ -346,7 +348,7 @@
             // lblCurrentPageRecordsCount
             // 
             this.lblCurrentPageRecordsCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCurrentPageRecordsCount.Location = new System.Drawing.Point(806, 685);
+            this.lblCurrentPageRecordsCount.Location = new System.Drawing.Point(827, 685);
             this.lblCurrentPageRecordsCount.Name = "lblCurrentPageRecordsCount";
             this.lblCurrentPageRecordsCount.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblCurrentPageRecordsCount.Size = new System.Drawing.Size(114, 24);
@@ -357,7 +359,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(931, 685);
+            this.label3.Location = new System.Drawing.Point(952, 685);
             this.label3.Name = "label3";
             this.label3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label3.Size = new System.Drawing.Size(205, 24);
@@ -382,8 +384,9 @@
             this.gcbFilterBy.Items.AddRange(new object[] {
             "بدون",
             "معرف الشخص",
+            "رقم الهاتف",
             "اسم الشخص"});
-            this.gcbFilterBy.Location = new System.Drawing.Point(873, 148);
+            this.gcbFilterBy.Location = new System.Drawing.Point(894, 148);
             this.gcbFilterBy.Name = "gcbFilterBy";
             this.gcbFilterBy.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.gcbFilterBy.Size = new System.Drawing.Size(157, 36);
@@ -395,7 +398,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(1039, 153);
+            this.label2.Location = new System.Drawing.Point(1060, 153);
             this.label2.Name = "label2";
             this.label2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label2.Size = new System.Drawing.Size(97, 24);
@@ -407,7 +410,7 @@
             this.lblNoRecordsFoundMessage.Font = new System.Drawing.Font("Segoe Script", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNoRecordsFoundMessage.ForeColor = System.Drawing.Color.Red;
             this.lblNoRecordsFoundMessage.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.lblNoRecordsFoundMessage.Location = new System.Drawing.Point(40, 352);
+            this.lblNoRecordsFoundMessage.Location = new System.Drawing.Point(61, 352);
             this.lblNoRecordsFoundMessage.Name = "lblNoRecordsFoundMessage";
             this.lblNoRecordsFoundMessage.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblNoRecordsFoundMessage.Size = new System.Drawing.Size(1092, 42);
@@ -432,7 +435,7 @@
             this.kgtxtFilterValue.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtFilterValue.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
             this.kgtxtFilterValue.IsRequired = false;
-            this.kgtxtFilterValue.Location = new System.Drawing.Point(691, 148);
+            this.kgtxtFilterValue.Location = new System.Drawing.Point(712, 148);
             this.kgtxtFilterValue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtFilterValue.Name = "kgtxtFilterValue";
             this.kgtxtFilterValue.NumberProperties.DecimalNumberProperties.AllowNegative = true;
@@ -473,7 +476,7 @@
             this.kgtxtFilterValue.TrimEnd = false;
             this.kgtxtFilterValue.TrimStart = false;
             this.kgtxtFilterValue.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxt_OnValidationError);
-            this.kgtxtFilterValue.OnValidationSuccess += new System.Action<object, System.ComponentModel.CancelEventArgs>(this.kgtxt_OnValidationSuccess);
+            this.kgtxtFilterValue.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxt_OnValidationSuccess);
             this.kgtxtFilterValue.TextChanged += new System.EventHandler(this.kgtxtFilterValue_TextChanged);
             this.kgtxtFilterValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.kgtxtFilterValue_KeyPress);
             // 
@@ -487,7 +490,7 @@
             this.lblUserMessage.Font = new System.Drawing.Font("Segoe Script", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUserMessage.ForeColor = System.Drawing.Color.Red;
             this.lblUserMessage.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.lblUserMessage.Location = new System.Drawing.Point(40, 394);
+            this.lblUserMessage.Location = new System.Drawing.Point(61, 394);
             this.lblUserMessage.Name = "lblUserMessage";
             this.lblUserMessage.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblUserMessage.Size = new System.Drawing.Size(1085, 42);
@@ -518,7 +521,7 @@
             this.gbtnAddPerson.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnAddPerson.ImageSize = new System.Drawing.Size(30, 30);
             this.gbtnAddPerson.IndicateFocus = true;
-            this.gbtnAddPerson.Location = new System.Drawing.Point(29, 143);
+            this.gbtnAddPerson.Location = new System.Drawing.Point(50, 143);
             this.gbtnAddPerson.Name = "gbtnAddPerson";
             this.gbtnAddPerson.PressedColor = System.Drawing.Color.White;
             this.gbtnAddPerson.Size = new System.Drawing.Size(196, 41);
@@ -532,7 +535,7 @@
             this.lblHeader.ForeColor = System.Drawing.Color.Red;
             this.lblHeader.Location = new System.Drawing.Point(12, 21);
             this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(1139, 62);
+            this.lblHeader.Size = new System.Drawing.Size(1186, 62);
             this.lblHeader.TabIndex = 18;
             this.lblHeader.Text = "الأشخاص";
             this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -543,7 +546,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1163, 737);
+            this.ClientSize = new System.Drawing.Size(1210, 737);
             this.Controls.Add(this.lblHeader);
             this.Controls.Add(this.gbtnAddPerson);
             this.Controls.Add(this.lblUserMessage);

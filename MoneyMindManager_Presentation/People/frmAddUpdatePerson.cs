@@ -16,7 +16,10 @@ namespace MoneyMindManager_Presentation.People
 {
     public partial class frmAddUpdatePerson : Form
     {
-        public event Action OnCloseAndSaved;
+        /// <summary>
+        /// PersonID
+        /// </summary>
+        public event Action<int> OnCloseAndSaved;
 
         bool _isSaved = false;
         enum enMode { AddNew, Update };
@@ -88,10 +91,24 @@ namespace MoneyMindManager_Presentation.People
             _Person.PersonName = kgtxtPersonName.ValidatedText;
             _Person.Email = kgtxtEmail.ValidatedText;
             _Person.Phone = kgtxtPhone.ValidatedText;
-            _Person.AccountID = clsGlobal_Presentation.CurrentUser?.AccountID;
+
+            if (Mode == enMode.AddNew)
+            {
+                if (!_Person.EnterAccountIDAtAddMode(Convert.ToInt16(clsGlobal_Presentation.CurrentUser.AccountID)))
+                {
+                    clsGlobalMessageBoxs.ShowErrorMessage("فشل تسجيل معرف الحساب للمستخدم");
+                    return;
+                }
+
+                if (!_Person.EnterCreatedByUserIDAtAddMode(Convert.ToInt32(clsGlobal_Presentation.CurrentUser.UserID)))
+                {
+                    clsGlobalMessageBoxs.ShowErrorMessage("فشل تسجيل معرف منشئ الحساب");
+                    return;
+                }
+            }
+
             _Person.Address = kgtxtAddress.ValidatedText;
             _Person.Notes = kgtxtNotes.ValidatedText;
-            _Person.CreatedByUserID = clsGlobal_Presentation.CurrentUser.UserID;
 
             if (await _Person.Save())
             {
@@ -154,7 +171,7 @@ namespace MoneyMindManager_Presentation.People
         private void gbtnClose_Click(object sender, EventArgs e)
         {
             if (_isSaved)
-                OnCloseAndSaved?.Invoke();
+                OnCloseAndSaved?.Invoke(Convert.ToInt32(_Person.PersonID));
 
             this.Close();
         }

@@ -22,6 +22,10 @@ namespace MoneyMindManager_Presentation.People
             InitializeComponent();
         }
 
+        enum enFilterBy { All, PersonID, PersonName,Phone };
+
+        enFilterBy _filterBy = enFilterBy.All;
+
         bool _IsHeaderCreated = false;
         bool _searchByPageNumber = false;
 
@@ -48,7 +52,7 @@ namespace MoneyMindManager_Presentation.People
 
             return true;
         }
-        async Task _LoadDataAtDataGridView()
+        async Task _LoadDataAtDataGridView(enFilterBy filterBy)
         {
             SearchAfterTimerFinish.Stop();
 
@@ -57,23 +61,28 @@ namespace MoneyMindManager_Presentation.People
 
             //_pageNumber = Convert.ToInt16(kgtxtPageNumber.ValidatedText);
 
-            clsDataColumns.PersonClassess.clsGetAllPeople result = null;
+            clsDataColumns.PersonClasses.clsGetAllPeople result = null;
 
             short accountID = Convert.ToInt16(clsGlobal_Presentation.CurrentUser.AccountID);
 
-            if (gcbFilterBy.Text == "بدون" || string.IsNullOrEmpty(kgtxtFilterValue.ValidatedText))
+            if (filterBy == enFilterBy.All || string.IsNullOrEmpty(kgtxtFilterValue.ValidatedText))
             {
                 result = await clsPerson.GetAllPeople(accountID, _pageNumber);
             }
-            else if (gcbFilterBy.Text == "معرف الشخص")
+            else if (filterBy == enFilterBy.PersonID)
             {
                 int personID = Convert.ToInt32(kgtxtFilterValue.ValidatedText);
                 result = await clsPerson.GetAllPeopleByPersonID(accountID, _pageNumber, personID);
             }
-            else if (gcbFilterBy.Text == "اسم الشخص")
+            else if (filterBy == enFilterBy.PersonName)
             {
                 string personName = kgtxtFilterValue.ValidatedText;
                 result = await clsPerson.GetAllPeopleByPersonName(accountID, _pageNumber, personName);
+            }
+            else if (filterBy == enFilterBy.Phone)
+            {
+                string phone = kgtxtFilterValue.ValidatedText;
+                result = await clsPerson.GetAllPeopleByPhone(accountID, _pageNumber, phone);
             }
             else
                 return;
@@ -134,8 +143,16 @@ namespace MoneyMindManager_Presentation.People
         void _AddNewPerson()
         {
             frmAddUpdatePerson frm = new frmAddUpdatePerson();
-            frm.OnCloseAndSaved += FrmAddUpdatePerson_OnCloseAndSaved;
+            frm.OnCloseAndSaved += x => _RefreshFilter();
             clsGlobal_Presentation.MainForm.AddNewForm(frm);
+        }
+
+        async void _RefreshFilter()
+        {
+            if (gcbFilterBy.SelectedIndex == 0)
+                await _LoadDataAtDataGridView(enFilterBy.All);
+            else
+                gcbFilterBy.SelectedIndex = 0;
         }
 
         void _ShowPersonInfo()
@@ -143,9 +160,10 @@ namespace MoneyMindManager_Presentation.People
             int personID = Convert.ToInt32(gdgvPeople.CurrentRow.Cells[0].Value);
 
             frmPersonInfo frm = new frmPersonInfo(personID);
-            frm.OnEditingPersonAndFormClosed += FrmAddUpdatePerson_OnCloseAndSaved;
+            frm.OnEditingPersonAndFormClosed += _RefreshFilter;
             clsGlobal_Presentation.MainForm.AddNewForm(frm);
         }
+
 
         private void frmPeople_Load(object sender, EventArgs e)
         {
@@ -183,13 +201,13 @@ namespace MoneyMindManager_Presentation.People
         private async void gibtnNextPage_Click(object sender, EventArgs e)
         {
             ++_pageNumber;
-            await _LoadDataAtDataGridView();
+            await _LoadDataAtDataGridView(_filterBy);
         }
 
         private async void gibtnPreviousPage_Click(object sender, EventArgs e)
         {
             --_pageNumber;
-            await _LoadDataAtDataGridView();
+            await _LoadDataAtDataGridView(_filterBy);
         }
 
         private async void gcbFilterBy_SelectedIndexChanged(object sender, EventArgs e)
@@ -198,39 +216,51 @@ namespace MoneyMindManager_Presentation.People
             if (gcbFilterBy.Text == "بدون")
             {
                 kgtxtFilterValue.Visible = false;
-                await _LoadDataAtDataGridView();
+                _filterBy = enFilterBy.All;
+                await _LoadDataAtDataGridView(_filterBy);
                 return;
             }
 
+            _searchByPageNumber = false;
             kgtxtFilterValue.Text = "";
-            SearchAfterTimerFinish.Stop();
-            await _LoadDataAtDataGridView();
+            _searchByPageNumber = true;
 
             kgtxtFilterValue.Visible = true;
+            kgtxtFilterValue.IsRequired = false;
+            kgtxtFilterValue.TrimStart = false;
 
             if (gcbFilterBy.Text == "معرف الشخص")
             {
+                _filterBy = enFilterBy.PersonID;
+
                 kgtxtFilterValue.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Number;
                 kgtxtFilterValue.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
                 kgtxtFilterValue.AllowWhiteSpace = false;
-                kgtxtFilterValue.IsRequired = false;
-                kgtxtFilterValue.TrimEnd = false;
-                kgtxtFilterValue.TrimStart = false;
+                kgtxtFilterValue.TrimEnd = true;
                 kgtxtFilterValue.NumberProperties.IntegerNumberProperties.AllowNegative = false;
                 kgtxtFilterValue.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
-                return;
             }
-
-            if (gcbFilterBy.Text == "اسم الشخص")
+            else if (gcbFilterBy.Text == "اسم الشخص")
             {
+                _filterBy = enFilterBy.PersonName;
+
                 kgtxtFilterValue.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
                 kgtxtFilterValue.AllowWhiteSpace = true;
-                kgtxtFilterValue.IsRequired = false;
                 kgtxtFilterValue.TrimEnd = false;
-                kgtxtFilterValue.TrimStart = false;
-                return;
+            }
+            else if (gcbFilterBy.Text == "رقم الهاتف")
+            {
+                _filterBy = enFilterBy.Phone;
+
+                kgtxtFilterValue.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Text;
+                kgtxtFilterValue.TextProperties.TextFormat = KhaledGuna2TextBox.clsText.enTextFormat.Phone;
+                kgtxtFilterValue.TextProperties.PhoneProperties.AllowPlusSign = false;
+                kgtxtFilterValue.TextProperties.PhoneProperties.MaxPhoneLength = 16;
+                kgtxtFilterValue.AllowWhiteSpace = false;
+                kgtxtFilterValue.TrimEnd = false;
             }
 
+            await _LoadDataAtDataGridView(_filterBy);
         }
 
         private void kgtxtFilterValue_TextChanged(object sender, EventArgs e)
@@ -241,7 +271,7 @@ namespace MoneyMindManager_Presentation.People
 
         private async void SearchAfterTimerFinish_Tick(object sender, EventArgs e)
         {
-            await _LoadDataAtDataGridView();
+            await _LoadDataAtDataGridView(_filterBy);
         }
 
         private void kgtxtPageNumber_TextChanged(object sender, EventArgs e)
@@ -262,19 +292,13 @@ namespace MoneyMindManager_Presentation.People
             if (e.KeyChar == (char)Keys.Enter)
             {
                 SearchAfterTimerFinish.Stop();
-                await _LoadDataAtDataGridView();
+                await _LoadDataAtDataGridView(_filterBy);
             }
         }
 
         private void gbtnAddPerson_Click(object sender, EventArgs e)
         {
             _AddNewPerson();
-        }
-
-        private void FrmAddUpdatePerson_OnCloseAndSaved()
-        {
-            _pageNumber = 1;
-            gcbFilterBy.SelectedIndex = (gcbFilterBy.SelectedIndex == 0) ? 1 : 0;
         }
 
         private void gtsmAddPerson_Click(object sender, EventArgs e)
@@ -287,7 +311,7 @@ namespace MoneyMindManager_Presentation.People
             int personID = Convert.ToInt32(gdgvPeople.CurrentRow.Cells[0].Value);
 
             frmAddUpdatePerson frm = new frmAddUpdatePerson(personID);
-            frm.OnCloseAndSaved += FrmAddUpdatePerson_OnCloseAndSaved;
+            frm.OnCloseAndSaved += x => _RefreshFilter();
             clsGlobal_Presentation.MainForm.AddNewForm(frm);
         }
 
@@ -316,5 +340,6 @@ namespace MoneyMindManager_Presentation.People
         {
             _ShowPersonInfo();
         }
+ 
     }
 }

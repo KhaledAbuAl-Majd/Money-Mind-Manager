@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MoneyMindManagerGlobal;
-using static MoneyMindManagerGlobal.clsDataColumns.PersonClassess;
+using static MoneyMindManagerGlobal.clsDataColumns.PersonClasses;
 
 namespace MoneyMindManager_DataAccess
 {
@@ -57,7 +57,7 @@ namespace MoneyMindManager_DataAccess
                 }
 
                 if (newPersonID == null)
-                    throw new Exception("فشت العمية");
+                    throw new Exception("فشلت العمية");
             }
             catch (Exception ex)
             {
@@ -200,7 +200,7 @@ namespace MoneyMindManager_DataAccess
                 }
 
                 if (personData == null)
-                    throw new Exception("فشت العملية");
+                    throw new Exception("فشلت العملية");
             }
             catch (Exception ex)
             {
@@ -303,6 +303,9 @@ namespace MoneyMindManager_DataAccess
                         }
                     }
                 }
+
+                if (allPeople == null)
+                    throw new Exception("فشلت العملية");
             }
             catch(Exception ex)
             {
@@ -365,6 +368,9 @@ namespace MoneyMindManager_DataAccess
                         }
                     }
                 }
+
+                if (allPeople == null)
+                    throw new Exception("فشلت العملية");
             }
             catch (Exception ex)
             {
@@ -427,6 +433,74 @@ namespace MoneyMindManager_DataAccess
                         }
                     }
                 }
+
+                if (allPeople == null)
+                    throw new Exception("فشلت العملية");
+            }
+            catch (Exception ex)
+            {
+                allPeople = null;
+
+                if (RaiseEventOnErrorOccured)
+                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+            }
+
+            return allPeople;
+        }
+
+        /// <summary>
+        /// Get All People By phone For Account Using Paging [10 rows per page]
+        /// </summary>
+        /// <param name="accountID">The current AccountID</param>
+        /// <param name="pageNumber">The page Number you want to get rows of it</param>
+        /// <param name="phone">The phone number you want to search for</param>
+        /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
+        /// <returns>object of clsGetAllPeople : if error happend, return null</returns>
+        public static async Task<clsGetAllPeople> GetAllPeopleByPhone(short accountID, short pageNumber, string phone, bool RaiseEventOnErrorOccured = true)
+        {
+            clsGetAllPeople allPeople = null;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("[dbo].[People_SP_GetAllPeopleByPhone]", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("@AccountID", accountID);
+                        command.Parameters.AddWithValue("@PageNumber", pageNumber);
+                        command.Parameters.AddWithValue("@Phone", string.IsNullOrEmpty(phone) ? DBNull.Value : (object)phone);
+
+                        SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.SmallInt)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+
+                        SqlParameter outputRecordsCount = new SqlParameter("@RecordsCount", SqlDbType.Int)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+
+                        command.Parameters.Add(outputNumberOfPages);
+                        command.Parameters.Add(outputRecordsCount);
+
+                        await connection.OpenAsync();
+
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            DataTable dtPeople = new DataTable();
+                            dtPeople.Load(reader);
+                            short numberOfPages = Convert.ToInt16(outputNumberOfPages.Value);
+                            short recordsCount = Convert.ToInt16(outputRecordsCount.Value);
+
+                            allPeople = new clsGetAllPeople(dtPeople, numberOfPages, recordsCount);
+                        }
+                    }
+                }
+
+                if (allPeople == null)
+                    throw new Exception("فشلت العملية");
             }
             catch (Exception ex)
             {

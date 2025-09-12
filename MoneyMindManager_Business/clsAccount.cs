@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MoneyMindManager_DataAccess;
+using static MoneyMindManagerGlobal.clsDataColumns.clsAccountClasses;
 
 namespace MoneyMindManager_Business
 {
-    public class clsAccount : clsAccountData.clsAccountColumns
+    public class clsAccount : clsAccountColumns
     {
         public enum enMode { Update };
         public enMode Mode { get; private set; } = enMode.Update;
@@ -68,7 +69,7 @@ namespace MoneyMindManager_Business
 
         public static async Task<clsAccount> FindAccountByAccountID(short accountID)
         {
-            clsAccountData.clsAccountColumns accountColumns = await clsAccountData.GetAccountInfoByAccountID(accountID);
+            clsAccountColumns accountColumns = await clsAccountData.GetAccountInfoByAccountID(accountID);
 
             if (accountColumns == null)
                 return null;

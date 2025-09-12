@@ -6,8 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MoneyMindManagerGlobal;
-using static MoneyMindManagerGlobal.clsDataColumns.clsUserClassess;
-using static MoneyMindManagerGlobal.clsDataColumns.PersonClassess;
+using static MoneyMindManagerGlobal.clsDataColumns.clsUserClasses;
+using static MoneyMindManagerGlobal.clsDataColumns.PersonClasses;
 
 namespace MoneyMindManager_DataAccess
 {
@@ -18,7 +18,7 @@ namespace MoneyMindManager_DataAccess
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>New UserID if Success, if failed return null</returns>
         public static async Task<Nullable<int>> AddNewUser(string userName,int personID, int? permissions, string password, string salt,
-            bool isActive,short accountID, string notes, bool RaiseEventOnErrorOccured = true)
+            bool isActive,short accountID, string notes, int createdByUserID, bool RaiseEventOnErrorOccured = true)
         {
             int? newUserID = null;
 
@@ -38,6 +38,7 @@ namespace MoneyMindManager_DataAccess
                         command.Parameters.AddWithValue("@IsActive", isActive);
                         command.Parameters.AddWithValue("@Notes", string.IsNullOrEmpty(notes) ? System.DBNull.Value : (object)notes);
                         command.Parameters.AddWithValue("@AccountID", accountID);
+                        command.Parameters.AddWithValue("@CreatedByUserID", createdByUserID);
 
                         SqlParameter outputnewUserID = new SqlParameter("@NewUserID", System.Data.SqlDbType.Int)
                         {
@@ -59,6 +60,9 @@ namespace MoneyMindManager_DataAccess
                         //newUserID = outputnewUserID?.Value as int?;
                     }
                 }
+
+                if (newUserID == null)
+                    throw new Exception("فشلت العملية");
             }
             catch (Exception ex)
             {
@@ -238,17 +242,21 @@ namespace MoneyMindManager_DataAccess
                                 string notes = (reader["Notes"] == DBNull.Value) ? null : reader["Notes"] as string;
                                 short accountID = Convert.ToInt16(reader["AccountID"]);
                                 bool isDeleted = Convert.ToBoolean(reader["IsDeleted"]);
+                                Nullable<int> createdByUserID = Convert.ToInt32(reader["CreatedByUserID"]);
+                                DateTime createdDate = Convert.ToDateTime(reader["CreatedDate"]);
 
-                                userData = new clsUserColumns(userID, userName, personID, permissions, password, salt, isActive, notes, accountID, isDeleted);
+                                userData = new clsUserColumns(userID, userName, personID, permissions, password, salt,
+                                    isActive, notes, accountID, isDeleted, createdByUserID, createdDate);
                             }
                             else
                                 userData = null;
 
-                            if (userData == null)
-                                throw new Exception("فشلت عملية تسجيل الدخول");
                         }
                     }
                 }
+
+                if (userData == null)
+                    throw new Exception("فشلت العملية");
             }
             catch (Exception ex)
             {
@@ -292,14 +300,20 @@ namespace MoneyMindManager_DataAccess
                                 string notes = (reader["Notes"] == DBNull.Value) ? null : reader["Notes"] as string;
                                 short accountID = Convert.ToInt16(reader["AccountID"]);
                                 bool isDeleted = Convert.ToBoolean(reader["IsDeleted"]);
+                                Nullable<int> createdByUserID = Convert.ToInt32(reader["CreatedByUserID"]);
+                                DateTime createdDate = Convert.ToDateTime(reader["CreatedDate"]);
 
-                                userData = new clsUserColumns(userID, userName, personID, permissions, password, salt, isActive, notes, accountID, isDeleted);
+                                userData = new clsUserColumns(userID, userName, personID, permissions, password, salt,
+                                    isActive, notes, accountID, isDeleted, createdByUserID, createdDate);
                             }
                             else
                                 userData = null;
                         }
                     }
                 }
+
+                if (userData == null)
+                    throw new Exception("فشلت العملية");
             }
             catch (Exception ex)
             {
@@ -343,14 +357,20 @@ namespace MoneyMindManager_DataAccess
                                 string notes = (reader["Notes"] == DBNull.Value) ? null : reader["Notes"] as string;
                                 short accountID = Convert.ToInt16(reader["AccountID"]);
                                 bool isDeleted = Convert.ToBoolean(reader["IsDeleted"]);
+                                Nullable<int> createdByUserID = Convert.ToInt32(reader["CreatedByUserID"]);
+                                DateTime createdDate = Convert.ToDateTime(reader["CreatedDate"]);
 
-                                userData = new clsUserColumns(userID, userName, personID, permissions, password, salt, isActive, notes, accountID, isDeleted);
+                                userData = new clsUserColumns(userID, userName, personID, permissions, password, salt,
+                                    isActive, notes, accountID, isDeleted, createdByUserID, createdDate);
                             }
                             else
                                 userData = null;
                         }
                     }
                 }
+
+                if (userData == null)
+                    throw new Exception("فشلت العملية");
             }
             catch (Exception ex)
             {
@@ -394,14 +414,20 @@ namespace MoneyMindManager_DataAccess
                                 string notes = (reader["Notes"] == DBNull.Value) ? null : reader["Notes"] as string;
                                 short accountID = Convert.ToInt16(reader["AccountID"]);
                                 bool isDeleted = Convert.ToBoolean(reader["IsDeleted"]);
+                                Nullable<int> createdByUserID = Convert.ToInt32(reader["CreatedByUserID"]);
+                                DateTime createdDate = Convert.ToDateTime(reader["CreatedDate"]);
 
-                                userData = new clsUserColumns(userID, userName, personID, permissions, password, salt, isActive, notes, accountID, isDeleted);
+                                userData = new clsUserColumns(userID, userName, personID, permissions, password, salt,
+                                    isActive, notes, accountID, isDeleted, createdByUserID, createdDate);
                             }
                             else
                                 userData = null;
                         }
                     }
                 }
+
+                if (userData == null)
+                    throw new Exception("فشلت العملية");
             }
             catch (Exception ex)
             {
@@ -501,7 +527,7 @@ namespace MoneyMindManager_DataAccess
         /// <param name="userName">userName of user you want to find</param>
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>true if user exist, false if user not exist</returns>
-        public static async Task<bool> IsUserExistByUserName(string userName, bool RaiseEventOnErrorOccured = true)
+        public static async Task<bool> IsUserExistByUserNameAsync(string userName, bool RaiseEventOnErrorOccured = true)
         {
             bool isExist = false;
 
@@ -524,6 +550,48 @@ namespace MoneyMindManager_DataAccess
 
                         await connection.OpenAsync();
                         await command.ExecuteNonQueryAsync();
+
+                        isExist = (retunValue.Value != DBNull.Value) && (Convert.ToInt32(retunValue.Value) == 1);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                isExist = false;
+
+                if (RaiseEventOnErrorOccured)
+                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+            }
+
+            return isExist;
+        }
+
+        /// <param name="userName">userName of user you want to find</param>
+        /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
+        /// <returns>true if user exist, false if user not exist</returns>
+        public static bool IsUserExistByUserName(string userName, bool RaiseEventOnErrorOccured = true)
+        {
+            bool isExist = false;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("[dbo].[SP_IsUserExistByUserName]", connection))
+                    {
+                        command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("@UserName", userName);
+
+                        SqlParameter retunValue = new SqlParameter("@ReturnVal", SqlDbType.Int)
+                        {
+                            Direction = System.Data.ParameterDirection.ReturnValue
+                        };
+
+                        command.Parameters.Add(retunValue);
+
+                        connection.Open();
+                        command.ExecuteNonQuery();
 
                         isExist = (retunValue.Value != DBNull.Value) && (Convert.ToInt32(retunValue.Value) == 1);
                     }
@@ -565,6 +633,9 @@ namespace MoneyMindManager_DataAccess
                         salt = (outputUserSalt.Value == DBNull.Value) ? null : outputUserSalt.Value as string;
                     }
                 }
+
+                if (salt == null)
+                    throw new Exception("فشلت العملية");
             }
             catch (Exception ex)
             {
@@ -625,6 +696,265 @@ namespace MoneyMindManager_DataAccess
                         }
                     }
                 }
+
+                if (allPeople == null)
+                    throw new Exception("فشلت العملية");
+            }
+            catch (Exception ex)
+            {
+                allPeople = null;
+
+                if (RaiseEventOnErrorOccured)
+                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+            }
+
+            return allPeople;
+        }
+
+        /// <summary>
+        /// Get All Users By UserID For Account Using Paging [10 rows per page]
+        /// </summary>
+        /// <param name="accountID">The current AccountID</param>
+        /// <param name="pageNumber">The page Number you want to get rows of it</param>
+        /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
+        /// <returns>object of clsGetAllUsers : if error happend, return null</returns>
+        public static async Task<clsGetAllUsers> GetAllUsersByUserID(short accountID, short pageNumber,int userID, bool RaiseEventOnErrorOccured = true)
+        {
+            clsGetAllUsers allPeople = null;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("[dbo].[SP_GetAllUsersByUserID]", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("@AccountID", accountID);
+                        command.Parameters.AddWithValue("@PageNumber", pageNumber);
+                        command.Parameters.AddWithValue("@UserID", userID);
+
+                        SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.SmallInt)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+
+                        SqlParameter outputRecordsCount = new SqlParameter("@RecordsCount", SqlDbType.Int)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+
+                        command.Parameters.Add(outputNumberOfPages);
+                        command.Parameters.Add(outputRecordsCount);
+
+                        await connection.OpenAsync();
+
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            DataTable dtPeople = new DataTable();
+                            dtPeople.Load(reader);
+                            short numberOfPages = Convert.ToInt16(outputNumberOfPages.Value);
+                            short recordsCount = Convert.ToInt16(outputRecordsCount.Value);
+
+                            allPeople = new clsGetAllUsers(dtPeople, numberOfPages, recordsCount);
+                        }
+                    }
+                }
+
+                if (allPeople == null)
+                    throw new Exception("فشلت العملية");
+            }
+            catch (Exception ex)
+            {
+                allPeople = null;
+
+                if (RaiseEventOnErrorOccured)
+                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+            }
+
+            return allPeople;
+        }
+
+        /// <summary>
+        /// Get All Users By UserName For Account Using Paging [10 rows per page]
+        /// </summary>
+        /// <param name="accountID">The current AccountID</param>
+        /// <param name="pageNumber">The page Number you want to get rows of it</param>
+        /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
+        /// <returns>object of clsGetAllUsers : if error happend, return null</returns>
+        public static async Task<clsGetAllUsers> GetAllUsersByUserName(short accountID, short pageNumber,string userName, bool RaiseEventOnErrorOccured = true)
+        {
+            clsGetAllUsers allPeople = null;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("[dbo].[SP_GetAllUsersByUserName]", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("@AccountID", accountID);
+                        command.Parameters.AddWithValue("@PageNumber", pageNumber);
+                        command.Parameters.AddWithValue("@UserName", userName);
+
+                        SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.SmallInt)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+
+                        SqlParameter outputRecordsCount = new SqlParameter("@RecordsCount", SqlDbType.Int)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+
+                        command.Parameters.Add(outputNumberOfPages);
+                        command.Parameters.Add(outputRecordsCount);
+
+                        await connection.OpenAsync();
+
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            DataTable dtPeople = new DataTable();
+                            dtPeople.Load(reader);
+                            short numberOfPages = Convert.ToInt16(outputNumberOfPages.Value);
+                            short recordsCount = Convert.ToInt16(outputRecordsCount.Value);
+
+                            allPeople = new clsGetAllUsers(dtPeople, numberOfPages, recordsCount);
+                        }
+                    }
+                }
+
+                if (allPeople == null)
+                    throw new Exception("فشلت العملية");
+            }
+            catch (Exception ex)
+            {
+                allPeople = null;
+
+                if (RaiseEventOnErrorOccured)
+                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+            }
+
+            return allPeople;
+        }
+
+        /// <summary>
+        /// Get All Users By personName For Account Using Paging [10 rows per page]
+        /// </summary>
+        /// <param name="accountID">The current AccountID</param>
+        /// <param name="pageNumber">The page Number you want to get rows of it</param>
+        /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
+        /// <returns>object of clsGetAllUsers : if error happend, return null</returns>
+        public static async Task<clsGetAllUsers> GetAllUsersByPersonName(short accountID, short pageNumber,string personName, bool RaiseEventOnErrorOccured = true)
+        {
+            clsGetAllUsers allPeople = null;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("[dbo].[SP_GetAllUsersByPersonName]", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("@AccountID", accountID);
+                        command.Parameters.AddWithValue("@PageNumber", pageNumber);
+                        command.Parameters.AddWithValue("@PersonName", personName);
+
+                        SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.SmallInt)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+
+                        SqlParameter outputRecordsCount = new SqlParameter("@RecordsCount", SqlDbType.Int)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+
+                        command.Parameters.Add(outputNumberOfPages);
+                        command.Parameters.Add(outputRecordsCount);
+
+                        await connection.OpenAsync();
+
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            DataTable dtPeople = new DataTable();
+                            dtPeople.Load(reader);
+                            short numberOfPages = Convert.ToInt16(outputNumberOfPages.Value);
+                            short recordsCount = Convert.ToInt16(outputRecordsCount.Value);
+
+                            allPeople = new clsGetAllUsers(dtPeople, numberOfPages, recordsCount);
+                        }
+                    }
+                }
+
+                if (allPeople == null)
+                    throw new Exception("فشلت العملية");
+            }
+            catch (Exception ex)
+            {
+                allPeople = null;
+
+                if (RaiseEventOnErrorOccured)
+                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+            }
+
+            return allPeople;
+        }
+
+        /// <summary>
+        /// Get All Users By IsActive For Account Using Paging [10 rows per page]
+        /// </summary>
+        /// <param name="accountID">The current AccountID</param>
+        /// <param name="pageNumber">The page Number you want to get rows of it</param>
+        /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
+        /// <returns>object of clsGetAllUsers : if error happend, return null</returns>
+        public static async Task<clsGetAllUsers> GetAllUsersByIsActive(short accountID, short pageNumber,bool isActive, bool RaiseEventOnErrorOccured = true)
+        {
+            clsGetAllUsers allPeople = null;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("[dbo].[SP_GetAllUsersByIsActive]", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("@AccountID", accountID);
+                        command.Parameters.AddWithValue("@PageNumber", pageNumber);
+                        command.Parameters.AddWithValue("@IsActive", isActive);
+
+                        SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.SmallInt)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+
+                        SqlParameter outputRecordsCount = new SqlParameter("@RecordsCount", SqlDbType.Int)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+
+                        command.Parameters.Add(outputNumberOfPages);
+                        command.Parameters.Add(outputRecordsCount);
+
+                        await connection.OpenAsync();
+
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            DataTable dtPeople = new DataTable();
+                            dtPeople.Load(reader);
+                            short numberOfPages = Convert.ToInt16(outputNumberOfPages.Value);
+                            short recordsCount = Convert.ToInt16(outputRecordsCount.Value);
+
+                            allPeople = new clsGetAllUsers(dtPeople, numberOfPages, recordsCount);
+                        }
+                    }
+                }
+
+                if (allPeople == null)
+                    throw new Exception("فشلت العملية");
             }
             catch (Exception ex)
             {

@@ -1,9 +1,9 @@
 E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManagerGlobal\bin\Debug\MoneyMindManagerGlobal.dll
 E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManagerGlobal\bin\Debug\MoneyMindManagerGlobal.pdb
-E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManagerGlobal\obj\Debug\MoneyMindManagerGlobal.csproj.AssemblyReference.cache
-E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManagerGlobal\obj\Debug\MoneyMindManagerGlobal.csproj.CoreCompileInputs.cache
-E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManagerGlobal\obj\Debug\MoneyMindManagerGlobal.dll
-E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManagerGlobal\obj\Debug\MoneyMindManagerGlobal.pdb
 E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManagerGlobal\bin\Debug\KhaledUtils.dll
 E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManagerGlobal\bin\Debug\KhaledUtils.pdb
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManagerGlobal\obj\Debug\MoneyMindManagerGlobal.csproj.AssemblyReference.cache
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManagerGlobal\obj\Debug\MoneyMindManagerGlobal.csproj.CoreCompileInputs.cache
 E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManagerGlobal\obj\Debug\MoneyMin.2EB0F2F7.Up2Date
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManagerGlobal\obj\Debug\MoneyMindManagerGlobal.dll
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManagerGlobal\obj\Debug\MoneyMindManagerGlobal.pdb

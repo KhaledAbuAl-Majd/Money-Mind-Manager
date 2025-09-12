@@ -25,10 +25,15 @@ namespace MoneyMindManager_Presentation.People.Controls
 
         public async Task<bool> LoadPerson(int personID)
         {
+            gbtnEditPerson.Enabled = false;
+
             Person = await clsPerson.FindPersonByID(personID);
 
             if (Person == null)
+            {
+                ResetControls();
                 return false;
+            }
 
             gbtnEditPerson.Enabled = true;
 
@@ -57,7 +62,7 @@ namespace MoneyMindManager_Presentation.People.Controls
             clsGlobal_Presentation.MainForm.AddNewForm(frm);
         }
 
-        private async void FrmAddEditPerson_OnCloseAndSaved()
+        private async void FrmAddEditPerson_OnCloseAndSaved(int personID)
         {
             await LoadPerson(Convert.ToInt32(Person.PersonID));
             OnEditingPerson?.Invoke();
@@ -67,13 +72,31 @@ namespace MoneyMindManager_Presentation.People.Controls
         {
             gbtnEditPerson.Enabled = false;
 
-            gbtnEditPerson.Enabled = true;
             kgtxtPersonName.ReadOnly = true;
             kgtxtPhoneNumber.ReadOnly = true;
             kgtxtUserNameOfCreatedUser.ReadOnly = true;
             kgtxtEmail.ReadOnly = true;
             kgtxtNotes.ReadOnly = true;
             kgtxtAddress.ReadOnly = true;
+        }
+
+        /// <summary>
+        /// Reset Controls With Start Value
+        /// </summary>
+        public void ResetControls()
+        {
+            gbtnEditPerson.Enabled = false;
+
+            Person = null;
+
+            lblPersonID.Text = "N/A";
+            lblCreatedDate.Text = "N/A";
+            kgtxtPersonName.Text = null;
+            kgtxtPhoneNumber.Text = null;
+            kgtxtUserNameOfCreatedUser.Text = null;
+            kgtxtEmail.Text = null;
+            kgtxtNotes.Text = null;
+            kgtxtAddress.Text = null;
         }
     }
 }

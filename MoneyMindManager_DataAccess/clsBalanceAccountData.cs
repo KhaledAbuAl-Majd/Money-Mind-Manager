@@ -5,41 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MoneyMindManagerGlobal;
-using static MoneyMindManager_DataAccess.clsUserData;
+using static MoneyMindManagerGlobal.clsDataColumns.clsBalanceAccountClasses;
 
 namespace MoneyMindManager_DataAccess
 {
     public static class clsBalanceAccountData
     {
-        public class clsBalanceAccountColumns
-        {
-            public int? BalanceAccountID { get;}
-            public string BalanceAccountName { get; set; }
-            public decimal Balance { get; }
-            public bool IsCurrentAccount { get; }
-            public DateTime CreatedDate { get; }
-            public string AccountTypeName { get; }
-
-            public clsBalanceAccountColumns(int balanceAccountID,string balanceAccountName,decimal balance,
-                bool isCurrentAccount,DateTime createdDate,string AccountTypeName)
-            {
-                this.BalanceAccountID = balanceAccountID;
-                this.BalanceAccountName = balanceAccountName;
-                this.Balance = balance;
-                this.IsCurrentAccount = isCurrentAccount;
-                this.CreatedDate = createdDate;
-                this.AccountTypeName = AccountTypeName;
-            }
-
-            //public clsBalanceAccountColumns()
-            //{
-            //    this.BalanceAccountID = null;
-            //    this.BalanceAccountName = null;
-            //    this.Balance = 0;
-            //    this.IsCurrentAccount = false;
-            //    this.CreatedDate = DateTime.Now;
-            //}
-        }
 
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>Updating Result</returns>
@@ -118,6 +89,9 @@ namespace MoneyMindManager_DataAccess
                         }
                     }
                 }
+
+                if (balanceAccountData == null)
+                    throw new Exception("فشلت العملية");
             }
             catch (Exception ex)
             {

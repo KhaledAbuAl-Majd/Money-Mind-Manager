@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MoneyMindManager_DataAccess;
+using static MoneyMindManagerGlobal.clsDataColumns.clsCurrencyClasses;
 
 namespace MoneyMindManager_Business
 {
-    public class clsCurrency : clsCurrencyData.clsCurrencyColumns
+    public class clsCurrency : clsCurrencyColumns
     {
         private clsCurrency(byte currencyID, string currencyName, string currencySymbol) : base(currencyID, currencyName, currencySymbol)
         {
@@ -17,7 +18,7 @@ namespace MoneyMindManager_Business
 
         public static async Task<clsCurrency> FindCurrencyByCurrencyID(byte currencyID)
         {
-            clsCurrencyData.clsCurrencyColumns currencyColumns = await clsCurrencyData.GetCurrencyInfoByCurrencyID(currencyID);
+            clsCurrencyColumns currencyColumns = await clsCurrencyData.GetCurrencyInfoByCurrencyID(currencyID);
 
             if (currencyColumns == null)
                 return null;
@@ -27,7 +28,7 @@ namespace MoneyMindManager_Business
 
         public static async Task<clsCurrency> FindCurrencyByCurrencyName(string currencyName)
         {
-            clsCurrencyData.clsCurrencyColumns currencyColumns = await clsCurrencyData.GetCurrencyInfoByCurrencyName(currencyName);
+            clsCurrencyColumns currencyColumns = await clsCurrencyData.GetCurrencyInfoByCurrencyName(currencyName);
 
             if (currencyColumns == null)
                 return null;

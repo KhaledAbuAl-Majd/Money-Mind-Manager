@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MoneyMindManager_DataAccess;
 using MoneyMindManagerGlobal;
-using static MoneyMindManagerGlobal.clsDataColumns.PersonClassess;
+using static MoneyMindManagerGlobal.clsDataColumns.PersonClasses;
 
 namespace MoneyMindManager_Business
 {
@@ -18,6 +18,24 @@ namespace MoneyMindManager_Business
         public clsAccount AccountInfo { get; private set; }
         //public clsUser CreatedByUserInfo { get; private set; }
 
+        public bool EnterAccountIDAtAddMode(short accountID)
+        {
+            if (Mode == enMode.Update)
+                return false;
+
+            this.AccountID = accountID;
+
+            return true;
+        }
+        public bool EnterCreatedByUserIDAtAddMode(int createdByUserID)
+        {
+            if (Mode == enMode.Update)
+                return false;
+
+            this.CreatedByUserID = createdByUserID;
+
+            return true;
+        }
         public async Task<clsUser> GetCreatedbyUserInfo()
         {
           return  await clsUser.FindUserByUserID(Convert.ToInt32(CreatedByUserID));
@@ -146,6 +164,18 @@ namespace MoneyMindManager_Business
             return await clsPersonData.GetAllPeopleByPersonName(accountID, pageNumber, personName);
         }
 
+        /// <summary>
+        /// Get All People By phone For Account Using Paging [10 rows per page]
+        /// </summary>
+        /// <param name="accountID">The current AccountID</param>
+        /// <param name="pageNumber">The page Number you want to get rows of it</param>
+        /// <param name="phone">The phone number you want to search for</param>
+        /// <returns>object of clsGetAllPeople : if error happend, return null</returns>
+        public static async Task<clsGetAllPeople> GetAllPeopleByPhone(short accountID, short pageNumber, string phone, bool RaiseEventOnErrorOccured = true)
+        {
+            return await clsPersonData.GetAllPeopleByPhone(accountID, pageNumber, phone);
+        }
+
         public async Task<bool> RefreshData()
         {
             clsPerson freshPerson = await clsPerson.FindPersonByID(Convert.ToInt32(PersonID));
@@ -156,11 +186,13 @@ namespace MoneyMindManager_Business
             this.PersonName = freshPerson.PersonName;
             this.Address = freshPerson.Address;
             this.Email = freshPerson.Email;
-            this.PersonName = freshPerson.Phone;
+            this.Phone = freshPerson.Phone;
             this.AccountID = freshPerson.AccountID;
             this.Notes = freshPerson.Notes;
             this.CreatedByUserID = freshPerson.CreatedByUserID;
             this.CreatedDate = freshPerson.CreatedDate;
+
+            this.AccountInfo = freshPerson.AccountInfo;
 
             return true;
         }
