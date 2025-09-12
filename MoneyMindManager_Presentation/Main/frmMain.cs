@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MoneyMindManager_Business;
+using MoneyMindManager_Presentation.Login;
 using MoneyMindManager_Presentation.People;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -17,10 +18,12 @@ namespace MoneyMindManager_Presentation.Main
     public partial class frmMain : Form
     {
         int _userID;
-        public frmMain(int userID)
+        frmLogin _frmLogin;
+        public frmMain(int userID,frmLogin loginForm)
         {
             InitializeComponent();
             _userID = userID;
+            _frmLogin = loginForm;
         }
 
         public void AddNewForm(Form frm)
@@ -86,6 +89,22 @@ namespace MoneyMindManager_Presentation.Main
         private void gbtnUsers_Click(object sender, EventArgs e)
         {
             _LoadFormAtPanelContainer(new FrmUsers(), true);
+        }
+        private void gcbClose_Click(object sender, EventArgs e)
+        {
+            _frmLogin.Close();
+        }
+
+        private void gbtnLogout_Click(object sender, EventArgs e)
+        {
+            clsGlobal_Presentation.CurrentUser = null;
+            clsGlobal_Presentation.MainForm = null;
+            this.Close();
+        }
+
+        private void guna2ControlBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MoneyMindManager_DataAccess;
+using MoneyMindManagerGlobal;
 using static MoneyMindManagerGlobal.clsDataColumns.clsAccountClasses;
 
 namespace MoneyMindManager_Business
@@ -94,16 +97,32 @@ namespace MoneyMindManager_Business
                 accountColumns.SavingBalanceAccountID, defaultCurrencyInfo, currentBalanceAccountInfo, savingBalanceAccountInfo);
         }
 
-        /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>New AccountID if Success and CreatringResult is true, if failed return null and CreatingResult is false</returns>
-        public static async Task<(Nullable<int> newAccountID, bool CreatingResult)> CreateAccount(string accountName, byte defaultCurrencyID,
+        public static async Task<int?> CreateAccount(string accountName, byte defaultCurrencyID,
             string description, string personName, string address, string email, string phone, string notes, string userName,
-           string password, string salt, bool RaiseEventOnErrorOccured = true)
+           string enteredpassword)
         {
-            int? newAccountID = await clsAccountData.CreateAccount(accountName, defaultCurrencyID, description, personName, address, email,
-                phone, notes, userName, password, salt);
+            var HashedPasswordAndSalat = clsHashing.HashPasswordWithSalt(enteredpassword);
+            string hashedPassword = HashedPasswordAndSalat.HashedPassword;
+            string salt = HashedPasswordAndSalat.Salt;
 
-            return (newAccountID, newAccountID != null);
+            int? newAccountID = await clsAccountData.CreateAccount(accountName, defaultCurrencyID, description, personName, address, email,
+                phone, notes, userName, hashedPassword, salt);
+
+            return (newAccountID);
+        }
+
+        /// <returns>true if account exist, false if account not exist</returns>
+        public static async Task<bool> IsAccountExistByAccountNameAsync(string accountName)
+        {
+            return await clsAccountData.IsAccountExistByAccountNameAsync(accountName,false);
+        }
+
+        /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
+        /// <returns>true if account exist, false if account not exist</returns>
+        public static bool IsAccountExistByAccountName(string accountName)
+        {
+            return clsAccountData.IsAccountExistByAccountName(accountName,false);
         }
     }
 }

@@ -622,10 +622,12 @@ namespace MoneyMindManager_DataAccess
                         command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.AddWithValue("@UserName", (string.IsNullOrEmpty(userName)) ? DBNull.Value : (object)userName);
 
-                        SqlParameter outputUserSalt = new SqlParameter("@Salt", SqlDbType.VarChar)
+                        SqlParameter outputUserSalt = new SqlParameter("@Salt", SqlDbType.VarChar,24)
                         {
                             Direction = ParameterDirection.Output
                         };
+
+                        command.Parameters.Add(outputUserSalt);
 
                         await connection.OpenAsync();
                         await command.ExecuteNonQueryAsync();

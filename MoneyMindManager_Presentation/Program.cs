@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MoneyMindManager_Presentation.Login;
 using MoneyMindManager_Presentation.Main;
 using MoneyMindManager_Presentation.People;
 
@@ -20,7 +21,7 @@ namespace MoneyMindManager_Presentation
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmMain(4));
+            Application.Run(new frmLogin());
         }
     }
 }

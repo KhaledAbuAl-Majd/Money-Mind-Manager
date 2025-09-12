@@ -10,7 +10,7 @@ namespace MoneyMindManagerGlobal
 {
     public static class clsSymmetricEncryption
     {
-        private static string _key = "(123dkfj^&*lk..@";
+        private static string _key = "dk234)^&(*^dk234";
 
         /// <summary>
         /// Encrypts a plain text string using AES 128-bit encryption with a fixed IV (not secure for production).

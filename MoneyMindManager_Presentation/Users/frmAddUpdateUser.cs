@@ -85,7 +85,7 @@ namespace MoneyMindManager_Presentation.Users
 
             gpnlPasswordPart.Enabled = (Mode == enMode.AddNew) ? value : false;
 
-            //if(Mode == enMode.AddNew)
+            //if(_ChangeMode == enMode.AddNew)
             //{
             //    gpnlPasswordPart.Enabled = value;
             //    kgtxtpassword.IsRequired = true;
@@ -269,7 +269,7 @@ namespace MoneyMindManager_Presentation.Users
                     if (clsUser.IsUserExistByUserName(userName))
                     {
                         e.CancelEventArgs.Cancel = true;
-                        errorProvider1.SetError(kgtxtUserName, "اسم المستخدم مستخدم من قبل شخص آخر, قم بتجربة اسم آخر");
+                        errorProvider1.SetError(kgtxtUserName, "اسم المستخدم مستخدم, قم بتجربة اسم آخر");
                     }
                     else
                     {
@@ -284,7 +284,7 @@ namespace MoneyMindManager_Presentation.Users
         {
             if (e.ValidationgResult && Mode == enMode.AddNew)
             {
-                if (kgtxtConfirmPassword.Text != kgtxtpassword.Text)
+                if (kgtxtConfirmPassword.ValidatedText != kgtxtpassword.ValidatedText)
                 {
                     e.CancelEventArgs.Cancel = true;
                     errorProvider1.SetError(kgtxtConfirmPassword, "كلمة السر يجب أن تكون متطابقة");
@@ -307,7 +307,7 @@ namespace MoneyMindManager_Presentation.Users
         {
             // Creat With DataBase When Adding New User 
 
-            //if(Mode == enMode.AddNew && await clsUser.IsUserExistByPersonIDAsync(Convert.ToInt32(ctrlPersonCardWithFilter1.Person.PersonID)))
+            //if(_ChangeMode == enMode.AddNew && await clsUser.IsUserExistByPersonIDAsync(Convert.ToInt32(ctrlPersonCardWithFilter1.Person.PersonID)))
             //{
             //    clsGlobalMessageBoxs.ShowErrorMessage("هذا الشخص مرتبط بمستخدم بالفعل");
             //    _ChangeEnablityOfUserControls(false);

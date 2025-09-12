@@ -269,7 +269,7 @@ namespace MoneyMindManager_Presentation.Users
             this.kgtxtUserName.TextProperties.PhoneProperties.MaxPhoneLength = ((byte)(15));
             this.kgtxtUserName.TextProperties.TextFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.enTextFormat.None;
             this.kgtxtUserName.TrimEnd = true;
-            this.kgtxtUserName.TrimStart = false;
+            this.kgtxtUserName.TrimStart = true;
             this.kgtxtUserName.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxt_OnValidationError);
             this.kgtxtUserName.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxt_OnValidationSuccess);
             this.kgtxtUserName.After_kgtxt_Validating += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.AfterMyValidatingEventArgs>(this.kgtxtUserName_After_kgtxt_Validating_1);

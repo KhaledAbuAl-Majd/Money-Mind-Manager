@@ -105,7 +105,7 @@ namespace MoneyMindManager_DataAccess
 
         public static async Task<DataTable> GetAllCurrencies(bool RaiseEventOnErrorOccured = true)
         {
-            DataTable dtCurrencies = null;
+            DataTable dtCurrencies = new DataTable();
 
             try
             {
