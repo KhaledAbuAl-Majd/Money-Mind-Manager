@@ -93,7 +93,7 @@ namespace MoneyMindManager_Presentation.People
             if (result.dtPeople.Rows.Count == 0)
             {
                 lblNoRecordsFoundMessage.Visible = true;
-                lblUserMessage.Visible = true;
+                //lblUserMessage.Visible = true;
                 gdgvPeople.DataSource = null;
                 _IsHeaderCreated = false;
                 _pageNumber = 1;
@@ -101,10 +101,10 @@ namespace MoneyMindManager_Presentation.People
             else
             {
                 lblNoRecordsFoundMessage.Visible = false;
-                lblUserMessage.Visible = false;
                 gdgvPeople.DataSource = result.dtPeople;
             }
 
+            lblUserMessage.Visible = false;
             _searchByPageNumber = false;
             kgtxtPageNumber.Text = _pageNumber.ToString();
             _searchByPageNumber = true;
@@ -324,8 +324,7 @@ namespace MoneyMindManager_Presentation.People
 
                 if (await clsPerson.DeletePersonByID(personID))
                 {
-                    _pageNumber = 1;
-                    gcbFilterBy.SelectedIndex = (gcbFilterBy.SelectedIndex == 0) ? 1 : 0;
+                    _RefreshFilter();
                 }
             }
 

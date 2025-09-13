@@ -255,7 +255,10 @@
             this.Controls.Add(this.gpnlTopBar);
             this.Controls.Add(this.gpnlRightBar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.MaximumSize = new System.Drawing.Size(1473, 809);
+            this.MinimumSize = new System.Drawing.Size(263, 809);
             this.Name = "frmMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmMain";
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.gpnlRightBar.ResumeLayout(false);

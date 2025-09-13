@@ -37,7 +37,7 @@ namespace MoneyMindManager_Business
             return false;
         }
 
-        public static async Task<clsBalanceAccount> FindBalanceAccount(int balanceAccountID)
+        public static async Task<clsBalanceAccount> FindBalanceAccountByID(int balanceAccountID)
         {
             clsBalanceAccountColumns balanceAccountColumns = await clsBalanceAccountData.GetBalanceAccountInfoByBalanceAccountID(balanceAccountID);
 

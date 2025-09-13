@@ -55,6 +55,7 @@ namespace MoneyMindManager_Presentation.Main
 
         private async void frmMain_Load(object sender, EventArgs e)
         {
+            this.UseWaitCursor = true;
             this.Enabled = false;
 
             clsUser user = await clsUser.FindUserByUserID(_userID);
@@ -66,7 +67,9 @@ namespace MoneyMindManager_Presentation.Main
             }
 
             this.Enabled = true;
-
+            this.UseWaitCursor = false;
+            this.Cursor = Cursors.Default;
+      
             clsGlobal_Presentation.CurrentUser = user;
             clsGlobal_Presentation.MainForm = this;
 

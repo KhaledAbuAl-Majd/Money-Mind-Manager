@@ -225,5 +225,46 @@ namespace MoneyMindManagerGlobal
                 }
             }
         }
+
+        public static class clsTransactionTypeClasses
+        {
+            public class clsTransactionTypeColumns
+            {
+                public byte TransactionTypeID { get; }
+                public string TransactionTypeName { get; }
+
+                public clsTransactionTypeColumns(byte transactionTypeID,string transactionTypeName)
+                {
+                    this.TransactionTypeID = transactionTypeID;
+                    this.TransactionTypeName = transactionTypeName;
+                }
+            }
+        }
+
+        public static class clsMainTransactionClasses
+        {
+            public class clsMainTransactionColumns
+            {
+               public int TransactionID { get; }
+                public decimal Amount { get; }
+                public DateTime CreatedDate { get; }
+                public short AccountID { get; }
+                public int CreatedByUserID { get; }
+                public int BalanceAccountID { get; }
+                public byte TransactionTypeID { get; }
+
+                public clsMainTransactionColumns(int transactionID,decimal amount,DateTime createdDate,short accountID,
+                    int createdByUserID,int balanceAccountID,byte tranasactionTypeID)
+                {
+                    this.TransactionID = transactionID;
+                    this.Amount = amount;
+                    this.CreatedDate = createdDate;
+                    this.AccountID = accountID;
+                    this.CreatedByUserID = createdByUserID;
+                    this.BalanceAccountID = balanceAccountID;
+                    this.TransactionTypeID = tranasactionTypeID;
+                }
+            }
+        }
     }
 }

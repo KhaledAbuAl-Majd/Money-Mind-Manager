@@ -41,7 +41,6 @@
             this.kgtxtLoginUserName = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.guna2DragControl1 = new Guna.UI2.WinForms.Guna2DragControl(this.components);
             this.guna2ShadowForm1 = new Guna.UI2.WinForms.Guna2ShadowForm(this.components);
-            this.guna2AnimateWindow1 = new Guna.UI2.WinForms.Guna2AnimateWindow(this.components);
             this.gbtnMode = new Guna.UI2.WinForms.Guna2Button();
             this.gpnlCreateAccount = new Guna.UI2.WinForms.Guna2Panel();
             this.label5 = new System.Windows.Forms.Label();
@@ -57,6 +56,8 @@
             this.kgtxtCreateAccount_UserName = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.guna2ControlBox2 = new Guna.UI2.WinForms.Guna2ControlBox();
+            this.lblHeader = new System.Windows.Forms.Label();
+            this.guna2DragControl2 = new Guna.UI2.WinForms.Guna2DragControl(this.components);
             this.gpnlLogin.SuspendLayout();
             this.gpnlCreateAccount.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -347,6 +348,7 @@
             // 
             // guna2DragControl1
             // 
+            this.guna2DragControl1.DockIndicatorColor = System.Drawing.Color.Transparent;
             this.guna2DragControl1.DockIndicatorTransparencyValue = 0.6D;
             this.guna2DragControl1.TargetControl = this;
             this.guna2DragControl1.UseTransparentDrag = true;
@@ -354,11 +356,6 @@
             // guna2ShadowForm1
             // 
             this.guna2ShadowForm1.TargetForm = this;
-            // 
-            // guna2AnimateWindow1
-            // 
-            this.guna2AnimateWindow1.AnimationType = Guna.UI2.WinForms.Guna2AnimateWindow.AnimateWindowType.AW_HOR_POSITIVE;
-            this.guna2AnimateWindow1.Interval = 250;
             // 
             // gbtnMode
             // 
@@ -914,14 +911,35 @@
             this.guna2ControlBox2.TabIndex = 10;
             this.guna2ControlBox2.UseTransparentBackground = true;
             // 
+            // lblHeader
+            // 
+            this.lblHeader.BackColor = System.Drawing.Color.Transparent;
+            this.lblHeader.Font = new System.Drawing.Font("Segoe Print", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHeader.ForeColor = System.Drawing.Color.White;
+            this.lblHeader.Location = new System.Drawing.Point(12, 35);
+            this.lblHeader.Name = "lblHeader";
+            this.lblHeader.Size = new System.Drawing.Size(1052, 55);
+            this.lblHeader.TabIndex = 11;
+            this.lblHeader.Text = "Mony Mind Manager";
+            this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // guna2DragControl2
+            // 
+            this.guna2DragControl2.DockIndicatorColor = System.Drawing.Color.Transparent;
+            this.guna2DragControl2.DockIndicatorTransparencyValue = 0.6D;
+            this.guna2DragControl2.TargetControl = this.lblHeader;
+            this.guna2DragControl2.UseTransparentDrag = true;
+            // 
             // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1076, 681);
+            this.Controls.Add(this.lblHeader);
             this.Controls.Add(this.guna2ControlBox2);
             this.Controls.Add(this.gbtnMode);
             this.Controls.Add(this.guna2ControlBox1);
@@ -929,6 +947,7 @@
             this.Controls.Add(this.gpnlCreateAccount);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmLogin";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmLogin";
             this.Load += new System.EventHandler(this.frmLogin_Load);
             this.gpnlLogin.ResumeLayout(false);
@@ -946,7 +965,6 @@
         private Guna.UI2.WinForms.Guna2Panel gpnlLogin;
         private Guna.UI2.WinForms.Guna2DragControl guna2DragControl1;
         private Guna.UI2.WinForms.Guna2ShadowForm guna2ShadowForm1;
-        private Guna.UI2.WinForms.Guna2AnimateWindow guna2AnimateWindow1;
         private KhaledControlLibrary1.KhaledGuna2TextBox kgtxtLogin_password;
         private KhaledControlLibrary1.KhaledGuna2TextBox kgtxtLoginUserName;
         private Guna.UI2.WinForms.Guna2GradientButton gbtnLogin;
@@ -969,5 +987,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private Guna.UI2.WinForms.Guna2ControlBox guna2ControlBox2;
+        private System.Windows.Forms.Label lblHeader;
+        private Guna.UI2.WinForms.Guna2DragControl guna2DragControl2;
     }
 }

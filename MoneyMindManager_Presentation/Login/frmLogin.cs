@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using KhaledControlLibrary1;
@@ -208,6 +209,9 @@ namespace MoneyMindManager_Presentation.Login
 
         private async void ggbtnLogin_Click(object sender, EventArgs e)
         {
+            if (this.UseWaitCursor)
+                return;
+
             if (!ValidateChildren())
             {
                 clsGlobalMessageBoxs.ShowValidateChildrenFailedMessage();
@@ -215,6 +219,9 @@ namespace MoneyMindManager_Presentation.Login
             }
             string userName = kgtxtLoginUserName.ValidatedText;
             string password = kgtxtLogin_password.ValidatedText;
+
+
+            this.UseWaitCursor = true;
 
             clsUser user = await clsUser.FindUserByUserNameAndPassword_Login(userName, password);
 
@@ -235,6 +242,9 @@ namespace MoneyMindManager_Presentation.Login
             Task.Run(() => clsLogger.LogAtEventLog($"clsLogger.LogAtEventLog($\"[LOGIN SUCCESS] User ID = {user.UserID}, Username = {user.UserName}, Login Time = {DateTime.Now}\",EventLogEntryType.Information);",System.Diagnostics.EventLogEntryType.Information));
 #pragma warning restore CS4014
 
+            this.UseWaitCursor = false;
+            this.Cursor = Cursors.Default;
+
 
             this.Hide();
             frmMain frm = new frmMain(Convert.ToInt32(user.UserID), this);
@@ -248,6 +258,9 @@ namespace MoneyMindManager_Presentation.Login
 
         private async void gbtnCreateAccount_Click(object sender, EventArgs e)
         {
+            if (this.UseWaitCursor)
+                return;
+
             if (!ValidateChildren())
             {
                 clsGlobalMessageBoxs.ShowValidateChildrenFailedMessage();
@@ -259,6 +272,8 @@ namespace MoneyMindManager_Presentation.Login
             string accountName = kgtxtCreateAccount_AccountName.ValidatedText;
             string password = kgtxtCreateAccount_Password.ValidatedText;
             byte defaultCurrencyID = Convert.ToByte(gcbCreateAccount_DefaultCurrency.SelectedValue);
+
+            this.UseWaitCursor = true;
 
             int? newAccountID = await clsAccount.CreateAccount(accountName, defaultCurrencyID, null, personName, null, null, null, null, userName, password);
 
@@ -275,10 +290,15 @@ namespace MoneyMindManager_Presentation.Login
                 _loadCredentials = true;
             }
 
+            this.UseWaitCursor = false;
+            this.Cursor = Cursors.Default;
         }
 
         private async void gbtnMode_Click(object sender, EventArgs e)
         {
+            if (this.UseWaitCursor)
+                return;
+
             enMode mode = (_Mode == enMode.Login) ? enMode.CreateAccount : enMode.Login;
             await _ChangeMode(mode);
         }
@@ -320,5 +340,6 @@ namespace MoneyMindManager_Presentation.Login
             if (e.KeyChar == (char)Keys.Enter)
                 gbtnLogin.PerformClick();
         }
+
     }
 }

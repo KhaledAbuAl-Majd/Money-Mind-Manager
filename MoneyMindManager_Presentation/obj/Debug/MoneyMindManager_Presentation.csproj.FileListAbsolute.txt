@@ -30,4 +30,3 @@ E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\Mo
 E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\obj\Debug\MoneyMin.CAE85569.Up2Date
 E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\obj\Debug\MoneyMindManager_Presentation.exe
 E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\obj\Debug\MoneyMindManager_Presentation.pdb
-E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\obj\Debug\MoneyMindManager_Presentation.exe.config

@@ -42,7 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clsAccount.cs" />
+    <Compile Include="clsMainTransaction.cs" />
     <Compile Include="clsBalanceAccount.cs" />
+    <Compile Include="clsTransactionType.cs" />
     <Compile Include="clsCurrency.cs" />
     <Compile Include="clsPerson.cs" />
     <Compile Include="clsUser.cs" />

@@ -415,6 +415,7 @@ namespace MoneyMindManager_Presentation
             this.gtsmDeleteUser.Name = "gtsmDeleteUser";
             this.gtsmDeleteUser.Size = new System.Drawing.Size(214, 36);
             this.gtsmDeleteUser.Text = "حذف";
+            this.gtsmDeleteUser.Click += new System.EventHandler(this.gtsmDeleteUser_Click);
             // 
             // gtsmEditUser
             // 
@@ -462,7 +463,7 @@ namespace MoneyMindManager_Presentation
             this.guna2ContextMenuStrip1.RenderStyle.SelectionForeColor = System.Drawing.Color.White;
             this.guna2ContextMenuStrip1.RenderStyle.SeparatorColor = System.Drawing.Color.Gainsboro;
             this.guna2ContextMenuStrip1.RenderStyle.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
-            this.guna2ContextMenuStrip1.Size = new System.Drawing.Size(215, 148);
+            this.guna2ContextMenuStrip1.Size = new System.Drawing.Size(215, 170);
             // 
             // gdgvUser
             // 

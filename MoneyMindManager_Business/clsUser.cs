@@ -365,28 +365,28 @@ namespace MoneyMindManager_Business
         /// <returns>true if user exist, false if user not exist</returns>
         public static async Task<bool> IsUserExistByUserIDAsync(int userID)
         {
-            return await clsUserData.IsUserExistByUserID(userID, false);
+            return await clsUserData.IsUserExistByUserID(userID);
         }
 
         /// <param name="personID">PersonID of user you want to find</param>
         /// <returns>true if user exist, false if user not exist</returns>
         public static async Task<bool> IsUserExistByPersonIDAsync(int personID)
         {
-            return await clsUserData.IsUserExistByPersonID(personID, false);
+            return await clsUserData.IsUserExistByPersonID(personID);
         }
 
         /// <param name="userName">userName of user you want to find</param>
         /// <returns>true if user exist, false if user not exist</returns>
         public static async Task<bool> IsUserExistByUserNameAsync(string userName)
         {
-            return await clsUserData.IsUserExistByUserNameAsync(userName,false);
+            return await clsUserData.IsUserExistByUserNameAsync(userName);
         }
 
         /// <param name="userName">userName of user you want to find</param>
         /// <returns>true if user exist, false if user not exist</returns>
         public static bool IsUserExistByUserName(string userName)
         {
-            return clsUserData.IsUserExistByUserName(userName, false);
+            return clsUserData.IsUserExistByUserName(userName);
         }
     }
 }

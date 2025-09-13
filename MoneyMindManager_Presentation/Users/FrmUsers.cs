@@ -102,7 +102,7 @@ namespace MoneyMindManager_Presentation
             if (result.dtUsers.Rows.Count == 0)
             {
                 lblNoRecordsFoundMessage.Visible = true;
-                lblUserMessage.Visible = true;
+                //lblUserMessage.Visible = true;
                 gdgvUser.DataSource = null;
                 _IsHeaderCreated = false;
                 _pageNumber = 1;
@@ -110,10 +110,10 @@ namespace MoneyMindManager_Presentation
             else
             {
                 lblNoRecordsFoundMessage.Visible = false;
-                lblUserMessage.Visible = false;
                 gdgvUser.DataSource = result.dtUsers;
             }
 
+            lblUserMessage.Visible = false;
             _searchByPageNumber = false;
             kgtxtPageNumber.Text = _pageNumber.ToString();
             _searchByPageNumber = true;
@@ -360,5 +360,24 @@ namespace MoneyMindManager_Presentation
             clsGlobal_Presentation.MainForm.AddNewForm(frm);
         }
 
+        private async void gtsmDeleteUser_Click(object sender, EventArgs e)
+        {
+            if (clsGlobalMessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف هذا الشخص", "طلب مواقفقة", MessageBoxButtons.OKCancel,
+               MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
+            {
+                int userID = Convert.ToInt32(gdgvUser.CurrentRow.Cells[0].Value);
+
+                if(userID == clsGlobal_Presentation.CurrentUser.UserID)
+                {
+                    clsGlobalMessageBoxs.ShowErrorMessage("لا يمكنك حذف المستخدم الحالي");
+                    return;
+                }
+
+                if (await clsUser.DeleteUserByUserID(userID))
+                {
+                    _RefreshFilter();
+                }
+            }
+        }
     }
 }

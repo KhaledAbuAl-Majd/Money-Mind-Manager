@@ -82,12 +82,12 @@ namespace MoneyMindManager_Business
             if (defaultCurrencyInfo == null)
                 return null;
 
-            clsBalanceAccount currentBalanceAccountInfo = await clsBalanceAccount.FindBalanceAccount(accountColumns.CurrentBalanceAccountID);
+            clsBalanceAccount currentBalanceAccountInfo = await clsBalanceAccount.FindBalanceAccountByID(accountColumns.CurrentBalanceAccountID);
 
             if (currentBalanceAccountInfo == null)
                 return null;
 
-            clsBalanceAccount savingBalanceAccountInfo = await clsBalanceAccount.FindBalanceAccount(accountColumns.SavingBalanceAccountID);
+            clsBalanceAccount savingBalanceAccountInfo = await clsBalanceAccount.FindBalanceAccountByID(accountColumns.SavingBalanceAccountID);
 
             if (savingBalanceAccountInfo == null)
                 return null;
@@ -115,14 +115,14 @@ namespace MoneyMindManager_Business
         /// <returns>true if account exist, false if account not exist</returns>
         public static async Task<bool> IsAccountExistByAccountNameAsync(string accountName)
         {
-            return await clsAccountData.IsAccountExistByAccountNameAsync(accountName,false);
+            return await clsAccountData.IsAccountExistByAccountNameAsync(accountName);
         }
 
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>true if account exist, false if account not exist</returns>
         public static bool IsAccountExistByAccountName(string accountName)
         {
-            return clsAccountData.IsAccountExistByAccountName(accountName,false);
+            return clsAccountData.IsAccountExistByAccountName(accountName);
         }
     }
 }

@@ -144,12 +144,6 @@ namespace MoneyMindManager_Presentation.Users
             _ChangeEnablityOfUserControls(true);
             kgtxtpassword.IsRequired = false;
             kgtxtConfirmPassword.IsRequired = false;
-
-            //gpnlUserPart.Enabled = true;
-            //gbtnSave.Enabled = true;
-            //gpnlPasswordPart.Enabled = false;
-            ////gpnlPasswordPart.Visible = false;
-
         }
 
         async Task _Save()
@@ -190,6 +184,18 @@ namespace MoneyMindManager_Presentation.Users
                     return;
                 }
             }
+            else if (Mode == enMode.Update)
+            {
+                if (_User.UserID == clsGlobal_Presentation.CurrentUser.UserID && !_User.IsActive)
+                {
+                    //gtswIsActive.Checked = true;
+                    lbluserMessage.Text = "لا يمكنك إلغاء نشاط المستخدم الحالي";
+                    lbluserMessage.Visible = true;
+                    return;
+                }
+            }
+
+            lbluserMessage.Visible = false;
 
             if (await _User.Save())
             {
@@ -215,6 +221,8 @@ namespace MoneyMindManager_Presentation.Users
         }
         private async void frmAddUpdateUser_Load(object sender, EventArgs e)
         {
+            lbluserMessage.Visible = false;
+
             switch (Mode)
             {
                 case enMode.AddNew:

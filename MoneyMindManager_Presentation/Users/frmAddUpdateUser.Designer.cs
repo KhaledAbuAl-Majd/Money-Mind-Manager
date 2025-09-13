@@ -42,6 +42,7 @@ namespace MoneyMindManager_Presentation.Users
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             this.gbtnSave = new Guna.UI2.WinForms.Guna2Button();
             this.gpnlUserPart = new Guna.UI2.WinForms.Guna2Panel();
+            this.lbluserMessage = new System.Windows.Forms.Label();
             this.kgtxtUserName = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.kgtxtNotes = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.gpnlPasswordPart = new Guna.UI2.WinForms.Guna2Panel();
@@ -195,6 +196,7 @@ namespace MoneyMindManager_Presentation.Users
             // 
             // gpnlUserPart
             // 
+            this.gpnlUserPart.Controls.Add(this.lbluserMessage);
             this.gpnlUserPart.Controls.Add(this.guna2Panel1);
             this.gpnlUserPart.Controls.Add(this.kgtxtUserName);
             this.gpnlUserPart.Controls.Add(this.kgtxtNotes);
@@ -203,6 +205,17 @@ namespace MoneyMindManager_Presentation.Users
             this.gpnlUserPart.Name = "gpnlUserPart";
             this.gpnlUserPart.Size = new System.Drawing.Size(456, 413);
             this.gpnlUserPart.TabIndex = 14;
+            // 
+            // lbluserMessage
+            // 
+            this.lbluserMessage.Font = new System.Drawing.Font("Segoe UI", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbluserMessage.ForeColor = System.Drawing.Color.Red;
+            this.lbluserMessage.Location = new System.Drawing.Point(3, 5);
+            this.lbluserMessage.Name = "lbluserMessage";
+            this.lbluserMessage.Size = new System.Drawing.Size(450, 34);
+            this.lbluserMessage.TabIndex = 13;
+            this.lbluserMessage.Text = "إضافة مستخدم";
+            this.lbluserMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // kgtxtUserName
             // 
@@ -592,5 +605,6 @@ namespace MoneyMindManager_Presentation.Users
         private Guna.UI2.WinForms.Guna2Button gbtnClose;
         private Guna.UI2.WinForms.Guna2Button gbtnSave;
         private Guna.UI2.WinForms.Guna2Panel gpnlPasswordPart;
+        private System.Windows.Forms.Label lbluserMessage;
     }
 }
