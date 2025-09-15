@@ -290,13 +290,13 @@ namespace MoneyMindManagerGlobal
         {
             public class clsMainTransactionColumns
             {
-               public int MainTransactionID { get; }
-                public decimal Amount { get; }
-                public DateTime CreatedDate { get; }
-                public short AccountID { get; }
-                public int CreatedByUserID { get; }
-                public int BalanceAccountID { get; }
-                public byte TransactionTypeID { get; }
+               public int? MainTransactionID { get; protected set; }
+                public decimal Amount { get; set; }
+                public DateTime CreatedDate { get; protected set; }
+                public short? AccountID { get; protected set; }
+                public int? CreatedByUserID { get; protected set; }
+                public int? BalanceAccountID { get; protected set; }
+                public byte? TransactionTypeID { get; protected set; }
 
                 public clsMainTransactionColumns(int transactionID,decimal amount,DateTime createdDate,short accountID,
                     int createdByUserID,int balanceAccountID,byte tranasactionTypeID)
@@ -308,6 +308,17 @@ namespace MoneyMindManagerGlobal
                     this.CreatedByUserID = createdByUserID;
                     this.BalanceAccountID = balanceAccountID;
                     this.TransactionTypeID = tranasactionTypeID;
+                }
+
+                public clsMainTransactionColumns()
+                {
+                    this.MainTransactionID = null;
+                    this.Amount = 0;
+                    this.CreatedDate = DateTime.MaxValue; ;
+                    this.AccountID = null;
+                    this.CreatedByUserID = null;
+                    this.BalanceAccountID = null;
+                    this.TransactionTypeID = null;
                 }
             }
         }
@@ -450,5 +461,28 @@ namespace MoneyMindManagerGlobal
 
             }
         }
+
+        //public static class clsIIncomeAndExpenseTransactionsClasses
+        //{
+        //    public class clsIncomeAndExpenseTransactionsColumns
+        //    {
+            
+        //        public int? VoucherID { get; set; }
+        //        public int? CategoryID { get; set; }
+        //        public clsIncomeAndExpenseTransactionsColumns(int voucherID,int categoryID)
+        //        {
+        //            this.VoucherID = voucherID;
+        //            this.CategoryID = categoryID;
+        //        }
+                    
+
+        //        public clsIncomeAndExpenseTransactionsColumns()
+        //        {
+        //            this.VoucherID = null;
+        //            this.CategoryID = null;
+        //        }
+
+        //    }
+        //}
     }
 }
