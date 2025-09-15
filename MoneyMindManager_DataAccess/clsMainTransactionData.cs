@@ -26,7 +26,7 @@ namespace MoneyMindManager_DataAccess
                     using (SqlCommand command = new SqlCommand("[dbo].[SP_MainTransactions_GetByID]", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
-                        command.Parameters.AddWithValue("@TransactionID", transactionID);
+                        command.Parameters.AddWithValue("@MainTransactionID", transactionID);
 
                         await connection.OpenAsync();
 

@@ -23,6 +23,13 @@ namespace MoneyMindManager_Presentation.Login
         public frmLogin()
         {
             InitializeComponent();
+
+            //to user doubled buffered and avoid flickers when change mode or Move form
+
+            this.SetStyle(ControlStyles.UserPaint |
+                 ControlStyles.AllPaintingInWmPaint |
+                 ControlStyles.OptimizedDoubleBuffer, true);
+            this.UpdateStyles();
         }
 
         enum enMode { Login, CreateAccount };
@@ -62,11 +69,11 @@ namespace MoneyMindManager_Presentation.Login
             {
                 case enMode.Login:
                     {
-                        gpnlCreateAccount.Enabled = false;
-                        gpnlCreateAccount.Visible = false;
                         gpnlLogin.Enabled = true;
                         gpnlLogin.Visible = true;
                         gpnlLogin.BringToFront();
+                        gpnlCreateAccount.Enabled = false;
+                        gpnlCreateAccount.Visible = false;
                         _resetgpnlLoginControls();
                         gbtnMode.Text = "إنشاء حساب";
                         await _LoadLoginCredential();
@@ -75,11 +82,11 @@ namespace MoneyMindManager_Presentation.Login
 
                 case enMode.CreateAccount:
                     {
-                        gpnlLogin.Enabled = false;
-                        gpnlLogin.Visible = false;
                         gpnlCreateAccount.Enabled = true;
                         gpnlCreateAccount.Visible = true;
                         gpnlCreateAccount.BringToFront();
+                        gpnlLogin.Enabled = false;
+                        gpnlLogin.Visible = false;
                         _resetgpnlCreateAccountControls();
                         gbtnMode.Text = "تسجيل الدخول";
                         await _LoadCurrenciesAtComboBox();
@@ -225,6 +232,9 @@ namespace MoneyMindManager_Presentation.Login
 
             clsUser user = await clsUser.FindUserByUserNameAndPassword_Login(userName, password);
 
+            this.UseWaitCursor = false;
+            this.Cursor = Cursors.Default;
+
             if (user == null)
                 return;
 
@@ -242,8 +252,6 @@ namespace MoneyMindManager_Presentation.Login
             Task.Run(() => clsLogger.LogAtEventLog($"clsLogger.LogAtEventLog($\"[LOGIN SUCCESS] User ID = {user.UserID}, Username = {user.UserName}, Login Time = {DateTime.Now}\",EventLogEntryType.Information);",System.Diagnostics.EventLogEntryType.Information));
 #pragma warning restore CS4014
 
-            this.UseWaitCursor = false;
-            this.Cursor = Cursors.Default;
 
 
             this.Hide();
@@ -277,6 +285,9 @@ namespace MoneyMindManager_Presentation.Login
 
             int? newAccountID = await clsAccount.CreateAccount(accountName, defaultCurrencyID, null, personName, null, null, null, null, userName, password);
 
+            this.UseWaitCursor = false;
+            this.Cursor = Cursors.Default;
+
             if (newAccountID != null)
             {
 #pragma warning disable CS4014
@@ -290,8 +301,6 @@ namespace MoneyMindManager_Presentation.Login
                 _loadCredentials = true;
             }
 
-            this.UseWaitCursor = false;
-            this.Cursor = Cursors.Default;
         }
 
         private async void gbtnMode_Click(object sender, EventArgs e)
@@ -341,5 +350,9 @@ namespace MoneyMindManager_Presentation.Login
                 gbtnLogin.PerformClick();
         }
 
+        private void guna2ControlBox2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

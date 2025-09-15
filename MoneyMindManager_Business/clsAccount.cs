@@ -60,8 +60,8 @@ namespace MoneyMindManager_Business
             this.IsActive = freshAccount.IsActive;
             this.DefaultCurrencyID = freshAccount.DefaultCurrencyID;
             this.Description = freshAccount.Description;
-            this.CurrentBalanceAccountID = freshAccount.CurrentBalanceAccountID;
-            this.SavingBalanceAccountID = freshAccount.SavingBalanceAccountID;
+            //this.CurrentBalanceAccountID = freshAccount.CurrentBalanceAccountID;
+            //this.SavingBalanceAccountID = freshAccount.SavingBalanceAccountID;
 
             this.DefaultCurrencyInfo = freshAccount.DefaultCurrencyInfo;
             this.CurrentBalanceAccountInfo = freshAccount.CurrentBalanceAccountInfo;

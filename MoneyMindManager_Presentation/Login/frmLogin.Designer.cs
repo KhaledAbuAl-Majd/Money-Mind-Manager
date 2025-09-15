@@ -68,16 +68,16 @@
             this.guna2ControlBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.guna2ControlBox1.Animated = true;
             this.guna2ControlBox1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2ControlBox1.BorderRadius = 10;
+            this.guna2ControlBox1.BorderRadius = 8;
             this.guna2ControlBox1.ControlBoxStyle = Guna.UI2.WinForms.Enums.ControlBoxStyle.Custom;
             this.guna2ControlBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2ControlBox1.CustomIconSize = 15F;
             this.guna2ControlBox1.FillColor = System.Drawing.Color.Transparent;
-            this.guna2ControlBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2ControlBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.guna2ControlBox1.HoverState.FillColor = System.Drawing.Color.White;
             this.guna2ControlBox1.HoverState.IconColor = System.Drawing.Color.Black;
             this.guna2ControlBox1.IconColor = System.Drawing.Color.White;
-            this.guna2ControlBox1.Location = new System.Drawing.Point(1038, 0);
+            this.guna2ControlBox1.Location = new System.Drawing.Point(1037, 0);
             this.guna2ControlBox1.Name = "guna2ControlBox1";
             this.guna2ControlBox1.Size = new System.Drawing.Size(38, 29);
             this.guna2ControlBox1.TabIndex = 0;
@@ -98,14 +98,14 @@
             this.gpnlLogin.Name = "gpnlLogin";
             this.gpnlLogin.ShadowDecoration.BorderRadius = 25;
             this.gpnlLogin.ShadowDecoration.Color = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(15)))), ((int)(((byte)(45)))));
-            this.gpnlLogin.ShadowDecoration.Depth = 20;
+            this.gpnlLogin.ShadowDecoration.Depth = 22;
             this.gpnlLogin.ShadowDecoration.Enabled = true;
             this.gpnlLogin.Size = new System.Drawing.Size(399, 462);
             this.gpnlLogin.TabIndex = 1;
             // 
             // label3
             // 
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 15.75F);
             this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(3, 17);
             this.label3.Name = "label3";
@@ -117,7 +117,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(125, 288);
             this.label1.Name = "label1";
@@ -147,6 +147,7 @@
             // 
             // gbtnLogin
             // 
+            this.gbtnLogin.Animated = true;
             this.gbtnLogin.AutoRoundedCorners = true;
             this.gbtnLogin.BackColor = System.Drawing.Color.Transparent;
             this.gbtnLogin.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -158,7 +159,7 @@
             this.gbtnLogin.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(214)))), ((int)(((byte)(137)))), ((int)(((byte)(84)))));
             this.gbtnLogin.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(91)))), ((int)(((byte)(155)))));
             this.gbtnLogin.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(39)))), ((int)(((byte)(93)))));
-            this.gbtnLogin.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnLogin.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.gbtnLogin.ForeColor = System.Drawing.Color.White;
             this.gbtnLogin.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(163)))), ((int)(((byte)(46)))));
             this.gbtnLogin.HoverState.FillColor2 = System.Drawing.Color.RosyBrown;
@@ -184,7 +185,7 @@
             this.gchkLogin_RemeberMe.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.gchkLogin_RemeberMe.CheckState = System.Windows.Forms.CheckState.Checked;
             this.gchkLogin_RemeberMe.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.gchkLogin_RemeberMe.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gchkLogin_RemeberMe.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.gchkLogin_RemeberMe.ForeColor = System.Drawing.Color.White;
             this.gchkLogin_RemeberMe.Location = new System.Drawing.Point(237, 288);
             this.gchkLogin_RemeberMe.Name = "gchkLogin_RemeberMe";
@@ -213,7 +214,7 @@
             this.kgtxtLogin_password.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(18)))), ((int)(((byte)(53)))));
             this.kgtxtLogin_password.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtLogin_password.FocusedState.ForeColor = System.Drawing.Color.White;
-            this.kgtxtLogin_password.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kgtxtLogin_password.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.kgtxtLogin_password.ForeColor = System.Drawing.Color.White;
             this.kgtxtLogin_password.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtLogin_password.HoverState.ForeColor = System.Drawing.Color.White;
@@ -290,7 +291,7 @@
             this.kgtxtLoginUserName.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(18)))), ((int)(((byte)(53)))));
             this.kgtxtLoginUserName.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtLoginUserName.FocusedState.ForeColor = System.Drawing.Color.White;
-            this.kgtxtLoginUserName.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kgtxtLoginUserName.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.kgtxtLoginUserName.ForeColor = System.Drawing.Color.White;
             this.kgtxtLoginUserName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtLoginUserName.HoverState.ForeColor = System.Drawing.Color.White;
@@ -368,13 +369,15 @@
             this.gbtnMode.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.gbtnMode.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.gbtnMode.FillColor = System.Drawing.Color.Transparent;
-            this.gbtnMode.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnMode.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(118)))), ((int)(((byte)(210)))));
+            this.gbtnMode.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.gbtnMode.ForeColor = System.Drawing.Color.White;
             this.gbtnMode.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(57)))), ((int)(((byte)(207)))));
             this.gbtnMode.HoverState.Font = new System.Drawing.Font("Segoe UI", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbtnMode.Image = ((System.Drawing.Image)(resources.GetObject("gbtnMode.Image")));
             this.gbtnMode.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnMode.ImageSize = new System.Drawing.Size(25, 25);
+            this.gbtnMode.IndicateFocus = true;
             this.gbtnMode.Location = new System.Drawing.Point(370, 602);
             this.gbtnMode.Name = "gbtnMode";
             this.gbtnMode.Size = new System.Drawing.Size(337, 41);
@@ -386,12 +389,12 @@
             // 
             this.gpnlCreateAccount.AutoRoundedCorners = true;
             this.gpnlCreateAccount.BackColor = System.Drawing.Color.Transparent;
+            this.gpnlCreateAccount.Controls.Add(this.label4);
             this.gpnlCreateAccount.Controls.Add(this.label5);
             this.gpnlCreateAccount.Controls.Add(this.gcbCreateAccount_DefaultCurrency);
             this.gpnlCreateAccount.Controls.Add(this.kgtxtCreatAccount_ConfirmPassowrd);
             this.gpnlCreateAccount.Controls.Add(this.kgtxtCreateAccount_AccountName);
             this.gpnlCreateAccount.Controls.Add(this.kgtxtCreateAccount_PersonName);
-            this.gpnlCreateAccount.Controls.Add(this.label4);
             this.gpnlCreateAccount.Controls.Add(this.label2);
             this.gpnlCreateAccount.Controls.Add(this.gtswCreateAccount_ShowPassword);
             this.gpnlCreateAccount.Controls.Add(this.gbtnCreateAccount);
@@ -401,7 +404,7 @@
             this.gpnlCreateAccount.Name = "gpnlCreateAccount";
             this.gpnlCreateAccount.ShadowDecoration.BorderRadius = 25;
             this.gpnlCreateAccount.ShadowDecoration.Color = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(15)))), ((int)(((byte)(45)))));
-            this.gpnlCreateAccount.ShadowDecoration.Depth = 20;
+            this.gpnlCreateAccount.ShadowDecoration.Depth = 22;
             this.gpnlCreateAccount.ShadowDecoration.Enabled = true;
             this.gpnlCreateAccount.Size = new System.Drawing.Size(399, 462);
             this.gpnlCreateAccount.TabIndex = 9;
@@ -410,7 +413,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.label5.ForeColor = System.Drawing.Color.White;
             this.label5.Location = new System.Drawing.Point(198, 313);
             this.label5.Name = "label5";
@@ -431,7 +434,7 @@
             this.gcbCreateAccount_DefaultCurrency.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(18)))), ((int)(((byte)(53)))));
             this.gcbCreateAccount_DefaultCurrency.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.gcbCreateAccount_DefaultCurrency.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.gcbCreateAccount_DefaultCurrency.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gcbCreateAccount_DefaultCurrency.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.gcbCreateAccount_DefaultCurrency.ForeColor = System.Drawing.Color.White;
             this.gcbCreateAccount_DefaultCurrency.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.gcbCreateAccount_DefaultCurrency.IntegralHeight = false;
@@ -460,7 +463,7 @@
             this.kgtxtCreatAccount_ConfirmPassowrd.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(18)))), ((int)(((byte)(53)))));
             this.kgtxtCreatAccount_ConfirmPassowrd.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtCreatAccount_ConfirmPassowrd.FocusedState.ForeColor = System.Drawing.Color.White;
-            this.kgtxtCreatAccount_ConfirmPassowrd.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kgtxtCreatAccount_ConfirmPassowrd.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.kgtxtCreatAccount_ConfirmPassowrd.ForeColor = System.Drawing.Color.White;
             this.kgtxtCreatAccount_ConfirmPassowrd.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtCreatAccount_ConfirmPassowrd.HoverState.ForeColor = System.Drawing.Color.White;
@@ -537,7 +540,7 @@
             this.kgtxtCreateAccount_AccountName.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(18)))), ((int)(((byte)(53)))));
             this.kgtxtCreateAccount_AccountName.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtCreateAccount_AccountName.FocusedState.ForeColor = System.Drawing.Color.White;
-            this.kgtxtCreateAccount_AccountName.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kgtxtCreateAccount_AccountName.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.kgtxtCreateAccount_AccountName.ForeColor = System.Drawing.Color.White;
             this.kgtxtCreateAccount_AccountName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtCreateAccount_AccountName.HoverState.ForeColor = System.Drawing.Color.White;
@@ -611,7 +614,7 @@
             this.kgtxtCreateAccount_PersonName.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(18)))), ((int)(((byte)(53)))));
             this.kgtxtCreateAccount_PersonName.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtCreateAccount_PersonName.FocusedState.ForeColor = System.Drawing.Color.White;
-            this.kgtxtCreateAccount_PersonName.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kgtxtCreateAccount_PersonName.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.kgtxtCreateAccount_PersonName.ForeColor = System.Drawing.Color.White;
             this.kgtxtCreateAccount_PersonName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtCreateAccount_PersonName.HoverState.ForeColor = System.Drawing.Color.White;
@@ -669,7 +672,7 @@
             // 
             // label4
             // 
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 15.75F);
             this.label4.ForeColor = System.Drawing.Color.White;
             this.label4.Location = new System.Drawing.Point(3, 17);
             this.label4.Name = "label4";
@@ -681,7 +684,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(264, 349);
             this.label2.Name = "label2";
@@ -711,6 +714,7 @@
             // 
             // gbtnCreateAccount
             // 
+            this.gbtnCreateAccount.Animated = true;
             this.gbtnCreateAccount.AutoRoundedCorners = true;
             this.gbtnCreateAccount.BackColor = System.Drawing.Color.Transparent;
             this.gbtnCreateAccount.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -722,7 +726,7 @@
             this.gbtnCreateAccount.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(214)))), ((int)(((byte)(137)))), ((int)(((byte)(84)))));
             this.gbtnCreateAccount.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(91)))), ((int)(((byte)(155)))));
             this.gbtnCreateAccount.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(39)))), ((int)(((byte)(93)))));
-            this.gbtnCreateAccount.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnCreateAccount.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.gbtnCreateAccount.ForeColor = System.Drawing.Color.White;
             this.gbtnCreateAccount.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(163)))), ((int)(((byte)(46)))));
             this.gbtnCreateAccount.HoverState.FillColor2 = System.Drawing.Color.RosyBrown;
@@ -829,7 +833,7 @@
             this.kgtxtCreateAccount_UserName.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(18)))), ((int)(((byte)(53)))));
             this.kgtxtCreateAccount_UserName.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtCreateAccount_UserName.FocusedState.ForeColor = System.Drawing.Color.White;
-            this.kgtxtCreateAccount_UserName.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kgtxtCreateAccount_UserName.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.kgtxtCreateAccount_UserName.ForeColor = System.Drawing.Color.White;
             this.kgtxtCreateAccount_UserName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtCreateAccount_UserName.HoverState.ForeColor = System.Drawing.Color.White;
@@ -895,26 +899,27 @@
             this.guna2ControlBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.guna2ControlBox2.Animated = true;
             this.guna2ControlBox2.BackColor = System.Drawing.Color.Transparent;
-            this.guna2ControlBox2.BorderRadius = 10;
+            this.guna2ControlBox2.BorderRadius = 8;
             this.guna2ControlBox2.ControlBoxStyle = Guna.UI2.WinForms.Enums.ControlBoxStyle.Custom;
             this.guna2ControlBox2.ControlBoxType = Guna.UI2.WinForms.Enums.ControlBoxType.MinimizeBox;
             this.guna2ControlBox2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2ControlBox2.CustomIconSize = 15F;
             this.guna2ControlBox2.FillColor = System.Drawing.Color.Transparent;
-            this.guna2ControlBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2ControlBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.guna2ControlBox2.HoverState.FillColor = System.Drawing.Color.White;
             this.guna2ControlBox2.HoverState.IconColor = System.Drawing.Color.Black;
             this.guna2ControlBox2.IconColor = System.Drawing.Color.White;
-            this.guna2ControlBox2.Location = new System.Drawing.Point(995, 0);
+            this.guna2ControlBox2.Location = new System.Drawing.Point(999, 0);
             this.guna2ControlBox2.Name = "guna2ControlBox2";
             this.guna2ControlBox2.Size = new System.Drawing.Size(38, 29);
             this.guna2ControlBox2.TabIndex = 10;
             this.guna2ControlBox2.UseTransparentBackground = true;
+            this.guna2ControlBox2.Click += new System.EventHandler(this.guna2ControlBox2_Click);
             // 
             // lblHeader
             // 
             this.lblHeader.BackColor = System.Drawing.Color.Transparent;
-            this.lblHeader.Font = new System.Drawing.Font("Segoe Print", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHeader.Font = new System.Drawing.Font("Segoe Print", 26.25F);
             this.lblHeader.ForeColor = System.Drawing.Color.White;
             this.lblHeader.Location = new System.Drawing.Point(12, 35);
             this.lblHeader.Name = "lblHeader";
@@ -945,7 +950,10 @@
             this.Controls.Add(this.guna2ControlBox1);
             this.Controls.Add(this.gpnlLogin);
             this.Controls.Add(this.gpnlCreateAccount);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.MaximumSize = new System.Drawing.Size(1076, 681);
+            this.MinimumSize = new System.Drawing.Size(1076, 681);
             this.Name = "frmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmLogin";

@@ -379,5 +379,10 @@ namespace MoneyMindManager_Presentation
                 }
             }
         }
+
+        private void gdgvUser_DoubleClick(object sender, EventArgs e)
+        {
+            _ShowPersonInfo();
+        }
     }
 }

@@ -117,7 +117,7 @@ namespace MoneyMindManager_Presentation.Users
         {
             ChangeHeaderValue("تعديل بيانات مستخدم");
 
-            clsUser searchedUser = await clsUser.FindUserByUserID(Convert.ToInt32(_UserID));
+            clsUser searchedUser = await clsUser.FindUserByUserID(Convert.ToInt32(_UserID), Convert.ToInt32(clsGlobal_Presentation.CurrentUser.UserID));
 
             if (searchedUser == null)
             {
@@ -197,7 +197,7 @@ namespace MoneyMindManager_Presentation.Users
 
             lbluserMessage.Visible = false;
 
-            if (await _User.Save())
+            if (await _User.Save(Convert.ToInt32(clsGlobal_Presentation.CurrentUser.UserID)))
             {
                 if (Mode == enMode.AddNew)
                 {

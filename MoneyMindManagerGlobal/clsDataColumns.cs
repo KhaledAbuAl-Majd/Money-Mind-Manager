@@ -18,9 +18,21 @@ namespace MoneyMindManagerGlobal
                 public string Address { get; set; }
                 public string Email { get; set; }
                 public string Phone { get; set; }
+
+                /// <summary>
+                /// At Add Mode Only
+                /// </summary>
                 public Nullable<short> AccountID { get;protected set; }
                 public string Notes { get; set; }
+
+                /// <summary>
+                /// At Add Mode Only
+                /// </summary>
                 public int? CreatedByUserID { get;protected set; }
+
+                /// <summary>
+                /// At Add Mode Only
+                /// </summary>
                 public DateTime CreatedDate { get; protected set; }
 
                 public clsPersonColumns(int? personID, string personName, string address, string email, string phone,
@@ -73,7 +85,15 @@ namespace MoneyMindManagerGlobal
             public class clsUserColumns
             {
                 public Nullable<int> UserID { get; protected set; }
+
+                /// <Note>
+                /// unqiue
+                /// </Note>
                 public string UserName { get; set; }
+
+                /// <summary>
+                /// At Add Mode Only, Unique
+                /// </summary>
                 public Nullable<int> PersonID { get;protected set; }
                 public Nullable<int> Permissions { get; set; }
 
@@ -84,9 +104,21 @@ namespace MoneyMindManagerGlobal
                 public string Salt { get;protected set; }
                 public bool IsActive { get; set; }
                 public string Notes { get; set; }
+
+                /// <summary>
+                /// At Add Mode Only
+                /// </summary>
                 public Nullable<short> AccountID { get;protected set; }
                 public bool IsDeleted { get;protected set; }
+
+                /// <summary>
+                /// At Add Mode Only
+                /// </summary>
                 public int? CreatedByUserID { get;protected set; }
+
+                /// <summary>
+                /// At Add Mode Only
+                /// </summary>
                 public DateTime CreatedDate { get; protected set; }
 
                 public clsUserColumns(int? userID, string userName, int? personID, int? permissions, string password, string salt
@@ -203,13 +235,26 @@ namespace MoneyMindManagerGlobal
             public class clsAccountColumns
             {
                 public short AccountID { get; }
+
+                /// <Note>
+                /// unqiue
+                /// </Note>
                 public string AccountName { get; set; }
+
+                /// <summary>
+                /// At Add Mode Only
+                /// </summary>
                 public DateTime CreatedDate { get; protected set; }
                 public bool IsActive { get; set; }
+
+                /// <summary>
+                /// At Add Mode Only
+                /// </summary>
                 public byte DefaultCurrencyID { get; protected set; }
                 public string Description { get; set; }
-                public int CurrentBalanceAccountID { get; protected set; }
-                public int SavingBalanceAccountID { get; protected set; }
+
+                public int CurrentBalanceAccountID { get; }
+                public int SavingBalanceAccountID { get;}
 
                 public clsAccountColumns(short accountID, string accountName, DateTime createdDate, bool isActive, byte defaultCurrencyID,
                     string description, int currentBalanceAccountID, int savingBalanceAccountID)
@@ -245,7 +290,7 @@ namespace MoneyMindManagerGlobal
         {
             public class clsMainTransactionColumns
             {
-               public int TransactionID { get; }
+               public int MainTransactionID { get; }
                 public decimal Amount { get; }
                 public DateTime CreatedDate { get; }
                 public short AccountID { get; }
@@ -256,7 +301,7 @@ namespace MoneyMindManagerGlobal
                 public clsMainTransactionColumns(int transactionID,decimal amount,DateTime createdDate,short accountID,
                     int createdByUserID,int balanceAccountID,byte tranasactionTypeID)
                 {
-                    this.TransactionID = transactionID;
+                    this.MainTransactionID = transactionID;
                     this.Amount = amount;
                     this.CreatedDate = createdDate;
                     this.AccountID = accountID;
@@ -264,6 +309,145 @@ namespace MoneyMindManagerGlobal
                     this.BalanceAccountID = balanceAccountID;
                     this.TransactionTypeID = tranasactionTypeID;
                 }
+            }
+        }
+
+        public static class clsIncomeAndExpenseCategoriesClasses
+        {
+            public class clsIncomeAndExpenseCategoriesColumns
+            {
+                public int? CategoryID { get; protected set; }
+
+                /// <Note>
+                /// unqiue
+                /// </Note>
+                public string CategoryName { get; set; }
+
+                public DateTime CreatedDate { get; protected set; }
+
+                /// <summary>
+                /// For Category which is main category [Parent category is null] only, null => don't have budget
+                /// </summary>
+                public Decimal? MonthlyBudget { get; set; }
+
+                /// <summary>
+                /// At Add Mode Only fro category type
+                /// </summary>
+                public bool IsIncome { get; protected set; }
+
+                /// <summary>
+                /// At Add Mode Only (category level), if it null => it's main Category, else it's sub category
+                /// </summary>
+                /// 
+                public int? ParentCategoryID { get; protected set; }
+
+                /// <summary>
+                /// at add mode only
+                /// </summary>
+                public short? AccountID { get; protected set; }
+
+                /// <summary>
+                /// at add mode only
+                /// </summary>
+                public int? CreatedByUserID { get; protected set; }
+                public bool IsActive { get; set; }
+
+                public clsIncomeAndExpenseCategoriesColumns(int categoryID, string categoryName, DateTime createdDate, decimal? monthlyBudget, bool isIncome,
+                    int? parentCategoryID, short accountID, int createdByUserID, bool isActive)
+                {
+                    this.CategoryID = categoryID;
+                    this.CategoryName = categoryName;
+                    this.CreatedDate = createdDate;
+                    this.MonthlyBudget = monthlyBudget;
+                    this.IsIncome = isIncome;
+                    this.ParentCategoryID = parentCategoryID;
+                    this.AccountID = accountID;
+                    this.CreatedByUserID = createdByUserID;
+                    this.IsActive = isActive;
+                }
+
+                public clsIncomeAndExpenseCategoriesColumns()
+                {
+                    this.CategoryID = null;
+                    this.CategoryName = null;
+                    this.CreatedDate = DateTime.Now;
+                    this.MonthlyBudget = null;
+                    this.IsIncome = false;
+                    this.ParentCategoryID = null;
+                    this.AccountID = null;
+                    this.CreatedByUserID = null;
+                    this.IsActive = false;
+                }
+
+            }
+        }
+
+        public static class clsIncomeAndExpenseVoucherClasses
+        {
+            public class clsIncomeAndExpenseVoucherColumns
+            {
+              public int? VoucherID { get; protected set; }
+
+                public string VoucherName { get; set; }
+
+                /// <summary>
+                /// Nullable
+                /// </summary>
+                public string Notes { get; set; }
+
+                /// <summary>
+                /// is voucher locked , if true => voucher is read only and can't open it
+                /// </summary>
+                public bool IsLocked { get; set; }
+
+                /// <summary>
+                /// At Add Mode Only
+                /// </summary>
+                public DateTime CreatedDate { get; protected set; }
+                public DateTime VoucherDate { get; set; }
+
+                /// <summary>
+                /// at add mode only
+                /// </summary>
+                public short? AccountID { get; protected set; }
+
+                /// <summary>
+                /// at add mode only
+                /// </summary>
+                public int? CreatedByUserID { get; protected set; }
+
+                /// <summary>
+                /// at add mode only
+                /// </summary>
+                public bool IsIncome { get; protected set; }
+
+                public clsIncomeAndExpenseVoucherColumns(int voucherID,string voucherName,string notes,bool isLocked,
+                    DateTime createdDate,DateTime voucherDate,short accountID,int createdByUserID,bool isIncome)
+                {
+                    this.VoucherID = voucherID;
+                    this.VoucherName = voucherName;
+                    this.Notes = notes;
+                    this.IsLocked = isLocked;
+                    this.CreatedDate = createdDate;
+                    this.VoucherDate = voucherDate;
+                    this.AccountID = accountID;
+                    this.CreatedByUserID = createdByUserID;
+                    this.IsIncome = isIncome;
+                }
+
+                public clsIncomeAndExpenseVoucherColumns()
+                {
+                    this.VoucherID = null;
+                    this.VoucherName = null;
+                    this.Notes = null;
+                    this.IsLocked = false;
+                    this.CreatedDate = DateTime.MaxValue;
+                    this.VoucherDate = DateTime.MaxValue;
+                    this.AccountID = null;
+                    this.CreatedByUserID = null;
+                    this.IsIncome = false;
+                }
+
             }
         }
     }

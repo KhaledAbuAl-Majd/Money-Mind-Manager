@@ -463,7 +463,7 @@ namespace MoneyMindManager_Presentation
             this.guna2ContextMenuStrip1.RenderStyle.SelectionForeColor = System.Drawing.Color.White;
             this.guna2ContextMenuStrip1.RenderStyle.SeparatorColor = System.Drawing.Color.Gainsboro;
             this.guna2ContextMenuStrip1.RenderStyle.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
-            this.guna2ContextMenuStrip1.Size = new System.Drawing.Size(215, 170);
+            this.guna2ContextMenuStrip1.Size = new System.Drawing.Size(215, 148);
             // 
             // gdgvUser
             // 
@@ -490,6 +490,7 @@ namespace MoneyMindManager_Presentation
             this.gdgvUser.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.gdgvUser.ColumnHeadersHeight = 35;
             this.gdgvUser.ContextMenuStrip = this.guna2ContextMenuStrip1;
+            this.gdgvUser.Cursor = System.Windows.Forms.Cursors.Hand;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -540,6 +541,7 @@ namespace MoneyMindManager_Presentation
             this.gdgvUser.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.gdgvUser.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             this.gdgvUser.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.guna2DataGridView1_CellFormatting);
+            this.gdgvUser.DoubleClick += new System.EventHandler(this.gdgvUser_DoubleClick);
             // 
             // gcbIsActive
             // 

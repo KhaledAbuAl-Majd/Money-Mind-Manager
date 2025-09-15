@@ -24,22 +24,22 @@ namespace MoneyMindManager_Business
             this.TransactionTypeInfo = transactionTypeInfo;
         }
 
-        public static async Task<clsMainTransaction> FindMainTransactionInfoByID(int transactionID)
+        public static async Task<clsMainTransaction> FindMainTransactionInfoByID(int transactionID, int currentUserID)
         {
             var result = await clsMainTransactionData.GetMainTransactionInfoByID(transactionID);
 
             if (result == null)
                 return null;
 
-            var accountInfo = await clsAccount.FindAccountByAccountID(result.AccountID);
-            var createdByUserInfo = await clsUser.FindUserByUserID(result.CreatedByUserID);
+            var createdByUserInfo = await clsUser.FindUserByUserID(result.CreatedByUserID,currentUserID);
+            var accountInfo = createdByUserInfo?.AccountInfo;
             var balanceAccountinfo = await clsBalanceAccount.FindBalanceAccountByID(result.BalanceAccountID);
             var transactionTypeInfo = await clsTransactionType.FindTransactionTypeByTransactionTypeID(result.TransactionTypeID);
 
             if (accountInfo == null || createdByUserInfo == null || balanceAccountinfo == null || transactionTypeInfo == null)
                 return null;
 
-            return new clsMainTransaction(result.TransactionID, result.Amount, result.CreatedDate, result.AccountID, result.CreatedByUserID, result.BalanceAccountID,
+            return new clsMainTransaction(result.MainTransactionID, result.Amount, result.CreatedDate, result.AccountID, result.CreatedByUserID, result.BalanceAccountID,
                 result.TransactionTypeID, accountInfo, createdByUserInfo, balanceAccountinfo, transactionTypeInfo);
         }
          

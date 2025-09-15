@@ -58,7 +58,7 @@ namespace MoneyMindManager_Presentation.Main
             this.UseWaitCursor = true;
             this.Enabled = false;
 
-            clsUser user = await clsUser.FindUserByUserID(_userID);
+            clsUser user = await clsUser.FindUserByUserID(_userID,_userID);
 
             if (user == null)
             {
@@ -98,11 +98,16 @@ namespace MoneyMindManager_Presentation.Main
             _frmLogin.Close();
         }
 
-        private void gbtnLogout_Click(object sender, EventArgs e)
+        public void Logout()
         {
             clsGlobal_Presentation.CurrentUser = null;
             clsGlobal_Presentation.MainForm = null;
             this.Close();
+        }
+
+        private void gbtnLogout_Click(object sender, EventArgs e)
+        {
+            Logout();
         }
 
         private void guna2ControlBox1_Click(object sender, EventArgs e)

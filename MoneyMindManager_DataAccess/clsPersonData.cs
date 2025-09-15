@@ -160,7 +160,7 @@ namespace MoneyMindManager_DataAccess
 
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>Object of clsUserColumns, if person is not found it will return null</returns>
-        public static async Task<clsPersonColumns> GetPersonInfoByID(int personID, bool RaiseEventOnErrorOccured = true)
+        public static async Task<clsPersonColumns> GetPersonInfoByID(int personID,int currentUserID, bool RaiseEventOnErrorOccured = true)
         {
             clsPersonColumns personData = null;
 
@@ -168,11 +168,12 @@ namespace MoneyMindManager_DataAccess
             {
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_GetPersonByID]", connection))
+                    using (SqlCommand command = new SqlCommand("[dbo].[SP_Person_GetByID]", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
                         command.Parameters.AddWithValue("@PersonID", personID);
+                        command.Parameters.AddWithValue("@CurrentUserID", currentUserID);
 
                         await connection.OpenAsync();
 

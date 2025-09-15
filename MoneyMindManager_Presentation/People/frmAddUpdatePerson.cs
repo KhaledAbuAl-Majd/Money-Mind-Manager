@@ -60,7 +60,7 @@ namespace MoneyMindManager_Presentation.People
         {
             ChangeHeaderValue("تعديل بيانات شخص");
 
-            clsPerson searchedPerson = await clsPerson.FindPersonByID(Convert.ToInt32(_PersonID));
+            clsPerson searchedPerson = await clsPerson.FindPersonByID(Convert.ToInt32(_PersonID), Convert.ToInt32(clsGlobal_Presentation.CurrentUser.UserID));
 
             if (searchedPerson == null)
             {

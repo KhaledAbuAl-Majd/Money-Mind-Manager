@@ -90,6 +90,7 @@ namespace MoneyMindManager_Presentation.People
             this.gdgvPeople.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.gdgvPeople.ColumnHeadersHeight = 35;
             this.gdgvPeople.ContextMenuStrip = this.guna2ContextMenuStrip1;
+            this.gdgvPeople.Cursor = System.Windows.Forms.Cursors.Hand;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

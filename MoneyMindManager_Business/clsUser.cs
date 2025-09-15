@@ -67,9 +67,9 @@ namespace MoneyMindManager_Business
             return true;
         }
 
-        public async Task<clsUser> GetCreatedbyUserInfo()
+        public async Task<clsUser> GetCreatedbyUserInfo(int currentUserID)
         {
-            return await clsUser.FindUserByUserID(Convert.ToInt32(CreatedByUserID));
+            return await clsUser.FindUserByUserID(Convert.ToInt32(CreatedByUserID),currentUserID);
         }
 
         public clsUser() : base()
@@ -105,15 +105,15 @@ namespace MoneyMindManager_Business
             return await clsUserData.UpdateUser(Convert.ToInt32(UserID), UserName, Convert.ToInt32(PersonID), Permissions, IsActive, Notes);
         }
 
-        async Task<bool> _RefeshCompositionObjects()
+        async Task<bool> _RefeshCompositionObjects(int currentUserID)
         {
-            PersonInfo = await clsPerson.FindPersonByID(Convert.ToInt32(this.PersonID));
+            PersonInfo = await clsPerson.FindPersonByID(Convert.ToInt32(this.PersonID),currentUserID);
             AccountInfo = await clsAccount.FindAccountByAccountID(Convert.ToInt16(AccountID));
 
             return ((PersonInfo != null) && (AccountInfo != null));
         }
 
-        public async Task<bool> Save()
+        public async Task<bool> Save(int currentUserID)
         {
             switch (Mode)
             {
@@ -122,7 +122,7 @@ namespace MoneyMindManager_Business
                         if (await _AddNewUser())
                         {
                             Mode = enMode.Update;
-                            return await _RefeshCompositionObjects();
+                            return await _RefeshCompositionObjects(currentUserID);
                         }
                         else
                             return false;
@@ -189,7 +189,7 @@ namespace MoneyMindManager_Business
             if (userColumns == null)
                 return null;
 
-            clsPerson personInfo = await clsPerson.FindPersonByID(Convert.ToInt32(userColumns.PersonID));
+            clsPerson personInfo = await clsPerson.FindPersonByID(Convert.ToInt32(userColumns.PersonID), Convert.ToInt32(userColumns.UserID));
             clsAccount accountInfo = await clsAccount.FindAccountByAccountID(Convert.ToInt16(userColumns.AccountID));
 
             if ((personInfo == null) || (accountInfo == null))
@@ -201,14 +201,14 @@ namespace MoneyMindManager_Business
         }
 
         /// <returns>Object of clsUserColumns, if user is not found it will return null</returns>
-        public static async Task<clsUser> FindUserByUserID(int userID)
+        public static async Task<clsUser> FindUserByUserID(int userID, int currentUserID)
         {
             var userColumns = await clsUserData.GetUserInfoByUserID(userID);
 
             if (userColumns == null)
                 return null;
 
-            clsPerson personInfo = await clsPerson.FindPersonByID(Convert.ToInt32(userColumns.PersonID));
+            clsPerson personInfo = await clsPerson.FindPersonByID(Convert.ToInt32(userColumns.PersonID),currentUserID);
 
             clsAccount accountInfo = await clsAccount.FindAccountByAccountID(Convert.ToInt16(userColumns.AccountID));
 
@@ -221,14 +221,14 @@ namespace MoneyMindManager_Business
         }
 
         /// <returns>Object of clsUserColumns, if user is not found it will return null</returns>
-        public static async Task<clsUser> FindUserByUserName(string userName)
+        public static async Task<clsUser> FindUserByUserName(string userName, int currentUserID)
         {
             clsUserColumns userColumns = await clsUserData.GetUserInfoByUserName(userName);
 
             if (userColumns == null)
                 return null;
 
-            clsPerson personInfo = await clsPerson.FindPersonByID(Convert.ToInt32(userColumns.PersonID));
+            clsPerson personInfo = await clsPerson.FindPersonByID(Convert.ToInt32(userColumns.PersonID),currentUserID);
             clsAccount accountInfo = await clsAccount.FindAccountByAccountID(Convert.ToInt16(userColumns.AccountID));
 
             if ((personInfo == null) || (accountInfo == null))
@@ -240,14 +240,14 @@ namespace MoneyMindManager_Business
         }
 
         /// <returns>Object of clsUserColumns, if user is not found it will return null</returns>
-        public static async Task<clsUser> FindUserByPersonID(int personID)
+        public static async Task<clsUser> FindUserByPersonID(int personID, int currentUserID)
         {
             clsUserColumns userColumns = await clsUserData.GetUserInfoByPersonID(personID);
 
             if (userColumns == null)
                 return null;
 
-            clsPerson personInfo = await clsPerson.FindPersonByID(Convert.ToInt32(userColumns.PersonID));
+            clsPerson personInfo = await clsPerson.FindPersonByID(Convert.ToInt32(userColumns.PersonID),currentUserID);
             clsAccount accountInfo = await clsAccount.FindAccountByAccountID(Convert.ToInt16(userColumns.AccountID));
 
             if ((personInfo == null) || (accountInfo == null))
@@ -263,9 +263,9 @@ namespace MoneyMindManager_Business
             return await clsUserData.DeleteUserByUserID(userID);
         }
 
-        public async Task<bool> RefreshData()
+        public async Task<bool> RefreshData(int currentUserID)
         {
-            clsUser freshUser = await clsUser.FindUserByUserID(Convert.ToInt32(this.UserID));
+            clsUser freshUser = await clsUser.FindUserByUserID(Convert.ToInt32(this.UserID),currentUserID);
 
             if (freshUser == null)
                 return false;

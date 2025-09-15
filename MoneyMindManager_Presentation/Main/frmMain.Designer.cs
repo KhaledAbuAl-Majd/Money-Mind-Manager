@@ -65,7 +65,9 @@
             // 
             // gbtnOverOview
             // 
+            this.gbtnOverOview.Animated = true;
             this.gbtnOverOview.BackColor = System.Drawing.Color.Transparent;
+            this.gbtnOverOview.BorderRadius = 5;
             this.gbtnOverOview.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
             this.gbtnOverOview.Cursor = System.Windows.Forms.Cursors.Hand;
             this.gbtnOverOview.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -77,9 +79,11 @@
             this.gbtnOverOview.Font = new System.Drawing.Font("Segoe UI", 11.25F);
             this.gbtnOverOview.ForeColor = System.Drawing.Color.Black;
             this.gbtnOverOview.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(164)))), ((int)(((byte)(255)))));
+            this.gbtnOverOview.HoverState.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbtnOverOview.Image = ((System.Drawing.Image)(resources.GetObject("gbtnOverOview.Image")));
             this.gbtnOverOview.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnOverOview.ImageSize = new System.Drawing.Size(40, 40);
+            this.gbtnOverOview.IndicateFocus = true;
             this.gbtnOverOview.Location = new System.Drawing.Point(6, 126);
             this.gbtnOverOview.Name = "gbtnOverOview";
             this.gbtnOverOview.Size = new System.Drawing.Size(254, 48);
@@ -89,7 +93,9 @@
             // 
             // guna2Button2
             // 
+            this.guna2Button2.Animated = true;
             this.guna2Button2.BackColor = System.Drawing.Color.Transparent;
+            this.guna2Button2.BorderRadius = 5;
             this.guna2Button2.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
             this.guna2Button2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2Button2.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -101,10 +107,12 @@
             this.guna2Button2.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2Button2.ForeColor = System.Drawing.Color.Black;
             this.guna2Button2.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(164)))), ((int)(((byte)(255)))));
+            this.guna2Button2.HoverState.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2Button2.Image = ((System.Drawing.Image)(resources.GetObject("guna2Button2.Image")));
             this.guna2Button2.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.guna2Button2.ImageSize = new System.Drawing.Size(40, 40);
-            this.guna2Button2.Location = new System.Drawing.Point(6, 190);
+            this.guna2Button2.IndicateFocus = true;
+            this.guna2Button2.Location = new System.Drawing.Point(6, 183);
             this.guna2Button2.Name = "guna2Button2";
             this.guna2Button2.Size = new System.Drawing.Size(254, 48);
             this.guna2Button2.TabIndex = 1;
@@ -132,7 +140,7 @@
             this.guna2ControlBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.guna2ControlBox2.Animated = true;
             this.guna2ControlBox2.BackColor = System.Drawing.Color.Transparent;
-            this.guna2ControlBox2.BorderRadius = 10;
+            this.guna2ControlBox2.BorderRadius = 8;
             this.guna2ControlBox2.ControlBoxStyle = Guna.UI2.WinForms.Enums.ControlBoxStyle.Custom;
             this.guna2ControlBox2.ControlBoxType = Guna.UI2.WinForms.Enums.ControlBoxType.MinimizeBox;
             this.guna2ControlBox2.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -142,7 +150,7 @@
             this.guna2ControlBox2.HoverState.FillColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.guna2ControlBox2.HoverState.IconColor = System.Drawing.Color.Black;
             this.guna2ControlBox2.IconColor = System.Drawing.Color.DimGray;
-            this.guna2ControlBox2.Location = new System.Drawing.Point(179, 3);
+            this.guna2ControlBox2.Location = new System.Drawing.Point(184, 3);
             this.guna2ControlBox2.Name = "guna2ControlBox2";
             this.guna2ControlBox2.Size = new System.Drawing.Size(38, 29);
             this.guna2ControlBox2.TabIndex = 12;
@@ -153,7 +161,7 @@
             this.gcbClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.gcbClose.Animated = true;
             this.gcbClose.BackColor = System.Drawing.Color.Transparent;
-            this.gcbClose.BorderRadius = 10;
+            this.gcbClose.BorderRadius = 8;
             this.gcbClose.ControlBoxStyle = Guna.UI2.WinForms.Enums.ControlBoxStyle.Custom;
             this.gcbClose.Cursor = System.Windows.Forms.Cursors.Hand;
             this.gcbClose.CustomIconSize = 15F;
@@ -171,7 +179,9 @@
             // 
             // gbtnLogout
             // 
+            this.gbtnLogout.Animated = true;
             this.gbtnLogout.BackColor = System.Drawing.Color.Transparent;
+            this.gbtnLogout.BorderRadius = 5;
             this.gbtnLogout.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
             this.gbtnLogout.Cursor = System.Windows.Forms.Cursors.Hand;
             this.gbtnLogout.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -183,10 +193,12 @@
             this.gbtnLogout.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbtnLogout.ForeColor = System.Drawing.Color.Black;
             this.gbtnLogout.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(164)))), ((int)(((byte)(255)))));
+            this.gbtnLogout.HoverState.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbtnLogout.Image = ((System.Drawing.Image)(resources.GetObject("gbtnLogout.Image")));
             this.gbtnLogout.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnLogout.ImageSize = new System.Drawing.Size(40, 40);
-            this.gbtnLogout.Location = new System.Drawing.Point(6, 298);
+            this.gbtnLogout.IndicateFocus = true;
+            this.gbtnLogout.Location = new System.Drawing.Point(6, 297);
             this.gbtnLogout.Name = "gbtnLogout";
             this.gbtnLogout.Size = new System.Drawing.Size(254, 48);
             this.gbtnLogout.TabIndex = 3;
@@ -195,7 +207,9 @@
             // 
             // gbtnUsers
             // 
+            this.gbtnUsers.Animated = true;
             this.gbtnUsers.BackColor = System.Drawing.Color.Transparent;
+            this.gbtnUsers.BorderRadius = 5;
             this.gbtnUsers.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
             this.gbtnUsers.Cursor = System.Windows.Forms.Cursors.Hand;
             this.gbtnUsers.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -207,10 +221,12 @@
             this.gbtnUsers.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbtnUsers.ForeColor = System.Drawing.Color.Black;
             this.gbtnUsers.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(164)))), ((int)(((byte)(255)))));
+            this.gbtnUsers.HoverState.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbtnUsers.Image = ((System.Drawing.Image)(resources.GetObject("gbtnUsers.Image")));
             this.gbtnUsers.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnUsers.ImageSize = new System.Drawing.Size(40, 40);
-            this.gbtnUsers.Location = new System.Drawing.Point(6, 244);
+            this.gbtnUsers.IndicateFocus = true;
+            this.gbtnUsers.Location = new System.Drawing.Point(6, 240);
             this.gbtnUsers.Name = "gbtnUsers";
             this.gbtnUsers.Size = new System.Drawing.Size(254, 48);
             this.gbtnUsers.TabIndex = 2;
