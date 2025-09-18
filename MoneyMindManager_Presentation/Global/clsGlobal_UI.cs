@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Forms;
 using Microsoft.Win32;
 using MoneyMindManager_Business;
@@ -13,11 +16,73 @@ using MoneyMindManagerGlobal;
 
 namespace MoneyMindManager_Presentation
 {
-    public static class clsGlobal_Presentation
+    public static class clsGlobal_UI
     {
-        public static clsUser CurrentUser { get; set; }
+        private static System.Timers.Timer _refreshTimer;
+        public static clsUser CurrentUser { get;private set; }
 
-        public static frmMain MainForm;
+        public static frmMain MainForm { get; private set; }
+
+        private static void _StartTimer()
+        {
+            _refreshTimer = new System.Timers.Timer(300000);
+            _refreshTimer.Elapsed += async (s,e) => await RefreshCurrentUser();
+            _refreshTimer.AutoReset = true;
+            _refreshTimer.Enabled = true;
+            _refreshTimer.Start();
+        }
+
+        private static void _StopTimer()
+        {
+            _refreshTimer?.Stop();
+            _refreshTimer?.Dispose();
+            _refreshTimer = null;
+        }
+
+        public static async Task RefreshCurrentUser()
+        {
+            CurrentUser = await clsUser.FindUserByUserID(Convert.ToInt32(CurrentUser?.UserID), Convert.ToInt32(CurrentUser?.UserID));
+
+            if (CurrentUser == null)
+            {
+                clsGlobalMessageBoxs.ShowErrorMessage("المستخدم الحالي غير موجود سيتم تسجيل خروجك !");
+                Logout();
+                return;
+            }
+
+            if (CurrentUser?.IsActive == false)
+            {
+                clsGlobalMessageBoxs.ShowErrorMessage("المستخدم الحالي موقوف, سيتم تسجيل خروجك !");
+                Logout();
+                return;
+            }
+
+            _refreshTimer.Stop();
+            _refreshTimer.Start();
+        }
+
+        public static async Task Login(int userID,frmMain frmmain)
+        {
+            clsUser user = await clsUser.FindUserByUserID(userID, userID);
+
+            if (user == null)
+            {
+                Logout();
+                return;
+            }
+
+            CurrentUser = user;
+            MainForm = frmmain;
+            _StartTimer();
+        }
+
+        public static void Logout()
+        {
+            _StopTimer();
+            CurrentUser = null;
+            MainForm?.Close();
+            MainForm = null;
+        }
         public static void SubscribeToErrorOcrruedEvent()
         {
             clsGlobalEvents.OnErrorOccured += clsGlobalMessageBoxs.ShowErrorMessage;

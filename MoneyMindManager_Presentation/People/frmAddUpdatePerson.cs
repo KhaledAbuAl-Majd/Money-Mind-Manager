@@ -60,7 +60,7 @@ namespace MoneyMindManager_Presentation.People
         {
             ChangeHeaderValue("تعديل بيانات شخص");
 
-            clsPerson searchedPerson = await clsPerson.FindPersonByID(Convert.ToInt32(_PersonID), Convert.ToInt32(clsGlobal_Presentation.CurrentUser.UserID));
+            clsPerson searchedPerson = await clsPerson.FindPersonByID(Convert.ToInt32(_PersonID), Convert.ToInt32(clsGlobal_UI.CurrentUser.UserID));
 
             if (searchedPerson == null)
             {
@@ -80,6 +80,10 @@ namespace MoneyMindManager_Presentation.People
             kgtxtAddress.Text = _Person.Address;
         }
 
+        void _ResteObject()
+        {
+            _Person = new clsPerson();
+        }
         async Task _Save()
         {
             if (!ValidateChildren())
@@ -94,15 +98,17 @@ namespace MoneyMindManager_Presentation.People
 
             if (Mode == enMode.AddNew)
             {
-                if (!_Person.EnterAccountIDAtAddMode(Convert.ToInt16(clsGlobal_Presentation.CurrentUser.AccountID)))
+                if (!_Person.EnterAccountIDAtAddMode(Convert.ToInt16(clsGlobal_UI.CurrentUser.AccountID)))
                 {
                     clsGlobalMessageBoxs.ShowErrorMessage("فشل تسجيل معرف الحساب للمستخدم");
+                    _ResteObject();
                     return;
                 }
 
-                if (!_Person.EnterCreatedByUserIDAtAddMode(Convert.ToInt32(clsGlobal_Presentation.CurrentUser.UserID)))
+                if (!_Person.EnterCreatedByUserIDAtAddMode(Convert.ToInt32(clsGlobal_UI.CurrentUser.UserID)))
                 {
                     clsGlobalMessageBoxs.ShowErrorMessage("فشل تسجيل معرف منشئ الحساب");
+                    _ResteObject();
                     return;
                 }
             }
@@ -112,7 +118,7 @@ namespace MoneyMindManager_Presentation.People
 
             if (await _Person.Save())
             {
-                if(Mode == enMode.AddNew)
+                if (Mode == enMode.AddNew)
                 {
                     clsGlobalMessageBoxs.ShowMessage($"تم إضافة الشخص بنجاج بمعرف [{_Person.PersonID}]", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -128,6 +134,8 @@ namespace MoneyMindManager_Presentation.People
 
                 _isSaved = true;
             }
+            else if (Mode == enMode.AddNew)
+                _ResteObject();
         }
 
         private async void frmAddUpdatePerson_Load(object sender, EventArgs e)

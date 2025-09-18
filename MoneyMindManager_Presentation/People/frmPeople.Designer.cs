@@ -342,6 +342,10 @@ namespace MoneyMindManager_Presentation.People
             this.kgtxtPageNumber.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxt_OnValidationSuccess);
             this.kgtxtPageNumber.TextChanged += new System.EventHandler(this.kgtxtPageNumber_TextChanged);
             // 
+            // toolTip1
+            // 
+            this.toolTip1.IsBalloon = true;
+            // 
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;

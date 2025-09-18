@@ -17,7 +17,7 @@ namespace MoneyMindManager_Presentation
         [STAThread]
         static void Main()
         {
-            clsGlobal_Presentation.SubscribeToErrorOcrruedEvent();
+            clsGlobal_UI.SubscribeToErrorOcrruedEvent();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

@@ -34,7 +34,7 @@
             this.guna2ShadowForm1 = new Guna.UI2.WinForms.Guna2ShadowForm(this.components);
             this.guna2AnimateWindow1 = new Guna.UI2.WinForms.Guna2AnimateWindow(this.components);
             this.gbtnOverOview = new Guna.UI2.WinForms.Guna2Button();
-            this.guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
+            this.gbtnPeople = new Guna.UI2.WinForms.Guna2Button();
             this.gpnlRightBar = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2ControlBox2 = new Guna.UI2.WinForms.Guna2ControlBox();
             this.gcbClose = new Guna.UI2.WinForms.Guna2ControlBox();
@@ -91,33 +91,33 @@
             this.gbtnOverOview.Text = "لمحة عامة";
             this.gbtnOverOview.Click += new System.EventHandler(this.gbtnOverOview_Click);
             // 
-            // guna2Button2
+            // gbtnPeople
             // 
-            this.guna2Button2.Animated = true;
-            this.guna2Button2.BackColor = System.Drawing.Color.Transparent;
-            this.guna2Button2.BorderRadius = 5;
-            this.guna2Button2.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
-            this.guna2Button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.guna2Button2.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button2.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button2.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2Button2.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2Button2.FillColor = System.Drawing.Color.White;
-            this.guna2Button2.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(118)))), ((int)(((byte)(210)))));
-            this.guna2Button2.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2Button2.ForeColor = System.Drawing.Color.Black;
-            this.guna2Button2.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(164)))), ((int)(((byte)(255)))));
-            this.guna2Button2.HoverState.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2Button2.Image = ((System.Drawing.Image)(resources.GetObject("guna2Button2.Image")));
-            this.guna2Button2.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.guna2Button2.ImageSize = new System.Drawing.Size(40, 40);
-            this.guna2Button2.IndicateFocus = true;
-            this.guna2Button2.Location = new System.Drawing.Point(6, 183);
-            this.guna2Button2.Name = "guna2Button2";
-            this.guna2Button2.Size = new System.Drawing.Size(254, 48);
-            this.guna2Button2.TabIndex = 1;
-            this.guna2Button2.Text = "الأشخاص";
-            this.guna2Button2.Click += new System.EventHandler(this.guna2Button2_Click);
+            this.gbtnPeople.Animated = true;
+            this.gbtnPeople.BackColor = System.Drawing.Color.Transparent;
+            this.gbtnPeople.BorderRadius = 5;
+            this.gbtnPeople.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            this.gbtnPeople.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gbtnPeople.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnPeople.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnPeople.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.gbtnPeople.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.gbtnPeople.FillColor = System.Drawing.Color.White;
+            this.gbtnPeople.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(118)))), ((int)(((byte)(210)))));
+            this.gbtnPeople.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnPeople.ForeColor = System.Drawing.Color.Black;
+            this.gbtnPeople.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(164)))), ((int)(((byte)(255)))));
+            this.gbtnPeople.HoverState.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnPeople.Image = ((System.Drawing.Image)(resources.GetObject("gbtnPeople.Image")));
+            this.gbtnPeople.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.gbtnPeople.ImageSize = new System.Drawing.Size(40, 40);
+            this.gbtnPeople.IndicateFocus = true;
+            this.gbtnPeople.Location = new System.Drawing.Point(6, 183);
+            this.gbtnPeople.Name = "gbtnPeople";
+            this.gbtnPeople.Size = new System.Drawing.Size(254, 48);
+            this.gbtnPeople.TabIndex = 1;
+            this.gbtnPeople.Text = "الأشخاص";
+            this.gbtnPeople.Click += new System.EventHandler(this.gbtnPeople_Click);
             // 
             // gpnlRightBar
             // 
@@ -126,7 +126,7 @@
             this.gpnlRightBar.Controls.Add(this.gbtnLogout);
             this.gpnlRightBar.Controls.Add(this.gbtnUsers);
             this.gpnlRightBar.Controls.Add(this.gbtnOverOview);
-            this.gpnlRightBar.Controls.Add(this.guna2Button2);
+            this.gpnlRightBar.Controls.Add(this.gbtnPeople);
             this.gpnlRightBar.CustomBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.gpnlRightBar.CustomBorderThickness = new System.Windows.Forms.Padding(1, 0, 0, 0);
             this.gpnlRightBar.Dock = System.Windows.Forms.DockStyle.Right;
@@ -265,17 +265,19 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1473, 809);
             this.Controls.Add(this.gpnlFormContainer);
             this.Controls.Add(this.gpnlTopBar);
             this.Controls.Add(this.gpnlRightBar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(1473, 809);
             this.MinimumSize = new System.Drawing.Size(263, 809);
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmMain";
+            this.Text = "Money Mind Manager";
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.gpnlRightBar.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -288,7 +290,7 @@
         private Guna.UI2.WinForms.Guna2ShadowForm guna2ShadowForm1;
         private Guna.UI2.WinForms.Guna2AnimateWindow guna2AnimateWindow1;
         private Guna.UI2.WinForms.Guna2Button gbtnOverOview;
-        private Guna.UI2.WinForms.Guna2Button guna2Button2;
+        private Guna.UI2.WinForms.Guna2Button gbtnPeople;
         private Guna.UI2.WinForms.Guna2Panel gpnlTopBar;
         private Guna.UI2.WinForms.Guna2Panel gpnlRightBar;
         private Guna.UI2.WinForms.Guna2DragControl guna2DragControl2;

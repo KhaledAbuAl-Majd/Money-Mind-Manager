@@ -13,7 +13,7 @@ namespace MoneyMindManager_DataAccess
     public static class clsIncomeAndExpenseVoucherData
     {
         public static async Task<int?> AddNewIncomeAndExpenseVoucher(string voucherName,string notes,
-            bool isLocked,DateTime voucherDate,int createdByUserID,bool isIncome, bool RaiseEventOnErrorOccured = true)
+            bool isLocked,DateTime voucherDate,int createdByUserID,bool isIncome,bool isReturn, bool RaiseEventOnErrorOccured = true)
         {
             int? newVoucherID = null;
 
@@ -31,6 +31,7 @@ namespace MoneyMindManager_DataAccess
                         command.Parameters.AddWithValue("@VoucherDate",voucherDate);
                         command.Parameters.AddWithValue("@CreatedByUserID",createdByUserID);
                         command.Parameters.AddWithValue("@IsIncome",isIncome);
+                        command.Parameters.AddWithValue("@IsReturn", isReturn);
 
                         SqlParameter outParmNewCategory = new SqlParameter("@NewVoucherID", System.Data.SqlDbType.Int)
                         {
@@ -174,9 +175,10 @@ namespace MoneyMindManager_DataAccess
                                 short accountID = Convert.ToInt16(reader["AccountID"]);
                                 int createdByUserID = Convert.ToInt32(reader["CreatedByUserID"]);
                                 bool isIncome = Convert.ToBoolean(reader["IsIncome"]);
+                                bool isReturn = Convert.ToBoolean(reader["IsReturn"]);
 
                                 voucherData = new clsIncomeAndExpenseVoucherColumns(voucherID, voucherName, notes, isLocked,
-                                    createdDate, voucherDate, accountID, createdByUserID, isIncome);
+                                    createdDate, voucherDate, accountID, createdByUserID, isIncome,isReturn);
                             }
                         }
                     }

@@ -7,13 +7,14 @@ using System.Text;
 using System.Threading.Tasks;
 using MoneyMindManagerGlobal;
 using static MoneyMindManagerGlobal.clsDataColumns.clsIncomeAndExpenseCategoriesClasses;
+using static MoneyMindManagerGlobal.clsDataColumns.PersonClasses;
 
 namespace MoneyMindManager_DataAccess
 {
     public static class clsIncomeAndExpenseCategoryData
     {
         public static async Task<int?> AddNewIncomeAndExpenseCategory(string categoryName, decimal? monthlyBudget, bool isIncome,
-                    int? parentCategoryID, int createdByUserID, bool isActive, bool RaiseEventOnErrorOccured = true)
+                    int? parentCategoryID, int createdByUserID, bool isActive,string notes, bool RaiseEventOnErrorOccured = true)
         {
             int? newCategoryID = null;
 
@@ -31,6 +32,7 @@ namespace MoneyMindManager_DataAccess
                         command.Parameters.AddWithValue("@ParentCategoryID", (object)parentCategoryID ?? DBNull.Value); 
                         command.Parameters.AddWithValue("@CreatedByUserID", createdByUserID);
                         command.Parameters.AddWithValue("@IsActive", isActive);
+                        command.Parameters.AddWithValue("@Notes", string.IsNullOrWhiteSpace(notes) ? DBNull.Value : (object)notes);
 
                         SqlParameter outParmNewCategory = new SqlParameter("@NewCategoryID", System.Data.SqlDbType.Int)
                         {
@@ -60,8 +62,8 @@ namespace MoneyMindManager_DataAccess
             return newCategoryID;
         }
 
-        public static async Task<bool> UpdateCategoryByID(int categoryID,string categoryName,Decimal?monnthlyBudget,
-            bool isActive,int currentUserID, bool RaiseEventOnErrorOccured = true)
+        public static async Task<bool> UpdateCategoryByID(int categoryID,string categoryName,Decimal?monthlyBudget,
+            bool isActive, string notes,int currentUserID, bool RaiseEventOnErrorOccured = true)
         {
             bool result = false;
 
@@ -75,9 +77,10 @@ namespace MoneyMindManager_DataAccess
 
                         command.Parameters.AddWithValue("@CategoryID", categoryID);
                         command.Parameters.AddWithValue("@CategoryName", categoryName);
-                        command.Parameters.AddWithValue("@MonthlyBudget", monnthlyBudget);
+                        command.Parameters.AddWithValue("@MonthlyBudget", (object)monthlyBudget ?? DBNull.Value);
                         command.Parameters.AddWithValue("@IsActive", isActive);
                         command.Parameters.AddWithValue("@CurrentUserID", currentUserID);
+                        command.Parameters.AddWithValue("@Notes", string.IsNullOrWhiteSpace(notes) ? DBNull.Value : (object)notes);
 
                         SqlParameter retunValue = new SqlParameter("@ReturnVal", SqlDbType.Int)
                         {
@@ -173,9 +176,13 @@ namespace MoneyMindManager_DataAccess
                                 short accountID = Convert.ToInt16(reader["AccountID"]);
                                 int createdByUseID = Convert.ToInt32(reader["CreatedByUserID"]);
                                 bool isActive = Convert.ToBoolean(reader["IsActive"]);
+                                string categoryHierarchical = reader["CategoryHierarchical"] as string;
+                                string notes = reader["Notes"] as string;
+                                string mainCategoryName = reader["MainCategoryName"] as string;
 
                                 categoryData = new clsIncomeAndExpenseCategoriesColumns(categoryID, categoryName, createdDate,
-                                    monthlyBudget, isIncome, parentCategoryID, accountID, createdByUseID, isActive);
+                                    monthlyBudget, isIncome, parentCategoryID, accountID, createdByUseID, isActive, categoryHierarchical,
+                                    notes, mainCategoryName);
                             }
                         }
                     }
@@ -188,7 +195,7 @@ namespace MoneyMindManager_DataAccess
             {
                 categoryData = null;
 
-                if (RaiseEventOnErrorOccured == false)
+                if (RaiseEventOnErrorOccured)
                     clsGlobalEvents.RaiseEvent(ex.Message, true);
             }
 
@@ -223,9 +230,13 @@ namespace MoneyMindManager_DataAccess
                                 short accountID = Convert.ToInt16(reader["AccountID"]);
                                 int createdByUseID = Convert.ToInt32(reader["CreatedByUserID"]);
                                 bool isActive = Convert.ToBoolean(reader["IsActive"]);
+                                string categoryHierarchical = reader["CategoryHierarchical"] as string;
+                                string notes = reader["Notes"] as string;
+                                string mainCategoryName = reader["MainCategoryName"] as string;
 
                                 categoryData = new clsIncomeAndExpenseCategoriesColumns(categoryID, categoryName, createdDate,
-                                    monthlyBudget, isIncome, parentCategoryID, accountID, createdByUseID, isActive);
+                                    monthlyBudget, isIncome, parentCategoryID, accountID, createdByUseID, isActive, categoryHierarchical,
+                                    notes, mainCategoryName);
                             }
                         }
                     }
@@ -238,14 +249,14 @@ namespace MoneyMindManager_DataAccess
             {
                 categoryData = null;
 
-                if (RaiseEventOnErrorOccured == false)
+                if (RaiseEventOnErrorOccured)
                     clsGlobalEvents.RaiseEvent(ex.Message, true);
             }
 
             return categoryData;
         }
 
-        public static async Task<bool> IsCategoryExistByCategoryName(string categoryName,int currentUserID, bool RaiseEventOnErrorOccured = true)
+        public static async Task<bool> IsCategoryExistByCategoryNameAsync(string categoryName,int currentUserID, bool RaiseEventOnErrorOccured = true)
         {
             bool isExist = false;
 
@@ -283,6 +294,93 @@ namespace MoneyMindManager_DataAccess
             }
 
             return isExist;
+        }
+       
+        public static bool IsCategoryExistByCategoryName(string categoryName, int currentUserID, bool RaiseEventOnErrorOccured = true)
+        {
+            bool isExist = false;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("[dbo].[SP_IncomeAndExpenseCategories_IsExistByCategoryName]", connection))
+                    {
+                        command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("@CategoryName", categoryName);
+                        command.Parameters.AddWithValue("@CurrentUserID", currentUserID);
+
+                        SqlParameter retunValue = new SqlParameter("@ReturnVal", SqlDbType.Int)
+                        {
+                            Direction = System.Data.ParameterDirection.ReturnValue
+                        };
+
+                        command.Parameters.Add(retunValue);
+
+                        connection.Open();
+                        command.ExecuteNonQuery();
+
+                        isExist = (retunValue.Value != DBNull.Value) && (Convert.ToInt32(retunValue.Value) == 1);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                isExist = false;
+
+                if (RaiseEventOnErrorOccured)
+                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+            }
+
+            return isExist;
+        }
+
+
+        /// <summary>
+        /// Get All Active Categories For The Account at Current User
+        /// </summary>
+        /// <param name="categoryName">if null => don't search by it, else => search by it</param>
+        /// <param name="isIncome">if null => don't search by it, else => search by it</param>
+        /// <returns></returns>
+        public static async Task<DataTable> GetAllCategoriesForSearch(string categoryName,bool? isIncome, int currentUserID, bool RaiseEventOnErrorOccured = true)
+        {
+            DataTable dtCategories = null;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("[dbo].[SP_IncomeAndExpenseCategories_GetAllForSearch]", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("@CategoryName", (string.IsNullOrEmpty(categoryName) ? DBNull.Value : (object)categoryName));
+                        command.Parameters.AddWithValue("@IsIncome", (object)isIncome ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@CurrentUserID", currentUserID);
+
+                        await connection.OpenAsync();
+
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            dtCategories = new DataTable();
+                            dtCategories.Load(reader);
+                        }
+                    }
+                }
+
+                if (dtCategories == null)
+                    throw new Exception("فشلت العملية");
+            }
+            catch (Exception ex)
+            {
+                dtCategories = null;
+
+                if (RaiseEventOnErrorOccured)
+                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+            }
+
+            return dtCategories;
         }
     }
 }

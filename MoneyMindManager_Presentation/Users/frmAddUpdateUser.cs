@@ -117,7 +117,7 @@ namespace MoneyMindManager_Presentation.Users
         {
             ChangeHeaderValue("تعديل بيانات مستخدم");
 
-            clsUser searchedUser = await clsUser.FindUserByUserID(Convert.ToInt32(_UserID), Convert.ToInt32(clsGlobal_Presentation.CurrentUser.UserID));
+            clsUser searchedUser = await clsUser.FindUserByUserID(Convert.ToInt32(_UserID), Convert.ToInt32(clsGlobal_UI.CurrentUser.UserID));
 
             if (searchedUser == null)
             {
@@ -146,6 +146,10 @@ namespace MoneyMindManager_Presentation.Users
             kgtxtConfirmPassword.IsRequired = false;
         }
 
+        void _ResteObject()
+        {
+            _User = new clsUser();
+        }
         async Task _Save()
         {
             if (!ValidateChildren())
@@ -163,41 +167,46 @@ namespace MoneyMindManager_Presentation.Users
                 if (!_User.EnterPasswordAtAddMode(kgtxtpassword.ValidatedText))
                 {
                     clsGlobalMessageBoxs.ShowErrorMessage("فشل تكوين كلمة المرور");
+                    _ResteObject();
                     return;
                 }
 
                 if (!_User.EnterPersonIDAtAddMode(Convert.ToInt32(ctrlPersonCardWithFilter1.Person.PersonID)))
                 {
                     clsGlobalMessageBoxs.ShowErrorMessage("فشل تسجيل معرف الشخص للمستخدم");
+                    _ResteObject();
                     return;
                 }
 
-                if (!_User.EnterAccountIDAtAddMode(Convert.ToInt16(clsGlobal_Presentation.CurrentUser.AccountID)))
+                if (!_User.EnterAccountIDAtAddMode(Convert.ToInt16(clsGlobal_UI.CurrentUser.AccountID)))
                 {
                     clsGlobalMessageBoxs.ShowErrorMessage("فشل تسجيل معرف الحساب للمستخدم");
+                    _ResteObject();
                     return;
                 }
 
-                if (!_User.EnterCreatedByUserIDAtAddMode(Convert.ToInt32(clsGlobal_Presentation.CurrentUser.UserID)))
+                if (!_User.EnterCreatedByUserIDAtAddMode(Convert.ToInt32(clsGlobal_UI.CurrentUser.UserID)))
                 {
                     clsGlobalMessageBoxs.ShowErrorMessage("فشل تسجيل معرف منشئ الحساب");
+                    _ResteObject();
                     return;
                 }
             }
             else if (Mode == enMode.Update)
             {
-                if (_User.UserID == clsGlobal_Presentation.CurrentUser.UserID && !_User.IsActive)
+                if (_User.UserID == clsGlobal_UI.CurrentUser.UserID && !_User.IsActive)
                 {
                     //gtswIsActive.Checked = true;
                     lbluserMessage.Text = "لا يمكنك إلغاء نشاط المستخدم الحالي";
                     lbluserMessage.Visible = true;
+                    _ResteObject();
                     return;
                 }
             }
 
             lbluserMessage.Visible = false;
 
-            if (await _User.Save(Convert.ToInt32(clsGlobal_Presentation.CurrentUser.UserID)))
+            if (await _User.Save(Convert.ToInt32(clsGlobal_UI.CurrentUser.UserID)))
             {
                 if (Mode == enMode.AddNew)
                 {
@@ -218,6 +227,8 @@ namespace MoneyMindManager_Presentation.Users
 
                 _isSaved = true;
             }
+            else if (Mode == enMode.AddNew)
+                _ResteObject();
         }
         private async void frmAddUpdateUser_Load(object sender, EventArgs e)
         {
@@ -257,10 +268,15 @@ namespace MoneyMindManager_Presentation.Users
             await _Save();
         }
 
-        private void gbtnClose_Click(object sender, EventArgs e)
+        private async void gbtnClose_Click(object sender, EventArgs e)
         {
+            int userID = Convert.ToInt32(_User.UserID);
+
             if (_isSaved || _IsPersonEdited)
-                OnCloseAndSavedOrEditing?.Invoke(Convert.ToInt32(_User.UserID));
+                OnCloseAndSavedOrEditing?.Invoke(userID);
+
+            if (userID == clsGlobal_UI.CurrentUser?.UserID)
+                await clsGlobal_UI.RefreshCurrentUser();
 
             this.Close();
         }

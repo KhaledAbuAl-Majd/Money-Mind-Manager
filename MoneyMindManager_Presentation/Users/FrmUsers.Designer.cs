@@ -235,6 +235,10 @@ namespace MoneyMindManager_Presentation
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // toolTip1
+            // 
+            this.toolTip1.IsBalloon = true;
+            // 
             // kgtxtPageNumber
             // 
             this.kgtxtPageNumber.AllowWhiteSpace = false;

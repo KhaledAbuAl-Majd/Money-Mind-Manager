@@ -10,14 +10,15 @@ namespace MoneyMindManager_Business
 {
     public class clsMainTransaction : clsMainTransactionColumns
     {
-        public enum enTransactionType { واردات = 1, مصروفات = 2, ديون = 3, تحويل_داخلي = 4 };
+        public enum enTransactionType { واردات = 1, مصروفات = 2, ديون = 3, تحويل_داخلي = 4, مرتجع_مصروفات = 5 };
         public clsAccount AccountInfo { get; private set; }
         public clsUser CreatedByUserInfo { get; private set; }
         public clsBalanceAccount BalanceAccountInfo { get; private set; }
         public clsTransactionType TransactionTypeInfo { get; private set; }
         protected clsMainTransaction(int transactionID, decimal amount, DateTime createdDate, short accountID, int createdByUserID, int balanceAccountID,
                     byte tranasactionTypeID, clsAccount accountInfo, clsUser createdByUserInfo, clsBalanceAccount balanceAccountInfo,
-                    clsTransactionType transactionTypeInfo) : base(transactionID, amount, createdDate, accountID, createdByUserID, balanceAccountID, tranasactionTypeID)
+                    clsTransactionType transactionTypeInfo) :
+            base(transactionID, amount, createdDate, accountID, createdByUserID, balanceAccountID, tranasactionTypeID)
         {
             this.AccountInfo = accountInfo;
             this.CreatedByUserInfo = createdByUserInfo;

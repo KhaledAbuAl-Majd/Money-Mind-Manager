@@ -1,6 +1,7 @@
 E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\bin\Debug\MoneyMindManager_Presentation.exe.config
 E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\bin\Debug\MoneyMindManager_Presentation.exe
 E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\bin\Debug\MoneyMindManager_Presentation.pdb
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\bin\Debug\ar\MoneyMindManager_Presentation.resources.dll
 E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\bin\Debug\Guna.UI2.dll
 E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\bin\Debug\KhaledControlLibrary1.dll
 E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\bin\Debug\MoneyMindManagerGlobal.dll
@@ -12,6 +13,10 @@ E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\Mo
 E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\bin\Debug\KhaledUtils.pdb
 E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\bin\Debug\MoneyMindManager_DataAccess.pdb
 E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\obj\Debug\MoneyMindManager_Presentation.csproj.AssemblyReference.cache
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\obj\Debug\MoneyMindManager_Presentation.Income_And_Expense.Categories.ctrlCategoryInfo.resources
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\obj\Debug\MoneyMindManager_Presentation.Income_And_Expense.Categories.frmAddUpdateCategory.resources
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\obj\Debug\MoneyMindManager_Presentation.Income_And_Expense.Categories.frmCategoryInfo.resources
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\obj\Debug\MoneyMindManager_Presentation.Income_And_Expense.Categories.frmSelectCategory.resources
 E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\obj\Debug\MoneyMindManager_Presentation.Login.frmLogin.resources
 E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\obj\Debug\MoneyMindManager_Presentation.People.Controls.ctrlPersonCardWithFilter.resources
 E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\obj\Debug\MoneyMindManager_Presentation.Users.ctrlUserCard.resources
@@ -25,11 +30,11 @@ E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\Mo
 E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\obj\Debug\MoneyMindManager_Presentation.People.frmPersonInfo.resources
 E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\obj\Debug\MoneyMindManager_Presentation.Form1.resources
 E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\obj\Debug\MoneyMindManager_Presentation.Properties.Resources.resources
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\obj\Debug\MoneyMindManager_Presentation.Login.frmLogin.ar.resources
 E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\obj\Debug\MoneyMindManager_Presentation.csproj.GenerateResource.cache
 E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\obj\Debug\MoneyMindManager_Presentation.csproj.CoreCompileInputs.cache
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\obj\Debug\ar\MoneyMindManager_Presentation.resources.dll
 E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\obj\Debug\MoneyMin.CAE85569.Up2Date
 E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\obj\Debug\MoneyMindManager_Presentation.exe
 E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\obj\Debug\MoneyMindManager_Presentation.pdb
-E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\bin\Debug\ar\MoneyMindManager_Presentation.resources.dll
-E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\obj\Debug\MoneyMindManager_Presentation.Login.frmLogin.ar.resources
-E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\obj\Debug\ar\MoneyMindManager_Presentation.resources.dll
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\obj\Debug\MoneyMindManager_Presentation.exe.config

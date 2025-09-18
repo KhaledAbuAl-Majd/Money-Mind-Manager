@@ -43,12 +43,12 @@
             this.guna2ShadowForm1 = new Guna.UI2.WinForms.Guna2ShadowForm(this.components);
             this.gbtnMode = new Guna.UI2.WinForms.Guna2Button();
             this.gpnlCreateAccount = new Guna.UI2.WinForms.Guna2Panel();
+            this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.gcbCreateAccount_DefaultCurrency = new Guna.UI2.WinForms.Guna2ComboBox();
             this.kgtxtCreatAccount_ConfirmPassowrd = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.kgtxtCreateAccount_AccountName = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.kgtxtCreateAccount_PersonName = new KhaledControlLibrary1.KhaledGuna2TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.gtswCreateAccount_ShowPassword = new Guna.UI2.WinForms.Guna2ToggleSwitch();
             this.gbtnCreateAccount = new Guna.UI2.WinForms.Guna2GradientButton();
@@ -81,6 +81,7 @@
             this.guna2ControlBox1.Name = "guna2ControlBox1";
             this.guna2ControlBox1.Size = new System.Drawing.Size(38, 29);
             this.guna2ControlBox1.TabIndex = 0;
+            this.guna2ControlBox1.TabStop = false;
             this.guna2ControlBox1.UseTransparentBackground = true;
             // 
             // gpnlLogin
@@ -410,6 +411,17 @@
             this.gpnlCreateAccount.TabIndex = 9;
             this.gpnlCreateAccount.UseTransparentBackground = true;
             // 
+            // label4
+            // 
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 15.75F);
+            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.Location = new System.Drawing.Point(3, 17);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(393, 34);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "إنشاء حساب";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -670,17 +682,6 @@
             this.kgtxtCreateAccount_PersonName.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxt_OnValidationSuccess);
             this.kgtxtCreateAccount_PersonName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.kgtxtCreateAccount_KeyPress);
             // 
-            // label4
-            // 
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 15.75F);
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(3, 17);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(393, 34);
-            this.label4.TabIndex = 11;
-            this.label4.Text = "إنشاء حساب";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -913,6 +914,7 @@
             this.guna2ControlBox2.Name = "guna2ControlBox2";
             this.guna2ControlBox2.Size = new System.Drawing.Size(38, 29);
             this.guna2ControlBox2.TabIndex = 10;
+            this.guna2ControlBox2.TabStop = false;
             this.guna2ControlBox2.UseTransparentBackground = true;
             this.guna2ControlBox2.Click += new System.EventHandler(this.guna2ControlBox2_Click);
             // 
@@ -952,11 +954,12 @@
             this.Controls.Add(this.gpnlCreateAccount);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(1076, 681);
             this.MinimumSize = new System.Drawing.Size(1076, 681);
             this.Name = "frmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmLogin";
+            this.Text = "Money Mind Manager";
             this.Load += new System.EventHandler(this.frmLogin_Load);
             this.gpnlLogin.ResumeLayout(false);
             this.gpnlLogin.PerformLayout();

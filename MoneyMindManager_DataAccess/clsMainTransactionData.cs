@@ -13,7 +13,7 @@ namespace MoneyMindManager_DataAccess
     public static class clsMainTransactionData
     {
         /// <summary>
-        /// Get Single record of AllTransactions Table
+        /// Get Single record of Main Transaction Table
         /// </summary>
         public static async Task<clsMainTransactionColumns> GetMainTransactionInfoByID(int transactionID, bool RaiseEventOnErrorOccured = true)
         {

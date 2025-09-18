@@ -63,7 +63,7 @@ namespace MoneyMindManager_Presentation.People
 
             clsDataColumns.PersonClasses.clsGetAllPeople result = null;
 
-            short accountID = Convert.ToInt16(clsGlobal_Presentation.CurrentUser.AccountID);
+            short accountID = Convert.ToInt16(clsGlobal_UI.CurrentUser.AccountID);
 
             if (filterBy == enFilterBy.All || string.IsNullOrEmpty(kgtxtFilterValue.ValidatedText))
             {
@@ -144,7 +144,7 @@ namespace MoneyMindManager_Presentation.People
         {
             frmAddUpdatePerson frm = new frmAddUpdatePerson();
             frm.OnCloseAndSaved += x => _RefreshFilter();
-            clsGlobal_Presentation.MainForm.AddNewForm(frm);
+            clsGlobal_UI.MainForm.AddNewForm(frm);
         }
 
         async void _RefreshFilter()
@@ -161,7 +161,7 @@ namespace MoneyMindManager_Presentation.People
 
             frmPersonInfo frm = new frmPersonInfo(personID);
             frm.OnEditingPersonAndFormClosed += _RefreshFilter;
-            clsGlobal_Presentation.MainForm.AddNewForm(frm);
+            clsGlobal_UI.MainForm.AddNewForm(frm);
         }
 
 
@@ -312,7 +312,7 @@ namespace MoneyMindManager_Presentation.People
 
             frmAddUpdatePerson frm = new frmAddUpdatePerson(personID);
             frm.OnCloseAndSaved += x => _RefreshFilter();
-            clsGlobal_Presentation.MainForm.AddNewForm(frm);
+            clsGlobal_UI.MainForm.AddNewForm(frm);
         }
 
         private async void gtsmDeletePerson_Click(object sender, EventArgs e)

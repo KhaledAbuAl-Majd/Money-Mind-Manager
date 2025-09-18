@@ -77,6 +77,7 @@ namespace MoneyMindManager_Presentation.Login
                         _resetgpnlLoginControls();
                         gbtnMode.Text = "إنشاء حساب";
                         await _LoadLoginCredential();
+                        kgtxtLoginUserName.Focus();
                         break;
                     }
 
@@ -90,6 +91,7 @@ namespace MoneyMindManager_Presentation.Login
                         _resetgpnlCreateAccountControls();
                         gbtnMode.Text = "تسجيل الدخول";
                         await _LoadCurrenciesAtComboBox();
+                        kgtxtCreateAccount_PersonName.Focus();
                         break;
                     }
             }
@@ -102,7 +104,7 @@ namespace MoneyMindManager_Presentation.Login
 
             string userName = null, password = null;
 
-            bool result = await Task.Run(() => clsGlobal_Presentation.GetStoredCredential(ref userName, ref password));
+            bool result = await Task.Run(() => clsGlobal_UI.GetStoredCredential(ref userName, ref password));
 
             if (result && userName != null && password != null)
             {
@@ -242,11 +244,11 @@ namespace MoneyMindManager_Presentation.Login
 
             if (gchkLogin_RemeberMe.Checked)
             {
-                Task.Run(() => clsGlobal_Presentation.RememberUsernameAndPassword(userName, password));
+                Task.Run(() => clsGlobal_UI.RememberUsernameAndPassword(userName, password));
             }
             else
             {
-                Task.Run(() => clsGlobal_Presentation.RememberUsernameAndPassword(null, null));
+                Task.Run(() => clsGlobal_UI.RememberUsernameAndPassword(null, null));
             }
 
             Task.Run(() => clsLogger.LogAtEventLog($"clsLogger.LogAtEventLog($\"[LOGIN SUCCESS] User ID = {user.UserID}, Username = {user.UserName}, Login Time = {DateTime.Now}\",EventLogEntryType.Information);",System.Diagnostics.EventLogEntryType.Information));

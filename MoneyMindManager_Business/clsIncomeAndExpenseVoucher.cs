@@ -26,8 +26,9 @@ namespace MoneyMindManager_Business
         }
 
         private clsIncomeAndExpenseVoucher(int voucherID, string voucherName, string notes, bool isLocked, DateTime createdDate, 
-                    DateTime voucherDate, short accountID, int createdByUserID, bool isIncome,clsAccount accountInfo,clsUser createdByUserInfo)
-            : base (voucherID,voucherName,notes,isLocked,createdDate,voucherDate,accountID,createdByUserID,isIncome)
+                    DateTime voucherDate, short accountID, int createdByUserID, bool isIncome,bool isReturn,clsAccount accountInfo,
+                    clsUser createdByUserInfo)
+            : base (voucherID,voucherName,notes,isLocked,createdDate,voucherDate,accountID,createdByUserID,isIncome,isReturn)
         {
             this.Mode = enMode.Update;
             this.AccountInfo = accountInfo;
@@ -46,7 +47,7 @@ namespace MoneyMindManager_Business
             this.CreatedByUserID = currentUserID;
 
             this.VoucherID = await clsIncomeAndExpenseVoucherData.AddNewIncomeAndExpenseVoucher(VoucherName, Notes, IsLocked,
-                VoucherDate, currentUserID,IsIncome);
+                VoucherDate, currentUserID,IsIncome,IsReturn);
 
             return (this.VoucherID != null);
         }
@@ -99,7 +100,7 @@ namespace MoneyMindManager_Business
 
             return new clsIncomeAndExpenseVoucher(Convert.ToInt32(result.VoucherID), result.VoucherName, result.Notes,
                 result.IsLocked, result.CreatedDate, result.VoucherDate,Convert.ToInt16(result.AccountID),
-                Convert.ToInt32(result.CreatedByUserID),  result.IsIncome, accountInfo, createdByUserInfo);
+                Convert.ToInt32(result.CreatedByUserID),  result.IsIncome,result.IsReturn, accountInfo, createdByUserInfo);
         }
         
 

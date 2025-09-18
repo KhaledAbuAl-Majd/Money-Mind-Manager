@@ -42,7 +42,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clsAccount.cs" />
-    <Compile Include="clsclsIncomeAndExpenseTransactionData.cs" />
     <Compile Include="clsIncomeAndExpenseTransaction.cs" />
     <Compile Include="clsIncomeAndExpenseVoucher.cs" />
     <Compile Include="clsIncomeAndExpenseCategory.cs" />

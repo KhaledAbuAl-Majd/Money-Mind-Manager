@@ -27,7 +27,7 @@ namespace MoneyMindManager_Presentation.People.Controls
         {
             gbtnEditPerson.Enabled = false;
 
-            Person = await clsPerson.FindPersonByID(personID, Convert.ToInt32(clsGlobal_Presentation.CurrentUser.UserID));
+            Person = await clsPerson.FindPersonByID(personID, Convert.ToInt32(clsGlobal_UI.CurrentUser.UserID));
 
             if (Person == null)
             {
@@ -48,7 +48,7 @@ namespace MoneyMindManager_Presentation.People.Controls
             lblCreatedDate.Text = clsFormat.DateToShort(Person.CreatedDate);
             kgtxtPersonName.Text = Person.PersonName;
             kgtxtPhoneNumber.Text = Person.Phone;
-            clsUser CreatedUser = await Person.GetCreatedbyUserInfo(Convert.ToInt32(clsGlobal_Presentation.CurrentUser.UserID));
+            clsUser CreatedUser = await Person.GetCreatedbyUserInfo(Convert.ToInt32(clsGlobal_UI.CurrentUser.UserID));
             kgtxtUserNameOfCreatedUser.Text = CreatedUser.UserName;
             kgtxtEmail.Text = Person.Email;
             kgtxtNotes.Text = Person.Notes;
@@ -59,7 +59,7 @@ namespace MoneyMindManager_Presentation.People.Controls
         {
             frmAddUpdatePerson frm = new frmAddUpdatePerson(Convert.ToInt32(Person.PersonID));
             frm.OnCloseAndSaved += FrmAddEditPerson_OnCloseAndSaved;
-            clsGlobal_Presentation.MainForm.AddNewForm(frm);
+            clsGlobal_UI.MainForm.AddNewForm(frm);
         }
 
         private async void FrmAddEditPerson_OnCloseAndSaved(int personID)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,12 +16,20 @@ namespace MoneyMindManager_Business
         public clsAccount AccountInfo { get; private set; }
         public clsUser CreatedByUserInfo { get; private set; }
 
+        public async Task<clsIncomeAndExpenseCategory> GetParentCategoryInfo(int currentUserID)
+        {
+            if (this.ParentCategoryID == null)
+                return null;
+
+            return await clsIncomeAndExpenseCategory.FindCategoryByCategoryID(Convert.ToInt32(this.ParentCategoryID), currentUserID);
+        }
+
         /// <summary>
         /// Assing ParentCategoryID At Add Mode 
         /// </summary>
         /// <param name="parentCategoryID">only at add mode, null = main category</param>
         /// <returns>false if it failed</returns>
-        public bool AssignParentCateoryIDAtAddMode(int? parentCategoryID)
+        public bool AssignParentCateoryIDAtAddMode(int parentCategoryID)
         {
             if (Mode == enMode.Update)
                 return false;
@@ -48,9 +57,11 @@ namespace MoneyMindManager_Business
         //    return true;
         //}
 
-        private clsIncomeAndExpenseCategory(int categoryID, string categoryName, DateTime createdDate, decimal? monthlyBudget, bool isIncome,
-                    int? parentCategoryID, short accountID, int createdByUserID, bool isActive,clsAccount accountInfo,clsUser createdByUserInfo) 
-            : base(categoryID, categoryName, createdDate, monthlyBudget, isIncome, parentCategoryID, accountID, createdByUserID, isActive)
+        private clsIncomeAndExpenseCategory(int categoryID, string categoryName, DateTime createdDate, decimal? monthlyBudget,
+            bool isIncome,int? parentCategoryID, short accountID, int createdByUserID, bool isActive, string categoryHierarchical,
+            string notes,string mainCategoryName,clsAccount accountInfo,clsUser createdByUserInfo) 
+            : base(categoryID, categoryName, createdDate, monthlyBudget, isIncome, parentCategoryID, accountID,
+                  createdByUserID, isActive,categoryHierarchical,notes,mainCategoryName)
         {
             this.Mode = enMode.Update;
             this.AccountInfo = accountInfo;
@@ -68,15 +79,18 @@ namespace MoneyMindManager_Business
             this.CreatedDate = DateTime.Now;
             this.CreatedByUserID = currentUserID;
 
-            this.CategoryID = await clsIncomeAndExpenseCategoryData.AddNewIncomeAndExpenseCategory(CategoryName, MonthlyBudget, IsIncome, ParentCategoryID,
-                Convert.ToInt32(AccountID), IsActive);
+            this.CategoryID = await clsIncomeAndExpenseCategoryData.AddNewIncomeAndExpenseCategory(CategoryName, MonthlyBudget,
+                IsIncome, ParentCategoryID, currentUserID, IsActive, Notes);
 
             return (this.CategoryID != null);
         }
+
         async Task<bool> _UpdateCategory(int currentUserID)
         {
-            return await clsIncomeAndExpenseCategoryData.UpdateCategoryByID(Convert.ToInt32(CategoryID), CategoryName, MonthlyBudget, IsActive, currentUserID);
+            return await clsIncomeAndExpenseCategoryData.UpdateCategoryByID(Convert.ToInt32(CategoryID),
+                CategoryName, MonthlyBudget, IsActive,Notes, currentUserID);
         }
+
         async Task<bool> _RefeshCompositionObjects(int currentUserID)
         {
             CreatedByUserInfo = await clsUser.FindUserByUserID(Convert.ToInt32(this.CreatedByUserID), currentUserID);
@@ -122,7 +136,8 @@ namespace MoneyMindManager_Business
 
             return new clsIncomeAndExpenseCategory(Convert.ToInt32(result.CategoryID), result.CategoryName, result.CreatedDate,
                 result.MonthlyBudget, result.IsIncome, result.ParentCategoryID,Convert.ToInt16(result.AccountID),
-                Convert.ToInt32(result.CreatedByUserID), result.IsActive,accountInfo, createdByUserInfo);
+                Convert.ToInt32(result.CreatedByUserID), result.IsActive,result.CategoryHierarchical,result.Notes,
+                result.MainCategoryName,accountInfo, createdByUserInfo);
         }
         
         public static async Task<clsIncomeAndExpenseCategory> FindCategoryByCategoryName(string categoryName,int currentUserID)
@@ -139,8 +154,9 @@ namespace MoneyMindManager_Business
                 return null;
 
             return new clsIncomeAndExpenseCategory(Convert.ToInt32(result.CategoryID), result.CategoryName, result.CreatedDate,
-                result.MonthlyBudget, result.IsIncome, result.ParentCategoryID,Convert.ToInt16(result.AccountID),
-                Convert.ToInt32(result.CreatedByUserID), result.IsActive,accountInfo, createdByUserInfo);
+               result.MonthlyBudget, result.IsIncome, result.ParentCategoryID, Convert.ToInt16(result.AccountID),
+               Convert.ToInt32(result.CreatedByUserID), result.IsActive, result.CategoryHierarchical, result.Notes,
+               result.MainCategoryName, accountInfo, createdByUserInfo);
         }
 
         public static async Task<bool> DeleteCategoryByCategoryID(int categoryID,int currentUserID)
@@ -148,9 +164,44 @@ namespace MoneyMindManager_Business
             return await clsIncomeAndExpenseCategoryData.DeleteCategoryByID(categoryID, currentUserID);
         }
 
-        public static async Task<bool> IsCategoryExistByCategoryName(string categoryName, int currentUserID)
+        public static async Task<bool> IsCategoryExistByCategoryNameAsync(string categoryName, int currentUserID)
         {
-            return await clsIncomeAndExpenseCategoryData.IsCategoryExistByCategoryName(categoryName, currentUserID);
+            return await clsIncomeAndExpenseCategoryData.IsCategoryExistByCategoryNameAsync(categoryName, currentUserID);
+        }
+        public static bool IsCategoryExistByCategoryName(string categoryName, int currentUserID)
+        {
+            return clsIncomeAndExpenseCategoryData.IsCategoryExistByCategoryName(categoryName, currentUserID);
+        }
+
+        /// <summary>
+        /// Without Filter
+        /// </summary>
+        public static async Task<DataTable> GetAllCategoriesForSearch(int currentUserID)
+        {
+         return  await clsIncomeAndExpenseCategoryData.GetAllCategoriesForSearch(null, null, currentUserID);
+        }
+        /// <summary>
+        /// Filter by CategoryName
+        /// </summary>
+        public static async Task<DataTable> GetAllCategoriesForSearch(string categoryName,int currentUserID)
+        {
+         return  await clsIncomeAndExpenseCategoryData.GetAllCategoriesForSearch(categoryName, null, currentUserID);
+        }
+
+        /// <summary>
+        /// Filter by CategoryType - isIncome
+        /// </summary>
+        public static async Task<DataTable> GetAllCategoriesForSearch(bool isIncome,int currentUserID)
+        {
+         return  await clsIncomeAndExpenseCategoryData.GetAllCategoriesForSearch(null, isIncome, currentUserID);
+        }
+
+        /// <summary>
+        /// Filter by CategoryName AND CategoryType - isIncome
+        /// </summary>
+        public static async Task<DataTable> GetAllCategoriesForSearch(string categoryName ,bool isIncome,int currentUserID)
+        {
+         return  await clsIncomeAndExpenseCategoryData.GetAllCategoriesForSearch(categoryName, isIncome, currentUserID);
         }
 
     }

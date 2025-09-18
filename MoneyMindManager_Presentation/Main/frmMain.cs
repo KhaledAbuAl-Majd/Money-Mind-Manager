@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MoneyMindManager_Business;
+using MoneyMindManager_Presentation.Income_And_Expense.Categories;
 using MoneyMindManager_Presentation.Login;
 using MoneyMindManager_Presentation.People;
 using static System.Net.Mime.MediaTypeNames;
@@ -41,7 +42,10 @@ namespace MoneyMindManager_Presentation.Main
             frm.Dock = DockStyle.Fill;
 
             if (clearOldControls)
+            {
                 gpnlFormContainer.Controls.Clear();
+                //clsGlobal_Presentation.RefreshCurrentUser();
+            }
 
             gpnlFormContainer.Controls.Add(frm);
             frm.Show();
@@ -51,6 +55,9 @@ namespace MoneyMindManager_Presentation.Main
         private void gbtnOverOview_Click(object sender, EventArgs e)
         {
             //MessageBox.Show("kk");
+            _LoadFormAtPanelContainer(new frmAddUpdateCategory(30), true);
+
+            //new frmSelectCategory(false).ShowDialog();
         }
 
         private async void frmMain_Load(object sender, EventArgs e)
@@ -58,28 +65,31 @@ namespace MoneyMindManager_Presentation.Main
             this.UseWaitCursor = true;
             this.Enabled = false;
 
-            clsUser user = await clsUser.FindUserByUserID(_userID,_userID);
+            await clsGlobal_UI.Login(_userID, this);
 
-            if (user == null)
-            {
-                this.Close();
-                return;
-            }
+            //clsUser user = await clsUser.FindUserByUserID(_userID,_userID);
+
+            //if (user == null)
+            //{
+            //    this.Close();
+            //    return;
+            //}
 
             this.Enabled = true;
             this.UseWaitCursor = false;
             this.Cursor = Cursors.Default;
-      
-            clsGlobal_Presentation.CurrentUser = user;
-            clsGlobal_Presentation.MainForm = this;
+
+            //clsGlobal_Presentation.CurrentUser = user;
+            //clsGlobal_Presentation.MainForm = this;
 
             gbtnOverOview.PerformClick();
 
         }
 
-        private void guna2Button2_Click(object sender, EventArgs e)
+        private void gbtnPeople_Click(object sender, EventArgs e)
         {
             _LoadFormAtPanelContainer(new frmPeople(),true);
+
 
             //MessageBox.Show(gpnlFormContainer.Controls.Count.ToString());
         }
@@ -98,16 +108,9 @@ namespace MoneyMindManager_Presentation.Main
             _frmLogin.Close();
         }
 
-        public void Logout()
-        {
-            clsGlobal_Presentation.CurrentUser = null;
-            clsGlobal_Presentation.MainForm = null;
-            this.Close();
-        }
-
         private void gbtnLogout_Click(object sender, EventArgs e)
         {
-            Logout();
+            clsGlobal_UI.Logout();
         }
 
         private void guna2ControlBox1_Click(object sender, EventArgs e)

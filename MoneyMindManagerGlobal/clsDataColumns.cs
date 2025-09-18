@@ -298,6 +298,8 @@ namespace MoneyMindManagerGlobal
                 public int? BalanceAccountID { get; protected set; }
                 public byte? TransactionTypeID { get; protected set; }
 
+
+
                 public clsMainTransactionColumns(int transactionID,decimal amount,DateTime createdDate,short accountID,
                     int createdByUserID,int balanceAccountID,byte tranasactionTypeID)
                 {
@@ -362,9 +364,12 @@ namespace MoneyMindManagerGlobal
                 /// </summary>
                 public int? CreatedByUserID { get; protected set; }
                 public bool IsActive { get; set; }
+                public string CategoryHierarchical { get; protected set; }
+                public string Notes { get; set; }
+                public string MainCategoryName { get; protected set; }
 
                 public clsIncomeAndExpenseCategoriesColumns(int categoryID, string categoryName, DateTime createdDate, decimal? monthlyBudget, bool isIncome,
-                    int? parentCategoryID, short accountID, int createdByUserID, bool isActive)
+                    int? parentCategoryID, short accountID, int createdByUserID, bool isActive,string categoryHierarchical,string notes,string mainCategoryName)
                 {
                     this.CategoryID = categoryID;
                     this.CategoryName = categoryName;
@@ -375,6 +380,9 @@ namespace MoneyMindManagerGlobal
                     this.AccountID = accountID;
                     this.CreatedByUserID = createdByUserID;
                     this.IsActive = isActive;
+                    this.CategoryHierarchical = categoryHierarchical;
+                    this.Notes = notes;
+                    this.MainCategoryName = mainCategoryName;
                 }
 
                 public clsIncomeAndExpenseCategoriesColumns()
@@ -388,6 +396,9 @@ namespace MoneyMindManagerGlobal
                     this.AccountID = null;
                     this.CreatedByUserID = null;
                     this.IsActive = false;
+                    this.CategoryHierarchical = null;
+                    this.Notes = null;
+                    this.MainCategoryName = null;
                 }
 
             }
@@ -432,8 +443,13 @@ namespace MoneyMindManagerGlobal
                 /// </summary>
                 public bool IsIncome { get; protected set; }
 
+                /// <summary>
+                /// For Expenses Return
+                /// </summary>
+                public bool IsReturn { get; protected set; }
+
                 public clsIncomeAndExpenseVoucherColumns(int voucherID,string voucherName,string notes,bool isLocked,
-                    DateTime createdDate,DateTime voucherDate,short accountID,int createdByUserID,bool isIncome)
+                    DateTime createdDate,DateTime voucherDate,short accountID,int createdByUserID,bool isIncome,bool isReturn)
                 {
                     this.VoucherID = voucherID;
                     this.VoucherName = voucherName;
@@ -444,6 +460,7 @@ namespace MoneyMindManagerGlobal
                     this.AccountID = accountID;
                     this.CreatedByUserID = createdByUserID;
                     this.IsIncome = isIncome;
+                    this.IsReturn = isReturn;
                 }
 
                 public clsIncomeAndExpenseVoucherColumns()
@@ -457,6 +474,7 @@ namespace MoneyMindManagerGlobal
                     this.AccountID = null;
                     this.CreatedByUserID = null;
                     this.IsIncome = false;
+                    this.IsReturn = false;
                 }
 
             }

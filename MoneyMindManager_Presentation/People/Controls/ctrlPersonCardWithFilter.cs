@@ -84,7 +84,7 @@ namespace MoneyMindManager_Presentation.People.Controls
         {
             frmAddUpdatePerson frm = new frmAddUpdatePerson();
             frm.OnCloseAndSaved += FrmAddUpdatePerson_OnCloseAndSaved;
-            clsGlobal_Presentation.MainForm.AddNewForm(frm);
+            clsGlobal_UI.MainForm.AddNewForm(frm);
         }
 
         private void FrmAddUpdatePerson_OnCloseAndSaved(int PersonID)

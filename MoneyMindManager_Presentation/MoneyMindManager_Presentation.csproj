@@ -35,6 +35,9 @@
   <PropertyGroup>
     <ApplicationManifest>app1.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>project-management.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -57,6 +60,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Income And Expense\Categories\Controls\ctrlCategoryInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Income And Expense\Categories\Controls\ctrlCategoryInfo.Designer.cs">
+      <DependentUpon>ctrlCategoryInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Income And Expense\Categories\frmAddUpdateCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Income And Expense\Categories\frmAddUpdateCategory.Designer.cs">
+      <DependentUpon>frmAddUpdateCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Income And Expense\Categories\frmCategoryInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Income And Expense\Categories\frmCategoryInfo.Designer.cs">
+      <DependentUpon>frmCategoryInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Income And Expense\Categories\frmSelectCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Income And Expense\Categories\frmSelectCategory.Designer.cs">
+      <DependentUpon>frmSelectCategory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login\frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,10 +96,10 @@
     <Compile Include="People\Controls\ctrlPersonCardWithFilter.Designer.cs">
       <DependentUpon>ctrlPersonCardWithFilter.cs</DependentUpon>
     </Compile>
-    <Compile Include="Users\ctrlUserCard.cs">
+    <Compile Include="Users\Controls\ctrlUserCard.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Users\ctrlUserCard.Designer.cs">
+    <Compile Include="Users\Controls\ctrlUserCard.Designer.cs">
       <DependentUpon>ctrlUserCard.cs</DependentUpon>
     </Compile>
     <Compile Include="Users\frmAddUpdateUser.cs">
@@ -95,7 +122,7 @@
     </Compile>
     <Compile Include="Global\clsFormat.cs" />
     <Compile Include="Global\clsGlobalMessageBoxs.cs" />
-    <Compile Include="Global\clsGlobal_Presentation.cs" />
+    <Compile Include="Global\clsGlobal_UI.cs" />
     <Compile Include="Global\clsUtils.cs" />
     <Compile Include="Main\frmMain.cs">
       <SubType>Form</SubType>
@@ -135,6 +162,18 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Income And Expense\Categories\Controls\ctrlCategoryInfo.resx">
+      <DependentUpon>ctrlCategoryInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Income And Expense\Categories\frmAddUpdateCategory.resx">
+      <DependentUpon>frmAddUpdateCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Income And Expense\Categories\frmCategoryInfo.resx">
+      <DependentUpon>frmCategoryInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Income And Expense\Categories\frmSelectCategory.resx">
+      <DependentUpon>frmSelectCategory.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login\frmLogin.ar.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
@@ -144,7 +183,7 @@
     <EmbeddedResource Include="People\Controls\ctrlPersonCardWithFilter.resx">
       <DependentUpon>ctrlPersonCardWithFilter.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Users\ctrlUserCard.resx">
+    <EmbeddedResource Include="Users\Controls\ctrlUserCard.resx">
       <DependentUpon>ctrlUserCard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Users\frmAddUpdateUser.resx">
@@ -213,6 +252,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\eye_icon_256043.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icons8-money-management-100.ico" />
+    <Content Include="project-management.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

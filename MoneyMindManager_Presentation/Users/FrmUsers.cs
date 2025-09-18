@@ -64,7 +64,7 @@ namespace MoneyMindManager_Presentation
 
             clsDataColumns.clsUserClasses.clsGetAllUsers result = null;
 
-            short accountID = Convert.ToInt16(clsGlobal_Presentation.CurrentUser.AccountID);
+            short accountID = Convert.ToInt16(clsGlobal_UI.CurrentUser.AccountID);
 
             if (filterBy == enFilterBy.All || (string.IsNullOrEmpty(kgtxtFilterValue.ValidatedText)) && _filterBy!=enFilterBy.IsActive)
             {
@@ -156,7 +156,7 @@ namespace MoneyMindManager_Presentation
         {
             frmAddUpdateUser frm = new frmAddUpdateUser();
             frm.OnCloseAndSavedOrEditing += x => _RefreshFilter();
-            clsGlobal_Presentation.MainForm.AddNewForm(frm);
+            clsGlobal_UI.MainForm.AddNewForm(frm);
         }
 
         async void _RefreshFilter()
@@ -173,7 +173,7 @@ namespace MoneyMindManager_Presentation
 
             frmUserInfo frm = new frmUserInfo(userID);
             frm.OnEditingUserAndFormClosed += _RefreshFilter;
-            clsGlobal_Presentation.MainForm.AddNewForm(frm);
+            clsGlobal_UI.MainForm.AddNewForm(frm);
         }
 
         private void frmUsers_Load(object sender, EventArgs e)
@@ -357,7 +357,7 @@ namespace MoneyMindManager_Presentation
 
             frmAddUpdateUser frm = new frmAddUpdateUser(userID);
             frm.OnCloseAndSavedOrEditing += x => _RefreshFilter();
-            clsGlobal_Presentation.MainForm.AddNewForm(frm);
+            clsGlobal_UI.MainForm.AddNewForm(frm);
         }
 
         private async void gtsmDeleteUser_Click(object sender, EventArgs e)
@@ -367,7 +367,7 @@ namespace MoneyMindManager_Presentation
             {
                 int userID = Convert.ToInt32(gdgvUser.CurrentRow.Cells[0].Value);
 
-                if(userID == clsGlobal_Presentation.CurrentUser.UserID)
+                if(userID == clsGlobal_UI.CurrentUser.UserID)
                 {
                     clsGlobalMessageBoxs.ShowErrorMessage("لا يمكنك حذف المستخدم الحالي");
                     return;
