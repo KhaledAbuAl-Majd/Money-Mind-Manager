@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MoneyMindManager_DataAccess;
 using MoneyMindManagerGlobal;
+using static MoneyMindManagerGlobal.clsDataColumns.clsIncomeAndExpenseTransactionsClasses;
 
 namespace MoneyMindManager_DataAccess
 {
@@ -68,7 +69,7 @@ namespace MoneyMindManager_DataAccess
             {
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_IncomeAndExpneseTransactions_UpdateByID]", connection))
+                    using (SqlCommand command = new SqlCommand("[dbo].[SP_IncomeAndExpenseTransactions_UpdateByID]", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
@@ -112,7 +113,7 @@ namespace MoneyMindManager_DataAccess
             {
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_MainTransactions_DeleteByID]", connection))
+                    using (SqlCommand command = new SqlCommand("[dbo].[SP_IncomeAndExpenseTransactions_DeleteByID]", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
@@ -194,6 +195,63 @@ namespace MoneyMindManager_DataAccess
             }
 
             return (Convert.ToInt32(voucherID), Convert.ToInt32(categoryID),purpose);
+        }
+
+        public static async Task<clsGetAllIncomeAndExpenseTransactions> GetAllIncomeAndExpensTransactions(int voucherID,int currentUserID, short pageNumber, bool RaiseEventOnErrorOccured = true)
+        {
+            clsGetAllIncomeAndExpenseTransactions allTransactions = null;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("[dbo].[SP_IncomeAndExpenseTransactionGetAllByVoucherID]", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("@VoucherID", voucherID);
+                        command.Parameters.AddWithValue("@CurrentUserID", currentUserID);
+                        command.Parameters.AddWithValue("@PageNumber", pageNumber);
+
+                        SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.SmallInt)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+
+                        SqlParameter outputRecordsCount = new SqlParameter("@RecordsCount", SqlDbType.Int)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+
+                        command.Parameters.Add(outputNumberOfPages);
+                        command.Parameters.Add(outputRecordsCount);
+
+                        await connection.OpenAsync();
+
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            DataTable dtTransactions = new DataTable();
+                            dtTransactions.Load(reader);
+                            short numberOfPages = Convert.ToInt16(outputNumberOfPages.Value);
+                            short recordsCount = Convert.ToInt16(outputRecordsCount.Value);
+
+                            allTransactions = new clsGetAllIncomeAndExpenseTransactions(dtTransactions, numberOfPages, recordsCount);
+                        }
+                    }
+                }
+
+                if (allTransactions == null)
+                    throw new Exception("فشلت العملية");
+            }
+            catch (Exception ex)
+            {
+                allTransactions = null;
+
+                if (RaiseEventOnErrorOccured)
+                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+            }
+
+            return allTransactions;
         }
     }
 }

@@ -109,7 +109,8 @@ namespace MoneyMindManager_Business
                         if(await _AddNewCategory(currentUserID))
                         {
                             Mode = enMode.Update;
-                            return await _RefeshCompositionObjects(currentUserID);
+                            await _RefeshCompositionObjects(currentUserID);
+                            return true;
                         }
                         break;
                     }

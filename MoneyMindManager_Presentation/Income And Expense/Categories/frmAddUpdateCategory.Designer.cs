@@ -585,7 +585,7 @@
             // 
             this.toolTip1.IsBalloon = true;
             // 
-            // frmAddUpdateCategory
+            // frmAddUpdateIncomeAndExpeseTransction
             // 
             this.AcceptButton = this.gbtnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -597,8 +597,8 @@
             this.Controls.Add(this.lblHeader);
             this.Controls.Add(this.guna2Panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "frmAddUpdateCategory";
-            this.Text = "frmAddUpdateCategory";
+            this.Name = "frmAddUpdateIncomeAndExpeseTransction";
+            this.Text = "frmAddUpdateIncomeAndExpeseTransction";
             this.Load += new System.EventHandler(this.frmAddUpdateCategory_Load);
             this.guna2Panel2.ResumeLayout(false);
             this.guna2Panel2.PerformLayout();

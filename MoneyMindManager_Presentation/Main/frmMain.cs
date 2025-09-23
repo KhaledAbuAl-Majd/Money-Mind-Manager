@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MoneyMindManager_Business;
 using MoneyMindManager_Presentation.Income_And_Expense.Categories;
+using MoneyMindManager_Presentation.Income_And_Expense.Vouchers;
 using MoneyMindManager_Presentation.Login;
 using MoneyMindManager_Presentation.People;
 using static System.Net.Mime.MediaTypeNames;
@@ -27,7 +28,22 @@ namespace MoneyMindManager_Presentation.Main
             _frmLogin = loginForm;
         }
 
-        public void AddNewForm(Form frm)
+        public void AddNewFormAsDialog(Form frm)
+        {
+            if (frm == null)
+                return;
+
+            frm.Move += (sender, e) =>
+            {
+                if (frm.Left < this.Left) frm.Left = this.Left;
+                if (frm.Top < this.Top) frm.Top = this.Top;
+                if (frm.Right > this.Right) frm.Left = this.Right - frm.Width;
+                if (frm.Bottom > this.Bottom) frm.Top = this.Bottom - frm.Height;
+            };
+
+            frm.ShowDialog(this);
+        }
+        public void AddNewFormAtContainer(Form frm)
         {
             _LoadFormAtPanelContainer(frm, false);
         }
@@ -55,7 +71,7 @@ namespace MoneyMindManager_Presentation.Main
         private void gbtnOverOview_Click(object sender, EventArgs e)
         {
             //MessageBox.Show("kk");
-            _LoadFormAtPanelContainer(new frmAddUpdateCategory(30), true);
+            _LoadFormAtPanelContainer(new frmAddUpdateVoucher(4), true);
 
             //new frmSelectCategory(false).ShowDialog();
         }

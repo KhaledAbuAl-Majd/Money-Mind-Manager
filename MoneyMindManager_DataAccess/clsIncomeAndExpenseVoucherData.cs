@@ -176,9 +176,10 @@ namespace MoneyMindManager_DataAccess
                                 int createdByUserID = Convert.ToInt32(reader["CreatedByUserID"]);
                                 bool isIncome = Convert.ToBoolean(reader["IsIncome"]);
                                 bool isReturn = Convert.ToBoolean(reader["IsReturn"]);
+                                decimal voucherValue = Convert.ToDecimal(reader["VoucherValue"]);
 
                                 voucherData = new clsIncomeAndExpenseVoucherColumns(voucherID, voucherName, notes, isLocked,
-                                    createdDate, voucherDate, accountID, createdByUserID, isIncome,isReturn);
+                                    createdDate, voucherDate, accountID, createdByUserID, isIncome,isReturn,voucherValue);
                             }
                         }
                     }
@@ -191,11 +192,55 @@ namespace MoneyMindManager_DataAccess
             {
                 voucherData = null;
 
-                if (RaiseEventOnErrorOccured == false)
+                if (RaiseEventOnErrorOccured)
                     clsGlobalEvents.RaiseEvent(ex.Message, true);
             }
 
             return voucherData;
+        }
+        public static async Task<decimal?> GetVoucherValueByID(int voucherID
+            , int currentUserID, bool RaiseEventOnErrorOccured = true)
+        {
+            decimal? voucherValue = null;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("[dbo].[SP_IncomeAndExpenseVouchers_GetVoucherValue]", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("@VoucherID", voucherID);
+                        command.Parameters.AddWithValue("@CurrentUserID", currentUserID);
+
+                        SqlParameter outValue = new SqlParameter("@VoucherValue", SqlDbType.Decimal)
+                        {
+                            Direction = ParameterDirection.Output,
+                            Precision = 19,
+                            Scale = 4
+                        };
+
+                        command.Parameters.Add(outValue);
+
+                        await connection.OpenAsync();
+                        await command.ExecuteNonQueryAsync();
+
+                        voucherValue = outValue.Value as decimal?;
+                    }
+                }
+
+                if (voucherValue == null)
+                    throw new Exception("فشلت العملية");
+            }
+            catch (Exception ex)
+            {
+                voucherValue = null;
+
+                if (RaiseEventOnErrorOccured)
+                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+            }
+
+            return voucherValue;
         }
     }
 }

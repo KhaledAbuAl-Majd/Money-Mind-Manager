@@ -38,7 +38,7 @@
             this.ctrlCategoryInfo1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ctrlCategoryInfo1.Location = new System.Drawing.Point(100, 77);
             this.ctrlCategoryInfo1.Name = "ctrlCategoryInfo1";
-            this.ctrlCategoryInfo1.Size = new System.Drawing.Size(583, 512);
+            this.ctrlCategoryInfo1.Size = new System.Drawing.Size(583, 579);
             this.ctrlCategoryInfo1.TabIndex = 0;
             // 
             // frmCategoryInfo
@@ -46,7 +46,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(800, 645);
+            this.ClientSize = new System.Drawing.Size(800, 718);
             this.Controls.Add(this.ctrlCategoryInfo1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmCategoryInfo";

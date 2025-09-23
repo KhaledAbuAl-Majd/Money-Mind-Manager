@@ -88,7 +88,8 @@ namespace MoneyMindManager_Business
                         if (await _AddNewPerson())
                         {
                             Mode = enMode.Update;
-                            return await _RefeshCompositionObjects();
+                            await _RefeshCompositionObjects();
+                            return true;
                         }
                         else
                             return false;

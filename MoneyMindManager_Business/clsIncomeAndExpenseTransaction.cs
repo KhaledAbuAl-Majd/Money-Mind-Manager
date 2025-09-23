@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MoneyMindManager_DataAccess;
+using static MoneyMindManagerGlobal.clsDataColumns.clsIncomeAndExpenseTransactionsClasses;
 
 namespace MoneyMindManager_Business
 {
@@ -19,7 +20,7 @@ namespace MoneyMindManager_Business
         /// </summary>
         public string Purpose { get; set; }
 
-        public bool AssingVoucherIDAtAddMode(int voucherID)
+        public bool AssignVoucherIDAtAddMode(int voucherID)
         {
             if (Mode == enMode.Update)
                 return false;
@@ -33,9 +34,9 @@ namespace MoneyMindManager_Business
         public clsIncomeAndExpenseCategory CategoryInfo { get; private set; }
 
         private clsIncomeAndExpenseTransaction(int voucherID,int categoryID,int transactionID, decimal amount, DateTime createdDate, short accountID, int createdByUserID,
-            int balanceAccountID, byte tranasactionTypeID,string purpose, clsAccount accountInfo, clsUser createdByUserInfo,  clsBalanceAccount balanceAccountInfo,
+            int balanceAccountID, byte tranasactionTypeID,bool isLocked,string purpose, clsAccount accountInfo, clsUser createdByUserInfo,  clsBalanceAccount balanceAccountInfo,
             clsTransactionType transactionTypeInfo,clsIncomeAndExpenseVoucher voucherInfo,clsIncomeAndExpenseCategory categoryInfo)
-            : base (transactionID,amount,createdDate,accountID,createdByUserID,balanceAccountID,tranasactionTypeID,accountInfo,
+            : base (transactionID,amount,createdDate,accountID,createdByUserID,balanceAccountID,tranasactionTypeID,isLocked,accountInfo,
                   createdByUserInfo, balanceAccountInfo, transactionTypeInfo)
         {
             this.Mode = enMode.Update;
@@ -88,7 +89,8 @@ namespace MoneyMindManager_Business
                         if (await _AddNewTransaction(currentUserID))
                         {
                             Mode = enMode.Update;
-                            return await this._RefresheCompositionObjects(currentUserID);
+                            await this._RefresheCompositionObjects(currentUserID);
+                            return true;
                         }
                         else
                             return false;
@@ -115,13 +117,18 @@ namespace MoneyMindManager_Business
             return new clsIncomeAndExpenseTransaction(VoucherID_CategoryID.VoucherID, VoucherID_CategoryID.CategoryID,
                 transactionID, result.Amount, result.CreatedDate, Convert.ToInt16(result.AccountID),
                 Convert.ToInt32(result.CreatedByUserID), Convert.ToInt32(result.BalanceAccountID), Convert.ToByte(result.TransactionTypeID),
-                VoucherID_CategoryID.Purpose , result.AccountInfo, result.CreatedByUserInfo , result.BalanceAccountInfo, result.TransactionTypeInfo
+                result.IsLocked,VoucherID_CategoryID.Purpose , result.AccountInfo, result.CreatedByUserInfo , result.BalanceAccountInfo, result.TransactionTypeInfo
                 ,voucherInfo, categoryInfo);
         }
 
         public static async Task<bool> DeleteIncomeAndExpenseTransactionByID(int transactionID,int currentUserID)
         {
             return await clsclsIncomeAndExpenseTransactionData.DeleteIncomeAndExpenseTransactoinByID(transactionID, currentUserID);
+        }
+
+        public static async Task<clsGetAllIncomeAndExpenseTransactions> GetAllIncomeAndExpensTransactions(int voucherID, int currentUserID, short pageNumber)
+        {
+            return await clsclsIncomeAndExpenseTransactionData.GetAllIncomeAndExpensTransactions(voucherID, currentUserID, pageNumber);
         }
     }
 }

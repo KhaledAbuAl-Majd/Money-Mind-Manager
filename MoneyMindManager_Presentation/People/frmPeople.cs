@@ -144,7 +144,7 @@ namespace MoneyMindManager_Presentation.People
         {
             frmAddUpdatePerson frm = new frmAddUpdatePerson();
             frm.OnCloseAndSaved += x => _RefreshFilter();
-            clsGlobal_UI.MainForm.AddNewForm(frm);
+            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
         }
 
         async void _RefreshFilter()
@@ -161,7 +161,7 @@ namespace MoneyMindManager_Presentation.People
 
             frmPersonInfo frm = new frmPersonInfo(personID);
             frm.OnEditingPersonAndFormClosed += _RefreshFilter;
-            clsGlobal_UI.MainForm.AddNewForm(frm);
+            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
         }
 
 
@@ -312,7 +312,7 @@ namespace MoneyMindManager_Presentation.People
 
             frmAddUpdatePerson frm = new frmAddUpdatePerson(personID);
             frm.OnCloseAndSaved += x => _RefreshFilter();
-            clsGlobal_UI.MainForm.AddNewForm(frm);
+            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
         }
 
         private async void gtsmDeletePerson_Click(object sender, EventArgs e)

@@ -47,6 +47,7 @@ namespace MoneyMindManager_Presentation.Global
 
                 case KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs.enValidationErrorType.SkipNumberMinValue:
                     {
+                        bool isMinValueIncluded = false;
                         decimal minValue = 0;
 
                         switch (kgtxtBox.NumberProperties.NumberInputTypes)
@@ -54,51 +55,63 @@ namespace MoneyMindManager_Presentation.Global
                             case KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber:
                                 {
                                     minValue = Convert.ToDecimal(kgtxtBox.NumberProperties.IntegerNumberProperties.MinValue);
+                                    isMinValueIncluded = kgtxtBox.NumberProperties.IntegerNumberProperties.MinValueIncluded;
                                     break;
                                 }
 
                             case KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.FloatNumber:
                                 {
                                     minValue = Convert.ToDecimal(kgtxtBox.NumberProperties.FloatNumberProperties.MinValue);
+                                    isMinValueIncluded = kgtxtBox.NumberProperties.FloatNumberProperties.MinValueIncluded;
                                     break;
                                 }
 
                             case KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.DecimalNumber:
                                 {
                                     minValue = kgtxtBox.NumberProperties.DecimalNumberProperties.MinValue;
+                                    isMinValueIncluded = kgtxtBox.NumberProperties.DecimalNumberProperties.MinValueIncluded;
                                     break;
                                 }
 
                             default:
                                 minValue = 0;
+                                isMinValueIncluded = false;
                                 break;
                         }
 
-                        errorMessage = $"لقد تخطيت أقل قيمة صالحة [{minValue.ToString()}], يرجى إدخل قيمة مناسبة";
+                        string minString = (isMinValueIncluded) ? $"يجب أن تكون القيمة اكبر من أو يساوي [{minValue.ToString()}]" :
+                            $"يجب أن تكون القيمة أكبر من [{minValue.ToString()}]";
+
+                        errorMessage = $"لقد تخطيت أقل قيمة صالحة, {minString} , برجاء إدخل قيمة مناسبة";
                         break;
                     }
 
                 case KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs.enValidationErrorType.SkipNumberMaxValue:
                     {
+                        bool isMaxValueIncluded = false;
                         decimal maxValue = 0;
+
 
                         switch (kgtxtBox.NumberProperties.NumberInputTypes)
                         {
                             case KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber:
                                 {
                                     maxValue = Convert.ToDecimal(kgtxtBox.NumberProperties.IntegerNumberProperties.MaxValue);
+                                    isMaxValueIncluded = kgtxtBox.NumberProperties.IntegerNumberProperties.MaxValueIncluded;
                                     break;
                                 }
 
                             case KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.FloatNumber:
                                 {
                                     maxValue = Convert.ToDecimal(kgtxtBox.NumberProperties.FloatNumberProperties.MaxValue);
+                                    isMaxValueIncluded = kgtxtBox.NumberProperties.FloatNumberProperties.MaxValueIncluded;
                                     break;
                                 }
 
                             case KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.DecimalNumber:
                                 {
                                     maxValue = kgtxtBox.NumberProperties.DecimalNumberProperties.MaxValue;
+                                    isMaxValueIncluded = kgtxtBox.NumberProperties.DecimalNumberProperties.MaxValueIncluded;
                                     break;
                                 }
 
@@ -107,7 +120,10 @@ namespace MoneyMindManager_Presentation.Global
                                 break;
                         }
 
-                        errorMessage = $"لقد تخطيت أكبر قيمة صالحة [{maxValue.ToString()}], يرجى إدخل قيمة مناسبة";
+                        string maxString = (isMaxValueIncluded) ? $"يجب أن تكون القيمة أقل من أو يساوي [{maxValue.ToString()}]" :
+                            $"يجب أن تكون القيمة أقل من [{maxValue.ToString()}]";
+
+                        errorMessage = $"لقد تخطيت أكبر قيمة صالحة, {maxString} , برجاء إدخل قيمة مناسبة";
                         break;
                     }
 
@@ -117,6 +133,11 @@ namespace MoneyMindManager_Presentation.Global
 
                 case KhaledGuna2TextBox.ValidatingErrorEventArgs.enValidationErrorType.NotValidTextPhone:
                     errorMessage = "صيغة الهاتف غير صحيحة ,برجاء إدخال رقم آخر مناسب";
+                    break;
+
+                case KhaledGuna2TextBox.ValidatingErrorEventArgs.enValidationErrorType.NotValidDate:
+                     errorMessage = "صيغة التاريخ غير صحيحة. الرجاء إدخال التاريخ بطريقة مناسبة مثل: " +
+                       "1/2/25، 01/02/25، 1/2/2025، 01/02/2025، 1-2-25، 01-02-25، 1-2-2025، 01-02-2025";
                     break;
 
                 case KhaledGuna2TextBox.ValidatingErrorEventArgs.enValidationErrorType.SkipTextMinLength:

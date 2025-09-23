@@ -297,11 +297,11 @@ namespace MoneyMindManagerGlobal
                 public int? CreatedByUserID { get; protected set; }
                 public int? BalanceAccountID { get; protected set; }
                 public byte? TransactionTypeID { get; protected set; }
-
+                public bool IsLocked { get; protected set; }
 
 
                 public clsMainTransactionColumns(int transactionID,decimal amount,DateTime createdDate,short accountID,
-                    int createdByUserID,int balanceAccountID,byte tranasactionTypeID)
+                    int createdByUserID,int balanceAccountID,byte tranasactionTypeID,bool isLocked)
                 {
                     this.MainTransactionID = transactionID;
                     this.Amount = amount;
@@ -310,6 +310,7 @@ namespace MoneyMindManagerGlobal
                     this.CreatedByUserID = createdByUserID;
                     this.BalanceAccountID = balanceAccountID;
                     this.TransactionTypeID = tranasactionTypeID;
+                    this.IsLocked = isLocked;
                 }
 
                 public clsMainTransactionColumns()
@@ -321,6 +322,7 @@ namespace MoneyMindManagerGlobal
                     this.CreatedByUserID = null;
                     this.BalanceAccountID = null;
                     this.TransactionTypeID = null;
+                    this.IsLocked = false;  
                 }
             }
         }
@@ -448,8 +450,13 @@ namespace MoneyMindManagerGlobal
                 /// </summary>
                 public bool IsReturn { get; protected set; }
 
+                /// <summary>
+                /// Get Sum Of Voucher Transactions, ensure that is Consistant => to refresh it use [RefreshVoucherValue]
+                /// </summary>
+                public Decimal VoucherValue { get; protected set; }
+
                 public clsIncomeAndExpenseVoucherColumns(int voucherID,string voucherName,string notes,bool isLocked,
-                    DateTime createdDate,DateTime voucherDate,short accountID,int createdByUserID,bool isIncome,bool isReturn)
+                    DateTime createdDate,DateTime voucherDate,short accountID,int createdByUserID,bool isIncome,bool isReturn,decimal voucherValue)
                 {
                     this.VoucherID = voucherID;
                     this.VoucherName = voucherName;
@@ -461,6 +468,7 @@ namespace MoneyMindManagerGlobal
                     this.CreatedByUserID = createdByUserID;
                     this.IsIncome = isIncome;
                     this.IsReturn = isReturn;
+                    this.VoucherValue = voucherValue;
                 }
 
                 public clsIncomeAndExpenseVoucherColumns()
@@ -475,32 +483,27 @@ namespace MoneyMindManagerGlobal
                     this.CreatedByUserID = null;
                     this.IsIncome = false;
                     this.IsReturn = false;
+                    this.VoucherValue = 0;
                 }
 
             }
         }
 
-        //public static class clsIIncomeAndExpenseTransactionsClasses
-        //{
-        //    public class clsIncomeAndExpenseTransactionsColumns
-        //    {
-            
-        //        public int? VoucherID { get; set; }
-        //        public int? CategoryID { get; set; }
-        //        public clsIncomeAndExpenseTransactionsColumns(int voucherID,int categoryID)
-        //        {
-        //            this.VoucherID = voucherID;
-        //            this.CategoryID = categoryID;
-        //        }
-                    
+        public static class clsIncomeAndExpenseTransactionsClasses
+        {
+            public class clsGetAllIncomeAndExpenseTransactions
+            {
+                public DataTable dtTransactions;
+                public short NumberOfPages = 0;
+                public int RecordsCount = 0;
 
-        //        public clsIncomeAndExpenseTransactionsColumns()
-        //        {
-        //            this.VoucherID = null;
-        //            this.CategoryID = null;
-        //        }
-
-        //    }
-        //}
+                public clsGetAllIncomeAndExpenseTransactions(DataTable dtTransactions, short numberOfPages, int recordsCount)
+                {
+                    this.dtTransactions = dtTransactions;
+                    this.NumberOfPages = numberOfPages;
+                    this.RecordsCount = recordsCount;
+                }
+            }
+        }
     }
 }

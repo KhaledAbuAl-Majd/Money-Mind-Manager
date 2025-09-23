@@ -301,22 +301,28 @@ namespace MoneyMindManager_Presentation.People
             0,
             0,
             0});
+            this.kgtxtPageNumber.NumberProperties.DecimalNumberProperties.MaxValueIncluded = true;
             this.kgtxtPageNumber.NumberProperties.DecimalNumberProperties.MaxValueOption = false;
             this.kgtxtPageNumber.NumberProperties.DecimalNumberProperties.MinValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
+            this.kgtxtPageNumber.NumberProperties.DecimalNumberProperties.MinValueIncluded = true;
             this.kgtxtPageNumber.NumberProperties.DecimalNumberProperties.MinValueOption = false;
             this.kgtxtPageNumber.NumberProperties.FloatNumberProperties.AllowNegative = true;
             this.kgtxtPageNumber.NumberProperties.FloatNumberProperties.MaxValue = 0F;
+            this.kgtxtPageNumber.NumberProperties.FloatNumberProperties.MaxValueIncluded = true;
             this.kgtxtPageNumber.NumberProperties.FloatNumberProperties.MaxValueOption = false;
             this.kgtxtPageNumber.NumberProperties.FloatNumberProperties.MinValue = 0F;
+            this.kgtxtPageNumber.NumberProperties.FloatNumberProperties.MinValueIncluded = true;
             this.kgtxtPageNumber.NumberProperties.FloatNumberProperties.MinValueOption = false;
             this.kgtxtPageNumber.NumberProperties.IntegerNumberProperties.AllowNegative = false;
             this.kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValue = 0;
+            this.kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValueIncluded = true;
             this.kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValueOption = false;
             this.kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MinValue = 1;
+            this.kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MinValueIncluded = true;
             this.kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MinValueOption = true;
             this.kgtxtPageNumber.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
             this.kgtxtPageNumber.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
@@ -449,22 +455,28 @@ namespace MoneyMindManager_Presentation.People
             0,
             0,
             0});
+            this.kgtxtFilterValue.NumberProperties.DecimalNumberProperties.MaxValueIncluded = true;
             this.kgtxtFilterValue.NumberProperties.DecimalNumberProperties.MaxValueOption = false;
             this.kgtxtFilterValue.NumberProperties.DecimalNumberProperties.MinValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
+            this.kgtxtFilterValue.NumberProperties.DecimalNumberProperties.MinValueIncluded = true;
             this.kgtxtFilterValue.NumberProperties.DecimalNumberProperties.MinValueOption = false;
             this.kgtxtFilterValue.NumberProperties.FloatNumberProperties.AllowNegative = true;
             this.kgtxtFilterValue.NumberProperties.FloatNumberProperties.MaxValue = 0F;
+            this.kgtxtFilterValue.NumberProperties.FloatNumberProperties.MaxValueIncluded = true;
             this.kgtxtFilterValue.NumberProperties.FloatNumberProperties.MaxValueOption = false;
             this.kgtxtFilterValue.NumberProperties.FloatNumberProperties.MinValue = 0F;
+            this.kgtxtFilterValue.NumberProperties.FloatNumberProperties.MinValueIncluded = true;
             this.kgtxtFilterValue.NumberProperties.FloatNumberProperties.MinValueOption = false;
             this.kgtxtFilterValue.NumberProperties.IntegerNumberProperties.AllowNegative = true;
             this.kgtxtFilterValue.NumberProperties.IntegerNumberProperties.MaxValue = 0;
+            this.kgtxtFilterValue.NumberProperties.IntegerNumberProperties.MaxValueIncluded = true;
             this.kgtxtFilterValue.NumberProperties.IntegerNumberProperties.MaxValueOption = false;
             this.kgtxtFilterValue.NumberProperties.IntegerNumberProperties.MinValue = 0;
+            this.kgtxtFilterValue.NumberProperties.IntegerNumberProperties.MinValueIncluded = true;
             this.kgtxtFilterValue.NumberProperties.IntegerNumberProperties.MinValueOption = false;
             this.kgtxtFilterValue.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
             this.kgtxtFilterValue.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
@@ -521,6 +533,7 @@ namespace MoneyMindManager_Presentation.People
             this.gbtnAddPerson.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbtnAddPerson.ForeColor = System.Drawing.Color.Black;
             this.gbtnAddPerson.HoverState.FillColor = System.Drawing.Color.SlateBlue;
+            this.gbtnAddPerson.HoverState.Font = new System.Drawing.Font("Segoe UI", 12.75F);
             this.gbtnAddPerson.HoverState.ForeColor = System.Drawing.Color.White;
             this.gbtnAddPerson.Image = ((System.Drawing.Image)(resources.GetObject("gbtnAddPerson.Image")));
             this.gbtnAddPerson.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -536,8 +549,8 @@ namespace MoneyMindManager_Presentation.People
             // 
             // lblHeader
             // 
-            this.lblHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHeader.ForeColor = System.Drawing.Color.Red;
+            this.lblHeader.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold);
+            this.lblHeader.ForeColor = System.Drawing.Color.Black;
             this.lblHeader.Location = new System.Drawing.Point(12, 21);
             this.lblHeader.Name = "lblHeader";
             this.lblHeader.Size = new System.Drawing.Size(1186, 62);

@@ -74,6 +74,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ctrlInfoIcon1.PictureBoxControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox11)).BeginInit();
             this.SuspendLayout();
             // 
@@ -499,6 +500,7 @@
             this.gtxtcategoryHierarchical.PlaceholderForeColor = System.Drawing.Color.Gray;
             this.gtxtcategoryHierarchical.PlaceholderText = "";
             this.gtxtcategoryHierarchical.ReadOnly = true;
+            this.gtxtcategoryHierarchical.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.gtxtcategoryHierarchical.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.gtxtcategoryHierarchical.SelectedText = "";
             this.gtxtcategoryHierarchical.Size = new System.Drawing.Size(318, 79);
@@ -535,6 +537,15 @@
             this.ctrlInfoIcon1.IconImage = ((System.Drawing.Image)(resources.GetObject("ctrlInfoIcon1.IconImage")));
             this.ctrlInfoIcon1.Location = new System.Drawing.Point(30, 439);
             this.ctrlInfoIcon1.Name = "ctrlInfoIcon1";
+            // 
+            // 
+            // 
+            this.ctrlInfoIcon1.PictureBoxControl.Image = ((System.Drawing.Image)(resources.GetObject("ctrlInfoIcon1.PictureBoxControl.Image")));
+            this.ctrlInfoIcon1.PictureBoxControl.ImageRotate = 0F;
+            this.ctrlInfoIcon1.PictureBoxControl.Location = new System.Drawing.Point(0, 0);
+            this.ctrlInfoIcon1.PictureBoxControl.Name = "gpbInfoIcon";
+            this.ctrlInfoIcon1.PictureBoxControl.TabIndex = 0;
+            this.ctrlInfoIcon1.PictureBoxControl.TabStop = false;
             this.ctrlInfoIcon1.Size = new System.Drawing.Size(20, 20);
             this.ctrlInfoIcon1.TabIndex = 96;
             // 
@@ -548,10 +559,10 @@
             this.lblMonthlyBudget.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMonthlyBudget.Location = new System.Drawing.Point(55, 98);
             this.lblMonthlyBudget.Name = "lblMonthlyBudget";
-            this.lblMonthlyBudget.NumberFormat = KhaledControlLibrary1.KhaledLabel.enNumberFormat.N2;
+            this.lblMonthlyBudget.NumberFormat = KhaledControlLibrary1.KhaledLabel.enNumberFormat.N4;
             this.lblMonthlyBudget.Size = new System.Drawing.Size(318, 28);
             this.lblMonthlyBudget.TabIndex = 97;
-            this.lblMonthlyBudget.Text = "11.00";
+            this.lblMonthlyBudget.Text = "11.0000";
             this.lblMonthlyBudget.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // gtxtMainCategoryName
@@ -660,6 +671,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ctrlInfoIcon1.PictureBoxControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox11)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

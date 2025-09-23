@@ -16,9 +16,9 @@ namespace MoneyMindManager_Business
         public clsBalanceAccount BalanceAccountInfo { get; private set; }
         public clsTransactionType TransactionTypeInfo { get; private set; }
         protected clsMainTransaction(int transactionID, decimal amount, DateTime createdDate, short accountID, int createdByUserID, int balanceAccountID,
-                    byte tranasactionTypeID, clsAccount accountInfo, clsUser createdByUserInfo, clsBalanceAccount balanceAccountInfo,
+                    byte tranasactionTypeID,bool isLocked, clsAccount accountInfo, clsUser createdByUserInfo, clsBalanceAccount balanceAccountInfo,
                     clsTransactionType transactionTypeInfo) :
-            base(transactionID, amount, createdDate, accountID, createdByUserID, balanceAccountID, tranasactionTypeID)
+            base(transactionID, amount, createdDate, accountID, createdByUserID, balanceAccountID, tranasactionTypeID,isLocked)
         {
             this.AccountInfo = accountInfo;
             this.CreatedByUserInfo = createdByUserInfo;
@@ -62,7 +62,7 @@ namespace MoneyMindManager_Business
 
             return new clsMainTransaction(Convert.ToInt32(result.MainTransactionID), result.Amount, result.CreatedDate,
                 Convert.ToInt16(result.AccountID), Convert.ToInt32(result.CreatedByUserID), Convert.ToInt32(result.BalanceAccountID),
-                Convert.ToByte(result.TransactionTypeID), accountInfo, createdByUserInfo, balanceAccountinfo, transactionTypeInfo);
+                Convert.ToByte(result.TransactionTypeID),result.IsLocked, accountInfo, createdByUserInfo, balanceAccountinfo, transactionTypeInfo);
         }
 
         protected async Task<bool> RefreshData(int currentUserID)
@@ -78,6 +78,7 @@ namespace MoneyMindManager_Business
             this.CreatedByUserID = fresh.CreatedByUserID;
             this.BalanceAccountID = fresh.BalanceAccountID;
             this.TransactionTypeID = fresh.TransactionTypeID;
+            this.IsLocked = fresh.IsLocked;
 
             this.AccountInfo = fresh.AccountInfo;
             this.CreatedByUserInfo = fresh.CreatedByUserInfo;

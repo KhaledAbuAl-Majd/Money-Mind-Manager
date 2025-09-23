@@ -122,7 +122,8 @@ namespace MoneyMindManager_Business
                         if (await _AddNewUser())
                         {
                             Mode = enMode.Update;
-                            return await _RefeshCompositionObjects(currentUserID);
+                            await _RefeshCompositionObjects(currentUserID);
+                            return true;
                         }
                         else
                             return false;

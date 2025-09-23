@@ -70,7 +70,7 @@ namespace MoneyMindManager_Presentation.Users
         {
             frmAddUpdateUser frm = new frmAddUpdateUser(Convert.ToInt32(User.UserID));
             frm.OnCloseAndSavedOrEditing += FrmAddUpdateUser_OnCloseAndSaved;
-            clsGlobal_UI.MainForm.AddNewForm(frm);
+            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
         }
         private void ctrlUserCard_Load(object sender, EventArgs e)
         {

@@ -156,7 +156,7 @@ namespace MoneyMindManager_Presentation
         {
             frmAddUpdateUser frm = new frmAddUpdateUser();
             frm.OnCloseAndSavedOrEditing += x => _RefreshFilter();
-            clsGlobal_UI.MainForm.AddNewForm(frm);
+            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
         }
 
         async void _RefreshFilter()
@@ -173,7 +173,7 @@ namespace MoneyMindManager_Presentation
 
             frmUserInfo frm = new frmUserInfo(userID);
             frm.OnEditingUserAndFormClosed += _RefreshFilter;
-            clsGlobal_UI.MainForm.AddNewForm(frm);
+            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
         }
 
         private void frmUsers_Load(object sender, EventArgs e)
@@ -357,7 +357,7 @@ namespace MoneyMindManager_Presentation
 
             frmAddUpdateUser frm = new frmAddUpdateUser(userID);
             frm.OnCloseAndSavedOrEditing += x => _RefreshFilter();
-            clsGlobal_UI.MainForm.AddNewForm(frm);
+            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
         }
 
         private async void gtsmDeleteUser_Click(object sender, EventArgs e)

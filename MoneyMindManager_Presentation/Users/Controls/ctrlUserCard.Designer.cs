@@ -165,22 +165,28 @@
             0,
             0,
             0});
+            this.kgtxtNotes.NumberProperties.DecimalNumberProperties.MaxValueIncluded = true;
             this.kgtxtNotes.NumberProperties.DecimalNumberProperties.MaxValueOption = false;
             this.kgtxtNotes.NumberProperties.DecimalNumberProperties.MinValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
+            this.kgtxtNotes.NumberProperties.DecimalNumberProperties.MinValueIncluded = true;
             this.kgtxtNotes.NumberProperties.DecimalNumberProperties.MinValueOption = false;
             this.kgtxtNotes.NumberProperties.FloatNumberProperties.AllowNegative = true;
             this.kgtxtNotes.NumberProperties.FloatNumberProperties.MaxValue = 0F;
+            this.kgtxtNotes.NumberProperties.FloatNumberProperties.MaxValueIncluded = true;
             this.kgtxtNotes.NumberProperties.FloatNumberProperties.MaxValueOption = false;
             this.kgtxtNotes.NumberProperties.FloatNumberProperties.MinValue = 0F;
+            this.kgtxtNotes.NumberProperties.FloatNumberProperties.MinValueIncluded = true;
             this.kgtxtNotes.NumberProperties.FloatNumberProperties.MinValueOption = false;
             this.kgtxtNotes.NumberProperties.IntegerNumberProperties.AllowNegative = true;
             this.kgtxtNotes.NumberProperties.IntegerNumberProperties.MaxValue = 0;
+            this.kgtxtNotes.NumberProperties.IntegerNumberProperties.MaxValueIncluded = true;
             this.kgtxtNotes.NumberProperties.IntegerNumberProperties.MaxValueOption = false;
             this.kgtxtNotes.NumberProperties.IntegerNumberProperties.MinValue = 0;
+            this.kgtxtNotes.NumberProperties.IntegerNumberProperties.MinValueIncluded = true;
             this.kgtxtNotes.NumberProperties.IntegerNumberProperties.MinValueOption = false;
             this.kgtxtNotes.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
             this.kgtxtNotes.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
@@ -195,6 +201,10 @@
             this.kgtxtNotes.Size = new System.Drawing.Size(318, 41);
             this.kgtxtNotes.TabIndex = 52;
             this.kgtxtNotes.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.kgtxtNotes.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
+            this.kgtxtNotes.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.kgtxtNotes.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
+            this.kgtxtNotes.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
             this.kgtxtNotes.TextProperties.MinLength = ((short)(0));
             this.kgtxtNotes.TextProperties.MinLengthOption = false;
             this.kgtxtNotes.TextProperties.PhoneProperties.AllowPlusSign = true;
@@ -234,22 +244,28 @@
             0,
             0,
             0});
+            this.kgtxtUserNameOfCreatedUser.NumberProperties.DecimalNumberProperties.MaxValueIncluded = true;
             this.kgtxtUserNameOfCreatedUser.NumberProperties.DecimalNumberProperties.MaxValueOption = false;
             this.kgtxtUserNameOfCreatedUser.NumberProperties.DecimalNumberProperties.MinValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
+            this.kgtxtUserNameOfCreatedUser.NumberProperties.DecimalNumberProperties.MinValueIncluded = true;
             this.kgtxtUserNameOfCreatedUser.NumberProperties.DecimalNumberProperties.MinValueOption = false;
             this.kgtxtUserNameOfCreatedUser.NumberProperties.FloatNumberProperties.AllowNegative = true;
             this.kgtxtUserNameOfCreatedUser.NumberProperties.FloatNumberProperties.MaxValue = 0F;
+            this.kgtxtUserNameOfCreatedUser.NumberProperties.FloatNumberProperties.MaxValueIncluded = true;
             this.kgtxtUserNameOfCreatedUser.NumberProperties.FloatNumberProperties.MaxValueOption = false;
             this.kgtxtUserNameOfCreatedUser.NumberProperties.FloatNumberProperties.MinValue = 0F;
+            this.kgtxtUserNameOfCreatedUser.NumberProperties.FloatNumberProperties.MinValueIncluded = true;
             this.kgtxtUserNameOfCreatedUser.NumberProperties.FloatNumberProperties.MinValueOption = false;
             this.kgtxtUserNameOfCreatedUser.NumberProperties.IntegerNumberProperties.AllowNegative = true;
             this.kgtxtUserNameOfCreatedUser.NumberProperties.IntegerNumberProperties.MaxValue = 0;
+            this.kgtxtUserNameOfCreatedUser.NumberProperties.IntegerNumberProperties.MaxValueIncluded = true;
             this.kgtxtUserNameOfCreatedUser.NumberProperties.IntegerNumberProperties.MaxValueOption = false;
             this.kgtxtUserNameOfCreatedUser.NumberProperties.IntegerNumberProperties.MinValue = 0;
+            this.kgtxtUserNameOfCreatedUser.NumberProperties.IntegerNumberProperties.MinValueIncluded = true;
             this.kgtxtUserNameOfCreatedUser.NumberProperties.IntegerNumberProperties.MinValueOption = false;
             this.kgtxtUserNameOfCreatedUser.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
             this.kgtxtUserNameOfCreatedUser.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
@@ -264,6 +280,10 @@
             this.kgtxtUserNameOfCreatedUser.Size = new System.Drawing.Size(318, 41);
             this.kgtxtUserNameOfCreatedUser.TabIndex = 50;
             this.kgtxtUserNameOfCreatedUser.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.kgtxtUserNameOfCreatedUser.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
+            this.kgtxtUserNameOfCreatedUser.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.kgtxtUserNameOfCreatedUser.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
+            this.kgtxtUserNameOfCreatedUser.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
             this.kgtxtUserNameOfCreatedUser.TextProperties.MinLength = ((short)(0));
             this.kgtxtUserNameOfCreatedUser.TextProperties.MinLengthOption = false;
             this.kgtxtUserNameOfCreatedUser.TextProperties.PhoneProperties.AllowPlusSign = true;
@@ -303,22 +323,28 @@
             0,
             0,
             0});
+            this.kgtxtUserName.NumberProperties.DecimalNumberProperties.MaxValueIncluded = true;
             this.kgtxtUserName.NumberProperties.DecimalNumberProperties.MaxValueOption = false;
             this.kgtxtUserName.NumberProperties.DecimalNumberProperties.MinValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
+            this.kgtxtUserName.NumberProperties.DecimalNumberProperties.MinValueIncluded = true;
             this.kgtxtUserName.NumberProperties.DecimalNumberProperties.MinValueOption = false;
             this.kgtxtUserName.NumberProperties.FloatNumberProperties.AllowNegative = true;
             this.kgtxtUserName.NumberProperties.FloatNumberProperties.MaxValue = 0F;
+            this.kgtxtUserName.NumberProperties.FloatNumberProperties.MaxValueIncluded = true;
             this.kgtxtUserName.NumberProperties.FloatNumberProperties.MaxValueOption = false;
             this.kgtxtUserName.NumberProperties.FloatNumberProperties.MinValue = 0F;
+            this.kgtxtUserName.NumberProperties.FloatNumberProperties.MinValueIncluded = true;
             this.kgtxtUserName.NumberProperties.FloatNumberProperties.MinValueOption = false;
             this.kgtxtUserName.NumberProperties.IntegerNumberProperties.AllowNegative = true;
             this.kgtxtUserName.NumberProperties.IntegerNumberProperties.MaxValue = 0;
+            this.kgtxtUserName.NumberProperties.IntegerNumberProperties.MaxValueIncluded = true;
             this.kgtxtUserName.NumberProperties.IntegerNumberProperties.MaxValueOption = false;
             this.kgtxtUserName.NumberProperties.IntegerNumberProperties.MinValue = 0;
+            this.kgtxtUserName.NumberProperties.IntegerNumberProperties.MinValueIncluded = true;
             this.kgtxtUserName.NumberProperties.IntegerNumberProperties.MinValueOption = false;
             this.kgtxtUserName.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
             this.kgtxtUserName.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
@@ -333,6 +359,10 @@
             this.kgtxtUserName.Size = new System.Drawing.Size(318, 41);
             this.kgtxtUserName.TabIndex = 49;
             this.kgtxtUserName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.kgtxtUserName.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
+            this.kgtxtUserName.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.kgtxtUserName.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
+            this.kgtxtUserName.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
             this.kgtxtUserName.TextProperties.MinLength = ((short)(0));
             this.kgtxtUserName.TextProperties.MinLengthOption = false;
             this.kgtxtUserName.TextProperties.PhoneProperties.AllowPlusSign = true;

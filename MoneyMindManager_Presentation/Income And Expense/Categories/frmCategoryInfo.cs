@@ -19,7 +19,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
         private async void frmCategoryInfo_Load(object sender, EventArgs e)
         {
-            if (!await ctrlCategoryInfo1.LoadCategory(0))
+            if (!await ctrlCategoryInfo1.LoadCategory(31))
             {
                 this.Close();
             }

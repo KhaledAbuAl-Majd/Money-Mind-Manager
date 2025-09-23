@@ -39,7 +39,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
         }
 
         /// <summary>
-        /// Add Mode and Specify Cateogry Type
+        /// AddNew _voucherMode and Specify Cateogry Type
         /// </summary>
         /// <param name="isIncome">Category Type</param>
         public frmAddUpdateCategory(bool isIncome)
@@ -64,7 +64,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
         void _SetCategoryType()
         {
-            //Add Mode And General
+            //AddNew _voucherMode And General
             if(_isIncome == null)
             {
                 gcbIsIncome_CategroyType.Enabled = true;
@@ -125,6 +125,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             this._isIncome = searchedCategory.IsIncome;
 
             kgtxtCategoryName.Text = _Category.CategoryName;
+            kgtxtCategoryName.Tag = _Category.CategoryID;
             lblCategoryID.Text = _Category.CategoryID?.ToString();
             gtswIsActive.Checked = _Category.IsActive;
             kgtxtMonthlyBudget.Text = _Category.MonthlyBudget?.ToString();
@@ -264,7 +265,8 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
             var frm = new frmSelectCategory(Convert.ToBoolean(_isIncome));
             frm.OnCategorySelected += Frm_OnCategorySelected;
-            frm.ShowDialog();
+            //frm.ShowDialog(clsGlobal_UI.MainForm);
+            clsGlobal_UI.MainForm.AddNewFormAsDialog(frm);
         }
 
         private void Frm_OnCategorySelected(object sender, frmSelectCategory.SelecteCategoryEventArgs e)

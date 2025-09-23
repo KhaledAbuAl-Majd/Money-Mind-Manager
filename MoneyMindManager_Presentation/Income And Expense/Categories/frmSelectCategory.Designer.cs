@@ -51,10 +51,10 @@
             this.lblNoRecordsFoundMessage.Font = new System.Drawing.Font("Segoe Script", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNoRecordsFoundMessage.ForeColor = System.Drawing.Color.Red;
             this.lblNoRecordsFoundMessage.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.lblNoRecordsFoundMessage.Location = new System.Drawing.Point(46, 220);
+            this.lblNoRecordsFoundMessage.Location = new System.Drawing.Point(29, 220);
             this.lblNoRecordsFoundMessage.Name = "lblNoRecordsFoundMessage";
             this.lblNoRecordsFoundMessage.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.lblNoRecordsFoundMessage.Size = new System.Drawing.Size(868, 42);
+            this.lblNoRecordsFoundMessage.Size = new System.Drawing.Size(885, 42);
             this.lblNoRecordsFoundMessage.TabIndex = 32;
             this.lblNoRecordsFoundMessage.Text = "لا يوجد نتائج مطباقة لبحثك !";
             this.lblNoRecordsFoundMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -83,7 +83,7 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.gdgvCategories.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.gdgvCategories.ColumnHeadersHeight = 35;
-            this.gdgvCategories.Cursor = System.Windows.Forms.Cursors.Default;
+            this.gdgvCategories.Cursor = System.Windows.Forms.Cursors.Hand;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -156,6 +156,7 @@
             this.kgtxtFilterValue.IsRequired = false;
             this.kgtxtFilterValue.Location = new System.Drawing.Point(67, 6);
             this.kgtxtFilterValue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.kgtxtFilterValue.MaxLength = 200;
             this.kgtxtFilterValue.Name = "kgtxtFilterValue";
             this.kgtxtFilterValue.NumberProperties.DecimalNumberProperties.AllowNegative = true;
             this.kgtxtFilterValue.NumberProperties.DecimalNumberProperties.MaxValue = new decimal(new int[] {
@@ -163,26 +164,33 @@
             0,
             0,
             0});
+            this.kgtxtFilterValue.NumberProperties.DecimalNumberProperties.MaxValueIncluded = true;
             this.kgtxtFilterValue.NumberProperties.DecimalNumberProperties.MaxValueOption = false;
             this.kgtxtFilterValue.NumberProperties.DecimalNumberProperties.MinValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
+            this.kgtxtFilterValue.NumberProperties.DecimalNumberProperties.MinValueIncluded = true;
             this.kgtxtFilterValue.NumberProperties.DecimalNumberProperties.MinValueOption = false;
             this.kgtxtFilterValue.NumberProperties.FloatNumberProperties.AllowNegative = true;
             this.kgtxtFilterValue.NumberProperties.FloatNumberProperties.MaxValue = 0F;
+            this.kgtxtFilterValue.NumberProperties.FloatNumberProperties.MaxValueIncluded = true;
             this.kgtxtFilterValue.NumberProperties.FloatNumberProperties.MaxValueOption = false;
             this.kgtxtFilterValue.NumberProperties.FloatNumberProperties.MinValue = 0F;
+            this.kgtxtFilterValue.NumberProperties.FloatNumberProperties.MinValueIncluded = true;
             this.kgtxtFilterValue.NumberProperties.FloatNumberProperties.MinValueOption = false;
             this.kgtxtFilterValue.NumberProperties.IntegerNumberProperties.AllowNegative = true;
             this.kgtxtFilterValue.NumberProperties.IntegerNumberProperties.MaxValue = 0;
+            this.kgtxtFilterValue.NumberProperties.IntegerNumberProperties.MaxValueIncluded = true;
             this.kgtxtFilterValue.NumberProperties.IntegerNumberProperties.MaxValueOption = false;
             this.kgtxtFilterValue.NumberProperties.IntegerNumberProperties.MinValue = 0;
+            this.kgtxtFilterValue.NumberProperties.IntegerNumberProperties.MinValueIncluded = true;
             this.kgtxtFilterValue.NumberProperties.IntegerNumberProperties.MinValueOption = false;
             this.kgtxtFilterValue.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
             this.kgtxtFilterValue.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
-            this.kgtxtFilterValue.PlaceholderText = "";
+            this.kgtxtFilterValue.PlaceholderForeColor = System.Drawing.Color.Gray;
+            this.kgtxtFilterValue.PlaceholderText = "اسم الفئة";
             this.kgtxtFilterValue.SelectedText = "";
             this.kgtxtFilterValue.Size = new System.Drawing.Size(859, 38);
             this.kgtxtFilterValue.TabIndex = 33;
@@ -240,10 +248,14 @@
             // 
             this.ctrlInfoIcon1.BackColor = System.Drawing.Color.Transparent;
             this.ctrlInfoIcon1.IconImage = ((System.Drawing.Image)(resources.GetObject("ctrlInfoIcon1.IconImage")));
-            this.ctrlInfoIcon1.Location = new System.Drawing.Point(27, 9);
+            this.ctrlInfoIcon1.Location = new System.Drawing.Point(27, 11);
             this.ctrlInfoIcon1.Name = "ctrlInfoIcon1";
-            this.ctrlInfoIcon1.Size = new System.Drawing.Size(33, 28);
+            this.ctrlInfoIcon1.Size = new System.Drawing.Size(33, 24);
             this.ctrlInfoIcon1.TabIndex = 37;
+            // 
+            // 
+            // 
+            this.ctrlInfoIcon1.ToolTipControl.IsBalloon = true;
             this.ctrlInfoIcon1.ToolTipText = "لاختيار الفئة قم بالنقر على العنصر المختار مرتين بالماوس او قم بالضغط على زر Ente" +
     "r ";
             // 

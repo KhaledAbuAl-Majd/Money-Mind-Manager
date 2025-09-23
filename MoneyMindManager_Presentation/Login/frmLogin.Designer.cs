@@ -58,6 +58,7 @@
             this.guna2ControlBox2 = new Guna.UI2.WinForms.Guna2ControlBox();
             this.lblHeader = new System.Windows.Forms.Label();
             this.guna2DragControl2 = new Guna.UI2.WinForms.Guna2DragControl(this.components);
+            this.guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.gpnlLogin.SuspendLayout();
             this.gpnlCreateAccount.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -233,22 +234,28 @@
             0,
             0,
             0});
+            this.kgtxtLogin_password.NumberProperties.DecimalNumberProperties.MaxValueIncluded = true;
             this.kgtxtLogin_password.NumberProperties.DecimalNumberProperties.MaxValueOption = false;
             this.kgtxtLogin_password.NumberProperties.DecimalNumberProperties.MinValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
+            this.kgtxtLogin_password.NumberProperties.DecimalNumberProperties.MinValueIncluded = true;
             this.kgtxtLogin_password.NumberProperties.DecimalNumberProperties.MinValueOption = false;
             this.kgtxtLogin_password.NumberProperties.FloatNumberProperties.AllowNegative = true;
             this.kgtxtLogin_password.NumberProperties.FloatNumberProperties.MaxValue = 0F;
+            this.kgtxtLogin_password.NumberProperties.FloatNumberProperties.MaxValueIncluded = true;
             this.kgtxtLogin_password.NumberProperties.FloatNumberProperties.MaxValueOption = false;
             this.kgtxtLogin_password.NumberProperties.FloatNumberProperties.MinValue = 0F;
+            this.kgtxtLogin_password.NumberProperties.FloatNumberProperties.MinValueIncluded = true;
             this.kgtxtLogin_password.NumberProperties.FloatNumberProperties.MinValueOption = false;
             this.kgtxtLogin_password.NumberProperties.IntegerNumberProperties.AllowNegative = true;
             this.kgtxtLogin_password.NumberProperties.IntegerNumberProperties.MaxValue = 0;
+            this.kgtxtLogin_password.NumberProperties.IntegerNumberProperties.MaxValueIncluded = true;
             this.kgtxtLogin_password.NumberProperties.IntegerNumberProperties.MaxValueOption = false;
             this.kgtxtLogin_password.NumberProperties.IntegerNumberProperties.MinValue = 0;
+            this.kgtxtLogin_password.NumberProperties.IntegerNumberProperties.MinValueIncluded = true;
             this.kgtxtLogin_password.NumberProperties.IntegerNumberProperties.MinValueOption = false;
             this.kgtxtLogin_password.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
             this.kgtxtLogin_password.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
@@ -308,22 +315,28 @@
             0,
             0,
             0});
+            this.kgtxtLoginUserName.NumberProperties.DecimalNumberProperties.MaxValueIncluded = true;
             this.kgtxtLoginUserName.NumberProperties.DecimalNumberProperties.MaxValueOption = false;
             this.kgtxtLoginUserName.NumberProperties.DecimalNumberProperties.MinValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
+            this.kgtxtLoginUserName.NumberProperties.DecimalNumberProperties.MinValueIncluded = true;
             this.kgtxtLoginUserName.NumberProperties.DecimalNumberProperties.MinValueOption = false;
             this.kgtxtLoginUserName.NumberProperties.FloatNumberProperties.AllowNegative = true;
             this.kgtxtLoginUserName.NumberProperties.FloatNumberProperties.MaxValue = 0F;
+            this.kgtxtLoginUserName.NumberProperties.FloatNumberProperties.MaxValueIncluded = true;
             this.kgtxtLoginUserName.NumberProperties.FloatNumberProperties.MaxValueOption = false;
             this.kgtxtLoginUserName.NumberProperties.FloatNumberProperties.MinValue = 0F;
+            this.kgtxtLoginUserName.NumberProperties.FloatNumberProperties.MinValueIncluded = true;
             this.kgtxtLoginUserName.NumberProperties.FloatNumberProperties.MinValueOption = false;
             this.kgtxtLoginUserName.NumberProperties.IntegerNumberProperties.AllowNegative = true;
             this.kgtxtLoginUserName.NumberProperties.IntegerNumberProperties.MaxValue = 0;
+            this.kgtxtLoginUserName.NumberProperties.IntegerNumberProperties.MaxValueIncluded = true;
             this.kgtxtLoginUserName.NumberProperties.IntegerNumberProperties.MaxValueOption = false;
             this.kgtxtLoginUserName.NumberProperties.IntegerNumberProperties.MinValue = 0;
+            this.kgtxtLoginUserName.NumberProperties.IntegerNumberProperties.MinValueIncluded = true;
             this.kgtxtLoginUserName.NumberProperties.IntegerNumberProperties.MinValueOption = false;
             this.kgtxtLoginUserName.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
             this.kgtxtLoginUserName.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
@@ -493,22 +506,28 @@
             0,
             0,
             0});
+            this.kgtxtCreatAccount_ConfirmPassowrd.NumberProperties.DecimalNumberProperties.MaxValueIncluded = true;
             this.kgtxtCreatAccount_ConfirmPassowrd.NumberProperties.DecimalNumberProperties.MaxValueOption = false;
             this.kgtxtCreatAccount_ConfirmPassowrd.NumberProperties.DecimalNumberProperties.MinValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
+            this.kgtxtCreatAccount_ConfirmPassowrd.NumberProperties.DecimalNumberProperties.MinValueIncluded = true;
             this.kgtxtCreatAccount_ConfirmPassowrd.NumberProperties.DecimalNumberProperties.MinValueOption = false;
             this.kgtxtCreatAccount_ConfirmPassowrd.NumberProperties.FloatNumberProperties.AllowNegative = true;
             this.kgtxtCreatAccount_ConfirmPassowrd.NumberProperties.FloatNumberProperties.MaxValue = 0F;
+            this.kgtxtCreatAccount_ConfirmPassowrd.NumberProperties.FloatNumberProperties.MaxValueIncluded = true;
             this.kgtxtCreatAccount_ConfirmPassowrd.NumberProperties.FloatNumberProperties.MaxValueOption = false;
             this.kgtxtCreatAccount_ConfirmPassowrd.NumberProperties.FloatNumberProperties.MinValue = 0F;
+            this.kgtxtCreatAccount_ConfirmPassowrd.NumberProperties.FloatNumberProperties.MinValueIncluded = true;
             this.kgtxtCreatAccount_ConfirmPassowrd.NumberProperties.FloatNumberProperties.MinValueOption = false;
             this.kgtxtCreatAccount_ConfirmPassowrd.NumberProperties.IntegerNumberProperties.AllowNegative = true;
             this.kgtxtCreatAccount_ConfirmPassowrd.NumberProperties.IntegerNumberProperties.MaxValue = 0;
+            this.kgtxtCreatAccount_ConfirmPassowrd.NumberProperties.IntegerNumberProperties.MaxValueIncluded = true;
             this.kgtxtCreatAccount_ConfirmPassowrd.NumberProperties.IntegerNumberProperties.MaxValueOption = false;
             this.kgtxtCreatAccount_ConfirmPassowrd.NumberProperties.IntegerNumberProperties.MinValue = 0;
+            this.kgtxtCreatAccount_ConfirmPassowrd.NumberProperties.IntegerNumberProperties.MinValueIncluded = true;
             this.kgtxtCreatAccount_ConfirmPassowrd.NumberProperties.IntegerNumberProperties.MinValueOption = false;
             this.kgtxtCreatAccount_ConfirmPassowrd.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
             this.kgtxtCreatAccount_ConfirmPassowrd.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
@@ -568,22 +587,28 @@
             0,
             0,
             0});
+            this.kgtxtCreateAccount_AccountName.NumberProperties.DecimalNumberProperties.MaxValueIncluded = true;
             this.kgtxtCreateAccount_AccountName.NumberProperties.DecimalNumberProperties.MaxValueOption = false;
             this.kgtxtCreateAccount_AccountName.NumberProperties.DecimalNumberProperties.MinValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
+            this.kgtxtCreateAccount_AccountName.NumberProperties.DecimalNumberProperties.MinValueIncluded = true;
             this.kgtxtCreateAccount_AccountName.NumberProperties.DecimalNumberProperties.MinValueOption = false;
             this.kgtxtCreateAccount_AccountName.NumberProperties.FloatNumberProperties.AllowNegative = true;
             this.kgtxtCreateAccount_AccountName.NumberProperties.FloatNumberProperties.MaxValue = 0F;
+            this.kgtxtCreateAccount_AccountName.NumberProperties.FloatNumberProperties.MaxValueIncluded = true;
             this.kgtxtCreateAccount_AccountName.NumberProperties.FloatNumberProperties.MaxValueOption = false;
             this.kgtxtCreateAccount_AccountName.NumberProperties.FloatNumberProperties.MinValue = 0F;
+            this.kgtxtCreateAccount_AccountName.NumberProperties.FloatNumberProperties.MinValueIncluded = true;
             this.kgtxtCreateAccount_AccountName.NumberProperties.FloatNumberProperties.MinValueOption = false;
             this.kgtxtCreateAccount_AccountName.NumberProperties.IntegerNumberProperties.AllowNegative = true;
             this.kgtxtCreateAccount_AccountName.NumberProperties.IntegerNumberProperties.MaxValue = 0;
+            this.kgtxtCreateAccount_AccountName.NumberProperties.IntegerNumberProperties.MaxValueIncluded = true;
             this.kgtxtCreateAccount_AccountName.NumberProperties.IntegerNumberProperties.MaxValueOption = false;
             this.kgtxtCreateAccount_AccountName.NumberProperties.IntegerNumberProperties.MinValue = 0;
+            this.kgtxtCreateAccount_AccountName.NumberProperties.IntegerNumberProperties.MinValueIncluded = true;
             this.kgtxtCreateAccount_AccountName.NumberProperties.IntegerNumberProperties.MinValueOption = false;
             this.kgtxtCreateAccount_AccountName.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
             this.kgtxtCreateAccount_AccountName.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
@@ -642,22 +667,28 @@
             0,
             0,
             0});
+            this.kgtxtCreateAccount_PersonName.NumberProperties.DecimalNumberProperties.MaxValueIncluded = true;
             this.kgtxtCreateAccount_PersonName.NumberProperties.DecimalNumberProperties.MaxValueOption = false;
             this.kgtxtCreateAccount_PersonName.NumberProperties.DecimalNumberProperties.MinValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
+            this.kgtxtCreateAccount_PersonName.NumberProperties.DecimalNumberProperties.MinValueIncluded = true;
             this.kgtxtCreateAccount_PersonName.NumberProperties.DecimalNumberProperties.MinValueOption = false;
             this.kgtxtCreateAccount_PersonName.NumberProperties.FloatNumberProperties.AllowNegative = true;
             this.kgtxtCreateAccount_PersonName.NumberProperties.FloatNumberProperties.MaxValue = 0F;
+            this.kgtxtCreateAccount_PersonName.NumberProperties.FloatNumberProperties.MaxValueIncluded = true;
             this.kgtxtCreateAccount_PersonName.NumberProperties.FloatNumberProperties.MaxValueOption = false;
             this.kgtxtCreateAccount_PersonName.NumberProperties.FloatNumberProperties.MinValue = 0F;
+            this.kgtxtCreateAccount_PersonName.NumberProperties.FloatNumberProperties.MinValueIncluded = true;
             this.kgtxtCreateAccount_PersonName.NumberProperties.FloatNumberProperties.MinValueOption = false;
             this.kgtxtCreateAccount_PersonName.NumberProperties.IntegerNumberProperties.AllowNegative = true;
             this.kgtxtCreateAccount_PersonName.NumberProperties.IntegerNumberProperties.MaxValue = 0;
+            this.kgtxtCreateAccount_PersonName.NumberProperties.IntegerNumberProperties.MaxValueIncluded = true;
             this.kgtxtCreateAccount_PersonName.NumberProperties.IntegerNumberProperties.MaxValueOption = false;
             this.kgtxtCreateAccount_PersonName.NumberProperties.IntegerNumberProperties.MinValue = 0;
+            this.kgtxtCreateAccount_PersonName.NumberProperties.IntegerNumberProperties.MinValueIncluded = true;
             this.kgtxtCreateAccount_PersonName.NumberProperties.IntegerNumberProperties.MinValueOption = false;
             this.kgtxtCreateAccount_PersonName.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
             this.kgtxtCreateAccount_PersonName.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
@@ -776,22 +807,28 @@
             0,
             0,
             0});
+            this.kgtxtCreateAccount_Password.NumberProperties.DecimalNumberProperties.MaxValueIncluded = true;
             this.kgtxtCreateAccount_Password.NumberProperties.DecimalNumberProperties.MaxValueOption = false;
             this.kgtxtCreateAccount_Password.NumberProperties.DecimalNumberProperties.MinValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
+            this.kgtxtCreateAccount_Password.NumberProperties.DecimalNumberProperties.MinValueIncluded = true;
             this.kgtxtCreateAccount_Password.NumberProperties.DecimalNumberProperties.MinValueOption = false;
             this.kgtxtCreateAccount_Password.NumberProperties.FloatNumberProperties.AllowNegative = true;
             this.kgtxtCreateAccount_Password.NumberProperties.FloatNumberProperties.MaxValue = 0F;
+            this.kgtxtCreateAccount_Password.NumberProperties.FloatNumberProperties.MaxValueIncluded = true;
             this.kgtxtCreateAccount_Password.NumberProperties.FloatNumberProperties.MaxValueOption = false;
             this.kgtxtCreateAccount_Password.NumberProperties.FloatNumberProperties.MinValue = 0F;
+            this.kgtxtCreateAccount_Password.NumberProperties.FloatNumberProperties.MinValueIncluded = true;
             this.kgtxtCreateAccount_Password.NumberProperties.FloatNumberProperties.MinValueOption = false;
             this.kgtxtCreateAccount_Password.NumberProperties.IntegerNumberProperties.AllowNegative = true;
             this.kgtxtCreateAccount_Password.NumberProperties.IntegerNumberProperties.MaxValue = 0;
+            this.kgtxtCreateAccount_Password.NumberProperties.IntegerNumberProperties.MaxValueIncluded = true;
             this.kgtxtCreateAccount_Password.NumberProperties.IntegerNumberProperties.MaxValueOption = false;
             this.kgtxtCreateAccount_Password.NumberProperties.IntegerNumberProperties.MinValue = 0;
+            this.kgtxtCreateAccount_Password.NumberProperties.IntegerNumberProperties.MinValueIncluded = true;
             this.kgtxtCreateAccount_Password.NumberProperties.IntegerNumberProperties.MinValueOption = false;
             this.kgtxtCreateAccount_Password.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
             this.kgtxtCreateAccount_Password.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
@@ -850,22 +887,28 @@
             0,
             0,
             0});
+            this.kgtxtCreateAccount_UserName.NumberProperties.DecimalNumberProperties.MaxValueIncluded = true;
             this.kgtxtCreateAccount_UserName.NumberProperties.DecimalNumberProperties.MaxValueOption = false;
             this.kgtxtCreateAccount_UserName.NumberProperties.DecimalNumberProperties.MinValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
+            this.kgtxtCreateAccount_UserName.NumberProperties.DecimalNumberProperties.MinValueIncluded = true;
             this.kgtxtCreateAccount_UserName.NumberProperties.DecimalNumberProperties.MinValueOption = false;
             this.kgtxtCreateAccount_UserName.NumberProperties.FloatNumberProperties.AllowNegative = true;
             this.kgtxtCreateAccount_UserName.NumberProperties.FloatNumberProperties.MaxValue = 0F;
+            this.kgtxtCreateAccount_UserName.NumberProperties.FloatNumberProperties.MaxValueIncluded = true;
             this.kgtxtCreateAccount_UserName.NumberProperties.FloatNumberProperties.MaxValueOption = false;
             this.kgtxtCreateAccount_UserName.NumberProperties.FloatNumberProperties.MinValue = 0F;
+            this.kgtxtCreateAccount_UserName.NumberProperties.FloatNumberProperties.MinValueIncluded = true;
             this.kgtxtCreateAccount_UserName.NumberProperties.FloatNumberProperties.MinValueOption = false;
             this.kgtxtCreateAccount_UserName.NumberProperties.IntegerNumberProperties.AllowNegative = true;
             this.kgtxtCreateAccount_UserName.NumberProperties.IntegerNumberProperties.MaxValue = 0;
+            this.kgtxtCreateAccount_UserName.NumberProperties.IntegerNumberProperties.MaxValueIncluded = true;
             this.kgtxtCreateAccount_UserName.NumberProperties.IntegerNumberProperties.MaxValueOption = false;
             this.kgtxtCreateAccount_UserName.NumberProperties.IntegerNumberProperties.MinValue = 0;
+            this.kgtxtCreateAccount_UserName.NumberProperties.IntegerNumberProperties.MinValueIncluded = true;
             this.kgtxtCreateAccount_UserName.NumberProperties.IntegerNumberProperties.MinValueOption = false;
             this.kgtxtCreateAccount_UserName.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
             this.kgtxtCreateAccount_UserName.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
@@ -937,6 +980,11 @@
             this.guna2DragControl2.TargetControl = this.lblHeader;
             this.guna2DragControl2.UseTransparentDrag = true;
             // 
+            // guna2Elipse1
+            // 
+            this.guna2Elipse1.BorderRadius = 20;
+            this.guna2Elipse1.TargetControl = this;
+            // 
             // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1000,5 +1048,6 @@
         private Guna.UI2.WinForms.Guna2ControlBox guna2ControlBox2;
         private System.Windows.Forms.Label lblHeader;
         private Guna.UI2.WinForms.Guna2DragControl guna2DragControl2;
+        private Guna.UI2.WinForms.Guna2Elipse guna2Elipse1;
     }
 }

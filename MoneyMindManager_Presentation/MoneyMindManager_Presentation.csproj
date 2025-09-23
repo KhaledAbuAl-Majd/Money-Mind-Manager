@@ -84,6 +84,18 @@
     <Compile Include="Income And Expense\Categories\frmSelectCategory.Designer.cs">
       <DependentUpon>frmSelectCategory.cs</DependentUpon>
     </Compile>
+    <Compile Include="Income And Expense\Transactions\frmAddUpdateIncomeAndExpeseTransaction.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Income And Expense\Transactions\frmAddUpdateIncomeAndExpeseTransaction.Designer.cs">
+      <DependentUpon>frmAddUpdateIncomeAndExpeseTransaction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Income And Expense\Vouchers\frmAddUpdateVoucher.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Income And Expense\Vouchers\frmAddUpdateVoucher.Designer.cs">
+      <DependentUpon>frmAddUpdateVoucher.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login\frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -174,6 +186,12 @@
     <EmbeddedResource Include="Income And Expense\Categories\frmSelectCategory.resx">
       <DependentUpon>frmSelectCategory.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Income And Expense\Transactions\frmAddUpdateIncomeAndExpeseTransaction.resx">
+      <DependentUpon>frmAddUpdateIncomeAndExpeseTransaction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Income And Expense\Vouchers\frmAddUpdateVoucher.resx">
+      <DependentUpon>frmAddUpdateVoucher.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login\frmLogin.ar.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
@@ -256,6 +274,11 @@
   <ItemGroup>
     <Content Include="icons8-money-management-100.ico" />
     <Content Include="project-management.ico" />
+    <None Include="Resources\unlocked %281%29.png" />
+    <None Include="Resources\lock %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Income And Expense\Vouchers\Controls\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
