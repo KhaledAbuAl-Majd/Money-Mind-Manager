@@ -104,6 +104,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             kgtxtCategoryName.Focus();
             //_isIncome = null;
             _SetCategoryType();
+            gibtnDeleteVoucher.Enabled = false;
         }
 
         async Task _UpdateMode()
@@ -137,7 +138,12 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             kgtxtNotes.Text = _Category.Notes;
             gcbIsIncome_CategroyType.SelectedIndex = Convert.ToInt32((Convert.ToBoolean(_isIncome)) ? en_gcbIsInocmeItems.واردات : en_gcbIsInocmeItems.مصروفات);
             gcbIsIncome_CategroyType.Enabled = false;
-            
+
+            gtxtMainCategoryName.Text = _Category.MainCategoryName;
+            gtxtCategoryHierarchical.Text = _Category.CategoryHierarchical;
+            klblCreatedDate.Text = _Category.CreatedDate.ToString();
+
+            gibtnDeleteVoucher.Enabled = true;
         }
 
         void _ResteObject()
@@ -201,6 +207,11 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                     ChangeHeaderValue("تعديل بيانات فئة");
                     _SetReadOnlyAtTextBox(kgtxtParentCategoryName);
                     gcbIsIncome_CategroyType.Enabled = false;
+
+                    gtxtMainCategoryName.Text = _Category.MainCategoryName;
+                    gtxtCategoryHierarchical.Text = _Category.CategoryHierarchical;
+                    klblCreatedDate.Text = _Category.CreatedDate.ToString();
+                    gibtnDeleteVoucher.Enabled = true;
                 }
                 else if (Mode == enMode.Update)
                 {
@@ -344,6 +355,22 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                 {
                     e.Cancel = false;
                     errorProvider1.SetError(kgtxtCategoryName, null);
+                }
+            }
+        }
+
+        private async void gibtnDeleteVoucher_Click(object sender, EventArgs e)
+        {
+            if (_CategoryID == null || Mode == enMode.AddNew)
+                return;
+
+            if (clsGlobalMessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف الفئة ؟ ", "طلب مواقفقة", MessageBoxButtons.OKCancel,
+               MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
+            {
+                if (await clsIncomeAndExpenseCategory.DeleteCategoryByCategoryID(Convert.ToInt32(_CategoryID), Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID)))
+                {
+                    _isSaved = true;
+                    gbtnClose.PerformClick();
                 }
             }
         }

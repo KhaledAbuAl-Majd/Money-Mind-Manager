@@ -331,7 +331,7 @@ namespace MoneyMindManager_Presentation.Users
         {
             // Creat With DataBase When Adding New User 
 
-            //if(_ChangeMode == enMode.AddNew && await clsUser.IsUserExistByPersonIDAsync(Convert.ToInt32(ctrlPersonCardWithFilter1.Person.PersonID)))
+            //if(_ChangeMode == enMode.AddNew && await clsUser.IsUserExistByPersonIDAsync(Convert.ToInt32(ctrlPersonCardWithFilter1.Person.CategoryID)))
             //{
             //    clsGlobalMessageBoxs.ShowErrorMessage("هذا الشخص مرتبط بمستخدم بالفعل");
             //    _ChangeEnablityOfUserControls(false);
@@ -354,6 +354,11 @@ namespace MoneyMindManager_Presentation.Users
             {
                 gbtnSave.PerformClick();
             }
+        }
+
+        private void gpnlUserPart_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

@@ -90,7 +90,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             else 
             {
                 string categoryName = kgtxtFilterValue.ValidatedText;
-                dtCategories = await clsIncomeAndExpenseCategory.GetAllCategoriesForSearch(categoryName, _isIncome, currentUserID);
+                dtCategories = await clsIncomeAndExpenseCategory.GetAllCategoriesForSelectOne(categoryName, _isIncome, currentUserID);
             }
 
 
@@ -141,6 +141,8 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
             await _LoadDataAtDataGridView();
 
+            this.Text = (_isIncome) ? "اختيار فئة واردات" : "اختيار فئة مصروفات";
+
             kgtxtFilterValue.Focus();
         }
 
@@ -175,6 +177,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             {
                 //e.CellStyle.BackColor = Color.LightYellow; // خلفية
                 e.CellStyle.ForeColor = Color.Red;
+                e.CellStyle.SelectionForeColor = Color.Red;
             }
         }
 

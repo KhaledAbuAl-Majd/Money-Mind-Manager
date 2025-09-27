@@ -38,6 +38,7 @@ namespace MoneyMindManager_Business
             
             return true;
         }
+
         public bool AssignIsIncome_CategoryType_AtAddMode(bool isIncome)
         {
             if (Mode == enMode.Update)
@@ -91,13 +92,28 @@ namespace MoneyMindManager_Business
                 CategoryName, MonthlyBudget, IsActive,Notes, currentUserID);
         }
 
-        async Task<bool> _RefeshCompositionObjects(int currentUserID)
+        public async Task<bool> RefreshData(int currentUserID)
         {
-            CreatedByUserInfo = await clsUser.FindUserByUserID(Convert.ToInt32(this.CreatedByUserID), currentUserID);
-            AccountInfo = CreatedByUserInfo?.AccountInfo;
-            this.AccountID = CreatedByUserInfo?.AccountID;
+            clsIncomeAndExpenseCategory fresh = await FindCategoryByCategoryID(Convert.ToInt32(CategoryID), currentUserID);
 
-            return ((CreatedByUserInfo != null) && (AccountInfo != null));
+            if (fresh == null)
+                return false;
+
+            this.CategoryName = fresh.CategoryName;
+            this.CreatedDate = fresh.CreatedDate;
+            this.MonthlyBudget = fresh.MonthlyBudget;
+            this.IsIncome = fresh.IsIncome;
+            this.ParentCategoryID = fresh.ParentCategoryID;
+            this.AccountID = fresh.AccountID;
+            this.CreatedByUserID = fresh.CreatedByUserID;
+            this.IsActive = fresh.IsActive;
+            this.CategoryHierarchical = fresh.CategoryHierarchical;
+            this.Notes = fresh.Notes;
+            this.MainCategoryName = fresh.MainCategoryName;
+            this.AccountInfo = fresh.AccountInfo;
+            this.CreatedByUserInfo = fresh.CreatedByUserInfo;
+
+            return true;
         }
 
         public async Task<bool> Save(int currentUserID)
@@ -109,7 +125,7 @@ namespace MoneyMindManager_Business
                         if(await _AddNewCategory(currentUserID))
                         {
                             Mode = enMode.Update;
-                            await _RefeshCompositionObjects(currentUserID);
+                            await RefreshData(currentUserID);
                             return true;
                         }
                         break;
@@ -179,14 +195,14 @@ namespace MoneyMindManager_Business
         /// </summary>
         public static async Task<DataTable> GetAllCategoriesForSearch(int currentUserID)
         {
-         return  await clsIncomeAndExpenseCategoryData.GetAllCategoriesForSearch(null, null, currentUserID);
+         return  await clsIncomeAndExpenseCategoryData.GetAllCategoriesForSelect(null, null, currentUserID);
         }
         /// <summary>
         /// Filter by CategoryName
         /// </summary>
         public static async Task<DataTable> GetAllCategoriesForSearch(string categoryName,int currentUserID)
         {
-         return  await clsIncomeAndExpenseCategoryData.GetAllCategoriesForSearch(categoryName, null, currentUserID);
+         return  await clsIncomeAndExpenseCategoryData.GetAllCategoriesForSelect(categoryName, null, currentUserID);
         }
 
         /// <summary>
@@ -194,16 +210,65 @@ namespace MoneyMindManager_Business
         /// </summary>
         public static async Task<DataTable> GetAllCategoriesForSearch(bool isIncome,int currentUserID)
         {
-         return  await clsIncomeAndExpenseCategoryData.GetAllCategoriesForSearch(null, isIncome, currentUserID);
+         return  await clsIncomeAndExpenseCategoryData.GetAllCategoriesForSelect(null, isIncome, currentUserID);
         }
 
         /// <summary>
         /// Filter by CategoryName AND CategoryType - isIncome
         /// </summary>
-        public static async Task<DataTable> GetAllCategoriesForSearch(string categoryName ,bool isIncome,int currentUserID)
+        public static async Task<DataTable> GetAllCategoriesForSelectOne(string categoryName ,bool isIncome,int currentUserID)
         {
-         return  await clsIncomeAndExpenseCategoryData.GetAllCategoriesForSearch(categoryName, isIncome, currentUserID);
+         return  await clsIncomeAndExpenseCategoryData.GetAllCategoriesForSelect(categoryName, isIncome, currentUserID);
         }
 
+        /// <summary>
+        /// if variable is null will not filter by it
+        /// </summary>
+        public static async Task<clsGetAllCategories> GetAllCategories(bool isIncome, bool? isActive, bool includeMainCategories, bool includeSubCategories,
+            int currentUserID, short pageNumber)
+        {
+            return await clsIncomeAndExpenseCategoryData.GetAllCategories(null, null, null, null, isIncome, isActive, includeMainCategories,
+                includeSubCategories, currentUserID, pageNumber);
+        }
+
+        /// <summary>
+        /// if variable is null will not filter by it
+        /// </summary>
+        public static async Task<clsGetAllCategories> GetAllCategoriesByCategoryID(int categoryID,bool isIncome, bool? isActive, bool includeMainCategories, bool includeSubCategories,
+            int currentUserID, short pageNumber)
+        {
+            return await clsIncomeAndExpenseCategoryData.GetAllCategories(categoryID, null, null, null, isIncome, isActive, includeMainCategories,
+                includeSubCategories, currentUserID, pageNumber);
+        }
+
+        /// <summary>
+        /// if variable is null will not filter by it
+        /// </summary>
+        public static async Task<clsGetAllCategories> GetAllCategoriesByCategoryName(string categoryName,bool isIncome, bool? isActive, bool includeMainCategories, bool includeSubCategories,
+            int currentUserID, short pageNumber)
+        {
+            return await clsIncomeAndExpenseCategoryData.GetAllCategories(null, categoryName, null, null, isIncome, isActive, includeMainCategories,
+                includeSubCategories, currentUserID, pageNumber);
+        }
+
+        /// <summary>
+        /// if variable is null will not filter by it
+        /// </summary>
+        public static async Task<clsGetAllCategories> GetAllCategoriesByParentCategoryName(string parentCategoryName,bool isIncome, bool? isActive, bool includeMainCategories, bool includeSubCategories,
+            int currentUserID, short pageNumber)
+        {
+            return await clsIncomeAndExpenseCategoryData.GetAllCategories(null, null, parentCategoryName, null, isIncome, isActive, includeMainCategories,
+                includeSubCategories, currentUserID, pageNumber);
+        }
+
+        /// <summary>
+        /// if variable is null will not filter by it
+        /// </summary>
+        public static async Task<clsGetAllCategories> GetAllCategoriesByMainCategoryName(string mainCategoryName,bool isIncome, bool? isActive, bool includeMainCategories, bool includeSubCategories,
+            int currentUserID, short pageNumber)
+        {
+            return await clsIncomeAndExpenseCategoryData.GetAllCategories(null, null, null, mainCategoryName, isIncome, isActive, includeMainCategories,
+                includeSubCategories, currentUserID, pageNumber);
+        }
     }
 }

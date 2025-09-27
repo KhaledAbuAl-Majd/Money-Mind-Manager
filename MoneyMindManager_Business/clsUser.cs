@@ -173,7 +173,7 @@ namespace MoneyMindManager_Business
         /// <summary>
         /// Login
         /// </summary>
-        /// <param name="userName">the entered userName</param>
+        /// <param name="userName">the entered personName</param>
         /// <param name="password">the entered password (Normal - NotHashed)</param>
         /// <returns>Object of clsUserColumns, if user is not found it will return null</returns>
         public static async Task<clsUser> FindUserByUserNameAndPassword_Login(string userName, string enteredpassword)
@@ -308,58 +308,39 @@ namespace MoneyMindManager_Business
         }
 
         /// <summary>
-        /// Get All Users For Account Using Paging [10 rows per page]
+        /// Get All Users For Account Using Paging [10 rows per page] , if variable is null will not filter by it
         /// </summary>
-        /// <param name="accountID">The current AccountID</param>
-        /// <param name="pageNumber">The page Number you want to get rows of it</param>
         /// <returns>object of clsGetAllUsers : if error happend, return null</returns>
-        public static async Task<clsGetAllUsers> GetAllUsers(short accountID, short pageNumber)
+        public static async Task<clsGetAllUsers> GetAllUsers(bool? isActive, short pageNumber, int currentUserID)
         {
-            return await clsUserData.GetAllUsers(accountID, pageNumber);
+            return await clsUserData.GetAllUsers(null,null,null,isActive,pageNumber,currentUserID);
         }
 
         /// <summary>
-        /// Get All Users By UserID For Account Using Paging [10 rows per page]
+        /// Get All Users By UserID For Account Using Paging [10 rows per page] , if variable is null will not filter by it
         /// </summary>
-        /// <param name="accountID">The current AccountID</param>
-        /// <param name="pageNumber">The page Number you want to get rows of it</param>
         /// <returns>object of clsGetAllUsers : if error happend, return null</returns>
-        public static async Task<clsGetAllUsers> GetAllUsersByUserID(short accountID, short pageNumber, int userID, bool RaiseEventOnErrorOccured = true)
+        public static async Task<clsGetAllUsers> GetAllUsersByUserID(int userID,bool? isActive, short pageNumber, int currentUserID)
         {
-            return await clsUserData.GetAllUsersByUserID(accountID, pageNumber, userID);
+            return await clsUserData.GetAllUsers(userID, null, null, isActive, pageNumber, currentUserID);
         }
 
         /// <summary>
-        /// Get All Users By UserName For Account Using Paging [10 rows per page]
+        /// Get All Users By UserName For Account Using Paging [10 rows per page], if variable is null will not filter by it
         /// </summary>
-        /// <param name="accountID">The current AccountID</param>
-        /// <param name="pageNumber">The page Number you want to get rows of it</param>
         /// <returns>object of clsGetAllUsers : if error happend, return null</returns>
-        public static async Task<clsGetAllUsers> GetAllUsersByUserName(short accountID, short pageNumber, string userName, bool RaiseEventOnErrorOccured = true)
+        public static async Task<clsGetAllUsers> GetAllUsersByUserName(string userName, bool? isActive, short pageNumber, int currentUserID)
         {
-            return await clsUserData.GetAllUsersByUserName(accountID, pageNumber, userName);
+            return await clsUserData.GetAllUsers(null, userName, null, isActive, pageNumber, currentUserID);
         }
 
         /// <summary>
-        /// Get All Users By personName For Account Using Paging [10 rows per page]
+        /// Get All Users By personName For Account Using Paging [10 rows per page], if variable is null will not filter by it
         /// </summary>
-        /// <param name="accountID">The current AccountID</param>
-        /// <param name="pageNumber">The page Number you want to get rows of it</param>
         /// <returns>object of clsGetAllUsers : if error happend, return null</returns>
-        public static async Task<clsGetAllUsers> GetAllUsersByPersonName(short accountID, short pageNumber, string personName, bool RaiseEventOnErrorOccured = true)
+        public static async Task<clsGetAllUsers> GetAllUsersByPersonName(string personName, bool? isActive, short pageNumber, int currentUserID)
         {
-            return await clsUserData.GetAllUsersByPersonName(accountID, pageNumber, personName);
-        }
-
-        /// <summary>
-        /// Get All Users By IsActive For Account Using Paging [10 rows per page]
-        /// </summary>
-        /// <param name="accountID">The current AccountID</param>
-        /// <param name="pageNumber">The page Number you want to get rows of it</param>
-        /// <returns>object of clsGetAllUsers : if error happend, return null</returns>
-        public static async Task<clsGetAllUsers> GetAllUsersByIsActive(short accountID, short pageNumber, bool isActive, bool RaiseEventOnErrorOccured = true)
-        {
-            return await clsUserData.GetAllUsersByIsActive(accountID, pageNumber, isActive);
+            return await clsUserData.GetAllUsers(null, null,personName, isActive, pageNumber, currentUserID);
         }
 
         /// <param name="userID">UserID of user you want to find</param>
@@ -376,14 +357,14 @@ namespace MoneyMindManager_Business
             return await clsUserData.IsUserExistByPersonID(personID);
         }
 
-        /// <param name="userName">userName of user you want to find</param>
+        /// <param name="userName">personName of user you want to find</param>
         /// <returns>true if user exist, false if user not exist</returns>
         public static async Task<bool> IsUserExistByUserNameAsync(string userName)
         {
             return await clsUserData.IsUserExistByUserNameAsync(userName);
         }
 
-        /// <param name="userName">userName of user you want to find</param>
+        /// <param name="userName">personName of user you want to find</param>
         /// <returns>true if user exist, false if user not exist</returns>
         public static bool IsUserExistByUserName(string userName)
         {

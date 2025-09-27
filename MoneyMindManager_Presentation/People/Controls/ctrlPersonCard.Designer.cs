@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ctrlPersonCard));
             this.label1 = new System.Windows.Forms.Label();
             this.lblPersonID = new System.Windows.Forms.Label();
@@ -49,11 +50,12 @@
             this.kgtxtEmail = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.kgtxtNotes = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.guna2PictureBox9 = new Guna.UI2.WinForms.Guna2PictureBox();
-            this.lblCreatedDate = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.kgtxtAddress = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.kgtxtPhoneNumber = new KhaledControlLibrary1.KhaledGuna2TextBox();
+            this.klblCreatedDate = new KhaledControlLibrary1.KhaledLabel();
             this.gbtnEditPerson = new Guna.UI2.WinForms.Guna2Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox3)).BeginInit();
@@ -67,7 +69,7 @@
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(459, 29);
+            this.label1.Location = new System.Drawing.Point(413, 13);
             this.label1.Name = "label1";
             this.label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label1.Size = new System.Drawing.Size(112, 24);
@@ -77,10 +79,10 @@
             // lblPersonID
             // 
             this.lblPersonID.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPersonID.Location = new System.Drawing.Point(289, 29);
+            this.lblPersonID.Location = new System.Drawing.Point(169, 13);
             this.lblPersonID.Name = "lblPersonID";
             this.lblPersonID.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.lblPersonID.Size = new System.Drawing.Size(130, 24);
+            this.lblPersonID.Size = new System.Drawing.Size(156, 24);
             this.lblPersonID.TabIndex = 1;
             this.lblPersonID.Text = "N/A";
             // 
@@ -88,7 +90,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(477, 78);
+            this.label4.Location = new System.Drawing.Point(431, 105);
             this.label4.Name = "label4";
             this.label4.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label4.Size = new System.Drawing.Size(94, 24);
@@ -100,7 +102,7 @@
             this.guna2PictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.guna2PictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox1.Image")));
             this.guna2PictureBox1.ImageRotate = 0F;
-            this.guna2PictureBox1.Location = new System.Drawing.Point(425, 26);
+            this.guna2PictureBox1.Location = new System.Drawing.Point(379, 10);
             this.guna2PictureBox1.Name = "guna2PictureBox1";
             this.guna2PictureBox1.Size = new System.Drawing.Size(36, 27);
             this.guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -113,7 +115,7 @@
             this.guna2PictureBox2.BackColor = System.Drawing.Color.Transparent;
             this.guna2PictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox2.Image")));
             this.guna2PictureBox2.ImageRotate = 0F;
-            this.guna2PictureBox2.Location = new System.Drawing.Point(435, 78);
+            this.guna2PictureBox2.Location = new System.Drawing.Point(389, 105);
             this.guna2PictureBox2.Name = "guna2PictureBox2";
             this.guna2PictureBox2.Size = new System.Drawing.Size(36, 27);
             this.guna2PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -126,7 +128,7 @@
             this.guna2PictureBox3.BackColor = System.Drawing.Color.Transparent;
             this.guna2PictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox3.Image")));
             this.guna2PictureBox3.ImageRotate = 0F;
-            this.guna2PictureBox3.Location = new System.Drawing.Point(477, 324);
+            this.guna2PictureBox3.Location = new System.Drawing.Point(431, 351);
             this.guna2PictureBox3.Name = "guna2PictureBox3";
             this.guna2PictureBox3.Size = new System.Drawing.Size(36, 27);
             this.guna2PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -138,7 +140,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(509, 323);
+            this.label6.Location = new System.Drawing.Point(463, 350);
             this.label6.Name = "label6";
             this.label6.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label6.Size = new System.Drawing.Size(62, 24);
@@ -150,7 +152,7 @@
             this.guna2PictureBox4.BackColor = System.Drawing.Color.Transparent;
             this.guna2PictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox4.Image")));
             this.guna2PictureBox4.ImageRotate = 0F;
-            this.guna2PictureBox4.Location = new System.Drawing.Point(450, 121);
+            this.guna2PictureBox4.Location = new System.Drawing.Point(404, 148);
             this.guna2PictureBox4.Name = "guna2PictureBox4";
             this.guna2PictureBox4.Size = new System.Drawing.Size(36, 27);
             this.guna2PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -162,7 +164,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(487, 127);
+            this.label8.Location = new System.Drawing.Point(441, 154);
             this.label8.Name = "label8";
             this.label8.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label8.Size = new System.Drawing.Size(84, 24);
@@ -174,7 +176,7 @@
             this.guna2PictureBox5.BackColor = System.Drawing.Color.Transparent;
             this.guna2PictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox5.Image")));
             this.guna2PictureBox5.ImageRotate = 0F;
-            this.guna2PictureBox5.Location = new System.Drawing.Point(412, 225);
+            this.guna2PictureBox5.Location = new System.Drawing.Point(366, 252);
             this.guna2PictureBox5.Name = "guna2PictureBox5";
             this.guna2PictureBox5.Size = new System.Drawing.Size(36, 27);
             this.guna2PictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -186,7 +188,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(450, 225);
+            this.label10.Location = new System.Drawing.Point(404, 252);
             this.label10.Name = "label10";
             this.label10.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label10.Size = new System.Drawing.Size(121, 24);
@@ -198,7 +200,7 @@
             this.guna2PictureBox6.BackColor = System.Drawing.Color.Transparent;
             this.guna2PictureBox6.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox6.Image")));
             this.guna2PictureBox6.ImageRotate = 0F;
-            this.guna2PictureBox6.Location = new System.Drawing.Point(458, 273);
+            this.guna2PictureBox6.Location = new System.Drawing.Point(412, 300);
             this.guna2PictureBox6.Name = "guna2PictureBox6";
             this.guna2PictureBox6.Size = new System.Drawing.Size(36, 27);
             this.guna2PictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -210,7 +212,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(494, 274);
+            this.label12.Location = new System.Drawing.Point(448, 301);
             this.label12.Name = "label12";
             this.label12.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label12.Size = new System.Drawing.Size(77, 24);
@@ -222,7 +224,7 @@
             this.guna2PictureBox8.BackColor = System.Drawing.Color.Transparent;
             this.guna2PictureBox8.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox8.Image")));
             this.guna2PictureBox8.ImageRotate = 0F;
-            this.guna2PictureBox8.Location = new System.Drawing.Point(393, 171);
+            this.guna2PictureBox8.Location = new System.Drawing.Point(347, 198);
             this.guna2PictureBox8.Name = "guna2PictureBox8";
             this.guna2PictureBox8.Size = new System.Drawing.Size(36, 27);
             this.guna2PictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -234,7 +236,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(429, 176);
+            this.label16.Location = new System.Drawing.Point(383, 203);
             this.label16.Name = "label16";
             this.label16.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label16.Size = new System.Drawing.Size(143, 24);
@@ -262,7 +264,7 @@
             this.kgtxtPersonName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtPersonName.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
             this.kgtxtPersonName.IsRequired = false;
-            this.kgtxtPersonName.Location = new System.Drawing.Point(53, 72);
+            this.kgtxtPersonName.Location = new System.Drawing.Point(7, 99);
             this.kgtxtPersonName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtPersonName.MaxLength = 150;
             this.kgtxtPersonName.Name = "kgtxtPersonName";
@@ -272,22 +274,28 @@
             0,
             0,
             0});
+            this.kgtxtPersonName.NumberProperties.DecimalNumberProperties.MaxValueIncluded = true;
             this.kgtxtPersonName.NumberProperties.DecimalNumberProperties.MaxValueOption = false;
             this.kgtxtPersonName.NumberProperties.DecimalNumberProperties.MinValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
+            this.kgtxtPersonName.NumberProperties.DecimalNumberProperties.MinValueIncluded = true;
             this.kgtxtPersonName.NumberProperties.DecimalNumberProperties.MinValueOption = false;
             this.kgtxtPersonName.NumberProperties.FloatNumberProperties.AllowNegative = true;
             this.kgtxtPersonName.NumberProperties.FloatNumberProperties.MaxValue = 0F;
+            this.kgtxtPersonName.NumberProperties.FloatNumberProperties.MaxValueIncluded = true;
             this.kgtxtPersonName.NumberProperties.FloatNumberProperties.MaxValueOption = false;
             this.kgtxtPersonName.NumberProperties.FloatNumberProperties.MinValue = 0F;
+            this.kgtxtPersonName.NumberProperties.FloatNumberProperties.MinValueIncluded = true;
             this.kgtxtPersonName.NumberProperties.FloatNumberProperties.MinValueOption = false;
             this.kgtxtPersonName.NumberProperties.IntegerNumberProperties.AllowNegative = true;
             this.kgtxtPersonName.NumberProperties.IntegerNumberProperties.MaxValue = 0;
+            this.kgtxtPersonName.NumberProperties.IntegerNumberProperties.MaxValueIncluded = true;
             this.kgtxtPersonName.NumberProperties.IntegerNumberProperties.MaxValueOption = false;
             this.kgtxtPersonName.NumberProperties.IntegerNumberProperties.MinValue = 0;
+            this.kgtxtPersonName.NumberProperties.IntegerNumberProperties.MinValueIncluded = true;
             this.kgtxtPersonName.NumberProperties.IntegerNumberProperties.MinValueOption = false;
             this.kgtxtPersonName.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
             this.kgtxtPersonName.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
@@ -302,6 +310,11 @@
             this.kgtxtPersonName.Size = new System.Drawing.Size(318, 41);
             this.kgtxtPersonName.TabIndex = 24;
             this.kgtxtPersonName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.kgtxtPersonName.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
+            this.kgtxtPersonName.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.kgtxtPersonName.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
+            this.kgtxtPersonName.TextProperties.DateTimeProperties.TimeFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enTimeFormate.None;
+            this.kgtxtPersonName.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
             this.kgtxtPersonName.TextProperties.MinLength = ((short)(0));
             this.kgtxtPersonName.TextProperties.MinLengthOption = false;
             this.kgtxtPersonName.TextProperties.PhoneProperties.AllowPlusSign = true;
@@ -331,7 +344,7 @@
             this.kgtxtUserNameOfCreatedUser.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtUserNameOfCreatedUser.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
             this.kgtxtUserNameOfCreatedUser.IsRequired = false;
-            this.kgtxtUserNameOfCreatedUser.Location = new System.Drawing.Point(53, 170);
+            this.kgtxtUserNameOfCreatedUser.Location = new System.Drawing.Point(7, 197);
             this.kgtxtUserNameOfCreatedUser.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtUserNameOfCreatedUser.MaxLength = 150;
             this.kgtxtUserNameOfCreatedUser.Name = "kgtxtUserNameOfCreatedUser";
@@ -341,22 +354,28 @@
             0,
             0,
             0});
+            this.kgtxtUserNameOfCreatedUser.NumberProperties.DecimalNumberProperties.MaxValueIncluded = true;
             this.kgtxtUserNameOfCreatedUser.NumberProperties.DecimalNumberProperties.MaxValueOption = false;
             this.kgtxtUserNameOfCreatedUser.NumberProperties.DecimalNumberProperties.MinValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
+            this.kgtxtUserNameOfCreatedUser.NumberProperties.DecimalNumberProperties.MinValueIncluded = true;
             this.kgtxtUserNameOfCreatedUser.NumberProperties.DecimalNumberProperties.MinValueOption = false;
             this.kgtxtUserNameOfCreatedUser.NumberProperties.FloatNumberProperties.AllowNegative = true;
             this.kgtxtUserNameOfCreatedUser.NumberProperties.FloatNumberProperties.MaxValue = 0F;
+            this.kgtxtUserNameOfCreatedUser.NumberProperties.FloatNumberProperties.MaxValueIncluded = true;
             this.kgtxtUserNameOfCreatedUser.NumberProperties.FloatNumberProperties.MaxValueOption = false;
             this.kgtxtUserNameOfCreatedUser.NumberProperties.FloatNumberProperties.MinValue = 0F;
+            this.kgtxtUserNameOfCreatedUser.NumberProperties.FloatNumberProperties.MinValueIncluded = true;
             this.kgtxtUserNameOfCreatedUser.NumberProperties.FloatNumberProperties.MinValueOption = false;
             this.kgtxtUserNameOfCreatedUser.NumberProperties.IntegerNumberProperties.AllowNegative = true;
             this.kgtxtUserNameOfCreatedUser.NumberProperties.IntegerNumberProperties.MaxValue = 0;
+            this.kgtxtUserNameOfCreatedUser.NumberProperties.IntegerNumberProperties.MaxValueIncluded = true;
             this.kgtxtUserNameOfCreatedUser.NumberProperties.IntegerNumberProperties.MaxValueOption = false;
             this.kgtxtUserNameOfCreatedUser.NumberProperties.IntegerNumberProperties.MinValue = 0;
+            this.kgtxtUserNameOfCreatedUser.NumberProperties.IntegerNumberProperties.MinValueIncluded = true;
             this.kgtxtUserNameOfCreatedUser.NumberProperties.IntegerNumberProperties.MinValueOption = false;
             this.kgtxtUserNameOfCreatedUser.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
             this.kgtxtUserNameOfCreatedUser.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
@@ -371,6 +390,11 @@
             this.kgtxtUserNameOfCreatedUser.Size = new System.Drawing.Size(318, 41);
             this.kgtxtUserNameOfCreatedUser.TabIndex = 25;
             this.kgtxtUserNameOfCreatedUser.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.kgtxtUserNameOfCreatedUser.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
+            this.kgtxtUserNameOfCreatedUser.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.kgtxtUserNameOfCreatedUser.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
+            this.kgtxtUserNameOfCreatedUser.TextProperties.DateTimeProperties.TimeFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enTimeFormate.None;
+            this.kgtxtUserNameOfCreatedUser.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
             this.kgtxtUserNameOfCreatedUser.TextProperties.MinLength = ((short)(0));
             this.kgtxtUserNameOfCreatedUser.TextProperties.MinLengthOption = false;
             this.kgtxtUserNameOfCreatedUser.TextProperties.PhoneProperties.AllowPlusSign = true;
@@ -400,7 +424,7 @@
             this.kgtxtEmail.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtEmail.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
             this.kgtxtEmail.IsRequired = false;
-            this.kgtxtEmail.Location = new System.Drawing.Point(53, 219);
+            this.kgtxtEmail.Location = new System.Drawing.Point(7, 246);
             this.kgtxtEmail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtEmail.MaxLength = 150;
             this.kgtxtEmail.Name = "kgtxtEmail";
@@ -410,22 +434,28 @@
             0,
             0,
             0});
+            this.kgtxtEmail.NumberProperties.DecimalNumberProperties.MaxValueIncluded = true;
             this.kgtxtEmail.NumberProperties.DecimalNumberProperties.MaxValueOption = false;
             this.kgtxtEmail.NumberProperties.DecimalNumberProperties.MinValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
+            this.kgtxtEmail.NumberProperties.DecimalNumberProperties.MinValueIncluded = true;
             this.kgtxtEmail.NumberProperties.DecimalNumberProperties.MinValueOption = false;
             this.kgtxtEmail.NumberProperties.FloatNumberProperties.AllowNegative = true;
             this.kgtxtEmail.NumberProperties.FloatNumberProperties.MaxValue = 0F;
+            this.kgtxtEmail.NumberProperties.FloatNumberProperties.MaxValueIncluded = true;
             this.kgtxtEmail.NumberProperties.FloatNumberProperties.MaxValueOption = false;
             this.kgtxtEmail.NumberProperties.FloatNumberProperties.MinValue = 0F;
+            this.kgtxtEmail.NumberProperties.FloatNumberProperties.MinValueIncluded = true;
             this.kgtxtEmail.NumberProperties.FloatNumberProperties.MinValueOption = false;
             this.kgtxtEmail.NumberProperties.IntegerNumberProperties.AllowNegative = true;
             this.kgtxtEmail.NumberProperties.IntegerNumberProperties.MaxValue = 0;
+            this.kgtxtEmail.NumberProperties.IntegerNumberProperties.MaxValueIncluded = true;
             this.kgtxtEmail.NumberProperties.IntegerNumberProperties.MaxValueOption = false;
             this.kgtxtEmail.NumberProperties.IntegerNumberProperties.MinValue = 0;
+            this.kgtxtEmail.NumberProperties.IntegerNumberProperties.MinValueIncluded = true;
             this.kgtxtEmail.NumberProperties.IntegerNumberProperties.MinValueOption = false;
             this.kgtxtEmail.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
             this.kgtxtEmail.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
@@ -440,6 +470,11 @@
             this.kgtxtEmail.Size = new System.Drawing.Size(318, 41);
             this.kgtxtEmail.TabIndex = 26;
             this.kgtxtEmail.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.kgtxtEmail.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
+            this.kgtxtEmail.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.kgtxtEmail.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
+            this.kgtxtEmail.TextProperties.DateTimeProperties.TimeFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enTimeFormate.None;
+            this.kgtxtEmail.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
             this.kgtxtEmail.TextProperties.MinLength = ((short)(0));
             this.kgtxtEmail.TextProperties.MinLengthOption = false;
             this.kgtxtEmail.TextProperties.PhoneProperties.AllowPlusSign = true;
@@ -469,7 +504,7 @@
             this.kgtxtNotes.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtNotes.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
             this.kgtxtNotes.IsRequired = false;
-            this.kgtxtNotes.Location = new System.Drawing.Point(53, 268);
+            this.kgtxtNotes.Location = new System.Drawing.Point(7, 295);
             this.kgtxtNotes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtNotes.MaxLength = 150;
             this.kgtxtNotes.Name = "kgtxtNotes";
@@ -479,22 +514,28 @@
             0,
             0,
             0});
+            this.kgtxtNotes.NumberProperties.DecimalNumberProperties.MaxValueIncluded = true;
             this.kgtxtNotes.NumberProperties.DecimalNumberProperties.MaxValueOption = false;
             this.kgtxtNotes.NumberProperties.DecimalNumberProperties.MinValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
+            this.kgtxtNotes.NumberProperties.DecimalNumberProperties.MinValueIncluded = true;
             this.kgtxtNotes.NumberProperties.DecimalNumberProperties.MinValueOption = false;
             this.kgtxtNotes.NumberProperties.FloatNumberProperties.AllowNegative = true;
             this.kgtxtNotes.NumberProperties.FloatNumberProperties.MaxValue = 0F;
+            this.kgtxtNotes.NumberProperties.FloatNumberProperties.MaxValueIncluded = true;
             this.kgtxtNotes.NumberProperties.FloatNumberProperties.MaxValueOption = false;
             this.kgtxtNotes.NumberProperties.FloatNumberProperties.MinValue = 0F;
+            this.kgtxtNotes.NumberProperties.FloatNumberProperties.MinValueIncluded = true;
             this.kgtxtNotes.NumberProperties.FloatNumberProperties.MinValueOption = false;
             this.kgtxtNotes.NumberProperties.IntegerNumberProperties.AllowNegative = true;
             this.kgtxtNotes.NumberProperties.IntegerNumberProperties.MaxValue = 0;
+            this.kgtxtNotes.NumberProperties.IntegerNumberProperties.MaxValueIncluded = true;
             this.kgtxtNotes.NumberProperties.IntegerNumberProperties.MaxValueOption = false;
             this.kgtxtNotes.NumberProperties.IntegerNumberProperties.MinValue = 0;
+            this.kgtxtNotes.NumberProperties.IntegerNumberProperties.MinValueIncluded = true;
             this.kgtxtNotes.NumberProperties.IntegerNumberProperties.MinValueOption = false;
             this.kgtxtNotes.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
             this.kgtxtNotes.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
@@ -509,6 +550,11 @@
             this.kgtxtNotes.Size = new System.Drawing.Size(318, 41);
             this.kgtxtNotes.TabIndex = 27;
             this.kgtxtNotes.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.kgtxtNotes.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
+            this.kgtxtNotes.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.kgtxtNotes.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
+            this.kgtxtNotes.TextProperties.DateTimeProperties.TimeFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enTimeFormate.None;
+            this.kgtxtNotes.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
             this.kgtxtNotes.TextProperties.MinLength = ((short)(0));
             this.kgtxtNotes.TextProperties.MinLengthOption = false;
             this.kgtxtNotes.TextProperties.PhoneProperties.AllowPlusSign = true;
@@ -522,7 +568,7 @@
             this.guna2PictureBox9.BackColor = System.Drawing.Color.Transparent;
             this.guna2PictureBox9.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox9.Image")));
             this.guna2PictureBox9.ImageRotate = 0F;
-            this.guna2PictureBox9.Location = new System.Drawing.Point(142, 26);
+            this.guna2PictureBox9.Location = new System.Drawing.Point(384, 53);
             this.guna2PictureBox9.Name = "guna2PictureBox9";
             this.guna2PictureBox9.Size = new System.Drawing.Size(36, 27);
             this.guna2PictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -530,21 +576,11 @@
             this.guna2PictureBox9.TabStop = false;
             this.guna2PictureBox9.UseTransparentBackground = true;
             // 
-            // lblCreatedDate
-            // 
-            this.lblCreatedDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCreatedDate.Location = new System.Drawing.Point(9, 29);
-            this.lblCreatedDate.Name = "lblCreatedDate";
-            this.lblCreatedDate.Size = new System.Drawing.Size(127, 24);
-            this.lblCreatedDate.TabIndex = 29;
-            this.lblCreatedDate.Text = "N/A";
-            this.lblCreatedDate.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(184, 26);
+            this.label5.Location = new System.Drawing.Point(426, 53);
             this.label5.Name = "label5";
             this.label5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label5.Size = new System.Drawing.Size(99, 24);
@@ -572,7 +608,7 @@
             this.kgtxtAddress.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtAddress.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
             this.kgtxtAddress.IsRequired = false;
-            this.kgtxtAddress.Location = new System.Drawing.Point(53, 317);
+            this.kgtxtAddress.Location = new System.Drawing.Point(7, 344);
             this.kgtxtAddress.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtAddress.MaxLength = 150;
             this.kgtxtAddress.Name = "kgtxtAddress";
@@ -582,22 +618,28 @@
             0,
             0,
             0});
+            this.kgtxtAddress.NumberProperties.DecimalNumberProperties.MaxValueIncluded = true;
             this.kgtxtAddress.NumberProperties.DecimalNumberProperties.MaxValueOption = false;
             this.kgtxtAddress.NumberProperties.DecimalNumberProperties.MinValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
+            this.kgtxtAddress.NumberProperties.DecimalNumberProperties.MinValueIncluded = true;
             this.kgtxtAddress.NumberProperties.DecimalNumberProperties.MinValueOption = false;
             this.kgtxtAddress.NumberProperties.FloatNumberProperties.AllowNegative = true;
             this.kgtxtAddress.NumberProperties.FloatNumberProperties.MaxValue = 0F;
+            this.kgtxtAddress.NumberProperties.FloatNumberProperties.MaxValueIncluded = true;
             this.kgtxtAddress.NumberProperties.FloatNumberProperties.MaxValueOption = false;
             this.kgtxtAddress.NumberProperties.FloatNumberProperties.MinValue = 0F;
+            this.kgtxtAddress.NumberProperties.FloatNumberProperties.MinValueIncluded = true;
             this.kgtxtAddress.NumberProperties.FloatNumberProperties.MinValueOption = false;
             this.kgtxtAddress.NumberProperties.IntegerNumberProperties.AllowNegative = true;
             this.kgtxtAddress.NumberProperties.IntegerNumberProperties.MaxValue = 0;
+            this.kgtxtAddress.NumberProperties.IntegerNumberProperties.MaxValueIncluded = true;
             this.kgtxtAddress.NumberProperties.IntegerNumberProperties.MaxValueOption = false;
             this.kgtxtAddress.NumberProperties.IntegerNumberProperties.MinValue = 0;
+            this.kgtxtAddress.NumberProperties.IntegerNumberProperties.MinValueIncluded = true;
             this.kgtxtAddress.NumberProperties.IntegerNumberProperties.MinValueOption = false;
             this.kgtxtAddress.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
             this.kgtxtAddress.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
@@ -612,6 +654,11 @@
             this.kgtxtAddress.Size = new System.Drawing.Size(318, 41);
             this.kgtxtAddress.TabIndex = 31;
             this.kgtxtAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.kgtxtAddress.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
+            this.kgtxtAddress.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.kgtxtAddress.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
+            this.kgtxtAddress.TextProperties.DateTimeProperties.TimeFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enTimeFormate.None;
+            this.kgtxtAddress.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
             this.kgtxtAddress.TextProperties.MinLength = ((short)(0));
             this.kgtxtAddress.TextProperties.MinLengthOption = false;
             this.kgtxtAddress.TextProperties.PhoneProperties.AllowPlusSign = true;
@@ -641,7 +688,7 @@
             this.kgtxtPhoneNumber.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtPhoneNumber.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
             this.kgtxtPhoneNumber.IsRequired = false;
-            this.kgtxtPhoneNumber.Location = new System.Drawing.Point(53, 121);
+            this.kgtxtPhoneNumber.Location = new System.Drawing.Point(7, 148);
             this.kgtxtPhoneNumber.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtPhoneNumber.MaxLength = 150;
             this.kgtxtPhoneNumber.Name = "kgtxtPhoneNumber";
@@ -651,22 +698,28 @@
             0,
             0,
             0});
+            this.kgtxtPhoneNumber.NumberProperties.DecimalNumberProperties.MaxValueIncluded = true;
             this.kgtxtPhoneNumber.NumberProperties.DecimalNumberProperties.MaxValueOption = false;
             this.kgtxtPhoneNumber.NumberProperties.DecimalNumberProperties.MinValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
+            this.kgtxtPhoneNumber.NumberProperties.DecimalNumberProperties.MinValueIncluded = true;
             this.kgtxtPhoneNumber.NumberProperties.DecimalNumberProperties.MinValueOption = false;
             this.kgtxtPhoneNumber.NumberProperties.FloatNumberProperties.AllowNegative = true;
             this.kgtxtPhoneNumber.NumberProperties.FloatNumberProperties.MaxValue = 0F;
+            this.kgtxtPhoneNumber.NumberProperties.FloatNumberProperties.MaxValueIncluded = true;
             this.kgtxtPhoneNumber.NumberProperties.FloatNumberProperties.MaxValueOption = false;
             this.kgtxtPhoneNumber.NumberProperties.FloatNumberProperties.MinValue = 0F;
+            this.kgtxtPhoneNumber.NumberProperties.FloatNumberProperties.MinValueIncluded = true;
             this.kgtxtPhoneNumber.NumberProperties.FloatNumberProperties.MinValueOption = false;
             this.kgtxtPhoneNumber.NumberProperties.IntegerNumberProperties.AllowNegative = true;
             this.kgtxtPhoneNumber.NumberProperties.IntegerNumberProperties.MaxValue = 0;
+            this.kgtxtPhoneNumber.NumberProperties.IntegerNumberProperties.MaxValueIncluded = true;
             this.kgtxtPhoneNumber.NumberProperties.IntegerNumberProperties.MaxValueOption = false;
             this.kgtxtPhoneNumber.NumberProperties.IntegerNumberProperties.MinValue = 0;
+            this.kgtxtPhoneNumber.NumberProperties.IntegerNumberProperties.MinValueIncluded = true;
             this.kgtxtPhoneNumber.NumberProperties.IntegerNumberProperties.MinValueOption = false;
             this.kgtxtPhoneNumber.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
             this.kgtxtPhoneNumber.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
@@ -681,6 +734,11 @@
             this.kgtxtPhoneNumber.Size = new System.Drawing.Size(318, 41);
             this.kgtxtPhoneNumber.TabIndex = 32;
             this.kgtxtPhoneNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.kgtxtPhoneNumber.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
+            this.kgtxtPhoneNumber.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.kgtxtPhoneNumber.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
+            this.kgtxtPhoneNumber.TextProperties.DateTimeProperties.TimeFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enTimeFormate.None;
+            this.kgtxtPhoneNumber.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
             this.kgtxtPhoneNumber.TextProperties.MinLength = ((short)(0));
             this.kgtxtPhoneNumber.TextProperties.MinLengthOption = false;
             this.kgtxtPhoneNumber.TextProperties.PhoneProperties.AllowPlusSign = true;
@@ -688,6 +746,23 @@
             this.kgtxtPhoneNumber.TextProperties.TextFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.enTextFormat.None;
             this.kgtxtPhoneNumber.TrimEnd = false;
             this.kgtxtPhoneNumber.TrimStart = false;
+            // 
+            // klblCreatedDate
+            // 
+            this.klblCreatedDate.DateProperties.DayFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enDayFormate.dd__01;
+            this.klblCreatedDate.DateProperties.MonthFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.klblCreatedDate.DateProperties.SeparatorFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enSeparator.Dash;
+            this.klblCreatedDate.DateProperties.TimeFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enTimeFormate.TwelveHours;
+            this.klblCreatedDate.DateProperties.YearFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enYearFormate.yyyy__2025;
+            this.klblCreatedDate.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.klblCreatedDate.InputType = KhaledControlLibrary1.KhaledLabel.enInputType.Date;
+            this.klblCreatedDate.Location = new System.Drawing.Point(7, 55);
+            this.klblCreatedDate.Name = "klblCreatedDate";
+            this.klblCreatedDate.NumberFormat = KhaledControlLibrary1.KhaledLabel.enNumberFormat.None;
+            this.klblCreatedDate.Size = new System.Drawing.Size(318, 25);
+            this.klblCreatedDate.TabIndex = 34;
+            this.klblCreatedDate.Text = "01-02-2025 12:00:00 AM";
+            this.klblCreatedDate.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // gbtnEditPerson
             // 
@@ -697,28 +772,33 @@
             this.gbtnEditPerson.BorderColor = System.Drawing.Color.DimGray;
             this.gbtnEditPerson.BorderThickness = 1;
             this.gbtnEditPerson.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.gbtnEditPerson.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.gbtnEditPerson.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.gbtnEditPerson.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.gbtnEditPerson.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.gbtnEditPerson.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.gbtnEditPerson.FillColor = System.Drawing.Color.White;
             this.gbtnEditPerson.FocusedColor = System.Drawing.SystemColors.MenuHighlight;
-            this.gbtnEditPerson.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnEditPerson.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.gbtnEditPerson.ForeColor = System.Drawing.Color.Black;
-            this.gbtnEditPerson.HoverState.FillColor = System.Drawing.Color.SlateBlue;
+            this.gbtnEditPerson.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(102)))), ((int)(((byte)(194)))));
+            this.gbtnEditPerson.HoverState.Font = new System.Drawing.Font("Segoe UI", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbtnEditPerson.HoverState.ForeColor = System.Drawing.Color.White;
             this.gbtnEditPerson.Image = ((System.Drawing.Image)(resources.GetObject("gbtnEditPerson.Image")));
             this.gbtnEditPerson.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.gbtnEditPerson.ImageSize = new System.Drawing.Size(30, 30);
+            this.gbtnEditPerson.ImageSize = new System.Drawing.Size(25, 25);
             this.gbtnEditPerson.IndicateFocus = true;
-            this.gbtnEditPerson.Location = new System.Drawing.Point(185, 378);
+            this.gbtnEditPerson.Location = new System.Drawing.Point(162, 397);
             this.gbtnEditPerson.Name = "gbtnEditPerson";
             this.gbtnEditPerson.PressedColor = System.Drawing.Color.White;
-            this.gbtnEditPerson.Size = new System.Drawing.Size(196, 41);
-            this.gbtnEditPerson.TabIndex = 33;
+            this.gbtnEditPerson.Size = new System.Drawing.Size(191, 41);
+            this.gbtnEditPerson.TabIndex = 120;
             this.gbtnEditPerson.Text = "تعديل البيانات";
+            this.toolTip1.SetToolTip(this.gbtnEditPerson, "تعديل بيانات الشخص");
             this.gbtnEditPerson.Click += new System.EventHandler(this.gbtnEditPerson_Click);
+            // 
+            // toolTip1
+            // 
+            this.toolTip1.IsBalloon = true;
             // 
             // ctrlPersonCard
             // 
@@ -726,6 +806,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.gbtnEditPerson);
+            this.Controls.Add(this.klblCreatedDate);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label10);
@@ -740,7 +821,6 @@
             this.Controls.Add(this.kgtxtUserNameOfCreatedUser);
             this.Controls.Add(this.kgtxtPersonName);
             this.Controls.Add(this.guna2PictureBox9);
-            this.Controls.Add(this.lblCreatedDate);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.guna2PictureBox8);
             this.Controls.Add(this.guna2PictureBox6);
@@ -751,7 +831,7 @@
             this.Controls.Add(this.guna2PictureBox1);
             this.Controls.Add(this.lblPersonID);
             this.Name = "ctrlPersonCard";
-            this.Size = new System.Drawing.Size(579, 436);
+            this.Size = new System.Drawing.Size(534, 449);
             this.Load += new System.EventHandler(this.ctrlPersonCard_Load);
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox2)).EndInit();
@@ -788,10 +868,11 @@
         private KhaledControlLibrary1.KhaledGuna2TextBox kgtxtEmail;
         private KhaledControlLibrary1.KhaledGuna2TextBox kgtxtNotes;
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox9;
-        private System.Windows.Forms.Label lblCreatedDate;
         private System.Windows.Forms.Label label5;
         private KhaledControlLibrary1.KhaledGuna2TextBox kgtxtAddress;
         private KhaledControlLibrary1.KhaledGuna2TextBox kgtxtPhoneNumber;
+        private KhaledControlLibrary1.KhaledLabel klblCreatedDate;
         private Guna.UI2.WinForms.Guna2Button gbtnEditPerson;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

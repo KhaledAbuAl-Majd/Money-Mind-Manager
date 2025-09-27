@@ -29,7 +29,7 @@ namespace MoneyMindManager_DataAccess
                         command.Parameters.AddWithValue("@VoucherID", voucherID);
                         command.Parameters.AddWithValue("@categoryID", categoryID);
                         command.Parameters.AddWithValue("@Amount", amount);
-                        command.Parameters.AddWithValue("@Purpose", (object)purpose ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@Purpose", string.IsNullOrWhiteSpace(purpose)? DBNull.Value : (object)purpose);
                         command.Parameters.AddWithValue("@CreatedByUserID", createdByUserID);
 
                         SqlParameter outParmNewCategory = new SqlParameter("@NewTransactionID", System.Data.SqlDbType.Int)
@@ -76,7 +76,7 @@ namespace MoneyMindManager_DataAccess
                         command.Parameters.AddWithValue("@TransactionID",transactionID);
                         command.Parameters.AddWithValue("@Amount",amount);
                         command.Parameters.AddWithValue("@categoryID",categoryID);
-                        command.Parameters.AddWithValue("@Purpose", (object)purpose ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@Purpose", string.IsNullOrWhiteSpace(purpose) ? DBNull.Value : (object)purpose);
                         command.Parameters.AddWithValue("@CurrentUserID",currentUserID);
                        
 
@@ -182,7 +182,7 @@ namespace MoneyMindManager_DataAccess
                     }
                 }
 
-                if (voucherID == null || categoryID == null || purpose == null)
+                if (voucherID == null || categoryID == null)
                     throw new Exception("فشلت العملية");
             }
             catch (Exception ex)

@@ -42,8 +42,10 @@
             this.lblUserMessage = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.ctrlInfoIcon1 = new KhaledControlLibrary1.ctrlInfoIcon();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.gdgvCategories)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ctrlInfoIcon1.PictureBoxControl)).BeginInit();
             this.SuspendLayout();
             // 
             // lblNoRecordsFoundMessage
@@ -195,11 +197,17 @@
             this.kgtxtFilterValue.Size = new System.Drawing.Size(859, 38);
             this.kgtxtFilterValue.TabIndex = 33;
             this.kgtxtFilterValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.kgtxtFilterValue.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
+            this.kgtxtFilterValue.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.kgtxtFilterValue.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
+            this.kgtxtFilterValue.TextProperties.DateTimeProperties.TimeFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enTimeFormate.None;
+            this.kgtxtFilterValue.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
             this.kgtxtFilterValue.TextProperties.MinLength = ((short)(0));
             this.kgtxtFilterValue.TextProperties.MinLengthOption = false;
             this.kgtxtFilterValue.TextProperties.PhoneProperties.AllowPlusSign = true;
             this.kgtxtFilterValue.TextProperties.PhoneProperties.MaxPhoneLength = ((byte)(15));
             this.kgtxtFilterValue.TextProperties.TextFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.enTextFormat.None;
+            this.toolTip1.SetToolTip(this.kgtxtFilterValue, "اسم الفئة التي تود اختيارها (يتم عرض الفئات الفعالة فقط)");
             this.kgtxtFilterValue.TrimEnd = true;
             this.kgtxtFilterValue.TrimStart = true;
             this.kgtxtFilterValue.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxt_OnValidationError);
@@ -250,14 +258,27 @@
             this.ctrlInfoIcon1.IconImage = ((System.Drawing.Image)(resources.GetObject("ctrlInfoIcon1.IconImage")));
             this.ctrlInfoIcon1.Location = new System.Drawing.Point(27, 11);
             this.ctrlInfoIcon1.Name = "ctrlInfoIcon1";
+            // 
+            // 
+            // 
+            this.ctrlInfoIcon1.PictureBoxControl.Image = ((System.Drawing.Image)(resources.GetObject("ctrlInfoIcon1.PictureBoxControl.Image")));
+            this.ctrlInfoIcon1.PictureBoxControl.ImageRotate = 0F;
+            this.ctrlInfoIcon1.PictureBoxControl.Location = new System.Drawing.Point(0, 0);
+            this.ctrlInfoIcon1.PictureBoxControl.Name = "gpbInfoIcon";
+            this.ctrlInfoIcon1.PictureBoxControl.TabIndex = 0;
+            this.ctrlInfoIcon1.PictureBoxControl.TabStop = false;
             this.ctrlInfoIcon1.Size = new System.Drawing.Size(33, 24);
             this.ctrlInfoIcon1.TabIndex = 37;
             // 
             // 
             // 
             this.ctrlInfoIcon1.ToolTipControl.IsBalloon = true;
-            this.ctrlInfoIcon1.ToolTipText = "لاختيار الفئة قم بالنقر على العنصر المختار مرتين بالماوس او قم بالضغط على زر Ente" +
-    "r ";
+            this.ctrlInfoIcon1.ToolTipText = " Enter لاختيار الفئة قم بالنقر على العنصر المختار مرتين بالماوس او قم بالضغط على " +
+    "زر";
+            // 
+            // toolTip1
+            // 
+            this.toolTip1.IsBalloon = true;
             // 
             // frmSelectCategory
             // 
@@ -284,6 +305,7 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmSelectCategory_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.gdgvCategories)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ctrlInfoIcon1.PictureBoxControl)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -299,5 +321,6 @@
         private System.Windows.Forms.Label lblUserMessage;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private KhaledControlLibrary1.ctrlInfoIcon ctrlInfoIcon1;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

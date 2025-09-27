@@ -33,23 +33,25 @@ namespace MoneyMindManager_Presentation.Users
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAddUpdateUser));
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.lblHeader = new System.Windows.Forms.Label();
             this.lblUserID = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.gtswIsActive = new Guna.UI2.WinForms.Guna2ToggleSwitch();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
-            this.gbtnSave = new Guna.UI2.WinForms.Guna2Button();
+            this.gbtnClose = new Guna.UI2.WinForms.Guna2Button();
             this.gpnlUserPart = new Guna.UI2.WinForms.Guna2Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.lbluserMessage = new System.Windows.Forms.Label();
             this.kgtxtUserName = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.kgtxtNotes = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.gpnlPasswordPart = new Guna.UI2.WinForms.Guna2Panel();
             this.kgtxtConfirmPassword = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.kgtxtpassword = new KhaledControlLibrary1.KhaledGuna2TextBox();
+            this.gbtnSave = new Guna.UI2.WinForms.Guna2Button();
+            this.lblHeader = new System.Windows.Forms.Label();
             this.ctrlPersonCardWithFilter1 = new MoneyMindManager_Presentation.People.Controls.ctrlPersonCardWithFilter();
-            this.gbtnClose = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.guna2Panel1.SuspendLayout();
             this.guna2Panel2.SuspendLayout();
@@ -60,17 +62,6 @@ namespace MoneyMindManager_Presentation.Users
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
-            // 
-            // lblHeader
-            // 
-            this.lblHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHeader.ForeColor = System.Drawing.Color.Red;
-            this.lblHeader.Location = new System.Drawing.Point(12, 24);
-            this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(1186, 62);
-            this.lblHeader.TabIndex = 12;
-            this.lblHeader.Text = "إضافة مستخدم";
-            this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblUserID
             // 
@@ -126,22 +117,22 @@ namespace MoneyMindManager_Presentation.Users
             this.gtswIsActive.AutoRoundedCorners = true;
             this.gtswIsActive.Checked = true;
             this.gtswIsActive.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.gtswIsActive.CheckedState.BorderRadius = 13;
+            this.gtswIsActive.CheckedState.BorderRadius = 12;
             this.gtswIsActive.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.gtswIsActive.CheckedState.InnerBorderColor = System.Drawing.Color.White;
-            this.gtswIsActive.CheckedState.InnerBorderRadius = 9;
+            this.gtswIsActive.CheckedState.InnerBorderRadius = 8;
             this.gtswIsActive.CheckedState.InnerColor = System.Drawing.Color.White;
             this.gtswIsActive.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.gtswIsActive.Location = new System.Drawing.Point(5, 7);
+            this.gtswIsActive.Location = new System.Drawing.Point(11, 10);
             this.gtswIsActive.Name = "gtswIsActive";
-            this.gtswIsActive.Size = new System.Drawing.Size(51, 29);
+            this.gtswIsActive.Size = new System.Drawing.Size(45, 26);
             this.gtswIsActive.TabIndex = 99;
             this.gtswIsActive.UncheckedState.BorderColor = System.Drawing.Color.Silver;
-            this.gtswIsActive.UncheckedState.BorderRadius = 13;
+            this.gtswIsActive.UncheckedState.BorderRadius = 12;
             this.gtswIsActive.UncheckedState.BorderThickness = 1;
             this.gtswIsActive.UncheckedState.FillColor = System.Drawing.Color.White;
             this.gtswIsActive.UncheckedState.InnerBorderColor = System.Drawing.Color.WhiteSmoke;
-            this.gtswIsActive.UncheckedState.InnerBorderRadius = 9;
+            this.gtswIsActive.UncheckedState.InnerBorderRadius = 8;
             this.gtswIsActive.UncheckedState.InnerColor = System.Drawing.Color.Gray;
             // 
             // guna2Panel2
@@ -150,61 +141,85 @@ namespace MoneyMindManager_Presentation.Users
             this.guna2Panel2.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.guna2Panel2.BorderRadius = 20;
             this.guna2Panel2.BorderThickness = 2;
-            this.guna2Panel2.Controls.Add(this.gbtnSave);
-            this.guna2Panel2.Controls.Add(this.gpnlUserPart);
-            this.guna2Panel2.Controls.Add(this.ctrlPersonCardWithFilter1);
             this.guna2Panel2.Controls.Add(this.gbtnClose);
+            this.guna2Panel2.Controls.Add(this.gpnlUserPart);
+            this.guna2Panel2.Controls.Add(this.gbtnSave);
+            this.guna2Panel2.Controls.Add(this.ctrlPersonCardWithFilter1);
             this.guna2Panel2.FillColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.guna2Panel2.Location = new System.Drawing.Point(52, 108);
+            this.guna2Panel2.Location = new System.Drawing.Point(89, 88);
             this.guna2Panel2.Name = "guna2Panel2";
             this.guna2Panel2.ShadowDecoration.Color = System.Drawing.Color.Transparent;
             this.guna2Panel2.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(0, 0, 5, 5);
-            this.guna2Panel2.Size = new System.Drawing.Size(1114, 556);
+            this.guna2Panel2.Size = new System.Drawing.Size(1046, 556);
             this.guna2Panel2.TabIndex = 11;
             // 
-            // gbtnSave
+            // gbtnClose
             // 
-            this.gbtnSave.Animated = true;
-            this.gbtnSave.AutoRoundedCorners = true;
-            this.gbtnSave.BackColor = System.Drawing.Color.Transparent;
-            this.gbtnSave.BorderColor = System.Drawing.Color.DimGray;
-            this.gbtnSave.BorderThickness = 1;
-            this.gbtnSave.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.gbtnSave.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.gbtnSave.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.gbtnSave.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.gbtnSave.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.gbtnSave.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.gbtnSave.FillColor = System.Drawing.Color.White;
-            this.gbtnSave.FocusedColor = System.Drawing.SystemColors.MenuHighlight;
-            this.gbtnSave.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbtnSave.ForeColor = System.Drawing.Color.Black;
-            this.gbtnSave.HoverState.FillColor = System.Drawing.Color.SlateBlue;
-            this.gbtnSave.HoverState.ForeColor = System.Drawing.Color.White;
-            this.gbtnSave.Image = ((System.Drawing.Image)(resources.GetObject("gbtnSave.Image")));
-            this.gbtnSave.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.gbtnSave.ImageOffset = new System.Drawing.Point(10, 0);
-            this.gbtnSave.ImageSize = new System.Drawing.Size(30, 30);
-            this.gbtnSave.IndicateFocus = true;
-            this.gbtnSave.Location = new System.Drawing.Point(66, 415);
-            this.gbtnSave.Name = "gbtnSave";
-            this.gbtnSave.PressedColor = System.Drawing.Color.White;
-            this.gbtnSave.Size = new System.Drawing.Size(363, 45);
-            this.gbtnSave.TabIndex = 4;
-            this.gbtnSave.Text = "حفظ";
-            this.gbtnSave.Click += new System.EventHandler(this.gbtnSave_Click);
+            this.gbtnClose.Animated = true;
+            this.gbtnClose.AutoRoundedCorners = true;
+            this.gbtnClose.BackColor = System.Drawing.Color.Transparent;
+            this.gbtnClose.BorderColor = System.Drawing.Color.DimGray;
+            this.gbtnClose.BorderThickness = 1;
+            this.gbtnClose.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gbtnClose.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnClose.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnClose.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.gbtnClose.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.gbtnClose.FillColor = System.Drawing.Color.White;
+            this.gbtnClose.FocusedColor = System.Drawing.SystemColors.MenuHighlight;
+            this.gbtnClose.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.gbtnClose.ForeColor = System.Drawing.Color.Black;
+            this.gbtnClose.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(102)))), ((int)(((byte)(194)))));
+            this.gbtnClose.HoverState.Font = new System.Drawing.Font("Segoe UI", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnClose.HoverState.ForeColor = System.Drawing.Color.White;
+            this.gbtnClose.Image = ((System.Drawing.Image)(resources.GetObject("gbtnClose.Image")));
+            this.gbtnClose.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.gbtnClose.ImageSize = new System.Drawing.Size(25, 25);
+            this.gbtnClose.IndicateFocus = true;
+            this.gbtnClose.Location = new System.Drawing.Point(73, 484);
+            this.gbtnClose.Name = "gbtnClose";
+            this.gbtnClose.PressedColor = System.Drawing.Color.White;
+            this.gbtnClose.Size = new System.Drawing.Size(337, 41);
+            this.gbtnClose.TabIndex = 120;
+            this.gbtnClose.Text = "غلق";
+            this.gbtnClose.Click += new System.EventHandler(this.gbtnClose_Click);
             // 
             // gpnlUserPart
             // 
+            this.gpnlUserPart.Controls.Add(this.label5);
+            this.gpnlUserPart.Controls.Add(this.label3);
             this.gpnlUserPart.Controls.Add(this.lbluserMessage);
             this.gpnlUserPart.Controls.Add(this.guna2Panel1);
             this.gpnlUserPart.Controls.Add(this.kgtxtUserName);
             this.gpnlUserPart.Controls.Add(this.kgtxtNotes);
             this.gpnlUserPart.Controls.Add(this.gpnlPasswordPart);
-            this.gpnlUserPart.Location = new System.Drawing.Point(13, 24);
+            this.gpnlUserPart.Location = new System.Drawing.Point(9, 16);
             this.gpnlUserPart.Name = "gpnlUserPart";
             this.gpnlUserPart.Size = new System.Drawing.Size(456, 413);
             this.gpnlUserPart.TabIndex = 14;
+            this.gpnlUserPart.Paint += new System.Windows.Forms.PaintEventHandler(this.gpnlUserPart_Paint);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(314, 94);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(87, 17);
+            this.label5.TabIndex = 122;
+            this.label5.Text = "اسم المستخدم";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(344, 148);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(57, 17);
+            this.label3.TabIndex = 123;
+            this.label3.Text = "ملاحظات";
             // 
             // lbluserMessage
             // 
@@ -247,22 +262,28 @@ namespace MoneyMindManager_Presentation.Users
             0,
             0,
             0});
+            this.kgtxtUserName.NumberProperties.DecimalNumberProperties.MaxValueIncluded = true;
             this.kgtxtUserName.NumberProperties.DecimalNumberProperties.MaxValueOption = false;
             this.kgtxtUserName.NumberProperties.DecimalNumberProperties.MinValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
+            this.kgtxtUserName.NumberProperties.DecimalNumberProperties.MinValueIncluded = true;
             this.kgtxtUserName.NumberProperties.DecimalNumberProperties.MinValueOption = false;
             this.kgtxtUserName.NumberProperties.FloatNumberProperties.AllowNegative = true;
             this.kgtxtUserName.NumberProperties.FloatNumberProperties.MaxValue = 0F;
+            this.kgtxtUserName.NumberProperties.FloatNumberProperties.MaxValueIncluded = true;
             this.kgtxtUserName.NumberProperties.FloatNumberProperties.MaxValueOption = false;
             this.kgtxtUserName.NumberProperties.FloatNumberProperties.MinValue = 0F;
+            this.kgtxtUserName.NumberProperties.FloatNumberProperties.MinValueIncluded = true;
             this.kgtxtUserName.NumberProperties.FloatNumberProperties.MinValueOption = false;
             this.kgtxtUserName.NumberProperties.IntegerNumberProperties.AllowNegative = true;
             this.kgtxtUserName.NumberProperties.IntegerNumberProperties.MaxValue = 0;
+            this.kgtxtUserName.NumberProperties.IntegerNumberProperties.MaxValueIncluded = true;
             this.kgtxtUserName.NumberProperties.IntegerNumberProperties.MaxValueOption = false;
             this.kgtxtUserName.NumberProperties.IntegerNumberProperties.MinValue = 0;
+            this.kgtxtUserName.NumberProperties.IntegerNumberProperties.MinValueIncluded = true;
             this.kgtxtUserName.NumberProperties.IntegerNumberProperties.MinValueOption = false;
             this.kgtxtUserName.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
             this.kgtxtUserName.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
@@ -276,6 +297,11 @@ namespace MoneyMindManager_Presentation.Users
             this.kgtxtUserName.Size = new System.Drawing.Size(337, 41);
             this.kgtxtUserName.TabIndex = 0;
             this.kgtxtUserName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.kgtxtUserName.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
+            this.kgtxtUserName.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.kgtxtUserName.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
+            this.kgtxtUserName.TextProperties.DateTimeProperties.TimeFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enTimeFormate.None;
+            this.kgtxtUserName.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
             this.kgtxtUserName.TextProperties.MinLength = ((short)(0));
             this.kgtxtUserName.TextProperties.MinLengthOption = false;
             this.kgtxtUserName.TextProperties.PhoneProperties.AllowPlusSign = true;
@@ -319,22 +345,28 @@ namespace MoneyMindManager_Presentation.Users
             0,
             0,
             0});
+            this.kgtxtNotes.NumberProperties.DecimalNumberProperties.MaxValueIncluded = true;
             this.kgtxtNotes.NumberProperties.DecimalNumberProperties.MaxValueOption = false;
             this.kgtxtNotes.NumberProperties.DecimalNumberProperties.MinValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
+            this.kgtxtNotes.NumberProperties.DecimalNumberProperties.MinValueIncluded = true;
             this.kgtxtNotes.NumberProperties.DecimalNumberProperties.MinValueOption = false;
             this.kgtxtNotes.NumberProperties.FloatNumberProperties.AllowNegative = true;
             this.kgtxtNotes.NumberProperties.FloatNumberProperties.MaxValue = 0F;
+            this.kgtxtNotes.NumberProperties.FloatNumberProperties.MaxValueIncluded = true;
             this.kgtxtNotes.NumberProperties.FloatNumberProperties.MaxValueOption = false;
             this.kgtxtNotes.NumberProperties.FloatNumberProperties.MinValue = 0F;
+            this.kgtxtNotes.NumberProperties.FloatNumberProperties.MinValueIncluded = true;
             this.kgtxtNotes.NumberProperties.FloatNumberProperties.MinValueOption = false;
             this.kgtxtNotes.NumberProperties.IntegerNumberProperties.AllowNegative = true;
             this.kgtxtNotes.NumberProperties.IntegerNumberProperties.MaxValue = 0;
+            this.kgtxtNotes.NumberProperties.IntegerNumberProperties.MaxValueIncluded = true;
             this.kgtxtNotes.NumberProperties.IntegerNumberProperties.MaxValueOption = false;
             this.kgtxtNotes.NumberProperties.IntegerNumberProperties.MinValue = 0;
+            this.kgtxtNotes.NumberProperties.IntegerNumberProperties.MinValueIncluded = true;
             this.kgtxtNotes.NumberProperties.IntegerNumberProperties.MinValueOption = false;
             this.kgtxtNotes.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
             this.kgtxtNotes.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
@@ -348,6 +380,11 @@ namespace MoneyMindManager_Presentation.Users
             this.kgtxtNotes.Size = new System.Drawing.Size(337, 107);
             this.kgtxtNotes.TabIndex = 1;
             this.kgtxtNotes.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.kgtxtNotes.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
+            this.kgtxtNotes.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.kgtxtNotes.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
+            this.kgtxtNotes.TextProperties.DateTimeProperties.TimeFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enTimeFormate.None;
+            this.kgtxtNotes.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
             this.kgtxtNotes.TextProperties.MinLength = ((short)(0));
             this.kgtxtNotes.TextProperties.MinLengthOption = false;
             this.kgtxtNotes.TextProperties.PhoneProperties.AllowPlusSign = true;
@@ -401,22 +438,28 @@ namespace MoneyMindManager_Presentation.Users
             0,
             0,
             0});
+            this.kgtxtConfirmPassword.NumberProperties.DecimalNumberProperties.MaxValueIncluded = true;
             this.kgtxtConfirmPassword.NumberProperties.DecimalNumberProperties.MaxValueOption = false;
             this.kgtxtConfirmPassword.NumberProperties.DecimalNumberProperties.MinValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
+            this.kgtxtConfirmPassword.NumberProperties.DecimalNumberProperties.MinValueIncluded = true;
             this.kgtxtConfirmPassword.NumberProperties.DecimalNumberProperties.MinValueOption = false;
             this.kgtxtConfirmPassword.NumberProperties.FloatNumberProperties.AllowNegative = true;
             this.kgtxtConfirmPassword.NumberProperties.FloatNumberProperties.MaxValue = 0F;
+            this.kgtxtConfirmPassword.NumberProperties.FloatNumberProperties.MaxValueIncluded = true;
             this.kgtxtConfirmPassword.NumberProperties.FloatNumberProperties.MaxValueOption = false;
             this.kgtxtConfirmPassword.NumberProperties.FloatNumberProperties.MinValue = 0F;
+            this.kgtxtConfirmPassword.NumberProperties.FloatNumberProperties.MinValueIncluded = true;
             this.kgtxtConfirmPassword.NumberProperties.FloatNumberProperties.MinValueOption = false;
             this.kgtxtConfirmPassword.NumberProperties.IntegerNumberProperties.AllowNegative = true;
             this.kgtxtConfirmPassword.NumberProperties.IntegerNumberProperties.MaxValue = 0;
+            this.kgtxtConfirmPassword.NumberProperties.IntegerNumberProperties.MaxValueIncluded = true;
             this.kgtxtConfirmPassword.NumberProperties.IntegerNumberProperties.MaxValueOption = false;
             this.kgtxtConfirmPassword.NumberProperties.IntegerNumberProperties.MinValue = 0;
+            this.kgtxtConfirmPassword.NumberProperties.IntegerNumberProperties.MinValueIncluded = true;
             this.kgtxtConfirmPassword.NumberProperties.IntegerNumberProperties.MinValueOption = false;
             this.kgtxtConfirmPassword.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
             this.kgtxtConfirmPassword.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
@@ -430,6 +473,11 @@ namespace MoneyMindManager_Presentation.Users
             this.kgtxtConfirmPassword.Size = new System.Drawing.Size(337, 41);
             this.kgtxtConfirmPassword.TabIndex = 3;
             this.kgtxtConfirmPassword.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.kgtxtConfirmPassword.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
+            this.kgtxtConfirmPassword.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.kgtxtConfirmPassword.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
+            this.kgtxtConfirmPassword.TextProperties.DateTimeProperties.TimeFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enTimeFormate.None;
+            this.kgtxtConfirmPassword.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
             this.kgtxtConfirmPassword.TextProperties.MinLength = ((short)(4));
             this.kgtxtConfirmPassword.TextProperties.MinLengthOption = false;
             this.kgtxtConfirmPassword.TextProperties.PhoneProperties.AllowPlusSign = true;
@@ -477,22 +525,28 @@ namespace MoneyMindManager_Presentation.Users
             0,
             0,
             0});
+            this.kgtxtpassword.NumberProperties.DecimalNumberProperties.MaxValueIncluded = true;
             this.kgtxtpassword.NumberProperties.DecimalNumberProperties.MaxValueOption = false;
             this.kgtxtpassword.NumberProperties.DecimalNumberProperties.MinValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
+            this.kgtxtpassword.NumberProperties.DecimalNumberProperties.MinValueIncluded = true;
             this.kgtxtpassword.NumberProperties.DecimalNumberProperties.MinValueOption = false;
             this.kgtxtpassword.NumberProperties.FloatNumberProperties.AllowNegative = true;
             this.kgtxtpassword.NumberProperties.FloatNumberProperties.MaxValue = 0F;
+            this.kgtxtpassword.NumberProperties.FloatNumberProperties.MaxValueIncluded = true;
             this.kgtxtpassword.NumberProperties.FloatNumberProperties.MaxValueOption = false;
             this.kgtxtpassword.NumberProperties.FloatNumberProperties.MinValue = 0F;
+            this.kgtxtpassword.NumberProperties.FloatNumberProperties.MinValueIncluded = true;
             this.kgtxtpassword.NumberProperties.FloatNumberProperties.MinValueOption = false;
             this.kgtxtpassword.NumberProperties.IntegerNumberProperties.AllowNegative = true;
             this.kgtxtpassword.NumberProperties.IntegerNumberProperties.MaxValue = 0;
+            this.kgtxtpassword.NumberProperties.IntegerNumberProperties.MaxValueIncluded = true;
             this.kgtxtpassword.NumberProperties.IntegerNumberProperties.MaxValueOption = false;
             this.kgtxtpassword.NumberProperties.IntegerNumberProperties.MinValue = 0;
+            this.kgtxtpassword.NumberProperties.IntegerNumberProperties.MinValueIncluded = true;
             this.kgtxtpassword.NumberProperties.IntegerNumberProperties.MinValueOption = false;
             this.kgtxtpassword.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
             this.kgtxtpassword.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
@@ -506,6 +560,11 @@ namespace MoneyMindManager_Presentation.Users
             this.kgtxtpassword.Size = new System.Drawing.Size(337, 41);
             this.kgtxtpassword.TabIndex = 2;
             this.kgtxtpassword.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.kgtxtpassword.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
+            this.kgtxtpassword.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.kgtxtpassword.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
+            this.kgtxtpassword.TextProperties.DateTimeProperties.TimeFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enTimeFormate.None;
+            this.kgtxtpassword.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
             this.kgtxtpassword.TextProperties.MinLength = ((short)(4));
             this.kgtxtpassword.TextProperties.MinLengthOption = true;
             this.kgtxtpassword.TextProperties.PhoneProperties.AllowPlusSign = true;
@@ -519,56 +578,66 @@ namespace MoneyMindManager_Presentation.Users
             this.kgtxtpassword.IconRightClick += new System.EventHandler(this.kgtxtpassword_IconRightClick);
             this.kgtxtpassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.kgtxt_KeyPress);
             // 
+            // gbtnSave
+            // 
+            this.gbtnSave.Animated = true;
+            this.gbtnSave.AutoRoundedCorners = true;
+            this.gbtnSave.BackColor = System.Drawing.Color.Transparent;
+            this.gbtnSave.BorderColor = System.Drawing.Color.DimGray;
+            this.gbtnSave.BorderThickness = 1;
+            this.gbtnSave.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gbtnSave.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnSave.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnSave.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.gbtnSave.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.gbtnSave.FillColor = System.Drawing.Color.White;
+            this.gbtnSave.FocusedColor = System.Drawing.SystemColors.MenuHighlight;
+            this.gbtnSave.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.gbtnSave.ForeColor = System.Drawing.Color.Black;
+            this.gbtnSave.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(102)))), ((int)(((byte)(194)))));
+            this.gbtnSave.HoverState.Font = new System.Drawing.Font("Segoe UI", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnSave.HoverState.ForeColor = System.Drawing.Color.White;
+            this.gbtnSave.Image = ((System.Drawing.Image)(resources.GetObject("gbtnSave.Image")));
+            this.gbtnSave.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.gbtnSave.ImageSize = new System.Drawing.Size(25, 25);
+            this.gbtnSave.IndicateFocus = true;
+            this.gbtnSave.Location = new System.Drawing.Point(73, 435);
+            this.gbtnSave.Name = "gbtnSave";
+            this.gbtnSave.PressedColor = System.Drawing.Color.White;
+            this.gbtnSave.Size = new System.Drawing.Size(337, 41);
+            this.gbtnSave.TabIndex = 119;
+            this.gbtnSave.Text = "حفظ";
+            this.gbtnSave.Click += new System.EventHandler(this.gbtnSave_Click);
+            // 
+            // lblHeader
+            // 
+            this.lblHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblHeader.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold);
+            this.lblHeader.ForeColor = System.Drawing.Color.Black;
+            this.lblHeader.Location = new System.Drawing.Point(0, 0);
+            this.lblHeader.Name = "lblHeader";
+            this.lblHeader.Size = new System.Drawing.Size(1210, 50);
+            this.lblHeader.TabIndex = 37;
+            this.lblHeader.Text = "إضافة مستخدم";
+            this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // ctrlPersonCardWithFilter1
             // 
             this.ctrlPersonCardWithFilter1.BackColor = System.Drawing.Color.White;
             this.ctrlPersonCardWithFilter1.EnablityOfSearchPart = true;
-            this.ctrlPersonCardWithFilter1.Location = new System.Drawing.Point(475, 22);
+            this.ctrlPersonCardWithFilter1.Location = new System.Drawing.Point(468, 16);
             this.ctrlPersonCardWithFilter1.Name = "ctrlPersonCardWithFilter1";
-            this.ctrlPersonCardWithFilter1.Size = new System.Drawing.Size(624, 519);
+            this.ctrlPersonCardWithFilter1.Size = new System.Drawing.Size(575, 529);
             this.ctrlPersonCardWithFilter1.TabIndex = 13;
             this.ctrlPersonCardWithFilter1.OnSuccess += new System.Action(this.ctrlPersonCardWithFilter1_OnSuccess);
             this.ctrlPersonCardWithFilter1.OnFailed += new System.Action(this.ctrlPersonCardWithFilter1_OnFailed);
             this.ctrlPersonCardWithFilter1.OnEditingPerson += new System.Action(this.ctrlPersonCardWithFilter1_OnEditingPerson);
-            // 
-            // gbtnClose
-            // 
-            this.gbtnClose.Animated = true;
-            this.gbtnClose.AutoRoundedCorners = true;
-            this.gbtnClose.BackColor = System.Drawing.Color.Transparent;
-            this.gbtnClose.BorderColor = System.Drawing.Color.DimGray;
-            this.gbtnClose.BorderThickness = 1;
-            this.gbtnClose.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.gbtnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.gbtnClose.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.gbtnClose.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.gbtnClose.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.gbtnClose.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.gbtnClose.FillColor = System.Drawing.Color.White;
-            this.gbtnClose.FocusedColor = System.Drawing.SystemColors.MenuHighlight;
-            this.gbtnClose.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbtnClose.ForeColor = System.Drawing.Color.Black;
-            this.gbtnClose.HoverState.FillColor = System.Drawing.Color.SlateBlue;
-            this.gbtnClose.HoverState.ForeColor = System.Drawing.Color.White;
-            this.gbtnClose.Image = ((System.Drawing.Image)(resources.GetObject("gbtnClose.Image")));
-            this.gbtnClose.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.gbtnClose.ImageOffset = new System.Drawing.Point(10, 0);
-            this.gbtnClose.ImageSize = new System.Drawing.Size(30, 30);
-            this.gbtnClose.IndicateFocus = true;
-            this.gbtnClose.Location = new System.Drawing.Point(66, 474);
-            this.gbtnClose.Name = "gbtnClose";
-            this.gbtnClose.PressedColor = System.Drawing.Color.White;
-            this.gbtnClose.Size = new System.Drawing.Size(363, 45);
-            this.gbtnClose.TabIndex = 5;
-            this.gbtnClose.Text = "غلق";
-            this.gbtnClose.Click += new System.EventHandler(this.gbtnClose_Click);
             // 
             // frmAddUpdateUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.CancelButton = this.gbtnClose;
             this.ClientSize = new System.Drawing.Size(1210, 737);
             this.Controls.Add(this.lblHeader);
             this.Controls.Add(this.guna2Panel2);
@@ -581,6 +650,7 @@ namespace MoneyMindManager_Presentation.Users
             this.guna2Panel1.PerformLayout();
             this.guna2Panel2.ResumeLayout(false);
             this.gpnlUserPart.ResumeLayout(false);
+            this.gpnlUserPart.PerformLayout();
             this.gpnlPasswordPart.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -589,7 +659,6 @@ namespace MoneyMindManager_Presentation.Users
         #endregion
 
         private System.Windows.Forms.ErrorProvider errorProvider1;
-        private System.Windows.Forms.Label lblHeader;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         private System.Windows.Forms.Label lblUserID;
@@ -602,9 +671,12 @@ namespace MoneyMindManager_Presentation.Users
         private KhaledControlLibrary1.KhaledGuna2TextBox kgtxtpassword;
         private KhaledControlLibrary1.KhaledGuna2TextBox kgtxtConfirmPassword;
         private Guna.UI2.WinForms.Guna2Panel gpnlUserPart;
-        private Guna.UI2.WinForms.Guna2Button gbtnClose;
-        private Guna.UI2.WinForms.Guna2Button gbtnSave;
         private Guna.UI2.WinForms.Guna2Panel gpnlPasswordPart;
         private System.Windows.Forms.Label lbluserMessage;
+        private System.Windows.Forms.Label lblHeader;
+        private Guna.UI2.WinForms.Guna2Button gbtnClose;
+        private Guna.UI2.WinForms.Guna2Button gbtnSave;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label3;
     }
 }

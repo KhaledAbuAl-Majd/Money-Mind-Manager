@@ -48,7 +48,7 @@
             this.guna2Panel2.Name = "guna2Panel2";
             this.guna2Panel2.ShadowDecoration.Color = System.Drawing.Color.Transparent;
             this.guna2Panel2.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(0, 0, 5, 5);
-            this.guna2Panel2.Size = new System.Drawing.Size(672, 527);
+            this.guna2Panel2.Size = new System.Drawing.Size(672, 541);
             this.guna2Panel2.TabIndex = 12;
             // 
             // gbtnClose
@@ -74,7 +74,7 @@
             this.gbtnClose.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnClose.ImageSize = new System.Drawing.Size(25, 25);
             this.gbtnClose.IndicateFocus = true;
-            this.gbtnClose.Location = new System.Drawing.Point(502, 469);
+            this.gbtnClose.Location = new System.Drawing.Point(509, 483);
             this.gbtnClose.Name = "gbtnClose";
             this.gbtnClose.PressedColor = System.Drawing.Color.White;
             this.gbtnClose.Size = new System.Drawing.Size(128, 45);
@@ -98,7 +98,7 @@
             this.ctrlPersonCard1.BackColor = System.Drawing.Color.White;
             this.ctrlPersonCard1.Location = new System.Drawing.Point(300, 140);
             this.ctrlPersonCard1.Name = "ctrlPersonCard1";
-            this.ctrlPersonCard1.Size = new System.Drawing.Size(602, 432);
+            this.ctrlPersonCard1.Size = new System.Drawing.Size(602, 446);
             this.ctrlPersonCard1.TabIndex = 0;
             this.ctrlPersonCard1.OnEditingPerson += new System.Action(this.ctrlPersonCard1_OnEditingPerson);
             // 

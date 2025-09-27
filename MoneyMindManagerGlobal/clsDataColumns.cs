@@ -404,6 +404,23 @@ namespace MoneyMindManagerGlobal
                 }
 
             }
+
+            public class clsGetAllCategories
+            {
+                public DataTable dtCategories;
+
+                public short NumberOfPages = 0;
+
+                public int RecordsCount = 0;
+
+
+                public clsGetAllCategories(DataTable dtCategories, short numberOfPages, int recordsCount)
+                {
+                    this.dtCategories = dtCategories;
+                    this.NumberOfPages = numberOfPages;
+                    this.RecordsCount = recordsCount;
+                }
+            }
         }
 
         public static class clsIncomeAndExpenseVoucherClasses
@@ -486,6 +503,28 @@ namespace MoneyMindManagerGlobal
                     this.VoucherValue = 0;
                 }
 
+            }
+
+            public class clsGetAllVouchers
+            {
+                public DataTable dtVouchers;
+
+                public short NumberOfPages = 0;
+
+                public int RecordsCount = 0;
+
+                public decimal TotalVouchersValue;
+
+                public decimal CurrentPageVouchersValue;
+
+                public clsGetAllVouchers(DataTable dtVouchers, short numberOfPages, int recordsCount,decimal totalVouchersValue,decimal currentPageVouchersValue)
+                {
+                    this.dtVouchers = dtVouchers;
+                    this.NumberOfPages = numberOfPages;
+                    this.RecordsCount = recordsCount;
+                    this.TotalVouchersValue = totalVouchersValue;
+                    this.CurrentPageVouchersValue = currentPageVouchersValue;
+                }
             }
         }
 

@@ -651,90 +651,28 @@ namespace MoneyMindManager_DataAccess
         }
 
         /// <summary>
-        /// Get All Users For Account Using Paging [10 rows per page]
+        /// Get All Users For Account Using Paging [10 rows per page], if variable is null will not filter by it
         /// </summary>
-        /// <param name="accountID">The current AccountID</param>
-        /// <param name="pageNumber">The page Number you want to get rows of it</param>
-        /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
-        /// <returns>object of clsGetAllPeople : if error happend, return null</returns>
-        public static async Task<clsGetAllUsers> GetAllUsers(short accountID, short pageNumber, bool RaiseEventOnErrorOccured = true)
-        {
-            clsGetAllUsers allPeople = null;
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
-                {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_GetAllUsers]", connection))
-                    {
-                        command.CommandType = CommandType.StoredProcedure;
-
-                        command.Parameters.AddWithValue("@AccountID", accountID);
-                        command.Parameters.AddWithValue("@PageNumber", pageNumber);
-
-                        SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.SmallInt)
-                        {
-                            Direction = ParameterDirection.Output
-                        };
-
-                        SqlParameter outputRecordsCount = new SqlParameter("@RecordsCount", SqlDbType.Int)
-                        {
-                            Direction = ParameterDirection.Output
-                        };
-
-                        command.Parameters.Add(outputNumberOfPages);
-                        command.Parameters.Add(outputRecordsCount);
-
-                        await connection.OpenAsync();
-
-                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
-                        {
-                            DataTable dtPeople = new DataTable();
-                            dtPeople.Load(reader);
-                            short numberOfPages = Convert.ToInt16(outputNumberOfPages.Value);
-                            short recordsCount = Convert.ToInt16(outputRecordsCount.Value);
-
-                            allPeople = new clsGetAllUsers(dtPeople, numberOfPages, recordsCount);
-                        }
-                    }
-                }
-
-                if (allPeople == null)
-                    throw new Exception("فشلت العملية");
-            }
-            catch (Exception ex)
-            {
-                allPeople = null;
-
-                if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
-            }
-
-            return allPeople;
-        }
-
-        /// <summary>
-        /// Get All Users By UserID For Account Using Paging [10 rows per page]
-        /// </summary>
-        /// <param name="accountID">The current AccountID</param>
-        /// <param name="pageNumber">The page Number you want to get rows of it</param>
-        /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>object of clsGetAllUsers : if error happend, return null</returns>
-        public static async Task<clsGetAllUsers> GetAllUsersByUserID(short accountID, short pageNumber,int userID, bool RaiseEventOnErrorOccured = true)
+        public static async Task<clsGetAllUsers> GetAllUsers(int? userID,string userName,string personName,
+            bool? isActive, short pageNumber,int currentUserID, bool RaiseEventOnErrorOccured = true)
         {
-            clsGetAllUsers allPeople = null;
+            clsGetAllUsers allUsers = null;
 
             try
             {
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_GetAllUsersByUserID]", connection))
+                    using (SqlCommand command = new SqlCommand("[dbo].[SP_Users_GetAll]", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
 
-                        command.Parameters.AddWithValue("@AccountID", accountID);
-                        command.Parameters.AddWithValue("@PageNumber", pageNumber);
-                        command.Parameters.AddWithValue("@UserID", userID);
+                        command.Parameters.AddWithValue("@UserID", (object)userID ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@UserName", string.IsNullOrWhiteSpace(userName) ? DBNull.Value : (object)userName);
+                        command.Parameters.AddWithValue("@PersonName", string.IsNullOrWhiteSpace(personName) ? DBNull.Value : (object)personName);
+                        command.Parameters.AddWithValue("@IsActive", (object)isActive ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@CurrentUserID", currentUserID); 
+                        command.Parameters.AddWithValue("@PageNumber", pageNumber);  
 
                         SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.SmallInt)
                         {
@@ -753,220 +691,28 @@ namespace MoneyMindManager_DataAccess
 
                         using (SqlDataReader reader = await command.ExecuteReaderAsync())
                         {
-                            DataTable dtPeople = new DataTable();
-                            dtPeople.Load(reader);
+                            DataTable dtUsers = new DataTable();
+                            dtUsers.Load(reader);
                             short numberOfPages = Convert.ToInt16(outputNumberOfPages.Value);
                             short recordsCount = Convert.ToInt16(outputRecordsCount.Value);
 
-                            allPeople = new clsGetAllUsers(dtPeople, numberOfPages, recordsCount);
+                            allUsers = new clsGetAllUsers(dtUsers, numberOfPages, recordsCount);
                         }
                     }
                 }
 
-                if (allPeople == null)
+                if (allUsers == null)
                     throw new Exception("فشلت العملية");
             }
             catch (Exception ex)
             {
-                allPeople = null;
+                allUsers = null;
 
                 if (RaiseEventOnErrorOccured)
                     clsGlobalEvents.RaiseEvent(ex.Message, true);
             }
 
-            return allPeople;
-        }
-
-        /// <summary>
-        /// Get All Users By UserName For Account Using Paging [10 rows per page]
-        /// </summary>
-        /// <param name="accountID">The current AccountID</param>
-        /// <param name="pageNumber">The page Number you want to get rows of it</param>
-        /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
-        /// <returns>object of clsGetAllUsers : if error happend, return null</returns>
-        public static async Task<clsGetAllUsers> GetAllUsersByUserName(short accountID, short pageNumber,string userName, bool RaiseEventOnErrorOccured = true)
-        {
-            clsGetAllUsers allPeople = null;
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
-                {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_GetAllUsersByUserName]", connection))
-                    {
-                        command.CommandType = CommandType.StoredProcedure;
-
-                        command.Parameters.AddWithValue("@AccountID", accountID);
-                        command.Parameters.AddWithValue("@PageNumber", pageNumber);
-                        command.Parameters.AddWithValue("@UserName", userName);
-
-                        SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.SmallInt)
-                        {
-                            Direction = ParameterDirection.Output
-                        };
-
-                        SqlParameter outputRecordsCount = new SqlParameter("@RecordsCount", SqlDbType.Int)
-                        {
-                            Direction = ParameterDirection.Output
-                        };
-
-                        command.Parameters.Add(outputNumberOfPages);
-                        command.Parameters.Add(outputRecordsCount);
-
-                        await connection.OpenAsync();
-
-                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
-                        {
-                            DataTable dtPeople = new DataTable();
-                            dtPeople.Load(reader);
-                            short numberOfPages = Convert.ToInt16(outputNumberOfPages.Value);
-                            short recordsCount = Convert.ToInt16(outputRecordsCount.Value);
-
-                            allPeople = new clsGetAllUsers(dtPeople, numberOfPages, recordsCount);
-                        }
-                    }
-                }
-
-                if (allPeople == null)
-                    throw new Exception("فشلت العملية");
-            }
-            catch (Exception ex)
-            {
-                allPeople = null;
-
-                if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
-            }
-
-            return allPeople;
-        }
-
-        /// <summary>
-        /// Get All Users By personName For Account Using Paging [10 rows per page]
-        /// </summary>
-        /// <param name="accountID">The current AccountID</param>
-        /// <param name="pageNumber">The page Number you want to get rows of it</param>
-        /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
-        /// <returns>object of clsGetAllUsers : if error happend, return null</returns>
-        public static async Task<clsGetAllUsers> GetAllUsersByPersonName(short accountID, short pageNumber,string personName, bool RaiseEventOnErrorOccured = true)
-        {
-            clsGetAllUsers allPeople = null;
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
-                {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_GetAllUsersByPersonName]", connection))
-                    {
-                        command.CommandType = CommandType.StoredProcedure;
-
-                        command.Parameters.AddWithValue("@AccountID", accountID);
-                        command.Parameters.AddWithValue("@PageNumber", pageNumber);
-                        command.Parameters.AddWithValue("@PersonName", personName);
-
-                        SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.SmallInt)
-                        {
-                            Direction = ParameterDirection.Output
-                        };
-
-                        SqlParameter outputRecordsCount = new SqlParameter("@RecordsCount", SqlDbType.Int)
-                        {
-                            Direction = ParameterDirection.Output
-                        };
-
-                        command.Parameters.Add(outputNumberOfPages);
-                        command.Parameters.Add(outputRecordsCount);
-
-                        await connection.OpenAsync();
-
-                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
-                        {
-                            DataTable dtPeople = new DataTable();
-                            dtPeople.Load(reader);
-                            short numberOfPages = Convert.ToInt16(outputNumberOfPages.Value);
-                            short recordsCount = Convert.ToInt16(outputRecordsCount.Value);
-
-                            allPeople = new clsGetAllUsers(dtPeople, numberOfPages, recordsCount);
-                        }
-                    }
-                }
-
-                if (allPeople == null)
-                    throw new Exception("فشلت العملية");
-            }
-            catch (Exception ex)
-            {
-                allPeople = null;
-
-                if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
-            }
-
-            return allPeople;
-        }
-
-        /// <summary>
-        /// Get All Users By IsActive For Account Using Paging [10 rows per page]
-        /// </summary>
-        /// <param name="accountID">The current AccountID</param>
-        /// <param name="pageNumber">The page Number you want to get rows of it</param>
-        /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
-        /// <returns>object of clsGetAllUsers : if error happend, return null</returns>
-        public static async Task<clsGetAllUsers> GetAllUsersByIsActive(short accountID, short pageNumber,bool isActive, bool RaiseEventOnErrorOccured = true)
-        {
-            clsGetAllUsers allPeople = null;
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
-                {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_GetAllUsersByIsActive]", connection))
-                    {
-                        command.CommandType = CommandType.StoredProcedure;
-
-                        command.Parameters.AddWithValue("@AccountID", accountID);
-                        command.Parameters.AddWithValue("@PageNumber", pageNumber);
-                        command.Parameters.AddWithValue("@IsActive", isActive);
-
-                        SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.SmallInt)
-                        {
-                            Direction = ParameterDirection.Output
-                        };
-
-                        SqlParameter outputRecordsCount = new SqlParameter("@RecordsCount", SqlDbType.Int)
-                        {
-                            Direction = ParameterDirection.Output
-                        };
-
-                        command.Parameters.Add(outputNumberOfPages);
-                        command.Parameters.Add(outputRecordsCount);
-
-                        await connection.OpenAsync();
-
-                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
-                        {
-                            DataTable dtPeople = new DataTable();
-                            dtPeople.Load(reader);
-                            short numberOfPages = Convert.ToInt16(outputNumberOfPages.Value);
-                            short recordsCount = Convert.ToInt16(outputRecordsCount.Value);
-
-                            allPeople = new clsGetAllUsers(dtPeople, numberOfPages, recordsCount);
-                        }
-                    }
-                }
-
-                if (allPeople == null)
-                    throw new Exception("فشلت العملية");
-            }
-            catch (Exception ex)
-            {
-                allPeople = null;
-
-                if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
-            }
-
-            return allPeople;
+            return allUsers;
         }
     }
 }

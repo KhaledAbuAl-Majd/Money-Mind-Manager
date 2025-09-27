@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MoneyMindManagerGlobal;
 using static MoneyMindManagerGlobal.clsDataColumns.clsIncomeAndExpenseCategoriesClasses;
+using static MoneyMindManagerGlobal.clsDataColumns.clsIncomeAndExpenseVoucherClasses;
 using static MoneyMindManagerGlobal.clsDataColumns.PersonClasses;
 
 namespace MoneyMindManager_DataAccess
@@ -343,7 +344,7 @@ namespace MoneyMindManager_DataAccess
         /// <param name="categoryName">if null => don't search by it, else => search by it</param>
         /// <param name="isIncome">if null => don't search by it, else => search by it</param>
         /// <returns></returns>
-        public static async Task<DataTable> GetAllCategoriesForSearch(string categoryName,bool? isIncome, int currentUserID, bool RaiseEventOnErrorOccured = true)
+        public static async Task<DataTable> GetAllCategoriesForSelect(string categoryName,bool? isIncome, int currentUserID, bool RaiseEventOnErrorOccured = true)
         {
             DataTable dtCategories = null;
 
@@ -351,7 +352,7 @@ namespace MoneyMindManager_DataAccess
             {
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_IncomeAndExpenseCategories_GetAllForSearch]", connection))
+                    using (SqlCommand command = new SqlCommand("SP_IncomeAndExpenseCategories_GetAllForSelectOne", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
 
@@ -381,6 +382,75 @@ namespace MoneyMindManager_DataAccess
             }
 
             return dtCategories;
+        }
+
+        /// <summary>
+        /// if variable is null will not filter by it
+        /// </summary>
+        public static async Task<clsGetAllCategories> GetAllCategories(int? categoryID, string categoryName,string parentCategoryName,
+            string mainCategoryName, bool? isIncome, bool? isActive,bool includeMainCategories,bool includeSubCategories,
+            int currentUserID, short pageNumber, bool RaiseEventOnErrorOccured = true)
+        {
+            clsGetAllCategories allCategories = null;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("[dbo].[SP_IncomeAndExpenseCategories_GetAll]", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("@CategoryID", (object)categoryID ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@CategoryName", string.IsNullOrWhiteSpace(categoryName) ? DBNull.Value : (object)categoryName);
+                        command.Parameters.AddWithValue("@ParentCategoryName", string.IsNullOrWhiteSpace(parentCategoryName) ? DBNull.Value : (object)parentCategoryName);
+                        command.Parameters.AddWithValue("@MainCategoryName", string.IsNullOrWhiteSpace(mainCategoryName) ? DBNull.Value : (object)mainCategoryName);
+                        command.Parameters.AddWithValue("@IsIncome", (object)isIncome ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@IsActive", (object)isActive ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@IncludeMainCategories", includeMainCategories);
+                        command.Parameters.AddWithValue("@IncludeSubCategories", includeSubCategories);
+                        command.Parameters.AddWithValue("@CurrentUserID", currentUserID);
+                        command.Parameters.AddWithValue("@PageNumber", pageNumber);
+
+                        SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.SmallInt)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+
+                        SqlParameter outputRecordsCount = new SqlParameter("@RecordsCount", SqlDbType.Int)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+
+                        command.Parameters.Add(outputNumberOfPages);
+                        command.Parameters.Add(outputRecordsCount);
+
+                        await connection.OpenAsync();
+
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            DataTable dtVouchers = new DataTable();
+                            dtVouchers.Load(reader);
+                            short numberOfPages = Convert.ToInt16(outputNumberOfPages.Value);
+                            short recordsCount = Convert.ToInt16(outputRecordsCount.Value);
+
+                            allCategories = new clsGetAllCategories(dtVouchers, numberOfPages, recordsCount);
+                        }
+                    }
+                }
+
+                if (allCategories == null)
+                    throw new Exception("فشلت العملية");
+            }
+            catch (Exception ex)
+            {
+                allCategories = null;
+
+                if (RaiseEventOnErrorOccured)
+                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+            }
+
+            return allCategories;
         }
     }
 }

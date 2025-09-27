@@ -60,13 +60,13 @@ namespace MoneyMindManager_Presentation.Users
         {
             lblUseID.Text = User.UserID.ToString();
             lblIsActive.Text = (User.IsActive) ? "فعال" : "موقوف";
-            lblCreatedDate.Text = clsFormat.DateToShort(User.CreatedDate);
+            klblCreatedDate.Text = clsFormat.DateToShort(User.CreatedDate);
             kgtxtUserName.Text = User.UserName;
             clsUser creatingUser = await User.GetCreatedbyUserInfo(Convert.ToInt32(clsGlobal_UI.CurrentUser.UserID));
             kgtxtUserNameOfCreatedUser.Text = creatingUser.UserName;
             kgtxtNotes.Text = User.Notes;
         }
-        private void gbtnEditPerson_Click(object sender, EventArgs e)
+        private void gbtnEditUser_Click(object sender, EventArgs e)
         {
             frmAddUpdateUser frm = new frmAddUpdateUser(Convert.ToInt32(User.UserID));
             frm.OnCloseAndSavedOrEditing += FrmAddUpdateUser_OnCloseAndSaved;
@@ -100,7 +100,7 @@ namespace MoneyMindManager_Presentation.Users
 
             lblUseID.Text = "N/A";
             lblIsActive.Text = "N/A";
-            lblCreatedDate.Text = "N/A";
+            klblCreatedDate.Text = "N/A";
             kgtxtUserName.Text = null;
             kgtxtUserNameOfCreatedUser.Text = null;
             kgtxtNotes.Text = null;

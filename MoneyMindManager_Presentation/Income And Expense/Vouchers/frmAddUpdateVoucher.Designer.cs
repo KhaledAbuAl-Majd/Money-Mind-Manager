@@ -42,7 +42,11 @@
             this.lblCurrentPageOfNumberOfPages = new System.Windows.Forms.Label();
             this.lblTotalRecordsNumber = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.gdgvPeople = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.gdgvTransactions = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.guna2ContextMenuStrip1 = new Guna.UI2.WinForms.Guna2ContextMenuStrip();
+            this.gtsmAddTransactions = new System.Windows.Forms.ToolStripMenuItem();
+            this.gtsmEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.gtsmDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.lblHeader = new System.Windows.Forms.Label();
             this.lblNoTransactionsFoundMessage = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
@@ -66,7 +70,10 @@
             this.label8 = new System.Windows.Forms.Label();
             this.kgtxtVoucherID = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.gdgvPeople)).BeginInit();
+            this.gibtnDeleteVoucher = new Guna.UI2.WinForms.Guna2ImageButton();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.gdgvTransactions)).BeginInit();
+            this.guna2ContextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -119,6 +126,7 @@
             this.gibtnPreviousPage.PressedState.ImageSize = new System.Drawing.Size(64, 64);
             this.gibtnPreviousPage.Size = new System.Drawing.Size(40, 42);
             this.gibtnPreviousPage.TabIndex = 35;
+            this.toolTip1.SetToolTip(this.gibtnPreviousPage, "الصفحة السابقة");
             this.gibtnPreviousPage.UseTransparentBackground = true;
             this.gibtnPreviousPage.Click += new System.EventHandler(this.gibtnPreviousPage_Click);
             // 
@@ -137,6 +145,7 @@
             this.gibtnNextPage.PressedState.ImageSize = new System.Drawing.Size(64, 64);
             this.gibtnNextPage.Size = new System.Drawing.Size(40, 42);
             this.gibtnNextPage.TabIndex = 34;
+            this.toolTip1.SetToolTip(this.gibtnNextPage, "الصفحة التالية");
             this.gibtnNextPage.UseTransparentBackground = true;
             this.gibtnNextPage.Click += new System.EventHandler(this.gibtnNextPage_Click);
             // 
@@ -172,21 +181,21 @@
             this.label1.TabIndex = 31;
             this.label1.Text = "# عدد الصفوف الكلية : ";
             // 
-            // gdgvPeople
+            // gdgvTransactions
             // 
-            this.gdgvPeople.AllowUserToAddRows = false;
-            this.gdgvPeople.AllowUserToDeleteRows = false;
-            this.gdgvPeople.AllowUserToResizeColumns = false;
-            this.gdgvPeople.AllowUserToResizeRows = false;
+            this.gdgvTransactions.AllowUserToAddRows = false;
+            this.gdgvTransactions.AllowUserToDeleteRows = false;
+            this.gdgvTransactions.AllowUserToResizeColumns = false;
+            this.gdgvTransactions.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Teal;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
-            this.gdgvPeople.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.gdgvPeople.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
-            this.gdgvPeople.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.gdgvPeople.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Raised;
+            this.gdgvTransactions.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.gdgvTransactions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
+            this.gdgvTransactions.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.gdgvTransactions.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Raised;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -194,9 +203,10 @@
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Menu;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gdgvPeople.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.gdgvPeople.ColumnHeadersHeight = 35;
-            this.gdgvPeople.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gdgvTransactions.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.gdgvTransactions.ColumnHeadersHeight = 35;
+            this.gdgvTransactions.ContextMenuStrip = this.guna2ContextMenuStrip1;
+            this.gdgvTransactions.Cursor = System.Windows.Forms.Cursors.Hand;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -205,14 +215,14 @@
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.Teal;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gdgvPeople.DefaultCellStyle = dataGridViewCellStyle3;
-            this.gdgvPeople.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.gdgvPeople.GridColor = System.Drawing.Color.White;
-            this.gdgvPeople.Location = new System.Drawing.Point(19, 245);
-            this.gdgvPeople.MultiSelect = false;
-            this.gdgvPeople.Name = "gdgvPeople";
-            this.gdgvPeople.ReadOnly = true;
-            this.gdgvPeople.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.gdgvTransactions.DefaultCellStyle = dataGridViewCellStyle3;
+            this.gdgvTransactions.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.gdgvTransactions.GridColor = System.Drawing.Color.White;
+            this.gdgvTransactions.Location = new System.Drawing.Point(19, 245);
+            this.gdgvTransactions.MultiSelect = false;
+            this.gdgvTransactions.Name = "gdgvTransactions";
+            this.gdgvTransactions.ReadOnly = true;
+            this.gdgvTransactions.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -220,39 +230,88 @@
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gdgvPeople.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.gdgvPeople.RowHeadersVisible = false;
-            this.gdgvPeople.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.gdgvPeople.RowTemplate.Height = 40;
-            this.gdgvPeople.Size = new System.Drawing.Size(1179, 422);
-            this.gdgvPeople.TabIndex = 30;
-            this.gdgvPeople.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
-            this.gdgvPeople.ThemeStyle.AlternatingRowsStyle.Font = null;
-            this.gdgvPeople.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty;
-            this.gdgvPeople.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty;
-            this.gdgvPeople.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty;
-            this.gdgvPeople.ThemeStyle.BackColor = System.Drawing.Color.White;
-            this.gdgvPeople.ThemeStyle.GridColor = System.Drawing.Color.White;
-            this.gdgvPeople.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            this.gdgvPeople.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Raised;
-            this.gdgvPeople.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gdgvPeople.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
-            this.gdgvPeople.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.gdgvPeople.ThemeStyle.HeaderStyle.Height = 35;
-            this.gdgvPeople.ThemeStyle.ReadOnly = true;
-            this.gdgvPeople.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
-            this.gdgvPeople.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.gdgvPeople.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gdgvPeople.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            this.gdgvPeople.ThemeStyle.RowsStyle.Height = 40;
-            this.gdgvPeople.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.gdgvPeople.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            this.gdgvTransactions.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.gdgvTransactions.RowHeadersVisible = false;
+            this.gdgvTransactions.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.gdgvTransactions.RowTemplate.Height = 40;
+            this.gdgvTransactions.Size = new System.Drawing.Size(1179, 422);
+            this.gdgvTransactions.TabIndex = 30;
+            this.gdgvTransactions.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
+            this.gdgvTransactions.ThemeStyle.AlternatingRowsStyle.Font = null;
+            this.gdgvTransactions.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty;
+            this.gdgvTransactions.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty;
+            this.gdgvTransactions.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty;
+            this.gdgvTransactions.ThemeStyle.BackColor = System.Drawing.Color.White;
+            this.gdgvTransactions.ThemeStyle.GridColor = System.Drawing.Color.White;
+            this.gdgvTransactions.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            this.gdgvTransactions.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Raised;
+            this.gdgvTransactions.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gdgvTransactions.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
+            this.gdgvTransactions.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.gdgvTransactions.ThemeStyle.HeaderStyle.Height = 35;
+            this.gdgvTransactions.ThemeStyle.ReadOnly = true;
+            this.gdgvTransactions.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
+            this.gdgvTransactions.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.gdgvTransactions.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gdgvTransactions.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            this.gdgvTransactions.ThemeStyle.RowsStyle.Height = 40;
+            this.gdgvTransactions.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            this.gdgvTransactions.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            this.gdgvTransactions.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.gdgvTransactions_CellFormatting);
+            this.gdgvTransactions.DoubleClick += new System.EventHandler(this.gdgvTransactions_DoubleClick);
+            // 
+            // guna2ContextMenuStrip1
+            // 
+            this.guna2ContextMenuStrip1.BackColor = System.Drawing.Color.Snow;
+            this.guna2ContextMenuStrip1.ImageScalingSize = new System.Drawing.Size(30, 30);
+            this.guna2ContextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.gtsmAddTransactions,
+            this.gtsmEdit,
+            this.gtsmDelete});
+            this.guna2ContextMenuStrip1.Name = "guna2ContextMenuStrip1";
+            this.guna2ContextMenuStrip1.RenderStyle.ArrowColor = System.Drawing.Color.FromArgb(((int)(((byte)(151)))), ((int)(((byte)(143)))), ((int)(((byte)(255)))));
+            this.guna2ContextMenuStrip1.RenderStyle.BorderColor = System.Drawing.Color.Gainsboro;
+            this.guna2ContextMenuStrip1.RenderStyle.ColorTable = null;
+            this.guna2ContextMenuStrip1.RenderStyle.RoundedEdges = true;
+            this.guna2ContextMenuStrip1.RenderStyle.SelectionArrowColor = System.Drawing.Color.White;
+            this.guna2ContextMenuStrip1.RenderStyle.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            this.guna2ContextMenuStrip1.RenderStyle.SelectionForeColor = System.Drawing.Color.White;
+            this.guna2ContextMenuStrip1.RenderStyle.SeparatorColor = System.Drawing.Color.Gainsboro;
+            this.guna2ContextMenuStrip1.RenderStyle.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
+            this.guna2ContextMenuStrip1.Size = new System.Drawing.Size(178, 112);
+            // 
+            // gtsmAddTransactions
+            // 
+            this.gtsmAddTransactions.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gtsmAddTransactions.Image = ((System.Drawing.Image)(resources.GetObject("gtsmAddTransactions.Image")));
+            this.gtsmAddTransactions.Name = "gtsmAddTransactions";
+            this.gtsmAddTransactions.Size = new System.Drawing.Size(177, 36);
+            this.gtsmAddTransactions.Text = "إضافة معاملة";
+            this.gtsmAddTransactions.Click += new System.EventHandler(this.gtsmAddTransactions_Click);
+            // 
+            // gtsmEdit
+            // 
+            this.gtsmEdit.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gtsmEdit.Image = ((System.Drawing.Image)(resources.GetObject("gtsmEdit.Image")));
+            this.gtsmEdit.Name = "gtsmEdit";
+            this.gtsmEdit.Size = new System.Drawing.Size(177, 36);
+            this.gtsmEdit.Text = "تعديل";
+            this.gtsmEdit.Click += new System.EventHandler(this.gtsmEdit_Click);
+            // 
+            // gtsmDelete
+            // 
+            this.gtsmDelete.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gtsmDelete.Image = ((System.Drawing.Image)(resources.GetObject("gtsmDelete.Image")));
+            this.gtsmDelete.Name = "gtsmDelete";
+            this.gtsmDelete.Size = new System.Drawing.Size(177, 36);
+            this.gtsmDelete.Text = "حذف";
+            this.gtsmDelete.Click += new System.EventHandler(this.gtsmDelete_Click);
             // 
             // lblHeader
             // 
             this.lblHeader.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHeader.ForeColor = System.Drawing.Color.Black;
-            this.lblHeader.Location = new System.Drawing.Point(12, 9);
+            this.lblHeader.Location = new System.Drawing.Point(12, 0);
             this.lblHeader.Name = "lblHeader";
             this.lblHeader.Size = new System.Drawing.Size(1186, 62);
             this.lblHeader.TabIndex = 41;
@@ -592,6 +651,7 @@
             this.kgtxtPageNumber.TextProperties.PhoneProperties.AllowPlusSign = true;
             this.kgtxtPageNumber.TextProperties.PhoneProperties.MaxPhoneLength = ((byte)(15));
             this.kgtxtPageNumber.TextProperties.TextFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.enTextFormat.None;
+            this.toolTip1.SetToolTip(this.kgtxtPageNumber, "رقم الصفحة الحالية, أدخل رقم الصفحة التي تريد الإنتقال إليها");
             this.kgtxtPageNumber.TrimEnd = true;
             this.kgtxtPageNumber.TrimStart = false;
             this.kgtxtPageNumber.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxtPageNumber_OnValidationError);
@@ -642,7 +702,6 @@
             this.gchkIsLocked.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.gchkIsLocked.CheckState = System.Windows.Forms.CheckState.Checked;
             this.gchkIsLocked.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.gchkIsLocked.Enabled = false;
             this.gchkIsLocked.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.gchkIsLocked.Location = new System.Drawing.Point(139, 85);
             this.gchkIsLocked.Name = "gchkIsLocked";
@@ -654,6 +713,7 @@
             this.gchkIsLocked.UncheckedState.BorderRadius = 0;
             this.gchkIsLocked.UncheckedState.BorderThickness = 0;
             this.gchkIsLocked.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.gchkIsLocked.CheckedChanged += new System.EventHandler(this.gchkIsLocked_CheckedChanged);
             // 
             // label2
             // 
@@ -1125,12 +1185,36 @@
             this.label9.TabIndex = 117;
             this.label9.Text = "معاملات المستند";
             // 
+            // gibtnDeleteVoucher
+            // 
+            this.gibtnDeleteVoucher.BackColor = System.Drawing.Color.Transparent;
+            this.gibtnDeleteVoucher.CheckedState.ImageSize = new System.Drawing.Size(64, 64);
+            this.gibtnDeleteVoucher.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gibtnDeleteVoucher.HoverState.ImageSize = new System.Drawing.Size(35, 35);
+            this.gibtnDeleteVoucher.Image = ((System.Drawing.Image)(resources.GetObject("gibtnDeleteVoucher.Image")));
+            this.gibtnDeleteVoucher.ImageOffset = new System.Drawing.Point(0, 0);
+            this.gibtnDeleteVoucher.ImageRotate = 0F;
+            this.gibtnDeleteVoucher.ImageSize = new System.Drawing.Size(28, 28);
+            this.gibtnDeleteVoucher.Location = new System.Drawing.Point(79, 76);
+            this.gibtnDeleteVoucher.Name = "gibtnDeleteVoucher";
+            this.gibtnDeleteVoucher.PressedState.ImageSize = new System.Drawing.Size(64, 64);
+            this.gibtnDeleteVoucher.Size = new System.Drawing.Size(40, 42);
+            this.gibtnDeleteVoucher.TabIndex = 118;
+            this.toolTip1.SetToolTip(this.gibtnDeleteVoucher, "حذف المستند , يجب حذف جميع المعاملات أولا");
+            this.gibtnDeleteVoucher.UseTransparentBackground = true;
+            this.gibtnDeleteVoucher.Click += new System.EventHandler(this.gibtnDeleteVoucher_Click);
+            // 
+            // toolTip1
+            // 
+            this.toolTip1.IsBalloon = true;
+            // 
             // frmAddUpdateVoucher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1210, 737);
+            this.Controls.Add(this.gibtnDeleteVoucher);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.gchkIsLocked);
@@ -1161,13 +1245,14 @@
             this.Controls.Add(this.lblCurrentPageOfNumberOfPages);
             this.Controls.Add(this.lblTotalRecordsNumber);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.gdgvPeople);
+            this.Controls.Add(this.gdgvTransactions);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmAddUpdateVoucher";
             this.Text = "frmAddVoucher";
             this.TransparencyKey = System.Drawing.Color.White;
             this.Load += new System.EventHandler(this.frmAddUpdateVoucher_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.gdgvPeople)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gdgvTransactions)).EndInit();
+            this.guna2ContextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -1184,7 +1269,7 @@
         private System.Windows.Forms.Label lblCurrentPageOfNumberOfPages;
         private System.Windows.Forms.Label lblTotalRecordsNumber;
         private System.Windows.Forms.Label label1;
-        private Guna.UI2.WinForms.Guna2DataGridView gdgvPeople;
+        private Guna.UI2.WinForms.Guna2DataGridView gdgvTransactions;
         private System.Windows.Forms.Label lblHeader;
         private System.Windows.Forms.Label lblNoTransactionsFoundMessage;
         private System.Windows.Forms.ErrorProvider errorProvider1;
@@ -1207,5 +1292,11 @@
         private System.Windows.Forms.Label label8;
         private KhaledControlLibrary1.KhaledGuna2TextBox kgtxtVoucherID;
         private System.Windows.Forms.Label label9;
+        private Guna.UI2.WinForms.Guna2ContextMenuStrip guna2ContextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem gtsmAddTransactions;
+        private System.Windows.Forms.ToolStripMenuItem gtsmEdit;
+        private System.Windows.Forms.ToolStripMenuItem gtsmDelete;
+        private Guna.UI2.WinForms.Guna2ImageButton gibtnDeleteVoucher;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

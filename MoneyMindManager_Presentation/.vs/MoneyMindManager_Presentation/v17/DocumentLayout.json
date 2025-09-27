@@ -3,12 +3,8 @@
   "WorkspaceRootPath": "E:\\Visual Studio\\source\\Projects\\External Projects\\Money Mind Manager\\Project\\MonyeMindManager\\MoneyMindManager_Presentation\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F453BF16-D51A-4E57-BCC5-DEA98DBE47DF}|MoneyMindManager_Presentation.csproj|e:\\visual studio\\source\\projects\\external projects\\money mind manager\\project\\monyemindmanager\\moneymindmanager_presentation\\income and expense\\vouchers\\frmaddupdatevoucher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F453BF16-D51A-4E57-BCC5-DEA98DBE47DF}|MoneyMindManager_Presentation.csproj|solutionrelative:income and expense\\vouchers\\frmaddupdatevoucher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F453BF16-D51A-4E57-BCC5-DEA98DBE47DF}|MoneyMindManager_Presentation.csproj|E:\\Visual Studio\\source\\Projects\\External Projects\\Money Mind Manager\\Project\\MonyeMindManager\\MoneyMindManager_Presentation\\income and expense\\vouchers\\frmaddupdatevoucher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{F453BF16-D51A-4E57-BCC5-DEA98DBE47DF}|MoneyMindManager_Presentation.csproj|solutionrelative:income and expense\\vouchers\\frmaddupdatevoucher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{F453BF16-D51A-4E57-BCC5-DEA98DBE47DF}|MoneyMindManager_Presentation.csproj|e:\\visual studio\\source\\projects\\external projects\\money mind manager\\project\\monyemindmanager\\moneymindmanager_presentation\\users\\frmaddupdateuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{F453BF16-D51A-4E57-BCC5-DEA98DBE47DF}|MoneyMindManager_Presentation.csproj|solutionrelative:users\\frmaddupdateuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -35,26 +31,13 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "frmAddUpdateVoucher.cs",
-              "DocumentMoniker": "E:\\Visual Studio\\source\\Projects\\External Projects\\Money Mind Manager\\Project\\MonyeMindManager\\MoneyMindManager_Presentation\\Income And Expense\\Vouchers\\frmAddUpdateVoucher.cs",
-              "RelativeDocumentMoniker": "Income And Expense\\Vouchers\\frmAddUpdateVoucher.cs",
-              "ToolTip": "E:\\Visual Studio\\source\\Projects\\External Projects\\Money Mind Manager\\Project\\MonyeMindManager\\MoneyMindManager_Presentation\\Income And Expense\\Vouchers\\frmAddUpdateVoucher.cs",
-              "RelativeToolTip": "Income And Expense\\Vouchers\\frmAddUpdateVoucher.cs",
-              "ViewState": "AgIAAI0AAAAAAAAAAAAqwJ8AAABMAAAAAAAAAA==",
+              "Title": "frmAddUpdateUser.cs [Design]",
+              "DocumentMoniker": "E:\\Visual Studio\\source\\Projects\\External Projects\\Money Mind Manager\\Project\\MonyeMindManager\\MoneyMindManager_Presentation\\Users\\frmAddUpdateUser.cs",
+              "RelativeDocumentMoniker": "Users\\frmAddUpdateUser.cs",
+              "ToolTip": "E:\\Visual Studio\\source\\Projects\\External Projects\\Money Mind Manager\\Project\\MonyeMindManager\\MoneyMindManager_Presentation\\Users\\frmAddUpdateUser.cs [Design]",
+              "RelativeToolTip": "Users\\frmAddUpdateUser.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-23T08:55:14.283Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "frmAddUpdateVoucher.cs [Design]",
-              "DocumentMoniker": "E:\\Visual Studio\\source\\Projects\\External Projects\\Money Mind Manager\\Project\\MonyeMindManager\\MoneyMindManager_Presentation\\Income And Expense\\Vouchers\\frmAddUpdateVoucher.cs",
-              "RelativeDocumentMoniker": "Income And Expense\\Vouchers\\frmAddUpdateVoucher.cs",
-              "ToolTip": "E:\\Visual Studio\\source\\Projects\\External Projects\\Money Mind Manager\\Project\\MonyeMindManager\\MoneyMindManager_Presentation\\Income And Expense\\Vouchers\\frmAddUpdateVoucher.cs [Design]",
-              "RelativeToolTip": "Income And Expense\\Vouchers\\frmAddUpdateVoucher.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-22T16:37:01.043Z",
+              "WhenOpened": "2025-09-27T14:08:24.393Z",
               "EditorCaption": " [Design]"
             }
           ]

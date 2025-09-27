@@ -23,7 +23,7 @@ namespace MoneyMindManager_Presentation
             InitializeComponent();
         }
 
-        enum enFilterBy { All,UserID, UserName, PersonName, IsActive };
+        enum enFilterBy { All,UserID, UserName, PersonName };
 
         enFilterBy _filterBy = enFilterBy.All;
 
@@ -60,37 +60,38 @@ namespace MoneyMindManager_Presentation
             if (!_CheckValidationChildren())
                 return;
 
-            //_pageNumber = Convert.ToInt16(kgtxtPageNumber.ValidatedText);
+            bool? isActive = null;
+
+            if (gcbIsActive.Text == "الكل")
+                isActive = null;
+            else if (gcbIsActive.Text == "فعال")
+                isActive = true;
+            else if (gcbIsActive.Text == "موقوف")
+                isActive = false;
 
             clsDataColumns.clsUserClasses.clsGetAllUsers result = null;
 
-            short accountID = Convert.ToInt16(clsGlobal_UI.CurrentUser.AccountID);
+            int currentUserID = Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID);
 
-            if (filterBy == enFilterBy.All || (string.IsNullOrEmpty(kgtxtFilterValue.ValidatedText)) && _filterBy!=enFilterBy.IsActive)
+            if (filterBy == enFilterBy.All || (string.IsNullOrEmpty(kgtxtFilterValue.ValidatedText)))
             {
-                result = await clsUser.GetAllUsers(accountID, _pageNumber);
+                result = await clsUser.GetAllUsers(isActive, _pageNumber, currentUserID);
             }
             else if (filterBy == enFilterBy.UserID)
             {
                 int userID = Convert.ToInt32(kgtxtFilterValue.ValidatedText);
-                result = await clsUser.GetAllUsersByUserID(accountID, _pageNumber, userID);
-
+                result = await clsUser.GetAllUsersByUserID(userID,isActive, _pageNumber, currentUserID);
             }
             else if (filterBy == enFilterBy.UserName)
             {
                 string userName = kgtxtFilterValue.ValidatedText;
-                result = await clsUser.GetAllUsersByUserName(accountID, _pageNumber, userName);
+                result = await clsUser.GetAllUsersByUserName(userName, isActive, _pageNumber, currentUserID);
             }
             else if (filterBy == enFilterBy.PersonName)
             {
                 string personName = kgtxtFilterValue.ValidatedText;
-                result = await clsUser.GetAllUsersByPersonName(accountID, _pageNumber, personName);
+                result = await clsUser.GetAllUsersByPersonName(personName, isActive, _pageNumber, currentUserID);
 
-            }
-            else if (filterBy == enFilterBy.IsActive)
-            {
-                bool isActive = (gcbIsActive.Text == "فعال") ? true : false;
-                result = await clsUser.GetAllUsersByIsActive(accountID, _pageNumber, isActive);
             }
             else
                 return;
@@ -131,22 +132,22 @@ namespace MoneyMindManager_Presentation
             if (!_IsHeaderCreated && gdgvUser.Rows.Count > 0)
             {
                 gdgvUser.Columns["UserID"].HeaderText = "معرف المستخدم";
-                gdgvUser.Columns["UserID"].Width = 120;
+                gdgvUser.Columns["UserID"].Width = 125;
 
                 gdgvUser.Columns["UserName"].HeaderText = "اسم المستخدم";
-                gdgvUser.Columns["UserName"].Width = 250;
+                gdgvUser.Columns["UserName"].Width = 268;
 
                 gdgvUser.Columns["PersonName"].HeaderText = "اسم الشخص";
-                gdgvUser.Columns["PersonName"].Width = 250;
+                gdgvUser.Columns["PersonName"].Width = 260;
 
                 gdgvUser.Columns["Phone"].HeaderText = "رقم الهاتف";
-                gdgvUser.Columns["Phone"].Width = 160;
+                gdgvUser.Columns["Phone"].Width = 175;
 
                 gdgvUser.Columns["Email"].HeaderText = "البريد الإلكتروني";
-                gdgvUser.Columns["Email"].Width = 250;
+                gdgvUser.Columns["Email"].Width = 270;
 
                 gdgvUser.Columns["IsActive"].HeaderText = "الفعالية";
-                gdgvUser.Columns["IsActive"].Width = 77;
+                gdgvUser.Columns["IsActive"].Width = 80;
 
                 _IsHeaderCreated = true;
             }
@@ -166,6 +167,19 @@ namespace MoneyMindManager_Presentation
             else
                 gcbFilterBy.SelectedIndex = 0;
         }
+
+        void _SetReadOnlyAtTextBox(KhaledGuna2TextBox kgtxt)
+        {
+            kgtxt.ReadOnly = true;
+            kgtxt.FillColor = SystemColors.ControlLight;
+        }
+
+        void _CancelReadOnlyAtTextBox(KhaledGuna2TextBox kgtxt)
+        {
+            kgtxt.ReadOnly = false;
+            kgtxt.FillColor = Color.White;
+        }
+
 
         void _ShowPersonInfo()
         {
@@ -206,6 +220,7 @@ namespace MoneyMindManager_Presentation
             {
                 //e.CellStyle.BackColor = Color.LightYellow; // خلفية
                 e.CellStyle.ForeColor = Color.Red;
+                e.CellStyle.SelectionForeColor = Color.Red;
             }
         }
 
@@ -225,39 +240,21 @@ namespace MoneyMindManager_Presentation
         {
             _pageNumber = 1;
 
-            if (gcbFilterBy.Text == "الفعالية")
-            {
-                kgtxtFilterValue.Visible = false;
-                gcbIsActive.Visible = true;
-                _filterBy = enFilterBy.IsActive;
-
-                if (gcbIsActive.SelectedIndex == 0)
-                    await _LoadDataAtDataGridView(enFilterBy.All);
-                else
-                    gcbIsActive.SelectedIndex = 0;
-
-                //gcbIsActive.SelectedIndex = (gcbIsActive.SelectedIndex == 0) ? 1 : 0;
-                return;
-            }
-
-            gcbIsActive.Visible = false;
+            _searchByPageNumber = false;
+            kgtxtFilterValue.Text = "";
+            _searchByPageNumber = true;
 
             if (gcbFilterBy.Text == "بدون")
             {
-                kgtxtFilterValue.Visible = false;
+                //kgtxtFilterValue.Visible = false;
+                _SetReadOnlyAtTextBox(kgtxtFilterValue);
                 _filterBy = enFilterBy.All;
                 await _LoadDataAtDataGridView(_filterBy);
                 return;
             }
 
-            _searchByPageNumber = false;
-            kgtxtFilterValue.Text = "";
-            _searchByPageNumber = true;
-
-            //SearchAfterTimerFinish.Stop();
-            //await _LoadDataAtDataGridView();
-
-            kgtxtFilterValue.Visible = true;
+            //kgtxtFilterValue.Visible = true;
+            _CancelReadOnlyAtTextBox(kgtxtFilterValue);
             kgtxtFilterValue.IsRequired = false;
             kgtxtFilterValue.TrimStart = false;
 
@@ -294,12 +291,7 @@ namespace MoneyMindManager_Presentation
 
         private async void gcbIsActive_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(gcbIsActive.Text == "الكل")
-            {
-                await _LoadDataAtDataGridView(enFilterBy.All);
-                return;
-            }
-
+            _pageNumber = 1;
             await _LoadDataAtDataGridView(_filterBy);
         }
 
@@ -336,7 +328,7 @@ namespace MoneyMindManager_Presentation
             }
         }
 
-        private void gbtnAddPerson_Click(object sender, EventArgs e)
+        private void gbtnAddUser_Click(object sender, EventArgs e)
         {
             _AddNewUser();
         }
@@ -383,6 +375,11 @@ namespace MoneyMindManager_Presentation
         private void gdgvUser_DoubleClick(object sender, EventArgs e)
         {
             _ShowPersonInfo();
+        }
+
+        private async void gibtnRefreshData_Click(object sender, EventArgs e)
+        {
+            await _LoadDataAtDataGridView(_filterBy);
         }
     }
 }

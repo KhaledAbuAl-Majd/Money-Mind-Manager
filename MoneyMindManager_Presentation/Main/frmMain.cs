@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MoneyMindManager_Business;
+using MoneyMindManager_Presentation.Income_And_Expense;
 using MoneyMindManager_Presentation.Income_And_Expense.Categories;
 using MoneyMindManager_Presentation.Income_And_Expense.Vouchers;
 using MoneyMindManager_Presentation.Login;
@@ -64,14 +65,20 @@ namespace MoneyMindManager_Presentation.Main
             }
 
             gpnlFormContainer.Controls.Add(frm);
-            frm.Show();
-            frm.BringToFront();
+
+            if (!frm.IsDisposed)
+            {
+                frm.Show();
+                frm.BringToFront();
+            }
         }
 
         private void gbtnOverOview_Click(object sender, EventArgs e)
         {
             //MessageBox.Show("kk");
-            _LoadFormAtPanelContainer(new frmAddUpdateVoucher(4), true);
+            //_LoadFormAtPanelContainer(new frmAddUpdateVoucher(1), true);
+            //_LoadFormAtPanelContainer(new frmVouhcersList(clsIncomeAndExpenseVoucher.enVoucherType.UnKnown), true);
+            //_LoadFormAtPanelContainer(new frmCategoriesList(false), true);
 
             //new frmSelectCategory(false).ShowDialog();
         }
@@ -129,9 +136,20 @@ namespace MoneyMindManager_Presentation.Main
             clsGlobal_UI.Logout();
         }
 
-        private void guna2ControlBox1_Click(object sender, EventArgs e)
-        {
 
+        private void gbtnIncome_Click(object sender, EventArgs e)
+        {
+            _LoadFormAtPanelContainer(new frmIncomeAndExpense(clsIncomeAndExpenseVoucher.enVoucherType.Incomes),true);
+        }
+
+        private void gbtnExpense_Click(object sender, EventArgs e)
+        {
+            _LoadFormAtPanelContainer(new frmIncomeAndExpense(clsIncomeAndExpenseVoucher.enVoucherType.Expenses), true);
+        }
+
+        private void guna2Button2_Click(object sender, EventArgs e)
+        {
+            _LoadFormAtPanelContainer(new frmIncomeAndExpense(clsIncomeAndExpenseVoucher.enVoucherType.ExpensesReturn), true);
         }
     }
 }

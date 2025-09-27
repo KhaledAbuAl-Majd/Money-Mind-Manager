@@ -45,7 +45,7 @@ namespace MoneyMindManager_Presentation.People.Controls
         async Task _ShowData()
         {
             lblPersonID.Text = Person.PersonID.ToString();
-            lblCreatedDate.Text = clsFormat.DateToShort(Person.CreatedDate);
+            klblCreatedDate.Text = clsFormat.DateToShort(Person.CreatedDate);
             kgtxtPersonName.Text = Person.PersonName;
             kgtxtPhoneNumber.Text = Person.Phone;
             clsUser CreatedUser = await Person.GetCreatedbyUserInfo(Convert.ToInt32(clsGlobal_UI.CurrentUser.UserID));
@@ -90,7 +90,7 @@ namespace MoneyMindManager_Presentation.People.Controls
             Person = null;
 
             lblPersonID.Text = "N/A";
-            lblCreatedDate.Text = "N/A";
+            klblCreatedDate.Text = "N/A";
             kgtxtPersonName.Text = null;
             kgtxtPhoneNumber.Text = null;
             kgtxtUserNameOfCreatedUser.Text = null;

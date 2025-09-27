@@ -17,7 +17,7 @@ namespace MoneyMindManager_Presentation.People
     public partial class frmAddUpdatePerson : Form
     {
         /// <summary>
-        /// PersonID
+        /// CategoryID
         /// </summary>
         public event Action<int> OnCloseAndSaved;
 

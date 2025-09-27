@@ -31,12 +31,11 @@ namespace MoneyMindManager_Presentation
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmUsers));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.lblHeader = new System.Windows.Forms.Label();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmUsers));
             this.lblUserMessage = new System.Windows.Forms.Label();
             this.SearchAfterTimerFinish = new System.Windows.Forms.Timer(this.components);
             this.kgtxtFilterValue = new KhaledControlLibrary1.KhaledGuna2TextBox();
@@ -50,7 +49,6 @@ namespace MoneyMindManager_Presentation
             this.kgtxtPageNumber = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.gibtnNextPage = new Guna.UI2.WinForms.Guna2ImageButton();
             this.gibtnPreviousPage = new Guna.UI2.WinForms.Guna2ImageButton();
-            this.gbtnAddUser = new Guna.UI2.WinForms.Guna2Button();
             this.lblCurrentPageOfNumberOfPages = new System.Windows.Forms.Label();
             this.lblTotalRecordsNumber = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -61,21 +59,14 @@ namespace MoneyMindManager_Presentation
             this.guna2ContextMenuStrip1 = new Guna.UI2.WinForms.Guna2ContextMenuStrip();
             this.gdgvUser = new Guna.UI2.WinForms.Guna2DataGridView();
             this.gcbIsActive = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.lblHeader = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.gbtnAddVoucher = new Guna.UI2.WinForms.Guna2Button();
+            this.gibtnRefreshData = new Guna.UI2.WinForms.Guna2ImageButton();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.guna2ContextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gdgvUser)).BeginInit();
             this.SuspendLayout();
-            // 
-            // lblHeader
-            // 
-            this.lblHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHeader.ForeColor = System.Drawing.Color.Red;
-            this.lblHeader.Location = new System.Drawing.Point(12, 24);
-            this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(1186, 62);
-            this.lblHeader.TabIndex = 34;
-            this.lblHeader.Text = "المستخدمين";
-            this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblUserMessage
             // 
@@ -112,7 +103,7 @@ namespace MoneyMindManager_Presentation
             this.kgtxtFilterValue.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtFilterValue.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
             this.kgtxtFilterValue.IsRequired = false;
-            this.kgtxtFilterValue.Location = new System.Drawing.Point(712, 151);
+            this.kgtxtFilterValue.Location = new System.Drawing.Point(751, 151);
             this.kgtxtFilterValue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtFilterValue.Name = "kgtxtFilterValue";
             this.kgtxtFilterValue.NumberProperties.DecimalNumberProperties.AllowNegative = true;
@@ -121,22 +112,28 @@ namespace MoneyMindManager_Presentation
             0,
             0,
             0});
+            this.kgtxtFilterValue.NumberProperties.DecimalNumberProperties.MaxValueIncluded = true;
             this.kgtxtFilterValue.NumberProperties.DecimalNumberProperties.MaxValueOption = false;
             this.kgtxtFilterValue.NumberProperties.DecimalNumberProperties.MinValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
+            this.kgtxtFilterValue.NumberProperties.DecimalNumberProperties.MinValueIncluded = true;
             this.kgtxtFilterValue.NumberProperties.DecimalNumberProperties.MinValueOption = false;
             this.kgtxtFilterValue.NumberProperties.FloatNumberProperties.AllowNegative = true;
             this.kgtxtFilterValue.NumberProperties.FloatNumberProperties.MaxValue = 0F;
+            this.kgtxtFilterValue.NumberProperties.FloatNumberProperties.MaxValueIncluded = true;
             this.kgtxtFilterValue.NumberProperties.FloatNumberProperties.MaxValueOption = false;
             this.kgtxtFilterValue.NumberProperties.FloatNumberProperties.MinValue = 0F;
+            this.kgtxtFilterValue.NumberProperties.FloatNumberProperties.MinValueIncluded = true;
             this.kgtxtFilterValue.NumberProperties.FloatNumberProperties.MinValueOption = false;
             this.kgtxtFilterValue.NumberProperties.IntegerNumberProperties.AllowNegative = true;
             this.kgtxtFilterValue.NumberProperties.IntegerNumberProperties.MaxValue = 0;
+            this.kgtxtFilterValue.NumberProperties.IntegerNumberProperties.MaxValueIncluded = true;
             this.kgtxtFilterValue.NumberProperties.IntegerNumberProperties.MaxValueOption = false;
             this.kgtxtFilterValue.NumberProperties.IntegerNumberProperties.MinValue = 0;
+            this.kgtxtFilterValue.NumberProperties.IntegerNumberProperties.MinValueIncluded = true;
             this.kgtxtFilterValue.NumberProperties.IntegerNumberProperties.MinValueOption = false;
             this.kgtxtFilterValue.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
             this.kgtxtFilterValue.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
@@ -145,6 +142,11 @@ namespace MoneyMindManager_Presentation
             this.kgtxtFilterValue.Size = new System.Drawing.Size(157, 36);
             this.kgtxtFilterValue.TabIndex = 31;
             this.kgtxtFilterValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.kgtxtFilterValue.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
+            this.kgtxtFilterValue.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.kgtxtFilterValue.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
+            this.kgtxtFilterValue.TextProperties.DateTimeProperties.TimeFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enTimeFormate.None;
+            this.kgtxtFilterValue.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
             this.kgtxtFilterValue.TextProperties.MinLength = ((short)(0));
             this.kgtxtFilterValue.TextProperties.MinLengthOption = false;
             this.kgtxtFilterValue.TextProperties.PhoneProperties.AllowPlusSign = true;
@@ -174,7 +176,7 @@ namespace MoneyMindManager_Presentation
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(1060, 156);
+            this.label2.Location = new System.Drawing.Point(1099, 156);
             this.label2.Name = "label2";
             this.label2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label2.Size = new System.Drawing.Size(97, 24);
@@ -200,9 +202,8 @@ namespace MoneyMindManager_Presentation
             "بدون",
             "معرف المستخدم",
             "اسم المستخدم",
-            "اسم الشخص",
-            "الفعالية"});
-            this.gcbFilterBy.Location = new System.Drawing.Point(894, 151);
+            "اسم الشخص"});
+            this.gcbFilterBy.Location = new System.Drawing.Point(933, 151);
             this.gcbFilterBy.Name = "gcbFilterBy";
             this.gcbFilterBy.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.gcbFilterBy.Size = new System.Drawing.Size(157, 36);
@@ -213,7 +214,7 @@ namespace MoneyMindManager_Presentation
             // lblCurrentPageRecordsCount
             // 
             this.lblCurrentPageRecordsCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCurrentPageRecordsCount.Location = new System.Drawing.Point(827, 688);
+            this.lblCurrentPageRecordsCount.Location = new System.Drawing.Point(868, 703);
             this.lblCurrentPageRecordsCount.Name = "lblCurrentPageRecordsCount";
             this.lblCurrentPageRecordsCount.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblCurrentPageRecordsCount.Size = new System.Drawing.Size(114, 24);
@@ -224,7 +225,7 @@ namespace MoneyMindManager_Presentation
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(952, 688);
+            this.label3.Location = new System.Drawing.Point(993, 703);
             this.label3.Name = "label3";
             this.label3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label3.Size = new System.Drawing.Size(205, 24);
@@ -260,7 +261,7 @@ namespace MoneyMindManager_Presentation
             this.kgtxtPageNumber.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtPageNumber.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Number;
             this.kgtxtPageNumber.IsRequired = true;
-            this.kgtxtPageNumber.Location = new System.Drawing.Point(196, 655);
+            this.kgtxtPageNumber.Location = new System.Drawing.Point(196, 670);
             this.kgtxtPageNumber.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtPageNumber.MaxLength = 150;
             this.kgtxtPageNumber.Name = "kgtxtPageNumber";
@@ -270,22 +271,28 @@ namespace MoneyMindManager_Presentation
             0,
             0,
             0});
+            this.kgtxtPageNumber.NumberProperties.DecimalNumberProperties.MaxValueIncluded = true;
             this.kgtxtPageNumber.NumberProperties.DecimalNumberProperties.MaxValueOption = false;
             this.kgtxtPageNumber.NumberProperties.DecimalNumberProperties.MinValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
+            this.kgtxtPageNumber.NumberProperties.DecimalNumberProperties.MinValueIncluded = true;
             this.kgtxtPageNumber.NumberProperties.DecimalNumberProperties.MinValueOption = false;
             this.kgtxtPageNumber.NumberProperties.FloatNumberProperties.AllowNegative = true;
             this.kgtxtPageNumber.NumberProperties.FloatNumberProperties.MaxValue = 0F;
+            this.kgtxtPageNumber.NumberProperties.FloatNumberProperties.MaxValueIncluded = true;
             this.kgtxtPageNumber.NumberProperties.FloatNumberProperties.MaxValueOption = false;
             this.kgtxtPageNumber.NumberProperties.FloatNumberProperties.MinValue = 0F;
+            this.kgtxtPageNumber.NumberProperties.FloatNumberProperties.MinValueIncluded = true;
             this.kgtxtPageNumber.NumberProperties.FloatNumberProperties.MinValueOption = false;
             this.kgtxtPageNumber.NumberProperties.IntegerNumberProperties.AllowNegative = false;
             this.kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValue = 0;
+            this.kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValueIncluded = true;
             this.kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValueOption = false;
             this.kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MinValue = 1;
+            this.kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MinValueIncluded = true;
             this.kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MinValueOption = true;
             this.kgtxtPageNumber.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
             this.kgtxtPageNumber.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
@@ -299,6 +306,11 @@ namespace MoneyMindManager_Presentation
             this.kgtxtPageNumber.Size = new System.Drawing.Size(119, 34);
             this.kgtxtPageNumber.TabIndex = 25;
             this.kgtxtPageNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.kgtxtPageNumber.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
+            this.kgtxtPageNumber.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.kgtxtPageNumber.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
+            this.kgtxtPageNumber.TextProperties.DateTimeProperties.TimeFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enTimeFormate.None;
+            this.kgtxtPageNumber.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
             this.kgtxtPageNumber.TextProperties.MinLength = ((short)(0));
             this.kgtxtPageNumber.TextProperties.MinLengthOption = false;
             this.kgtxtPageNumber.TextProperties.PhoneProperties.AllowPlusSign = true;
@@ -321,7 +333,7 @@ namespace MoneyMindManager_Presentation
             this.gibtnNextPage.ImageOffset = new System.Drawing.Point(0, 0);
             this.gibtnNextPage.ImageRotate = 0F;
             this.gibtnNextPage.ImageSize = new System.Drawing.Size(25, 25);
-            this.gibtnNextPage.Location = new System.Drawing.Point(722, 655);
+            this.gibtnNextPage.Location = new System.Drawing.Point(722, 670);
             this.gibtnNextPage.Name = "gibtnNextPage";
             this.gibtnNextPage.PressedState.ImageSize = new System.Drawing.Size(64, 64);
             this.gibtnNextPage.Size = new System.Drawing.Size(40, 42);
@@ -340,7 +352,7 @@ namespace MoneyMindManager_Presentation
             this.gibtnPreviousPage.ImageOffset = new System.Drawing.Point(0, 0);
             this.gibtnPreviousPage.ImageRotate = 0F;
             this.gibtnPreviousPage.ImageSize = new System.Drawing.Size(25, 25);
-            this.gibtnPreviousPage.Location = new System.Drawing.Point(444, 655);
+            this.gibtnPreviousPage.Location = new System.Drawing.Point(444, 670);
             this.gibtnPreviousPage.Name = "gibtnPreviousPage";
             this.gibtnPreviousPage.PressedState.ImageSize = new System.Drawing.Size(64, 64);
             this.gibtnPreviousPage.Size = new System.Drawing.Size(40, 42);
@@ -349,41 +361,10 @@ namespace MoneyMindManager_Presentation
             this.gibtnPreviousPage.UseTransparentBackground = true;
             this.gibtnPreviousPage.Click += new System.EventHandler(this.gibtnPreviousPage_Click);
             // 
-            // gbtnAddUser
-            // 
-            this.gbtnAddUser.Animated = true;
-            this.gbtnAddUser.AutoRoundedCorners = true;
-            this.gbtnAddUser.BackColor = System.Drawing.Color.Transparent;
-            this.gbtnAddUser.BorderColor = System.Drawing.Color.DimGray;
-            this.gbtnAddUser.BorderThickness = 1;
-            this.gbtnAddUser.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.gbtnAddUser.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.gbtnAddUser.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.gbtnAddUser.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.gbtnAddUser.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.gbtnAddUser.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.gbtnAddUser.FillColor = System.Drawing.Color.White;
-            this.gbtnAddUser.FocusedColor = System.Drawing.SystemColors.MenuHighlight;
-            this.gbtnAddUser.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbtnAddUser.ForeColor = System.Drawing.Color.Black;
-            this.gbtnAddUser.HoverState.FillColor = System.Drawing.Color.SlateBlue;
-            this.gbtnAddUser.HoverState.ForeColor = System.Drawing.Color.White;
-            this.gbtnAddUser.Image = ((System.Drawing.Image)(resources.GetObject("gbtnAddUser.Image")));
-            this.gbtnAddUser.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.gbtnAddUser.ImageSize = new System.Drawing.Size(30, 30);
-            this.gbtnAddUser.IndicateFocus = true;
-            this.gbtnAddUser.Location = new System.Drawing.Point(50, 146);
-            this.gbtnAddUser.Name = "gbtnAddUser";
-            this.gbtnAddUser.PressedColor = System.Drawing.Color.White;
-            this.gbtnAddUser.Size = new System.Drawing.Size(196, 41);
-            this.gbtnAddUser.TabIndex = 33;
-            this.gbtnAddUser.Text = "إضافة مستخدم";
-            this.gbtnAddUser.Click += new System.EventHandler(this.gbtnAddPerson_Click);
-            // 
             // lblCurrentPageOfNumberOfPages
             // 
             this.lblCurrentPageOfNumberOfPages.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCurrentPageOfNumberOfPages.Location = new System.Drawing.Point(479, 659);
+            this.lblCurrentPageOfNumberOfPages.Location = new System.Drawing.Point(479, 674);
             this.lblCurrentPageOfNumberOfPages.Name = "lblCurrentPageOfNumberOfPages";
             this.lblCurrentPageOfNumberOfPages.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblCurrentPageOfNumberOfPages.Size = new System.Drawing.Size(249, 30);
@@ -394,7 +375,7 @@ namespace MoneyMindManager_Presentation
             // lblTotalRecordsNumber
             // 
             this.lblTotalRecordsNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalRecordsNumber.Location = new System.Drawing.Point(871, 659);
+            this.lblTotalRecordsNumber.Location = new System.Drawing.Point(912, 674);
             this.lblTotalRecordsNumber.Name = "lblTotalRecordsNumber";
             this.lblTotalRecordsNumber.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblTotalRecordsNumber.Size = new System.Drawing.Size(114, 24);
@@ -405,7 +386,7 @@ namespace MoneyMindManager_Presentation
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(1002, 659);
+            this.label1.Location = new System.Drawing.Point(1043, 674);
             this.label1.Name = "label1";
             this.label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label1.Size = new System.Drawing.Size(155, 24);
@@ -505,7 +486,7 @@ namespace MoneyMindManager_Presentation
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.gdgvUser.DefaultCellStyle = dataGridViewCellStyle3;
             this.gdgvUser.GridColor = System.Drawing.Color.White;
-            this.gdgvUser.Location = new System.Drawing.Point(50, 201);
+            this.gdgvUser.Location = new System.Drawing.Point(12, 200);
             this.gdgvUser.MultiSelect = false;
             this.gdgvUser.Name = "gdgvUser";
             this.gdgvUser.ReadOnly = true;
@@ -521,7 +502,7 @@ namespace MoneyMindManager_Presentation
             this.gdgvUser.RowHeadersVisible = false;
             this.gdgvUser.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gdgvUser.RowTemplate.Height = 40;
-            this.gdgvUser.Size = new System.Drawing.Size(1110, 440);
+            this.gdgvUser.Size = new System.Drawing.Size(1186, 463);
             this.gdgvUser.TabIndex = 19;
             this.gdgvUser.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.gdgvUser.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -555,7 +536,7 @@ namespace MoneyMindManager_Presentation
             this.gcbIsActive.Cursor = System.Windows.Forms.Cursors.Hand;
             this.gcbIsActive.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.gcbIsActive.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.gcbIsActive.DropDownWidth = 150;
+            this.gcbIsActive.DropDownWidth = 90;
             this.gcbIsActive.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.gcbIsActive.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.gcbIsActive.Font = new System.Drawing.Font("Segoe UI", 11.25F);
@@ -566,13 +547,86 @@ namespace MoneyMindManager_Presentation
             "الكل",
             "فعال",
             "موقوف"});
-            this.gcbIsActive.Location = new System.Drawing.Point(712, 151);
+            this.gcbIsActive.Location = new System.Drawing.Point(594, 151);
             this.gcbIsActive.Name = "gcbIsActive";
             this.gcbIsActive.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.gcbIsActive.Size = new System.Drawing.Size(157, 36);
+            this.gcbIsActive.Size = new System.Drawing.Size(136, 36);
+            this.gcbIsActive.StartIndex = 0;
             this.gcbIsActive.TabIndex = 35;
             this.gcbIsActive.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.gcbIsActive.SelectedIndexChanged += new System.EventHandler(this.gcbIsActive_SelectedIndexChanged);
+            // 
+            // lblHeader
+            // 
+            this.lblHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblHeader.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold);
+            this.lblHeader.ForeColor = System.Drawing.Color.Black;
+            this.lblHeader.Location = new System.Drawing.Point(0, 0);
+            this.lblHeader.Name = "lblHeader";
+            this.lblHeader.Size = new System.Drawing.Size(1210, 50);
+            this.lblHeader.TabIndex = 36;
+            this.lblHeader.Text = "المستخدمين";
+            this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(682, 140);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(48, 17);
+            this.label4.TabIndex = 132;
+            this.label4.Text = "الفعالية";
+            // 
+            // gbtnAddVoucher
+            // 
+            this.gbtnAddVoucher.Animated = true;
+            this.gbtnAddVoucher.AutoRoundedCorners = true;
+            this.gbtnAddVoucher.BackColor = System.Drawing.Color.Transparent;
+            this.gbtnAddVoucher.BorderColor = System.Drawing.Color.DimGray;
+            this.gbtnAddVoucher.BorderThickness = 1;
+            this.gbtnAddVoucher.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gbtnAddVoucher.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnAddVoucher.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnAddVoucher.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.gbtnAddVoucher.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.gbtnAddVoucher.FillColor = System.Drawing.Color.White;
+            this.gbtnAddVoucher.FocusedColor = System.Drawing.SystemColors.MenuHighlight;
+            this.gbtnAddVoucher.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.gbtnAddVoucher.ForeColor = System.Drawing.Color.Black;
+            this.gbtnAddVoucher.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(102)))), ((int)(((byte)(194)))));
+            this.gbtnAddVoucher.HoverState.Font = new System.Drawing.Font("Segoe UI", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnAddVoucher.HoverState.ForeColor = System.Drawing.Color.White;
+            this.gbtnAddVoucher.Image = ((System.Drawing.Image)(resources.GetObject("gbtnAddVoucher.Image")));
+            this.gbtnAddVoucher.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.gbtnAddVoucher.ImageSize = new System.Drawing.Size(25, 25);
+            this.gbtnAddVoucher.IndicateFocus = true;
+            this.gbtnAddVoucher.Location = new System.Drawing.Point(12, 151);
+            this.gbtnAddVoucher.Name = "gbtnAddVoucher";
+            this.gbtnAddVoucher.PressedColor = System.Drawing.Color.White;
+            this.gbtnAddVoucher.Size = new System.Drawing.Size(180, 41);
+            this.gbtnAddVoucher.TabIndex = 133;
+            this.gbtnAddVoucher.Text = "إضافة مستخدم";
+            this.gbtnAddVoucher.Click += new System.EventHandler(this.gbtnAddUser_Click);
+            // 
+            // gibtnRefreshData
+            // 
+            this.gibtnRefreshData.BackColor = System.Drawing.Color.Transparent;
+            this.gibtnRefreshData.CheckedState.ImageSize = new System.Drawing.Size(64, 64);
+            this.gibtnRefreshData.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gibtnRefreshData.HoverState.ImageSize = new System.Drawing.Size(35, 35);
+            this.gibtnRefreshData.Image = ((System.Drawing.Image)(resources.GetObject("gibtnRefreshData.Image")));
+            this.gibtnRefreshData.ImageOffset = new System.Drawing.Point(0, 0);
+            this.gibtnRefreshData.ImageRotate = 0F;
+            this.gibtnRefreshData.ImageSize = new System.Drawing.Size(28, 28);
+            this.gibtnRefreshData.Location = new System.Drawing.Point(547, 147);
+            this.gibtnRefreshData.Name = "gibtnRefreshData";
+            this.gibtnRefreshData.PressedState.ImageSize = new System.Drawing.Size(64, 64);
+            this.gibtnRefreshData.Size = new System.Drawing.Size(40, 42);
+            this.gibtnRefreshData.TabIndex = 134;
+            this.toolTip1.SetToolTip(this.gibtnRefreshData, "تحديث البيانات");
+            this.gibtnRefreshData.UseTransparentBackground = true;
+            this.gibtnRefreshData.Click += new System.EventHandler(this.gibtnRefreshData_Click);
             // 
             // FrmUsers
             // 
@@ -580,6 +634,9 @@ namespace MoneyMindManager_Presentation
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1210, 737);
+            this.Controls.Add(this.gibtnRefreshData);
+            this.Controls.Add(this.gbtnAddVoucher);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.lblHeader);
             this.Controls.Add(this.lblUserMessage);
             this.Controls.Add(this.lblNoRecordsFoundMessage);
@@ -587,7 +644,6 @@ namespace MoneyMindManager_Presentation
             this.Controls.Add(this.gcbFilterBy);
             this.Controls.Add(this.lblCurrentPageRecordsCount);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.gbtnAddUser);
             this.Controls.Add(this.kgtxtPageNumber);
             this.Controls.Add(this.gibtnNextPage);
             this.Controls.Add(this.lblCurrentPageOfNumberOfPages);
@@ -610,8 +666,6 @@ namespace MoneyMindManager_Presentation
         }
 
         #endregion
-
-        private System.Windows.Forms.Label lblHeader;
         private System.Windows.Forms.Label lblUserMessage;
         private System.Windows.Forms.Timer SearchAfterTimerFinish;
         private KhaledControlLibrary1.KhaledGuna2TextBox kgtxtFilterValue;
@@ -621,7 +675,6 @@ namespace MoneyMindManager_Presentation
         private System.Windows.Forms.Label lblCurrentPageRecordsCount;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ErrorProvider errorProvider1;
-        private Guna.UI2.WinForms.Guna2Button gbtnAddUser;
         private KhaledControlLibrary1.KhaledGuna2TextBox kgtxtPageNumber;
         private System.Windows.Forms.ToolTip toolTip1;
         private Guna.UI2.WinForms.Guna2ImageButton gibtnNextPage;
@@ -636,5 +689,9 @@ namespace MoneyMindManager_Presentation
         private System.Windows.Forms.ToolStripMenuItem gtsmEditUser;
         private System.Windows.Forms.ToolStripMenuItem gtsmDeleteUser;
         private Guna.UI2.WinForms.Guna2ComboBox gcbIsActive;
+        private System.Windows.Forms.Label lblHeader;
+        private System.Windows.Forms.Label label4;
+        private Guna.UI2.WinForms.Guna2Button gbtnAddVoucher;
+        private Guna.UI2.WinForms.Guna2ImageButton gibtnRefreshData;
     }
 }

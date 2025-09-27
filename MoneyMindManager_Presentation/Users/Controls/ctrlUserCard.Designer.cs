@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ctrlUserCard));
-            this.gbtnEditUser = new Guna.UI2.WinForms.Guna2Button();
             this.label16 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -38,7 +38,6 @@
             this.kgtxtUserNameOfCreatedUser = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.kgtxtUserName = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.guna2PictureBox9 = new Guna.UI2.WinForms.Guna2PictureBox();
-            this.lblCreatedDate = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.guna2PictureBox8 = new Guna.UI2.WinForms.Guna2PictureBox();
             this.guna2PictureBox6 = new Guna.UI2.WinForms.Guna2PictureBox();
@@ -49,8 +48,11 @@
             this.guna2PictureBox3 = new Guna.UI2.WinForms.Guna2PictureBox();
             this.lblIsActive = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gbtnEditUser = new Guna.UI2.WinForms.Guna2Button();
+            this.klblCreatedDate = new KhaledControlLibrary1.KhaledLabel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.ctrlPersonCard1 = new MoneyMindManager_Presentation.People.Controls.ctrlPersonCard();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox6)).BeginInit();
@@ -59,37 +61,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox3)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // gbtnEditUser
-            // 
-            this.gbtnEditUser.Animated = true;
-            this.gbtnEditUser.AutoRoundedCorners = true;
-            this.gbtnEditUser.BackColor = System.Drawing.Color.Transparent;
-            this.gbtnEditUser.BorderColor = System.Drawing.Color.DimGray;
-            this.gbtnEditUser.BorderThickness = 1;
-            this.gbtnEditUser.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.gbtnEditUser.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.gbtnEditUser.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.gbtnEditUser.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.gbtnEditUser.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.gbtnEditUser.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.gbtnEditUser.FillColor = System.Drawing.Color.White;
-            this.gbtnEditUser.FocusedColor = System.Drawing.SystemColors.MenuHighlight;
-            this.gbtnEditUser.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbtnEditUser.ForeColor = System.Drawing.Color.Black;
-            this.gbtnEditUser.HoverState.FillColor = System.Drawing.Color.SlateBlue;
-            this.gbtnEditUser.HoverState.ForeColor = System.Drawing.Color.White;
-            this.gbtnEditUser.Image = ((System.Drawing.Image)(resources.GetObject("gbtnEditUser.Image")));
-            this.gbtnEditUser.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.gbtnEditUser.ImageSize = new System.Drawing.Size(30, 30);
-            this.gbtnEditUser.IndicateFocus = true;
-            this.gbtnEditUser.Location = new System.Drawing.Point(170, 395);
-            this.gbtnEditUser.Name = "gbtnEditUser";
-            this.gbtnEditUser.PressedColor = System.Drawing.Color.White;
-            this.gbtnEditUser.Size = new System.Drawing.Size(196, 41);
-            this.gbtnEditUser.TabIndex = 58;
-            this.gbtnEditUser.Text = "تعديل البيانات";
-            this.gbtnEditUser.Click += new System.EventHandler(this.gbtnEditPerson_Click);
             // 
             // label16
             // 
@@ -204,6 +175,7 @@
             this.kgtxtNotes.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
             this.kgtxtNotes.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
             this.kgtxtNotes.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
+            this.kgtxtNotes.TextProperties.DateTimeProperties.TimeFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enTimeFormate.None;
             this.kgtxtNotes.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
             this.kgtxtNotes.TextProperties.MinLength = ((short)(0));
             this.kgtxtNotes.TextProperties.MinLengthOption = false;
@@ -283,6 +255,7 @@
             this.kgtxtUserNameOfCreatedUser.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
             this.kgtxtUserNameOfCreatedUser.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
             this.kgtxtUserNameOfCreatedUser.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
+            this.kgtxtUserNameOfCreatedUser.TextProperties.DateTimeProperties.TimeFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enTimeFormate.None;
             this.kgtxtUserNameOfCreatedUser.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
             this.kgtxtUserNameOfCreatedUser.TextProperties.MinLength = ((short)(0));
             this.kgtxtUserNameOfCreatedUser.TextProperties.MinLengthOption = false;
@@ -362,6 +335,7 @@
             this.kgtxtUserName.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
             this.kgtxtUserName.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
             this.kgtxtUserName.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
+            this.kgtxtUserName.TextProperties.DateTimeProperties.TimeFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enTimeFormate.None;
             this.kgtxtUserName.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
             this.kgtxtUserName.TextProperties.MinLength = ((short)(0));
             this.kgtxtUserName.TextProperties.MinLengthOption = false;
@@ -376,7 +350,7 @@
             this.guna2PictureBox9.BackColor = System.Drawing.Color.Transparent;
             this.guna2PictureBox9.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox9.Image")));
             this.guna2PictureBox9.ImageRotate = 0F;
-            this.guna2PictureBox9.Location = new System.Drawing.Point(156, 90);
+            this.guna2PictureBox9.Location = new System.Drawing.Point(387, 91);
             this.guna2PictureBox9.Name = "guna2PictureBox9";
             this.guna2PictureBox9.Size = new System.Drawing.Size(36, 27);
             this.guna2PictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -384,21 +358,11 @@
             this.guna2PictureBox9.TabStop = false;
             this.guna2PictureBox9.UseTransparentBackground = true;
             // 
-            // lblCreatedDate
-            // 
-            this.lblCreatedDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCreatedDate.Location = new System.Drawing.Point(23, 89);
-            this.lblCreatedDate.Name = "lblCreatedDate";
-            this.lblCreatedDate.Size = new System.Drawing.Size(127, 24);
-            this.lblCreatedDate.TabIndex = 54;
-            this.lblCreatedDate.Text = "N/A";
-            this.lblCreatedDate.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(198, 90);
+            this.label5.Location = new System.Drawing.Point(429, 91);
             this.label5.Name = "label5";
             this.label5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label5.Size = new System.Drawing.Size(99, 24);
@@ -471,7 +435,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(468, 90);
+            this.label2.Location = new System.Drawing.Point(174, 43);
             this.label2.Name = "label2";
             this.label2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label2.Size = new System.Drawing.Size(60, 24);
@@ -483,7 +447,7 @@
             this.guna2PictureBox3.BackColor = System.Drawing.Color.Transparent;
             this.guna2PictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox3.Image")));
             this.guna2PictureBox3.ImageRotate = 0F;
-            this.guna2PictureBox3.Location = new System.Drawing.Point(432, 90);
+            this.guna2PictureBox3.Location = new System.Drawing.Point(138, 43);
             this.guna2PictureBox3.Name = "guna2PictureBox3";
             this.guna2PictureBox3.Size = new System.Drawing.Size(36, 27);
             this.guna2PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -495,7 +459,7 @@
             // 
             this.lblIsActive.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblIsActive.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblIsActive.Location = new System.Drawing.Point(350, 89);
+            this.lblIsActive.Location = new System.Drawing.Point(56, 42);
             this.lblIsActive.Name = "lblIsActive";
             this.lblIsActive.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblIsActive.Size = new System.Drawing.Size(70, 24);
@@ -504,10 +468,11 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.gbtnEditUser);
+            this.groupBox1.Controls.Add(this.klblCreatedDate);
             this.groupBox1.Controls.Add(this.lblIsActive);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.guna2PictureBox3);
-            this.groupBox1.Controls.Add(this.gbtnEditUser);
             this.groupBox1.Controls.Add(this.label16);
             this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.label4);
@@ -516,7 +481,6 @@
             this.groupBox1.Controls.Add(this.kgtxtUserNameOfCreatedUser);
             this.groupBox1.Controls.Add(this.kgtxtUserName);
             this.groupBox1.Controls.Add(this.guna2PictureBox9);
-            this.groupBox1.Controls.Add(this.lblCreatedDate);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.guna2PictureBox8);
             this.groupBox1.Controls.Add(this.guna2PictureBox6);
@@ -530,12 +494,61 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "معلومات المستخدم";
             // 
+            // gbtnEditUser
+            // 
+            this.gbtnEditUser.Animated = true;
+            this.gbtnEditUser.AutoRoundedCorners = true;
+            this.gbtnEditUser.BackColor = System.Drawing.Color.Transparent;
+            this.gbtnEditUser.BorderColor = System.Drawing.Color.DimGray;
+            this.gbtnEditUser.BorderThickness = 1;
+            this.gbtnEditUser.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gbtnEditUser.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnEditUser.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnEditUser.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.gbtnEditUser.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.gbtnEditUser.FillColor = System.Drawing.Color.White;
+            this.gbtnEditUser.FocusedColor = System.Drawing.SystemColors.MenuHighlight;
+            this.gbtnEditUser.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.gbtnEditUser.ForeColor = System.Drawing.Color.Black;
+            this.gbtnEditUser.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(102)))), ((int)(((byte)(194)))));
+            this.gbtnEditUser.HoverState.Font = new System.Drawing.Font("Segoe UI", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnEditUser.HoverState.ForeColor = System.Drawing.Color.White;
+            this.gbtnEditUser.Image = ((System.Drawing.Image)(resources.GetObject("gbtnEditUser.Image")));
+            this.gbtnEditUser.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.gbtnEditUser.ImageSize = new System.Drawing.Size(25, 25);
+            this.gbtnEditUser.IndicateFocus = true;
+            this.gbtnEditUser.Location = new System.Drawing.Point(174, 416);
+            this.gbtnEditUser.Name = "gbtnEditUser";
+            this.gbtnEditUser.PressedColor = System.Drawing.Color.White;
+            this.gbtnEditUser.Size = new System.Drawing.Size(191, 41);
+            this.gbtnEditUser.TabIndex = 121;
+            this.gbtnEditUser.Text = "تعديل البيانات";
+            this.toolTip1.SetToolTip(this.gbtnEditUser, "تعديل بيانات المستخدم");
+            this.gbtnEditUser.Click += new System.EventHandler(this.gbtnEditUser_Click);
+            // 
+            // klblCreatedDate
+            // 
+            this.klblCreatedDate.DateProperties.DayFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enDayFormate.dd__01;
+            this.klblCreatedDate.DateProperties.MonthFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.klblCreatedDate.DateProperties.SeparatorFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enSeparator.Dash;
+            this.klblCreatedDate.DateProperties.TimeFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enTimeFormate.TwelveHours;
+            this.klblCreatedDate.DateProperties.YearFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enYearFormate.yyyy__2025;
+            this.klblCreatedDate.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.klblCreatedDate.InputType = KhaledControlLibrary1.KhaledLabel.enInputType.Date;
+            this.klblCreatedDate.Location = new System.Drawing.Point(51, 91);
+            this.klblCreatedDate.Name = "klblCreatedDate";
+            this.klblCreatedDate.NumberFormat = KhaledControlLibrary1.KhaledLabel.enNumberFormat.None;
+            this.klblCreatedDate.Size = new System.Drawing.Size(278, 23);
+            this.klblCreatedDate.TabIndex = 62;
+            this.klblCreatedDate.Text = "N/A";
+            this.klblCreatedDate.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // groupBox2
             // 
             this.groupBox2.Location = new System.Drawing.Point(553, 7);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.groupBox2.Size = new System.Drawing.Size(596, 474);
+            this.groupBox2.Size = new System.Drawing.Size(558, 474);
             this.groupBox2.TabIndex = 63;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "معلومات الشخص";
@@ -545,8 +558,12 @@
             this.ctrlPersonCard1.BackColor = System.Drawing.Color.White;
             this.ctrlPersonCard1.Location = new System.Drawing.Point(565, 26);
             this.ctrlPersonCard1.Name = "ctrlPersonCard1";
-            this.ctrlPersonCard1.Size = new System.Drawing.Size(579, 436);
+            this.ctrlPersonCard1.Size = new System.Drawing.Size(532, 449);
             this.ctrlPersonCard1.TabIndex = 0;
+            // 
+            // toolTip1
+            // 
+            this.toolTip1.IsBalloon = true;
             // 
             // ctrlUserCard
             // 
@@ -557,7 +574,7 @@
             this.Controls.Add(this.ctrlPersonCard1);
             this.Controls.Add(this.groupBox2);
             this.Name = "ctrlUserCard";
-            this.Size = new System.Drawing.Size(1152, 487);
+            this.Size = new System.Drawing.Size(1122, 489);
             this.Load += new System.EventHandler(this.ctrlUserCard_Load);
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox8)).EndInit();
@@ -574,7 +591,6 @@
         #endregion
 
         private People.Controls.ctrlPersonCard ctrlPersonCard1;
-        private Guna.UI2.WinForms.Guna2Button gbtnEditUser;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label4;
@@ -583,7 +599,6 @@
         private KhaledControlLibrary1.KhaledGuna2TextBox kgtxtUserNameOfCreatedUser;
         private KhaledControlLibrary1.KhaledGuna2TextBox kgtxtUserName;
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox9;
-        private System.Windows.Forms.Label lblCreatedDate;
         private System.Windows.Forms.Label label5;
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox8;
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox6;
@@ -595,5 +610,8 @@
         private System.Windows.Forms.Label lblIsActive;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
+        private KhaledControlLibrary1.KhaledLabel klblCreatedDate;
+        private Guna.UI2.WinForms.Guna2Button gbtnEditUser;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

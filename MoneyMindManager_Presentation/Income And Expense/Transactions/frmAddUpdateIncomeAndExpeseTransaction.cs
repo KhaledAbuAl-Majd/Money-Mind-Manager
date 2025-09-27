@@ -80,7 +80,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                 _SetReadOnlyAtTextBox(kgtxtAmount);
 
                 ctrlInfoIcon_Status_IsLocked.IconImage = Resources.lock__1_;
-                ctrlInfoIcon_Status_IsLocked.ToolTipText = "العاملة مغلقة لايمكن التعديل عليها";
+                ctrlInfoIcon_Status_IsLocked.ToolTipText = "المعاملة مغلقة لايمكن التعديل عليها";
             }
             else
             {
@@ -89,8 +89,10 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                 _CancelReadOnlyAtTextBox(kgtxtAmount);
 
                 ctrlInfoIcon_Status_IsLocked.IconImage = Resources.unlocked__1_;
-                ctrlInfoIcon_Status_IsLocked.ToolTipText = "العاملة ليست مغلقة, يمكن التعديل عليها";
+                ctrlInfoIcon_Status_IsLocked.ToolTipText = "المعاملة ليست مغلقة, يمكن التعديل عليها";
             }
+
+            gbtnSave.Enabled = !isLocked;
         }
 
         void _AddNewMode()
@@ -106,6 +108,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             _isLocked = false;
             LockAndUnLockMode(_isLocked);
             ctrlInfoIcon_Status_IsLocked.Visible = false;
+            gibtnDeleteTransaction.Enabled = false;
             kgtxtCategoryName.Focus();
         }
 
@@ -126,6 +129,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             //this._TransactionID = searchedTransaction.MainTransactionID;
             this._Transaction = searchedTransaction;
             this._isIncome = searchedTransaction.VouhcerInfo.IsIncome;
+            lblTransactionID.Text = _Transaction.MainTransactionID.ToString();
             kgtxtCategoryName.Text = _Transaction.CategoryInfo?.CategoryName;
             kgtxtCategoryName.Tag = _Transaction.CategoryID;
             kgtxtPurpose.Text = _Transaction?.Purpose;
@@ -133,6 +137,12 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
             _isLocked = _Transaction.IsLocked;
             LockAndUnLockMode(_Transaction.IsLocked);
+
+            gibtnDeleteTransaction.Enabled = !_Transaction.IsLocked;      
+
+            gtswNewTransactionAfterAdd.Checked = false;
+            gtswNewTransactionAfterAdd.Enabled = false;
+            gbtnNewTransaction.Enabled = false;
         }
 
         void _ResteObject()
@@ -144,7 +154,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
         {
             if (_isLocked)
             {
-                lblUserMessage.Text = "العاملة مغلقة لايمكن التعديل عليها";
+                lblUserMessage.Text = "المعاملة مغلقة لايمكن التعديل عليها";
                 lblUserMessage.Visible = true;
                 return;
             }
@@ -196,6 +206,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                         _TransactionID = _Transaction.MainTransactionID;
                         lblTransactionID.Text = _TransactionID.ToString();
                         ChangeHeaderValue("تعديل بيانات المعاملة");
+                        gibtnDeleteTransaction.Enabled = !_Transaction.IsLocked;
                     }
                 }
                 else if (Mode == enMode.Update)
@@ -256,17 +267,6 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             this.Close();
         }
 
-        private void kgtxtCategoryName_IconLeftClick(object sender, EventArgs e)
-        {
-            if (_isLocked)
-                return;
-
-            var frm = new frmSelectCategory(Convert.ToBoolean(_isIncome));
-            frm.OnCategorySelected += Frm_OnCategorySelected;
-            //frm.ShowDialog(clsGlobal_UI.MainForm);
-            clsGlobal_UI.MainForm.AddNewFormAsDialog(frm);
-        }
-
         private void Frm_OnCategorySelected(object sender, frmSelectCategory.SelecteCategoryEventArgs e)
         {
             if (_isLocked)
@@ -280,6 +280,33 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
         {
             Mode = enMode.AddNew;
             _AddNewMode();
+        }
+
+        private void gibtnChooseCategory_Click(object sender, EventArgs e)
+        {
+            if (_isLocked)
+                return;
+
+            var frm = new frmSelectCategory(Convert.ToBoolean(_isIncome));
+            frm.OnCategorySelected += Frm_OnCategorySelected;
+            //frm.ShowDialog(clsGlobal_UI.MainForm);
+            clsGlobal_UI.MainForm.AddNewFormAsDialog(frm);
+        }
+
+        private async void gibtnDeleteTransaction_Click(object sender, EventArgs e)
+        {
+            if (Mode == enMode.AddNew || _TransactionID == null)
+                return;
+
+            if (clsGlobalMessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف المعاملة ؟ ", "طلب مواقفقة", MessageBoxButtons.OKCancel,
+               MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
+            {
+                if (await clsIncomeAndExpenseTransaction.DeleteIncomeAndExpenseTransactionByID(Convert.ToInt32(_TransactionID), Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID)))
+                {
+                    _isSaved = true;
+                    gbtnClose.PerformClick();
+                }
+            }
         }
     }
 }
