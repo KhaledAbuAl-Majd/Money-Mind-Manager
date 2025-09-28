@@ -279,7 +279,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                     break;
 
                 case enVoucherType.ExpensesReturn:
-                    ChangeHeaderValue("تعديل مستند مرتجع مصروفات");
+                    ChangeHeaderValue("تعديل مستند مرتجعات مصروفات");
                     break;
             }
         }
@@ -288,7 +288,6 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
         {
             //ChangeHeaderValue("تعديل بيانات المستند");
 
-            _UpdateModeChangesAtUi();
 
             int currentUserID = Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID);
 
@@ -303,6 +302,9 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             this._Voucher = searchedVoucher;
             this._voucherType = searchedVoucher.VoucherType;
+            this._voucherType = _Voucher.VoucherType;
+
+            _UpdateModeChangesAtUi();
 
             kgtxtVoucherName.Text = _Voucher.VoucherName;
             kgtxtNotes.Text = _Voucher.Notes;

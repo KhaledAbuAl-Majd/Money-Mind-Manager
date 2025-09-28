@@ -31,8 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPersonInfo));
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             this.gbtnClose = new Guna.UI2.WinForms.Guna2Button();
-            this.lblHeader = new System.Windows.Forms.Label();
             this.ctrlPersonCard1 = new MoneyMindManager_Presentation.People.Controls.ctrlPersonCard();
+            this.lblHeader = new System.Windows.Forms.Label();
             this.guna2Panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,12 +43,13 @@
             this.guna2Panel2.BorderRadius = 20;
             this.guna2Panel2.BorderThickness = 2;
             this.guna2Panel2.Controls.Add(this.gbtnClose);
+            this.guna2Panel2.Controls.Add(this.ctrlPersonCard1);
             this.guna2Panel2.FillColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.guna2Panel2.Location = new System.Drawing.Point(265, 113);
+            this.guna2Panel2.Location = new System.Drawing.Point(269, 113);
             this.guna2Panel2.Name = "guna2Panel2";
             this.guna2Panel2.ShadowDecoration.Color = System.Drawing.Color.Transparent;
             this.guna2Panel2.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(0, 0, 5, 5);
-            this.guna2Panel2.Size = new System.Drawing.Size(672, 541);
+            this.guna2Panel2.Size = new System.Drawing.Size(571, 524);
             this.guna2Panel2.TabIndex = 12;
             // 
             // gbtnClose
@@ -66,50 +67,52 @@
             this.gbtnClose.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.gbtnClose.FillColor = System.Drawing.Color.White;
             this.gbtnClose.FocusedColor = System.Drawing.SystemColors.MenuHighlight;
-            this.gbtnClose.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnClose.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.gbtnClose.ForeColor = System.Drawing.Color.Black;
-            this.gbtnClose.HoverState.FillColor = System.Drawing.Color.SlateBlue;
+            this.gbtnClose.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(102)))), ((int)(((byte)(194)))));
+            this.gbtnClose.HoverState.Font = new System.Drawing.Font("Segoe UI", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbtnClose.HoverState.ForeColor = System.Drawing.Color.White;
             this.gbtnClose.Image = ((System.Drawing.Image)(resources.GetObject("gbtnClose.Image")));
             this.gbtnClose.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnClose.ImageSize = new System.Drawing.Size(25, 25);
             this.gbtnClose.IndicateFocus = true;
-            this.gbtnClose.Location = new System.Drawing.Point(509, 483);
+            this.gbtnClose.Location = new System.Drawing.Point(151, 462);
             this.gbtnClose.Name = "gbtnClose";
             this.gbtnClose.PressedColor = System.Drawing.Color.White;
-            this.gbtnClose.Size = new System.Drawing.Size(128, 45);
-            this.gbtnClose.TabIndex = 7;
+            this.gbtnClose.Size = new System.Drawing.Size(258, 41);
+            this.gbtnClose.TabIndex = 122;
             this.gbtnClose.Text = "غلق";
             this.gbtnClose.Click += new System.EventHandler(this.gbtnClose_Click);
-            // 
-            // lblHeader
-            // 
-            this.lblHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHeader.ForeColor = System.Drawing.Color.Red;
-            this.lblHeader.Location = new System.Drawing.Point(12, 21);
-            this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(1186, 62);
-            this.lblHeader.TabIndex = 11;
-            this.lblHeader.Text = "معلومات الشخص";
-            this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ctrlPersonCard1
             // 
             this.ctrlPersonCard1.BackColor = System.Drawing.Color.White;
-            this.ctrlPersonCard1.Location = new System.Drawing.Point(300, 140);
+            this.ctrlPersonCard1.Location = new System.Drawing.Point(14, 12);
             this.ctrlPersonCard1.Name = "ctrlPersonCard1";
-            this.ctrlPersonCard1.Size = new System.Drawing.Size(602, 446);
+            this.ctrlPersonCard1.Size = new System.Drawing.Size(535, 446);
             this.ctrlPersonCard1.TabIndex = 0;
             this.ctrlPersonCard1.OnEditingPerson += new System.Action(this.ctrlPersonCard1_OnEditingPerson);
+            // 
+            // lblHeader
+            // 
+            this.lblHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblHeader.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold);
+            this.lblHeader.ForeColor = System.Drawing.Color.Black;
+            this.lblHeader.Location = new System.Drawing.Point(0, 0);
+            this.lblHeader.Name = "lblHeader";
+            this.lblHeader.Size = new System.Drawing.Size(1210, 50);
+            this.lblHeader.TabIndex = 39;
+            this.lblHeader.Text = "معلومات الشخص";
+            this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // frmPersonInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.CancelButton = this.gbtnClose;
             this.ClientSize = new System.Drawing.Size(1210, 737);
             this.Controls.Add(this.lblHeader);
-            this.Controls.Add(this.ctrlPersonCard1);
             this.Controls.Add(this.guna2Panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmPersonInfo";
@@ -123,8 +126,8 @@
         #endregion
 
         private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
-        private Guna.UI2.WinForms.Guna2Button gbtnClose;
-        private System.Windows.Forms.Label lblHeader;
         private Controls.ctrlPersonCard ctrlPersonCard1;
+        private System.Windows.Forms.Label lblHeader;
+        private Guna.UI2.WinForms.Guna2Button gbtnClose;
     }
 }

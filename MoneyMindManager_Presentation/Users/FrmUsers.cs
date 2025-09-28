@@ -181,7 +181,7 @@ namespace MoneyMindManager_Presentation
         }
 
 
-        void _ShowPersonInfo()
+        void _ShowUserInfo()
         {
             int userID = Convert.ToInt32(gdgvUser.CurrentRow.Cells[0].Value);
 
@@ -335,7 +335,7 @@ namespace MoneyMindManager_Presentation
 
         private void gtsmUserInfo_Click(object sender, EventArgs e)
         {
-            _ShowPersonInfo();
+            _ShowUserInfo();
         }
 
         private void gtsmAddUser_Click(object sender, EventArgs e)
@@ -374,11 +374,12 @@ namespace MoneyMindManager_Presentation
 
         private void gdgvUser_DoubleClick(object sender, EventArgs e)
         {
-            _ShowPersonInfo();
+            _ShowUserInfo();
         }
 
         private async void gibtnRefreshData_Click(object sender, EventArgs e)
         {
+            _pageNumber = 1;
             await _LoadDataAtDataGridView(_filterBy);
         }
     }

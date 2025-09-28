@@ -150,6 +150,17 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
         {
             _Category = new clsIncomeAndExpenseCategory();
         }
+
+        void _ShowChooseCategoryForm()
+        {
+            if (Mode != enMode.AddNew || _isIncome == null)
+                return;
+
+            var frm = new frmSelectCategory(Convert.ToBoolean(_isIncome));
+            frm.OnCategorySelected += Frm_OnCategorySelected;
+            //frm.ShowDialog(clsGlobal_UI.MainForm);
+            clsGlobal_UI.MainForm.AddNewFormAsDialog(frm);
+        }
         async Task _Save()
         {
             if (!ValidateChildren())
@@ -271,13 +282,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
         private void kgtxtParentCategory_IconLeftClick(object sender, EventArgs e)
         {
-            if (Mode != enMode.AddNew || _isIncome == null)
-                return;
-
-            var frm = new frmSelectCategory(Convert.ToBoolean(_isIncome));
-            frm.OnCategorySelected += Frm_OnCategorySelected;
-            //frm.ShowDialog(clsGlobal_UI.MainForm);
-            clsGlobal_UI.MainForm.AddNewFormAsDialog(frm);
+            _ShowChooseCategoryForm();
         }
 
         private void Frm_OnCategorySelected(object sender, frmSelectCategory.SelecteCategoryEventArgs e)
@@ -372,6 +377,14 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                     _isSaved = true;
                     gbtnClose.PerformClick();
                 }
+            }
+        }
+
+        private void kgtxtParentCategoryName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F9)
+            {
+                _ShowChooseCategoryForm();
             }
         }
     }

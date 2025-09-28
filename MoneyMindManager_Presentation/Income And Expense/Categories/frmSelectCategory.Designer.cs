@@ -43,6 +43,7 @@
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.ctrlInfoIcon1 = new KhaledControlLibrary1.ctrlInfoIcon();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.gbtnClose = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.gdgvCategories)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ctrlInfoIcon1.PictureBoxControl)).BeginInit();
@@ -112,7 +113,7 @@
             this.gdgvCategories.RowHeadersVisible = false;
             this.gdgvCategories.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gdgvCategories.RowTemplate.Height = 40;
-            this.gdgvCategories.Size = new System.Drawing.Size(926, 494);
+            this.gdgvCategories.Size = new System.Drawing.Size(926, 480);
             this.gdgvCategories.TabIndex = 31;
             this.gdgvCategories.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.gdgvCategories.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -217,7 +218,7 @@
             // lblTotalRecordsNumber
             // 
             this.lblTotalRecordsNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalRecordsNumber.Location = new System.Drawing.Point(636, 554);
+            this.lblTotalRecordsNumber.Location = new System.Drawing.Point(638, 537);
             this.lblTotalRecordsNumber.Name = "lblTotalRecordsNumber";
             this.lblTotalRecordsNumber.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblTotalRecordsNumber.Size = new System.Drawing.Size(148, 24);
@@ -228,7 +229,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(781, 554);
+            this.label1.Location = new System.Drawing.Point(781, 537);
             this.label1.Name = "label1";
             this.label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label1.Size = new System.Drawing.Size(155, 24);
@@ -280,13 +281,47 @@
             // 
             this.toolTip1.IsBalloon = true;
             // 
+            // gbtnClose
+            // 
+            this.gbtnClose.Animated = true;
+            this.gbtnClose.AutoRoundedCorners = true;
+            this.gbtnClose.BackColor = System.Drawing.Color.Transparent;
+            this.gbtnClose.BorderColor = System.Drawing.Color.DimGray;
+            this.gbtnClose.BorderThickness = 1;
+            this.gbtnClose.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gbtnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.gbtnClose.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnClose.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnClose.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.gbtnClose.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.gbtnClose.FillColor = System.Drawing.Color.White;
+            this.gbtnClose.FocusedColor = System.Drawing.SystemColors.MenuHighlight;
+            this.gbtnClose.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.gbtnClose.ForeColor = System.Drawing.Color.Black;
+            this.gbtnClose.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(102)))), ((int)(((byte)(194)))));
+            this.gbtnClose.HoverState.Font = new System.Drawing.Font("Segoe UI", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnClose.HoverState.ForeColor = System.Drawing.Color.White;
+            this.gbtnClose.Image = ((System.Drawing.Image)(resources.GetObject("gbtnClose.Image")));
+            this.gbtnClose.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.gbtnClose.ImageSize = new System.Drawing.Size(25, 25);
+            this.gbtnClose.IndicateFocus = true;
+            this.gbtnClose.Location = new System.Drawing.Point(335, 537);
+            this.gbtnClose.Name = "gbtnClose";
+            this.gbtnClose.PressedColor = System.Drawing.Color.White;
+            this.gbtnClose.Size = new System.Drawing.Size(283, 41);
+            this.gbtnClose.TabIndex = 119;
+            this.gbtnClose.Text = "غلق";
+            this.gbtnClose.Click += new System.EventHandler(this.gbtnClose_Click);
+            // 
             // frmSelectCategory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.Color.White;
+            this.CancelButton = this.gbtnClose;
             this.ClientSize = new System.Drawing.Size(938, 583);
+            this.Controls.Add(this.gbtnClose);
             this.Controls.Add(this.ctrlInfoIcon1);
             this.Controls.Add(this.lblUserMessage);
             this.Controls.Add(this.lblTotalRecordsNumber);
@@ -322,5 +357,6 @@
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private KhaledControlLibrary1.ctrlInfoIcon ctrlInfoIcon1;
         private System.Windows.Forms.ToolTip toolTip1;
+        private Guna.UI2.WinForms.Guna2Button gbtnClose;
     }
 }

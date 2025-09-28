@@ -30,9 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmUserInfo));
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
+            this.gbtnClose = new Guna.UI2.WinForms.Guna2Button();
             this.ctrlUserCard1 = new MoneyMindManager_Presentation.Users.ctrlUserCard();
             this.lblHeader = new System.Windows.Forms.Label();
-            this.gbtnClose = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,28 +51,6 @@
             this.guna2Panel2.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.guna2Panel2.Size = new System.Drawing.Size(1178, 574);
             this.guna2Panel2.TabIndex = 13;
-            // 
-            // ctrlUserCard1
-            // 
-            this.ctrlUserCard1.BackColor = System.Drawing.Color.White;
-            this.ctrlUserCard1.Location = new System.Drawing.Point(16, 17);
-            this.ctrlUserCard1.Name = "ctrlUserCard1";
-            this.ctrlUserCard1.Size = new System.Drawing.Size(1132, 487);
-            this.ctrlUserCard1.TabIndex = 8;
-            this.ctrlUserCard1.OnEditingPerson += new System.Action(this.ctrlUserCard1_OnEditingUserOrPerson);
-            this.ctrlUserCard1.OnEditingUser += new System.Action(this.ctrlUserCard1_OnEditingUserOrPerson);
-            // 
-            // lblHeader
-            // 
-            this.lblHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblHeader.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold);
-            this.lblHeader.ForeColor = System.Drawing.Color.Black;
-            this.lblHeader.Location = new System.Drawing.Point(0, 0);
-            this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(1210, 50);
-            this.lblHeader.TabIndex = 38;
-            this.lblHeader.Text = "معلومات المستخدم";
-            this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // gbtnClose
             // 
@@ -98,13 +76,35 @@
             this.gbtnClose.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnClose.ImageSize = new System.Drawing.Size(25, 25);
             this.gbtnClose.IndicateFocus = true;
-            this.gbtnClose.Location = new System.Drawing.Point(451, 510);
+            this.gbtnClose.Location = new System.Drawing.Point(465, 510);
             this.gbtnClose.Name = "gbtnClose";
             this.gbtnClose.PressedColor = System.Drawing.Color.White;
             this.gbtnClose.Size = new System.Drawing.Size(229, 41);
             this.gbtnClose.TabIndex = 121;
             this.gbtnClose.Text = "غلق";
             this.gbtnClose.Click += new System.EventHandler(this.gbtnClose_Click);
+            // 
+            // ctrlUserCard1
+            // 
+            this.ctrlUserCard1.BackColor = System.Drawing.Color.White;
+            this.ctrlUserCard1.Location = new System.Drawing.Point(30, 17);
+            this.ctrlUserCard1.Name = "ctrlUserCard1";
+            this.ctrlUserCard1.Size = new System.Drawing.Size(1125, 487);
+            this.ctrlUserCard1.TabIndex = 8;
+            this.ctrlUserCard1.OnEditingPerson += new System.Action(this.ctrlUserCard1_OnEditingUserOrPerson);
+            this.ctrlUserCard1.OnEditingUser += new System.Action(this.ctrlUserCard1_OnEditingUserOrPerson);
+            // 
+            // lblHeader
+            // 
+            this.lblHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblHeader.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold);
+            this.lblHeader.ForeColor = System.Drawing.Color.Black;
+            this.lblHeader.Location = new System.Drawing.Point(0, 0);
+            this.lblHeader.Name = "lblHeader";
+            this.lblHeader.Size = new System.Drawing.Size(1210, 50);
+            this.lblHeader.TabIndex = 38;
+            this.lblHeader.Text = "معلومات المستخدم";
+            this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // frmUserInfo
             // 

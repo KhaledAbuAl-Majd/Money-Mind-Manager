@@ -787,7 +787,7 @@
             this.gbtnEditPerson.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnEditPerson.ImageSize = new System.Drawing.Size(25, 25);
             this.gbtnEditPerson.IndicateFocus = true;
-            this.gbtnEditPerson.Location = new System.Drawing.Point(162, 397);
+            this.gbtnEditPerson.Location = new System.Drawing.Point(167, 397);
             this.gbtnEditPerson.Name = "gbtnEditPerson";
             this.gbtnEditPerson.PressedColor = System.Drawing.Color.White;
             this.gbtnEditPerson.Size = new System.Drawing.Size(191, 41);

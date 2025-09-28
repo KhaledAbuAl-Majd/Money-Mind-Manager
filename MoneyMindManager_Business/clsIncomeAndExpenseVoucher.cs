@@ -170,7 +170,7 @@ namespace MoneyMindManager_Business
         {
             if (isIncome)
             {
-                if (!isReturn)
+                if (isReturn)
                     return enVoucherType.UnKnown;
                 else
                     return enVoucherType.Incomes;

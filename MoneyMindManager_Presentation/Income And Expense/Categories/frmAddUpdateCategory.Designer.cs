@@ -183,6 +183,7 @@
             this.gbtnClose.BorderColor = System.Drawing.Color.DimGray;
             this.gbtnClose.BorderThickness = 1;
             this.gbtnClose.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gbtnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.gbtnClose.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.gbtnClose.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.gbtnClose.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -202,7 +203,7 @@
             this.gbtnClose.Name = "gbtnClose";
             this.gbtnClose.PressedColor = System.Drawing.Color.White;
             this.gbtnClose.Size = new System.Drawing.Size(283, 41);
-            this.gbtnClose.TabIndex = 118;
+            this.gbtnClose.TabIndex = 9;
             this.gbtnClose.Text = "غلق";
             this.gbtnClose.Click += new System.EventHandler(this.gbtnClose_Click);
             // 
@@ -233,7 +234,7 @@
             this.gbtnSave.Name = "gbtnSave";
             this.gbtnSave.PressedColor = System.Drawing.Color.White;
             this.gbtnSave.Size = new System.Drawing.Size(283, 41);
-            this.gbtnSave.TabIndex = 117;
+            this.gbtnSave.TabIndex = 8;
             this.gbtnSave.Text = "حفظ";
             this.gbtnSave.Click += new System.EventHandler(this.gbtnSave_Click);
             // 
@@ -262,7 +263,7 @@
             this.gtxtMainCategoryName.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.gtxtMainCategoryName.SelectedText = "";
             this.gtxtMainCategoryName.Size = new System.Drawing.Size(283, 41);
-            this.gtxtMainCategoryName.TabIndex = 125;
+            this.gtxtMainCategoryName.TabIndex = 2;
             this.gtxtMainCategoryName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label1
@@ -303,7 +304,7 @@
             this.gtxtCategoryHierarchical.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.gtxtCategoryHierarchical.SelectedText = "";
             this.gtxtCategoryHierarchical.Size = new System.Drawing.Size(283, 77);
-            this.gtxtCategoryHierarchical.TabIndex = 124;
+            this.gtxtCategoryHierarchical.TabIndex = 7;
             this.gtxtCategoryHierarchical.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // gtswIsActive
@@ -321,7 +322,7 @@
             this.gtswIsActive.Location = new System.Drawing.Point(37, 153);
             this.gtswIsActive.Name = "gtswIsActive";
             this.gtswIsActive.Size = new System.Drawing.Size(44, 26);
-            this.gtswIsActive.TabIndex = 99;
+            this.gtswIsActive.TabIndex = 5;
             this.toolTip1.SetToolTip(this.gtswIsActive, "الفعالية تتحكم في إمكانية اختيارها ");
             this.gtswIsActive.UncheckedState.BorderColor = System.Drawing.Color.Silver;
             this.gtswIsActive.UncheckedState.BorderRadius = 12;
@@ -411,7 +412,7 @@
             this.gcbIsIncome_CategroyType.Name = "gcbIsIncome_CategroyType";
             this.gcbIsIncome_CategroyType.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.gcbIsIncome_CategroyType.Size = new System.Drawing.Size(168, 36);
-            this.gcbIsIncome_CategroyType.TabIndex = 102;
+            this.gcbIsIncome_CategroyType.TabIndex = 4;
             this.gcbIsIncome_CategroyType.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.gcbIsIncome_CategroyType.SelectedIndexChanged += new System.EventHandler(this.gcbIsIncome_CategroyType_SelectedIndexChanged);
             // 
@@ -561,7 +562,7 @@
             this.kgtxtNotes.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.kgtxtNotes.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(2);
             this.kgtxtNotes.Size = new System.Drawing.Size(283, 107);
-            this.kgtxtNotes.TabIndex = 3;
+            this.kgtxtNotes.TabIndex = 6;
             this.kgtxtNotes.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.kgtxtNotes.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
             this.kgtxtNotes.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
@@ -639,7 +640,7 @@
             this.kgtxtMonthlyBudget.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.kgtxtMonthlyBudget.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(2);
             this.kgtxtMonthlyBudget.Size = new System.Drawing.Size(283, 41);
-            this.kgtxtMonthlyBudget.TabIndex = 1;
+            this.kgtxtMonthlyBudget.TabIndex = 3;
             this.kgtxtMonthlyBudget.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.kgtxtMonthlyBudget.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
             this.kgtxtMonthlyBudget.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
@@ -725,7 +726,7 @@
             this.kgtxtParentCategoryName.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.kgtxtParentCategoryName.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(2);
             this.kgtxtParentCategoryName.Size = new System.Drawing.Size(283, 41);
-            this.kgtxtParentCategoryName.TabIndex = 2;
+            this.kgtxtParentCategoryName.TabIndex = 1;
             this.kgtxtParentCategoryName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.kgtxtParentCategoryName.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
             this.kgtxtParentCategoryName.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
@@ -737,10 +738,12 @@
             this.kgtxtParentCategoryName.TextProperties.PhoneProperties.AllowPlusSign = true;
             this.kgtxtParentCategoryName.TextProperties.PhoneProperties.MaxPhoneLength = ((byte)(15));
             this.kgtxtParentCategoryName.TextProperties.TextFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.enTextFormat.Email;
+            this.toolTip1.SetToolTip(this.kgtxtParentCategoryName, " F9 لتقوم باختيار الفئة : اضغط على الأيقونة على اليسار أو اضغط على مفتاح ");
             this.kgtxtParentCategoryName.TrimEnd = false;
             this.kgtxtParentCategoryName.TrimStart = false;
             this.kgtxtParentCategoryName.IconLeftClick += new System.EventHandler(this.kgtxtParentCategory_IconLeftClick);
             this.kgtxtParentCategoryName.IconRightClick += new System.EventHandler(this.kgtxtParentCategoryName_RightIconClear);
+            this.kgtxtParentCategoryName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.kgtxtParentCategoryName_KeyDown);
             // 
             // kgtxtCategoryName
             // 
@@ -847,6 +850,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.Color.White;
+            this.CancelButton = this.gbtnClose;
             this.ClientSize = new System.Drawing.Size(1210, 737);
             this.Controls.Add(this.lblHeader);
             this.Controls.Add(this.guna2Panel2);

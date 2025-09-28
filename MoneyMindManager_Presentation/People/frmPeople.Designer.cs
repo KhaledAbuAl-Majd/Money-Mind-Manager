@@ -49,6 +49,7 @@ namespace MoneyMindManager_Presentation.People
             this.gibtnPreviousPage = new Guna.UI2.WinForms.Guna2ImageButton();
             this.kgtxtPageNumber = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.gibtnRefreshData = new Guna.UI2.WinForms.Guna2ImageButton();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.lblCurrentPageRecordsCount = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -58,8 +59,8 @@ namespace MoneyMindManager_Presentation.People
             this.kgtxtFilterValue = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.SearchAfterTimerFinish = new System.Windows.Forms.Timer(this.components);
             this.lblUserMessage = new System.Windows.Forms.Label();
-            this.gbtnAddPerson = new Guna.UI2.WinForms.Guna2Button();
             this.lblHeader = new System.Windows.Forms.Label();
+            this.gbtnAddPerson = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.gdgvPeople)).BeginInit();
             this.guna2ContextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -101,7 +102,7 @@ namespace MoneyMindManager_Presentation.People
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.gdgvPeople.DefaultCellStyle = dataGridViewCellStyle3;
             this.gdgvPeople.GridColor = System.Drawing.Color.White;
-            this.gdgvPeople.Location = new System.Drawing.Point(50, 198);
+            this.gdgvPeople.Location = new System.Drawing.Point(12, 200);
             this.gdgvPeople.MultiSelect = false;
             this.gdgvPeople.Name = "gdgvPeople";
             this.gdgvPeople.ReadOnly = true;
@@ -117,7 +118,7 @@ namespace MoneyMindManager_Presentation.People
             this.gdgvPeople.RowHeadersVisible = false;
             this.gdgvPeople.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gdgvPeople.RowTemplate.Height = 40;
-            this.gdgvPeople.Size = new System.Drawing.Size(1110, 440);
+            this.gdgvPeople.Size = new System.Drawing.Size(1186, 463);
             this.gdgvPeople.TabIndex = 0;
             this.gdgvPeople.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.gdgvPeople.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -204,7 +205,7 @@ namespace MoneyMindManager_Presentation.People
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(1002, 656);
+            this.label1.Location = new System.Drawing.Point(1043, 674);
             this.label1.Name = "label1";
             this.label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label1.Size = new System.Drawing.Size(155, 24);
@@ -214,7 +215,7 @@ namespace MoneyMindManager_Presentation.People
             // lblTotalRecordsNumber
             // 
             this.lblTotalRecordsNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalRecordsNumber.Location = new System.Drawing.Point(871, 656);
+            this.lblTotalRecordsNumber.Location = new System.Drawing.Point(912, 674);
             this.lblTotalRecordsNumber.Name = "lblTotalRecordsNumber";
             this.lblTotalRecordsNumber.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblTotalRecordsNumber.Size = new System.Drawing.Size(114, 24);
@@ -224,7 +225,7 @@ namespace MoneyMindManager_Presentation.People
             // lblCurrentPageOfNumberOfPages
             // 
             this.lblCurrentPageOfNumberOfPages.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCurrentPageOfNumberOfPages.Location = new System.Drawing.Point(479, 656);
+            this.lblCurrentPageOfNumberOfPages.Location = new System.Drawing.Point(479, 674);
             this.lblCurrentPageOfNumberOfPages.Name = "lblCurrentPageOfNumberOfPages";
             this.lblCurrentPageOfNumberOfPages.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblCurrentPageOfNumberOfPages.Size = new System.Drawing.Size(249, 30);
@@ -242,7 +243,7 @@ namespace MoneyMindManager_Presentation.People
             this.gibtnNextPage.ImageOffset = new System.Drawing.Point(0, 0);
             this.gibtnNextPage.ImageRotate = 0F;
             this.gibtnNextPage.ImageSize = new System.Drawing.Size(25, 25);
-            this.gibtnNextPage.Location = new System.Drawing.Point(722, 652);
+            this.gibtnNextPage.Location = new System.Drawing.Point(722, 670);
             this.gibtnNextPage.Name = "gibtnNextPage";
             this.gibtnNextPage.PressedState.ImageSize = new System.Drawing.Size(64, 64);
             this.gibtnNextPage.Size = new System.Drawing.Size(40, 42);
@@ -261,7 +262,7 @@ namespace MoneyMindManager_Presentation.People
             this.gibtnPreviousPage.ImageOffset = new System.Drawing.Point(0, 0);
             this.gibtnPreviousPage.ImageRotate = 0F;
             this.gibtnPreviousPage.ImageSize = new System.Drawing.Size(25, 25);
-            this.gibtnPreviousPage.Location = new System.Drawing.Point(444, 652);
+            this.gibtnPreviousPage.Location = new System.Drawing.Point(444, 670);
             this.gibtnPreviousPage.Name = "gibtnPreviousPage";
             this.gibtnPreviousPage.PressedState.ImageSize = new System.Drawing.Size(64, 64);
             this.gibtnPreviousPage.Size = new System.Drawing.Size(40, 42);
@@ -291,7 +292,7 @@ namespace MoneyMindManager_Presentation.People
             this.kgtxtPageNumber.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtPageNumber.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Number;
             this.kgtxtPageNumber.IsRequired = true;
-            this.kgtxtPageNumber.Location = new System.Drawing.Point(196, 652);
+            this.kgtxtPageNumber.Location = new System.Drawing.Point(196, 670);
             this.kgtxtPageNumber.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtPageNumber.MaxLength = 150;
             this.kgtxtPageNumber.Name = "kgtxtPageNumber";
@@ -336,6 +337,11 @@ namespace MoneyMindManager_Presentation.People
             this.kgtxtPageNumber.Size = new System.Drawing.Size(119, 34);
             this.kgtxtPageNumber.TabIndex = 8;
             this.kgtxtPageNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.kgtxtPageNumber.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
+            this.kgtxtPageNumber.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.kgtxtPageNumber.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
+            this.kgtxtPageNumber.TextProperties.DateTimeProperties.TimeFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enTimeFormate.None;
+            this.kgtxtPageNumber.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
             this.kgtxtPageNumber.TextProperties.MinLength = ((short)(0));
             this.kgtxtPageNumber.TextProperties.MinLengthOption = false;
             this.kgtxtPageNumber.TextProperties.PhoneProperties.AllowPlusSign = true;
@@ -352,6 +358,25 @@ namespace MoneyMindManager_Presentation.People
             // 
             this.toolTip1.IsBalloon = true;
             // 
+            // gibtnRefreshData
+            // 
+            this.gibtnRefreshData.BackColor = System.Drawing.Color.Transparent;
+            this.gibtnRefreshData.CheckedState.ImageSize = new System.Drawing.Size(64, 64);
+            this.gibtnRefreshData.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gibtnRefreshData.HoverState.ImageSize = new System.Drawing.Size(35, 35);
+            this.gibtnRefreshData.Image = ((System.Drawing.Image)(resources.GetObject("gibtnRefreshData.Image")));
+            this.gibtnRefreshData.ImageOffset = new System.Drawing.Point(0, 0);
+            this.gibtnRefreshData.ImageRotate = 0F;
+            this.gibtnRefreshData.ImageSize = new System.Drawing.Size(28, 28);
+            this.gibtnRefreshData.Location = new System.Drawing.Point(700, 152);
+            this.gibtnRefreshData.Name = "gibtnRefreshData";
+            this.gibtnRefreshData.PressedState.ImageSize = new System.Drawing.Size(64, 64);
+            this.gibtnRefreshData.Size = new System.Drawing.Size(40, 42);
+            this.gibtnRefreshData.TabIndex = 135;
+            this.toolTip1.SetToolTip(this.gibtnRefreshData, "تحديث البيانات");
+            this.gibtnRefreshData.UseTransparentBackground = true;
+            this.gibtnRefreshData.Click += new System.EventHandler(this.gibtnRefreshData_Click);
+            // 
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
@@ -359,7 +384,7 @@ namespace MoneyMindManager_Presentation.People
             // lblCurrentPageRecordsCount
             // 
             this.lblCurrentPageRecordsCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCurrentPageRecordsCount.Location = new System.Drawing.Point(827, 685);
+            this.lblCurrentPageRecordsCount.Location = new System.Drawing.Point(868, 703);
             this.lblCurrentPageRecordsCount.Name = "lblCurrentPageRecordsCount";
             this.lblCurrentPageRecordsCount.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblCurrentPageRecordsCount.Size = new System.Drawing.Size(114, 24);
@@ -370,7 +395,7 @@ namespace MoneyMindManager_Presentation.People
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(952, 685);
+            this.label3.Location = new System.Drawing.Point(993, 703);
             this.label3.Name = "label3";
             this.label3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label3.Size = new System.Drawing.Size(205, 24);
@@ -395,9 +420,10 @@ namespace MoneyMindManager_Presentation.People
             this.gcbFilterBy.Items.AddRange(new object[] {
             "بدون",
             "معرف الشخص",
-            "رقم الهاتف",
-            "اسم الشخص"});
-            this.gcbFilterBy.Location = new System.Drawing.Point(894, 148);
+            "اسم الشخص",
+            "البريد الإلكتروني",
+            "رقم الهاتف"});
+            this.gcbFilterBy.Location = new System.Drawing.Point(934, 155);
             this.gcbFilterBy.Name = "gcbFilterBy";
             this.gcbFilterBy.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.gcbFilterBy.Size = new System.Drawing.Size(157, 36);
@@ -409,7 +435,7 @@ namespace MoneyMindManager_Presentation.People
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(1060, 153);
+            this.label2.Location = new System.Drawing.Point(1100, 160);
             this.label2.Name = "label2";
             this.label2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label2.Size = new System.Drawing.Size(97, 24);
@@ -446,7 +472,7 @@ namespace MoneyMindManager_Presentation.People
             this.kgtxtFilterValue.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtFilterValue.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
             this.kgtxtFilterValue.IsRequired = false;
-            this.kgtxtFilterValue.Location = new System.Drawing.Point(712, 148);
+            this.kgtxtFilterValue.Location = new System.Drawing.Point(752, 155);
             this.kgtxtFilterValue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtFilterValue.Name = "kgtxtFilterValue";
             this.kgtxtFilterValue.NumberProperties.DecimalNumberProperties.AllowNegative = true;
@@ -485,6 +511,11 @@ namespace MoneyMindManager_Presentation.People
             this.kgtxtFilterValue.Size = new System.Drawing.Size(157, 36);
             this.kgtxtFilterValue.TabIndex = 15;
             this.kgtxtFilterValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.kgtxtFilterValue.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
+            this.kgtxtFilterValue.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.kgtxtFilterValue.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
+            this.kgtxtFilterValue.TextProperties.DateTimeProperties.TimeFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enTimeFormate.None;
+            this.kgtxtFilterValue.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
             this.kgtxtFilterValue.TextProperties.MinLength = ((short)(0));
             this.kgtxtFilterValue.TextProperties.MinLengthOption = false;
             this.kgtxtFilterValue.TextProperties.PhoneProperties.AllowPlusSign = true;
@@ -515,6 +546,18 @@ namespace MoneyMindManager_Presentation.People
             this.lblUserMessage.Text = "\"تم العثور على حقول غير صالحة. ضع المؤشر على العلامات الحمراء لعرض سبب الخطأ.\"";
             this.lblUserMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // lblHeader
+            // 
+            this.lblHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblHeader.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold);
+            this.lblHeader.ForeColor = System.Drawing.Color.Black;
+            this.lblHeader.Location = new System.Drawing.Point(0, 0);
+            this.lblHeader.Name = "lblHeader";
+            this.lblHeader.Size = new System.Drawing.Size(1210, 50);
+            this.lblHeader.TabIndex = 39;
+            this.lblHeader.Text = "الأشخاص";
+            this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // gbtnAddPerson
             // 
             this.gbtnAddPerson.Animated = true;
@@ -523,40 +566,28 @@ namespace MoneyMindManager_Presentation.People
             this.gbtnAddPerson.BorderColor = System.Drawing.Color.DimGray;
             this.gbtnAddPerson.BorderThickness = 1;
             this.gbtnAddPerson.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.gbtnAddPerson.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.gbtnAddPerson.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.gbtnAddPerson.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.gbtnAddPerson.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.gbtnAddPerson.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.gbtnAddPerson.FillColor = System.Drawing.Color.White;
             this.gbtnAddPerson.FocusedColor = System.Drawing.SystemColors.MenuHighlight;
-            this.gbtnAddPerson.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnAddPerson.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.gbtnAddPerson.ForeColor = System.Drawing.Color.Black;
-            this.gbtnAddPerson.HoverState.FillColor = System.Drawing.Color.SlateBlue;
-            this.gbtnAddPerson.HoverState.Font = new System.Drawing.Font("Segoe UI", 12.75F);
+            this.gbtnAddPerson.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(102)))), ((int)(((byte)(194)))));
+            this.gbtnAddPerson.HoverState.Font = new System.Drawing.Font("Segoe UI", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbtnAddPerson.HoverState.ForeColor = System.Drawing.Color.White;
             this.gbtnAddPerson.Image = ((System.Drawing.Image)(resources.GetObject("gbtnAddPerson.Image")));
             this.gbtnAddPerson.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.gbtnAddPerson.ImageSize = new System.Drawing.Size(30, 30);
+            this.gbtnAddPerson.ImageSize = new System.Drawing.Size(25, 25);
             this.gbtnAddPerson.IndicateFocus = true;
-            this.gbtnAddPerson.Location = new System.Drawing.Point(50, 143);
+            this.gbtnAddPerson.Location = new System.Drawing.Point(12, 155);
             this.gbtnAddPerson.Name = "gbtnAddPerson";
             this.gbtnAddPerson.PressedColor = System.Drawing.Color.White;
-            this.gbtnAddPerson.Size = new System.Drawing.Size(196, 41);
-            this.gbtnAddPerson.TabIndex = 17;
+            this.gbtnAddPerson.Size = new System.Drawing.Size(180, 41);
+            this.gbtnAddPerson.TabIndex = 134;
             this.gbtnAddPerson.Text = "إضافة شخص";
             this.gbtnAddPerson.Click += new System.EventHandler(this.gbtnAddPerson_Click);
-            // 
-            // lblHeader
-            // 
-            this.lblHeader.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold);
-            this.lblHeader.ForeColor = System.Drawing.Color.Black;
-            this.lblHeader.Location = new System.Drawing.Point(12, 21);
-            this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(1186, 62);
-            this.lblHeader.TabIndex = 18;
-            this.lblHeader.Text = "الأشخاص";
-            this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // frmPeople
             // 
@@ -565,8 +596,9 @@ namespace MoneyMindManager_Presentation.People
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1210, 737);
-            this.Controls.Add(this.lblHeader);
+            this.Controls.Add(this.gibtnRefreshData);
             this.Controls.Add(this.gbtnAddPerson);
+            this.Controls.Add(this.lblHeader);
             this.Controls.Add(this.lblUserMessage);
             this.Controls.Add(this.kgtxtFilterValue);
             this.Controls.Add(this.lblNoRecordsFoundMessage);
@@ -612,12 +644,13 @@ namespace MoneyMindManager_Presentation.People
         private KhaledControlLibrary1.KhaledGuna2TextBox kgtxtFilterValue;
         private System.Windows.Forms.Timer SearchAfterTimerFinish;
         private System.Windows.Forms.Label lblUserMessage;
-        private Guna.UI2.WinForms.Guna2Button gbtnAddPerson;
-        private System.Windows.Forms.Label lblHeader;
         private Guna.UI2.WinForms.Guna2ContextMenuStrip guna2ContextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem gtsmAddPerson;
         private System.Windows.Forms.ToolStripMenuItem gtsmEditPerson;
         private System.Windows.Forms.ToolStripMenuItem gtsmDeletePerson;
         private System.Windows.Forms.ToolStripMenuItem gtsmPersonInfo;
+        private System.Windows.Forms.Label lblHeader;
+        private Guna.UI2.WinForms.Guna2Button gbtnAddPerson;
+        private Guna.UI2.WinForms.Guna2ImageButton gibtnRefreshData;
     }
 }

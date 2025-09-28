@@ -131,50 +131,48 @@ namespace MoneyMindManager_Business
         }
 
         /// <summary>
-        /// Get All People For Account Using Paging [10 rows per page]
+        /// Get All People For Account Using Paging [10 rows per page],  if variable null will not filter by it.
         /// </summary>
-        /// <param name="accountID">The current AccountID</param>
-        /// <param name="pageNumber">The page Number you want to get rows of it</param>
         /// <returns>object of clsGetAllPeople : if error happend, return null</returns>
-        public static async Task<clsGetAllPeople> GetAllPeople(short accountID, short pageNumber)
+        public static async Task<clsGetAllPeople> GetAllPeople( short pageNumber,int currentUserID)
         {
-            return await clsPersonData.GetAllPeople(accountID, pageNumber);
+            return await clsPersonData.GetAllPeople(null, null, null, null, pageNumber, currentUserID);
         }
 
         /// <summary>
-        /// Get All People For Account Using Paging [10 rows per page]
+        /// Get All People For Account Using Paging [10 rows per page], if variable null will not filter by it.
         /// </summary>
-        /// <param name="accountID">The current AccountID</param>
-        /// <param name="pageNumber">The page Number you want to get rows of it</param>
-        /// <param name="personID">The personID you want to search for</param>
         /// <returns>object of clsGetAllPeople : if error happend, return null</returns>
-        public static async Task<clsGetAllPeople> GetAllPeopleByPersonID(short accountID, short pageNumber,int personID)
+        public static async Task<clsGetAllPeople> GetAllPeopleByPersonID(int personID,short pageNumber, int currentUserID)
         {
-            return await clsPersonData.GetAllPeopleByPersonID(accountID, pageNumber,personID);
+            return await clsPersonData.GetAllPeople(personID, null, null, null, pageNumber, currentUserID);
         }
 
         /// <summary>
-        /// Get All People By Person Name For Account Using Paging [10 rows per page]
+        /// Get All People By Person Name For Account Using Paging [10 rows per page],  if variable null will not filter by it.
         /// </summary>
-        /// <param name="accountID">The current AccountID</param>
-        /// <param name="pageNumber">The page Number you want to get rows of it</param>
-        /// <param name="personName">The person name you want to search for</param>
         /// <returns>object of clsGetAllPeople : if error happend, return null</returns>
-        public static async Task<clsGetAllPeople> GetAllPeopleByPersonName(short accountID, short pageNumber, string personName)
+        public static async Task<clsGetAllPeople> GetAllPeopleByPersonName(string personName, short pageNumber, int currentUserID)
         {
-            return await clsPersonData.GetAllPeopleByPersonName(accountID, pageNumber, personName);
+            return await clsPersonData.GetAllPeople(null, personName, null, null, pageNumber, currentUserID);
         }
 
         /// <summary>
-        /// Get All People By phone For Account Using Paging [10 rows per page]
+        /// Get All People By phone For Account Using Paging [10 rows per page],  if variable null will not filter by it.
         /// </summary>
-        /// <param name="accountID">The current AccountID</param>
-        /// <param name="pageNumber">The page Number you want to get rows of it</param>
-        /// <param name="phone">The phone number you want to search for</param>
         /// <returns>object of clsGetAllPeople : if error happend, return null</returns>
-        public static async Task<clsGetAllPeople> GetAllPeopleByPhone(short accountID, short pageNumber, string phone, bool RaiseEventOnErrorOccured = true)
+        public static async Task<clsGetAllPeople> GetAllPeopleByEmail(string email, short pageNumber, int currentUserID)
         {
-            return await clsPersonData.GetAllPeopleByPhone(accountID, pageNumber, phone);
+            return await clsPersonData.GetAllPeople(null, null, email, null, pageNumber, currentUserID);
+        }
+
+        /// <summary>
+        /// Get All People By phone For Account Using Paging [10 rows per page],  if variable null will not filter by it.
+        /// </summary>
+        /// <returns>object of clsGetAllPeople : if error happend, return null</returns>
+        public static async Task<clsGetAllPeople> GetAllPeopleByPhone(string phone, short pageNumber, int currentUserID)
+        {
+            return await clsPersonData.GetAllPeople(null, null, null, phone, pageNumber, currentUserID);
         }
 
         public async Task<bool> RefreshData(int currentUserID)

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MoneyMindManagerGlobal;
+using static MoneyMindManagerGlobal.clsDataColumns.clsUserClasses;
 using static MoneyMindManagerGlobal.clsDataColumns.PersonClasses;
 
 namespace MoneyMindManager_DataAccess
@@ -257,77 +258,11 @@ namespace MoneyMindManager_DataAccess
         }
 
         /// <summary>
-        /// Get All People For Account Using Paging [10 rows per page]
+        /// Get All People For Account Using Paging [10 rows per page], if variable null will not filter by it.
         /// </summary>
-        /// <param name="accountID">The current AccountID</param>
-        /// <param name="pageNumber">The page Number you want to get rows of it</param>
-        /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>object of clsGetAllPeople : if error happend, return null</returns>
-        public static async Task<clsGetAllPeople> GetAllPeople(short accountID,short pageNumber, bool RaiseEventOnErrorOccured = true)
-        {
-            clsGetAllPeople allPeople = null;
-
-            try
-            {
-                using(SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
-                {
-                    using(SqlCommand command = new SqlCommand("[dbo].[SP_GetAllPeople]", connection))
-                    {
-                        command.CommandType = CommandType.StoredProcedure;
-
-                        command.Parameters.AddWithValue("@AccountID", accountID);
-                        command.Parameters.AddWithValue("@PageNumber", pageNumber);
-
-                        SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.SmallInt)
-                        {
-                            Direction = ParameterDirection.Output
-                        };
-
-                        SqlParameter outputRecordsCount = new SqlParameter("@RecordsCount", SqlDbType.Int)
-                        {
-                            Direction = ParameterDirection.Output
-                        };
-
-                        command.Parameters.Add(outputNumberOfPages);
-                        command.Parameters.Add(outputRecordsCount);
-
-                        await connection.OpenAsync();
-
-                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
-                        {
-                            DataTable dtPeople = new DataTable();
-                            dtPeople.Load(reader);
-                            short numberOfPages = Convert.ToInt16(outputNumberOfPages.Value);
-                            short recordsCount = Convert.ToInt16(outputRecordsCount.Value);
-
-                            allPeople = new clsGetAllPeople(dtPeople, numberOfPages, recordsCount);
-                        }
-                    }
-                }
-
-                if (allPeople == null)
-                    throw new Exception("فشلت العملية");
-            }
-            catch(Exception ex)
-            {
-                allPeople = null;
-
-                if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
-            }
-
-            return allPeople;
-        }
-
-        /// <summary>
-        /// Get All People By PersonID For Account Using Paging [10 rows per page]
-        /// </summary>
-        /// <param name="accountID">The current AccountID</param>
-        /// <param name="pageNumber">The page Number you want to get rows of it</param>
-        /// <param name="personID">The personID you want to search for</param>
-        /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
-        /// <returns>object of clsGetAllPeople : if error happend, return null</returns>
-        public static async Task<clsGetAllPeople> GetAllPeopleByPersonID(short accountID, short pageNumber,int personID, bool RaiseEventOnErrorOccured = true)
+        public static async Task<clsGetAllPeople> GetAllPeople(int? personID, string personName, string email,
+             string phone, short pageNumber, int currentUserID, bool RaiseEventOnErrorOccured = true)
         {
             clsGetAllPeople allPeople = null;
 
@@ -335,143 +270,16 @@ namespace MoneyMindManager_DataAccess
             {
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_GetAllPeopleByPersonID]", connection))
+                    using (SqlCommand command = new SqlCommand("[dbo].[SP_People_GetAll]", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
 
-                        command.Parameters.AddWithValue("@AccountID", accountID);
+                        command.Parameters.AddWithValue("@PersonID", (object)personID ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@PersonName", string.IsNullOrWhiteSpace(personName) ? DBNull.Value : (object)personName);
+                        command.Parameters.AddWithValue("@Email", string.IsNullOrWhiteSpace(email) ? DBNull.Value : (object)email);
+                        command.Parameters.AddWithValue("@Phone", string.IsNullOrWhiteSpace(phone) ? DBNull.Value : (object)phone);
+                        command.Parameters.AddWithValue("@CurrentUserID", currentUserID);
                         command.Parameters.AddWithValue("@PageNumber", pageNumber);
-                        command.Parameters.AddWithValue("@PersonID", personID);
-
-                        SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.SmallInt)
-                        {
-                            Direction = ParameterDirection.Output
-                        };
-
-                        SqlParameter outputRecordsCount = new SqlParameter("@RecordsCount", SqlDbType.Int)
-                        {
-                            Direction = ParameterDirection.Output
-                        };
-
-                        command.Parameters.Add(outputNumberOfPages);
-                        command.Parameters.Add(outputRecordsCount);
-
-                        await connection.OpenAsync();
-
-                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
-                        {
-                            DataTable dtPeople = new DataTable();
-                            dtPeople.Load(reader);
-                            short numberOfPages = Convert.ToInt16(outputNumberOfPages.Value);
-                            short recordsCount = Convert.ToInt16(outputRecordsCount.Value);
-
-                            allPeople = new clsGetAllPeople(dtPeople, numberOfPages, recordsCount);
-                        }
-                    }
-                }
-
-                if (allPeople == null)
-                    throw new Exception("فشلت العملية");
-            }
-            catch (Exception ex)
-            {
-                allPeople = null;
-
-                if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
-            }
-
-            return allPeople;
-        }
-
-        /// <summary>
-        /// Get All People By Person Name For Account Using Paging [10 rows per page]
-        /// </summary>
-        /// <param name="accountID">The current AccountID</param>
-        /// <param name="pageNumber">The page Number you want to get rows of it</param>
-        /// <param name="personName">The person name you want to search for</param>
-        /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
-        /// <returns>object of clsGetAllPeople : if error happend, return null</returns>
-        public static async Task<clsGetAllPeople> GetAllPeopleByPersonName(short accountID, short pageNumber, string personName, bool RaiseEventOnErrorOccured = true)
-        {
-            clsGetAllPeople allPeople = null;
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
-                {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_GetAllPeopleByPersonName]", connection))
-                    {
-                        command.CommandType = CommandType.StoredProcedure;
-
-                        command.Parameters.AddWithValue("@AccountID", accountID);
-                        command.Parameters.AddWithValue("@PageNumber", pageNumber);
-                        command.Parameters.AddWithValue("@PersonName", personName);
-
-                        SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.SmallInt)
-                        {
-                            Direction = ParameterDirection.Output
-                        };
-
-                        SqlParameter outputRecordsCount = new SqlParameter("@RecordsCount", SqlDbType.Int)
-                        {
-                            Direction = ParameterDirection.Output
-                        };
-
-                        command.Parameters.Add(outputNumberOfPages);
-                        command.Parameters.Add(outputRecordsCount);
-
-                        await connection.OpenAsync();
-
-                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
-                        {
-                            DataTable dtPeople = new DataTable();
-                            dtPeople.Load(reader);
-                            short numberOfPages = Convert.ToInt16(outputNumberOfPages.Value);
-                            short recordsCount = Convert.ToInt16(outputRecordsCount.Value);
-
-                            allPeople = new clsGetAllPeople(dtPeople, numberOfPages, recordsCount);
-                        }
-                    }
-                }
-
-                if (allPeople == null)
-                    throw new Exception("فشلت العملية");
-            }
-            catch (Exception ex)
-            {
-                allPeople = null;
-
-                if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
-            }
-
-            return allPeople;
-        }
-
-        /// <summary>
-        /// Get All People By phone For Account Using Paging [10 rows per page]
-        /// </summary>
-        /// <param name="accountID">The current AccountID</param>
-        /// <param name="pageNumber">The page Number you want to get rows of it</param>
-        /// <param name="phone">The phone number you want to search for</param>
-        /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
-        /// <returns>object of clsGetAllPeople : if error happend, return null</returns>
-        public static async Task<clsGetAllPeople> GetAllPeopleByPhone(short accountID, short pageNumber, string phone, bool RaiseEventOnErrorOccured = true)
-        {
-            clsGetAllPeople allPeople = null;
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
-                {
-                    using (SqlCommand command = new SqlCommand("[dbo].[People_SP_GetAllPeopleByPhone]", connection))
-                    {
-                        command.CommandType = CommandType.StoredProcedure;
-
-                        command.Parameters.AddWithValue("@AccountID", accountID);
-                        command.Parameters.AddWithValue("@PageNumber", pageNumber);
-                        command.Parameters.AddWithValue("@Phone", string.IsNullOrEmpty(phone) ? DBNull.Value : (object)phone);
 
                         SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.SmallInt)
                         {

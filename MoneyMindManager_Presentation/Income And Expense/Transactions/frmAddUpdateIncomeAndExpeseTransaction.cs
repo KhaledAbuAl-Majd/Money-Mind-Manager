@@ -150,6 +150,16 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             _Transaction = new clsIncomeAndExpenseTransaction();
         }
 
+        void _ShowChooseCategoryForm()
+        {
+            if (_isLocked)
+                return;
+
+            var frm = new frmSelectCategory(Convert.ToBoolean(_isIncome));
+            frm.OnCategorySelected += Frm_OnCategorySelected;
+            //frm.ShowDialog(clsGlobal_UI.MainForm);
+            clsGlobal_UI.MainForm.AddNewFormAsDialog(frm);
+        }
         async Task _Save()
         {
             if (_isLocked)
@@ -284,13 +294,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
         private void gibtnChooseCategory_Click(object sender, EventArgs e)
         {
-            if (_isLocked)
-                return;
-
-            var frm = new frmSelectCategory(Convert.ToBoolean(_isIncome));
-            frm.OnCategorySelected += Frm_OnCategorySelected;
-            //frm.ShowDialog(clsGlobal_UI.MainForm);
-            clsGlobal_UI.MainForm.AddNewFormAsDialog(frm);
+            _ShowChooseCategoryForm();
         }
 
         private async void gibtnDeleteTransaction_Click(object sender, EventArgs e)
@@ -306,6 +310,15 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                     _isSaved = true;
                     gbtnClose.PerformClick();
                 }
+            }
+        }
+
+
+        private void kgtxtCategoryName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F9)
+            {
+                _ShowChooseCategoryForm();
             }
         }
     }

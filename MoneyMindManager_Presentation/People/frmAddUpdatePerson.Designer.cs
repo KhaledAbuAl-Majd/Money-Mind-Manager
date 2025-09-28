@@ -38,13 +38,13 @@ namespace MoneyMindManager_Presentation.People
             this.kgtxtAddress = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.kgtxtPersonName = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.lblHeader = new System.Windows.Forms.Label();
-            this.gbtnSave = new Guna.UI2.WinForms.Guna2Button();
-            this.gbtnClose = new Guna.UI2.WinForms.Guna2Button();
             this.lblPersonID = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
+            this.gbtnClose = new Guna.UI2.WinForms.Guna2Button();
+            this.gbtnSave = new Guna.UI2.WinForms.Guna2Button();
+            this.lblHeader = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.guna2Panel1.SuspendLayout();
             this.guna2Panel2.SuspendLayout();
@@ -81,22 +81,28 @@ namespace MoneyMindManager_Presentation.People
             0,
             0,
             0});
+            this.kgtxtNotes.NumberProperties.DecimalNumberProperties.MaxValueIncluded = true;
             this.kgtxtNotes.NumberProperties.DecimalNumberProperties.MaxValueOption = false;
             this.kgtxtNotes.NumberProperties.DecimalNumberProperties.MinValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
+            this.kgtxtNotes.NumberProperties.DecimalNumberProperties.MinValueIncluded = true;
             this.kgtxtNotes.NumberProperties.DecimalNumberProperties.MinValueOption = false;
             this.kgtxtNotes.NumberProperties.FloatNumberProperties.AllowNegative = true;
             this.kgtxtNotes.NumberProperties.FloatNumberProperties.MaxValue = 0F;
+            this.kgtxtNotes.NumberProperties.FloatNumberProperties.MaxValueIncluded = true;
             this.kgtxtNotes.NumberProperties.FloatNumberProperties.MaxValueOption = false;
             this.kgtxtNotes.NumberProperties.FloatNumberProperties.MinValue = 0F;
+            this.kgtxtNotes.NumberProperties.FloatNumberProperties.MinValueIncluded = true;
             this.kgtxtNotes.NumberProperties.FloatNumberProperties.MinValueOption = false;
             this.kgtxtNotes.NumberProperties.IntegerNumberProperties.AllowNegative = true;
             this.kgtxtNotes.NumberProperties.IntegerNumberProperties.MaxValue = 0;
+            this.kgtxtNotes.NumberProperties.IntegerNumberProperties.MaxValueIncluded = true;
             this.kgtxtNotes.NumberProperties.IntegerNumberProperties.MaxValueOption = false;
             this.kgtxtNotes.NumberProperties.IntegerNumberProperties.MinValue = 0;
+            this.kgtxtNotes.NumberProperties.IntegerNumberProperties.MinValueIncluded = true;
             this.kgtxtNotes.NumberProperties.IntegerNumberProperties.MinValueOption = false;
             this.kgtxtNotes.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
             this.kgtxtNotes.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
@@ -110,6 +116,11 @@ namespace MoneyMindManager_Presentation.People
             this.kgtxtNotes.Size = new System.Drawing.Size(283, 107);
             this.kgtxtNotes.TabIndex = 3;
             this.kgtxtNotes.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.kgtxtNotes.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
+            this.kgtxtNotes.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.kgtxtNotes.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
+            this.kgtxtNotes.TextProperties.DateTimeProperties.TimeFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enTimeFormate.None;
+            this.kgtxtNotes.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
             this.kgtxtNotes.TextProperties.MinLength = ((short)(0));
             this.kgtxtNotes.TextProperties.MinLengthOption = false;
             this.kgtxtNotes.TextProperties.PhoneProperties.AllowPlusSign = true;
@@ -151,22 +162,28 @@ namespace MoneyMindManager_Presentation.People
             0,
             0,
             0});
+            this.kgtxtPhone.NumberProperties.DecimalNumberProperties.MaxValueIncluded = true;
             this.kgtxtPhone.NumberProperties.DecimalNumberProperties.MaxValueOption = false;
             this.kgtxtPhone.NumberProperties.DecimalNumberProperties.MinValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
+            this.kgtxtPhone.NumberProperties.DecimalNumberProperties.MinValueIncluded = true;
             this.kgtxtPhone.NumberProperties.DecimalNumberProperties.MinValueOption = false;
             this.kgtxtPhone.NumberProperties.FloatNumberProperties.AllowNegative = true;
             this.kgtxtPhone.NumberProperties.FloatNumberProperties.MaxValue = 0F;
+            this.kgtxtPhone.NumberProperties.FloatNumberProperties.MaxValueIncluded = true;
             this.kgtxtPhone.NumberProperties.FloatNumberProperties.MaxValueOption = false;
             this.kgtxtPhone.NumberProperties.FloatNumberProperties.MinValue = 0F;
+            this.kgtxtPhone.NumberProperties.FloatNumberProperties.MinValueIncluded = true;
             this.kgtxtPhone.NumberProperties.FloatNumberProperties.MinValueOption = false;
             this.kgtxtPhone.NumberProperties.IntegerNumberProperties.AllowNegative = true;
             this.kgtxtPhone.NumberProperties.IntegerNumberProperties.MaxValue = 0;
+            this.kgtxtPhone.NumberProperties.IntegerNumberProperties.MaxValueIncluded = true;
             this.kgtxtPhone.NumberProperties.IntegerNumberProperties.MaxValueOption = false;
             this.kgtxtPhone.NumberProperties.IntegerNumberProperties.MinValue = 0;
+            this.kgtxtPhone.NumberProperties.IntegerNumberProperties.MinValueIncluded = true;
             this.kgtxtPhone.NumberProperties.IntegerNumberProperties.MinValueOption = false;
             this.kgtxtPhone.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
             this.kgtxtPhone.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
@@ -180,6 +197,11 @@ namespace MoneyMindManager_Presentation.People
             this.kgtxtPhone.Size = new System.Drawing.Size(283, 41);
             this.kgtxtPhone.TabIndex = 1;
             this.kgtxtPhone.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.kgtxtPhone.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
+            this.kgtxtPhone.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.kgtxtPhone.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
+            this.kgtxtPhone.TextProperties.DateTimeProperties.TimeFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enTimeFormate.None;
+            this.kgtxtPhone.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
             this.kgtxtPhone.TextProperties.MinLength = ((short)(0));
             this.kgtxtPhone.TextProperties.MinLengthOption = false;
             this.kgtxtPhone.TextProperties.PhoneProperties.AllowPlusSign = true;
@@ -221,22 +243,28 @@ namespace MoneyMindManager_Presentation.People
             0,
             0,
             0});
+            this.kgtxtEmail.NumberProperties.DecimalNumberProperties.MaxValueIncluded = true;
             this.kgtxtEmail.NumberProperties.DecimalNumberProperties.MaxValueOption = false;
             this.kgtxtEmail.NumberProperties.DecimalNumberProperties.MinValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
+            this.kgtxtEmail.NumberProperties.DecimalNumberProperties.MinValueIncluded = true;
             this.kgtxtEmail.NumberProperties.DecimalNumberProperties.MinValueOption = false;
             this.kgtxtEmail.NumberProperties.FloatNumberProperties.AllowNegative = true;
             this.kgtxtEmail.NumberProperties.FloatNumberProperties.MaxValue = 0F;
+            this.kgtxtEmail.NumberProperties.FloatNumberProperties.MaxValueIncluded = true;
             this.kgtxtEmail.NumberProperties.FloatNumberProperties.MaxValueOption = false;
             this.kgtxtEmail.NumberProperties.FloatNumberProperties.MinValue = 0F;
+            this.kgtxtEmail.NumberProperties.FloatNumberProperties.MinValueIncluded = true;
             this.kgtxtEmail.NumberProperties.FloatNumberProperties.MinValueOption = false;
             this.kgtxtEmail.NumberProperties.IntegerNumberProperties.AllowNegative = true;
             this.kgtxtEmail.NumberProperties.IntegerNumberProperties.MaxValue = 0;
+            this.kgtxtEmail.NumberProperties.IntegerNumberProperties.MaxValueIncluded = true;
             this.kgtxtEmail.NumberProperties.IntegerNumberProperties.MaxValueOption = false;
             this.kgtxtEmail.NumberProperties.IntegerNumberProperties.MinValue = 0;
+            this.kgtxtEmail.NumberProperties.IntegerNumberProperties.MinValueIncluded = true;
             this.kgtxtEmail.NumberProperties.IntegerNumberProperties.MinValueOption = false;
             this.kgtxtEmail.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
             this.kgtxtEmail.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
@@ -250,6 +278,11 @@ namespace MoneyMindManager_Presentation.People
             this.kgtxtEmail.Size = new System.Drawing.Size(283, 41);
             this.kgtxtEmail.TabIndex = 2;
             this.kgtxtEmail.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.kgtxtEmail.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
+            this.kgtxtEmail.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.kgtxtEmail.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
+            this.kgtxtEmail.TextProperties.DateTimeProperties.TimeFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enTimeFormate.None;
+            this.kgtxtEmail.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
             this.kgtxtEmail.TextProperties.MinLength = ((short)(0));
             this.kgtxtEmail.TextProperties.MinLengthOption = false;
             this.kgtxtEmail.TextProperties.PhoneProperties.AllowPlusSign = true;
@@ -291,22 +324,28 @@ namespace MoneyMindManager_Presentation.People
             0,
             0,
             0});
+            this.kgtxtAddress.NumberProperties.DecimalNumberProperties.MaxValueIncluded = true;
             this.kgtxtAddress.NumberProperties.DecimalNumberProperties.MaxValueOption = false;
             this.kgtxtAddress.NumberProperties.DecimalNumberProperties.MinValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
+            this.kgtxtAddress.NumberProperties.DecimalNumberProperties.MinValueIncluded = true;
             this.kgtxtAddress.NumberProperties.DecimalNumberProperties.MinValueOption = false;
             this.kgtxtAddress.NumberProperties.FloatNumberProperties.AllowNegative = true;
             this.kgtxtAddress.NumberProperties.FloatNumberProperties.MaxValue = 0F;
+            this.kgtxtAddress.NumberProperties.FloatNumberProperties.MaxValueIncluded = true;
             this.kgtxtAddress.NumberProperties.FloatNumberProperties.MaxValueOption = false;
             this.kgtxtAddress.NumberProperties.FloatNumberProperties.MinValue = 0F;
+            this.kgtxtAddress.NumberProperties.FloatNumberProperties.MinValueIncluded = true;
             this.kgtxtAddress.NumberProperties.FloatNumberProperties.MinValueOption = false;
             this.kgtxtAddress.NumberProperties.IntegerNumberProperties.AllowNegative = true;
             this.kgtxtAddress.NumberProperties.IntegerNumberProperties.MaxValue = 0;
+            this.kgtxtAddress.NumberProperties.IntegerNumberProperties.MaxValueIncluded = true;
             this.kgtxtAddress.NumberProperties.IntegerNumberProperties.MaxValueOption = false;
             this.kgtxtAddress.NumberProperties.IntegerNumberProperties.MinValue = 0;
+            this.kgtxtAddress.NumberProperties.IntegerNumberProperties.MinValueIncluded = true;
             this.kgtxtAddress.NumberProperties.IntegerNumberProperties.MinValueOption = false;
             this.kgtxtAddress.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
             this.kgtxtAddress.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
@@ -320,6 +359,11 @@ namespace MoneyMindManager_Presentation.People
             this.kgtxtAddress.Size = new System.Drawing.Size(283, 107);
             this.kgtxtAddress.TabIndex = 4;
             this.kgtxtAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.kgtxtAddress.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
+            this.kgtxtAddress.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.kgtxtAddress.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
+            this.kgtxtAddress.TextProperties.DateTimeProperties.TimeFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enTimeFormate.None;
+            this.kgtxtAddress.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
             this.kgtxtAddress.TextProperties.MinLength = ((short)(0));
             this.kgtxtAddress.TextProperties.MinLengthOption = false;
             this.kgtxtAddress.TextProperties.PhoneProperties.AllowPlusSign = true;
@@ -360,22 +404,28 @@ namespace MoneyMindManager_Presentation.People
             0,
             0,
             0});
+            this.kgtxtPersonName.NumberProperties.DecimalNumberProperties.MaxValueIncluded = true;
             this.kgtxtPersonName.NumberProperties.DecimalNumberProperties.MaxValueOption = false;
             this.kgtxtPersonName.NumberProperties.DecimalNumberProperties.MinValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
+            this.kgtxtPersonName.NumberProperties.DecimalNumberProperties.MinValueIncluded = true;
             this.kgtxtPersonName.NumberProperties.DecimalNumberProperties.MinValueOption = false;
             this.kgtxtPersonName.NumberProperties.FloatNumberProperties.AllowNegative = true;
             this.kgtxtPersonName.NumberProperties.FloatNumberProperties.MaxValue = 0F;
+            this.kgtxtPersonName.NumberProperties.FloatNumberProperties.MaxValueIncluded = true;
             this.kgtxtPersonName.NumberProperties.FloatNumberProperties.MaxValueOption = false;
             this.kgtxtPersonName.NumberProperties.FloatNumberProperties.MinValue = 0F;
+            this.kgtxtPersonName.NumberProperties.FloatNumberProperties.MinValueIncluded = true;
             this.kgtxtPersonName.NumberProperties.FloatNumberProperties.MinValueOption = false;
             this.kgtxtPersonName.NumberProperties.IntegerNumberProperties.AllowNegative = true;
             this.kgtxtPersonName.NumberProperties.IntegerNumberProperties.MaxValue = 0;
+            this.kgtxtPersonName.NumberProperties.IntegerNumberProperties.MaxValueIncluded = true;
             this.kgtxtPersonName.NumberProperties.IntegerNumberProperties.MaxValueOption = false;
             this.kgtxtPersonName.NumberProperties.IntegerNumberProperties.MinValue = 0;
+            this.kgtxtPersonName.NumberProperties.IntegerNumberProperties.MinValueIncluded = true;
             this.kgtxtPersonName.NumberProperties.IntegerNumberProperties.MinValueOption = false;
             this.kgtxtPersonName.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
             this.kgtxtPersonName.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
@@ -389,6 +439,11 @@ namespace MoneyMindManager_Presentation.People
             this.kgtxtPersonName.Size = new System.Drawing.Size(283, 41);
             this.kgtxtPersonName.TabIndex = 0;
             this.kgtxtPersonName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.kgtxtPersonName.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
+            this.kgtxtPersonName.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.kgtxtPersonName.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
+            this.kgtxtPersonName.TextProperties.DateTimeProperties.TimeFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enTimeFormate.None;
+            this.kgtxtPersonName.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
             this.kgtxtPersonName.TextProperties.MinLength = ((short)(0));
             this.kgtxtPersonName.TextProperties.MinLengthOption = false;
             this.kgtxtPersonName.TextProperties.PhoneProperties.AllowPlusSign = true;
@@ -403,79 +458,6 @@ namespace MoneyMindManager_Presentation.People
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
-            // 
-            // lblHeader
-            // 
-            this.lblHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHeader.ForeColor = System.Drawing.Color.Red;
-            this.lblHeader.Location = new System.Drawing.Point(12, 30);
-            this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(1186, 62);
-            this.lblHeader.TabIndex = 10;
-            this.lblHeader.Text = "إضافة شخص";
-            this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // gbtnSave
-            // 
-            this.gbtnSave.Animated = true;
-            this.gbtnSave.AutoRoundedCorners = true;
-            this.gbtnSave.BackColor = System.Drawing.Color.Transparent;
-            this.gbtnSave.BorderColor = System.Drawing.Color.DimGray;
-            this.gbtnSave.BorderThickness = 1;
-            this.gbtnSave.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.gbtnSave.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.gbtnSave.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.gbtnSave.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.gbtnSave.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.gbtnSave.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.gbtnSave.FillColor = System.Drawing.Color.White;
-            this.gbtnSave.FocusedColor = System.Drawing.SystemColors.MenuHighlight;
-            this.gbtnSave.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbtnSave.ForeColor = System.Drawing.Color.Black;
-            this.gbtnSave.HoverState.FillColor = System.Drawing.Color.SlateBlue;
-            this.gbtnSave.HoverState.ForeColor = System.Drawing.Color.White;
-            this.gbtnSave.Image = ((System.Drawing.Image)(resources.GetObject("gbtnSave.Image")));
-            this.gbtnSave.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.gbtnSave.ImageSize = new System.Drawing.Size(25, 25);
-            this.gbtnSave.IndicateFocus = true;
-            this.gbtnSave.Location = new System.Drawing.Point(497, 279);
-            this.gbtnSave.Name = "gbtnSave";
-            this.gbtnSave.PressedColor = System.Drawing.Color.White;
-            this.gbtnSave.Size = new System.Drawing.Size(128, 45);
-            this.gbtnSave.TabIndex = 5;
-            this.gbtnSave.Text = "حفظ";
-            this.gbtnSave.Click += new System.EventHandler(this.gbtnSave_Click);
-            // 
-            // gbtnClose
-            // 
-            this.gbtnClose.Animated = true;
-            this.gbtnClose.AutoRoundedCorners = true;
-            this.gbtnClose.BackColor = System.Drawing.Color.Transparent;
-            this.gbtnClose.BorderColor = System.Drawing.Color.DimGray;
-            this.gbtnClose.BorderThickness = 1;
-            this.gbtnClose.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.gbtnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.gbtnClose.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.gbtnClose.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.gbtnClose.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.gbtnClose.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.gbtnClose.FillColor = System.Drawing.Color.White;
-            this.gbtnClose.FocusedColor = System.Drawing.SystemColors.MenuHighlight;
-            this.gbtnClose.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbtnClose.ForeColor = System.Drawing.Color.Black;
-            this.gbtnClose.HoverState.FillColor = System.Drawing.Color.SlateBlue;
-            this.gbtnClose.HoverState.ForeColor = System.Drawing.Color.White;
-            this.gbtnClose.Image = ((System.Drawing.Image)(resources.GetObject("gbtnClose.Image")));
-            this.gbtnClose.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.gbtnClose.ImageSize = new System.Drawing.Size(25, 25);
-            this.gbtnClose.IndicateFocus = true;
-            this.gbtnClose.Location = new System.Drawing.Point(361, 279);
-            this.gbtnClose.Name = "gbtnClose";
-            this.gbtnClose.PressedColor = System.Drawing.Color.White;
-            this.gbtnClose.Size = new System.Drawing.Size(128, 45);
-            this.gbtnClose.TabIndex = 6;
-            this.gbtnClose.Text = "غلق";
-            this.gbtnClose.Click += new System.EventHandler(this.gbtnClose_Click);
             // 
             // lblPersonID
             // 
@@ -518,9 +500,9 @@ namespace MoneyMindManager_Presentation.People
             this.guna2Panel2.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.guna2Panel2.BorderRadius = 20;
             this.guna2Panel2.BorderThickness = 2;
-            this.guna2Panel2.Controls.Add(this.guna2Panel1);
-            this.guna2Panel2.Controls.Add(this.gbtnClose);
             this.guna2Panel2.Controls.Add(this.gbtnSave);
+            this.guna2Panel2.Controls.Add(this.gbtnClose);
+            this.guna2Panel2.Controls.Add(this.guna2Panel1);
             this.guna2Panel2.Controls.Add(this.kgtxtNotes);
             this.guna2Panel2.Controls.Add(this.kgtxtPhone);
             this.guna2Panel2.Controls.Add(this.kgtxtEmail);
@@ -534,6 +516,81 @@ namespace MoneyMindManager_Presentation.People
             this.guna2Panel2.Size = new System.Drawing.Size(654, 358);
             this.guna2Panel2.TabIndex = 0;
             // 
+            // gbtnClose
+            // 
+            this.gbtnClose.Animated = true;
+            this.gbtnClose.AutoRoundedCorners = true;
+            this.gbtnClose.BackColor = System.Drawing.Color.Transparent;
+            this.gbtnClose.BorderColor = System.Drawing.Color.DimGray;
+            this.gbtnClose.BorderThickness = 1;
+            this.gbtnClose.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gbtnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.gbtnClose.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnClose.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnClose.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.gbtnClose.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.gbtnClose.FillColor = System.Drawing.Color.White;
+            this.gbtnClose.FocusedColor = System.Drawing.SystemColors.MenuHighlight;
+            this.gbtnClose.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.gbtnClose.ForeColor = System.Drawing.Color.Black;
+            this.gbtnClose.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(102)))), ((int)(((byte)(194)))));
+            this.gbtnClose.HoverState.Font = new System.Drawing.Font("Segoe UI", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnClose.HoverState.ForeColor = System.Drawing.Color.White;
+            this.gbtnClose.Image = ((System.Drawing.Image)(resources.GetObject("gbtnClose.Image")));
+            this.gbtnClose.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.gbtnClose.ImageSize = new System.Drawing.Size(25, 25);
+            this.gbtnClose.IndicateFocus = true;
+            this.gbtnClose.Location = new System.Drawing.Point(29, 290);
+            this.gbtnClose.Name = "gbtnClose";
+            this.gbtnClose.PressedColor = System.Drawing.Color.White;
+            this.gbtnClose.Size = new System.Drawing.Size(283, 41);
+            this.gbtnClose.TabIndex = 122;
+            this.gbtnClose.Text = "غلق";
+            this.gbtnClose.Click += new System.EventHandler(this.gbtnClose_Click);
+            // 
+            // gbtnSave
+            // 
+            this.gbtnSave.Animated = true;
+            this.gbtnSave.AutoRoundedCorners = true;
+            this.gbtnSave.BackColor = System.Drawing.Color.Transparent;
+            this.gbtnSave.BorderColor = System.Drawing.Color.DimGray;
+            this.gbtnSave.BorderThickness = 1;
+            this.gbtnSave.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gbtnSave.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnSave.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnSave.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.gbtnSave.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.gbtnSave.FillColor = System.Drawing.Color.White;
+            this.gbtnSave.FocusedColor = System.Drawing.SystemColors.MenuHighlight;
+            this.gbtnSave.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.gbtnSave.ForeColor = System.Drawing.Color.Black;
+            this.gbtnSave.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(102)))), ((int)(((byte)(194)))));
+            this.gbtnSave.HoverState.Font = new System.Drawing.Font("Segoe UI", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnSave.HoverState.ForeColor = System.Drawing.Color.White;
+            this.gbtnSave.Image = ((System.Drawing.Image)(resources.GetObject("gbtnSave.Image")));
+            this.gbtnSave.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.gbtnSave.ImageSize = new System.Drawing.Size(25, 25);
+            this.gbtnSave.IndicateFocus = true;
+            this.gbtnSave.Location = new System.Drawing.Point(342, 290);
+            this.gbtnSave.Name = "gbtnSave";
+            this.gbtnSave.PressedColor = System.Drawing.Color.White;
+            this.gbtnSave.Size = new System.Drawing.Size(283, 41);
+            this.gbtnSave.TabIndex = 121;
+            this.gbtnSave.Text = "حفظ";
+            this.gbtnSave.Click += new System.EventHandler(this.gbtnSave_Click);
+            // 
+            // lblHeader
+            // 
+            this.lblHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblHeader.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold);
+            this.lblHeader.ForeColor = System.Drawing.Color.Black;
+            this.lblHeader.Location = new System.Drawing.Point(0, 0);
+            this.lblHeader.Name = "lblHeader";
+            this.lblHeader.Size = new System.Drawing.Size(1210, 50);
+            this.lblHeader.TabIndex = 39;
+            this.lblHeader.Text = "إضافة شخص";
+            this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // frmAddUpdatePerson
             // 
             this.AcceptButton = this.gbtnSave;
@@ -543,8 +600,8 @@ namespace MoneyMindManager_Presentation.People
             this.BackColor = System.Drawing.Color.White;
             this.CancelButton = this.gbtnClose;
             this.ClientSize = new System.Drawing.Size(1210, 737);
-            this.Controls.Add(this.guna2Panel2);
             this.Controls.Add(this.lblHeader);
+            this.Controls.Add(this.guna2Panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmAddUpdatePerson";
             this.Text = "إضافة شخص";
@@ -565,12 +622,12 @@ namespace MoneyMindManager_Presentation.People
         private KhaledControlLibrary1.KhaledGuna2TextBox kgtxtAddress;
         private KhaledControlLibrary1.KhaledGuna2TextBox kgtxtPersonName;
         private System.Windows.Forms.ErrorProvider errorProvider1;
-        private System.Windows.Forms.Label lblHeader;
-        private Guna.UI2.WinForms.Guna2Button gbtnClose;
-        private Guna.UI2.WinForms.Guna2Button gbtnSave;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblPersonID;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
+        private Guna.UI2.WinForms.Guna2Button gbtnSave;
+        private Guna.UI2.WinForms.Guna2Button gbtnClose;
+        private System.Windows.Forms.Label lblHeader;
     }
 }

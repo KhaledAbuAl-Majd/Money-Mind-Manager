@@ -997,6 +997,7 @@
             this.gbtnSave.BorderColor = System.Drawing.Color.DimGray;
             this.gbtnSave.BorderThickness = 1;
             this.gbtnSave.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gbtnSave.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.gbtnSave.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.gbtnSave.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.gbtnSave.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -1028,6 +1029,7 @@
             this.gbtnClose.BorderColor = System.Drawing.Color.DimGray;
             this.gbtnClose.BorderThickness = 1;
             this.gbtnClose.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gbtnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.gbtnClose.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.gbtnClose.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.gbtnClose.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -1059,6 +1061,7 @@
             this.gbtnAddTransaction.BorderColor = System.Drawing.Color.DimGray;
             this.gbtnAddTransaction.BorderThickness = 1;
             this.gbtnAddTransaction.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gbtnAddTransaction.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.gbtnAddTransaction.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.gbtnAddTransaction.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.gbtnAddTransaction.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -1213,6 +1216,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.CancelButton = this.gbtnClose;
             this.ClientSize = new System.Drawing.Size(1210, 737);
             this.Controls.Add(this.gibtnDeleteVoucher);
             this.Controls.Add(this.label7);

@@ -46,9 +46,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.gtswNewTransactionAfterAdd = new Guna.UI2.WinForms.Guna2ToggleSwitch();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.gibtnDeleteTransaction = new Guna.UI2.WinForms.Guna2ImageButton();
             this.gbtnNewTransaction = new Guna.UI2.WinForms.Guna2Button();
             this.lblUserMessage = new System.Windows.Forms.Label();
-            this.gibtnDeleteTransaction = new Guna.UI2.WinForms.Guna2ImageButton();
             this.guna2Panel2.SuspendLayout();
             this.guna2Panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ctrlInfoIcon_Status_IsLocked.PictureBoxControl)).BeginInit();
@@ -105,6 +105,7 @@
             this.gbtnClose.BorderColor = System.Drawing.Color.DimGray;
             this.gbtnClose.BorderThickness = 1;
             this.gbtnClose.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gbtnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.gbtnClose.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.gbtnClose.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.gbtnClose.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -124,7 +125,7 @@
             this.gbtnClose.Name = "gbtnClose";
             this.gbtnClose.PressedColor = System.Drawing.Color.White;
             this.gbtnClose.Size = new System.Drawing.Size(283, 41);
-            this.gbtnClose.TabIndex = 108;
+            this.gbtnClose.TabIndex = 4;
             this.gbtnClose.Text = "غلق";
             this.gbtnClose.Click += new System.EventHandler(this.gbtnClose_Click);
             // 
@@ -155,7 +156,7 @@
             this.gbtnSave.Name = "gbtnSave";
             this.gbtnSave.PressedColor = System.Drawing.Color.White;
             this.gbtnSave.Size = new System.Drawing.Size(283, 41);
-            this.gbtnSave.TabIndex = 107;
+            this.gbtnSave.TabIndex = 3;
             this.gbtnSave.Text = "حفظ";
             this.gbtnSave.Click += new System.EventHandler(this.gbtnSave_Click);
             // 
@@ -457,10 +458,12 @@
             this.kgtxtCategoryName.TextProperties.PhoneProperties.AllowPlusSign = true;
             this.kgtxtCategoryName.TextProperties.PhoneProperties.MaxPhoneLength = ((byte)(15));
             this.kgtxtCategoryName.TextProperties.TextFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.enTextFormat.Email;
+            this.toolTip1.SetToolTip(this.kgtxtCategoryName, " F9 لتقوم باختيار الفئة : اضغط على الأيقونة على اليسار أو اضغط على مفتاح ");
             this.kgtxtCategoryName.TrimEnd = false;
             this.kgtxtCategoryName.TrimStart = false;
             this.kgtxtCategoryName.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxt_OnValidationError);
             this.kgtxtCategoryName.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxt_OnValidationSuccess);
+            this.kgtxtCategoryName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.kgtxtCategoryName_KeyDown);
             // 
             // lblHeader
             // 
@@ -517,6 +520,25 @@
             // 
             this.toolTip1.IsBalloon = true;
             // 
+            // gibtnDeleteTransaction
+            // 
+            this.gibtnDeleteTransaction.BackColor = System.Drawing.Color.Transparent;
+            this.gibtnDeleteTransaction.CheckedState.ImageSize = new System.Drawing.Size(64, 64);
+            this.gibtnDeleteTransaction.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gibtnDeleteTransaction.HoverState.ImageSize = new System.Drawing.Size(35, 35);
+            this.gibtnDeleteTransaction.Image = ((System.Drawing.Image)(resources.GetObject("gibtnDeleteTransaction.Image")));
+            this.gibtnDeleteTransaction.ImageOffset = new System.Drawing.Point(0, 0);
+            this.gibtnDeleteTransaction.ImageRotate = 0F;
+            this.gibtnDeleteTransaction.ImageSize = new System.Drawing.Size(28, 28);
+            this.gibtnDeleteTransaction.Location = new System.Drawing.Point(479, 537);
+            this.gibtnDeleteTransaction.Name = "gibtnDeleteTransaction";
+            this.gibtnDeleteTransaction.PressedState.ImageSize = new System.Drawing.Size(64, 64);
+            this.gibtnDeleteTransaction.Size = new System.Drawing.Size(40, 42);
+            this.gibtnDeleteTransaction.TabIndex = 6;
+            this.toolTip1.SetToolTip(this.gibtnDeleteTransaction, "حذف المعاملة نهائيا");
+            this.gibtnDeleteTransaction.UseTransparentBackground = true;
+            this.gibtnDeleteTransaction.Click += new System.EventHandler(this.gibtnDeleteTransaction_Click);
+            // 
             // gbtnNewTransaction
             // 
             this.gbtnNewTransaction.Animated = true;
@@ -542,7 +564,7 @@
             this.gbtnNewTransaction.Location = new System.Drawing.Point(464, 593);
             this.gbtnNewTransaction.Name = "gbtnNewTransaction";
             this.gbtnNewTransaction.Size = new System.Drawing.Size(283, 41);
-            this.gbtnNewTransaction.TabIndex = 6;
+            this.gbtnNewTransaction.TabIndex = 7;
             this.gbtnNewTransaction.Text = "معاملة جديدة";
             this.gbtnNewTransaction.Click += new System.EventHandler(this.gbtnNewTransaction_Click);
             // 
@@ -559,31 +581,13 @@
             this.lblUserMessage.Text = "\"تم العثور على حقول غير صالحة. ضع المؤشر على العلامات الحمراء لعرض سبب الخطأ.\"";
             this.lblUserMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // gibtnDeleteTransaction
-            // 
-            this.gibtnDeleteTransaction.BackColor = System.Drawing.Color.Transparent;
-            this.gibtnDeleteTransaction.CheckedState.ImageSize = new System.Drawing.Size(64, 64);
-            this.gibtnDeleteTransaction.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.gibtnDeleteTransaction.HoverState.ImageSize = new System.Drawing.Size(35, 35);
-            this.gibtnDeleteTransaction.Image = ((System.Drawing.Image)(resources.GetObject("gibtnDeleteTransaction.Image")));
-            this.gibtnDeleteTransaction.ImageOffset = new System.Drawing.Point(0, 0);
-            this.gibtnDeleteTransaction.ImageRotate = 0F;
-            this.gibtnDeleteTransaction.ImageSize = new System.Drawing.Size(28, 28);
-            this.gibtnDeleteTransaction.Location = new System.Drawing.Point(479, 537);
-            this.gibtnDeleteTransaction.Name = "gibtnDeleteTransaction";
-            this.gibtnDeleteTransaction.PressedState.ImageSize = new System.Drawing.Size(64, 64);
-            this.gibtnDeleteTransaction.Size = new System.Drawing.Size(40, 42);
-            this.gibtnDeleteTransaction.TabIndex = 119;
-            this.toolTip1.SetToolTip(this.gibtnDeleteTransaction, "حذف المعاملة نهائيا");
-            this.gibtnDeleteTransaction.UseTransparentBackground = true;
-            this.gibtnDeleteTransaction.Click += new System.EventHandler(this.gibtnDeleteTransaction_Click);
-            // 
             // frmAddUpdateIncomeAndExpeseTransction
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.Color.White;
+            this.CancelButton = this.gbtnClose;
             this.ClientSize = new System.Drawing.Size(1210, 737);
             this.Controls.Add(this.gibtnDeleteTransaction);
             this.Controls.Add(this.lblUserMessage);

@@ -187,5 +187,10 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                 _RaiseOnCategorySelectedEvnet();
         }
 
+
+        private void gbtnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
