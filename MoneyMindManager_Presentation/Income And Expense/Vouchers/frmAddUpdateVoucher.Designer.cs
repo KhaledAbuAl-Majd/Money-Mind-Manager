@@ -822,7 +822,7 @@
             // kgtxtVoucherValue
             // 
             this.kgtxtVoucherValue.AllowWhiteSpace = true;
-            this.kgtxtVoucherValue.ApplyTrimAtTextBoxValue = true;
+            this.kgtxtVoucherValue.ApplyTrimAtTextBoxValue = false;
             this.kgtxtVoucherValue.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.kgtxtVoucherValue.BackColor = System.Drawing.Color.Transparent;
             this.kgtxtVoucherValue.BorderColor = System.Drawing.Color.DimGray;

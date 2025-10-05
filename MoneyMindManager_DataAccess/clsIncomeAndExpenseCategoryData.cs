@@ -339,14 +339,15 @@ namespace MoneyMindManager_DataAccess
 
 
         /// <summary>
-        /// Get All Active Categories For The Account at Current User
+        /// Get All Active Categories For The Account at Current User for select one
         /// </summary>
         /// <param name="categoryName">if null => don't search by it, else => search by it</param>
         /// <param name="isIncome">if null => don't search by it, else => search by it</param>
         /// <returns></returns>
-        public static async Task<DataTable> GetAllCategoriesForSelect(string categoryName,bool? isIncome, int currentUserID, bool RaiseEventOnErrorOccured = true)
+        public static async Task<clsGetAllCategories> GetAllCategoriesForSelectOne(string categoryName, bool? isIncome, int currentUserID,
+            short pageNumber, bool RaiseEventOnErrorOccured = true)
         {
-            DataTable dtCategories = null;
+            clsGetAllCategories allCategories = null;
 
             try
             {
@@ -359,29 +360,47 @@ namespace MoneyMindManager_DataAccess
                         command.Parameters.AddWithValue("@CategoryName", (string.IsNullOrEmpty(categoryName) ? DBNull.Value : (object)categoryName));
                         command.Parameters.AddWithValue("@IsIncome", (object)isIncome ?? DBNull.Value);
                         command.Parameters.AddWithValue("@CurrentUserID", currentUserID);
+                        command.Parameters.AddWithValue("@PageNumber", pageNumber);
+
+                        SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.SmallInt)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+
+                        SqlParameter outputRecordsCount = new SqlParameter("@RecordsCount", SqlDbType.Int)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+
+                        command.Parameters.Add(outputNumberOfPages);
+                        command.Parameters.Add(outputRecordsCount);
 
                         await connection.OpenAsync();
 
                         using (SqlDataReader reader = await command.ExecuteReaderAsync())
                         {
-                            dtCategories = new DataTable();
+                            DataTable dtCategories = new DataTable();
                             dtCategories.Load(reader);
+                            short numberOfPages = Convert.ToInt16(outputNumberOfPages.Value);
+                            short recordsCount = Convert.ToInt16(outputRecordsCount.Value);
+
+                            allCategories = new clsGetAllCategories(dtCategories, numberOfPages, recordsCount);
                         }
                     }
                 }
 
-                if (dtCategories == null)
+                if (allCategories == null)
                     throw new Exception("فشلت العملية");
             }
             catch (Exception ex)
             {
-                dtCategories = null;
+                allCategories = null;
 
                 if (RaiseEventOnErrorOccured)
                     clsGlobalEvents.RaiseEvent(ex.Message, true);
             }
 
-            return dtCategories;
+            return allCategories;
         }
 
         /// <summary>
@@ -429,12 +448,12 @@ namespace MoneyMindManager_DataAccess
 
                         using (SqlDataReader reader = await command.ExecuteReaderAsync())
                         {
-                            DataTable dtVouchers = new DataTable();
-                            dtVouchers.Load(reader);
+                            DataTable dtCategories = new DataTable();
+                            dtCategories.Load(reader);
                             short numberOfPages = Convert.ToInt16(outputNumberOfPages.Value);
                             short recordsCount = Convert.ToInt16(outputRecordsCount.Value);
 
-                            allCategories = new clsGetAllCategories(dtVouchers, numberOfPages, recordsCount);
+                            allCategories = new clsGetAllCategories(dtCategories, numberOfPages, recordsCount);
                         }
                     }
                 }

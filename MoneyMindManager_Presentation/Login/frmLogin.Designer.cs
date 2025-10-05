@@ -72,11 +72,11 @@
             this.guna2ControlBox1.BorderRadius = 8;
             this.guna2ControlBox1.ControlBoxStyle = Guna.UI2.WinForms.Enums.ControlBoxStyle.Custom;
             this.guna2ControlBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.guna2ControlBox1.CustomIconSize = 15F;
+            this.guna2ControlBox1.CustomIconSize = 12F;
             this.guna2ControlBox1.FillColor = System.Drawing.Color.Transparent;
             this.guna2ControlBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.guna2ControlBox1.HoverState.FillColor = System.Drawing.Color.White;
-            this.guna2ControlBox1.HoverState.IconColor = System.Drawing.Color.Black;
+            this.guna2ControlBox1.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(17)))), ((int)(((byte)(35)))));
+            this.guna2ControlBox1.HoverState.IconColor = System.Drawing.Color.White;
             this.guna2ControlBox1.IconColor = System.Drawing.Color.White;
             this.guna2ControlBox1.Location = new System.Drawing.Point(1037, 0);
             this.guna2ControlBox1.Name = "guna2ControlBox1";
@@ -269,6 +269,11 @@
             this.kgtxtLogin_password.Size = new System.Drawing.Size(337, 41);
             this.kgtxtLogin_password.TabIndex = 1;
             this.kgtxtLogin_password.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.kgtxtLogin_password.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
+            this.kgtxtLogin_password.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.kgtxtLogin_password.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
+            this.kgtxtLogin_password.TextProperties.DateTimeProperties.TimeFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enTimeFormate.None;
+            this.kgtxtLogin_password.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
             this.kgtxtLogin_password.TextProperties.MinLength = ((short)(4));
             this.kgtxtLogin_password.TextProperties.MinLengthOption = false;
             this.kgtxtLogin_password.TextProperties.PhoneProperties.AllowPlusSign = true;
@@ -350,6 +355,11 @@
             this.kgtxtLoginUserName.Size = new System.Drawing.Size(337, 41);
             this.kgtxtLoginUserName.TabIndex = 0;
             this.kgtxtLoginUserName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.kgtxtLoginUserName.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
+            this.kgtxtLoginUserName.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.kgtxtLoginUserName.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
+            this.kgtxtLoginUserName.TextProperties.DateTimeProperties.TimeFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enTimeFormate.None;
+            this.kgtxtLoginUserName.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
             this.kgtxtLoginUserName.TextProperties.MinLength = ((short)(0));
             this.kgtxtLoginUserName.TextProperties.MinLengthOption = false;
             this.kgtxtLoginUserName.TextProperties.PhoneProperties.AllowPlusSign = true;
@@ -541,6 +551,11 @@
             this.kgtxtCreatAccount_ConfirmPassowrd.Size = new System.Drawing.Size(337, 41);
             this.kgtxtCreatAccount_ConfirmPassowrd.TabIndex = 4;
             this.kgtxtCreatAccount_ConfirmPassowrd.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.kgtxtCreatAccount_ConfirmPassowrd.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
+            this.kgtxtCreatAccount_ConfirmPassowrd.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.kgtxtCreatAccount_ConfirmPassowrd.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
+            this.kgtxtCreatAccount_ConfirmPassowrd.TextProperties.DateTimeProperties.TimeFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enTimeFormate.None;
+            this.kgtxtCreatAccount_ConfirmPassowrd.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
             this.kgtxtCreatAccount_ConfirmPassowrd.TextProperties.MinLength = ((short)(4));
             this.kgtxtCreatAccount_ConfirmPassowrd.TextProperties.MinLengthOption = false;
             this.kgtxtCreatAccount_ConfirmPassowrd.TextProperties.PhoneProperties.AllowPlusSign = true;
@@ -622,6 +637,11 @@
             this.kgtxtCreateAccount_AccountName.Size = new System.Drawing.Size(337, 41);
             this.kgtxtCreateAccount_AccountName.TabIndex = 2;
             this.kgtxtCreateAccount_AccountName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.kgtxtCreateAccount_AccountName.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
+            this.kgtxtCreateAccount_AccountName.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.kgtxtCreateAccount_AccountName.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
+            this.kgtxtCreateAccount_AccountName.TextProperties.DateTimeProperties.TimeFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enTimeFormate.None;
+            this.kgtxtCreateAccount_AccountName.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
             this.kgtxtCreateAccount_AccountName.TextProperties.MinLength = ((short)(0));
             this.kgtxtCreateAccount_AccountName.TextProperties.MinLengthOption = false;
             this.kgtxtCreateAccount_AccountName.TextProperties.PhoneProperties.AllowPlusSign = true;
@@ -702,6 +722,11 @@
             this.kgtxtCreateAccount_PersonName.Size = new System.Drawing.Size(337, 41);
             this.kgtxtCreateAccount_PersonName.TabIndex = 0;
             this.kgtxtCreateAccount_PersonName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.kgtxtCreateAccount_PersonName.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
+            this.kgtxtCreateAccount_PersonName.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.kgtxtCreateAccount_PersonName.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
+            this.kgtxtCreateAccount_PersonName.TextProperties.DateTimeProperties.TimeFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enTimeFormate.None;
+            this.kgtxtCreateAccount_PersonName.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
             this.kgtxtCreateAccount_PersonName.TextProperties.MinLength = ((short)(0));
             this.kgtxtCreateAccount_PersonName.TextProperties.MinLengthOption = false;
             this.kgtxtCreateAccount_PersonName.TextProperties.PhoneProperties.AllowPlusSign = true;
@@ -842,6 +867,11 @@
             this.kgtxtCreateAccount_Password.Size = new System.Drawing.Size(337, 41);
             this.kgtxtCreateAccount_Password.TabIndex = 3;
             this.kgtxtCreateAccount_Password.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.kgtxtCreateAccount_Password.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
+            this.kgtxtCreateAccount_Password.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.kgtxtCreateAccount_Password.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
+            this.kgtxtCreateAccount_Password.TextProperties.DateTimeProperties.TimeFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enTimeFormate.None;
+            this.kgtxtCreateAccount_Password.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
             this.kgtxtCreateAccount_Password.TextProperties.MinLength = ((short)(4));
             this.kgtxtCreateAccount_Password.TextProperties.MinLengthOption = true;
             this.kgtxtCreateAccount_Password.TextProperties.PhoneProperties.AllowPlusSign = true;
@@ -922,6 +952,11 @@
             this.kgtxtCreateAccount_UserName.Size = new System.Drawing.Size(337, 41);
             this.kgtxtCreateAccount_UserName.TabIndex = 1;
             this.kgtxtCreateAccount_UserName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.kgtxtCreateAccount_UserName.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
+            this.kgtxtCreateAccount_UserName.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.kgtxtCreateAccount_UserName.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
+            this.kgtxtCreateAccount_UserName.TextProperties.DateTimeProperties.TimeFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enTimeFormate.None;
+            this.kgtxtCreateAccount_UserName.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
             this.kgtxtCreateAccount_UserName.TextProperties.MinLength = ((short)(0));
             this.kgtxtCreateAccount_UserName.TextProperties.MinLengthOption = false;
             this.kgtxtCreateAccount_UserName.TextProperties.PhoneProperties.AllowPlusSign = true;
@@ -970,7 +1005,7 @@
             this.lblHeader.Name = "lblHeader";
             this.lblHeader.Size = new System.Drawing.Size(1052, 55);
             this.lblHeader.TabIndex = 11;
-            this.lblHeader.Text = "Mony Mind Manager";
+            this.lblHeader.Text = "Money Mind Manager";
             this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // guna2DragControl2

@@ -101,6 +101,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             lblCurrentPageRecordsCount.Visible = value;
         }
+
         async Task _LoadDataAtDataGridView()
         {
             if (!_CheckValidationChildren())
@@ -159,7 +160,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             if (!_IsHeaderCreated && gdgvTransactions.Rows.Count > 0)
             {
-                gdgvTransactions.Columns["MainTransactionID"].HeaderText = "معرف الفئة";
+                gdgvTransactions.Columns["MainTransactionID"].HeaderText = "معرف المعاملة";
                 gdgvTransactions.Columns["MainTransactionID"].Width = 120;
 
                 gdgvTransactions.Columns["CategoryName"].HeaderText = "اسم الفئة";
@@ -179,8 +180,9 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 _IsHeaderCreated = true;
             }
 
-            await _Voucher.RefreshVoucherValue(currentUserID);
-            kgtxtVoucherValue.RefreshNumber_DateTimeFormattedText(_Voucher.VoucherValue.ToString());
+            kgtxtVoucherValue.RefreshNumber_DateTimeFormattedText(result.VoucherValue.ToString());
+
+            this.Focus();
         }
 
         void ChangeHeaderValue(string txt)
@@ -209,6 +211,9 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 _SetReadOnlyAtTextBox(kgtxtNotes);
                 _SetReadOnlyAtTextBox(kgtxtVoucherDate);
                 _ChangeEnablityForButton(gbtnAddTransaction, false);
+                _ChangeEnablityForButton(gbtnSave, false);
+                lblUserMessage.Text = "المستند مغلق لايمكن التعديل عليه";
+                lblUserMessage.Visible = true;
             }
             else
             {
@@ -216,6 +221,8 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 _CancelReadOnlyAtTextBox(kgtxtNotes);
                 _CancelReadOnlyAtTextBox(kgtxtVoucherDate);
                 _ChangeEnablityForButton(gbtnAddTransaction, true);
+                _ChangeEnablityForButton(gbtnSave, true);
+                lblUserMessage.Visible = false;
             }
         }
 
@@ -330,19 +337,13 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
         async Task _Save()
         {
-            //if (_Voucher.IsLocked)
-            //{
-            //    lblUserMessage.Text = "المستند مغلق لايمكن التعديل عليه";
-            //    lblUserMessage.Visible = true;
-            //    return;
-            //}
+            if (_Voucher.IsLocked && _voucherMode == enVoucherMode.Update)
+            {
+                lblUserMessage.Text = "المستند مغلق لايمكن التعديل عليه";
+                lblUserMessage.Visible = true;
+                return;
+            }
 
-            //if (gchkIsLocked.Checked)
-            //{
-            //    lblUserMessage.Text = "المستند مغلق لايمكن التعديل عليه";
-            //    lblUserMessage.Visible = true;
-            //    return;
-            //}
 
             if (!ValidateChildren())
             {
@@ -363,9 +364,15 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                     _ResetVoucherObject();
                     return;
                 }
+
+                if (!_Voucher.AssingIsLockingAddMode(gchkIsLocked.Checked))
+                {
+                    clsGlobalMessageBoxs.ShowErrorMessage("فشل تسجيل قفل المستند !");
+                    _ResetVoucherObject();
+                    return;
+                }
             }
             // permissions
-            _Voucher.IsLocked = gchkIsLocked.Checked;
 
             if (await _Voucher.Save(Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID)))
             {
@@ -395,7 +402,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
                 _isSaved = true;
 
-                LockAndUnLockMode(_Voucher.IsLocked);
+                //LockAndUnLockMode(_Voucher.IsLocked);
             }
             else if (_voucherMode == enVoucherMode.AddNew)
                 _ResetVoucherObject();
@@ -404,7 +411,6 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
         void _ResetVoucherObject()
         {
             _Voucher = new clsIncomeAndExpenseVoucher();
-            _Voucher.IsLocked = false;  
         }
 
         void _AddTransaction()
@@ -528,15 +534,25 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             _EditTransaction();
         }
 
-        private void gchkIsLocked_CheckedChanged(object sender, EventArgs e)
+        private async void gchkIsLocked_CheckedChanged(object sender, EventArgs e)
         {
-            ////_Voucher.IsLocked = gchkIsLocked.Checked;
-            //LockAndUnLockMode(_Voucher.IsLocked);
+            if(this._voucherMode == enVoucherMode.Update)
+            {
+                if (await _Voucher.ChangeLocking(gchkIsLocked.Checked, Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID)))
+                {
+                    LockAndUnLockMode(_Voucher.IsLocked);
+                }
+                else
+                {
+                    clsGlobalMessageBoxs.ShowErrorMessage("فشل تغيير قفل المستند !");
+                    gchkIsLocked.Checked = _Voucher.IsLocked;
+                }
+            }
         }
 
         private async void gtsmDelete_Click(object sender, EventArgs e)
         {
-            if (gdgvTransactions.SelectedRows.Count < 1 || _VoucherID == null)
+            if (gdgvTransactions.SelectedRows.Count < 1 || _VoucherID == null || _Voucher.IsLocked)
                 return;
 
             if (clsGlobalMessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف هذه المعاملة ؟ ", "طلب مواقفقة", MessageBoxButtons.OKCancel,
@@ -581,8 +597,9 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             {
                 //e.CellStyle.BackColor = Color.LightYellow; // خلفية
                 e.CellStyle.ForeColor = Color.Red;
-                e.CellStyle.SelectionForeColor = Color.Red;
+                e.CellStyle.SelectionForeColor = Color.Orange;
             }
         }
+
     }
 }

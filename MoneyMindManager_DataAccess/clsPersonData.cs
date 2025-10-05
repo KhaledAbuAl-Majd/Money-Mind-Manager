@@ -321,5 +321,62 @@ namespace MoneyMindManager_DataAccess
 
             return allPeople;
         }
+
+        public static async Task<clsGetAllPeople> GetAllPeopleForSelectOne(string personName, short pageNumber, int currentUserID, bool RaiseEventOnErrorOccured = true)
+        {
+            clsGetAllPeople allPeople = null;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("[dbo].[SP_People_GetAllForSelectOne]", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("@PersonName", string.IsNullOrWhiteSpace(personName) ? DBNull.Value : (object)personName);
+                        command.Parameters.AddWithValue("@CurrentUserID", currentUserID);
+                        command.Parameters.AddWithValue("@PageNumber", pageNumber);
+
+                        SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.SmallInt)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+
+                        SqlParameter outputRecordsCount = new SqlParameter("@RecordsCount", SqlDbType.Int)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+
+                        command.Parameters.Add(outputNumberOfPages);
+                        command.Parameters.Add(outputRecordsCount);
+
+                        await connection.OpenAsync();
+
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            DataTable dtPeople = new DataTable();
+                            dtPeople.Load(reader);
+                            short numberOfPages = Convert.ToInt16(outputNumberOfPages.Value);
+                            short recordsCount = Convert.ToInt16(outputRecordsCount.Value);
+
+                            allPeople = new clsGetAllPeople(dtPeople, numberOfPages, recordsCount);
+                        }
+                    }
+                }
+
+                if (allPeople == null)
+                    throw new Exception("فشلت العملية");
+            }
+            catch (Exception ex)
+            {
+                allPeople = null;
+
+                if (RaiseEventOnErrorOccured)
+                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+            }
+
+            return allPeople;
+        }
     }
 }

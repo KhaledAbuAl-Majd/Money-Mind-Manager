@@ -150,6 +150,8 @@
             this.kgtxtFilterValue.TextProperties.TextFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.enTextFormat.None;
             this.kgtxtFilterValue.TrimEnd = false;
             this.kgtxtFilterValue.TrimStart = false;
+            this.kgtxtFilterValue.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxt_OnValidationError);
+            this.kgtxtFilterValue.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxt_OnValidationSuccess);
             this.kgtxtFilterValue.TextChanged += new System.EventHandler(this.kgtxtFilterValue_TextChanged);
             this.kgtxtFilterValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.kgtxtFilterValue_KeyPress);
             // 
@@ -163,7 +165,7 @@
             this.lblNoRecordsFoundMessage.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblNoRecordsFoundMessage.Size = new System.Drawing.Size(1159, 42);
             this.lblNoRecordsFoundMessage.TabIndex = 29;
-            this.lblNoRecordsFoundMessage.Text = "لا يوجد نتائج مطباقة لبحثك !";
+            this.lblNoRecordsFoundMessage.Text = "لا يوجد نتائج مطابقة لبحثك !";
             this.lblNoRecordsFoundMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label2

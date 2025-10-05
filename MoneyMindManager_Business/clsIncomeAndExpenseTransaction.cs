@@ -15,11 +15,6 @@ namespace MoneyMindManager_Business
         public int? VoucherID { get;protected set; }
         public int? CategoryID { get; set; }
 
-        /// <summary>
-        /// Nullable
-        /// </summary>
-        public string Purpose { get; set; }
-
         public bool AssignVoucherIDAtAddMode(int voucherID)
         {
             if (Mode == enMode.Update)
@@ -34,15 +29,14 @@ namespace MoneyMindManager_Business
         public clsIncomeAndExpenseCategory CategoryInfo { get; private set; }
 
         private clsIncomeAndExpenseTransaction(int voucherID,int categoryID,int transactionID, decimal amount, DateTime createdDate, short accountID, int createdByUserID,
-            int balanceAccountID, byte tranasactionTypeID,bool isLocked,string purpose, clsAccount accountInfo, clsUser createdByUserInfo,  clsBalanceAccount balanceAccountInfo,
+             byte tranasactionTypeID,string purpose,bool isLocked,DateTime transactionDate, clsAccount accountInfo, clsUser createdByUserInfo,
             clsTransactionType transactionTypeInfo,clsIncomeAndExpenseVoucher voucherInfo,clsIncomeAndExpenseCategory categoryInfo)
-            : base (transactionID,amount,createdDate,accountID,createdByUserID,balanceAccountID,tranasactionTypeID,isLocked,accountInfo,
-                  createdByUserInfo, balanceAccountInfo, transactionTypeInfo)
+            : base (transactionID,amount,createdDate,accountID,createdByUserID,tranasactionTypeID,purpose,isLocked,transactionDate
+                  ,accountInfo, createdByUserInfo, transactionTypeInfo)
         {
             this.Mode = enMode.Update;
             this.VoucherID = voucherID;
             this.CategoryID = categoryID;
-            this.Purpose = purpose;
             this.VouhcerInfo = voucherInfo;
             this.CategoryInfo = categoryInfo;
         }
@@ -104,20 +98,20 @@ namespace MoneyMindManager_Business
 
         public static async Task<clsIncomeAndExpenseTransaction> FindTransactionByTransactionID(int transactionID, int currentUserID)
         {
-            var VoucherID_CategoryID = await clsclsIncomeAndExpenseTransactionData.GetIncomeAndExpenseTransactionInfoByID(transactionID, currentUserID);
+            var VC = await clsclsIncomeAndExpenseTransactionData.GetIncomeAndExpenseTransactionInfoByID(transactionID, currentUserID);
 
             var result = await  clsMainTransaction.FindMainTransactionInfoByID(transactionID, currentUserID);
 
-            var voucherInfo = await clsIncomeAndExpenseVoucher.FindVoucherByVoucherID(VoucherID_CategoryID.VoucherID, currentUserID);
-            var categoryInfo = await clsIncomeAndExpenseCategory.FindCategoryByCategoryID(VoucherID_CategoryID.CategoryID, currentUserID);
+            var voucherInfo = await clsIncomeAndExpenseVoucher.FindVoucherByVoucherID(VC.VoucherID, currentUserID);
+            var categoryInfo = await clsIncomeAndExpenseCategory.FindCategoryByCategoryID(VC.CategoryID, currentUserID);
 
             if (result == null || voucherInfo == null || categoryInfo == null)
                 return null;
 
-            return new clsIncomeAndExpenseTransaction(VoucherID_CategoryID.VoucherID, VoucherID_CategoryID.CategoryID,
+            return new clsIncomeAndExpenseTransaction(VC.VoucherID, VC.CategoryID,
                 transactionID, result.Amount, result.CreatedDate, Convert.ToInt16(result.AccountID),
-                Convert.ToInt32(result.CreatedByUserID), Convert.ToInt32(result.BalanceAccountID), Convert.ToByte(result.TransactionTypeID),
-                result.IsLocked,VoucherID_CategoryID.Purpose , result.AccountInfo, result.CreatedByUserInfo , result.BalanceAccountInfo, result.TransactionTypeInfo
+                Convert.ToInt32(result.CreatedByUserID), Convert.ToByte(result.TransactionTypeID),
+               result.Purpose,result.IsLocked,result.TransactionDate , result.AccountInfo, result.CreatedByUserInfo , result.TransactionTypeInfo
                 ,voucherInfo, categoryInfo);
         }
 

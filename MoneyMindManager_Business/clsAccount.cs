@@ -17,18 +17,13 @@ namespace MoneyMindManager_Business
         public enMode Mode { get; private set; } = enMode.Update;
 
         public clsCurrency DefaultCurrencyInfo { get; private set; }
-        public clsBalanceAccount CurrentBalanceAccountInfo { get; private set; }
-        public clsBalanceAccount SavingBalanceAccountInfo { get; private set; }
 
         private clsAccount(short accountID, string accountName, DateTime createdDate, bool isActive, byte defaultCurrencyID,
-                string description, int currentBalanceAccountID, int savingBalanceAccountID, clsCurrency defaultCurrencyInfo,
-                clsBalanceAccount currentBalanceAccountInfo, clsBalanceAccount savingBalanceAccountInfo)
-            : base(accountID, accountName, createdDate, isActive, defaultCurrencyID, description, currentBalanceAccountID, savingBalanceAccountID)
+                string description,decimal balance, clsCurrency defaultCurrencyInfo)
+            : base(accountID, accountName, createdDate, isActive, defaultCurrencyID, description,balance)
         {
             this.Mode = enMode.Update;
             this.DefaultCurrencyInfo = defaultCurrencyInfo;
-            this.CurrentBalanceAccountInfo = currentBalanceAccountInfo;
-            this.SavingBalanceAccountInfo = savingBalanceAccountInfo;
         }
 
         private async Task<bool> _UpdateAccount()
@@ -60,12 +55,9 @@ namespace MoneyMindManager_Business
             this.IsActive = freshAccount.IsActive;
             this.DefaultCurrencyID = freshAccount.DefaultCurrencyID;
             this.Description = freshAccount.Description;
-            //this.CurrentBalanceAccountID = freshAccount.CurrentBalanceAccountID;
-            //this.SavingBalanceAccountID = freshAccount.SavingBalanceAccountID;
+            this.Balance = freshAccount.Balance;
 
             this.DefaultCurrencyInfo = freshAccount.DefaultCurrencyInfo;
-            this.CurrentBalanceAccountInfo = freshAccount.CurrentBalanceAccountInfo;
-            this.SavingBalanceAccountInfo = freshAccount.SavingBalanceAccountInfo;
 
             return true;
         }
@@ -82,19 +74,8 @@ namespace MoneyMindManager_Business
             if (defaultCurrencyInfo == null)
                 return null;
 
-            clsBalanceAccount currentBalanceAccountInfo = await clsBalanceAccount.FindBalanceAccountByID(accountColumns.CurrentBalanceAccountID);
-
-            if (currentBalanceAccountInfo == null)
-                return null;
-
-            clsBalanceAccount savingBalanceAccountInfo = await clsBalanceAccount.FindBalanceAccountByID(accountColumns.SavingBalanceAccountID);
-
-            if (savingBalanceAccountInfo == null)
-                return null;
-
             return new clsAccount(accountColumns.AccountID, accountColumns.AccountName, accountColumns.CreatedDate, accountColumns.IsActive,
-                accountColumns.DefaultCurrencyID, accountColumns.Description, accountColumns.CurrentBalanceAccountID,
-                accountColumns.SavingBalanceAccountID, defaultCurrencyInfo, currentBalanceAccountInfo, savingBalanceAccountInfo);
+                accountColumns.DefaultCurrencyID, accountColumns.Description,accountColumns.Balance,  defaultCurrencyInfo);
         }
 
         /// <returns>New AccountID if Success and CreatringResult is true, if failed return null and CreatingResult is false</returns>

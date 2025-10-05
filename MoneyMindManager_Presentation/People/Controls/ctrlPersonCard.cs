@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DVLDPresentation.Global_Classes;
 using MoneyMindManager_Business;
 
 namespace MoneyMindManager_Presentation.People.Controls
@@ -45,7 +44,7 @@ namespace MoneyMindManager_Presentation.People.Controls
         async Task _ShowData()
         {
             lblPersonID.Text = Person.PersonID.ToString();
-            klblCreatedDate.Text = clsFormat.DateToShort(Person.CreatedDate);
+            klblCreatedDate.Text = Person.CreatedDate.ToString();
             kgtxtPersonName.Text = Person.PersonName;
             kgtxtPhoneNumber.Text = Person.Phone;
             clsUser CreatedUser = await Person.GetCreatedbyUserInfo(Convert.ToInt32(clsGlobal_UI.CurrentUser.UserID));

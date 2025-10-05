@@ -11,6 +11,7 @@ using KhaledControlLibrary1;
 using MoneyMindManager_Business;
 using MoneyMindManager_Presentation.Global;
 using MoneyMindManagerGlobal;
+using static MoneyMindManagerGlobal.clsDataColumns.clsIncomeAndExpenseCategoriesClasses;
 
 namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 {
@@ -35,8 +36,10 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             this._isIncome = isIncome;
         }
 
-
         bool _isIncome;
+
+        bool _searchByPageNumber = false;
+        short _pageNumber = 1;
         bool _IsHeaderCreated = false;
         void _RaiseOnCategorySelectedEvnet()
         {
@@ -55,6 +58,23 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             }
         }
 
+        void _ChangeEnablithForPagingControls(bool value)
+        {
+            kgtxtPageNumber.Enabled = value;
+            kgtxtPageNumber.Visible = value;
+
+            gibtnNextPage.Enabled = value;
+            gibtnNextPage.Visible = value;
+
+            gibtnPreviousPage.Enabled = value;
+            gibtnPreviousPage.Visible = value;
+
+            lblCurrentPageOfNumberOfPages.Visible = value;
+
+            lblDescriptionOfCurrentPageNumOfRcords.Visible = value;
+
+            lblCurrentPageRecordsCount.Visible = value;
+        }
 
         bool _CheckValidationChildren()
         {
@@ -65,8 +85,12 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                 lblNoRecordsFoundMessage.Visible = true;
                 lblUserMessage.Text = "تم العثور على حقول غير صالحة. ضع المؤشر على العلامات الحمراء لعرض سبب الخطأ.";
                 lblUserMessage.Visible = true;
-                //clsGlobal_Presentation.ShowMessage("تم العثور على حقول غير صالحة. ضع المؤشر على العلامات الحمراء لعرض سبب الخطأ.", "خطأ في التحقق", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                lblTotalRecordsNumber.Text = "0";
+                lblTotalRecordsNumber.Text = "0";   
+                lblCurrentPageRecordsCount.Text = "0";
+                lblCurrentPageOfNumberOfPages.Text = string.Concat("1", "   من   ", "0", "  صفحات");
+                _pageNumber = 1;
+                gibtnNextPage.Enabled = false;
+                gibtnNextPage.Enabled = false;
                 return false;
             }
 
@@ -77,43 +101,52 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             if (!_CheckValidationChildren())
                 return;
 
-            //_pageNumber = Convert.ToInt16(kgtxtPageNumber.ValidatedText);
 
-            DataTable dtCategories = null;
+            int currentUserID = Convert.ToInt32(clsGlobal_UI.CurrentUser.UserID);
 
-            int currentUserID = Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID);
+            clsGetAllCategories result = null;
 
             if (string.IsNullOrEmpty(kgtxtFilterValue.ValidatedText))
             {
-                dtCategories = await clsIncomeAndExpenseCategory.GetAllCategoriesForSearch(_isIncome, currentUserID);
+                result = await clsIncomeAndExpenseCategory.GetAllCategoriesForSelectOne(_isIncome, currentUserID,_pageNumber);
             }
             else 
             {
                 string categoryName = kgtxtFilterValue.ValidatedText;
-                dtCategories = await clsIncomeAndExpenseCategory.GetAllCategoriesForSelectOne(categoryName, _isIncome, currentUserID);
+                result = await clsIncomeAndExpenseCategory.GetAllCategoriesForSelectOne(categoryName, _isIncome, currentUserID,_pageNumber);
             }
 
 
-            if (dtCategories == null)
+            if (result == null)
                 return;
 
-            if (dtCategories.Rows.Count == 0)
+            if (result.dtCategories.Rows.Count == 0)
             {
                 lblNoRecordsFoundMessage.Visible = true;
                 //lblUserMessage.Visible = true;
                 gdgvCategories.DataSource = null;
                 _IsHeaderCreated = false;
+                kgtxtFilterValue.Focus();
             }
             else
             {
                 lblNoRecordsFoundMessage.Visible = false;
-                gdgvCategories.DataSource =dtCategories;
+                gdgvCategories.DataSource = result.dtCategories;
             }
 
             lblUserMessage.Visible = false;
+            _searchByPageNumber = false;
+            kgtxtPageNumber.Text = _pageNumber.ToString();
+            _searchByPageNumber = true;
 
-            lblTotalRecordsNumber.Text = dtCategories.Rows.Count.ToString();
-            //
+            lblTotalRecordsNumber.Text = result.RecordsCount.ToString();
+            lblCurrentPageOfNumberOfPages.Text = string.Concat(_pageNumber, "   من   ", result.NumberOfPages, "  صفحات");
+            kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValueOption = true;
+            kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValue = (result.NumberOfPages < 1) ? 1 : result.NumberOfPages;
+            lblCurrentPageRecordsCount.Text = gdgvCategories.Rows.Count.ToString();
+
+            gibtnNextPage.Enabled = (_pageNumber < result.NumberOfPages);
+            gibtnPreviousPage.Enabled = (_pageNumber > 1);
 
             if (!_IsHeaderCreated && gdgvCategories.Rows.Count > 0)
             {
@@ -135,8 +168,10 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
         private async void frmSelectCategory_Load(object sender, EventArgs e)
         {
-            _IsHeaderCreated = false;
             lblNoRecordsFoundMessage.Visible = false;
+            _IsHeaderCreated = false;
+            _searchByPageNumber = false;
+            kgtxtPageNumber.Text = "1";
             lblUserMessage.Visible = false;
 
             await _LoadDataAtDataGridView();
@@ -177,20 +212,78 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             {
                 //e.CellStyle.BackColor = Color.LightYellow; // خلفية
                 e.CellStyle.ForeColor = Color.Red;
-                e.CellStyle.SelectionForeColor = Color.Red;
+                e.CellStyle.SelectionForeColor = Color.Orange;
             }
         }
 
         private void frmSelectCategory_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
+            {
                 _RaiseOnCategorySelectedEvnet();
+                e.Handled = true;
+                return;
+            }
+
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+                e.Handled = true;
+                return;
+            }
+
+            if (gdgvCategories.Focused == false && gdgvCategories.Rows.Count > 0)
+            {
+                int selectedRow = gdgvCategories.CurrentCell.RowIndex;
+
+                switch (e.KeyCode)
+                {
+                    case Keys.Up:
+                        if (selectedRow > 0)
+                        {
+                            gdgvCategories.CurrentCell = gdgvCategories.Rows[selectedRow - 1].Cells[0];
+                            e.Handled = true;
+                        }
+                        break;
+
+                    case Keys.Down:
+                        if (selectedRow < gdgvCategories.Rows.Count - 1)
+                        {
+                            gdgvCategories.CurrentCell = gdgvCategories.Rows[selectedRow + 1].Cells[0];
+                            e.Handled = true;
+                        }
+                        break;
+
+                }
+            }
+
         }
 
 
         private void gbtnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private async void gibtnNextPage_Click(object sender, EventArgs e)
+        {
+            ++_pageNumber;
+            await _LoadDataAtDataGridView();
+        }
+
+        private async void gibtnPreviousPage_Click(object sender, EventArgs e)
+        {
+            --_pageNumber;
+            await _LoadDataAtDataGridView();
+        }
+        private async void kgtxtPageNumber_TextChanged(object sender, EventArgs e)
+        {
+            if (!_searchByPageNumber || !_CheckValidationChildren())
+                return;
+
+            _pageNumber = Convert.ToInt16(kgtxtPageNumber.ValidatedText);
+
+            await _LoadDataAtDataGridView();
         }
     }
 }

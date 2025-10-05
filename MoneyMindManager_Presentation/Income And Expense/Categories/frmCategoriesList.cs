@@ -383,7 +383,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             {
                 //e.CellStyle.BackColor = Color.LightYellow; // خلفية
                 e.CellStyle.ForeColor = Color.Red;
-                e.CellStyle.SelectionForeColor = Color.Red;
+                e.CellStyle.SelectionForeColor = Color.Orange;
             }
         }
     }

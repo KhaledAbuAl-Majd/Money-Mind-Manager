@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using MoneyMindManagerGlobal;
 using static MoneyMindManagerGlobal.clsDataColumns.clsIncomeAndExpenseVoucherClasses;
-using static MoneyMindManagerGlobal.clsDataColumns.clsUserClasses;
 
 namespace MoneyMindManager_DataAccess
 {
@@ -62,7 +61,7 @@ namespace MoneyMindManager_DataAccess
             return newVoucherID;
         }
 
-        public static async Task<bool> UpdateVoucherByID(int voucherID,string voucherName, string notes, bool isLocked, 
+        public static async Task<bool> UpdateVoucherByID(int voucherID,string voucherName, string notes, 
             DateTime voucherDate, int currentUserID, bool RaiseEventOnErrorOccured = true)
         {
             bool result = false;
@@ -78,8 +77,48 @@ namespace MoneyMindManager_DataAccess
                         command.Parameters.AddWithValue("@VoucherID", voucherID);
                         command.Parameters.AddWithValue("@VoucherName", voucherName);
                         command.Parameters.AddWithValue("@Notes", string.IsNullOrWhiteSpace(notes) ? DBNull.Value : (object)notes);
-                        command.Parameters.AddWithValue("@IsLocked", isLocked);
                         command.Parameters.AddWithValue("@VoucherDate", voucherDate);
+                        command.Parameters.AddWithValue("@CurrentUserID", currentUserID);
+
+                        SqlParameter retunValue = new SqlParameter("@ReturnVal", SqlDbType.Int)
+                        {
+                            Direction = System.Data.ParameterDirection.ReturnValue
+                        };
+
+                        command.Parameters.Add(retunValue);
+
+                        await connection.OpenAsync();
+                        await command.ExecuteNonQueryAsync();
+
+                        result = (retunValue.Value != DBNull.Value) && (Convert.ToInt32(retunValue.Value) == 1);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                result = false;
+
+                if (RaiseEventOnErrorOccured)
+                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+            }
+
+            return result;
+        }
+
+        public static async Task<bool> ChangeVoucherLockingByID(int voucherID,bool isLocked, int currentUserID, bool RaiseEventOnErrorOccured = true)
+        {
+            bool result = false;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("[dbo].[SP_IncomeAndExpenseVouchers_ChangeLocking]", connection))
+                    {
+                        command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("@VoucherID", voucherID);
+                        command.Parameters.AddWithValue("@IsLocked", isLocked);
                         command.Parameters.AddWithValue("@CurrentUserID", currentUserID);
 
                         SqlParameter retunValue = new SqlParameter("@ReturnVal", SqlDbType.Int)

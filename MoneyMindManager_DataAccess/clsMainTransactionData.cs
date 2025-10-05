@@ -38,12 +38,13 @@ namespace MoneyMindManager_DataAccess
                                 DateTime createdDate = Convert.ToDateTime(reader["CreatedDate"]);
                                 short accountID = Convert.ToInt16(reader["AccountID"]);
                                 int createdByUserID = Convert.ToInt32(reader["CreatedByUserID"]);
-                                int balanceAccountID = Convert.ToInt32(reader["BalanceAccountID"]);
                                 byte transactionTypeID = Convert.ToByte(reader["TransactionTypeID"]);
-                                bool isLocked = Convert.ToBoolean(reader["IsLocked"]);
+                                string purpose = reader["Purpose"] as string;
+                                bool IsLocked = Convert.ToBoolean(reader["IsLocked"]);
+                                DateTime transactionDate = Convert.ToDateTime(reader["TransactionDate"]); 
 
                                 transactionTypeData = new clsMainTransactionColumns(transactionID, amount, createdDate, accountID,
-                                    createdByUserID, balanceAccountID, transactionTypeID,isLocked);
+                                    createdByUserID, transactionTypeID,purpose,IsLocked,transactionDate);
                             }
                             else
                                 transactionTypeData = null;

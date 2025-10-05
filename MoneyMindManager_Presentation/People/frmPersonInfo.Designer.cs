@@ -45,11 +45,13 @@
             this.guna2Panel2.Controls.Add(this.gbtnClose);
             this.guna2Panel2.Controls.Add(this.ctrlPersonCard1);
             this.guna2Panel2.FillColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.guna2Panel2.Location = new System.Drawing.Point(269, 113);
+            this.guna2Panel2.Location = new System.Drawing.Point(314, 90);
             this.guna2Panel2.Name = "guna2Panel2";
-            this.guna2Panel2.ShadowDecoration.Color = System.Drawing.Color.Transparent;
-            this.guna2Panel2.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(0, 0, 5, 5);
-            this.guna2Panel2.Size = new System.Drawing.Size(571, 524);
+            this.guna2Panel2.ShadowDecoration.BorderRadius = 20;
+            this.guna2Panel2.ShadowDecoration.Color = System.Drawing.Color.DarkGray;
+            this.guna2Panel2.ShadowDecoration.Depth = 20;
+            this.guna2Panel2.ShadowDecoration.Enabled = true;
+            this.guna2Panel2.Size = new System.Drawing.Size(571, 514);
             this.guna2Panel2.TabIndex = 12;
             // 
             // gbtnClose
@@ -76,7 +78,7 @@
             this.gbtnClose.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnClose.ImageSize = new System.Drawing.Size(25, 25);
             this.gbtnClose.IndicateFocus = true;
-            this.gbtnClose.Location = new System.Drawing.Point(151, 462);
+            this.gbtnClose.Location = new System.Drawing.Point(152, 456);
             this.gbtnClose.Name = "gbtnClose";
             this.gbtnClose.PressedColor = System.Drawing.Color.White;
             this.gbtnClose.Size = new System.Drawing.Size(258, 41);

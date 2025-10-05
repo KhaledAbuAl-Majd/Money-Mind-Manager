@@ -31,11 +31,11 @@ namespace MoneyMindManager_Presentation
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmUsers));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmUsers));
             this.lblUserMessage = new System.Windows.Forms.Label();
             this.SearchAfterTimerFinish = new System.Windows.Forms.Timer(this.components);
             this.kgtxtFilterValue = new KhaledControlLibrary1.KhaledGuna2TextBox();
@@ -49,6 +49,7 @@ namespace MoneyMindManager_Presentation
             this.kgtxtPageNumber = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.gibtnNextPage = new Guna.UI2.WinForms.Guna2ImageButton();
             this.gibtnPreviousPage = new Guna.UI2.WinForms.Guna2ImageButton();
+            this.gibtnRefreshData = new Guna.UI2.WinForms.Guna2ImageButton();
             this.lblCurrentPageOfNumberOfPages = new System.Windows.Forms.Label();
             this.lblTotalRecordsNumber = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -62,7 +63,6 @@ namespace MoneyMindManager_Presentation
             this.lblHeader = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.gbtnAddVoucher = new Guna.UI2.WinForms.Guna2Button();
-            this.gibtnRefreshData = new Guna.UI2.WinForms.Guna2ImageButton();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.guna2ContextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gdgvUser)).BeginInit();
@@ -169,7 +169,7 @@ namespace MoneyMindManager_Presentation
             this.lblNoRecordsFoundMessage.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblNoRecordsFoundMessage.Size = new System.Drawing.Size(1092, 42);
             this.lblNoRecordsFoundMessage.TabIndex = 30;
-            this.lblNoRecordsFoundMessage.Text = "لا يوجد نتائج مطباقة لبحثك !";
+            this.lblNoRecordsFoundMessage.Text = "لا يوجد نتائج مطابقة لبحثك !";
             this.lblNoRecordsFoundMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label2
@@ -360,6 +360,25 @@ namespace MoneyMindManager_Presentation
             this.toolTip1.SetToolTip(this.gibtnPreviousPage, "الصفحة السابقة");
             this.gibtnPreviousPage.UseTransparentBackground = true;
             this.gibtnPreviousPage.Click += new System.EventHandler(this.gibtnPreviousPage_Click);
+            // 
+            // gibtnRefreshData
+            // 
+            this.gibtnRefreshData.BackColor = System.Drawing.Color.Transparent;
+            this.gibtnRefreshData.CheckedState.ImageSize = new System.Drawing.Size(64, 64);
+            this.gibtnRefreshData.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gibtnRefreshData.HoverState.ImageSize = new System.Drawing.Size(35, 35);
+            this.gibtnRefreshData.Image = ((System.Drawing.Image)(resources.GetObject("gibtnRefreshData.Image")));
+            this.gibtnRefreshData.ImageOffset = new System.Drawing.Point(0, 0);
+            this.gibtnRefreshData.ImageRotate = 0F;
+            this.gibtnRefreshData.ImageSize = new System.Drawing.Size(28, 28);
+            this.gibtnRefreshData.Location = new System.Drawing.Point(547, 147);
+            this.gibtnRefreshData.Name = "gibtnRefreshData";
+            this.gibtnRefreshData.PressedState.ImageSize = new System.Drawing.Size(64, 64);
+            this.gibtnRefreshData.Size = new System.Drawing.Size(40, 42);
+            this.gibtnRefreshData.TabIndex = 134;
+            this.toolTip1.SetToolTip(this.gibtnRefreshData, "تحديث البيانات");
+            this.gibtnRefreshData.UseTransparentBackground = true;
+            this.gibtnRefreshData.Click += new System.EventHandler(this.gibtnRefreshData_Click);
             // 
             // lblCurrentPageOfNumberOfPages
             // 
@@ -608,25 +627,6 @@ namespace MoneyMindManager_Presentation
             this.gbtnAddVoucher.TabIndex = 133;
             this.gbtnAddVoucher.Text = "إضافة مستخدم";
             this.gbtnAddVoucher.Click += new System.EventHandler(this.gbtnAddUser_Click);
-            // 
-            // gibtnRefreshData
-            // 
-            this.gibtnRefreshData.BackColor = System.Drawing.Color.Transparent;
-            this.gibtnRefreshData.CheckedState.ImageSize = new System.Drawing.Size(64, 64);
-            this.gibtnRefreshData.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.gibtnRefreshData.HoverState.ImageSize = new System.Drawing.Size(35, 35);
-            this.gibtnRefreshData.Image = ((System.Drawing.Image)(resources.GetObject("gibtnRefreshData.Image")));
-            this.gibtnRefreshData.ImageOffset = new System.Drawing.Point(0, 0);
-            this.gibtnRefreshData.ImageRotate = 0F;
-            this.gibtnRefreshData.ImageSize = new System.Drawing.Size(28, 28);
-            this.gibtnRefreshData.Location = new System.Drawing.Point(547, 147);
-            this.gibtnRefreshData.Name = "gibtnRefreshData";
-            this.gibtnRefreshData.PressedState.ImageSize = new System.Drawing.Size(64, 64);
-            this.gibtnRefreshData.Size = new System.Drawing.Size(40, 42);
-            this.gibtnRefreshData.TabIndex = 134;
-            this.toolTip1.SetToolTip(this.gibtnRefreshData, "تحديث البيانات");
-            this.gibtnRefreshData.UseTransparentBackground = true;
-            this.gibtnRefreshData.Click += new System.EventHandler(this.gibtnRefreshData_Click);
             // 
             // FrmUsers
             // 

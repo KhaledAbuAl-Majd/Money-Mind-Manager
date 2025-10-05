@@ -146,11 +146,10 @@ namespace MoneyMindManager_DataAccess
             return result;
         }
 
-        public static async Task<(int VoucherID,int CategoryID,string Purpose)> GetIncomeAndExpenseTransactionInfoByID(int transactionID,
+        public static async Task<(int VoucherID,int CategoryID)> GetIncomeAndExpenseTransactionInfoByID(int transactionID,
             int currentUserID,bool RaiseEventOnErrorOccured = true)
         {
             int? voucherID = null, categoryID = null;
-            string purpose = null;
 
             try
             {
@@ -170,13 +169,11 @@ namespace MoneyMindManager_DataAccess
                             {
                                 voucherID = reader["VoucherID"] as int?;
                                 categoryID = reader["CategoryID"] as int?;
-                                purpose = reader["Purpose"] as string;
                             }
                             else
                             {
                                 voucherID = null;
                                 categoryID = null;
-                                purpose = null;
                             }
                         }
                     }
@@ -194,7 +191,7 @@ namespace MoneyMindManager_DataAccess
                     clsGlobalEvents.RaiseEvent(ex.Message, true);
             }
 
-            return (Convert.ToInt32(voucherID), Convert.ToInt32(categoryID),purpose);
+            return (Convert.ToInt32(voucherID), Convert.ToInt32(categoryID));
         }
 
         public static async Task<clsGetAllIncomeAndExpenseTransactions> GetAllIncomeAndExpensTransactions(int voucherID,int currentUserID, short pageNumber, bool RaiseEventOnErrorOccured = true)
@@ -223,8 +220,16 @@ namespace MoneyMindManager_DataAccess
                             Direction = ParameterDirection.Output
                         };
 
+                        SqlParameter outputVoucherValue = new SqlParameter("@VoucherValue", SqlDbType.Decimal)
+                        {
+                            Direction = ParameterDirection.Output,
+                            Precision = 19,
+                            Scale = 4
+                        };
+
                         command.Parameters.Add(outputNumberOfPages);
                         command.Parameters.Add(outputRecordsCount);
+                        command.Parameters.Add(outputVoucherValue);
 
                         await connection.OpenAsync();
 
@@ -234,8 +239,9 @@ namespace MoneyMindManager_DataAccess
                             dtTransactions.Load(reader);
                             short numberOfPages = Convert.ToInt16(outputNumberOfPages.Value);
                             short recordsCount = Convert.ToInt16(outputRecordsCount.Value);
+                            decimal voucherValue = Convert.ToDecimal(outputVoucherValue.Value);
 
-                            allTransactions = new clsGetAllIncomeAndExpenseTransactions(dtTransactions, numberOfPages, recordsCount);
+                            allTransactions = new clsGetAllIncomeAndExpenseTransactions(dtTransactions, numberOfPages, recordsCount,voucherValue);
                         }
                     }
                 }

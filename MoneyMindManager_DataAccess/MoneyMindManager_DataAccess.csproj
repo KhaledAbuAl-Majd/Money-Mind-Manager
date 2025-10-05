@@ -44,10 +44,10 @@
   <ItemGroup>
     <Compile Include="clsAccountData.cs" />
     <Compile Include="clsclsIncomeAndExpenseTransactionData.cs" />
+    <Compile Include="clsDebtData.cs" />
     <Compile Include="clsIncomeAndExpenseCategoryData.cs" />
     <Compile Include="clsIncomeAndExpenseVoucherData.cs" />
     <Compile Include="clsMainTransactionData.cs" />
-    <Compile Include="clsBalanceAccountData.cs" />
     <Compile Include="clsTransactionTypeData.cs" />
     <Compile Include="clsCurrencyData.cs" />
     <Compile Include="clsDataAccessSettings.cs" />

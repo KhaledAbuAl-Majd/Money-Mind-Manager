@@ -220,7 +220,7 @@ namespace MoneyMindManager_Presentation
             {
                 //e.CellStyle.BackColor = Color.LightYellow; // خلفية
                 e.CellStyle.ForeColor = Color.Red;
-                e.CellStyle.SelectionForeColor = Color.Red;
+                e.CellStyle.SelectionForeColor = Color.Orange;
             }
         }
 

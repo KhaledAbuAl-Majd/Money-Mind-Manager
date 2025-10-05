@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MoneyMindManager_Business;
 using MoneyMindManager_Presentation.Global;
+using MoneyMindManager_Presentation.Income_And_Expense.Categories;
 
 namespace MoneyMindManager_Presentation.People.Controls
 {
@@ -59,38 +60,53 @@ namespace MoneyMindManager_Presentation.People.Controls
             OnEditingPerson?.Invoke();
         }
 
-        private async void gibtnFindPerson_Click(object sender, EventArgs e)
+        void _ShowSelectPersonForm()
         {
-            if (!ValidateChildren())
-            {
-                ctrlPersonCard1.ResetControls();
-                clsGlobalMessageBoxs.ShowValidateChildrenFailedMessage();
-                OnFailed?.Invoke();
-                return;
-            }
+            var frm = new frmSelectPerson();
+            frm.OnPersonSelected += FrmSelectPerson_OnPersonSelected;
+            clsGlobal_UI.MainForm.AddNewFormAsDialog(frm);
+        }
 
-            int personID = Convert.ToInt32(kgtxtPersonID.ValidatedText);
-
+        async Task _FindPerson(int personID)
+        {
             if (!await ctrlPersonCard1.LoadPerson(personID))
             {
                 OnFailed?.Invoke();
                 return;
             }
 
+            kgtxtPersonID.Text = personID.ToString();
+            kgtxtPersonName.Text = ctrlPersonCard1.Person?.PersonName;
+
             OnSuccess?.Invoke();
+        }
+        private async void FrmSelectPerson_OnPersonSelected(object sender, frmSelectPerson.SelectPersonEventArgs e)
+        {
+           await _FindPerson(e.PersonID);
+        }
+
+        private  void gibtnFindPerson_Click(object sender, EventArgs e)
+        {
+            if (gibtnFindPerson.Enabled)
+            {
+                _ShowSelectPersonForm();
+            }
         }
 
         private void gibtnAddPerson_Click(object sender, EventArgs e)
         {
+            if (!gibtnAddPerson.Enabled)
+                return;
+
             frmAddUpdatePerson frm = new frmAddUpdatePerson();
             frm.OnCloseAndSaved += FrmAddUpdatePerson_OnCloseAndSaved;
             clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
         }
 
-        private void FrmAddUpdatePerson_OnCloseAndSaved(int PersonID)
+        private async void FrmAddUpdatePerson_OnCloseAndSaved(int personID)
         {
-            kgtxtPersonID.Text = PersonID.ToString();
-            gibtnFindPerson.PerformClick();
+            kgtxtPersonID.Text = personID.ToString();
+            await _FindPerson(personID);
         }
 
         private void kgtxtPersonID_OnValidationError(object sender, KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs e)
@@ -119,22 +135,26 @@ namespace MoneyMindManager_Presentation.People.Controls
                 return false;
 
             kgtxtPersonID.Text = personID.ToString();
+            kgtxtPersonName.Text = ctrlPersonCard1.Person?.PersonName;
             pnlSearchPart.Enabled = false;
 
             return true;
 
         }
 
-        private void kgtxtPersonID_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)Keys.Enter)
-                gibtnFindPerson.PerformClick();
-        }
-
         public void ResetControls()
         {
             ctrlPersonCard1.ResetControls();
             kgtxtPersonID.Text = null;
+            kgtxtPersonName.Text = null;
+        }
+
+        private void kgtxtPersonID_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.F9)
+            {
+                gibtnFindPerson.PerformClick();
+            }
         }
     }
 }

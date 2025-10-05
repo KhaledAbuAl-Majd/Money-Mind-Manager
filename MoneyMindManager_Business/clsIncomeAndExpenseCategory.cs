@@ -122,13 +122,14 @@ namespace MoneyMindManager_Business
             {
                 case enMode.AddNew:
                     {
-                        if(await _AddNewCategory(currentUserID))
+                        if (await _AddNewCategory(currentUserID))
                         {
                             Mode = enMode.Update;
                             await RefreshData(currentUserID);
                             return true;
                         }
-                        break;
+                        else
+                            return false;
                     }
 
                 case enMode.Update:
@@ -191,34 +192,19 @@ namespace MoneyMindManager_Business
         }
 
         /// <summary>
-        /// Without Filter
-        /// </summary>
-        public static async Task<DataTable> GetAllCategoriesForSearch(int currentUserID)
-        {
-         return  await clsIncomeAndExpenseCategoryData.GetAllCategoriesForSelect(null, null, currentUserID);
-        }
-        /// <summary>
-        /// Filter by CategoryName
-        /// </summary>
-        public static async Task<DataTable> GetAllCategoriesForSearch(string categoryName,int currentUserID)
-        {
-         return  await clsIncomeAndExpenseCategoryData.GetAllCategoriesForSelect(categoryName, null, currentUserID);
-        }
-
-        /// <summary>
         /// Filter by CategoryType - isIncome
         /// </summary>
-        public static async Task<DataTable> GetAllCategoriesForSearch(bool isIncome,int currentUserID)
+        public static async Task<clsGetAllCategories> GetAllCategoriesForSelectOne(bool isIncome,int currentUserID,short pageNumber)
         {
-         return  await clsIncomeAndExpenseCategoryData.GetAllCategoriesForSelect(null, isIncome, currentUserID);
+         return  await clsIncomeAndExpenseCategoryData.GetAllCategoriesForSelectOne(null, isIncome, currentUserID,pageNumber);
         }
 
         /// <summary>
         /// Filter by CategoryName AND CategoryType - isIncome
         /// </summary>
-        public static async Task<DataTable> GetAllCategoriesForSelectOne(string categoryName ,bool isIncome,int currentUserID)
+        public static async Task<clsGetAllCategories> GetAllCategoriesForSelectOne(string categoryName ,bool isIncome,int currentUserID,short pageNumber)
         {
-         return  await clsIncomeAndExpenseCategoryData.GetAllCategoriesForSelect(categoryName, isIncome, currentUserID);
+         return  await clsIncomeAndExpenseCategoryData.GetAllCategoriesForSelectOne(categoryName, isIncome, currentUserID,pageNumber);
         }
 
         /// <summary>

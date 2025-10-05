@@ -210,7 +210,7 @@ namespace MoneyMindManager_Presentation.People
             {
                 //e.CellStyle.BackColor = Color.LightYellow; // خلفية
                 e.CellStyle.ForeColor = Color.Red;
-                e.CellStyle.SelectionForeColor = Color.Red;
+                e.CellStyle.SelectionForeColor = Color.Orange;
             }
         }
 

@@ -94,7 +94,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             }
             else if (filterBy == enFilterBy.VoucherID)
             {
-                int voucherID = Convert.ToInt32(kgtxtFilterValue.ValidatedText);
+         int voucherID = Convert.ToInt32(kgtxtFilterValue.ValidatedText);
                 result = await clsIncomeAndExpenseVoucher.GetAllVouchers(voucherID, filterByCreatedDate, kgtxtFromData.ValidatedText,
                     kgtxtToDate.ValidatedText, _voucherType, currentUserID, _pageNumber);
             }
@@ -368,7 +368,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             {
                 //e.CellStyle.BackColor = Color.LightYellow; // خلفية
                 e.CellStyle.ForeColor = Color.Red;
-                e.CellStyle.SelectionForeColor = Color.Red;
+                e.CellStyle.SelectionForeColor = Color.Orange;
             }
         }
     }

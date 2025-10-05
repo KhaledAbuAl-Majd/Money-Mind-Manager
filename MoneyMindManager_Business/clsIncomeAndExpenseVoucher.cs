@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using MoneyMindManager_DataAccess;
@@ -61,6 +62,14 @@ namespace MoneyMindManager_Business
 
             return true;
         }
+        public bool AssingIsLockingAddMode(bool isLocked)
+        {
+            if (Mode == enMode.Update)
+                return false;
+
+            this.IsLocked = isLocked;
+            return true;
+        }
 
         private clsIncomeAndExpenseVoucher(int voucherID, string voucherName, string notes, bool isLocked, DateTime createdDate, 
                     DateTime voucherDate, short accountID, int createdByUserID, bool isIncome,bool isReturn,decimal voucherValue
@@ -94,7 +103,7 @@ namespace MoneyMindManager_Business
 
         async Task<bool> _UpdateVoucher(int currentUserID)
         {
-            return await clsIncomeAndExpenseVoucherData.UpdateVoucherByID(Convert.ToInt32(VoucherID), VoucherName, Notes, IsLocked, VoucherDate, currentUserID);
+            return await clsIncomeAndExpenseVoucherData.UpdateVoucherByID(Convert.ToInt32(VoucherID), VoucherName, Notes, VoucherDate, currentUserID);
         }
 
         async Task<bool> _RefeshCompositionObjects(int currentUserID)
@@ -121,13 +130,28 @@ namespace MoneyMindManager_Business
                             await _RefeshCompositionObjects(currentUserID);
                             return true;
                         }
-                        break;
+                        else
+                            return false;
                     }
 
                 case enMode.Update:
                     return await _UpdateVoucher(currentUserID);
             }
 
+            return true;
+        }
+
+        public async Task<bool> ChangeLocking(bool isLocked,int currentUserID)
+        {
+            if (Mode == enMode.AddNew)
+                return false;
+
+            bool result = await clsIncomeAndExpenseVoucherData.ChangeVoucherLockingByID(Convert.ToInt32(VoucherID), isLocked, currentUserID);
+
+            if (!result)
+                return false;
+
+            this.IsLocked = isLocked;
             return true;
         }
 
@@ -158,12 +182,17 @@ namespace MoneyMindManager_Business
 
         public async Task<clsGetAllIncomeAndExpenseTransactions> GetVoucheTransactions(int currentUserID, short pageNumber)
         {
-            return await GetVoucheTransactions(Convert.ToInt32(VoucherID), currentUserID, pageNumber);
+          var result =  await GetVoucheTransactions(Convert.ToInt32(VoucherID), currentUserID, pageNumber);
+
+            if (result != null)
+                this.VoucherValue = result.VoucherValue;
+
+            return result;
         }
 
         public static async Task<clsGetAllIncomeAndExpenseTransactions> GetVoucheTransactions(int voucherID,int currentUserID, short pageNumber)
         {
-            return await clsclsIncomeAndExpenseTransactionData.GetAllIncomeAndExpensTransactions(voucherID, currentUserID, pageNumber);
+           return await clsclsIncomeAndExpenseTransactionData.GetAllIncomeAndExpensTransactions(voucherID, currentUserID, pageNumber);
         }
 
         public static enVoucherType GetVoucherType(bool isIncome, bool isReturn)

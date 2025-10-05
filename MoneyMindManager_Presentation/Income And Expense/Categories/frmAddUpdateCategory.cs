@@ -16,7 +16,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
     public partial class frmAddUpdateCategory : Form
     {
         /// <summary>
-        /// CategoryID
+        /// PersonID
         /// </summary>
         public event Action<int> OnCloseAndSaved;
 
@@ -151,7 +151,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             _Category = new clsIncomeAndExpenseCategory();
         }
 
-        void _ShowChooseCategoryForm()
+        void _ShowSelectCategoryForm()
         {
             if (Mode != enMode.AddNew || _isIncome == null)
                 return;
@@ -177,7 +177,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             {
                 if (int.TryParse(kgtxtParentCategoryName.Tag?.ToString(), out int parentCategoryID))
                 {
-                    if (_isIncome == false && !string.IsNullOrWhiteSpace(kgtxtParentCategoryName.ValidatedText) && !_Category.AssignParentCateoryIDAtAddMode(Convert.ToInt32(parentCategoryID)))
+                    if (!string.IsNullOrWhiteSpace(kgtxtParentCategoryName.ValidatedText) && !_Category.AssignParentCateoryIDAtAddMode(Convert.ToInt32(parentCategoryID)))
                     {
                         clsGlobalMessageBoxs.ShowErrorMessage("فشل تسجيل معرف الفئة التابعة لها");
                         _ResteObject();
@@ -282,7 +282,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
         private void kgtxtParentCategory_IconLeftClick(object sender, EventArgs e)
         {
-            _ShowChooseCategoryForm();
+            _ShowSelectCategoryForm();
         }
 
         private void Frm_OnCategorySelected(object sender, frmSelectCategory.SelecteCategoryEventArgs e)
@@ -384,7 +384,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
         {
             if (e.KeyCode == Keys.F9)
             {
-                _ShowChooseCategoryForm();
+                _ShowSelectCategoryForm();
             }
         }
     }

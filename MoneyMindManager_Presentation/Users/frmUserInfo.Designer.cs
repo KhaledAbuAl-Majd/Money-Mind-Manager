@@ -47,8 +47,10 @@
             this.guna2Panel2.FillColor = System.Drawing.SystemColors.ButtonHighlight;
             this.guna2Panel2.Location = new System.Drawing.Point(20, 86);
             this.guna2Panel2.Name = "guna2Panel2";
-            this.guna2Panel2.ShadowDecoration.Color = System.Drawing.Color.Transparent;
-            this.guna2Panel2.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(0, 0, 5, 5);
+            this.guna2Panel2.ShadowDecoration.BorderRadius = 20;
+            this.guna2Panel2.ShadowDecoration.Color = System.Drawing.Color.DarkGray;
+            this.guna2Panel2.ShadowDecoration.Depth = 20;
+            this.guna2Panel2.ShadowDecoration.Enabled = true;
             this.guna2Panel2.Size = new System.Drawing.Size(1178, 574);
             this.guna2Panel2.TabIndex = 13;
             // 

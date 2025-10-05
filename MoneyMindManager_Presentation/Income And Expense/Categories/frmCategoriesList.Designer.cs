@@ -85,7 +85,7 @@
             this.guna2ContextMenuStrip1.RenderStyle.SelectionForeColor = System.Drawing.Color.White;
             this.guna2ContextMenuStrip1.RenderStyle.SeparatorColor = System.Drawing.Color.Gainsboro;
             this.guna2ContextMenuStrip1.RenderStyle.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
-            this.guna2ContextMenuStrip1.Size = new System.Drawing.Size(195, 98);
+            this.guna2ContextMenuStrip1.Size = new System.Drawing.Size(148, 76);
             // 
             // gtsmAddVoucher
             // 
@@ -94,7 +94,7 @@
             this.gtsmAddVoucher.Name = "gtsmAddVoucher";
             this.gtsmAddVoucher.ShortcutKeys = System.Windows.Forms.Keys.Insert;
             this.gtsmAddVoucher.ShowShortcutKeys = false;
-            this.gtsmAddVoucher.Size = new System.Drawing.Size(194, 36);
+            this.gtsmAddVoucher.Size = new System.Drawing.Size(147, 36);
             this.gtsmAddVoucher.Text = "إضافة فئة";
             this.gtsmAddVoucher.Click += new System.EventHandler(this.gtsmAddVoucher_Click);
             // 
@@ -103,7 +103,7 @@
             this.gtsmEdit.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gtsmEdit.Image = ((System.Drawing.Image)(resources.GetObject("gtsmEdit.Image")));
             this.gtsmEdit.Name = "gtsmEdit";
-            this.gtsmEdit.Size = new System.Drawing.Size(194, 36);
+            this.gtsmEdit.Size = new System.Drawing.Size(147, 36);
             this.gtsmEdit.Text = "تعديل";
             this.gtsmEdit.Click += new System.EventHandler(this.gtsmEdit_Click);
             // 
@@ -388,7 +388,7 @@
             this.lblNoRecordsFoundMessage.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblNoRecordsFoundMessage.Size = new System.Drawing.Size(1159, 42);
             this.lblNoRecordsFoundMessage.TabIndex = 112;
-            this.lblNoRecordsFoundMessage.Text = "لا يوجد نتائج مطباقة لبحثك !";
+            this.lblNoRecordsFoundMessage.Text = "لا يوجد نتائج مطابقة لبحثك !";
             this.lblNoRecordsFoundMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label2
@@ -485,7 +485,7 @@
             this.label1.TabIndex = 102;
             this.label1.Text = "# عدد الصفوف الكلية : ";
             // 
-            // gdgvCategories
+            // gdgvPeople
             // 
             this.gdgvCategories.AllowUserToAddRows = false;
             this.gdgvCategories.AllowUserToDeleteRows = false;
@@ -523,7 +523,7 @@
             this.gdgvCategories.GridColor = System.Drawing.Color.White;
             this.gdgvCategories.Location = new System.Drawing.Point(15, 60);
             this.gdgvCategories.MultiSelect = false;
-            this.gdgvCategories.Name = "gdgvCategories";
+            this.gdgvCategories.Name = "gdgvPeople";
             this.gdgvCategories.ReadOnly = true;
             this.gdgvCategories.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;

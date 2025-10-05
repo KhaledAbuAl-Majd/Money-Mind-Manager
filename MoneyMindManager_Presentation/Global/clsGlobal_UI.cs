@@ -80,8 +80,16 @@ namespace MoneyMindManager_Presentation
         {
             _StopTimer();
             CurrentUser = null;
-            MainForm?.Close();
-            MainForm = null;
+
+            if(MainForm !=null && !MainForm.IsDisposed)
+            {
+                MainForm.Invoke(new Action(() =>
+                {
+                    MainForm?.Close();
+                    MainForm = null;
+                }
+                ));
+            }
         }
         public static void SubscribeToErrorOcrruedEvent()
         {

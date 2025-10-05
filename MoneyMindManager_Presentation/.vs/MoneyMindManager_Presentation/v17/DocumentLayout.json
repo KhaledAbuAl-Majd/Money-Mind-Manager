@@ -1,7 +1,11 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "E:\\Visual Studio\\source\\Projects\\External Projects\\Money Mind Manager\\Project\\MonyeMindManager\\MoneyMindManager_Presentation\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F9541440-5DD1-4791-B0F2-0FFA87A7CE59}|..\\MoneyMindManager_Business\\MoneyMindManager_Business.csproj|e:\\visual studio\\source\\projects\\external projects\\money mind manager\\project\\monyemindmanager\\moneymindmanager_business\\clsdebt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +13,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -22,6 +26,19 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{6d4078d1-5951-4ed1-ac0e-0a8099c1cce5}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "clsDebt.cs",
+              "DocumentMoniker": "E:\\Visual Studio\\source\\Projects\\External Projects\\Money Mind Manager\\Project\\MonyeMindManager\\MoneyMindManager_Business\\clsDebt.cs",
+              "RelativeDocumentMoniker": "..\\MoneyMindManager_Business\\clsDebt.cs",
+              "ToolTip": "E:\\Visual Studio\\source\\Projects\\External Projects\\Money Mind Manager\\Project\\MonyeMindManager\\MoneyMindManager_Business\\clsDebt.cs",
+              "RelativeToolTip": "..\\MoneyMindManager_Business\\clsDebt.cs",
+              "ViewState": "AgIAAD0AAAAAAAAAAAAuwKgAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-05T14:58:50.295Z",
+              "EditorCaption": ""
             }
           ]
         }

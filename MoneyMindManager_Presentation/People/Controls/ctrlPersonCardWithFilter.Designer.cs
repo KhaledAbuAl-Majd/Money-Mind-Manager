@@ -38,6 +38,8 @@ namespace MoneyMindManager_Presentation.People.Controls
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.pnlSearchPart = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.kgtxtPersonName = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.ctrlPersonCard1 = new MoneyMindManager_Presentation.People.Controls.ctrlPersonCard();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -58,13 +60,14 @@ namespace MoneyMindManager_Presentation.People.Controls
             this.kgtxtPersonID.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.kgtxtPersonID.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.kgtxtPersonID.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.kgtxtPersonID.FillColor = System.Drawing.SystemColors.ControlLight;
             this.kgtxtPersonID.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtPersonID.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.kgtxtPersonID.ForeColor = System.Drawing.Color.Black;
             this.kgtxtPersonID.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtPersonID.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Number;
             this.kgtxtPersonID.IsRequired = true;
-            this.kgtxtPersonID.Location = new System.Drawing.Point(154, 19);
+            this.kgtxtPersonID.Location = new System.Drawing.Point(422, 19);
             this.kgtxtPersonID.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtPersonID.MaxLength = 150;
             this.kgtxtPersonID.Name = "kgtxtPersonID";
@@ -101,12 +104,13 @@ namespace MoneyMindManager_Presentation.People.Controls
             this.kgtxtPersonID.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
             this.kgtxtPersonID.PlaceholderForeColor = System.Drawing.Color.Gray;
             this.kgtxtPersonID.PlaceholderText = "معرف الشخص";
+            this.kgtxtPersonID.ReadOnly = true;
             this.kgtxtPersonID.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.kgtxtPersonID.SelectedText = "";
             this.kgtxtPersonID.ShadowDecoration.BorderRadius = 2;
             this.kgtxtPersonID.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.kgtxtPersonID.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(2);
-            this.kgtxtPersonID.Size = new System.Drawing.Size(390, 42);
+            this.kgtxtPersonID.Size = new System.Drawing.Size(125, 42);
             this.kgtxtPersonID.TabIndex = 1;
             this.kgtxtPersonID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.kgtxtPersonID.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
@@ -119,11 +123,12 @@ namespace MoneyMindManager_Presentation.People.Controls
             this.kgtxtPersonID.TextProperties.PhoneProperties.AllowPlusSign = true;
             this.kgtxtPersonID.TextProperties.PhoneProperties.MaxPhoneLength = ((byte)(15));
             this.kgtxtPersonID.TextProperties.TextFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.enTextFormat.None;
+            this.toolTip1.SetToolTip(this.kgtxtPersonID, "F9 للبحث عن شخص قم بالضغط على زر البحث أو قم بضغط على زر");
             this.kgtxtPersonID.TrimEnd = false;
             this.kgtxtPersonID.TrimStart = false;
             this.kgtxtPersonID.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxtPersonID_OnValidationError);
             this.kgtxtPersonID.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxtPersonID_OnValidationSuccess);
-            this.kgtxtPersonID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.kgtxtPersonID_KeyPress);
+            this.kgtxtPersonID.KeyDown += new System.Windows.Forms.KeyEventHandler(this.kgtxtPersonID_KeyDown);
             // 
             // gibtnFindPerson
             // 
@@ -137,12 +142,12 @@ namespace MoneyMindManager_Presentation.People.Controls
             this.gibtnFindPerson.ImageRotate = 0F;
             this.gibtnFindPerson.ImageSize = new System.Drawing.Size(40, 40);
             this.gibtnFindPerson.IndicateFocus = true;
-            this.gibtnFindPerson.Location = new System.Drawing.Point(83, 19);
+            this.gibtnFindPerson.Location = new System.Drawing.Point(78, 19);
             this.gibtnFindPerson.Name = "gibtnFindPerson";
             this.gibtnFindPerson.PressedState.ImageSize = new System.Drawing.Size(64, 64);
             this.gibtnFindPerson.Size = new System.Drawing.Size(64, 42);
             this.gibtnFindPerson.TabIndex = 99;
-            this.toolTip1.SetToolTip(this.gibtnFindPerson, "وجد الشخص صاحب معرف الشخص");
+            this.toolTip1.SetToolTip(this.gibtnFindPerson, "البحث عن شخص");
             this.gibtnFindPerson.UseTransparentBackground = true;
             this.gibtnFindPerson.Click += new System.EventHandler(this.gibtnFindPerson_Click);
             // 
@@ -178,6 +183,8 @@ namespace MoneyMindManager_Presentation.People.Controls
             // pnlSearchPart
             // 
             this.pnlSearchPart.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pnlSearchPart.Controls.Add(this.label1);
+            this.pnlSearchPart.Controls.Add(this.kgtxtPersonName);
             this.pnlSearchPart.Controls.Add(this.label3);
             this.pnlSearchPart.Controls.Add(this.gibtnAddPerson);
             this.pnlSearchPart.Controls.Add(this.gibtnFindPerson);
@@ -187,12 +194,105 @@ namespace MoneyMindManager_Presentation.People.Controls
             this.pnlSearchPart.Size = new System.Drawing.Size(570, 68);
             this.pnlSearchPart.TabIndex = 101;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(337, 1);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(77, 17);
+            this.label1.TabIndex = 126;
+            this.label1.Text = "اسم الشخص";
+            // 
+            // kgtxtPersonName
+            // 
+            this.kgtxtPersonName.AllowWhiteSpace = false;
+            this.kgtxtPersonName.ApplyTrimAtTextBoxValue = false;
+            this.kgtxtPersonName.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.kgtxtPersonName.BackColor = System.Drawing.Color.Transparent;
+            this.kgtxtPersonName.BorderColor = System.Drawing.Color.DimGray;
+            this.kgtxtPersonName.BorderRadius = 10;
+            this.kgtxtPersonName.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.kgtxtPersonName.DefaultText = "";
+            this.kgtxtPersonName.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.kgtxtPersonName.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.kgtxtPersonName.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.kgtxtPersonName.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.kgtxtPersonName.FillColor = System.Drawing.SystemColors.ControlLight;
+            this.kgtxtPersonName.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.kgtxtPersonName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kgtxtPersonName.ForeColor = System.Drawing.Color.Black;
+            this.kgtxtPersonName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.kgtxtPersonName.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Number;
+            this.kgtxtPersonName.IsRequired = true;
+            this.kgtxtPersonName.Location = new System.Drawing.Point(144, 19);
+            this.kgtxtPersonName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.kgtxtPersonName.MaxLength = 200;
+            this.kgtxtPersonName.Name = "kgtxtPersonName";
+            this.kgtxtPersonName.NumberProperties.DecimalNumberProperties.AllowNegative = true;
+            this.kgtxtPersonName.NumberProperties.DecimalNumberProperties.MaxValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.kgtxtPersonName.NumberProperties.DecimalNumberProperties.MaxValueIncluded = true;
+            this.kgtxtPersonName.NumberProperties.DecimalNumberProperties.MaxValueOption = false;
+            this.kgtxtPersonName.NumberProperties.DecimalNumberProperties.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.kgtxtPersonName.NumberProperties.DecimalNumberProperties.MinValueIncluded = true;
+            this.kgtxtPersonName.NumberProperties.DecimalNumberProperties.MinValueOption = false;
+            this.kgtxtPersonName.NumberProperties.FloatNumberProperties.AllowNegative = true;
+            this.kgtxtPersonName.NumberProperties.FloatNumberProperties.MaxValue = 0F;
+            this.kgtxtPersonName.NumberProperties.FloatNumberProperties.MaxValueIncluded = true;
+            this.kgtxtPersonName.NumberProperties.FloatNumberProperties.MaxValueOption = false;
+            this.kgtxtPersonName.NumberProperties.FloatNumberProperties.MinValue = 0F;
+            this.kgtxtPersonName.NumberProperties.FloatNumberProperties.MinValueIncluded = true;
+            this.kgtxtPersonName.NumberProperties.FloatNumberProperties.MinValueOption = false;
+            this.kgtxtPersonName.NumberProperties.IntegerNumberProperties.AllowNegative = false;
+            this.kgtxtPersonName.NumberProperties.IntegerNumberProperties.MaxValue = 0;
+            this.kgtxtPersonName.NumberProperties.IntegerNumberProperties.MaxValueIncluded = true;
+            this.kgtxtPersonName.NumberProperties.IntegerNumberProperties.MaxValueOption = false;
+            this.kgtxtPersonName.NumberProperties.IntegerNumberProperties.MinValue = 0;
+            this.kgtxtPersonName.NumberProperties.IntegerNumberProperties.MinValueIncluded = true;
+            this.kgtxtPersonName.NumberProperties.IntegerNumberProperties.MinValueOption = false;
+            this.kgtxtPersonName.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
+            this.kgtxtPersonName.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
+            this.kgtxtPersonName.PlaceholderForeColor = System.Drawing.Color.Gray;
+            this.kgtxtPersonName.PlaceholderText = "اسم الشخص";
+            this.kgtxtPersonName.ReadOnly = true;
+            this.kgtxtPersonName.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
+            this.kgtxtPersonName.SelectedText = "";
+            this.kgtxtPersonName.ShadowDecoration.BorderRadius = 2;
+            this.kgtxtPersonName.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.kgtxtPersonName.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(2);
+            this.kgtxtPersonName.Size = new System.Drawing.Size(270, 42);
+            this.kgtxtPersonName.TabIndex = 125;
+            this.kgtxtPersonName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.kgtxtPersonName.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
+            this.kgtxtPersonName.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.kgtxtPersonName.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
+            this.kgtxtPersonName.TextProperties.DateTimeProperties.TimeFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enTimeFormate.None;
+            this.kgtxtPersonName.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
+            this.kgtxtPersonName.TextProperties.MinLength = ((short)(0));
+            this.kgtxtPersonName.TextProperties.MinLengthOption = false;
+            this.kgtxtPersonName.TextProperties.PhoneProperties.AllowPlusSign = true;
+            this.kgtxtPersonName.TextProperties.PhoneProperties.MaxPhoneLength = ((byte)(15));
+            this.kgtxtPersonName.TextProperties.TextFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.enTextFormat.None;
+            this.toolTip1.SetToolTip(this.kgtxtPersonName, "F9 للبحث عن شخص قم بالضغط على زر البحث أو قم بضغط على زر");
+            this.kgtxtPersonName.TrimEnd = false;
+            this.kgtxtPersonName.TrimStart = false;
+            this.kgtxtPersonName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.kgtxtPersonID_KeyDown);
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(457, 1);
+            this.label3.Location = new System.Drawing.Point(459, 1);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(88, 17);
             this.label3.TabIndex = 124;
@@ -235,5 +335,7 @@ namespace MoneyMindManager_Presentation.People.Controls
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.Panel pnlSearchPart;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label1;
+        private KhaledControlLibrary1.KhaledGuna2TextBox kgtxtPersonName;
     }
 }

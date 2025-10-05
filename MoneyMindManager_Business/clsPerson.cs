@@ -175,6 +175,26 @@ namespace MoneyMindManager_Business
             return await clsPersonData.GetAllPeople(null, null, null, phone, pageNumber, currentUserID);
         }
 
+        /// <summary>
+        /// Get All People For Account Using Paging [10 rows per page],  if variable null will not filter by it.
+        /// For Select One - display personID - Name
+        /// </summary>
+        /// <returns>object of clsGetAllPeople : if error happend, return null</returns>
+        public static async Task<clsGetAllPeople> GetAllPeopleForSelectOne(short pageNumber, int currentUserID)
+        {
+            return await clsPersonData.GetAllPeopleForSelectOne(null, pageNumber, currentUserID);
+        }
+
+        /// <summary>
+        /// Get All People For Account Using Paging [10 rows per page],  if variable null will not filter by it.
+        /// For Select One - display personID - Name
+        /// </summary>
+        /// <returns>object of clsGetAllPeople : if error happend, return null</returns>
+        public static async Task<clsGetAllPeople> GetAllPeopleForSelectOne(string personName,short pageNumber, int currentUserID)
+        {
+            return await clsPersonData.GetAllPeopleForSelectOne(personName, pageNumber, currentUserID);
+        }
+
         public async Task<bool> RefreshData(int currentUserID)
         {
             clsPerson freshPerson = await clsPerson.FindPersonByID(Convert.ToInt32(PersonID),currentUserID);

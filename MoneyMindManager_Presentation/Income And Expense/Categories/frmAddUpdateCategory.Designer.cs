@@ -98,10 +98,12 @@
             this.guna2Panel2.Controls.Add(this.kgtxtParentCategoryName);
             this.guna2Panel2.Controls.Add(this.kgtxtCategoryName);
             this.guna2Panel2.FillColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.guna2Panel2.Location = new System.Drawing.Point(275, 133);
+            this.guna2Panel2.Location = new System.Drawing.Point(279, 74);
             this.guna2Panel2.Name = "guna2Panel2";
-            this.guna2Panel2.ShadowDecoration.Color = System.Drawing.Color.Transparent;
-            this.guna2Panel2.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(0, 0, 5, 5);
+            this.guna2Panel2.ShadowDecoration.BorderRadius = 20;
+            this.guna2Panel2.ShadowDecoration.Color = System.Drawing.Color.DarkGray;
+            this.guna2Panel2.ShadowDecoration.Depth = 20;
+            this.guna2Panel2.ShadowDecoration.Enabled = true;
             this.guna2Panel2.Size = new System.Drawing.Size(656, 393);
             this.guna2Panel2.TabIndex = 1;
             // 
@@ -300,7 +302,6 @@
             this.gtxtCategoryHierarchical.PlaceholderForeColor = System.Drawing.Color.Gray;
             this.gtxtCategoryHierarchical.PlaceholderText = "";
             this.gtxtCategoryHierarchical.ReadOnly = true;
-            this.gtxtCategoryHierarchical.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.gtxtCategoryHierarchical.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.gtxtCategoryHierarchical.SelectedText = "";
             this.gtxtCategoryHierarchical.Size = new System.Drawing.Size(283, 77);
@@ -313,23 +314,19 @@
             this.gtswIsActive.AutoRoundedCorners = true;
             this.gtswIsActive.Checked = true;
             this.gtswIsActive.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.gtswIsActive.CheckedState.BorderRadius = 12;
             this.gtswIsActive.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.gtswIsActive.CheckedState.InnerBorderColor = System.Drawing.Color.White;
-            this.gtswIsActive.CheckedState.InnerBorderRadius = 8;
             this.gtswIsActive.CheckedState.InnerColor = System.Drawing.Color.White;
             this.gtswIsActive.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.gtswIsActive.Location = new System.Drawing.Point(37, 153);
+            this.gtswIsActive.Location = new System.Drawing.Point(48, 157);
             this.gtswIsActive.Name = "gtswIsActive";
-            this.gtswIsActive.Size = new System.Drawing.Size(44, 26);
+            this.gtswIsActive.Size = new System.Drawing.Size(35, 20);
             this.gtswIsActive.TabIndex = 5;
             this.toolTip1.SetToolTip(this.gtswIsActive, "الفعالية تتحكم في إمكانية اختيارها ");
             this.gtswIsActive.UncheckedState.BorderColor = System.Drawing.Color.Silver;
-            this.gtswIsActive.UncheckedState.BorderRadius = 12;
             this.gtswIsActive.UncheckedState.BorderThickness = 1;
             this.gtswIsActive.UncheckedState.FillColor = System.Drawing.Color.White;
             this.gtswIsActive.UncheckedState.InnerBorderColor = System.Drawing.Color.WhiteSmoke;
-            this.gtswIsActive.UncheckedState.InnerBorderRadius = 8;
             this.gtswIsActive.UncheckedState.InnerColor = System.Drawing.Color.Gray;
             // 
             // label7
@@ -827,11 +824,12 @@
             // 
             // lblHeader
             // 
+            this.lblHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblHeader.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold);
             this.lblHeader.ForeColor = System.Drawing.Color.Black;
-            this.lblHeader.Location = new System.Drawing.Point(12, 19);
+            this.lblHeader.Location = new System.Drawing.Point(0, 0);
             this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(1186, 62);
+            this.lblHeader.Size = new System.Drawing.Size(1210, 50);
             this.lblHeader.TabIndex = 11;
             this.lblHeader.Text = "إضافة شخص";
             this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

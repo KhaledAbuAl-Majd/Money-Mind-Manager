@@ -70,12 +70,15 @@
             this.guna2Panel2.Controls.Add(this.kgtxtAmount);
             this.guna2Panel2.Controls.Add(this.kgtxtCategoryName);
             this.guna2Panel2.FillColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.guna2Panel2.Location = new System.Drawing.Point(427, 138);
+            this.guna2Panel2.Location = new System.Drawing.Point(427, 111);
             this.guna2Panel2.Name = "guna2Panel2";
-            this.guna2Panel2.ShadowDecoration.Color = System.Drawing.Color.Transparent;
-            this.guna2Panel2.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(0, 0, 5, 5);
+            this.guna2Panel2.ShadowDecoration.BorderRadius = 20;
+            this.guna2Panel2.ShadowDecoration.Color = System.Drawing.Color.DarkGray;
+            this.guna2Panel2.ShadowDecoration.Depth = 20;
+            this.guna2Panel2.ShadowDecoration.Enabled = true;
             this.guna2Panel2.Size = new System.Drawing.Size(359, 393);
             this.guna2Panel2.TabIndex = 1;
+            this.guna2Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2Panel2_Paint);
             // 
             // gibtnChooseCategory
             // 
@@ -467,11 +470,12 @@
             // 
             // lblHeader
             // 
+            this.lblHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblHeader.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold);
             this.lblHeader.ForeColor = System.Drawing.Color.Black;
-            this.lblHeader.Location = new System.Drawing.Point(12, 15);
+            this.lblHeader.Location = new System.Drawing.Point(0, 0);
             this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(1186, 62);
+            this.lblHeader.Size = new System.Drawing.Size(1210, 50);
             this.lblHeader.TabIndex = 11;
             this.lblHeader.Text = "إضافة معاملة";
             this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -484,12 +488,13 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(596, 545);
+            this.label1.Location = new System.Drawing.Point(596, 518);
             this.label1.Name = "label1";
             this.label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label1.Size = new System.Drawing.Size(194, 24);
             this.label1.TabIndex = 104;
             this.label1.Text = "معاملة جديدة بعد الإضافة تلقائيا";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // gtswNewTransactionAfterAdd
             // 
@@ -497,24 +502,21 @@
             this.gtswNewTransactionAfterAdd.AutoRoundedCorners = true;
             this.gtswNewTransactionAfterAdd.Checked = true;
             this.gtswNewTransactionAfterAdd.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.gtswNewTransactionAfterAdd.CheckedState.BorderRadius = 12;
             this.gtswNewTransactionAfterAdd.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.gtswNewTransactionAfterAdd.CheckedState.InnerBorderColor = System.Drawing.Color.White;
-            this.gtswNewTransactionAfterAdd.CheckedState.InnerBorderRadius = 8;
             this.gtswNewTransactionAfterAdd.CheckedState.InnerColor = System.Drawing.Color.White;
             this.gtswNewTransactionAfterAdd.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.gtswNewTransactionAfterAdd.Location = new System.Drawing.Point(540, 545);
+            this.gtswNewTransactionAfterAdd.Location = new System.Drawing.Point(556, 521);
             this.gtswNewTransactionAfterAdd.Name = "gtswNewTransactionAfterAdd";
-            this.gtswNewTransactionAfterAdd.Size = new System.Drawing.Size(51, 26);
+            this.gtswNewTransactionAfterAdd.Size = new System.Drawing.Size(35, 20);
             this.gtswNewTransactionAfterAdd.TabIndex = 5;
             this.toolTip1.SetToolTip(this.gtswNewTransactionAfterAdd, "بعد الحفظ : سيتم التهيئة لإضافة معاملة جديدة تلقائيا");
             this.gtswNewTransactionAfterAdd.UncheckedState.BorderColor = System.Drawing.Color.Silver;
-            this.gtswNewTransactionAfterAdd.UncheckedState.BorderRadius = 12;
             this.gtswNewTransactionAfterAdd.UncheckedState.BorderThickness = 1;
             this.gtswNewTransactionAfterAdd.UncheckedState.FillColor = System.Drawing.Color.White;
             this.gtswNewTransactionAfterAdd.UncheckedState.InnerBorderColor = System.Drawing.Color.WhiteSmoke;
-            this.gtswNewTransactionAfterAdd.UncheckedState.InnerBorderRadius = 8;
             this.gtswNewTransactionAfterAdd.UncheckedState.InnerColor = System.Drawing.Color.Gray;
+            this.gtswNewTransactionAfterAdd.CheckedChanged += new System.EventHandler(this.gtswNewTransactionAfterAdd_CheckedChanged);
             // 
             // toolTip1
             // 
@@ -530,7 +532,7 @@
             this.gibtnDeleteTransaction.ImageOffset = new System.Drawing.Point(0, 0);
             this.gibtnDeleteTransaction.ImageRotate = 0F;
             this.gibtnDeleteTransaction.ImageSize = new System.Drawing.Size(28, 28);
-            this.gibtnDeleteTransaction.Location = new System.Drawing.Point(479, 537);
+            this.gibtnDeleteTransaction.Location = new System.Drawing.Point(479, 510);
             this.gibtnDeleteTransaction.Name = "gibtnDeleteTransaction";
             this.gibtnDeleteTransaction.PressedState.ImageSize = new System.Drawing.Size(64, 64);
             this.gibtnDeleteTransaction.Size = new System.Drawing.Size(40, 42);
@@ -561,7 +563,7 @@
             this.gbtnNewTransaction.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnNewTransaction.ImageSize = new System.Drawing.Size(25, 25);
             this.gbtnNewTransaction.IndicateFocus = true;
-            this.gbtnNewTransaction.Location = new System.Drawing.Point(464, 593);
+            this.gbtnNewTransaction.Location = new System.Drawing.Point(464, 562);
             this.gbtnNewTransaction.Name = "gbtnNewTransaction";
             this.gbtnNewTransaction.Size = new System.Drawing.Size(283, 41);
             this.gbtnNewTransaction.TabIndex = 7;
@@ -573,13 +575,14 @@
             this.lblUserMessage.Font = new System.Drawing.Font("Segoe Script", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUserMessage.ForeColor = System.Drawing.Color.Red;
             this.lblUserMessage.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.lblUserMessage.Location = new System.Drawing.Point(38, 92);
+            this.lblUserMessage.Location = new System.Drawing.Point(38, 65);
             this.lblUserMessage.Name = "lblUserMessage";
             this.lblUserMessage.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblUserMessage.Size = new System.Drawing.Size(1148, 42);
             this.lblUserMessage.TabIndex = 106;
             this.lblUserMessage.Text = "\"تم العثور على حقول غير صالحة. ضع المؤشر على العلامات الحمراء لعرض سبب الخطأ.\"";
             this.lblUserMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblUserMessage.Click += new System.EventHandler(this.lblUserMessage_Click);
             // 
             // frmAddUpdateIncomeAndExpeseTransction
             // 

@@ -134,6 +134,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             kgtxtCategoryName.Tag = _Transaction.CategoryID;
             kgtxtPurpose.Text = _Transaction?.Purpose;
             kgtxtAmount.Text = _Transaction.Amount.ToString();
+            kgtxtAmount.RefreshNumber_DateTimeFormattedText();
 
             _isLocked = _Transaction.IsLocked;
             LockAndUnLockMode(_Transaction.IsLocked);
@@ -143,6 +144,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             gtswNewTransactionAfterAdd.Checked = false;
             gtswNewTransactionAfterAdd.Enabled = false;
             gbtnNewTransaction.Enabled = false;
+            this.Focus();
         }
 
         void _ResteObject()
@@ -320,6 +322,26 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             {
                 _ShowChooseCategoryForm();
             }
+        }
+
+        private void guna2Panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void lblUserMessage_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gtswNewTransactionAfterAdd_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

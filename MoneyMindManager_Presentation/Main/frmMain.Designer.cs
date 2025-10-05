@@ -47,6 +47,7 @@
             this.guna2DragControl2 = new Guna.UI2.WinForms.Guna2DragControl(this.components);
             this.guna2DragControl3 = new Guna.UI2.WinForms.Guna2DragControl(this.components);
             this.gpnlFormContainer = new Guna.UI2.WinForms.Guna2Panel();
+            this.guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.gpnlRightBar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,7 +63,7 @@
             // 
             // guna2AnimateWindow1
             // 
-            this.guna2AnimateWindow1.AnimationType = Guna.UI2.WinForms.Guna2AnimateWindow.AnimateWindowType.AW_HOR_POSITIVE;
+            this.guna2AnimateWindow1.AnimationType = Guna.UI2.WinForms.Guna2AnimateWindow.AnimateWindowType.AW_HIDE;
             this.guna2AnimateWindow1.Interval = 250;
             this.guna2AnimateWindow1.TargetForm = this;
             // 
@@ -252,13 +253,14 @@
             this.guna2ControlBox2.CustomIconSize = 15F;
             this.guna2ControlBox2.FillColor = System.Drawing.Color.Transparent;
             this.guna2ControlBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2ControlBox2.HoverState.FillColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.guna2ControlBox2.HoverState.FillColor = System.Drawing.Color.Silver;
             this.guna2ControlBox2.HoverState.IconColor = System.Drawing.Color.Black;
             this.guna2ControlBox2.IconColor = System.Drawing.Color.DimGray;
-            this.guna2ControlBox2.Location = new System.Drawing.Point(184, 3);
+            this.guna2ControlBox2.Location = new System.Drawing.Point(188, 0);
             this.guna2ControlBox2.Name = "guna2ControlBox2";
             this.guna2ControlBox2.Size = new System.Drawing.Size(38, 29);
             this.guna2ControlBox2.TabIndex = 12;
+            this.guna2ControlBox2.TabStop = false;
             this.guna2ControlBox2.UseTransparentBackground = true;
             // 
             // gcbClose
@@ -269,16 +271,17 @@
             this.gcbClose.BorderRadius = 8;
             this.gcbClose.ControlBoxStyle = Guna.UI2.WinForms.Enums.ControlBoxStyle.Custom;
             this.gcbClose.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.gcbClose.CustomIconSize = 15F;
+            this.gcbClose.CustomIconSize = 12F;
             this.gcbClose.FillColor = System.Drawing.Color.Transparent;
             this.gcbClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gcbClose.HoverState.FillColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.gcbClose.HoverState.IconColor = System.Drawing.Color.Black;
+            this.gcbClose.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(17)))), ((int)(((byte)(35)))));
+            this.gcbClose.HoverState.IconColor = System.Drawing.Color.White;
             this.gcbClose.IconColor = System.Drawing.Color.DimGray;
-            this.gcbClose.Location = new System.Drawing.Point(222, 3);
+            this.gcbClose.Location = new System.Drawing.Point(225, 0);
             this.gcbClose.Name = "gcbClose";
             this.gcbClose.Size = new System.Drawing.Size(38, 29);
             this.gcbClose.TabIndex = 11;
+            this.gcbClose.TabStop = false;
             this.gcbClose.UseTransparentBackground = true;
             this.gcbClose.Click += new System.EventHandler(this.gcbClose_Click);
             // 
@@ -373,6 +376,11 @@
             this.gpnlFormContainer.Size = new System.Drawing.Size(1210, 737);
             this.gpnlFormContainer.TabIndex = 5;
             // 
+            // guna2Elipse1
+            // 
+            this.guna2Elipse1.BorderRadius = 20;
+            this.guna2Elipse1.TargetControl = this;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -415,5 +423,6 @@
         private Guna.UI2.WinForms.Guna2Button gbtnExpense;
         private Guna.UI2.WinForms.Guna2Button guna2Button2;
         private Guna.UI2.WinForms.Guna2Button gbtnIncome;
+        private Guna.UI2.WinForms.Guna2Elipse guna2Elipse1;
     }
 }

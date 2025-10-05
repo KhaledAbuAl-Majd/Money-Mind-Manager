@@ -50,8 +50,8 @@ namespace MoneyMindManager_Presentation.Users
             this.kgtxtConfirmPassword = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.kgtxtpassword = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.gbtnSave = new Guna.UI2.WinForms.Guna2Button();
-            this.lblHeader = new System.Windows.Forms.Label();
             this.ctrlPersonCardWithFilter1 = new MoneyMindManager_Presentation.People.Controls.ctrlPersonCardWithFilter();
+            this.lblHeader = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.guna2Panel1.SuspendLayout();
             this.guna2Panel2.SuspendLayout();
@@ -117,22 +117,18 @@ namespace MoneyMindManager_Presentation.Users
             this.gtswIsActive.AutoRoundedCorners = true;
             this.gtswIsActive.Checked = true;
             this.gtswIsActive.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.gtswIsActive.CheckedState.BorderRadius = 12;
             this.gtswIsActive.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.gtswIsActive.CheckedState.InnerBorderColor = System.Drawing.Color.White;
-            this.gtswIsActive.CheckedState.InnerBorderRadius = 8;
             this.gtswIsActive.CheckedState.InnerColor = System.Drawing.Color.White;
             this.gtswIsActive.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.gtswIsActive.Location = new System.Drawing.Point(11, 10);
+            this.gtswIsActive.Location = new System.Drawing.Point(23, 13);
             this.gtswIsActive.Name = "gtswIsActive";
-            this.gtswIsActive.Size = new System.Drawing.Size(45, 26);
+            this.gtswIsActive.Size = new System.Drawing.Size(35, 20);
             this.gtswIsActive.TabIndex = 99;
             this.gtswIsActive.UncheckedState.BorderColor = System.Drawing.Color.Silver;
-            this.gtswIsActive.UncheckedState.BorderRadius = 12;
             this.gtswIsActive.UncheckedState.BorderThickness = 1;
             this.gtswIsActive.UncheckedState.FillColor = System.Drawing.Color.White;
             this.gtswIsActive.UncheckedState.InnerBorderColor = System.Drawing.Color.WhiteSmoke;
-            this.gtswIsActive.UncheckedState.InnerBorderRadius = 8;
             this.gtswIsActive.UncheckedState.InnerColor = System.Drawing.Color.Gray;
             // 
             // guna2Panel2
@@ -146,10 +142,12 @@ namespace MoneyMindManager_Presentation.Users
             this.guna2Panel2.Controls.Add(this.gbtnSave);
             this.guna2Panel2.Controls.Add(this.ctrlPersonCardWithFilter1);
             this.guna2Panel2.FillColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.guna2Panel2.Location = new System.Drawing.Point(89, 88);
+            this.guna2Panel2.Location = new System.Drawing.Point(90, 83);
             this.guna2Panel2.Name = "guna2Panel2";
-            this.guna2Panel2.ShadowDecoration.Color = System.Drawing.Color.Transparent;
-            this.guna2Panel2.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(0, 0, 5, 5);
+            this.guna2Panel2.ShadowDecoration.BorderRadius = 20;
+            this.guna2Panel2.ShadowDecoration.Color = System.Drawing.Color.DarkGray;
+            this.guna2Panel2.ShadowDecoration.Depth = 20;
+            this.guna2Panel2.ShadowDecoration.Enabled = true;
             this.guna2Panel2.Size = new System.Drawing.Size(1046, 556);
             this.guna2Panel2.TabIndex = 11;
             // 
@@ -223,7 +221,7 @@ namespace MoneyMindManager_Presentation.Users
             // 
             // lbluserMessage
             // 
-            this.lbluserMessage.Font = new System.Drawing.Font("Segoe UI", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbluserMessage.Font = new System.Drawing.Font("Segoe UI Semibold", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbluserMessage.ForeColor = System.Drawing.Color.Red;
             this.lbluserMessage.Location = new System.Drawing.Point(3, 5);
             this.lbluserMessage.Name = "lbluserMessage";
@@ -609,18 +607,6 @@ namespace MoneyMindManager_Presentation.Users
             this.gbtnSave.Text = "حفظ";
             this.gbtnSave.Click += new System.EventHandler(this.gbtnSave_Click);
             // 
-            // lblHeader
-            // 
-            this.lblHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblHeader.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold);
-            this.lblHeader.ForeColor = System.Drawing.Color.Black;
-            this.lblHeader.Location = new System.Drawing.Point(0, 0);
-            this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(1210, 50);
-            this.lblHeader.TabIndex = 37;
-            this.lblHeader.Text = "إضافة مستخدم";
-            this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // ctrlPersonCardWithFilter1
             // 
             this.ctrlPersonCardWithFilter1.BackColor = System.Drawing.Color.White;
@@ -632,6 +618,18 @@ namespace MoneyMindManager_Presentation.Users
             this.ctrlPersonCardWithFilter1.OnSuccess += new System.Action(this.ctrlPersonCardWithFilter1_OnSuccess);
             this.ctrlPersonCardWithFilter1.OnFailed += new System.Action(this.ctrlPersonCardWithFilter1_OnFailed);
             this.ctrlPersonCardWithFilter1.OnEditingPerson += new System.Action(this.ctrlPersonCardWithFilter1_OnEditingPerson);
+            // 
+            // lblHeader
+            // 
+            this.lblHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblHeader.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold);
+            this.lblHeader.ForeColor = System.Drawing.Color.Black;
+            this.lblHeader.Location = new System.Drawing.Point(0, 0);
+            this.lblHeader.Name = "lblHeader";
+            this.lblHeader.Size = new System.Drawing.Size(1210, 50);
+            this.lblHeader.TabIndex = 37;
+            this.lblHeader.Text = "إضافة مستخدم";
+            this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // frmAddUpdateUser
             // 

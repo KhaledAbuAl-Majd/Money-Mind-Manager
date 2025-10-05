@@ -253,11 +253,9 @@ namespace MoneyMindManagerGlobal
                 public byte DefaultCurrencyID { get; protected set; }
                 public string Description { get; set; }
 
-                public int CurrentBalanceAccountID { get; }
-                public int SavingBalanceAccountID { get;}
-
+                public decimal Balance { get; protected set; }
                 public clsAccountColumns(short accountID, string accountName, DateTime createdDate, bool isActive, byte defaultCurrencyID,
-                    string description, int currentBalanceAccountID, int savingBalanceAccountID)
+                    string description,decimal balance)
                 {
                     this.AccountID = accountID;
                     this.AccountName = accountName;
@@ -265,8 +263,7 @@ namespace MoneyMindManagerGlobal
                     this.IsActive = isActive;
                     this.DefaultCurrencyID = defaultCurrencyID;
                     this.Description = description;
-                    this.CurrentBalanceAccountID = currentBalanceAccountID;
-                    this.SavingBalanceAccountID = savingBalanceAccountID;
+                    this.Balance = balance;
                 }
             }
         }
@@ -292,25 +289,27 @@ namespace MoneyMindManagerGlobal
             {
                public int? MainTransactionID { get; protected set; }
                 public decimal Amount { get; set; }
-                public DateTime CreatedDate { get; protected set; }
+                public DateTime CreatedDate { get; protected set; }  
                 public short? AccountID { get; protected set; }
                 public int? CreatedByUserID { get; protected set; }
-                public int? BalanceAccountID { get; protected set; }
                 public byte? TransactionTypeID { get; protected set; }
+                public string Purpose { get; set; }
                 public bool IsLocked { get; protected set; }
+                public DateTime TransactionDate { get; set; }
 
 
                 public clsMainTransactionColumns(int transactionID,decimal amount,DateTime createdDate,short accountID,
-                    int createdByUserID,int balanceAccountID,byte tranasactionTypeID,bool isLocked)
+                    int createdByUserID,byte tranasactionTypeID,string purpose, bool isLocked,DateTime transactionDate)
                 {
                     this.MainTransactionID = transactionID;
                     this.Amount = amount;
                     this.CreatedDate = createdDate;
                     this.AccountID = accountID;
                     this.CreatedByUserID = createdByUserID;
-                    this.BalanceAccountID = balanceAccountID;
                     this.TransactionTypeID = tranasactionTypeID;
+                    this.Purpose = purpose;
                     this.IsLocked = isLocked;
+                    this.TransactionDate = transactionDate;
                 }
 
                 public clsMainTransactionColumns()
@@ -320,9 +319,9 @@ namespace MoneyMindManagerGlobal
                     this.CreatedDate = DateTime.MaxValue; ;
                     this.AccountID = null;
                     this.CreatedByUserID = null;
-                    this.BalanceAccountID = null;
                     this.TransactionTypeID = null;
-                    this.IsLocked = false;  
+                    this.Purpose = null;
+                    this.TransactionDate = DateTime.MaxValue; ; 
                 }
             }
         }
@@ -439,7 +438,7 @@ namespace MoneyMindManagerGlobal
                 /// <summary>
                 /// is voucher locked , if true => voucher is read only and can't open it
                 /// </summary>
-                public bool IsLocked { get; set; }
+                public bool IsLocked { get;protected set; }
 
                 /// <summary>
                 /// At Add Mode Only
@@ -535,12 +534,87 @@ namespace MoneyMindManagerGlobal
                 public DataTable dtTransactions;
                 public short NumberOfPages = 0;
                 public int RecordsCount = 0;
-
-                public clsGetAllIncomeAndExpenseTransactions(DataTable dtTransactions, short numberOfPages, int recordsCount)
+                public decimal VoucherValue;
+                public clsGetAllIncomeAndExpenseTransactions(DataTable dtTransactions, short numberOfPages, int recordsCount,decimal voucherValue)
                 {
                     this.dtTransactions = dtTransactions;
                     this.NumberOfPages = numberOfPages;
                     this.RecordsCount = recordsCount;
+                    this.VoucherValue = voucherValue;
+                }
+            }
+        }
+
+        public static class clsDebtsClasses
+        {
+            public class clsDebtsColumns
+            {
+                public int? DebtID { get; protected set; }
+
+                public bool IsLending { get; protected set; }
+
+                public int? PersonID { get; protected set; }
+
+                public DateTime? PaymentDueDate { get; set; }
+
+                public int? DebtTransactionID { get;protected set; }
+
+                public short? AccountID { get; protected set; }
+
+                public int? CreatedByUserID { get; protected set; }
+
+                public bool IsLocked { get; protected set; }
+
+                public decimal RemainingAmount { get; protected set; }
+
+                public clsDebtsColumns(int debtID,bool isLending,int personID,DateTime? paymentDueDate,int debtTransactionID,
+                    short accountID,int createdByUserID,bool isLocked,decimal remaintAmount)
+                {
+                    this.DebtID = debtID;
+                    this.IsLending = isLending;
+                    this.PersonID = personID;
+                    this.PaymentDueDate = paymentDueDate;
+                    this.DebtTransactionID = debtTransactionID;
+                    this.AccountID = accountID;
+                    this.CreatedByUserID = createdByUserID;
+                    this.IsLocked = isLocked;
+                    this.RemainingAmount = remaintAmount;
+                }
+
+                public clsDebtsColumns()
+                {
+                    this.DebtID = null;
+                    this.IsLending = false;
+                    this.PersonID = null;
+                    this.PaymentDueDate = null;
+                    this.DebtTransactionID = null;
+                    this.AccountID = null;
+                    this.CreatedByUserID = null;
+                    this.IsLocked = false;
+                    this.RemainingAmount = -9999999999;
+                }
+
+            }
+
+            public class clsGetAllDebts
+            {
+                public DataTable dtDebts;
+
+                public short NumberOfPages = 0;
+
+                public int RecordsCount = 0;
+
+                public decimal TotalDebtsValue;
+
+                public decimal CurrentPageDebtsValue;
+
+                public clsGetAllDebts(DataTable dtDebts, short numberOfPages, int recordsCount, decimal totalDebtsValue, decimal currentPageDebtsValue)
+                {
+                    this.dtDebts = dtDebts;
+                    this.NumberOfPages = numberOfPages;
+                    this.RecordsCount = recordsCount;
+                    this.TotalDebtsValue = totalDebtsValue;
+                    this.CurrentPageDebtsValue = currentPageDebtsValue;
                 }
             }
         }

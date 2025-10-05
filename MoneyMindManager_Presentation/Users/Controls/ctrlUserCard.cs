@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DVLDPresentation.Global_Classes;
 using MoneyMindManager_Business;
 
 namespace MoneyMindManager_Presentation.Users
@@ -60,7 +59,7 @@ namespace MoneyMindManager_Presentation.Users
         {
             lblUseID.Text = User.UserID.ToString();
             lblIsActive.Text = (User.IsActive) ? "فعال" : "موقوف";
-            klblCreatedDate.Text = clsFormat.DateToShort(User.CreatedDate);
+            klblCreatedDate.Text =User.CreatedDate.ToString();
             kgtxtUserName.Text = User.UserName;
             clsUser creatingUser = await User.GetCreatedbyUserInfo(Convert.ToInt32(clsGlobal_UI.CurrentUser.UserID));
             kgtxtUserNameOfCreatedUser.Text = creatingUser.UserName;

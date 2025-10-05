@@ -42,8 +42,8 @@ namespace MoneyMindManager_Presentation.People
             this.label2 = new System.Windows.Forms.Label();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
-            this.gbtnClose = new Guna.UI2.WinForms.Guna2Button();
             this.gbtnSave = new Guna.UI2.WinForms.Guna2Button();
+            this.gbtnClose = new Guna.UI2.WinForms.Guna2Button();
             this.lblHeader = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.guna2Panel1.SuspendLayout();
@@ -509,12 +509,45 @@ namespace MoneyMindManager_Presentation.People
             this.guna2Panel2.Controls.Add(this.kgtxtAddress);
             this.guna2Panel2.Controls.Add(this.kgtxtPersonName);
             this.guna2Panel2.FillColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.guna2Panel2.Location = new System.Drawing.Point(281, 106);
+            this.guna2Panel2.Location = new System.Drawing.Point(284, 95);
             this.guna2Panel2.Name = "guna2Panel2";
-            this.guna2Panel2.ShadowDecoration.Color = System.Drawing.Color.Transparent;
-            this.guna2Panel2.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(0, 0, 5, 5);
+            this.guna2Panel2.ShadowDecoration.BorderRadius = 20;
+            this.guna2Panel2.ShadowDecoration.Color = System.Drawing.Color.DarkGray;
+            this.guna2Panel2.ShadowDecoration.Depth = 20;
+            this.guna2Panel2.ShadowDecoration.Enabled = true;
             this.guna2Panel2.Size = new System.Drawing.Size(654, 358);
             this.guna2Panel2.TabIndex = 0;
+            // 
+            // gbtnSave
+            // 
+            this.gbtnSave.Animated = true;
+            this.gbtnSave.AutoRoundedCorners = true;
+            this.gbtnSave.BackColor = System.Drawing.Color.Transparent;
+            this.gbtnSave.BorderColor = System.Drawing.Color.DimGray;
+            this.gbtnSave.BorderThickness = 1;
+            this.gbtnSave.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gbtnSave.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnSave.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnSave.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.gbtnSave.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.gbtnSave.FillColor = System.Drawing.Color.White;
+            this.gbtnSave.FocusedColor = System.Drawing.SystemColors.MenuHighlight;
+            this.gbtnSave.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.gbtnSave.ForeColor = System.Drawing.Color.Black;
+            this.gbtnSave.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(102)))), ((int)(((byte)(194)))));
+            this.gbtnSave.HoverState.Font = new System.Drawing.Font("Segoe UI", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnSave.HoverState.ForeColor = System.Drawing.Color.White;
+            this.gbtnSave.Image = ((System.Drawing.Image)(resources.GetObject("gbtnSave.Image")));
+            this.gbtnSave.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.gbtnSave.ImageSize = new System.Drawing.Size(25, 25);
+            this.gbtnSave.IndicateFocus = true;
+            this.gbtnSave.Location = new System.Drawing.Point(342, 290);
+            this.gbtnSave.Name = "gbtnSave";
+            this.gbtnSave.PressedColor = System.Drawing.Color.White;
+            this.gbtnSave.Size = new System.Drawing.Size(283, 41);
+            this.gbtnSave.TabIndex = 121;
+            this.gbtnSave.Text = "حفظ";
+            this.gbtnSave.Click += new System.EventHandler(this.gbtnSave_Click);
             // 
             // gbtnClose
             // 
@@ -547,37 +580,6 @@ namespace MoneyMindManager_Presentation.People
             this.gbtnClose.TabIndex = 122;
             this.gbtnClose.Text = "غلق";
             this.gbtnClose.Click += new System.EventHandler(this.gbtnClose_Click);
-            // 
-            // gbtnSave
-            // 
-            this.gbtnSave.Animated = true;
-            this.gbtnSave.AutoRoundedCorners = true;
-            this.gbtnSave.BackColor = System.Drawing.Color.Transparent;
-            this.gbtnSave.BorderColor = System.Drawing.Color.DimGray;
-            this.gbtnSave.BorderThickness = 1;
-            this.gbtnSave.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.gbtnSave.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.gbtnSave.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.gbtnSave.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.gbtnSave.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.gbtnSave.FillColor = System.Drawing.Color.White;
-            this.gbtnSave.FocusedColor = System.Drawing.SystemColors.MenuHighlight;
-            this.gbtnSave.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.gbtnSave.ForeColor = System.Drawing.Color.Black;
-            this.gbtnSave.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(102)))), ((int)(((byte)(194)))));
-            this.gbtnSave.HoverState.Font = new System.Drawing.Font("Segoe UI", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbtnSave.HoverState.ForeColor = System.Drawing.Color.White;
-            this.gbtnSave.Image = ((System.Drawing.Image)(resources.GetObject("gbtnSave.Image")));
-            this.gbtnSave.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.gbtnSave.ImageSize = new System.Drawing.Size(25, 25);
-            this.gbtnSave.IndicateFocus = true;
-            this.gbtnSave.Location = new System.Drawing.Point(342, 290);
-            this.gbtnSave.Name = "gbtnSave";
-            this.gbtnSave.PressedColor = System.Drawing.Color.White;
-            this.gbtnSave.Size = new System.Drawing.Size(283, 41);
-            this.gbtnSave.TabIndex = 121;
-            this.gbtnSave.Text = "حفظ";
-            this.gbtnSave.Click += new System.EventHandler(this.gbtnSave_Click);
             // 
             // lblHeader
             // 
