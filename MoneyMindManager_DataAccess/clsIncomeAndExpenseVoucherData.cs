@@ -347,7 +347,7 @@ namespace MoneyMindManager_DataAccess
                             DataTable dtVouchers = new DataTable();
                             dtVouchers.Load(reader);
                             short numberOfPages = Convert.ToInt16(outputNumberOfPages.Value);
-                            short recordsCount = Convert.ToInt16(outputRecordsCount.Value);
+                            int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
 
                             allVouchers = new clsGetAllVouchers(dtVouchers, numberOfPages, recordsCount,
                                 Convert.ToDecimal(outputTotalVouchersValue.Value), Convert.ToDecimal(outputCurrentPageVouchersValue.Value));

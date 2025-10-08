@@ -50,6 +50,7 @@
     <Compile Include="clsHashing.cs" />
     <Compile Include="clsLogger.cs" />
     <Compile Include="clsSymmetricEncryption.cs" />
+    <Compile Include="clsFormat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

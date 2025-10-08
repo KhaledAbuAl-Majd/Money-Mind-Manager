@@ -694,7 +694,7 @@ namespace MoneyMindManager_DataAccess
                             DataTable dtUsers = new DataTable();
                             dtUsers.Load(reader);
                             short numberOfPages = Convert.ToInt16(outputNumberOfPages.Value);
-                            short recordsCount = Convert.ToInt16(outputRecordsCount.Value);
+                            int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
 
                             allUsers = new clsGetAllUsers(dtUsers, numberOfPages, recordsCount);
                         }

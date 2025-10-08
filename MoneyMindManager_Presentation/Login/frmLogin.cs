@@ -257,13 +257,19 @@ namespace MoneyMindManager_Presentation.Login
 
 
             this.Hide();
-            frmMain frm = new frmMain(Convert.ToInt32(user.UserID), this);
+            frmMain frm = new frmMain(Convert.ToInt32(user.UserID));
+            frm.OnCloseProgramm += frmMain_OnCloseProgramm;
             frm.ShowDialog();
             if (!this.IsDisposed)
             {
                 this.Show();
                 await _ChangeMode(enMode.Login);
             }
+        }
+
+        private void frmMain_OnCloseProgramm()
+        {
+            this.Close();
         }
 
         private async void gbtnCreateAccount_Click(object sender, EventArgs e)

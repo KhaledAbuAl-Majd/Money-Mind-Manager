@@ -50,8 +50,8 @@ namespace MoneyMindManager_Presentation.Users
             this.kgtxtConfirmPassword = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.kgtxtpassword = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.gbtnSave = new Guna.UI2.WinForms.Guna2Button();
-            this.ctrlPersonCardWithFilter1 = new MoneyMindManager_Presentation.People.Controls.ctrlPersonCardWithFilter();
             this.lblHeader = new System.Windows.Forms.Label();
+            this.ctrlPersonCardWithFilter1 = new MoneyMindManager_Presentation.People.Controls.ctrlPersonCardWithFilter();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.guna2Panel1.SuspendLayout();
             this.guna2Panel2.SuspendLayout();
@@ -607,18 +607,6 @@ namespace MoneyMindManager_Presentation.Users
             this.gbtnSave.Text = "حفظ";
             this.gbtnSave.Click += new System.EventHandler(this.gbtnSave_Click);
             // 
-            // ctrlPersonCardWithFilter1
-            // 
-            this.ctrlPersonCardWithFilter1.BackColor = System.Drawing.Color.White;
-            this.ctrlPersonCardWithFilter1.EnablityOfSearchPart = true;
-            this.ctrlPersonCardWithFilter1.Location = new System.Drawing.Point(468, 16);
-            this.ctrlPersonCardWithFilter1.Name = "ctrlPersonCardWithFilter1";
-            this.ctrlPersonCardWithFilter1.Size = new System.Drawing.Size(575, 529);
-            this.ctrlPersonCardWithFilter1.TabIndex = 13;
-            this.ctrlPersonCardWithFilter1.OnSuccess += new System.Action(this.ctrlPersonCardWithFilter1_OnSuccess);
-            this.ctrlPersonCardWithFilter1.OnFailed += new System.Action(this.ctrlPersonCardWithFilter1_OnFailed);
-            this.ctrlPersonCardWithFilter1.OnEditingPerson += new System.Action(this.ctrlPersonCardWithFilter1_OnEditingPerson);
-            // 
             // lblHeader
             // 
             this.lblHeader.Dock = System.Windows.Forms.DockStyle.Top;
@@ -630,6 +618,18 @@ namespace MoneyMindManager_Presentation.Users
             this.lblHeader.TabIndex = 37;
             this.lblHeader.Text = "إضافة مستخدم";
             this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // ctrlPersonCardWithFilter1
+            // 
+            this.ctrlPersonCardWithFilter1.BackColor = System.Drawing.Color.White;
+            this.ctrlPersonCardWithFilter1.EnablityOfSearchPart = true;
+            this.ctrlPersonCardWithFilter1.Location = new System.Drawing.Point(468, 16);
+            this.ctrlPersonCardWithFilter1.Name = "ctrlPersonCardWithFilter1";
+            this.ctrlPersonCardWithFilter1.Size = new System.Drawing.Size(575, 529);
+            this.ctrlPersonCardWithFilter1.TabIndex = 13;
+            this.ctrlPersonCardWithFilter1.OnSuccess += new System.Action(this.ctrlPersonCardWithFilter1_OnSuccess);
+            this.ctrlPersonCardWithFilter1.OnFailed += new System.Action(this.ctrlPersonCardWithFilter1_OnFailed);
+            this.ctrlPersonCardWithFilter1.OnEditingPerson += new System.Action(this.ctrlPersonCardWithFilter1_OnEditingPerson);
             // 
             // frmAddUpdateUser
             // 

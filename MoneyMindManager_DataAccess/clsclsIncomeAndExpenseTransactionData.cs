@@ -238,7 +238,7 @@ namespace MoneyMindManager_DataAccess
                             DataTable dtTransactions = new DataTable();
                             dtTransactions.Load(reader);
                             short numberOfPages = Convert.ToInt16(outputNumberOfPages.Value);
-                            short recordsCount = Convert.ToInt16(outputRecordsCount.Value);
+                            int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
                             decimal voucherValue = Convert.ToDecimal(outputVoucherValue.Value);
 
                             allTransactions = new clsGetAllIncomeAndExpenseTransactions(dtTransactions, numberOfPages, recordsCount,voucherValue);

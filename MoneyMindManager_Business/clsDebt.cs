@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MoneyMindManager_DataAccess;
+using MoneyMindManagerGlobal;
 using static MoneyMindManager_Business.clsIncomeAndExpenseVoucher;
 using static MoneyMindManagerGlobal.clsDataColumns.clsDebtsClasses;
 
@@ -168,6 +169,70 @@ namespace MoneyMindManager_Business
         public static async Task<bool> DeleteDebtByDebtID(int debtID, int currentUserID)
         {
             return await clsDebtData.DeleteDebtByID(debtID, currentUserID);
+        }
+
+        private static async Task<clsGetAllDebts> _GetAllDebts(int? debtID,bool? isLending,string personName, bool byCreatedDate,
+            string fromDateString, string toDateString,bool? isPaid, int currentUserID, short pageNumber)
+        {
+
+            DateTime? fromCreatedDate = null, toCreatedDate = null,
+                fromDebtDate = null, toDebtDate = null;
+
+            if (byCreatedDate)
+            {
+                fromCreatedDate = clsFormat.TryConvertToDateTime(fromDateString);
+                toCreatedDate = clsFormat.TryConvertToDateTime(toDateString);
+
+                fromDebtDate = null;
+                toDebtDate = null;
+            }
+            else
+            {
+                fromDebtDate = clsFormat.TryConvertToDateTime(fromDateString);
+                toDebtDate = clsFormat.TryConvertToDateTime(toDateString);
+
+                fromCreatedDate = null;
+                toCreatedDate = null;
+            }
+
+            return await clsDebtData.GetAllDebts(debtID, isLending, personName, fromCreatedDate, toCreatedDate, fromDebtDate,
+                toDebtDate, isPaid, currentUserID, pageNumber);
+        }
+
+        /// <summary>
+        /// Get All Debts, if variable is null will not filter by it
+        /// </summary>
+        /// <param name="byCreatedDate">filter by createdDate or not (DebtData)</param>
+        /// <returns>Object of all debts if exists, if not returns null</returns>
+        public static async Task<clsGetAllDebts> GetAllDebts( bool? isLending, bool byCreatedDate,
+           string fromDateString, string toDateString, bool? isPaid, int currentUserID, short pageNumber)
+        {
+
+            return await _GetAllDebts(null, isLending, null, byCreatedDate, fromDateString, toDateString, isPaid, currentUserID, pageNumber);
+        }
+
+        /// <summary>
+        /// Get All Debts, if variable is null will not filter by it
+        /// </summary>
+        /// <param name="byCreatedDate">filter by createdDate or not (DebtData)</param>
+        /// <returns>Object of all debts if exists, if not returns null</returns>
+        public static async Task<clsGetAllDebts> GetAllDebts(int debtID,bool? isLending, bool byCreatedDate,
+           string fromDateString, string toDateString, bool? isPaid, int currentUserID, short pageNumber)
+        {
+
+            return await _GetAllDebts(debtID, isLending, null, byCreatedDate, fromDateString, toDateString, isPaid, currentUserID, pageNumber);
+        }
+
+        /// <summary>
+        /// Get All Debts, if variable is null will not filter by it
+        /// </summary>
+        /// <param name="byCreatedDate">filter by createdDate or not (DebtData)</param>
+        /// <returns>Object of all debts if exists, if not returns null</returns>
+        public static async Task<clsGetAllDebts> GetAllDebts(string personName, bool? isLending, bool byCreatedDate,
+           string fromDateString, string toDateString, bool? isPaid, int currentUserID, short pageNumber)
+        {
+
+            return await _GetAllDebts(null, isLending, personName, byCreatedDate, fromDateString, toDateString, isPaid, currentUserID, pageNumber);
         }
     }
 }

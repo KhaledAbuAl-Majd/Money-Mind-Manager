@@ -301,7 +301,7 @@ namespace MoneyMindManager_DataAccess
                             DataTable dtPeople = new DataTable();
                             dtPeople.Load(reader);
                             short numberOfPages = Convert.ToInt16(outputNumberOfPages.Value);
-                            short recordsCount = Convert.ToInt16(outputRecordsCount.Value);
+                            int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
 
                             allPeople = new clsGetAllPeople(dtPeople, numberOfPages, recordsCount);
                         }
@@ -358,7 +358,7 @@ namespace MoneyMindManager_DataAccess
                             DataTable dtPeople = new DataTable();
                             dtPeople.Load(reader);
                             short numberOfPages = Convert.ToInt16(outputNumberOfPages.Value);
-                            short recordsCount = Convert.ToInt16(outputRecordsCount.Value);
+                            int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
 
                             allPeople = new clsGetAllPeople(dtPeople, numberOfPages, recordsCount);
                         }

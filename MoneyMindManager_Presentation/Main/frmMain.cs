@@ -20,13 +20,13 @@ namespace MoneyMindManager_Presentation.Main
 {
     public partial class frmMain : Form
     {
+        public event Action OnCloseProgramm;
+
         int _userID;
-        frmLogin _frmLogin;
-        public frmMain(int userID,frmLogin loginForm)
+        public frmMain(int userID)
         {
             InitializeComponent();
             _userID = userID;
-            _frmLogin = loginForm;
         }
 
         public void AddNewFormAsDialog(Form frm)
@@ -112,28 +112,11 @@ namespace MoneyMindManager_Presentation.Main
         private void gbtnPeople_Click(object sender, EventArgs e)
         {
             _LoadFormAtPanelContainer(new frmPeople(),true);
-
-
-            //MessageBox.Show(gpnlFormContainer.Controls.Count.ToString());
-        }
-
-        private void guna2Button3_Click(object sender, EventArgs e)
-        {
-            _LoadFormAtPanelContainer(new frmAddUpdatePerson(),true);
         }
 
         private void gbtnUsers_Click(object sender, EventArgs e)
         {
             _LoadFormAtPanelContainer(new FrmUsers(), true);
-        }
-        private void gcbClose_Click(object sender, EventArgs e)
-        {
-            _frmLogin.Close();
-        }
-
-        private void gbtnLogout_Click(object sender, EventArgs e)
-        {
-            clsGlobal_UI.Logout();
         }
 
 
@@ -147,9 +130,27 @@ namespace MoneyMindManager_Presentation.Main
             _LoadFormAtPanelContainer(new frmIncomeAndExpense(clsIncomeAndExpenseVoucher.enVoucherType.Expenses), true);
         }
 
-        private void guna2Button2_Click(object sender, EventArgs e)
+        private void gbtnExpensesReturn_Click(object sender, EventArgs e)
         {
             _LoadFormAtPanelContainer(new frmIncomeAndExpense(clsIncomeAndExpenseVoucher.enVoucherType.ExpensesReturn), true);
+        }
+
+        private void gbtnDebts_Click(object sender, EventArgs e)
+        {
+            _LoadFormAtPanelContainer(new frmDebtsList(), true);
+        }
+        private void gbtnTransactions_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void gbtnLogout_Click(object sender, EventArgs e)
+        {
+            clsGlobal_UI.Logout();
+        }
+
+        private void gcbClose_Click(object sender, EventArgs e)
+        {
+            OnCloseProgramm?.Invoke();
         }
     }
 }

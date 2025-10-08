@@ -1,6 +1,6 @@
 ﻿namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 {
-    partial class frmVouhcersList
+    partial class frmDebtsList
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmVouhcersList));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDebtsList));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -63,7 +63,14 @@
             this.SearchAfterTimerFinish = new System.Windows.Forms.Timer(this.components);
             this.gbtnAddVoucher = new Guna.UI2.WinForms.Guna2Button();
             this.gcbFilterByDate = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.lblHeader = new System.Windows.Forms.Label();
+            this.gcbFilterByDebtType = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.gcbFilterbyPaymentStatus = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.gtsmExport = new System.Windows.Forms.ToolStripMenuItem();
+            this.gtsmExportExcel = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gdgvVouchers)).BeginInit();
             this.guna2ContextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -74,7 +81,7 @@
             this.lblUserMessage.Font = new System.Drawing.Font("Segoe Script", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUserMessage.ForeColor = System.Drawing.Color.Red;
             this.lblUserMessage.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.lblUserMessage.Location = new System.Drawing.Point(25, 256);
+            this.lblUserMessage.Location = new System.Drawing.Point(25, 406);
             this.lblUserMessage.Name = "lblUserMessage";
             this.lblUserMessage.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblUserMessage.Size = new System.Drawing.Size(1159, 42);
@@ -100,7 +107,7 @@
             this.kgtxtFilterValue.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtFilterValue.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
             this.kgtxtFilterValue.IsRequired = false;
-            this.kgtxtFilterValue.Location = new System.Drawing.Point(763, 10);
+            this.kgtxtFilterValue.Location = new System.Drawing.Point(771, 112);
             this.kgtxtFilterValue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtFilterValue.Name = "kgtxtFilterValue";
             this.kgtxtFilterValue.NumberProperties.DecimalNumberProperties.AllowNegative = true;
@@ -137,7 +144,7 @@
             this.kgtxtFilterValue.PlaceholderText = "";
             this.kgtxtFilterValue.SelectedText = "";
             this.kgtxtFilterValue.Size = new System.Drawing.Size(157, 36);
-            this.kgtxtFilterValue.TabIndex = 30;
+            this.kgtxtFilterValue.TabIndex = 1;
             this.kgtxtFilterValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.kgtxtFilterValue.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
             this.kgtxtFilterValue.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
@@ -161,7 +168,7 @@
             this.lblNoRecordsFoundMessage.Font = new System.Drawing.Font("Segoe Script", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNoRecordsFoundMessage.ForeColor = System.Drawing.Color.Red;
             this.lblNoRecordsFoundMessage.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.lblNoRecordsFoundMessage.Location = new System.Drawing.Point(25, 214);
+            this.lblNoRecordsFoundMessage.Location = new System.Drawing.Point(25, 364);
             this.lblNoRecordsFoundMessage.Name = "lblNoRecordsFoundMessage";
             this.lblNoRecordsFoundMessage.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblNoRecordsFoundMessage.Size = new System.Drawing.Size(1159, 42);
@@ -173,7 +180,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(1105, 15);
+            this.label2.Location = new System.Drawing.Point(1106, 117);
             this.label2.Name = "label2";
             this.label2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label2.Size = new System.Drawing.Size(97, 24);
@@ -199,19 +206,19 @@
             this.gcbFilterBy.Items.AddRange(new object[] {
             "بدون",
             "معرف المستند",
-            "اسم المستند"});
-            this.gcbFilterBy.Location = new System.Drawing.Point(935, 10);
+            "اسم الشخص"});
+            this.gcbFilterBy.Location = new System.Drawing.Point(943, 112);
             this.gcbFilterBy.Name = "gcbFilterBy";
             this.gcbFilterBy.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.gcbFilterBy.Size = new System.Drawing.Size(157, 36);
-            this.gcbFilterBy.TabIndex = 27;
+            this.gcbFilterBy.TabIndex = 0;
             this.gcbFilterBy.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.gcbFilterBy.SelectedIndexChanged += new System.EventHandler(this.gcbFilterBy_SelectedIndexChanged);
             // 
             // lblCurrentPageRecordsCount
             // 
             this.lblCurrentPageRecordsCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCurrentPageRecordsCount.Location = new System.Drawing.Point(888, 555);
+            this.lblCurrentPageRecordsCount.Location = new System.Drawing.Point(888, 705);
             this.lblCurrentPageRecordsCount.Name = "lblCurrentPageRecordsCount";
             this.lblCurrentPageRecordsCount.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblCurrentPageRecordsCount.Size = new System.Drawing.Size(114, 24);
@@ -222,7 +229,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(998, 555);
+            this.label3.Location = new System.Drawing.Point(998, 705);
             this.label3.Name = "label3";
             this.label3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label3.Size = new System.Drawing.Size(205, 24);
@@ -250,7 +257,7 @@
             this.kgtxtPageNumber.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtPageNumber.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Number;
             this.kgtxtPageNumber.IsRequired = true;
-            this.kgtxtPageNumber.Location = new System.Drawing.Point(768, 533);
+            this.kgtxtPageNumber.Location = new System.Drawing.Point(768, 683);
             this.kgtxtPageNumber.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtPageNumber.MaxLength = 150;
             this.kgtxtPageNumber.Name = "kgtxtPageNumber";
@@ -293,7 +300,7 @@
             this.kgtxtPageNumber.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.kgtxtPageNumber.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(2);
             this.kgtxtPageNumber.Size = new System.Drawing.Size(119, 34);
-            this.kgtxtPageNumber.TabIndex = 24;
+            this.kgtxtPageNumber.TabIndex = 9;
             this.kgtxtPageNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.kgtxtPageNumber.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
             this.kgtxtPageNumber.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
@@ -322,7 +329,7 @@
             this.gibtnPreviousPage.ImageOffset = new System.Drawing.Point(0, 0);
             this.gibtnPreviousPage.ImageRotate = 0F;
             this.gibtnPreviousPage.ImageSize = new System.Drawing.Size(25, 25);
-            this.gibtnPreviousPage.Location = new System.Drawing.Point(443, 529);
+            this.gibtnPreviousPage.Location = new System.Drawing.Point(443, 679);
             this.gibtnPreviousPage.Name = "gibtnPreviousPage";
             this.gibtnPreviousPage.PressedState.ImageSize = new System.Drawing.Size(64, 64);
             this.gibtnPreviousPage.Size = new System.Drawing.Size(40, 42);
@@ -341,7 +348,7 @@
             this.gibtnNextPage.ImageOffset = new System.Drawing.Point(0, 0);
             this.gibtnNextPage.ImageRotate = 0F;
             this.gibtnNextPage.ImageSize = new System.Drawing.Size(25, 25);
-            this.gibtnNextPage.Location = new System.Drawing.Point(721, 529);
+            this.gibtnNextPage.Location = new System.Drawing.Point(721, 679);
             this.gibtnNextPage.Name = "gibtnNextPage";
             this.gibtnNextPage.PressedState.ImageSize = new System.Drawing.Size(64, 64);
             this.gibtnNextPage.Size = new System.Drawing.Size(40, 42);
@@ -353,7 +360,7 @@
             // lblCurrentPageOfNumberOfPages
             // 
             this.lblCurrentPageOfNumberOfPages.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCurrentPageOfNumberOfPages.Location = new System.Drawing.Point(478, 533);
+            this.lblCurrentPageOfNumberOfPages.Location = new System.Drawing.Point(478, 683);
             this.lblCurrentPageOfNumberOfPages.Name = "lblCurrentPageOfNumberOfPages";
             this.lblCurrentPageOfNumberOfPages.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblCurrentPageOfNumberOfPages.Size = new System.Drawing.Size(249, 30);
@@ -364,7 +371,7 @@
             // lblTotalRecordsNumber
             // 
             this.lblTotalRecordsNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalRecordsNumber.Location = new System.Drawing.Point(938, 526);
+            this.lblTotalRecordsNumber.Location = new System.Drawing.Point(938, 676);
             this.lblTotalRecordsNumber.Name = "lblTotalRecordsNumber";
             this.lblTotalRecordsNumber.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblTotalRecordsNumber.Size = new System.Drawing.Size(114, 24);
@@ -375,7 +382,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(1048, 526);
+            this.label1.Location = new System.Drawing.Point(1048, 676);
             this.label1.Name = "label1";
             this.label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label1.Size = new System.Drawing.Size(155, 24);
@@ -418,7 +425,7 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.gdgvVouchers.DefaultCellStyle = dataGridViewCellStyle3;
             this.gdgvVouchers.GridColor = System.Drawing.Color.White;
-            this.gdgvVouchers.Location = new System.Drawing.Point(12, 59);
+            this.gdgvVouchers.Location = new System.Drawing.Point(12, 209);
             this.gdgvVouchers.MultiSelect = false;
             this.gdgvVouchers.Name = "gdgvVouchers";
             this.gdgvVouchers.ReadOnly = true;
@@ -466,7 +473,8 @@
             this.guna2ContextMenuStrip1.ImageScalingSize = new System.Drawing.Size(30, 30);
             this.guna2ContextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.gtsmAddVoucher,
-            this.gtsmEdit});
+            this.gtsmEdit,
+            this.gtsmExport});
             this.guna2ContextMenuStrip1.Name = "guna2ContextMenuStrip1";
             this.guna2ContextMenuStrip1.RenderStyle.ArrowColor = System.Drawing.Color.FromArgb(((int)(((byte)(151)))), ((int)(((byte)(143)))), ((int)(((byte)(255)))));
             this.guna2ContextMenuStrip1.RenderStyle.BorderColor = System.Drawing.Color.Gainsboro;
@@ -477,16 +485,17 @@
             this.guna2ContextMenuStrip1.RenderStyle.SelectionForeColor = System.Drawing.Color.White;
             this.guna2ContextMenuStrip1.RenderStyle.SeparatorColor = System.Drawing.Color.Gainsboro;
             this.guna2ContextMenuStrip1.RenderStyle.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
-            this.guna2ContextMenuStrip1.Size = new System.Drawing.Size(167, 76);
+            this.guna2ContextMenuStrip1.Size = new System.Drawing.Size(195, 134);
             // 
             // gtsmAddVoucher
             // 
+            this.gtsmAddVoucher.AutoSize = false;
             this.gtsmAddVoucher.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gtsmAddVoucher.Image = ((System.Drawing.Image)(resources.GetObject("gtsmAddVoucher.Image")));
             this.gtsmAddVoucher.Name = "gtsmAddVoucher";
             this.gtsmAddVoucher.ShortcutKeys = System.Windows.Forms.Keys.Insert;
             this.gtsmAddVoucher.ShowShortcutKeys = false;
-            this.gtsmAddVoucher.Size = new System.Drawing.Size(166, 36);
+            this.gtsmAddVoucher.Size = new System.Drawing.Size(194, 36);
             this.gtsmAddVoucher.Text = "إضافة مستند";
             this.gtsmAddVoucher.Click += new System.EventHandler(this.gtsmAddVoucher_Click);
             // 
@@ -495,7 +504,7 @@
             this.gtsmEdit.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gtsmEdit.Image = ((System.Drawing.Image)(resources.GetObject("gtsmEdit.Image")));
             this.gtsmEdit.Name = "gtsmEdit";
-            this.gtsmEdit.Size = new System.Drawing.Size(166, 36);
+            this.gtsmEdit.Size = new System.Drawing.Size(194, 36);
             this.gtsmEdit.Text = "تعديل";
             this.gtsmEdit.Click += new System.EventHandler(this.gtsmEdit_Click);
             // 
@@ -525,7 +534,7 @@
             this.kgtxtFromData.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtFromData.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Text;
             this.kgtxtFromData.IsRequired = false;
-            this.kgtxtFromData.Location = new System.Drawing.Point(473, 10);
+            this.kgtxtFromData.Location = new System.Drawing.Point(825, 165);
             this.kgtxtFromData.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtFromData.Name = "kgtxtFromData";
             this.kgtxtFromData.NumberProperties.DecimalNumberProperties.AllowNegative = true;
@@ -562,7 +571,7 @@
             this.kgtxtFromData.PlaceholderText = "من التاريخ";
             this.kgtxtFromData.SelectedText = "";
             this.kgtxtFromData.Size = new System.Drawing.Size(123, 36);
-            this.kgtxtFromData.TabIndex = 35;
+            this.kgtxtFromData.TabIndex = 6;
             this.kgtxtFromData.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.kgtxtFromData.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
             this.kgtxtFromData.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
@@ -599,7 +608,7 @@
             this.kgtxtToDate.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtToDate.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Text;
             this.kgtxtToDate.IsRequired = false;
-            this.kgtxtToDate.Location = new System.Drawing.Point(334, 10);
+            this.kgtxtToDate.Location = new System.Drawing.Point(686, 165);
             this.kgtxtToDate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtToDate.Name = "kgtxtToDate";
             this.kgtxtToDate.NumberProperties.DecimalNumberProperties.AllowNegative = true;
@@ -636,7 +645,7 @@
             this.kgtxtToDate.PlaceholderText = "إلى التاريخ";
             this.kgtxtToDate.SelectedText = "";
             this.kgtxtToDate.Size = new System.Drawing.Size(123, 36);
-            this.kgtxtToDate.TabIndex = 36;
+            this.kgtxtToDate.TabIndex = 7;
             this.kgtxtToDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.kgtxtToDate.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
             this.kgtxtToDate.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
@@ -664,7 +673,7 @@
             this.klblAllVouchersValue.DateProperties.YearFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enYearFormate.yyyy__2025;
             this.klblAllVouchersValue.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.klblAllVouchersValue.InputType = KhaledControlLibrary1.KhaledLabel.enInputType.Number;
-            this.klblAllVouchersValue.Location = new System.Drawing.Point(6, 524);
+            this.klblAllVouchersValue.Location = new System.Drawing.Point(6, 674);
             this.klblAllVouchersValue.Name = "klblAllVouchersValue";
             this.klblAllVouchersValue.NumberFormat = KhaledControlLibrary1.KhaledLabel.enNumberFormat.N4;
             this.klblAllVouchersValue.Size = new System.Drawing.Size(277, 28);
@@ -683,11 +692,11 @@
             this.gibtnRefreshData.ImageOffset = new System.Drawing.Point(0, 0);
             this.gibtnRefreshData.ImageRotate = 0F;
             this.gibtnRefreshData.ImageSize = new System.Drawing.Size(28, 28);
-            this.gibtnRefreshData.Location = new System.Drawing.Point(286, 4);
+            this.gibtnRefreshData.Location = new System.Drawing.Point(435, 107);
             this.gibtnRefreshData.Name = "gibtnRefreshData";
             this.gibtnRefreshData.PressedState.ImageSize = new System.Drawing.Size(64, 64);
             this.gibtnRefreshData.Size = new System.Drawing.Size(40, 42);
-            this.gibtnRefreshData.TabIndex = 100;
+            this.gibtnRefreshData.TabIndex = 4;
             this.toolTip1.SetToolTip(this.gibtnRefreshData, "تحديث البيانات");
             this.gibtnRefreshData.UseTransparentBackground = true;
             this.gibtnRefreshData.Click += new System.EventHandler(this.gibtnRefreshData_Click);
@@ -701,7 +710,7 @@
             this.klblCurrentPageVouchersValue.DateProperties.YearFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enYearFormate.yyyy__2025;
             this.klblCurrentPageVouchersValue.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.klblCurrentPageVouchersValue.InputType = KhaledControlLibrary1.KhaledLabel.enInputType.Number;
-            this.klblCurrentPageVouchersValue.Location = new System.Drawing.Point(1, 552);
+            this.klblCurrentPageVouchersValue.Location = new System.Drawing.Point(1, 702);
             this.klblCurrentPageVouchersValue.Name = "klblCurrentPageVouchersValue";
             this.klblCurrentPageVouchersValue.NumberFormat = KhaledControlLibrary1.KhaledLabel.enNumberFormat.N4;
             this.klblCurrentPageVouchersValue.Size = new System.Drawing.Size(241, 28);
@@ -714,7 +723,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(231, 556);
+            this.label5.Location = new System.Drawing.Point(231, 706);
             this.label5.Name = "label5";
             this.label5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label5.Size = new System.Drawing.Size(214, 24);
@@ -726,7 +735,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(286, 527);
+            this.label7.Location = new System.Drawing.Point(286, 677);
             this.label7.Name = "label7";
             this.label7.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label7.Size = new System.Drawing.Size(159, 24);
@@ -760,13 +769,13 @@
             this.gbtnAddVoucher.HoverState.ForeColor = System.Drawing.Color.White;
             this.gbtnAddVoucher.Image = ((System.Drawing.Image)(resources.GetObject("gbtnAddVoucher.Image")));
             this.gbtnAddVoucher.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.gbtnAddVoucher.ImageSize = new System.Drawing.Size(25, 25);
+            this.gbtnAddVoucher.ImageSize = new System.Drawing.Size(28, 28);
             this.gbtnAddVoucher.IndicateFocus = true;
-            this.gbtnAddVoucher.Location = new System.Drawing.Point(12, 10);
+            this.gbtnAddVoucher.Location = new System.Drawing.Point(12, 160);
             this.gbtnAddVoucher.Name = "gbtnAddVoucher";
             this.gbtnAddVoucher.PressedColor = System.Drawing.Color.White;
             this.gbtnAddVoucher.Size = new System.Drawing.Size(180, 41);
-            this.gbtnAddVoucher.TabIndex = 33;
+            this.gbtnAddVoucher.TabIndex = 8;
             this.gbtnAddVoucher.Text = "إضافة مستند";
             this.gbtnAddVoucher.Click += new System.EventHandler(this.gbtnAddVoucher_Click);
             // 
@@ -789,33 +798,147 @@
             this.gcbFilterByDate.Items.AddRange(new object[] {
             "تاريخ المستند",
             "تاريخ الإنشاء"});
-            this.gcbFilterByDate.Location = new System.Drawing.Point(612, 10);
+            this.gcbFilterByDate.Location = new System.Drawing.Point(964, 165);
             this.gcbFilterByDate.Name = "gcbFilterByDate";
             this.gcbFilterByDate.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.gcbFilterByDate.Size = new System.Drawing.Size(136, 36);
             this.gcbFilterByDate.StartIndex = 0;
-            this.gcbFilterByDate.TabIndex = 34;
+            this.gcbFilterByDate.TabIndex = 5;
             this.gcbFilterByDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.gcbFilterByDate.SelectedIndexChanged += new System.EventHandler(this.gcbFilterByDate_SelectedIndexChanged);
+            // 
+            // lblHeader
+            // 
+            this.lblHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblHeader.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold);
+            this.lblHeader.ForeColor = System.Drawing.Color.Black;
+            this.lblHeader.Location = new System.Drawing.Point(0, 0);
+            this.lblHeader.Name = "lblHeader";
+            this.lblHeader.Size = new System.Drawing.Size(1210, 50);
+            this.lblHeader.TabIndex = 101;
+            this.lblHeader.Text = "مستندات الديون";
+            this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // gcbFilterByDebtType
+            // 
+            this.gcbFilterByDebtType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.gcbFilterByDebtType.AutoRoundedCorners = true;
+            this.gcbFilterByDebtType.BackColor = System.Drawing.Color.Transparent;
+            this.gcbFilterByDebtType.BorderColor = System.Drawing.Color.Silver;
+            this.gcbFilterByDebtType.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gcbFilterByDebtType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.gcbFilterByDebtType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.gcbFilterByDebtType.DropDownWidth = 110;
+            this.gcbFilterByDebtType.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.gcbFilterByDebtType.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.gcbFilterByDebtType.Font = new System.Drawing.Font("Segoe UI", 11.25F);
+            this.gcbFilterByDebtType.ForeColor = System.Drawing.Color.Black;
+            this.gcbFilterByDebtType.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.gcbFilterByDebtType.ItemHeight = 30;
+            this.gcbFilterByDebtType.Items.AddRange(new object[] {
+            "الكل",
+            "إقراض",
+            "إقتراض"});
+            this.gcbFilterByDebtType.Location = new System.Drawing.Point(484, 112);
+            this.gcbFilterByDebtType.Name = "gcbFilterByDebtType";
+            this.gcbFilterByDebtType.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.gcbFilterByDebtType.Size = new System.Drawing.Size(136, 36);
+            this.gcbFilterByDebtType.StartIndex = 0;
+            this.gcbFilterByDebtType.TabIndex = 3;
+            this.gcbFilterByDebtType.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.gcbFilterByDebtType.SelectedIndexChanged += new System.EventHandler(this.gcbFilterByDebtType_SelectedIndexChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(558, 99);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(58, 17);
+            this.label4.TabIndex = 132;
+            this.label4.Text = "نوع الدين";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(685, -3);
+            this.label6.Location = new System.Drawing.Point(1035, 152);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(63, 17);
-            this.label6.TabIndex = 134;
+            this.label6.TabIndex = 133;
             this.label6.Text = "نوع التاريخ";
             // 
-            // frmVouhcersList
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(691, 99);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(69, 17);
+            this.label8.TabIndex = 135;
+            this.label8.Text = "حالة السداد";
+            // 
+            // gcbFilterbyPaymentStatus
+            // 
+            this.gcbFilterbyPaymentStatus.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.gcbFilterbyPaymentStatus.AutoRoundedCorners = true;
+            this.gcbFilterbyPaymentStatus.BackColor = System.Drawing.Color.Transparent;
+            this.gcbFilterbyPaymentStatus.BorderColor = System.Drawing.Color.Silver;
+            this.gcbFilterbyPaymentStatus.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gcbFilterbyPaymentStatus.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.gcbFilterbyPaymentStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.gcbFilterbyPaymentStatus.DropDownWidth = 110;
+            this.gcbFilterbyPaymentStatus.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.gcbFilterbyPaymentStatus.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.gcbFilterbyPaymentStatus.Font = new System.Drawing.Font("Segoe UI", 11.25F);
+            this.gcbFilterbyPaymentStatus.ForeColor = System.Drawing.Color.Black;
+            this.gcbFilterbyPaymentStatus.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.gcbFilterbyPaymentStatus.ItemHeight = 30;
+            this.gcbFilterbyPaymentStatus.Items.AddRange(new object[] {
+            "الكل",
+            "مسدد",
+            "غير مسدد"});
+            this.gcbFilterbyPaymentStatus.Location = new System.Drawing.Point(626, 112);
+            this.gcbFilterbyPaymentStatus.Name = "gcbFilterbyPaymentStatus";
+            this.gcbFilterbyPaymentStatus.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.gcbFilterbyPaymentStatus.Size = new System.Drawing.Size(136, 36);
+            this.gcbFilterbyPaymentStatus.StartIndex = 0;
+            this.gcbFilterbyPaymentStatus.TabIndex = 2;
+            this.gcbFilterbyPaymentStatus.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.gcbFilterbyPaymentStatus.SelectedIndexChanged += new System.EventHandler(this.gcbFilterbyPaymentStatus_SelectedIndexChanged);
+            // 
+            // gtsmExport
+            // 
+            this.gtsmExport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.gtsmExportExcel});
+            this.gtsmExport.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gtsmExport.Image = ((System.Drawing.Image)(resources.GetObject("gtsmExport.Image")));
+            this.gtsmExport.Name = "gtsmExport";
+            this.gtsmExport.Size = new System.Drawing.Size(194, 36);
+            this.gtsmExport.Text = "تصدير";
+            // 
+            // gtsmExportExcel
+            // 
+            this.gtsmExportExcel.AutoSize = false;
+            this.gtsmExportExcel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gtsmExportExcel.Image = ((System.Drawing.Image)(resources.GetObject("gtsmExportExcel.Image")));
+            this.gtsmExportExcel.Name = "gtsmExportExcel";
+            this.gtsmExportExcel.Size = new System.Drawing.Size(194, 27);
+            this.gtsmExportExcel.Text = "       Excel";
+            // 
+            // frmDebtsList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1210, 587);
+            this.ClientSize = new System.Drawing.Size(1210, 737);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.gcbFilterbyPaymentStatus);
             this.Controls.Add(this.label6);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.gcbFilterByDebtType);
+            this.Controls.Add(this.lblHeader);
             this.Controls.Add(this.gibtnRefreshData);
             this.Controls.Add(this.klblCurrentPageVouchersValue);
             this.Controls.Add(this.klblAllVouchersValue);
@@ -840,7 +963,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.gdgvVouchers);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "frmVouhcersList";
+            this.Name = "frmDebtsList";
             this.Text = "VouhcersList";
             this.Load += new System.EventHandler(this.VouhcersList_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gdgvVouchers)).EndInit();
@@ -881,6 +1004,13 @@
         private KhaledControlLibrary1.KhaledLabel klblCurrentPageVouchersValue;
         private KhaledControlLibrary1.KhaledLabel klblAllVouchersValue;
         private Guna.UI2.WinForms.Guna2ImageButton gibtnRefreshData;
+        private System.Windows.Forms.Label lblHeader;
+        private Guna.UI2.WinForms.Guna2ComboBox gcbFilterByDebtType;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label8;
+        private Guna.UI2.WinForms.Guna2ComboBox gcbFilterbyPaymentStatus;
+        private System.Windows.Forms.ToolStripMenuItem gtsmExport;
+        private System.Windows.Forms.ToolStripMenuItem gtsmExportExcel;
     }
 }

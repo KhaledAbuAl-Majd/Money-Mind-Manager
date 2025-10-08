@@ -16,23 +16,13 @@ using static MoneyMindManager_Business.clsIncomeAndExpenseVoucher;
 
 namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 {
-    public partial class frmVouhcersList : Form
+    public partial class frmDebtsList : Form
     {
-        public frmVouhcersList(enVoucherType voucherType)
-        {
-            if (voucherType == enVoucherType.UnKnown)
-            {
-                clsGlobalMessageBoxs.ShowErrorMessage("نوع المستند غير معروف !");
-                this.Dispose();
-                return;
-            }
-
+        public frmDebtsList()
+        { 
             InitializeComponent();
-            _voucherType = voucherType;
         }
-
-        enVoucherType _voucherType;
-        enum enFilterBy { All, VoucherID, VoucherName };
+        enum enFilterBy { All, DebtID, PersonName };
 
         enFilterBy _filterBy = enFilterBy.All;
 
@@ -50,7 +40,6 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 lblNoRecordsFoundMessage.Visible = true;
                 lblUserMessage.Text = "تم العثور على حقول غير صالحة. ضع المؤشر على العلامات الحمراء لعرض سبب الخطأ.";
                 lblUserMessage.Visible = true;
-                //clsGlobal_Presentation.ShowMessage("تم العثور على حقول غير صالحة. ضع المؤشر على العلامات الحمراء لعرض سبب الخطأ.", "خطأ في التحقق", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 lblCurrentPageRecordsCount.Text = "0";
                 lblTotalRecordsNumber.Text = "0";
                 lblCurrentPageOfNumberOfPages.Text = string.Concat("1", "   من   ", "0", "  صفحات");
@@ -69,40 +58,55 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             if (!_CheckValidationChildren())
                 return;
+  
 
-            //_pageNumber = Convert.ToInt16(kgtxtPageNumber.ValidatedText);
-
-            clsDataColumns.clsIncomeAndExpenseVoucherClasses.clsGetAllVouchers result = null;
+            clsDataColumns.clsDebtsClasses.clsGetAllDebts result = null;
 
             bool filterByCreatedDate = false;
 
             if (gcbFilterByDate.Text == "تاريخ الإنشاء")
-            {
                 filterByCreatedDate = true;
-            }
             else if (gcbFilterByDate.Text == "تاريخ المستند")
                 filterByCreatedDate = false;
             else
                 return;
 
+            bool? isLending = null;
+
+            if (gcbFilterByDebtType.Text == "إقراض")
+                isLending = true;
+            else if (gcbFilterByDate.Text == "إقتراض")
+                isLending = false;
+            else
+                isLending = null;
+
+            bool? isPaid = null;
+
+            if (gcbFilterbyPaymentStatus.Text == "مسدد")
+                isPaid = true;  
+            else if (gcbFilterbyPaymentStatus.Text == "غير مسدد")
+                isPaid = false;
+            else
+                isPaid = null;
+
             int currentUserID = Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID);
 
             if (filterBy == enFilterBy.All || string.IsNullOrEmpty(kgtxtFilterValue.ValidatedText))
             {
-                result = await clsIncomeAndExpenseVoucher.GetAllVouchers(filterByCreatedDate, kgtxtFromData.ValidatedText,
-                    kgtxtToDate.ValidatedText, _voucherType,currentUserID,_pageNumber);
+                result = await clsDebt.GetAllDebts(isLending, filterByCreatedDate, kgtxtFromData.ValidatedText, kgtxtToDate.ValidatedText,
+                    isPaid, currentUserID, _pageNumber);
             }
-            else if (filterBy == enFilterBy.VoucherID)
+            else if (filterBy == enFilterBy.DebtID)
             {
-         int voucherID = Convert.ToInt32(kgtxtFilterValue.ValidatedText);
-                result = await clsIncomeAndExpenseVoucher.GetAllVouchers(voucherID, filterByCreatedDate, kgtxtFromData.ValidatedText,
-                    kgtxtToDate.ValidatedText, _voucherType, currentUserID, _pageNumber);
+                int debtID = Convert.ToInt32(kgtxtFilterValue.ValidatedText);
+                result = await clsDebt.GetAllDebts(debtID,isLending, filterByCreatedDate, kgtxtFromData.ValidatedText, kgtxtToDate.ValidatedText,
+                      isPaid, currentUserID, _pageNumber);
             }
-            else if (filterBy == enFilterBy.VoucherName)
+            else if (filterBy == enFilterBy.PersonName)
             {
-                string voucherName = kgtxtFilterValue.ValidatedText;
-                result = await clsIncomeAndExpenseVoucher.GetAllVouchers(voucherName, filterByCreatedDate, kgtxtFromData.ValidatedText,
-                    kgtxtToDate.ValidatedText, _voucherType, currentUserID, _pageNumber);
+                string personName = kgtxtFilterValue.ValidatedText;
+                result = await clsDebt.GetAllDebts(personName,isLending, filterByCreatedDate, kgtxtFromData.ValidatedText, kgtxtToDate.ValidatedText,
+                    isPaid, currentUserID, _pageNumber);
             }
             else
                 return;
@@ -110,10 +114,9 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             if (result == null)
                 return;
 
-            if (result.dtVouchers.Rows.Count == 0)
+            if (result.dtDebts.Rows.Count == 0)
             {
                 lblNoRecordsFoundMessage.Visible = true;
-                //lblUserMessage.Visible = true;
                 gdgvVouchers.DataSource = null;
                 _IsHeaderCreated = false;
                 _pageNumber = 1;
@@ -121,7 +124,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             else
             {
                 lblNoRecordsFoundMessage.Visible = false;
-                gdgvVouchers.DataSource = result.dtVouchers;
+                gdgvVouchers.DataSource = result.dtDebts;
             }
 
             lblUserMessage.Visible = false;
@@ -138,33 +141,36 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             gibtnNextPage.Enabled = (_pageNumber < result.NumberOfPages);
             gibtnPreviousPage.Enabled = (_pageNumber > 1);
 
-            klblAllVouchersValue.Text = result.TotalVouchersValue.ToString();
-            klblCurrentPageVouchersValue.Text = result.CurrentPageVouchersValue.ToString();
+            klblAllVouchersValue.Text = result.TotalDebtsValue.ToString();
+            klblCurrentPageVouchersValue.Text = result.CurrentPageDebtsValue.ToString();
             //
 
             if (!_IsHeaderCreated && gdgvVouchers.Rows.Count > 0)
             {
-                gdgvVouchers.Columns["VoucherID"].HeaderText = "معرف المستند";
-                gdgvVouchers.Columns["VoucherID"].Width = 125;
+                gdgvVouchers.Columns["DebtID"].HeaderText = "معرف المستند";
+                gdgvVouchers.Columns["DebtID"].Width = 125;
 
-                gdgvVouchers.Columns["VoucherName"].HeaderText = "اسم المستند";
-                gdgvVouchers.Columns["VoucherName"].Width = 280;
+                gdgvVouchers.Columns["PersonName"].HeaderText = "اسم الشخص";
+                gdgvVouchers.Columns["PersonName"].Width = 280;
 
-                gdgvVouchers.Columns["VoucherValue"].HeaderText = "قيمة المستند";
-                gdgvVouchers.Columns["VoucherValue"].Width = 250;
-                gdgvVouchers.Columns["VoucherValue"].DefaultCellStyle.Format = "N4";
+                gdgvVouchers.Columns["DebtValue"].HeaderText = "قيمة الدين";
+                gdgvVouchers.Columns["DebtValue"].Width = 250;
+                gdgvVouchers.Columns["DebtValue"].DefaultCellStyle.Format = "N4";
 
-                gdgvVouchers.Columns["TransactionsCount"].HeaderText = "عدد المعاملات";
-                gdgvVouchers.Columns["TransactionsCount"].Width = 125;
-                //gdgvVouchers.Columns["TransactionsCount"].DefaultCellStyle.Format = "N0";
+                gdgvVouchers.Columns["RemainingAmount"].HeaderText = "القيمة المتبقية";
+                gdgvVouchers.Columns["RemainingAmount"].Width = 250;
+                gdgvVouchers.Columns["RemainingAmount"].DefaultCellStyle.Format = "N4";
 
-                gdgvVouchers.Columns["VoucherDate"].HeaderText = "تاريخ المستند";
-                gdgvVouchers.Columns["VoucherDate"].Width = 150;
-                gdgvVouchers.Columns["VoucherDate"].DefaultCellStyle.Format = "dd-MM-yyyy";
+                gdgvVouchers.Columns["DebtDate"].HeaderText = "تاريخ المستند";
+                gdgvVouchers.Columns["DebtDate"].Width = 150;
+                gdgvVouchers.Columns["DebtDate"].DefaultCellStyle.Format = "dd-MM-yyyy";
 
                 gdgvVouchers.Columns["CreatedDate"].HeaderText = "تاريخ الإنشاء";
                 gdgvVouchers.Columns["CreatedDate"].Width = 250;
                 gdgvVouchers.Columns["CreatedDate"].DefaultCellStyle.Format = "hh:mm:ss tt dd-MM-yyyy";
+
+                gdgvVouchers.Columns["DebtType"].HeaderText = "نوع الدين";
+                gdgvVouchers.Columns["DebtType"].Width = 280;
 
                 _IsHeaderCreated = true;
 
@@ -173,9 +179,9 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
         void _AddNewVoucher()
         {
-            frmAddUpdateVoucher frm = new frmAddUpdateVoucher(_voucherType);
-            frm.OnCloseAndSaved += _RefreshFilter;
-            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
+            //frmAddUpdateVoucher frm = new frmAddUpdateVoucher(_voucherType);
+            //frm.OnCloseAndSaved += _RefreshFilter;
+            //clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
         }
 
         void _UpdateVoucher()
@@ -183,11 +189,11 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             if (gdgvVouchers.SelectedRows.Count < 1)
                 return;
 
-            int voucherID = Convert.ToInt32(gdgvVouchers.SelectedRows[0].Cells[0].Value);
+            //int voucherID = Convert.ToInt32(gdgvVouchers.SelectedRows[0].Cells[0].Value);
 
-            frmAddUpdateVoucher frm = new frmAddUpdateVoucher(voucherID);
-            frm.OnCloseAndSaved += _RefreshFilter;
-            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
+            //frmAddUpdateVoucher frm = new frmAddUpdateVoucher(voucherID);
+            //frm.OnCloseAndSaved += _RefreshFilter;
+            //clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
         }
 
         async void _RefreshFilter()
@@ -257,15 +263,12 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             if (gcbFilterBy.Text == "بدون")
             {
-                //kgtxtFilterValue.Visible = false;
                 _SetReadOnlyAtTextBox(kgtxtFilterValue);
                 _filterBy = enFilterBy.All;
                 await _LoadDataAtDataGridView(_filterBy);
                 return;
             }
 
-
-            //kgtxtFilterValue.Visible = true;
             _CancelReadOnlyAtTextBox(kgtxtFilterValue);
             kgtxtFilterValue.IsRequired = false;
             kgtxtFilterValue.TrimStart = false;
@@ -273,7 +276,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             if (gcbFilterBy.Text == "معرف المستند")
             {
-                _filterBy = enFilterBy.VoucherID;
+                _filterBy = enFilterBy.DebtID;
 
                 kgtxtFilterValue.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Number;
                 kgtxtFilterValue.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
@@ -281,9 +284,9 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 kgtxtFilterValue.NumberProperties.IntegerNumberProperties.AllowNegative = false;
                 kgtxtFilterValue.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
             }
-            else if (gcbFilterBy.Text == "اسم المستند")
+            else if (gcbFilterBy.Text == "اسم الشخص")
             {
-                _filterBy = enFilterBy.VoucherName;
+                _filterBy = enFilterBy.PersonName;
 
                 kgtxtFilterValue.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
                 kgtxtFilterValue.AllowWhiteSpace = true;
@@ -369,6 +372,16 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 e.CellStyle.ForeColor = Color.Red;
                 e.CellStyle.SelectionForeColor = Color.Orange;
             }
+        }
+
+        private async void gcbFilterByDebtType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            await _LoadDataAtDataGridView(_filterBy);
+        }
+
+        private async void gcbFilterbyPaymentStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            await _LoadDataAtDataGridView(_filterBy);
         }
     }
 }

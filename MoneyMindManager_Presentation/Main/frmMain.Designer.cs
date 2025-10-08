@@ -36,8 +36,10 @@
             this.gbtnOverOview = new Guna.UI2.WinForms.Guna2Button();
             this.gbtnPeople = new Guna.UI2.WinForms.Guna2Button();
             this.gpnlRightBar = new Guna.UI2.WinForms.Guna2Panel();
+            this.gbtnDebts = new Guna.UI2.WinForms.Guna2Button();
+            this.gbtnTransactions = new Guna.UI2.WinForms.Guna2Button();
             this.gbtnExpense = new Guna.UI2.WinForms.Guna2Button();
-            this.guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
+            this.gbtnExpensesReturn = new Guna.UI2.WinForms.Guna2Button();
             this.gbtnIncome = new Guna.UI2.WinForms.Guna2Button();
             this.guna2ControlBox2 = new Guna.UI2.WinForms.Guna2ControlBox();
             this.gcbClose = new Guna.UI2.WinForms.Guna2ControlBox();
@@ -131,8 +133,10 @@
             // 
             // gpnlRightBar
             // 
+            this.gpnlRightBar.Controls.Add(this.gbtnDebts);
+            this.gpnlRightBar.Controls.Add(this.gbtnTransactions);
             this.gpnlRightBar.Controls.Add(this.gbtnExpense);
-            this.gpnlRightBar.Controls.Add(this.guna2Button2);
+            this.gpnlRightBar.Controls.Add(this.gbtnExpensesReturn);
             this.gpnlRightBar.Controls.Add(this.gbtnIncome);
             this.gpnlRightBar.Controls.Add(this.guna2ControlBox2);
             this.gpnlRightBar.Controls.Add(this.gcbClose);
@@ -147,6 +151,68 @@
             this.gpnlRightBar.Name = "gpnlRightBar";
             this.gpnlRightBar.Size = new System.Drawing.Size(263, 809);
             this.gpnlRightBar.TabIndex = 3;
+            // 
+            // gbtnDebts
+            // 
+            this.gbtnDebts.Animated = true;
+            this.gbtnDebts.BackColor = System.Drawing.Color.Transparent;
+            this.gbtnDebts.BorderRadius = 5;
+            this.gbtnDebts.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            this.gbtnDebts.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(102)))), ((int)(((byte)(194)))));
+            this.gbtnDebts.CheckedState.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnDebts.CheckedState.ForeColor = System.Drawing.Color.White;
+            this.gbtnDebts.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gbtnDebts.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnDebts.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnDebts.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.gbtnDebts.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.gbtnDebts.FillColor = System.Drawing.Color.White;
+            this.gbtnDebts.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnDebts.ForeColor = System.Drawing.Color.Black;
+            this.gbtnDebts.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(102)))), ((int)(((byte)(194)))));
+            this.gbtnDebts.HoverState.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnDebts.HoverState.ForeColor = System.Drawing.Color.White;
+            this.gbtnDebts.Image = ((System.Drawing.Image)(resources.GetObject("gbtnDebts.Image")));
+            this.gbtnDebts.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.gbtnDebts.ImageSize = new System.Drawing.Size(40, 40);
+            this.gbtnDebts.IndicateFocus = true;
+            this.gbtnDebts.Location = new System.Drawing.Point(6, 444);
+            this.gbtnDebts.Name = "gbtnDebts";
+            this.gbtnDebts.Size = new System.Drawing.Size(254, 48);
+            this.gbtnDebts.TabIndex = 6;
+            this.gbtnDebts.Text = "الديون";
+            this.gbtnDebts.Click += new System.EventHandler(this.gbtnDebts_Click);
+            // 
+            // gbtnTransactions
+            // 
+            this.gbtnTransactions.Animated = true;
+            this.gbtnTransactions.BackColor = System.Drawing.Color.Transparent;
+            this.gbtnTransactions.BorderRadius = 5;
+            this.gbtnTransactions.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            this.gbtnTransactions.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(102)))), ((int)(((byte)(194)))));
+            this.gbtnTransactions.CheckedState.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnTransactions.CheckedState.ForeColor = System.Drawing.Color.White;
+            this.gbtnTransactions.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gbtnTransactions.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnTransactions.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnTransactions.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.gbtnTransactions.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.gbtnTransactions.FillColor = System.Drawing.Color.White;
+            this.gbtnTransactions.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnTransactions.ForeColor = System.Drawing.Color.Black;
+            this.gbtnTransactions.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(102)))), ((int)(((byte)(194)))));
+            this.gbtnTransactions.HoverState.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnTransactions.HoverState.ForeColor = System.Drawing.Color.White;
+            this.gbtnTransactions.Image = ((System.Drawing.Image)(resources.GetObject("gbtnTransactions.Image")));
+            this.gbtnTransactions.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.gbtnTransactions.ImageSize = new System.Drawing.Size(40, 40);
+            this.gbtnTransactions.IndicateFocus = true;
+            this.gbtnTransactions.Location = new System.Drawing.Point(6, 497);
+            this.gbtnTransactions.Name = "gbtnTransactions";
+            this.gbtnTransactions.Size = new System.Drawing.Size(254, 48);
+            this.gbtnTransactions.TabIndex = 7;
+            this.gbtnTransactions.Text = "المعاملات";
+            this.gbtnTransactions.Click += new System.EventHandler(this.gbtnTransactions_Click);
             // 
             // gbtnExpense
             // 
@@ -179,36 +245,36 @@
             this.gbtnExpense.Text = "المصروفات";
             this.gbtnExpense.Click += new System.EventHandler(this.gbtnExpense_Click);
             // 
-            // guna2Button2
+            // gbtnExpensesReturn
             // 
-            this.guna2Button2.Animated = true;
-            this.guna2Button2.BackColor = System.Drawing.Color.Transparent;
-            this.guna2Button2.BorderRadius = 5;
-            this.guna2Button2.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
-            this.guna2Button2.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(102)))), ((int)(((byte)(194)))));
-            this.guna2Button2.CheckedState.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2Button2.CheckedState.ForeColor = System.Drawing.Color.White;
-            this.guna2Button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.guna2Button2.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button2.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button2.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2Button2.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2Button2.FillColor = System.Drawing.Color.White;
-            this.guna2Button2.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2Button2.ForeColor = System.Drawing.Color.Black;
-            this.guna2Button2.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(102)))), ((int)(((byte)(194)))));
-            this.guna2Button2.HoverState.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2Button2.HoverState.ForeColor = System.Drawing.Color.White;
-            this.guna2Button2.Image = ((System.Drawing.Image)(resources.GetObject("guna2Button2.Image")));
-            this.guna2Button2.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.guna2Button2.ImageSize = new System.Drawing.Size(40, 40);
-            this.guna2Button2.IndicateFocus = true;
-            this.guna2Button2.Location = new System.Drawing.Point(6, 391);
-            this.guna2Button2.Name = "guna2Button2";
-            this.guna2Button2.Size = new System.Drawing.Size(254, 48);
-            this.guna2Button2.TabIndex = 5;
-            this.guna2Button2.Text = "مرتجعات المصروفات";
-            this.guna2Button2.Click += new System.EventHandler(this.guna2Button2_Click);
+            this.gbtnExpensesReturn.Animated = true;
+            this.gbtnExpensesReturn.BackColor = System.Drawing.Color.Transparent;
+            this.gbtnExpensesReturn.BorderRadius = 5;
+            this.gbtnExpensesReturn.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            this.gbtnExpensesReturn.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(102)))), ((int)(((byte)(194)))));
+            this.gbtnExpensesReturn.CheckedState.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnExpensesReturn.CheckedState.ForeColor = System.Drawing.Color.White;
+            this.gbtnExpensesReturn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gbtnExpensesReturn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnExpensesReturn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnExpensesReturn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.gbtnExpensesReturn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.gbtnExpensesReturn.FillColor = System.Drawing.Color.White;
+            this.gbtnExpensesReturn.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnExpensesReturn.ForeColor = System.Drawing.Color.Black;
+            this.gbtnExpensesReturn.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(102)))), ((int)(((byte)(194)))));
+            this.gbtnExpensesReturn.HoverState.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnExpensesReturn.HoverState.ForeColor = System.Drawing.Color.White;
+            this.gbtnExpensesReturn.Image = ((System.Drawing.Image)(resources.GetObject("gbtnExpensesReturn.Image")));
+            this.gbtnExpensesReturn.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.gbtnExpensesReturn.ImageSize = new System.Drawing.Size(40, 40);
+            this.gbtnExpensesReturn.IndicateFocus = true;
+            this.gbtnExpensesReturn.Location = new System.Drawing.Point(6, 391);
+            this.gbtnExpensesReturn.Name = "gbtnExpensesReturn";
+            this.gbtnExpensesReturn.Size = new System.Drawing.Size(254, 48);
+            this.gbtnExpensesReturn.TabIndex = 5;
+            this.gbtnExpensesReturn.Text = "مرتجعات المصروفات";
+            this.gbtnExpensesReturn.Click += new System.EventHandler(this.gbtnExpensesReturn_Click);
             // 
             // gbtnIncome
             // 
@@ -310,10 +376,10 @@
             this.gbtnLogout.ImageSize = new System.Drawing.Size(40, 40);
             this.gbtnLogout.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.gbtnLogout.IndicateFocus = true;
-            this.gbtnLogout.Location = new System.Drawing.Point(6, 444);
+            this.gbtnLogout.Location = new System.Drawing.Point(6, 550);
             this.gbtnLogout.Name = "gbtnLogout";
             this.gbtnLogout.Size = new System.Drawing.Size(254, 48);
-            this.gbtnLogout.TabIndex = 6;
+            this.gbtnLogout.TabIndex = 8;
             this.gbtnLogout.Text = "تسجيل الخروج";
             this.gbtnLogout.Click += new System.EventHandler(this.gbtnLogout_Click);
             // 
@@ -421,8 +487,10 @@
         private Guna.UI2.WinForms.Guna2ControlBox guna2ControlBox2;
         private Guna.UI2.WinForms.Guna2ControlBox gcbClose;
         private Guna.UI2.WinForms.Guna2Button gbtnExpense;
-        private Guna.UI2.WinForms.Guna2Button guna2Button2;
+        private Guna.UI2.WinForms.Guna2Button gbtnExpensesReturn;
         private Guna.UI2.WinForms.Guna2Button gbtnIncome;
         private Guna.UI2.WinForms.Guna2Elipse guna2Elipse1;
+        private Guna.UI2.WinForms.Guna2Button gbtnDebts;
+        private Guna.UI2.WinForms.Guna2Button gbtnTransactions;
     }
 }

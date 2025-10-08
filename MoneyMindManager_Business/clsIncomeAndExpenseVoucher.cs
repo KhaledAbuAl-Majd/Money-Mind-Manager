@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using MoneyMindManager_DataAccess;
+using MoneyMindManagerGlobal;
 using static MoneyMindManager_Business.clsIncomeAndExpenseVoucher;
 using static MoneyMindManagerGlobal.clsDataColumns.clsIncomeAndExpenseTransactionsClasses;
 using static MoneyMindManagerGlobal.clsDataColumns.clsIncomeAndExpenseVoucherClasses;
@@ -246,16 +247,16 @@ namespace MoneyMindManager_Business
 
             if (byCreatedDate)
             {
-                fromCreatedDate = string.IsNullOrWhiteSpace(fromDateString) ? null : Convert.ToDateTime(fromDateString) as DateTime?;
-                toCreatedDate = string.IsNullOrWhiteSpace(toDateString) ? null : Convert.ToDateTime(toDateString) as DateTime?;
+                fromCreatedDate = clsFormat.TryConvertToDateTime(fromDateString);
+                toCreatedDate = clsFormat.TryConvertToDateTime(toDateString);
 
                 fromVoucherDate = null;
                 toVoucherDate = null;
             }
             else
             {
-                fromVoucherDate = string.IsNullOrWhiteSpace(fromDateString) ? null : Convert.ToDateTime(fromDateString) as DateTime?;
-                toVoucherDate = string.IsNullOrWhiteSpace(toDateString) ? null : Convert.ToDateTime(toDateString) as DateTime?;
+                fromVoucherDate = clsFormat.TryConvertToDateTime(fromDateString);
+                toVoucherDate = clsFormat.TryConvertToDateTime(toDateString);
 
                 fromCreatedDate = null;
                 toCreatedDate = null;
@@ -267,7 +268,7 @@ namespace MoneyMindManager_Business
         }
 
         /// <summary>
-        /// Get All Vouchers
+        /// Get All Vouchers, if variable is null will not filter by it
         /// </summary>
         /// <param name="byCreatedDate">filter by createdDate or not (voucherDate)</param>
         /// <returns>Object of all vouchers if exists, if not returns null</returns>
@@ -278,7 +279,7 @@ namespace MoneyMindManager_Business
         }
 
         /// <summary>
-        /// Get All Vouchers By VoucherID
+        /// Get All Vouchers By VoucherID, if variable is null will not filter by it
         /// </summary>
         /// <param name="byCreatedDate">filter by createdDate or not (voucherDate)</param>
         /// <returns>Object of all vouchers if exists, if not returns null</returns>
@@ -289,7 +290,7 @@ namespace MoneyMindManager_Business
         }
 
         /// <summary>
-        /// Get All Vouchers by voucher name
+        /// Get All Vouchers by voucher name, if variable is null will not filter by it
         /// </summary>
         /// <param name="byCreatedDate">filter by createdDate or not (voucherDate)</param>
         /// <returns>Object of all vouchers if exists, if not returns null</returns>

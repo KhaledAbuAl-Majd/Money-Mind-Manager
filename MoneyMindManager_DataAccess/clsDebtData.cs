@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MoneyMindManagerGlobal;
 using static MoneyMindManagerGlobal.clsDataColumns.clsDebtsClasses;
+using static MoneyMindManagerGlobal.clsDataColumns.clsIncomeAndExpenseVoucherClasses;
 
 namespace MoneyMindManager_DataAccess
 {
@@ -257,6 +258,92 @@ namespace MoneyMindManager_DataAccess
             }
 
             return voucherData;
+        }
+
+        /// <summary>
+        /// if variable is null will not filter by it
+        /// </summary>
+        public static async Task<clsGetAllDebts> GetAllDebts(int? debtID, bool? isLending, string personName,
+            DateTime? fromCreatedDate, DateTime? toCreatedDate, DateTime? fromDebtDate, DateTime? toDebtDate,
+            bool? isPaid,int currentUserID, short pageNumber, bool RaiseEventOnErrorOccured = true)
+        {
+            clsGetAllDebts allDebts = null;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("[dbo].[SP_Debts_GetAll]", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("@DebtID", (object)debtID ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@IsLending", (object)isLending ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@PersonName", string.IsNullOrWhiteSpace(personName) ? DBNull.Value : (object)personName);
+                        command.Parameters.AddWithValue("@FromCreatedDate", (object)fromCreatedDate ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@ToCreatedDate", (object)toCreatedDate ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@FromDebtDate", (object)fromDebtDate ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@ToDebtDate", (object)toDebtDate ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@IsPaid", (object)isPaid ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@CurrentUserID", currentUserID);
+                        command.Parameters.AddWithValue("@PageNumber", pageNumber);
+
+                        SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.SmallInt)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+
+                        SqlParameter outputRecordsCount = new SqlParameter("@RecordsCount", SqlDbType.Int)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+
+                        SqlParameter outputTotalDebtsValue = new SqlParameter("@TotalDebtsValue", SqlDbType.Decimal)
+                        {
+                            Direction = ParameterDirection.Output,
+                            Precision = 19,
+                            Scale = 4
+                        };
+
+                        SqlParameter outputCurrentPageDebtsValue = new SqlParameter("@CurrentPageDebtsValue", SqlDbType.Decimal)
+                        {
+                            Direction = ParameterDirection.Output,
+                            Precision = 19,
+                            Scale = 4
+                        };
+
+                        command.Parameters.Add(outputNumberOfPages);
+                        command.Parameters.Add(outputRecordsCount);
+                        command.Parameters.Add(outputTotalDebtsValue);
+                        command.Parameters.Add(outputCurrentPageDebtsValue);
+
+                        await connection.OpenAsync();
+
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            DataTable dtDebts = new DataTable();
+                            dtDebts.Load(reader);
+                            short numberOfPages = Convert.ToInt16(outputNumberOfPages.Value);
+                            int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
+
+                            allDebts = new clsGetAllDebts(dtDebts, numberOfPages, recordsCount,
+                                Convert.ToDecimal(outputTotalDebtsValue.Value), Convert.ToDecimal(outputCurrentPageDebtsValue.Value));
+                        }
+                    }
+                }
+
+                if (allDebts == null)
+                    throw new Exception("فشلت العملية");
+            }
+            catch (Exception ex)
+            {
+                allDebts = null;
+
+                if (RaiseEventOnErrorOccured)
+                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+            }
+
+            return allDebts;
         }
     }
 }
