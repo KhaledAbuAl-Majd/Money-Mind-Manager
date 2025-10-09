@@ -66,7 +66,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             if (gcbFilterByDate.Text == "تاريخ الإنشاء")
                 filterByCreatedDate = true;
-            else if (gcbFilterByDate.Text == "تاريخ المستند")
+            else if (gcbFilterByDate.Text == "تاريخ السند")
                 filterByCreatedDate = false;
             else
                 return;
@@ -75,7 +75,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             if (gcbFilterByDebtType.Text == "إقراض")
                 isLending = true;
-            else if (gcbFilterByDate.Text == "إقتراض")
+            else if (gcbFilterByDebtType.Text == "إقتراض")
                 isLending = false;
             else
                 isLending = null;
@@ -147,53 +147,53 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             if (!_IsHeaderCreated && gdgvVouchers.Rows.Count > 0)
             {
-                gdgvVouchers.Columns["DebtID"].HeaderText = "معرف المستند";
+                gdgvVouchers.Columns["DebtID"].HeaderText = "معرف سند الدين";
                 gdgvVouchers.Columns["DebtID"].Width = 125;
 
                 gdgvVouchers.Columns["PersonName"].HeaderText = "اسم الشخص";
-                gdgvVouchers.Columns["PersonName"].Width = 280;
+                gdgvVouchers.Columns["PersonName"].Width = 265;
 
                 gdgvVouchers.Columns["DebtValue"].HeaderText = "قيمة الدين";
-                gdgvVouchers.Columns["DebtValue"].Width = 250;
+                gdgvVouchers.Columns["DebtValue"].Width = 215;
                 gdgvVouchers.Columns["DebtValue"].DefaultCellStyle.Format = "N4";
 
-                gdgvVouchers.Columns["RemainingAmount"].HeaderText = "القيمة المتبقية";
-                gdgvVouchers.Columns["RemainingAmount"].Width = 250;
+                gdgvVouchers.Columns["RemainingAmount"].HeaderText = "القيمة المتبقية للسداد";
+                gdgvVouchers.Columns["RemainingAmount"].Width = 215;
                 gdgvVouchers.Columns["RemainingAmount"].DefaultCellStyle.Format = "N4";
 
-                gdgvVouchers.Columns["DebtDate"].HeaderText = "تاريخ المستند";
-                gdgvVouchers.Columns["DebtDate"].Width = 150;
+                gdgvVouchers.Columns["DebtDate"].HeaderText = "تاريخ السند";
+                gdgvVouchers.Columns["DebtDate"].Width = 115;
                 gdgvVouchers.Columns["DebtDate"].DefaultCellStyle.Format = "dd-MM-yyyy";
 
                 gdgvVouchers.Columns["CreatedDate"].HeaderText = "تاريخ الإنشاء";
-                gdgvVouchers.Columns["CreatedDate"].Width = 250;
+                gdgvVouchers.Columns["CreatedDate"].Width = 190;
                 gdgvVouchers.Columns["CreatedDate"].DefaultCellStyle.Format = "hh:mm:ss tt dd-MM-yyyy";
 
                 gdgvVouchers.Columns["DebtType"].HeaderText = "نوع الدين";
-                gdgvVouchers.Columns["DebtType"].Width = 280;
+                gdgvVouchers.Columns["DebtType"].Width = 70;
 
                 _IsHeaderCreated = true;
 
             }
         }
 
-        void _AddNewVoucher()
+        void _AddNewDebt()
         {
-            //frmAddUpdateVoucher frm = new frmAddUpdateVoucher(_voucherType);
-            //frm.OnCloseAndSaved += _RefreshFilter;
-            //clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
+            frmAddUpdateDebt frm = new frmAddUpdateDebt();
+            frm.OnCloseAndSaved += _RefreshFilter;
+            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
         }
 
-        void _UpdateVoucher()
+        void _UpdateDebt()
         {
             if (gdgvVouchers.SelectedRows.Count < 1)
                 return;
 
-            //int voucherID = Convert.ToInt32(gdgvVouchers.SelectedRows[0].Cells[0].Value);
+            int debtID = Convert.ToInt32(gdgvVouchers.SelectedRows[0].Cells[0].Value);
 
-            //frmAddUpdateVoucher frm = new frmAddUpdateVoucher(voucherID);
-            //frm.OnCloseAndSaved += _RefreshFilter;
-            //clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
+            frmAddUpdateDebt frm = new frmAddUpdateDebt(debtID);
+            frm.OnCloseAndSaved += _RefreshFilter;
+            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
         }
 
         async void _RefreshFilter()
@@ -274,7 +274,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             kgtxtFilterValue.TrimStart = false;
             kgtxtFilterValue.TrimEnd = true;
 
-            if (gcbFilterBy.Text == "معرف المستند")
+            if (gcbFilterBy.Text == "معرف السند")
             {
                 _filterBy = enFilterBy.DebtID;
 
@@ -330,7 +330,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
         private void gbtnAddVoucher_Click(object sender, EventArgs e)
         {
-            _AddNewVoucher();
+            _AddNewDebt();
         }
 
         private async void gcbFilterByDate_SelectedIndexChanged(object sender, EventArgs e)
@@ -351,24 +351,23 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
         private void gtsmAddVoucher_Click(object sender, EventArgs e)
         {
-            _AddNewVoucher();
+            _AddNewDebt();
         }
 
         private void gtsmEdit_Click(object sender, EventArgs e)
         {
-            _UpdateVoucher();
+            _UpdateDebt();
         }
 
         private void gdgvVouchers_DoubleClick(object sender, EventArgs e)
         {
-            _UpdateVoucher();
+            _UpdateDebt();
         }
 
         private void gdgvVouchers_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.Value == null || e.Value == DBNull.Value)
             {
-                //e.CellStyle.BackColor = Color.LightYellow; // خلفية
                 e.CellStyle.ForeColor = Color.Red;
                 e.CellStyle.SelectionForeColor = Color.Orange;
             }

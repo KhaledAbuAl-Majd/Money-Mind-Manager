@@ -82,10 +82,10 @@
             this.lblUserMessage.Font = new System.Drawing.Font("Segoe Script", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUserMessage.ForeColor = System.Drawing.Color.Red;
             this.lblUserMessage.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.lblUserMessage.Location = new System.Drawing.Point(30, 416);
+            this.lblUserMessage.Location = new System.Drawing.Point(35, 48);
             this.lblUserMessage.Name = "lblUserMessage";
             this.lblUserMessage.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.lblUserMessage.Size = new System.Drawing.Size(1148, 42);
+            this.lblUserMessage.Size = new System.Drawing.Size(1148, 30);
             this.lblUserMessage.TabIndex = 39;
             this.lblUserMessage.Text = "\"تم العثور على حقول غير صالحة. ضع المؤشر على العلامات الحمراء لعرض سبب الخطأ.\"";
             this.lblUserMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -93,7 +93,7 @@
             // lblCurrentPageRecordsCount
             // 
             this.lblCurrentPageRecordsCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCurrentPageRecordsCount.Location = new System.Drawing.Point(879, 707);
+            this.lblCurrentPageRecordsCount.Location = new System.Drawing.Point(879, 709);
             this.lblCurrentPageRecordsCount.Name = "lblCurrentPageRecordsCount";
             this.lblCurrentPageRecordsCount.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblCurrentPageRecordsCount.Size = new System.Drawing.Size(114, 24);
@@ -104,7 +104,7 @@
             // 
             this.lblDescriptionOfCurrentPageNumOfRcords.AutoSize = true;
             this.lblDescriptionOfCurrentPageNumOfRcords.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDescriptionOfCurrentPageNumOfRcords.Location = new System.Drawing.Point(996, 707);
+            this.lblDescriptionOfCurrentPageNumOfRcords.Location = new System.Drawing.Point(996, 709);
             this.lblDescriptionOfCurrentPageNumOfRcords.Name = "lblDescriptionOfCurrentPageNumOfRcords";
             this.lblDescriptionOfCurrentPageNumOfRcords.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblDescriptionOfCurrentPageNumOfRcords.Size = new System.Drawing.Size(205, 24);
@@ -121,7 +121,7 @@
             this.gibtnPreviousPage.ImageOffset = new System.Drawing.Point(0, 0);
             this.gibtnPreviousPage.ImageRotate = 0F;
             this.gibtnPreviousPage.ImageSize = new System.Drawing.Size(25, 25);
-            this.gibtnPreviousPage.Location = new System.Drawing.Point(447, 674);
+            this.gibtnPreviousPage.Location = new System.Drawing.Point(447, 688);
             this.gibtnPreviousPage.Name = "gibtnPreviousPage";
             this.gibtnPreviousPage.PressedState.ImageSize = new System.Drawing.Size(64, 64);
             this.gibtnPreviousPage.Size = new System.Drawing.Size(40, 42);
@@ -140,7 +140,7 @@
             this.gibtnNextPage.ImageOffset = new System.Drawing.Point(0, 0);
             this.gibtnNextPage.ImageRotate = 0F;
             this.gibtnNextPage.ImageSize = new System.Drawing.Size(25, 25);
-            this.gibtnNextPage.Location = new System.Drawing.Point(725, 674);
+            this.gibtnNextPage.Location = new System.Drawing.Point(725, 688);
             this.gibtnNextPage.Name = "gibtnNextPage";
             this.gibtnNextPage.PressedState.ImageSize = new System.Drawing.Size(64, 64);
             this.gibtnNextPage.Size = new System.Drawing.Size(40, 42);
@@ -152,7 +152,7 @@
             // lblCurrentPageOfNumberOfPages
             // 
             this.lblCurrentPageOfNumberOfPages.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCurrentPageOfNumberOfPages.Location = new System.Drawing.Point(482, 678);
+            this.lblCurrentPageOfNumberOfPages.Location = new System.Drawing.Point(482, 692);
             this.lblCurrentPageOfNumberOfPages.Name = "lblCurrentPageOfNumberOfPages";
             this.lblCurrentPageOfNumberOfPages.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblCurrentPageOfNumberOfPages.Size = new System.Drawing.Size(249, 30);
@@ -163,7 +163,7 @@
             // lblTotalRecordsNumber
             // 
             this.lblTotalRecordsNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalRecordsNumber.Location = new System.Drawing.Point(924, 678);
+            this.lblTotalRecordsNumber.Location = new System.Drawing.Point(924, 680);
             this.lblTotalRecordsNumber.Name = "lblTotalRecordsNumber";
             this.lblTotalRecordsNumber.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblTotalRecordsNumber.Size = new System.Drawing.Size(114, 24);
@@ -174,7 +174,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(1046, 678);
+            this.label1.Location = new System.Drawing.Point(1046, 680);
             this.label1.Name = "label1";
             this.label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label1.Size = new System.Drawing.Size(155, 24);
@@ -218,7 +218,7 @@
             this.gdgvTransactions.DefaultCellStyle = dataGridViewCellStyle3;
             this.gdgvTransactions.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.gdgvTransactions.GridColor = System.Drawing.Color.White;
-            this.gdgvTransactions.Location = new System.Drawing.Point(19, 245);
+            this.gdgvTransactions.Location = new System.Drawing.Point(19, 256);
             this.gdgvTransactions.MultiSelect = false;
             this.gdgvTransactions.Name = "gdgvTransactions";
             this.gdgvTransactions.ReadOnly = true;
@@ -309,11 +309,12 @@
             // 
             // lblHeader
             // 
+            this.lblHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblHeader.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHeader.ForeColor = System.Drawing.Color.Black;
-            this.lblHeader.Location = new System.Drawing.Point(12, 0);
+            this.lblHeader.Location = new System.Drawing.Point(0, 0);
             this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(1186, 62);
+            this.lblHeader.Size = new System.Drawing.Size(1210, 50);
             this.lblHeader.TabIndex = 41;
             this.lblHeader.Text = "إضافة شخص";
             this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -323,7 +324,7 @@
             this.lblNoTransactionsFoundMessage.Font = new System.Drawing.Font("Segoe Script", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNoTransactionsFoundMessage.ForeColor = System.Drawing.Color.Red;
             this.lblNoTransactionsFoundMessage.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.lblNoTransactionsFoundMessage.Location = new System.Drawing.Point(30, 374);
+            this.lblNoTransactionsFoundMessage.Location = new System.Drawing.Point(30, 385);
             this.lblNoTransactionsFoundMessage.Name = "lblNoTransactionsFoundMessage";
             this.lblNoTransactionsFoundMessage.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblNoTransactionsFoundMessage.Size = new System.Drawing.Size(1155, 42);
@@ -355,7 +356,7 @@
             this.kgtxtNotes.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtNotes.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
             this.kgtxtNotes.IsRequired = false;
-            this.kgtxtNotes.Location = new System.Drawing.Point(850, 132);
+            this.kgtxtNotes.Location = new System.Drawing.Point(850, 143);
             this.kgtxtNotes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtNotes.MaxLength = 200;
             this.kgtxtNotes.Multiline = true;
@@ -435,7 +436,7 @@
             this.kgtxtVoucherDate.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtVoucherDate.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Text;
             this.kgtxtVoucherDate.IsRequired = true;
-            this.kgtxtVoucherDate.Location = new System.Drawing.Point(608, 79);
+            this.kgtxtVoucherDate.Location = new System.Drawing.Point(608, 90);
             this.kgtxtVoucherDate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtVoucherDate.MaxLength = 30;
             this.kgtxtVoucherDate.Name = "kgtxtVoucherDate";
@@ -515,7 +516,7 @@
             this.kgtxtVoucherName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtVoucherName.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
             this.kgtxtVoucherName.IsRequired = true;
-            this.kgtxtVoucherName.Location = new System.Drawing.Point(850, 79);
+            this.kgtxtVoucherName.Location = new System.Drawing.Point(850, 90);
             this.kgtxtVoucherName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtVoucherName.MaxLength = 150;
             this.kgtxtVoucherName.Name = "kgtxtVoucherName";
@@ -596,7 +597,7 @@
             this.kgtxtPageNumber.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtPageNumber.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Number;
             this.kgtxtPageNumber.IsRequired = true;
-            this.kgtxtPageNumber.Location = new System.Drawing.Point(199, 674);
+            this.kgtxtPageNumber.Location = new System.Drawing.Point(199, 688);
             this.kgtxtPageNumber.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtPageNumber.MaxLength = 150;
             this.kgtxtPageNumber.Name = "kgtxtPageNumber";
@@ -663,7 +664,7 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(1115, 67);
+            this.label3.Location = new System.Drawing.Point(1115, 78);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(75, 17);
             this.label3.TabIndex = 105;
@@ -674,7 +675,7 @@
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(754, 67);
+            this.label4.Location = new System.Drawing.Point(754, 78);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(78, 17);
             this.label4.TabIndex = 106;
@@ -685,7 +686,7 @@
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(1133, 120);
+            this.label5.Location = new System.Drawing.Point(1133, 131);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(57, 17);
             this.label5.TabIndex = 107;
@@ -703,7 +704,7 @@
             this.gchkIsLocked.CheckState = System.Windows.Forms.CheckState.Checked;
             this.gchkIsLocked.Cursor = System.Windows.Forms.Cursors.Hand;
             this.gchkIsLocked.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.gchkIsLocked.Location = new System.Drawing.Point(139, 85);
+            this.gchkIsLocked.Location = new System.Drawing.Point(139, 96);
             this.gchkIsLocked.Name = "gchkIsLocked";
             this.gchkIsLocked.Size = new System.Drawing.Size(64, 25);
             this.gchkIsLocked.TabIndex = 8;
@@ -720,7 +721,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(521, 67);
+            this.label2.Location = new System.Drawing.Point(521, 78);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(70, 17);
             this.label2.TabIndex = 110;
@@ -747,7 +748,7 @@
             this.kgtxtCreatedDate.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtCreatedDate.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Text;
             this.kgtxtCreatedDate.IsRequired = false;
-            this.kgtxtCreatedDate.Location = new System.Drawing.Point(367, 79);
+            this.kgtxtCreatedDate.Location = new System.Drawing.Point(367, 90);
             this.kgtxtCreatedDate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtCreatedDate.MaxLength = 150;
             this.kgtxtCreatedDate.Name = "kgtxtCreatedDate";
@@ -813,7 +814,7 @@
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.Transparent;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(754, 120);
+            this.label6.Location = new System.Drawing.Point(754, 131);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(79, 17);
             this.label6.TabIndex = 112;
@@ -839,7 +840,7 @@
             this.kgtxtVoucherValue.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtVoucherValue.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Number;
             this.kgtxtVoucherValue.IsRequired = false;
-            this.kgtxtVoucherValue.Location = new System.Drawing.Point(608, 132);
+            this.kgtxtVoucherValue.Location = new System.Drawing.Point(608, 143);
             this.kgtxtVoucherValue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtVoucherValue.MaxLength = 150;
             this.kgtxtVoucherValue.Name = "kgtxtVoucherValue";
@@ -919,7 +920,7 @@
             this.kgtxtCreatedByUserName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtCreatedByUserName.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
             this.kgtxtCreatedByUserName.IsRequired = false;
-            this.kgtxtCreatedByUserName.Location = new System.Drawing.Point(608, 185);
+            this.kgtxtCreatedByUserName.Location = new System.Drawing.Point(608, 196);
             this.kgtxtCreatedByUserName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtCreatedByUserName.MaxLength = 200;
             this.kgtxtCreatedByUserName.Name = "kgtxtCreatedByUserName";
@@ -983,7 +984,7 @@
             this.label7.AutoSize = true;
             this.label7.BackColor = System.Drawing.Color.Transparent;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(699, 173);
+            this.label7.Location = new System.Drawing.Point(699, 184);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(134, 17);
             this.label7.TabIndex = 114;
@@ -1013,7 +1014,7 @@
             this.gbtnSave.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnSave.ImageSize = new System.Drawing.Size(25, 25);
             this.gbtnSave.IndicateFocus = true;
-            this.gbtnSave.Location = new System.Drawing.Point(367, 132);
+            this.gbtnSave.Location = new System.Drawing.Point(367, 143);
             this.gbtnSave.Name = "gbtnSave";
             this.gbtnSave.PressedColor = System.Drawing.Color.White;
             this.gbtnSave.Size = new System.Drawing.Size(220, 41);
@@ -1045,7 +1046,7 @@
             this.gbtnClose.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnClose.ImageSize = new System.Drawing.Size(25, 25);
             this.gbtnClose.IndicateFocus = true;
-            this.gbtnClose.Location = new System.Drawing.Point(367, 186);
+            this.gbtnClose.Location = new System.Drawing.Point(367, 197);
             this.gbtnClose.Name = "gbtnClose";
             this.gbtnClose.PressedColor = System.Drawing.Color.White;
             this.gbtnClose.Size = new System.Drawing.Size(220, 41);
@@ -1077,7 +1078,7 @@
             this.gbtnAddTransaction.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnAddTransaction.ImageSize = new System.Drawing.Size(25, 25);
             this.gbtnAddTransaction.IndicateFocus = true;
-            this.gbtnAddTransaction.Location = new System.Drawing.Point(20, 186);
+            this.gbtnAddTransaction.Location = new System.Drawing.Point(20, 197);
             this.gbtnAddTransaction.Name = "gbtnAddTransaction";
             this.gbtnAddTransaction.PressedColor = System.Drawing.Color.White;
             this.gbtnAddTransaction.Size = new System.Drawing.Size(210, 41);
@@ -1090,7 +1091,7 @@
             this.label8.AutoSize = true;
             this.label8.BackColor = System.Drawing.Color.Transparent;
             this.label8.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(265, 67);
+            this.label8.Location = new System.Drawing.Point(265, 78);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(86, 17);
             this.label8.TabIndex = 116;
@@ -1116,7 +1117,7 @@
             this.kgtxtVoucherID.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtVoucherID.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Number;
             this.kgtxtVoucherID.IsRequired = false;
-            this.kgtxtVoucherID.Location = new System.Drawing.Point(209, 79);
+            this.kgtxtVoucherID.Location = new System.Drawing.Point(209, 90);
             this.kgtxtVoucherID.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtVoucherID.MaxLength = 150;
             this.kgtxtVoucherID.Name = "kgtxtVoucherID";
@@ -1174,15 +1175,13 @@
             this.kgtxtVoucherID.TextProperties.TextFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.enTextFormat.None;
             this.kgtxtVoucherID.TrimEnd = true;
             this.kgtxtVoucherID.TrimStart = true;
-            this.kgtxtVoucherID.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxtPageNumber_OnValidationError);
-            this.kgtxtVoucherID.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxtPageNumber_OnValidationSuccess);
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.BackColor = System.Drawing.Color.Transparent;
             this.label9.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(1103, 227);
+            this.label9.Location = new System.Drawing.Point(1103, 238);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(99, 17);
             this.label9.TabIndex = 117;
@@ -1198,7 +1197,7 @@
             this.gibtnDeleteVoucher.ImageOffset = new System.Drawing.Point(0, 0);
             this.gibtnDeleteVoucher.ImageRotate = 0F;
             this.gibtnDeleteVoucher.ImageSize = new System.Drawing.Size(28, 28);
-            this.gibtnDeleteVoucher.Location = new System.Drawing.Point(79, 76);
+            this.gibtnDeleteVoucher.Location = new System.Drawing.Point(79, 87);
             this.gibtnDeleteVoucher.Name = "gibtnDeleteVoucher";
             this.gibtnDeleteVoucher.PressedState.ImageSize = new System.Drawing.Size(64, 64);
             this.gibtnDeleteVoucher.Size = new System.Drawing.Size(40, 42);

@@ -99,7 +99,7 @@ namespace MoneyMindManager_DataAccess
 
                         SqlParameter outRemainingAmount = new SqlParameter("@RemainingAmount", SqlDbType.Decimal)
                         {
-                            Direction = System.Data.ParameterDirection.ReturnValue,
+                            Direction = System.Data.ParameterDirection.Output,
                             Precision = 19,
                             Scale = 4
                         };

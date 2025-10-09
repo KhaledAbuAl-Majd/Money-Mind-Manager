@@ -618,5 +618,23 @@ namespace MoneyMindManagerGlobal
                 }
             }
         }
+
+        public static class clsDebtPaymentClasses
+        {
+            public class clsGetAllDebtPayments
+            {
+                public DataTable dtDebtPayment;
+                public short NumberOfPages = 0;
+                public int RecordsCount = 0;
+                public decimal RemainingAmount;
+                public clsGetAllDebtPayments(DataTable dtTransactions, short numberOfPages, int recordsCount, decimal remainingAmount)
+                {
+                    this.dtDebtPayment = dtTransactions;
+                    this.NumberOfPages = numberOfPages;
+                    this.RecordsCount = recordsCount;
+                    this.RemainingAmount = remainingAmount;
+                }
+            }
+        }
     }
 }

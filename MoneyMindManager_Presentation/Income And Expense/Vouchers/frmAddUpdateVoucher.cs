@@ -125,13 +125,11 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 gdgvTransactions.DataSource = null;
                 _IsHeaderCreated = false;
                 _pageNumber = 1;
-                gibtnDeleteVoucher.Enabled = true;
             }
             else
             {
                 lblNoTransactionsFoundMessage.Visible = false;
                 gdgvTransactions.DataSource = result.dtTransactions;
-                gibtnDeleteVoucher.Enabled = false;
             }
 
             lblUserMessage.Visible = false;
@@ -224,6 +222,8 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 _ChangeEnablityForButton(gbtnSave, true);
                 lblUserMessage.Visible = false;
             }
+
+            gibtnDeleteVoucher.Enabled = !isLocked;
         }
 
         void _ChangeEnablityForButton(Guna2Button btn,bool value)
@@ -265,12 +265,6 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
            
             lblNoTransactionsFoundMessage.Visible = true;
             gibtnDeleteVoucher.Enabled = false;
-
-            //kgtxtCreatedByUserName.Text = clsGlobal_UI.CurrentUser?.UserName;
-            //kgtxtVoucherDate.RefreshNumber_DateTimeFormattedText(DateTime.Now.ToString()); 
-            //kgtxtVoucherValue.Text = "0";
-            //kgtxtVoucherValue.RefreshNumber_DateTimeFormattedText();
-            //kgtxtCreatedDate.RefreshNumber_DateTimeFormattedText(DateTime.Now.ToString());
         }
 
         void _UpdateModeChangesAtUi()
@@ -289,6 +283,8 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                     ChangeHeaderValue("تعديل مستند مرتجعات مصروفات");
                     break;
             }
+
+            LockAndUnLockMode(_Voucher.IsLocked);
         }
 
         async Task _UpdateMode()
@@ -308,7 +304,6 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             }
 
             this._Voucher = searchedVoucher;
-            this._voucherType = searchedVoucher.VoucherType;
             this._voucherType = _Voucher.VoucherType;
 
             _UpdateModeChangesAtUi();
@@ -322,28 +317,19 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             kgtxtVoucherID.Text = _Voucher.VoucherID.ToString();
             gchkIsLocked.Checked = _Voucher.IsLocked;
 
-            gibtnDeleteVoucher.Enabled = true;
-            if (_Voucher.IsLocked)
-            {
-                LockAndUnLockMode(true);
-                //_SetReadOnlyAtTextBox(kgtxtVoucherName);
-                //_SetReadOnlyAtTextBox(kgtxtNotes);
-                //_SetReadOnlyAtTextBox(kgtxtVoucherDate);
-                //_ChangeEnablityForButton(gbtnAddTransaction,false);
-            }
-
             await _LoadDataAtDataGridView();
         }
 
         async Task _Save()
         {
-            if (_Voucher.IsLocked && _voucherMode == enVoucherMode.Update)
+            if ((_Voucher.IsLocked && _voucherMode == enVoucherMode.Update)|| !gbtnSave.Enabled)
             {
                 lblUserMessage.Text = "المستند مغلق لايمكن التعديل عليه";
                 lblUserMessage.Visible = true;
                 return;
             }
 
+            lblUserMessage.Visible = false;
 
             if (!ValidateChildren())
             {
@@ -389,11 +375,8 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                     kgtxtVoucherID.Text = _Voucher.VoucherID.ToString();
 
                     _ChangeEnablityForButton(gbtnAddTransaction, true);
-                    gibtnDeleteVoucher.Enabled = true;
 
                     _UpdateModeChangesAtUi();
-                    //ChangeHeaderValue("تعديل بيانات المستند");
-
                 }
                 else if (_voucherMode == enVoucherMode.Update)
                 {
@@ -402,7 +385,6 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
                 _isSaved = true;
 
-                //LockAndUnLockMode(_Voucher.IsLocked);
             }
             else if (_voucherMode == enVoucherMode.AddNew)
                 _ResetVoucherObject();
@@ -572,7 +554,14 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
         private async void gibtnDeleteVoucher_Click(object sender, EventArgs e)
         {
             if (_VoucherID == null || gdgvTransactions.Rows.Count > 0)
+            {
+                lblUserMessage.Text = "لتتمكن من حذف المستند قم بحذف جميع المعاملات أولا !";
+                lblUserMessage.Visible = true;
                 return;
+            }
+
+            lblUserMessage.Visible = false;
+
 
             if (clsGlobalMessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف المستند ؟ ", "طلب مواقفقة", MessageBoxButtons.OKCancel,
                MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)

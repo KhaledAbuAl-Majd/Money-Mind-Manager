@@ -51,6 +51,8 @@
             this.guna2ContextMenuStrip1 = new Guna.UI2.WinForms.Guna2ContextMenuStrip();
             this.gtsmAddVoucher = new System.Windows.Forms.ToolStripMenuItem();
             this.gtsmEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.gtsmExport = new System.Windows.Forms.ToolStripMenuItem();
+            this.gtsmExportExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.kgtxtFromData = new KhaledControlLibrary1.KhaledGuna2TextBox();
@@ -61,7 +63,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.SearchAfterTimerFinish = new System.Windows.Forms.Timer(this.components);
-            this.gbtnAddVoucher = new Guna.UI2.WinForms.Guna2Button();
+            this.gbtnAddDebt = new Guna.UI2.WinForms.Guna2Button();
             this.gcbFilterByDate = new Guna.UI2.WinForms.Guna2ComboBox();
             this.lblHeader = new System.Windows.Forms.Label();
             this.gcbFilterByDebtType = new Guna.UI2.WinForms.Guna2ComboBox();
@@ -69,8 +71,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.gcbFilterbyPaymentStatus = new Guna.UI2.WinForms.Guna2ComboBox();
-            this.gtsmExport = new System.Windows.Forms.ToolStripMenuItem();
-            this.gtsmExportExcel = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gdgvVouchers)).BeginInit();
             this.guna2ContextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -205,7 +205,7 @@
             this.gcbFilterBy.ItemHeight = 30;
             this.gcbFilterBy.Items.AddRange(new object[] {
             "بدون",
-            "معرف المستند",
+            "معرف السند",
             "اسم الشخص"});
             this.gcbFilterBy.Location = new System.Drawing.Point(943, 112);
             this.gcbFilterBy.Name = "gcbFilterBy";
@@ -485,7 +485,7 @@
             this.guna2ContextMenuStrip1.RenderStyle.SelectionForeColor = System.Drawing.Color.White;
             this.guna2ContextMenuStrip1.RenderStyle.SeparatorColor = System.Drawing.Color.Gainsboro;
             this.guna2ContextMenuStrip1.RenderStyle.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
-            this.guna2ContextMenuStrip1.Size = new System.Drawing.Size(195, 134);
+            this.guna2ContextMenuStrip1.Size = new System.Drawing.Size(167, 112);
             // 
             // gtsmAddVoucher
             // 
@@ -504,9 +504,28 @@
             this.gtsmEdit.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gtsmEdit.Image = ((System.Drawing.Image)(resources.GetObject("gtsmEdit.Image")));
             this.gtsmEdit.Name = "gtsmEdit";
-            this.gtsmEdit.Size = new System.Drawing.Size(194, 36);
+            this.gtsmEdit.Size = new System.Drawing.Size(166, 36);
             this.gtsmEdit.Text = "تعديل";
             this.gtsmEdit.Click += new System.EventHandler(this.gtsmEdit_Click);
+            // 
+            // gtsmExport
+            // 
+            this.gtsmExport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.gtsmExportExcel});
+            this.gtsmExport.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gtsmExport.Image = ((System.Drawing.Image)(resources.GetObject("gtsmExport.Image")));
+            this.gtsmExport.Name = "gtsmExport";
+            this.gtsmExport.Size = new System.Drawing.Size(166, 36);
+            this.gtsmExport.Text = "تصدير";
+            // 
+            // gtsmExportExcel
+            // 
+            this.gtsmExportExcel.AutoSize = false;
+            this.gtsmExportExcel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gtsmExportExcel.Image = ((System.Drawing.Image)(resources.GetObject("gtsmExportExcel.Image")));
+            this.gtsmExportExcel.Name = "gtsmExportExcel";
+            this.gtsmExportExcel.Size = new System.Drawing.Size(194, 27);
+            this.gtsmExportExcel.Text = "       Excel";
             // 
             // errorProvider1
             // 
@@ -673,14 +692,14 @@
             this.klblAllVouchersValue.DateProperties.YearFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enYearFormate.yyyy__2025;
             this.klblAllVouchersValue.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.klblAllVouchersValue.InputType = KhaledControlLibrary1.KhaledLabel.enInputType.Number;
-            this.klblAllVouchersValue.Location = new System.Drawing.Point(6, 674);
+            this.klblAllVouchersValue.Location = new System.Drawing.Point(9, 674);
             this.klblAllVouchersValue.Name = "klblAllVouchersValue";
             this.klblAllVouchersValue.NumberFormat = KhaledControlLibrary1.KhaledLabel.enNumberFormat.N4;
             this.klblAllVouchersValue.Size = new System.Drawing.Size(277, 28);
             this.klblAllVouchersValue.TabIndex = 98;
             this.klblAllVouchersValue.Text = "111,111,111,111,111.0000";
             this.klblAllVouchersValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.toolTip1.SetToolTip(this.klblAllVouchersValue, "قيمة المستندات الكلية لنتيجة البحث");
+            this.toolTip1.SetToolTip(this.klblAllVouchersValue, "قيمة سندات الديون الكلية لنتيجة البحث");
             // 
             // gibtnRefreshData
             // 
@@ -717,67 +736,67 @@
             this.klblCurrentPageVouchersValue.TabIndex = 99;
             this.klblCurrentPageVouchersValue.Text = "111,111,111,111,111.0000";
             this.klblCurrentPageVouchersValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.toolTip1.SetToolTip(this.klblCurrentPageVouchersValue, "قيمة المستندات الكلية لنتيجة البحث للصفحة الحالية");
+            this.toolTip1.SetToolTip(this.klblCurrentPageVouchersValue, "قيمة سندات الديون الكلية لنتيجة البحث للصفحة الحالية");
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(231, 706);
+            this.label5.Location = new System.Drawing.Point(240, 706);
             this.label5.Name = "label5";
             this.label5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.label5.Size = new System.Drawing.Size(214, 24);
+            this.label5.Size = new System.Drawing.Size(202, 24);
             this.label5.TabIndex = 39;
-            this.label5.Text = "# قيمة مستندات الصفحة الحالية : ";
-            this.toolTip1.SetToolTip(this.label5, "قيمة المستندات الكلية لنتيجة البحث للصفحة الحالية");
+            this.label5.Text = "# قيمة سندات الصفحة الحالية : ";
+            this.toolTip1.SetToolTip(this.label5, "قيمة سندات الديون الكلية لنتيجة البحث للصفحة الحالية");
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(286, 677);
+            this.label7.Location = new System.Drawing.Point(295, 677);
             this.label7.Name = "label7";
             this.label7.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.label7.Size = new System.Drawing.Size(159, 24);
+            this.label7.Size = new System.Drawing.Size(147, 24);
             this.label7.TabIndex = 37;
-            this.label7.Text = "# قيمة المستندات الكلية :";
-            this.toolTip1.SetToolTip(this.label7, "قيمة المستندات الكلية لنتيجة البحث");
+            this.label7.Text = "# قيمة السندات الكلية :";
+            this.toolTip1.SetToolTip(this.label7, "قيمة سندات الديون الكلية لنتيجة البحث");
             // 
             // SearchAfterTimerFinish
             // 
             this.SearchAfterTimerFinish.Interval = 400;
             this.SearchAfterTimerFinish.Tick += new System.EventHandler(this.SearchAfterTimerFinish_Tick);
             // 
-            // gbtnAddVoucher
+            // gbtnAddDebt
             // 
-            this.gbtnAddVoucher.Animated = true;
-            this.gbtnAddVoucher.AutoRoundedCorners = true;
-            this.gbtnAddVoucher.BackColor = System.Drawing.Color.Transparent;
-            this.gbtnAddVoucher.BorderColor = System.Drawing.Color.DimGray;
-            this.gbtnAddVoucher.BorderThickness = 1;
-            this.gbtnAddVoucher.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.gbtnAddVoucher.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.gbtnAddVoucher.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.gbtnAddVoucher.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.gbtnAddVoucher.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.gbtnAddVoucher.FillColor = System.Drawing.Color.White;
-            this.gbtnAddVoucher.FocusedColor = System.Drawing.SystemColors.MenuHighlight;
-            this.gbtnAddVoucher.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.gbtnAddVoucher.ForeColor = System.Drawing.Color.Black;
-            this.gbtnAddVoucher.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(102)))), ((int)(((byte)(194)))));
-            this.gbtnAddVoucher.HoverState.Font = new System.Drawing.Font("Segoe UI", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbtnAddVoucher.HoverState.ForeColor = System.Drawing.Color.White;
-            this.gbtnAddVoucher.Image = ((System.Drawing.Image)(resources.GetObject("gbtnAddVoucher.Image")));
-            this.gbtnAddVoucher.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.gbtnAddVoucher.ImageSize = new System.Drawing.Size(28, 28);
-            this.gbtnAddVoucher.IndicateFocus = true;
-            this.gbtnAddVoucher.Location = new System.Drawing.Point(12, 160);
-            this.gbtnAddVoucher.Name = "gbtnAddVoucher";
-            this.gbtnAddVoucher.PressedColor = System.Drawing.Color.White;
-            this.gbtnAddVoucher.Size = new System.Drawing.Size(180, 41);
-            this.gbtnAddVoucher.TabIndex = 8;
-            this.gbtnAddVoucher.Text = "إضافة مستند";
-            this.gbtnAddVoucher.Click += new System.EventHandler(this.gbtnAddVoucher_Click);
+            this.gbtnAddDebt.Animated = true;
+            this.gbtnAddDebt.AutoRoundedCorners = true;
+            this.gbtnAddDebt.BackColor = System.Drawing.Color.Transparent;
+            this.gbtnAddDebt.BorderColor = System.Drawing.Color.DimGray;
+            this.gbtnAddDebt.BorderThickness = 1;
+            this.gbtnAddDebt.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gbtnAddDebt.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnAddDebt.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnAddDebt.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.gbtnAddDebt.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.gbtnAddDebt.FillColor = System.Drawing.Color.White;
+            this.gbtnAddDebt.FocusedColor = System.Drawing.SystemColors.MenuHighlight;
+            this.gbtnAddDebt.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.gbtnAddDebt.ForeColor = System.Drawing.Color.Black;
+            this.gbtnAddDebt.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(102)))), ((int)(((byte)(194)))));
+            this.gbtnAddDebt.HoverState.Font = new System.Drawing.Font("Segoe UI", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnAddDebt.HoverState.ForeColor = System.Drawing.Color.White;
+            this.gbtnAddDebt.Image = ((System.Drawing.Image)(resources.GetObject("gbtnAddDebt.Image")));
+            this.gbtnAddDebt.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.gbtnAddDebt.ImageSize = new System.Drawing.Size(28, 28);
+            this.gbtnAddDebt.IndicateFocus = true;
+            this.gbtnAddDebt.Location = new System.Drawing.Point(12, 160);
+            this.gbtnAddDebt.Name = "gbtnAddDebt";
+            this.gbtnAddDebt.PressedColor = System.Drawing.Color.White;
+            this.gbtnAddDebt.Size = new System.Drawing.Size(180, 41);
+            this.gbtnAddDebt.TabIndex = 8;
+            this.gbtnAddDebt.Text = "إضافة سند دين";
+            this.gbtnAddDebt.Click += new System.EventHandler(this.gbtnAddVoucher_Click);
             // 
             // gcbFilterByDate
             // 
@@ -796,7 +815,7 @@
             this.gcbFilterByDate.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.gcbFilterByDate.ItemHeight = 30;
             this.gcbFilterByDate.Items.AddRange(new object[] {
-            "تاريخ المستند",
+            "تاريخ السند",
             "تاريخ الإنشاء"});
             this.gcbFilterByDate.Location = new System.Drawing.Point(964, 165);
             this.gcbFilterByDate.Name = "gcbFilterByDate";
@@ -816,7 +835,7 @@
             this.lblHeader.Name = "lblHeader";
             this.lblHeader.Size = new System.Drawing.Size(1210, 50);
             this.lblHeader.TabIndex = 101;
-            this.lblHeader.Text = "مستندات الديون";
+            this.lblHeader.Text = "سندات الديون";
             this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // gcbFilterByDebtType
@@ -907,25 +926,6 @@
             this.gcbFilterbyPaymentStatus.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.gcbFilterbyPaymentStatus.SelectedIndexChanged += new System.EventHandler(this.gcbFilterbyPaymentStatus_SelectedIndexChanged);
             // 
-            // gtsmExport
-            // 
-            this.gtsmExport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.gtsmExportExcel});
-            this.gtsmExport.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gtsmExport.Image = ((System.Drawing.Image)(resources.GetObject("gtsmExport.Image")));
-            this.gtsmExport.Name = "gtsmExport";
-            this.gtsmExport.Size = new System.Drawing.Size(194, 36);
-            this.gtsmExport.Text = "تصدير";
-            // 
-            // gtsmExportExcel
-            // 
-            this.gtsmExportExcel.AutoSize = false;
-            this.gtsmExportExcel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gtsmExportExcel.Image = ((System.Drawing.Image)(resources.GetObject("gtsmExportExcel.Image")));
-            this.gtsmExportExcel.Name = "gtsmExportExcel";
-            this.gtsmExportExcel.Size = new System.Drawing.Size(194, 27);
-            this.gtsmExportExcel.Text = "       Excel";
-            // 
             // frmDebtsList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -947,7 +947,7 @@
             this.Controls.Add(this.kgtxtToDate);
             this.Controls.Add(this.kgtxtFromData);
             this.Controls.Add(this.gcbFilterByDate);
-            this.Controls.Add(this.gbtnAddVoucher);
+            this.Controls.Add(this.gbtnAddDebt);
             this.Controls.Add(this.lblUserMessage);
             this.Controls.Add(this.kgtxtFilterValue);
             this.Controls.Add(this.lblNoRecordsFoundMessage);
@@ -995,7 +995,7 @@
         private System.Windows.Forms.ToolStripMenuItem gtsmEdit;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.Timer SearchAfterTimerFinish;
-        private Guna.UI2.WinForms.Guna2Button gbtnAddVoucher;
+        private Guna.UI2.WinForms.Guna2Button gbtnAddDebt;
         private Guna.UI2.WinForms.Guna2ComboBox gcbFilterByDate;
         private KhaledControlLibrary1.KhaledGuna2TextBox kgtxtToDate;
         private KhaledControlLibrary1.KhaledGuna2TextBox kgtxtFromData;

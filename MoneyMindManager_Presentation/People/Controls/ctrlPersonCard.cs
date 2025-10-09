@@ -18,6 +18,20 @@ namespace MoneyMindManager_Presentation.People.Controls
             InitializeComponent();
         }
 
+        public bool AllowEditingPerson
+        {
+            get
+            {
+                return gbtnEditPerson.Enabled;
+            }
+
+            set
+            {
+                gbtnEditPerson.Enabled = value;
+            }
+        }
+
+
         public event Action OnEditingPerson;
 
         public clsPerson Person { get; private set; }

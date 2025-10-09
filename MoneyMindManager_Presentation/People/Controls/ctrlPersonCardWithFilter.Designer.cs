@@ -36,10 +36,10 @@ namespace MoneyMindManager_Presentation.People.Controls
             this.gibtnFindPerson = new Guna.UI2.WinForms.Guna2ImageButton();
             this.gibtnAddPerson = new Guna.UI2.WinForms.Guna2ImageButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.kgtxtPersonName = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.pnlSearchPart = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.kgtxtPersonName = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.ctrlPersonCard1 = new MoneyMindManager_Presentation.People.Controls.ctrlPersonCard();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -176,38 +176,9 @@ namespace MoneyMindManager_Presentation.People.Controls
             // 
             this.toolTip1.IsBalloon = true;
             // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
-            // 
-            // pnlSearchPart
-            // 
-            this.pnlSearchPart.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.pnlSearchPart.Controls.Add(this.label1);
-            this.pnlSearchPart.Controls.Add(this.kgtxtPersonName);
-            this.pnlSearchPart.Controls.Add(this.label3);
-            this.pnlSearchPart.Controls.Add(this.gibtnAddPerson);
-            this.pnlSearchPart.Controls.Add(this.gibtnFindPerson);
-            this.pnlSearchPart.Controls.Add(this.kgtxtPersonID);
-            this.pnlSearchPart.Location = new System.Drawing.Point(2, 0);
-            this.pnlSearchPart.Name = "pnlSearchPart";
-            this.pnlSearchPart.Size = new System.Drawing.Size(570, 68);
-            this.pnlSearchPart.TabIndex = 101;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(337, 1);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 17);
-            this.label1.TabIndex = 126;
-            this.label1.Text = "اسم الشخص";
-            // 
             // kgtxtPersonName
             // 
-            this.kgtxtPersonName.AllowWhiteSpace = false;
+            this.kgtxtPersonName.AllowWhiteSpace = true;
             this.kgtxtPersonName.ApplyTrimAtTextBoxValue = false;
             this.kgtxtPersonName.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.kgtxtPersonName.BackColor = System.Drawing.Color.Transparent;
@@ -224,7 +195,7 @@ namespace MoneyMindManager_Presentation.People.Controls
             this.kgtxtPersonName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.kgtxtPersonName.ForeColor = System.Drawing.Color.Black;
             this.kgtxtPersonName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.kgtxtPersonName.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Number;
+            this.kgtxtPersonName.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
             this.kgtxtPersonName.IsRequired = true;
             this.kgtxtPersonName.Location = new System.Drawing.Point(144, 19);
             this.kgtxtPersonName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
@@ -286,6 +257,35 @@ namespace MoneyMindManager_Presentation.People.Controls
             this.kgtxtPersonName.TrimEnd = false;
             this.kgtxtPersonName.TrimStart = false;
             this.kgtxtPersonName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.kgtxtPersonID_KeyDown);
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // pnlSearchPart
+            // 
+            this.pnlSearchPart.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pnlSearchPart.Controls.Add(this.label1);
+            this.pnlSearchPart.Controls.Add(this.kgtxtPersonName);
+            this.pnlSearchPart.Controls.Add(this.label3);
+            this.pnlSearchPart.Controls.Add(this.gibtnAddPerson);
+            this.pnlSearchPart.Controls.Add(this.gibtnFindPerson);
+            this.pnlSearchPart.Controls.Add(this.kgtxtPersonID);
+            this.pnlSearchPart.Location = new System.Drawing.Point(2, 0);
+            this.pnlSearchPart.Name = "pnlSearchPart";
+            this.pnlSearchPart.Size = new System.Drawing.Size(570, 68);
+            this.pnlSearchPart.TabIndex = 101;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(337, 1);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(77, 17);
+            this.label1.TabIndex = 126;
+            this.label1.Text = "اسم الشخص";
             // 
             // label3
             // 

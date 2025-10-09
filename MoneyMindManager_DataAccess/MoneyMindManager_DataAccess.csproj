@@ -43,8 +43,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clsAccountData.cs" />
-    <Compile Include="clsclsIncomeAndExpenseTransactionData.cs" />
+    <Compile Include="clsIncomeAndExpenseTransactionData.cs" />
     <Compile Include="clsDebtData.cs" />
+    <Compile Include="clsDebtPaymentData.cs" />
     <Compile Include="clsIncomeAndExpenseCategoryData.cs" />
     <Compile Include="clsIncomeAndExpenseVoucherData.cs" />
     <Compile Include="clsMainTransactionData.cs" />

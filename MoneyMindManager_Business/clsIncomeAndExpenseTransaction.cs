@@ -54,7 +54,7 @@ namespace MoneyMindManager_Business
             this.CreatedDate = DateTime.Now;
             this.CreatedByUserID = currentUserID;
 
-            this.MainTransactionID = await clsclsIncomeAndExpenseTransactionData.AddNewIncomeAndExpenseTransaction(Convert.ToInt32(VoucherID)
+            this.MainTransactionID = await clsIncomeAndExpenseTransactionData.AddNewIncomeAndExpenseTransaction(Convert.ToInt32(VoucherID)
                 , Convert.ToInt32(CategoryID), Amount,Purpose, currentUserID);
 
             return this.MainTransactionID != null;
@@ -62,7 +62,7 @@ namespace MoneyMindManager_Business
 
         async Task<bool> _UpdateTransaction(int currentUserID)
         {
-            return await clsclsIncomeAndExpenseTransactionData.UpdateIncomeAndExpenseTransactoinByID
+            return await clsIncomeAndExpenseTransactionData.UpdateIncomeAndExpenseTransactoinByID
                 (Convert.ToInt32(MainTransactionID),Amount, Convert.ToInt32(CategoryID),Purpose, currentUserID);
         }
 
@@ -98,7 +98,7 @@ namespace MoneyMindManager_Business
 
         public static async Task<clsIncomeAndExpenseTransaction> FindTransactionByTransactionID(int transactionID, int currentUserID)
         {
-            var VC = await clsclsIncomeAndExpenseTransactionData.GetIncomeAndExpenseTransactionInfoByID(transactionID, currentUserID);
+            var VC = await clsIncomeAndExpenseTransactionData.GetIncomeAndExpenseTransactionInfoByID(transactionID, currentUserID);
 
             var result = await  clsMainTransaction.FindMainTransactionInfoByID(transactionID, currentUserID);
 
@@ -117,12 +117,12 @@ namespace MoneyMindManager_Business
 
         public static async Task<bool> DeleteIncomeAndExpenseTransactionByID(int transactionID,int currentUserID)
         {
-            return await clsclsIncomeAndExpenseTransactionData.DeleteIncomeAndExpenseTransactoinByID(transactionID, currentUserID);
+            return await clsIncomeAndExpenseTransactionData.DeleteIncomeAndExpenseTransactoinByID(transactionID, currentUserID);
         }
 
         public static async Task<clsGetAllIncomeAndExpenseTransactions> GetAllIncomeAndExpensTransactions(int voucherID, int currentUserID, short pageNumber)
         {
-            return await clsclsIncomeAndExpenseTransactionData.GetAllIncomeAndExpensTransactions(voucherID, currentUserID, pageNumber);
+            return await clsIncomeAndExpenseTransactionData.GetAllIncomeAndExpensTransactions(voucherID, currentUserID, pageNumber);
         }
     }
 }

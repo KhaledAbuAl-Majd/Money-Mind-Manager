@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MoneyMindManager_DataAccess;
 using MoneyMindManagerGlobal;
-using static MoneyMindManager_Business.clsIncomeAndExpenseVoucher;
+using static MoneyMindManagerGlobal.clsDataColumns.clsDebtPaymentClasses;
 using static MoneyMindManagerGlobal.clsDataColumns.clsDebtsClasses;
 
 namespace MoneyMindManager_Business
@@ -22,8 +22,45 @@ namespace MoneyMindManager_Business
         public clsAccount AccountInfo { get; private set; }
         public clsUser CreatedByUserInfo { get; private set; }
 
+        public string Notes
+        {
+            get
+            {
+                return DebtTransactionInfo?.Purpose;
+            }
+        }
+
+        public DateTime? DebtDate
+        {
+            get
+            {
+                return DebtTransactionInfo?.TransactionDate;
+            }
+        }
+        public DateTime? CreatedDate
+        {
+            get
+            {
+                return DebtTransactionInfo?.CreatedDate;
+            }
+        }
+        public Decimal? DebtValue
+        {
+            get
+            {
+                return DebtTransactionInfo?.Amount;
+            }
+        }
         //
 
+        public bool AssingPersonIDAtAddMode(int personID)
+        {
+            if (Mode == enMode.Update)
+                return false;
+
+            this.PersonID = personID;
+            return true;
+        }
         public bool AssingIsLendingAddMode(bool isLending)
         {
             if (Mode == enMode.Update)
@@ -32,6 +69,7 @@ namespace MoneyMindManager_Business
             this.IsLending = isLending;
             return true;
         }
+
         public bool AssingIsLockingAddMode(bool isLocked)
         {
             if (Mode == enMode.Update)
@@ -169,6 +207,21 @@ namespace MoneyMindManager_Business
         public static async Task<bool> DeleteDebtByDebtID(int debtID, int currentUserID)
         {
             return await clsDebtData.DeleteDebtByID(debtID, currentUserID);
+        }
+
+        public async Task<clsGetAllDebtPayments> GetDebtPayments(int currentUserID, short pageNumber)
+        {
+            var result = await GetDebtPayments(Convert.ToInt32(DebtID), currentUserID, pageNumber);
+
+            if (result != null)
+                this.RemainingAmount = result.RemainingAmount;
+
+            return result;
+        }
+
+        public static async Task<clsGetAllDebtPayments> GetDebtPayments(int debtID, int currentUserID, short pageNumber)
+        {
+            return await clsDebtPayment.GetAllDebtPyamentsByDebtID(debtID, currentUserID, pageNumber);
         }
 
         private static async Task<clsGetAllDebts> _GetAllDebts(int? debtID,bool? isLending,string personName, bool byCreatedDate,

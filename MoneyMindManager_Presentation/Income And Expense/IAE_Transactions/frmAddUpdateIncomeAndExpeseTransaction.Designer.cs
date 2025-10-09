@@ -31,6 +31,9 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAddUpdateIncomeAndExpeseTransction));
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.gibtnChooseCategory = new Guna.UI2.WinForms.Guna2ImageButton();
             this.gbtnClose = new Guna.UI2.WinForms.Guna2Button();
             this.gbtnSave = new Guna.UI2.WinForms.Guna2Button();
@@ -61,6 +64,9 @@
             this.guna2Panel2.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.guna2Panel2.BorderRadius = 20;
             this.guna2Panel2.BorderThickness = 2;
+            this.guna2Panel2.Controls.Add(this.label5);
+            this.guna2Panel2.Controls.Add(this.label2);
+            this.guna2Panel2.Controls.Add(this.label4);
             this.guna2Panel2.Controls.Add(this.gibtnChooseCategory);
             this.guna2Panel2.Controls.Add(this.gbtnClose);
             this.guna2Panel2.Controls.Add(this.gbtnSave);
@@ -76,9 +82,42 @@
             this.guna2Panel2.ShadowDecoration.Color = System.Drawing.Color.DarkGray;
             this.guna2Panel2.ShadowDecoration.Depth = 20;
             this.guna2Panel2.ShadowDecoration.Enabled = true;
-            this.guna2Panel2.Size = new System.Drawing.Size(359, 393);
+            this.guna2Panel2.Size = new System.Drawing.Size(359, 419);
             this.guna2Panel2.TabIndex = 1;
             this.guna2Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2Panel2_Paint);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(283, 238);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(39, 17);
+            this.label5.TabIndex = 111;
+            this.label5.Text = "المبلغ";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(287, 118);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 17);
+            this.label2.TabIndex = 110;
+            this.label2.Text = "البيان";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(289, 66);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(33, 17);
+            this.label4.TabIndex = 109;
+            this.label4.Text = "الفئة";
             // 
             // gibtnChooseCategory
             // 
@@ -91,7 +130,7 @@
             this.gibtnChooseCategory.ImageRotate = 0F;
             this.gibtnChooseCategory.ImageSize = new System.Drawing.Size(20, 20);
             this.gibtnChooseCategory.IndicateFocus = true;
-            this.gibtnChooseCategory.Location = new System.Drawing.Point(10, 80);
+            this.gibtnChooseCategory.Location = new System.Drawing.Point(10, 88);
             this.gibtnChooseCategory.Name = "gibtnChooseCategory";
             this.gibtnChooseCategory.PressedState.ImageSize = new System.Drawing.Size(30, 30);
             this.gibtnChooseCategory.Size = new System.Drawing.Size(23, 21);
@@ -124,7 +163,7 @@
             this.gbtnClose.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnClose.ImageSize = new System.Drawing.Size(25, 25);
             this.gbtnClose.IndicateFocus = true;
-            this.gbtnClose.Location = new System.Drawing.Point(37, 336);
+            this.gbtnClose.Location = new System.Drawing.Point(37, 358);
             this.gbtnClose.Name = "gbtnClose";
             this.gbtnClose.PressedColor = System.Drawing.Color.White;
             this.gbtnClose.Size = new System.Drawing.Size(283, 41);
@@ -155,7 +194,7 @@
             this.gbtnSave.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnSave.ImageSize = new System.Drawing.Size(25, 25);
             this.gbtnSave.IndicateFocus = true;
-            this.gbtnSave.Location = new System.Drawing.Point(37, 282);
+            this.gbtnSave.Location = new System.Drawing.Point(37, 304);
             this.gbtnSave.Name = "gbtnSave";
             this.gbtnSave.PressedColor = System.Drawing.Color.White;
             this.gbtnSave.Size = new System.Drawing.Size(283, 41);
@@ -242,7 +281,7 @@
             this.kgtxtPurpose.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtPurpose.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
             this.kgtxtPurpose.IsRequired = false;
-            this.kgtxtPurpose.Location = new System.Drawing.Point(37, 119);
+            this.kgtxtPurpose.Location = new System.Drawing.Point(37, 130);
             this.kgtxtPurpose.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtPurpose.MaxLength = 150;
             this.kgtxtPurpose.Multiline = true;
@@ -323,7 +362,7 @@
             this.kgtxtAmount.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtAmount.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Number;
             this.kgtxtAmount.IsRequired = true;
-            this.kgtxtAmount.Location = new System.Drawing.Point(37, 234);
+            this.kgtxtAmount.Location = new System.Drawing.Point(37, 250);
             this.kgtxtAmount.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtAmount.MaxLength = 25;
             this.kgtxtAmount.Name = "kgtxtAmount";
@@ -405,7 +444,7 @@
             this.kgtxtCategoryName.IconRightCursor = System.Windows.Forms.Cursors.Hand;
             this.kgtxtCategoryName.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
             this.kgtxtCategoryName.IsRequired = true;
-            this.kgtxtCategoryName.Location = new System.Drawing.Point(37, 70);
+            this.kgtxtCategoryName.Location = new System.Drawing.Point(37, 76);
             this.kgtxtCategoryName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtCategoryName.MaxLength = 255;
             this.kgtxtCategoryName.Name = "kgtxtCategoryName";
@@ -488,7 +527,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(596, 518);
+            this.label1.Location = new System.Drawing.Point(596, 544);
             this.label1.Name = "label1";
             this.label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label1.Size = new System.Drawing.Size(194, 24);
@@ -506,7 +545,7 @@
             this.gtswNewTransactionAfterAdd.CheckedState.InnerBorderColor = System.Drawing.Color.White;
             this.gtswNewTransactionAfterAdd.CheckedState.InnerColor = System.Drawing.Color.White;
             this.gtswNewTransactionAfterAdd.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.gtswNewTransactionAfterAdd.Location = new System.Drawing.Point(556, 521);
+            this.gtswNewTransactionAfterAdd.Location = new System.Drawing.Point(556, 547);
             this.gtswNewTransactionAfterAdd.Name = "gtswNewTransactionAfterAdd";
             this.gtswNewTransactionAfterAdd.Size = new System.Drawing.Size(35, 20);
             this.gtswNewTransactionAfterAdd.TabIndex = 5;
@@ -532,7 +571,7 @@
             this.gibtnDeleteTransaction.ImageOffset = new System.Drawing.Point(0, 0);
             this.gibtnDeleteTransaction.ImageRotate = 0F;
             this.gibtnDeleteTransaction.ImageSize = new System.Drawing.Size(28, 28);
-            this.gibtnDeleteTransaction.Location = new System.Drawing.Point(479, 510);
+            this.gibtnDeleteTransaction.Location = new System.Drawing.Point(479, 536);
             this.gibtnDeleteTransaction.Name = "gibtnDeleteTransaction";
             this.gibtnDeleteTransaction.PressedState.ImageSize = new System.Drawing.Size(64, 64);
             this.gibtnDeleteTransaction.Size = new System.Drawing.Size(40, 42);
@@ -563,7 +602,7 @@
             this.gbtnNewTransaction.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnNewTransaction.ImageSize = new System.Drawing.Size(25, 25);
             this.gbtnNewTransaction.IndicateFocus = true;
-            this.gbtnNewTransaction.Location = new System.Drawing.Point(464, 562);
+            this.gbtnNewTransaction.Location = new System.Drawing.Point(464, 588);
             this.gbtnNewTransaction.Name = "gbtnNewTransaction";
             this.gbtnNewTransaction.Size = new System.Drawing.Size(283, 41);
             this.gbtnNewTransaction.TabIndex = 7;
@@ -604,6 +643,7 @@
             this.Text = "frmAddUpdateIncomeAndExpeseTransction";
             this.Load += new System.EventHandler(this.frmAddUpdateIncomeAndExpenseTransaction_Load);
             this.guna2Panel2.ResumeLayout(false);
+            this.guna2Panel2.PerformLayout();
             this.guna2Panel3.ResumeLayout(false);
             this.guna2Panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ctrlInfoIcon_Status_IsLocked.PictureBoxControl)).EndInit();
@@ -634,5 +674,8 @@
         private Guna.UI2.WinForms.Guna2Button gbtnSave;
         private Guna.UI2.WinForms.Guna2ImageButton gibtnChooseCategory;
         private Guna.UI2.WinForms.Guna2ImageButton gibtnDeleteTransaction;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label4;
     }
 }

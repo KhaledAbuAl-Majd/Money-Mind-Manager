@@ -68,6 +68,18 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Debts\DebtPayment\frmAddUpdateDebtPayment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Debts\DebtPayment\frmAddUpdateDebtPayment.Designer.cs">
+      <DependentUpon>frmAddUpdateDebtPayment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Debts\frmAddUpdateDebt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Debts\frmAddUpdateDebt.Designer.cs">
+      <DependentUpon>frmAddUpdateDebt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Debts\frmDebtsList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,10 +110,10 @@
     <Compile Include="Income And Expense\frmIncomeAndExpense.Designer.cs">
       <DependentUpon>frmIncomeAndExpense.cs</DependentUpon>
     </Compile>
-    <Compile Include="Income And Expense\Transactions\frmAddUpdateIncomeAndExpeseTransaction.cs">
+    <Compile Include="Income And Expense\IAE_Transactions\frmAddUpdateIncomeAndExpeseTransaction.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Income And Expense\Transactions\frmAddUpdateIncomeAndExpeseTransaction.Designer.cs">
+    <Compile Include="Income And Expense\IAE_Transactions\frmAddUpdateIncomeAndExpeseTransaction.Designer.cs">
       <DependentUpon>frmAddUpdateIncomeAndExpeseTransaction.cs</DependentUpon>
     </Compile>
     <Compile Include="Income And Expense\Vouchers\frmAddUpdateVoucher.cs">
@@ -199,6 +211,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Debts\DebtPayment\frmAddUpdateDebtPayment.resx">
+      <DependentUpon>frmAddUpdateDebtPayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Debts\frmAddUpdateDebt.resx">
+      <DependentUpon>frmAddUpdateDebt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Debts\frmDebtsList.resx">
       <DependentUpon>frmDebtsList.cs</DependentUpon>
     </EmbeddedResource>
@@ -214,7 +232,7 @@
     <EmbeddedResource Include="Income And Expense\frmIncomeAndExpense.resx">
       <DependentUpon>frmIncomeAndExpense.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Income And Expense\Transactions\frmAddUpdateIncomeAndExpeseTransaction.resx">
+    <EmbeddedResource Include="Income And Expense\IAE_Transactions\frmAddUpdateIncomeAndExpeseTransaction.resx">
       <DependentUpon>frmAddUpdateIncomeAndExpeseTransaction.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Income And Expense\Vouchers\frmAddUpdateVoucher.resx">
@@ -313,6 +331,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Income And Expense\Vouchers\Controls\" />
+    <Folder Include="Transactions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

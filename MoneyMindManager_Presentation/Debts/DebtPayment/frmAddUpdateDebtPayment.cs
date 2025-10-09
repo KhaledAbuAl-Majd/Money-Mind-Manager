@@ -15,14 +15,14 @@ using static MoneyMindManager_Business.clsIncomeAndExpenseVoucher;
 
 namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 {
-    public partial class frmAddUpdateIncomeAndExpeseTransction : Form
+    public partial class frmAddUpdateDebtPayment : Form
     {
         /// <summary>
         /// TransactionID
         /// </summary>
         public event Action<int> OnCloseAndSaved;
 
-        int _VoucherID { get; }
+        int _DebtID { get; }
 
         bool _isSaved = false;
 
@@ -32,17 +32,16 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
         enum enMode { AddNew, Update };
         enMode Mode { get; set; }
 
-        public frmAddUpdateIncomeAndExpeseTransction(bool isIncome,int voucherID)
+        public frmAddUpdateDebtPayment(bool isLending, int debtId)
         {
             InitializeComponent();
             Mode = enMode.AddNew;
-            this._VoucherID = voucherID;
-            _isIncome = isIncome;
+            this._DebtID = debtId;
             _TransactionID = null;
-            _Transaction = new clsIncomeAndExpenseTransaction();
+            _DebtPayment = new clsDebtPayment();
         }
 
-        public frmAddUpdateIncomeAndExpeseTransction(int transactionID)
+        public frmAddUpdateDebtPayment(int transactionID)
         {
             InitializeComponent();
             Mode = enMode.Update;
@@ -51,7 +50,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
         private int? _TransactionID { get; set; }
 
-        private clsIncomeAndExpenseTransaction _Transaction { get; set; }
+        private clsDebtPayment _DebtPayment { get; set; }
 
         void ChangeHeaderValue(string txt)
         {
@@ -75,7 +74,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
         {
             if (isLocked)
             {
-                //_SetReadOnlyAtTextBox(kgtxtCategoryName);
+                _SetReadOnlyAtTextBox(kgtxtPaymentDate);
                 _SetReadOnlyAtTextBox(kgtxtPurpose);
                 _SetReadOnlyAtTextBox(kgtxtAmount);
 
@@ -84,7 +83,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             }
             else
             {
-                //_CancelReadOnlyAtTextBox(kgtxtCategoryName);
+                _CancelReadOnlyAtTextBox(kgtxtPaymentDate);
                 _CancelReadOnlyAtTextBox(kgtxtPurpose);
                 _CancelReadOnlyAtTextBox(kgtxtAmount);
 
@@ -97,49 +96,48 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
         void _AddNewMode()
         {
-            ChangeHeaderValue("إضافة معاملة");
+            ChangeHeaderValue("إضافة معاملة سداد دين");
             _TransactionID = null;
-            _Transaction = new clsIncomeAndExpenseTransaction();
+            _DebtPayment = new clsDebtPayment();
             lblTransactionID.Text = "N/A";
-            kgtxtCategoryName.Text = null;
-            kgtxtCategoryName.Tag = null;
+            kgtxtPaymentDate.Text = null;
+            kgtxtPaymentDate.Tag = null;
             kgtxtPurpose.Text = null;
             kgtxtAmount.Text = null;
             _isLocked = false;
             LockAndUnLockMode(_isLocked);
             ctrlInfoIcon_Status_IsLocked.Visible = false;
             gibtnDeleteTransaction.Enabled = false;
-            kgtxtCategoryName.Focus();
+            kgtxtPaymentDate.Focus();
         }
 
         async Task _UpdateMode()
         {
-            ChangeHeaderValue("تعديل بيانات المعاملة");
+            ChangeHeaderValue("تعديل بيانات معاملة سداد دين");
             int currentUserID = Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID);
 
-            var searchedTransaction = await clsIncomeAndExpenseTransaction.FindTransactionByTransactionID(Convert.ToInt32(_TransactionID), currentUserID);
+            var searchedDebtPayment = await clsDebtPayment.FindDebtPaymentByTransactionID(Convert.ToInt32(_TransactionID), currentUserID);
 
-            if (searchedTransaction == null)
+            if (searchedDebtPayment == null)
             {
-                clsGlobalMessageBoxs.ShowErrorMessage("فشل تحميل بيانات المعاملة");
+                clsGlobalMessageBoxs.ShowErrorMessage("فشل تحميل بيانات معاملة سداد الدين");
                 this.Close();
                 return;
             }
 
-            //this._TransactionID = searchedTransaction.MainTransactionID;
-            this._Transaction = searchedTransaction;
-            this._isIncome = searchedTransaction.VouhcerInfo.IsIncome;
-            lblTransactionID.Text = _Transaction.MainTransactionID.ToString();
-            kgtxtCategoryName.Text = _Transaction.CategoryInfo?.CategoryName;
-            kgtxtCategoryName.Tag = _Transaction.CategoryID;
-            kgtxtPurpose.Text = _Transaction?.Purpose;
-            kgtxtAmount.Text = _Transaction.Amount.ToString();
+            this._DebtPayment = searchedDebtPayment;
+
+            lblTransactionID.Text = _DebtPayment.MainTransactionID.ToString();
+            kgtxtPaymentDate.Text = _DebtPayment.TransactionDate.ToString();
+            kgtxtPaymentDate.RefreshNumber_DateTimeFormattedText();
+            kgtxtPurpose.Text = _DebtPayment?.Purpose;
+            kgtxtAmount.Text = _DebtPayment.Amount.ToString();
             kgtxtAmount.RefreshNumber_DateTimeFormattedText();
 
-            _isLocked = _Transaction.IsLocked;
-            LockAndUnLockMode(_Transaction.IsLocked);
+            _isLocked = _DebtPayment.IsLocked;
+            LockAndUnLockMode(_DebtPayment.IsLocked);
 
-            gibtnDeleteTransaction.Enabled = !_Transaction.IsLocked;      
+            gibtnDeleteTransaction.Enabled = !_DebtPayment.IsLocked;      
 
             gtswNewTransactionAfterAdd.Checked = false;
             gtswNewTransactionAfterAdd.Enabled = false;
@@ -149,19 +147,9 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
         void _ResteObject()
         {
-            _Transaction = new clsIncomeAndExpenseTransaction();
+            _DebtPayment = new clsDebtPayment();
         }
 
-        void _ShowChooseCategoryForm()
-        {
-            if (_isLocked)
-                return;
-
-            var frm = new frmSelectCategory(Convert.ToBoolean(_isIncome));
-            frm.OnCategorySelected += Frm_OnCategorySelected;
-            //frm.ShowDialog(clsGlobal_UI.MainForm);
-            clsGlobal_UI.MainForm.AddNewFormAsDialog(frm);
-        }
         async Task _Save()
         {
             if (_isLocked)
@@ -174,39 +162,33 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             if (!ValidateChildren())
             {
                 clsGlobalMessageBoxs.ShowValidateChildrenFailedMessage();
+                lblUserMessage.Text = "تم العثور على حقول غير صالحة. ضع المؤشر على العلامات الحمراء لعرض سبب الخطأ.";
+                lblUserMessage.Visible = true;
                 return;
             }
 
-            if (int.TryParse(kgtxtCategoryName.Tag?.ToString(), out int CategoryID))
-            {
-                _Transaction.CategoryID = CategoryID;
-            }
-            else
-            {
-                clsGlobalMessageBoxs.ShowErrorMessage("فشل تحويل معرف الفئة, برجاء التواصل مع منشئ البرنامج");
-                _ResteObject();
-                return;
-            }
+            lblUserMessage.Visible = false;
 
-            _Transaction.Purpose = kgtxtPurpose.ValidatedText;
-            _Transaction.Amount = Convert.ToDecimal(kgtxtAmount.ValidatedText);
+            _DebtPayment.TransactionDate = Convert.ToDateTime(kgtxtPaymentDate.ValidatedText);
+            _DebtPayment.Purpose = kgtxtPurpose.ValidatedText;
+            _DebtPayment.Amount = Convert.ToDecimal(kgtxtAmount.ValidatedText);
 
             if (Mode == enMode.AddNew)
             {
-                if (!_Transaction.AssignVoucherIDAtAddMode(_VoucherID))
+                if (!_DebtPayment.AssignDebtIDAtAddMode(_DebtID))
                 {
-                    clsGlobalMessageBoxs.ShowErrorMessage("فشل تسجيل معرف المستند !");
+                    clsGlobalMessageBoxs.ShowErrorMessage("فشل تسجيل معرف سند الدين !");
                     _ResteObject();
                     return;
                 }
             }
 
 
-            if (await _Transaction.Save(Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID)))
+            if (await _DebtPayment.Save(Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID)))
             {
                 if (Mode == enMode.AddNew)
                 {
-                    clsGlobalMessageBoxs.ShowMessage($"تم إضافة المعاملة بنجاج بمعرف [{_Transaction.MainTransactionID}]", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    clsGlobalMessageBoxs.ShowMessage($"تم إضافة معاملة السداد بنجاج بمعرف [{_DebtPayment.MainTransactionID}]", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     if (gtswNewTransactionAfterAdd.Checked)
                     {
@@ -215,15 +197,15 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                     else
                     {
                         Mode = enMode.Update;
-                        _TransactionID = _Transaction.MainTransactionID;
+                        _TransactionID = _DebtPayment.MainTransactionID;
                         lblTransactionID.Text = _TransactionID.ToString();
-                        ChangeHeaderValue("تعديل بيانات المعاملة");
-                        gibtnDeleteTransaction.Enabled = !_Transaction.IsLocked;
+                        ChangeHeaderValue("تعديل بيانات معاملة سداد دين");
+                        gibtnDeleteTransaction.Enabled = !_DebtPayment.IsLocked;
                     }
                 }
                 else if (Mode == enMode.Update)
                 {
-                    clsGlobalMessageBoxs.ShowMessage("تم تعديل بيانات المعاملة بنجاح", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    clsGlobalMessageBoxs.ShowMessage("تم تعديل بيانات معاملة السداد بنجاح", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
                 _isSaved = true;
@@ -274,29 +256,15 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
         private void gbtnClose_Click(object sender, EventArgs e)
         {
             if (_isSaved)
-                OnCloseAndSaved?.Invoke(Convert.ToInt32(_Transaction.MainTransactionID));
+                OnCloseAndSaved?.Invoke(Convert.ToInt32(_DebtPayment.MainTransactionID));
 
             this.Close();
-        }
-
-        private void Frm_OnCategorySelected(object sender, frmSelectCategory.SelecteCategoryEventArgs e)
-        {
-            if (_isLocked)
-                return;
-
-            kgtxtCategoryName.Text = e.CategoryName;
-            kgtxtCategoryName.Tag = e.CategoryID;
         }
 
         private void gbtnNewTransaction_Click(object sender, EventArgs e)
         {
             Mode = enMode.AddNew;
             _AddNewMode();
-        }
-
-        private void gibtnChooseCategory_Click(object sender, EventArgs e)
-        {
-            _ShowChooseCategoryForm();
         }
 
         private async void gibtnDeleteTransaction_Click(object sender, EventArgs e)
@@ -307,7 +275,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             if (clsGlobalMessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف المعاملة ؟ ", "طلب مواقفقة", MessageBoxButtons.OKCancel,
                MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
             {
-                if (await clsIncomeAndExpenseTransaction.DeleteIncomeAndExpenseTransactionByID(Convert.ToInt32(_TransactionID), Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID)))
+                if (await clsDebtPayment.DeleteDebtPaymentByID(Convert.ToInt32(_TransactionID), Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID)))
                 {
                     _isSaved = true;
                     gbtnClose.PerformClick();
@@ -315,33 +283,5 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             }
         }
 
-
-        private void kgtxtCategoryName_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.F9)
-            {
-                _ShowChooseCategoryForm();
-            }
-        }
-
-        private void guna2Panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void lblUserMessage_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void gtswNewTransactionAfterAdd_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }

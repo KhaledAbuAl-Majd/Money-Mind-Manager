@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="clsAccount.cs" />
     <Compile Include="clsDebt.cs" />
+    <Compile Include="clsDebtPayment.cs" />
     <Compile Include="clsIncomeAndExpenseTransaction.cs" />
     <Compile Include="clsIncomeAndExpenseVoucher.cs" />
     <Compile Include="clsIncomeAndExpenseCategory.cs" />

@@ -11,7 +11,7 @@ using static MoneyMindManagerGlobal.clsDataColumns.clsIncomeAndExpenseTransactio
 
 namespace MoneyMindManager_DataAccess
 {
-    public static class clsclsIncomeAndExpenseTransactionData
+    public static class clsIncomeAndExpenseTransactionData
     {
         public static async Task<int?> AddNewIncomeAndExpenseTransaction(int voucherID, int categoryID, Decimal amount,string purpose,
             int createdByUserID, bool RaiseEventOnErrorOccured = true)

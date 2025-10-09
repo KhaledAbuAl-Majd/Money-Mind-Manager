@@ -193,7 +193,7 @@ namespace MoneyMindManager_Business
 
         public static async Task<clsGetAllIncomeAndExpenseTransactions> GetVoucheTransactions(int voucherID,int currentUserID, short pageNumber)
         {
-           return await clsclsIncomeAndExpenseTransactionData.GetAllIncomeAndExpensTransactions(voucherID, currentUserID, pageNumber);
+           return await clsIncomeAndExpenseTransaction.GetAllIncomeAndExpensTransactions(voucherID, currentUserID, pageNumber);
         }
 
         public static enVoucherType GetVoucherType(bool isIncome, bool isReturn)
