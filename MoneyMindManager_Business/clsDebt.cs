@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -286,6 +287,72 @@ namespace MoneyMindManager_Business
         {
 
             return await _GetAllDebts(null, isLending, personName, byCreatedDate, fromDateString, toDateString, isPaid, currentUserID, pageNumber);
+        }
+
+        //
+
+        private static async Task<DataTable> _GetAllDebtsWithoutPaging(int? debtID, bool? isLending, string personName, bool byCreatedDate,
+           string fromDateString, string toDateString, bool? isPaid, int currentUserID)
+        {
+
+            DateTime? fromCreatedDate = null, toCreatedDate = null,
+                fromDebtDate = null, toDebtDate = null;
+
+            if (byCreatedDate)
+            {
+                fromCreatedDate = clsFormat.TryConvertToDateTime(fromDateString);
+                toCreatedDate = clsFormat.TryConvertToDateTime(toDateString);
+
+                fromDebtDate = null;
+                toDebtDate = null;
+            }
+            else
+            {
+                fromDebtDate = clsFormat.TryConvertToDateTime(fromDateString);
+                toDebtDate = clsFormat.TryConvertToDateTime(toDateString);
+
+                fromCreatedDate = null;
+                toCreatedDate = null;
+            }
+
+            return await clsDebtData.GetAllDebtsWithoutPaging(debtID, isLending, personName, fromCreatedDate, toCreatedDate, fromDebtDate,
+                toDebtDate, isPaid, currentUserID);
+        }
+
+        /// <summary>
+        /// Get All Debts WithoutPaging, if variable is null will not filter by it
+        /// </summary>
+        /// <param name="byCreatedDate">filter by createdDate or not (DebtData)</param>
+        /// <returns>DataTable of all debts if exists, if not returns null</returns>
+        public static async Task<DataTable> GetAllDebtsWithoutPaging(bool? isLending, bool byCreatedDate,
+           string fromDateString, string toDateString, bool? isPaid, int currentUserID)
+        {
+
+            return await _GetAllDebtsWithoutPaging(null, isLending, null, byCreatedDate, fromDateString, toDateString, isPaid, currentUserID);
+        }
+
+        /// <summary>
+        /// Get All Debts WithoutPaging, if variable is null will not filter by it
+        /// </summary>
+        /// <param name="byCreatedDate">filter by createdDate or not (DebtData)</param>
+        /// <returns>DataTable of all debts if exists, if not returns null</returns>
+        public static async Task<DataTable> GetAllDebtsWithoutPaging(int debtID, bool? isLending, bool byCreatedDate,
+           string fromDateString, string toDateString, bool? isPaid, int currentUserID)
+        {
+
+            return await _GetAllDebtsWithoutPaging(debtID, isLending, null, byCreatedDate, fromDateString, toDateString, isPaid, currentUserID);
+        }
+
+        /// <summary>
+        /// Get All Debts WithoutPaging, if variable is null will not filter by it
+        /// </summary>
+        /// <param name="byCreatedDate">filter by createdDate or not (DebtData)</param>
+        /// <returns>DataTable of all debts if exists, if not returns null</returns>
+        public static async Task<DataTable> GetAllDebtsWithoutPaging(string personName, bool? isLending, bool byCreatedDate,
+           string fromDateString, string toDateString, bool? isPaid, int currentUserID)
+        {
+
+            return await _GetAllDebtsWithoutPaging(null, isLending, personName, byCreatedDate, fromDateString, toDateString, isPaid, currentUserID);
         }
     }
 }

@@ -45,7 +45,7 @@
             this.guna2Panel2.Controls.Add(this.gbtnClose);
             this.guna2Panel2.Controls.Add(this.ctrlPersonCard1);
             this.guna2Panel2.FillColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.guna2Panel2.Location = new System.Drawing.Point(314, 90);
+            this.guna2Panel2.Location = new System.Drawing.Point(314, 82);
             this.guna2Panel2.Name = "guna2Panel2";
             this.guna2Panel2.ShadowDecoration.BorderRadius = 20;
             this.guna2Panel2.ShadowDecoration.Color = System.Drawing.Color.DarkGray;
@@ -88,6 +88,7 @@
             // 
             // ctrlPersonCard1
             // 
+            this.ctrlPersonCard1.AllowEditingPerson = false;
             this.ctrlPersonCard1.BackColor = System.Drawing.Color.White;
             this.ctrlPersonCard1.Location = new System.Drawing.Point(14, 12);
             this.ctrlPersonCard1.Name = "ctrlPersonCard1";

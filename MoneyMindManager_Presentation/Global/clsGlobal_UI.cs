@@ -93,7 +93,7 @@ namespace MoneyMindManager_Presentation
         }
         public static void SubscribeToErrorOcrruedEvent()
         {
-            clsGlobalEvents.OnErrorOccured += clsGlobalMessageBoxs.ShowErrorMessage;
+            clsGlobalEvents.OnErrorOccured +=  clsGlobalMessageBoxs.ShowErrorMessage;
 
             //SynchronizationContext uiContext = SynchronizationContext.Current;
 

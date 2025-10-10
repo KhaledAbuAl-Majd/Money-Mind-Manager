@@ -324,6 +324,29 @@ namespace MoneyMindManagerGlobal
                     this.TransactionDate = DateTime.MaxValue; ; 
                 }
             }
+
+            public class clsGetAllMainTransactions
+            {
+                public DataTable dtTransactions;
+
+                public short NumberOfPages = 0;
+
+                public int RecordsCount = 0;
+
+                public decimal TotalAmount;
+
+                public decimal CurrentPageAmount;
+
+                public clsGetAllMainTransactions(DataTable dtTransactions, short numberOfPages, int recordsCount, decimal totalAmount,
+                    decimal currentPageAmount)
+                {
+                    this.dtTransactions = dtTransactions;
+                    this.NumberOfPages = numberOfPages;
+                    this.RecordsCount = recordsCount;
+                    this.TotalAmount = totalAmount;
+                    this.CurrentPageAmount = currentPageAmount;
+                }
+            }
         }
 
         public static class clsIncomeAndExpenseCategoriesClasses

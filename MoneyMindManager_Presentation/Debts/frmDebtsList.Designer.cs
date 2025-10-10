@@ -485,7 +485,7 @@
             this.guna2ContextMenuStrip1.RenderStyle.SelectionForeColor = System.Drawing.Color.White;
             this.guna2ContextMenuStrip1.RenderStyle.SeparatorColor = System.Drawing.Color.Gainsboro;
             this.guna2ContextMenuStrip1.RenderStyle.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
-            this.guna2ContextMenuStrip1.Size = new System.Drawing.Size(167, 112);
+            this.guna2ContextMenuStrip1.Size = new System.Drawing.Size(195, 134);
             // 
             // gtsmAddVoucher
             // 
@@ -504,7 +504,7 @@
             this.gtsmEdit.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gtsmEdit.Image = ((System.Drawing.Image)(resources.GetObject("gtsmEdit.Image")));
             this.gtsmEdit.Name = "gtsmEdit";
-            this.gtsmEdit.Size = new System.Drawing.Size(166, 36);
+            this.gtsmEdit.Size = new System.Drawing.Size(194, 36);
             this.gtsmEdit.Text = "تعديل";
             this.gtsmEdit.Click += new System.EventHandler(this.gtsmEdit_Click);
             // 
@@ -515,7 +515,7 @@
             this.gtsmExport.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gtsmExport.Image = ((System.Drawing.Image)(resources.GetObject("gtsmExport.Image")));
             this.gtsmExport.Name = "gtsmExport";
-            this.gtsmExport.Size = new System.Drawing.Size(166, 36);
+            this.gtsmExport.Size = new System.Drawing.Size(194, 36);
             this.gtsmExport.Text = "تصدير";
             // 
             // gtsmExportExcel
@@ -526,6 +526,7 @@
             this.gtsmExportExcel.Name = "gtsmExportExcel";
             this.gtsmExportExcel.Size = new System.Drawing.Size(194, 27);
             this.gtsmExportExcel.Text = "       Excel";
+            this.gtsmExportExcel.Click += new System.EventHandler(this.gtsmExportExcel_Click);
             // 
             // errorProvider1
             // 

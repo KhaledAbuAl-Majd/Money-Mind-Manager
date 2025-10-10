@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MoneyMindManager_DataAccess;
+using MoneyMindManagerGlobal;
+using static MoneyMindManager_Business.clsIncomeAndExpenseVoucher;
+using static MoneyMindManagerGlobal.clsDataColumns.clsIncomeAndExpenseVoucherClasses;
 using static MoneyMindManagerGlobal.clsDataColumns.clsMainTransactionClasses;
 
 namespace MoneyMindManager_Business
@@ -81,6 +85,135 @@ namespace MoneyMindManager_Business
 
             return true;
         }
-         
+
+        private static async Task<clsGetAllMainTransactions> _GetAllTransactions(int? transactionID, string createdByUserName,  List<int>transactionTypes ,
+            bool byCreatedDate, string fromDateString,  string toDateString, int currentUserID, short pageNumber)
+        {
+            DateTime? fromCreatedDate = null, toCreatedDate = null,
+                fromTransactionDate = null, toTransactionDate = null;
+
+            if (byCreatedDate)
+            {
+                fromCreatedDate = clsFormat.TryConvertToDateTime(fromDateString);
+                toCreatedDate = clsFormat.TryConvertToDateTime(toDateString);
+
+                fromTransactionDate = null;
+                toTransactionDate = null;
+            }
+            else
+            {
+                fromTransactionDate = clsFormat.TryConvertToDateTime(fromDateString);
+                toTransactionDate = clsFormat.TryConvertToDateTime(toDateString);
+
+                fromCreatedDate = null;
+                toCreatedDate = null;
+            }
+
+            string transactionTypesString = string.Join(",", transactionTypes);
+
+
+            return await clsMainTransactionData.GetAllMainTransactions(transactionID, createdByUserName,transactionTypesString, fromCreatedDate,
+                toCreatedDate, fromTransactionDate, toTransactionDate, currentUserID, pageNumber);
+        }
+
+        /// <summary>
+        /// Get All MainTransactions, if variable is null will not filter by it
+        /// </summary>
+        /// <param name="byCreatedDate">filter by createdDate or not (voucherDate)</param>
+        /// <returns>Object of all MainTransactions if exists, if not returns null</returns>
+        public static async Task<clsGetAllMainTransactions> GetAllTransactions(List<int> transactionTypes ,bool byCreatedDate, string fromDateString, string toDateString,
+            int currentUserID, short pageNumber)
+        {
+            return await _GetAllTransactions(null, null,transactionTypes, byCreatedDate, fromDateString, toDateString, currentUserID, pageNumber);
+        }
+
+        /// <summary>
+        /// Get All MainTransactions by TransactionID, if variable is null will not filter by it
+        /// </summary>
+        /// <param name="byCreatedDate">filter by createdDate or not (voucherDate)</param>
+        /// <returns>Object of all MainTransactions if exists, if not returns null</returns>
+        public static async Task<clsGetAllMainTransactions> GetAllTransactions(int? transactionID,List<int> transactionTypes,
+            bool byCreatedDate, string fromDateString, string toDateString,int currentUserID, short pageNumber)
+        {
+            return await _GetAllTransactions(transactionID, null, transactionTypes, byCreatedDate, fromDateString, toDateString, currentUserID, pageNumber);
+        }
+
+
+        /// <summary>
+        /// Get All MainTransactions by CreatedByUserName, if variable is null will not filter by it
+        /// </summary>
+        /// <param name="byCreatedDate">filter by createdDate or not (voucherDate)</param>
+        /// <returns>Object of all MainTransactions if exists, if not returns null</returns>
+        public static async Task<clsGetAllMainTransactions> GetAllTransactions(string createdByUserName, List<int> transactionTypes,
+            bool byCreatedDate, string fromDateString, string toDateString, int currentUserID, short pageNumber)
+        {
+            return await _GetAllTransactions(null, createdByUserName, transactionTypes, byCreatedDate, fromDateString, toDateString, currentUserID, pageNumber);
+        }
+
+        //
+
+        private static async Task<DataTable> _GetAllTransactionsWithoutPaging(int? transactionID, string createdByUserName, List<int> transactionTypes,
+           bool byCreatedDate, string fromDateString, string toDateString, int currentUserID)
+        {
+            DateTime? fromCreatedDate = null, toCreatedDate = null,
+                fromTransactionDate = null, toTransactionDate = null;
+
+            if (byCreatedDate)
+            {
+                fromCreatedDate = clsFormat.TryConvertToDateTime(fromDateString);
+                toCreatedDate = clsFormat.TryConvertToDateTime(toDateString);
+
+                fromTransactionDate = null;
+                toTransactionDate = null;
+            }
+            else
+            {
+                fromTransactionDate = clsFormat.TryConvertToDateTime(fromDateString);
+                toTransactionDate = clsFormat.TryConvertToDateTime(toDateString);
+
+                fromCreatedDate = null;
+                toCreatedDate = null;
+            }
+
+            string transactionTypesString = string.Join(",", transactionTypes);
+
+
+            return await clsMainTransactionData.GetAllMainTransactionsWithoutPaging(transactionID, createdByUserName, transactionTypesString, fromCreatedDate,
+                toCreatedDate, fromTransactionDate, toTransactionDate, currentUserID);
+        }
+
+        /// <summary>
+        /// Get All MainTransactions WithoutPaging, if variable is null will not filter by it
+        /// </summary>
+        /// <param name="byCreatedDate">filter by createdDate or not (voucherDate)</param>
+        /// <returns>DataTable of MainTransactions if exists, if not returns null</returns>
+        public static async Task<DataTable> GetAllTransactionsWithoutPaging(List<int> transactionTypes, bool byCreatedDate, string fromDateString, string toDateString,
+            int currentUserID)
+        {
+            return await _GetAllTransactionsWithoutPaging(null, null, transactionTypes, byCreatedDate, fromDateString, toDateString, currentUserID);
+        }
+
+        /// <summary>
+        /// Get All MainTransactions WithoutPaging by TransactionID, if variable is null will not filter by it
+        /// </summary>
+        /// <param name="byCreatedDate">filter by createdDate or not (voucherDate)</param>
+        /// <returns>DataTable of MainTransactions if exists, if not returns null</returns>
+        public static async Task<DataTable> GetAllTransactionsWithoutPaging(int? transactionID, List<int> transactionTypes,
+            bool byCreatedDate, string fromDateString, string toDateString, int currentUserID)
+        {
+            return await _GetAllTransactionsWithoutPaging(transactionID, null, transactionTypes, byCreatedDate, fromDateString, toDateString, currentUserID);
+        }
+
+
+        /// <summary>
+        /// Get All MainTransactions WithoutPaging by CreatedByUserName, if variable is null will not filter by it
+        /// </summary>
+        /// <param name="byCreatedDate">filter by createdDate or not (voucherDate)</param>
+        /// <returns>DataTable of MainTransactions if exists, if not returns null</returns>
+        public static async Task<DataTable> GetAllTransactionsWithoutPaging(string createdByUserName, List<int> transactionTypes,
+            bool byCreatedDate, string fromDateString, string toDateString, int currentUserID)
+        {
+            return await _GetAllTransactionsWithoutPaging(null, createdByUserName, transactionTypes, byCreatedDate, fromDateString, toDateString, currentUserID);
+        }
     }
 }

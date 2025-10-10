@@ -1,7 +1,20 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "E:\\Visual Studio\\source\\Projects\\External Projects\\Money Mind Manager\\Project\\MonyeMindManager\\MoneyMindManager_Presentation\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F453BF16-D51A-4E57-BCC5-DEA98DBE47DF}|MoneyMindManager_Presentation.csproj|e:\\visual studio\\source\\projects\\external projects\\money mind manager\\project\\monyemindmanager\\moneymindmanager_presentation\\global\\clsexporthelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F453BF16-D51A-4E57-BCC5-DEA98DBE47DF}|MoneyMindManager_Presentation.csproj|solutionrelative:global\\clsexporthelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F453BF16-D51A-4E57-BCC5-DEA98DBE47DF}|MoneyMindManager_Presentation.csproj|e:\\visual studio\\source\\projects\\external projects\\money mind manager\\project\\monyemindmanager\\moneymindmanager_presentation\\debts\\frmdebtslist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F453BF16-D51A-4E57-BCC5-DEA98DBE47DF}|MoneyMindManager_Presentation.csproj|solutionrelative:debts\\frmdebtslist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F453BF16-D51A-4E57-BCC5-DEA98DBE47DF}|MoneyMindManager_Presentation.csproj|e:\\visual studio\\source\\projects\\external projects\\money mind manager\\project\\monyemindmanager\\moneymindmanager_presentation\\debts\\frmdebtslist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{F453BF16-D51A-4E57-BCC5-DEA98DBE47DF}|MoneyMindManager_Presentation.csproj|solutionrelative:debts\\frmdebtslist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,8 +22,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "clsExportHelper.cs",
+              "DocumentMoniker": "E:\\Visual Studio\\source\\Projects\\External Projects\\Money Mind Manager\\Project\\MonyeMindManager\\MoneyMindManager_Presentation\\Global\\clsExportHelper.cs",
+              "RelativeDocumentMoniker": "Global\\clsExportHelper.cs",
+              "ToolTip": "E:\\Visual Studio\\source\\Projects\\External Projects\\Money Mind Manager\\Project\\MonyeMindManager\\MoneyMindManager_Presentation\\Global\\clsExportHelper.cs*",
+              "RelativeToolTip": "Global\\clsExportHelper.cs*",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAjwDUAAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-10T18:20:35.922Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
@@ -22,6 +48,31 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{6d4078d1-5951-4ed1-ac0e-0a8099c1cce5}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "frmDebtsList.cs",
+              "DocumentMoniker": "E:\\Visual Studio\\source\\Projects\\External Projects\\Money Mind Manager\\Project\\MonyeMindManager\\MoneyMindManager_Presentation\\Debts\\frmDebtsList.cs",
+              "RelativeDocumentMoniker": "Debts\\frmDebtsList.cs",
+              "ToolTip": "E:\\Visual Studio\\source\\Projects\\External Projects\\Money Mind Manager\\Project\\MonyeMindManager\\MoneyMindManager_Presentation\\Debts\\frmDebtsList.cs",
+              "RelativeToolTip": "Debts\\frmDebtsList.cs",
+              "ViewState": "AgIAAL4BAAAAAAAAAAAAANMBAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-10T18:01:51.006Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "frmDebtsList.cs [Design]",
+              "DocumentMoniker": "E:\\Visual Studio\\source\\Projects\\External Projects\\Money Mind Manager\\Project\\MonyeMindManager\\MoneyMindManager_Presentation\\Debts\\frmDebtsList.cs",
+              "RelativeDocumentMoniker": "Debts\\frmDebtsList.cs",
+              "ToolTip": "E:\\Visual Studio\\source\\Projects\\External Projects\\Money Mind Manager\\Project\\MonyeMindManager\\MoneyMindManager_Presentation\\Debts\\frmDebtsList.cs [Design]",
+              "RelativeToolTip": "Debts\\frmDebtsList.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-10T18:01:47.752Z",
+              "EditorCaption": " [Design]"
             }
           ]
         }

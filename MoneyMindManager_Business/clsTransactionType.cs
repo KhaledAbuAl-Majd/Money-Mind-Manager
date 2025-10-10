@@ -11,7 +11,7 @@ namespace MoneyMindManager_Business
 {
     public class clsTransactionType : clsTransactionTypeColumns
     {
-        private clsTransactionType(byte transactionTypeID,string transactionName):base(transactionTypeID,transactionName)
+        private clsTransactionType(byte transactionTypeID, string transactionName) : base(transactionTypeID, transactionName)
         {
 
         }
@@ -32,9 +32,13 @@ namespace MoneyMindManager_Business
             if (TransactionTypeColumns == null)
                 return null;
 
-            return new clsTransactionType(TransactionTypeColumns.TransactionTypeID , transactionTypeName);
+            return new clsTransactionType(TransactionTypeColumns.TransactionTypeID, transactionTypeName);
         }
 
-      
+        public static async Task<DataTable> GetAllTransactionTypes()
+        {
+            return await clsTransactionTypeData.GetAllTransactionTypes();
+        }
+
     }
 }

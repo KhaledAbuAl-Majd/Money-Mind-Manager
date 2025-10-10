@@ -101,6 +101,39 @@ namespace MoneyMindManager_DataAccess
             return TransactionTypeData;
         }
 
+        public static async Task<DataTable> GetAllTransactionTypes(bool RaiseEventOnErrorOccured = true)
+        {
+            DataTable dtTypes = new DataTable();
 
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("[dbo].[SP_TransactionTypes_GetAll]", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        await connection.OpenAsync();
+
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            dtTypes.Load(reader);
+                        }
+                    }
+                }
+
+                if (dtTypes == null)
+                    throw new Exception("فشلت العملية");
+            }
+            catch (Exception ex)
+            {
+                dtTypes = null;
+
+                if (RaiseEventOnErrorOccured)
+                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+            }
+
+            return dtTypes;
+        }
     }
 }

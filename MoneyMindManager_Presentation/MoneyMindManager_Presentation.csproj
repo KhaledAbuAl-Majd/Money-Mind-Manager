@@ -39,6 +39,21 @@
     <ApplicationIcon>project-management.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ClosedXML, Version=0.105.0.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
+      <HintPath>packages\ClosedXML.0.105.0\lib\netstandard2.0\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="ClosedXML.Parser, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1d5f7376574c51ec, processorArchitecture=MSIL">
+      <HintPath>packages\ClosedXML.Parser.2.0.0\lib\netstandard2.0\ClosedXML.Parser.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=3.1.1.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>packages\DocumentFormat.OpenXml.3.1.1\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml.Framework, Version=3.1.1.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>packages\DocumentFormat.OpenXml.Framework.3.1.1\lib\net46\DocumentFormat.OpenXml.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelNumberFormat, Version=1.1.0.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
+      <HintPath>packages\ExcelNumberFormat.1.1.0\lib\net20\ExcelNumberFormat.dll</HintPath>
+    </Reference>
     <Reference Include="Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Control Libraries\Guna.UI2.dll</HintPath>
@@ -46,12 +61,34 @@
     <Reference Include="KhaledControlLibrary1">
       <HintPath>Control Libraries\KhaledControlLibrary1.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Bcl.HashCode, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Bcl.HashCode.1.1.1\lib\net461\Microsoft.Bcl.HashCode.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="RBush, Version=4.0.0.0, Culture=neutral, PublicKeyToken=c77e27b81f4d0187, processorArchitecture=MSIL">
+      <HintPath>packages\RBush.Signed.4.0.0\lib\net47\RBush.dll</HintPath>
+    </Reference>
+    <Reference Include="SixLabors.Fonts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d998eea7b14cab13, processorArchitecture=MSIL">
+      <HintPath>packages\SixLabors.Fonts.1.0.0\lib\netstandard2.0\SixLabors.Fonts.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.4.7.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
@@ -86,6 +123,7 @@
     <Compile Include="Debts\frmDebtsList.Designer.cs">
       <DependentUpon>frmDebtsList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Global\clsExportHelper.cs" />
     <Compile Include="Income And Expense\Categories\frmAddUpdateCategory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -145,6 +183,24 @@
     </Compile>
     <Compile Include="People\frmSelectPerson.Designer.cs">
       <DependentUpon>frmSelectPerson.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main Transactions\Controls\ctrlMainTransactionInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Main Transactions\Controls\ctrlMainTransactionInfo.Designer.cs">
+      <DependentUpon>ctrlMainTransactionInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main Transactions\frmMainTransactionInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main Transactions\frmMainTransactionInfo.Designer.cs">
+      <DependentUpon>frmMainTransactionInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main Transactions\frmMainTransactionsList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main Transactions\frmMainTransactionsList.Designer.cs">
+      <DependentUpon>frmMainTransactionsList.cs</DependentUpon>
     </Compile>
     <Compile Include="Users\Controls\ctrlUserCard.cs">
       <SubType>UserControl</SubType>
@@ -253,6 +309,15 @@
     <EmbeddedResource Include="People\frmSelectPerson.resx">
       <DependentUpon>frmSelectPerson.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Main Transactions\Controls\ctrlMainTransactionInfo.resx">
+      <DependentUpon>ctrlMainTransactionInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main Transactions\frmMainTransactionInfo.resx">
+      <DependentUpon>frmMainTransactionInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main Transactions\frmMainTransactionsList.resx">
+      <DependentUpon>frmMainTransactionsList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Users\Controls\ctrlUserCard.resx">
       <DependentUpon>ctrlUserCard.cs</DependentUpon>
     </EmbeddedResource>
@@ -294,6 +359,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app1.manifest" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -331,7 +397,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Income And Expense\Vouchers\Controls\" />
-    <Folder Include="Transactions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

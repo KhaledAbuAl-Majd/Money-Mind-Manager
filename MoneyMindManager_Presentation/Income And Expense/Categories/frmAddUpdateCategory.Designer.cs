@@ -60,11 +60,13 @@
             this.lblHeader = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.ctrlInfoIcon3 = new KhaledControlLibrary1.ctrlInfoIcon();
             this.guna2Panel2.SuspendLayout();
             this.guna2Panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ctrlInfoIcon1.PictureBoxControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ctrlInfoIcon2.PictureBoxControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ctrlInfoIcon3.PictureBoxControl)).BeginInit();
             this.SuspendLayout();
             // 
             // guna2Panel2
@@ -73,6 +75,7 @@
             this.guna2Panel2.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.guna2Panel2.BorderRadius = 20;
             this.guna2Panel2.BorderThickness = 2;
+            this.guna2Panel2.Controls.Add(this.ctrlInfoIcon3);
             this.guna2Panel2.Controls.Add(this.gibtnDeleteVoucher);
             this.guna2Panel2.Controls.Add(this.label10);
             this.guna2Panel2.Controls.Add(this.klblCreatedDate);
@@ -842,6 +845,33 @@
             // 
             this.toolTip1.IsBalloon = true;
             // 
+            // ctrlInfoIcon3
+            // 
+            this.ctrlInfoIcon3.BackColor = System.Drawing.Color.Transparent;
+            this.ctrlInfoIcon3.IconImage = ((System.Drawing.Image)(resources.GetObject("ctrlInfoIcon3.IconImage")));
+            this.ctrlInfoIcon3.Location = new System.Drawing.Point(20, 155);
+            this.ctrlInfoIcon3.Name = "ctrlInfoIcon3";
+            // 
+            // 
+            // 
+            this.ctrlInfoIcon3.PictureBoxControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctrlInfoIcon3.PictureBoxControl.Image = ((System.Drawing.Image)(resources.GetObject("ctrlInfoIcon3.PictureBoxControl.Image")));
+            this.ctrlInfoIcon3.PictureBoxControl.ImageRotate = 0F;
+            this.ctrlInfoIcon3.PictureBoxControl.Location = new System.Drawing.Point(0, 0);
+            this.ctrlInfoIcon3.PictureBoxControl.Name = "gpbInfoIcon";
+            this.ctrlInfoIcon3.PictureBoxControl.Size = new System.Drawing.Size(20, 20);
+            this.ctrlInfoIcon3.PictureBoxControl.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.ctrlInfoIcon3.PictureBoxControl.TabIndex = 0;
+            this.ctrlInfoIcon3.PictureBoxControl.TabStop = false;
+            this.ctrlInfoIcon3.PictureBoxControl.UseTransparentBackground = true;
+            this.ctrlInfoIcon3.Size = new System.Drawing.Size(20, 20);
+            this.ctrlInfoIcon3.TabIndex = 12;
+            // 
+            // 
+            // 
+            this.ctrlInfoIcon3.ToolTipControl.IsBalloon = true;
+            this.ctrlInfoIcon3.ToolTipText = "تنبيه : عند الغاء تنشيط فئة يتم الغاء تنشيط الفئات التابعة لها";
+            // 
             // frmAddUpdateCategory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -863,6 +893,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ctrlInfoIcon1.PictureBoxControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ctrlInfoIcon2.PictureBoxControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ctrlInfoIcon3.PictureBoxControl)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -899,5 +930,6 @@
         private KhaledControlLibrary1.KhaledLabel klblCreatedDate;
         private System.Windows.Forms.Label label10;
         private Guna.UI2.WinForms.Guna2ImageButton gibtnDeleteVoucher;
+        private KhaledControlLibrary1.ctrlInfoIcon ctrlInfoIcon3;
     }
 }

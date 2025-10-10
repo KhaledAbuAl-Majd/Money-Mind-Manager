@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Common;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -381,6 +382,90 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
         private async void gcbFilterbyPaymentStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
             await _LoadDataAtDataGridView(_filterBy);
+        }
+
+
+        private async void gtsmExportExcel_Click(object sender, EventArgs e)
+        {
+            SearchAfterTimerFinish.Stop();
+
+            if (!_CheckValidationChildren())
+                return;
+
+
+            DataTable dtDebts = null;
+
+            bool filterByCreatedDate = false;
+
+            if (gcbFilterByDate.Text == "تاريخ الإنشاء")
+                filterByCreatedDate = true;
+            else if (gcbFilterByDate.Text == "تاريخ السند")
+                filterByCreatedDate = false;
+            else
+                return;
+
+            bool? isLending = null;
+
+            if (gcbFilterByDebtType.Text == "إقراض")
+                isLending = true;
+            else if (gcbFilterByDebtType.Text == "إقتراض")
+                isLending = false;
+            else
+                isLending = null;
+
+            bool? isPaid = null;
+
+            if (gcbFilterbyPaymentStatus.Text == "مسدد")
+                isPaid = true;
+            else if (gcbFilterbyPaymentStatus.Text == "غير مسدد")
+                isPaid = false;
+            else
+                isPaid = null;
+
+            int currentUserID = Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID);
+
+            if (_filterBy == enFilterBy.All || string.IsNullOrEmpty(kgtxtFilterValue.ValidatedText))
+            {
+                dtDebts = await clsDebt.GetAllDebtsWithoutPaging(isLending, filterByCreatedDate, kgtxtFromData.ValidatedText, kgtxtToDate.ValidatedText,
+                    isPaid, currentUserID);
+            }
+            else if (_filterBy == enFilterBy.DebtID)
+            {
+                int debtID = Convert.ToInt32(kgtxtFilterValue.ValidatedText);
+                dtDebts = await clsDebt.GetAllDebtsWithoutPaging(debtID, isLending, filterByCreatedDate, kgtxtFromData.ValidatedText, kgtxtToDate.ValidatedText,
+                      isPaid, currentUserID);
+            }
+            else if (_filterBy == enFilterBy.PersonName)
+            {
+                string personName = kgtxtFilterValue.ValidatedText;
+                dtDebts = await clsDebt.GetAllDebtsWithoutPaging(personName, isLending, filterByCreatedDate, kgtxtFromData.ValidatedText, kgtxtToDate.ValidatedText,
+                    isPaid, currentUserID);
+            }
+            else
+                return;
+
+            if (dtDebts == null)
+                return;
+
+            if (dtDebts == null)
+            {
+                clsGlobalMessageBoxs.ShowErrorMessage("فشل تصدير البيانات !");
+                return;
+            }
+
+            dtDebts.Columns["DebtID"].ColumnName = "معرف سند الدين";
+            dtDebts.Columns["PersonID"].ColumnName = "معرف الشخص";
+            dtDebts.Columns["PersonName"].ColumnName = "اسم الشخص";
+            dtDebts.Columns["DebtValue"].ColumnName = "قيمة الدين";
+            dtDebts.Columns["RemainingAmount"].ColumnName = "القيمة المتبقية للسداد";
+            dtDebts.Columns["DebtDate"].ColumnName = "تاريخ سند الدين";
+            dtDebts.Columns["CreatedDate"].ColumnName = "تاريخ الإنشاء";
+            dtDebts.Columns["DebtType"].ColumnName = "نوع الدين";
+            dtDebts.Columns["CreatedByUserID"].ColumnName = "معرف المستخدم المنشئ";
+            dtDebts.Columns["CreatedByUserName"].ColumnName = "اسم المستخدم المنشئ";
+            dtDebts.Columns["AccountID"].ColumnName = "معرف الحساب";
+
+            await clsExportHelper.ExportToExcelWithDialog(dtDebts, "تقرير الديون");
         }
     }
 }

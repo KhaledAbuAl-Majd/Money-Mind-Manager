@@ -27,7 +27,14 @@ namespace MoneyMindManager_Presentation.Global
                 options = MessageBoxOptions.RightAlign | MessageBoxOptions.RtlReading;
             }
 
-          return  MessageBox.Show(message, caption, buttons, icon, defaultButton, options);
+            DialogResult d = DialogResult.Cancel;
+
+            clsGlobal_UI.MainForm.Invoke(new Action(() =>
+              {
+                  d = MessageBox.Show(message, caption, buttons, icon, defaultButton, options);
+              }));
+
+            return d;
         }
 
         public static void ShowValidateChildrenFailedMessage()

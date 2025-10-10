@@ -141,7 +141,7 @@ namespace MoneyMindManager_Presentation.Main
         }
         private void gbtnTransactions_Click(object sender, EventArgs e)
         {
-
+            _LoadFormAtPanelContainer(new frmMainTransactionsList(), true);
         }
         private void gbtnLogout_Click(object sender, EventArgs e)
         {

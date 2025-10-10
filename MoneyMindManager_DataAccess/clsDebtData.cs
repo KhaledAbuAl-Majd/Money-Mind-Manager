@@ -345,5 +345,53 @@ namespace MoneyMindManager_DataAccess
 
             return allDebts;
         }
+
+        public static async Task<DataTable> GetAllDebtsWithoutPaging(int? debtID, bool? isLending, string personName,
+            DateTime? fromCreatedDate, DateTime? toCreatedDate, DateTime? fromDebtDate, DateTime? toDebtDate,
+            bool? isPaid, int currentUserID, bool RaiseEventOnErrorOccured = true)
+        {
+            DataTable dtDebts = null;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("[dbo].[SP_Debts_GetAllWithoutPaging]", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("@DebtID", (object)debtID ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@IsLending", (object)isLending ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@PersonName", string.IsNullOrWhiteSpace(personName) ? DBNull.Value : (object)personName);
+                        command.Parameters.AddWithValue("@FromCreatedDate", (object)fromCreatedDate ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@ToCreatedDate", (object)toCreatedDate ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@FromDebtDate", (object)fromDebtDate ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@ToDebtDate", (object)toDebtDate ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@IsPaid", (object)isPaid ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@CurrentUserID", currentUserID);
+
+                        await connection.OpenAsync();
+
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            dtDebts = new DataTable();
+                            dtDebts.Load(reader);
+                        }
+                    }
+                }
+
+                if (dtDebts == null)
+                    throw new Exception("فشلت العملية");
+            }
+            catch (Exception ex)
+            {
+                dtDebts = null;
+
+                if (RaiseEventOnErrorOccured)
+                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+            }
+
+            return dtDebts;
+        }
     }
 }
