@@ -15,6 +15,7 @@ using MoneyMindManager_Presentation.Global;
 using MoneyMindManager_Presentation.Income_And_Expense.Categories;
 using MoneyMindManager_Presentation.Main;
 using MoneyMindManager_Presentation.Properties;
+using MoneyMindManager_Presentation.Transactions;
 using MoneyMindManagerGlobal;
 using static Guna.UI2.Native.WinApi;
 using static MoneyMindManager_Business.clsIncomeAndExpenseVoucher;
@@ -132,7 +133,8 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 gdgvTransactions.DataSource = result.dtTransactions;
             }
 
-            lblUserMessage.Visible = false;
+            if (!_Voucher.IsLocked)
+                lblUserMessage.Visible = false;
 
             lblTotalRecordsNumber.Text = result.RecordsCount.ToString();
 
@@ -159,18 +161,21 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             if (!_IsHeaderCreated && gdgvTransactions.Rows.Count > 0)
             {
                 gdgvTransactions.Columns["MainTransactionID"].HeaderText = "معرف المعاملة";
-                gdgvTransactions.Columns["MainTransactionID"].Width = 120;
+                gdgvTransactions.Columns["MainTransactionID"].Width = 125;
 
                 gdgvTransactions.Columns["CategoryName"].HeaderText = "اسم الفئة";
-                gdgvTransactions.Columns["CategoryName"].Width = 290;
+                gdgvTransactions.Columns["CategoryName"].Width = 280;
 
                 gdgvTransactions.Columns["Amount"].HeaderText = "المبلغ";
                 gdgvTransactions.Columns["Amount"].Width = 250;
                 gdgvTransactions.Columns["Amount"].DefaultCellStyle.Format = "N4";
 
                 gdgvTransactions.Columns["CreatedDate"].HeaderText = "تاريخ الإنشاء";
-                gdgvTransactions.Columns["CreatedDate"].Width = 250;
+                gdgvTransactions.Columns["CreatedDate"].Width = 235;
                 gdgvTransactions.Columns["CreatedDate"].DefaultCellStyle.Format = "hh:mm:ss tt dd-MM-yyyy";
+
+                gdgvTransactions.Columns["CreatedByUserName"].HeaderText = "اسم المستخدم المنشئ";
+                gdgvTransactions.Columns["CreatedByUserName"].Width = 260;
 
                 gdgvTransactions.Columns["Purpose"].HeaderText = "البيان";
                 gdgvTransactions.Columns["Purpose"].Width = 250;
@@ -398,7 +403,13 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
         void _AddTransaction()
         {
             if (!gbtnAddTransaction.Enabled || _VoucherID == null)
+            {
+                lblUserMessage.Text = "قم بإضافة مستند أولا ; لتتمكن من إضافة معاملة";
+                lblUserMessage.Visible = true;
                 return;
+            }
+
+            lblUserMessage.Visible = false;
 
             var frm = new frmAddUpdateIncomeAndExpeseTransction(_Voucher.IsIncome, Convert.ToInt32(_VoucherID));
             frm.OnCloseAndSaved += FrmAddUpdateTransactions_OnCloseAndSaved;
@@ -408,7 +419,13 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
         void _EditTransaction()
         {
             if (gdgvTransactions.SelectedRows.Count < 1 || _VoucherID == null)
+            {
+                lblUserMessage.Text = "قم بإختيار معاملة أولا ; لتتمكن من تعديلها";
+                lblUserMessage.Visible = true;
                 return;
+            }
+
+            lblUserMessage.Visible = false;
 
             int transactionID = Convert.ToInt32(gdgvTransactions.SelectedRows[0].Cells[0].Value);
 
@@ -416,6 +433,24 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             frm.OnCloseAndSaved += FrmAddUpdateTransactions_OnCloseAndSaved;
             clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
         }
+
+        void _ShowTransactionInfo()
+        {
+            if (gdgvTransactions.SelectedRows.Count < 1 || _VoucherID == null)
+            {
+                lblUserMessage.Text = "قم بإختيار معاملة أولا ; لتتمكن من رؤية معلوماتها";
+                lblUserMessage.Visible = true;
+                return;
+            }
+
+            lblUserMessage.Visible = false;
+
+            int transactionID = Convert.ToInt32(gdgvTransactions.SelectedRows[0].Cells[0].Value);
+
+            var frm = new frmIncomeAndExpenseTransactionInfo(transactionID);
+            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
+        }
+
         private async void frmAddUpdateVoucher_Load(object sender, EventArgs e)
         {
             _SetReadOnlyAtTextBox(kgtxtVoucherValue);
@@ -590,5 +625,75 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             }
         }
 
+        private async void gtsmExportExcel_Click(object sender, EventArgs e)
+        {
+            if (!_CheckValidationChildren())
+                return;
+
+            if (gdgvTransactions.Rows.Count < 1)
+            {
+                lblUserMessage.Text = "لا يوجد صفوف لتصديرها !";
+                lblUserMessage.Visible = true;
+                return;
+            }
+
+            lblUserMessage.Visible = false;
+
+
+            int currentUserID = Convert.ToInt32(clsGlobal_UI.CurrentUser.UserID);
+
+            var dt = await _Voucher.GetVoucheTransactionsWithoutPaging(currentUserID);
+
+
+            if (dt == null)
+                return;
+
+            if (dt == null)
+            {
+                clsGlobalMessageBoxs.ShowErrorMessage("فشل تصدير البيانات !");
+                return;
+            }
+
+            dt.Columns["MainTransactionID"].ColumnName = "معرف المعاملة";
+            dt.Columns["CategoryID"].ColumnName = "معرف الفئة";
+            dt.Columns["CategoryName"].ColumnName = "اسم الفئة";
+            dt.Columns["Amount"].ColumnName = "المبلغ";
+            dt.Columns["TransactionDate"].ColumnName = "تاريخ المعاملة";
+            dt.Columns["CreatedDate"].ColumnName = "تاريخ الإنشاء";
+            dt.Columns["CreatedByUserID"].ColumnName = "معرف المستخدم المنشئ";
+            dt.Columns["CreatedByUserName"].ColumnName = "اسم المستخدم المنشئ";
+            dt.Columns["Purpose"].ColumnName = "البيان";
+            dt.Columns["AccountID"].ColumnName = "معرف الحساب";
+
+            //
+
+            string vouchersTypeName = null;
+
+            switch (_voucherType)
+            {
+                case enVoucherType.Incomes:
+                    vouchersTypeName = "واردات";
+                    break;
+
+                case enVoucherType.Expenses:
+                    vouchersTypeName = "مصروفات";
+                    break;
+
+                case enVoucherType.ExpensesReturn:
+                    vouchersTypeName = "مرتجعات مصروفات";
+                    break;
+
+                default:
+                    vouchersTypeName = "";
+                    break;
+            }
+
+            await clsExportHelper.ExportToExcelWithDialog(dt, $"تقرير معاملات مستند {vouchersTypeName} [ {_VoucherID?.ToString()} ]");
+        }
+
+        private void gtsmTransactionInfo_Click(object sender, EventArgs e)
+        {
+            _ShowTransactionInfo();
+        }
     }
 }

@@ -72,4 +72,4 @@ E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\Mo
 E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\bin\Debug\System.Memory.xml
 E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\bin\Debug\System.Numerics.Vectors.xml
 E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
-E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\obj\Debug\MoneyMindManager_Presentation.exe.config
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\obj\Debug\MoneyMindManager_Presentation.Transactions.frmIncomeAndExpenseTransactionInfo.resources

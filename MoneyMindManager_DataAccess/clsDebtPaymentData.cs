@@ -256,5 +256,44 @@ namespace MoneyMindManager_DataAccess
 
             return allTransactions;
         }
+
+        public static async Task<DataTable> GetAllDebtPaymentsForDebtIDWithoutPaging(int debtID, int currentUserID, bool RaiseEventOnErrorOccured = true)
+        {
+            DataTable dtTransactions = null;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("[dbo].[SP_DebtPayment_GetAllByDebtIDWihtoutPaging]", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("@DebtID", debtID);
+                        command.Parameters.AddWithValue("@CurrentUserID", currentUserID);
+
+                        await connection.OpenAsync();
+
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            dtTransactions = new DataTable();
+                            dtTransactions.Load(reader);
+                        }
+                    }
+                }
+
+                if (dtTransactions == null)
+                    throw new Exception("فشلت العملية");
+            }
+            catch (Exception ex)
+            {
+                dtTransactions = null;
+
+                if (RaiseEventOnErrorOccured)
+                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+            }
+
+            return dtTransactions;
+        }
     }
 }

@@ -32,7 +32,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
         }
 
         enVoucherType _voucherType;
-        enum enFilterBy { All, VoucherID, VoucherName };
+        enum enFilterBy { All, VoucherID, VoucherName, UserName };
 
         enFilterBy _filterBy = enFilterBy.All;
 
@@ -70,8 +70,6 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             if (!_CheckValidationChildren())
                 return;
 
-            //_pageNumber = Convert.ToInt16(kgtxtPageNumber.ValidatedText);
-
             clsDataColumns.clsIncomeAndExpenseVoucherClasses.clsGetAllVouchers result = null;
 
             bool filterByCreatedDate = false;
@@ -95,13 +93,19 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             else if (filterBy == enFilterBy.VoucherID)
             {
          int voucherID = Convert.ToInt32(kgtxtFilterValue.ValidatedText);
-                result = await clsIncomeAndExpenseVoucher.GetAllVouchers(voucherID, filterByCreatedDate, kgtxtFromData.ValidatedText,
+                result = await clsIncomeAndExpenseVoucher.GetAllVouchersByVoucherID(voucherID, filterByCreatedDate, kgtxtFromData.ValidatedText,
                     kgtxtToDate.ValidatedText, _voucherType, currentUserID, _pageNumber);
             }
             else if (filterBy == enFilterBy.VoucherName)
             {
                 string voucherName = kgtxtFilterValue.ValidatedText;
-                result = await clsIncomeAndExpenseVoucher.GetAllVouchers(voucherName, filterByCreatedDate, kgtxtFromData.ValidatedText,
+                result = await clsIncomeAndExpenseVoucher.GetAllVouchersByVoucherName(voucherName, filterByCreatedDate, kgtxtFromData.ValidatedText,
+                    kgtxtToDate.ValidatedText, _voucherType, currentUserID, _pageNumber);
+            }
+            else if (filterBy == enFilterBy.UserName)
+            {
+                string userName = kgtxtFilterValue.ValidatedText;
+                result = await clsIncomeAndExpenseVoucher.GetAllVouchersByUserName(userName, filterByCreatedDate, kgtxtFromData.ValidatedText,
                     kgtxtToDate.ValidatedText, _voucherType, currentUserID, _pageNumber);
             }
             else
@@ -148,7 +152,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 gdgvVouchers.Columns["VoucherID"].Width = 125;
 
                 gdgvVouchers.Columns["VoucherName"].HeaderText = "اسم المستند";
-                gdgvVouchers.Columns["VoucherName"].Width = 280;
+                gdgvVouchers.Columns["VoucherName"].Width = 265;
 
                 gdgvVouchers.Columns["VoucherValue"].HeaderText = "قيمة المستند";
                 gdgvVouchers.Columns["VoucherValue"].Width = 250;
@@ -156,15 +160,17 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
                 gdgvVouchers.Columns["TransactionsCount"].HeaderText = "عدد المعاملات";
                 gdgvVouchers.Columns["TransactionsCount"].Width = 125;
-                //gdgvVouchers.Columns["TransactionsCount"].DefaultCellStyle.Format = "N0";
 
                 gdgvVouchers.Columns["VoucherDate"].HeaderText = "تاريخ المستند";
-                gdgvVouchers.Columns["VoucherDate"].Width = 150;
+                gdgvVouchers.Columns["VoucherDate"].Width = 135;
                 gdgvVouchers.Columns["VoucherDate"].DefaultCellStyle.Format = "dd-MM-yyyy";
 
                 gdgvVouchers.Columns["CreatedDate"].HeaderText = "تاريخ الإنشاء";
-                gdgvVouchers.Columns["CreatedDate"].Width = 250;
+                gdgvVouchers.Columns["CreatedDate"].Width = 235;
                 gdgvVouchers.Columns["CreatedDate"].DefaultCellStyle.Format = "hh:mm:ss tt dd-MM-yyyy";
+
+                gdgvVouchers.Columns["CreatedByUserName"].HeaderText = "اسم المستخدم المنشئ";
+                gdgvVouchers.Columns["CreatedByUserName"].Width = 265;
 
                 _IsHeaderCreated = true;
 
@@ -288,6 +294,13 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 kgtxtFilterValue.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
                 kgtxtFilterValue.AllowWhiteSpace = true;
             }
+            else if (gcbFilterBy.Text == "اسم المستخدم")
+            {
+                _filterBy = enFilterBy.UserName;
+
+                kgtxtFilterValue.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
+                kgtxtFilterValue.AllowWhiteSpace = false;
+            }
 
             await _LoadDataAtDataGridView(_filterBy);
         }
@@ -309,8 +322,6 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 return;
 
             _pageNumber = Convert.ToInt16(kgtxtPageNumber.ValidatedText);
-
-            //await _LoadDataAtDataGridView();
 
             SearchAfterTimerFinish.Stop();
             SearchAfterTimerFinish.Start();
@@ -369,6 +380,106 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 e.CellStyle.ForeColor = Color.Red;
                 e.CellStyle.SelectionForeColor = Color.Orange;
             }
+        }
+
+        private async void gtsmExportExcel_Click(object sender, EventArgs e)
+        {
+            SearchAfterTimerFinish.Stop();
+
+            if (!_CheckValidationChildren())
+                return;
+
+            if (gdgvVouchers.Rows.Count < 1)
+            {
+                lblUserMessage.Text = "لا يوجد صفوف لتصديرها !";
+                lblUserMessage.Visible = true;
+                return;
+            }
+
+            lblUserMessage.Visible = false; 
+
+            DataTable result = null;
+
+            bool filterByCreatedDate = false;
+
+            if (gcbFilterByDate.Text == "تاريخ الإنشاء")
+            {
+                filterByCreatedDate = true;
+            }
+            else if (gcbFilterByDate.Text == "تاريخ المستند")
+                filterByCreatedDate = false;
+            else
+                return;
+
+            int currentUserID = Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID);
+
+            if (_filterBy == enFilterBy.All || string.IsNullOrEmpty(kgtxtFilterValue.ValidatedText))
+            {
+                result = await clsIncomeAndExpenseVoucher.GetAllVouchersWithoutPaging(filterByCreatedDate, kgtxtFromData.ValidatedText,
+                    kgtxtToDate.ValidatedText, _voucherType, currentUserID);
+            }
+            else if (_filterBy == enFilterBy.VoucherID)
+            {
+                int voucherID = Convert.ToInt32(kgtxtFilterValue.ValidatedText);
+                result = await clsIncomeAndExpenseVoucher.GetAllVouchersByVoucherIDWithoutPaging(voucherID, filterByCreatedDate, kgtxtFromData.ValidatedText,
+                    kgtxtToDate.ValidatedText, _voucherType, currentUserID);
+            }
+            else if (_filterBy == enFilterBy.VoucherName)
+            {
+                string voucherName = kgtxtFilterValue.ValidatedText;
+                result = await clsIncomeAndExpenseVoucher.GetAllVouchersByVoucherNameWithoutPaging(voucherName, filterByCreatedDate, kgtxtFromData.ValidatedText,
+                    kgtxtToDate.ValidatedText, _voucherType, currentUserID);
+            }
+            else if (_filterBy == enFilterBy.UserName)
+            {
+                string userName = kgtxtFilterValue.ValidatedText;
+                result = await clsIncomeAndExpenseVoucher.GetAllVouchersByUserNameWithoutPaging(userName, filterByCreatedDate, kgtxtFromData.ValidatedText,
+                    kgtxtToDate.ValidatedText, _voucherType, currentUserID);
+            }
+            else
+                return;
+
+            if (result == null)
+                return;
+
+            if (result == null)
+            {
+                clsGlobalMessageBoxs.ShowErrorMessage("فشل تصدير البيانات !");
+                return;
+            }
+
+            result.Columns["VoucherID"].ColumnName = "معرف المستند";
+            result.Columns["VoucherName"].ColumnName = "اسم المستند";
+            result.Columns["VoucherValue"].ColumnName = "قيمة المستند";
+            result.Columns["TransactionsCount"].ColumnName = "عدد المعاملات";
+            result.Columns["VoucherDate"].ColumnName = "تاريخ المستند";
+            result.Columns["CreatedDate"].ColumnName = "تاريخ الإنشاء";
+            result.Columns["CreatedByUserID"].ColumnName = "معرف المستخدم المنشئ";
+            result.Columns["CreatedByUserName"].ColumnName = "اسم المستخدم المنشئ";
+            result.Columns["AccountID"].ColumnName = "معرف الحساب";
+
+            string vouchersTypeName = null;
+
+            switch (_voucherType)
+            {
+                case enVoucherType.Incomes:
+                    vouchersTypeName = "الواردات";
+                    break;
+
+                case enVoucherType.Expenses:
+                    vouchersTypeName = "المصروفات";
+                    break;
+
+                case enVoucherType.ExpensesReturn:
+                    vouchersTypeName = "مرتجعات المصروفات";
+                    break;
+
+                default:
+                    vouchersTypeName = "";
+                    break;
+            }
+
+            await clsExportHelper.ExportToExcelWithDialog(result, $"تقرير مستندات {vouchersTypeName}");
         }
     }
 }

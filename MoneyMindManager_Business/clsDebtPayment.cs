@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -113,6 +114,11 @@ namespace MoneyMindManager_Business
         public static async Task<clsGetAllDebtPayments> GetAllDebtPyamentsByDebtID(int debtID, int currentUserID, short pageNumber)
         {
             return await clsDebtPaymentData.GetAllDebtPaymentsForDebtID(debtID, currentUserID, pageNumber);
+        }
+
+        public static async Task<DataTable> GetAllDebtPyamentsByDebtIDWithoutPaging(int debtID, int currentUserID)
+        {
+            return await clsDebtPaymentData.GetAllDebtPaymentsForDebtIDWithoutPaging(debtID, currentUserID);
         }
     }
 }

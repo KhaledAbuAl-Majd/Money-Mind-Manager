@@ -46,7 +46,10 @@
             this.guna2ContextMenuStrip1 = new Guna.UI2.WinForms.Guna2ContextMenuStrip();
             this.gtsmAddTransactions = new System.Windows.Forms.ToolStripMenuItem();
             this.gtsmEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.gtsmTransactionInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.gtsmDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.gtsmExport = new System.Windows.Forms.ToolStripMenuItem();
+            this.gtsmExportExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.lblHeader = new System.Windows.Forms.Label();
             this.lblNoTransactionsFoundMessage = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
@@ -267,7 +270,9 @@
             this.guna2ContextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.gtsmAddTransactions,
             this.gtsmEdit,
-            this.gtsmDelete});
+            this.gtsmTransactionInfo,
+            this.gtsmDelete,
+            this.gtsmExport});
             this.guna2ContextMenuStrip1.Name = "guna2ContextMenuStrip1";
             this.guna2ContextMenuStrip1.RenderStyle.ArrowColor = System.Drawing.Color.FromArgb(((int)(((byte)(151)))), ((int)(((byte)(143)))), ((int)(((byte)(255)))));
             this.guna2ContextMenuStrip1.RenderStyle.BorderColor = System.Drawing.Color.Gainsboro;
@@ -278,14 +283,14 @@
             this.guna2ContextMenuStrip1.RenderStyle.SelectionForeColor = System.Drawing.Color.White;
             this.guna2ContextMenuStrip1.RenderStyle.SeparatorColor = System.Drawing.Color.Gainsboro;
             this.guna2ContextMenuStrip1.RenderStyle.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
-            this.guna2ContextMenuStrip1.Size = new System.Drawing.Size(178, 112);
+            this.guna2ContextMenuStrip1.Size = new System.Drawing.Size(206, 184);
             // 
             // gtsmAddTransactions
             // 
             this.gtsmAddTransactions.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gtsmAddTransactions.Image = ((System.Drawing.Image)(resources.GetObject("gtsmAddTransactions.Image")));
             this.gtsmAddTransactions.Name = "gtsmAddTransactions";
-            this.gtsmAddTransactions.Size = new System.Drawing.Size(177, 36);
+            this.gtsmAddTransactions.Size = new System.Drawing.Size(205, 36);
             this.gtsmAddTransactions.Text = "إضافة معاملة";
             this.gtsmAddTransactions.Click += new System.EventHandler(this.gtsmAddTransactions_Click);
             // 
@@ -294,18 +299,47 @@
             this.gtsmEdit.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gtsmEdit.Image = ((System.Drawing.Image)(resources.GetObject("gtsmEdit.Image")));
             this.gtsmEdit.Name = "gtsmEdit";
-            this.gtsmEdit.Size = new System.Drawing.Size(177, 36);
+            this.gtsmEdit.Size = new System.Drawing.Size(205, 36);
             this.gtsmEdit.Text = "تعديل";
             this.gtsmEdit.Click += new System.EventHandler(this.gtsmEdit_Click);
+            // 
+            // gtsmTransactionInfo
+            // 
+            this.gtsmTransactionInfo.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gtsmTransactionInfo.Image = ((System.Drawing.Image)(resources.GetObject("gtsmTransactionInfo.Image")));
+            this.gtsmTransactionInfo.Name = "gtsmTransactionInfo";
+            this.gtsmTransactionInfo.Size = new System.Drawing.Size(205, 36);
+            this.gtsmTransactionInfo.Text = "معلومات المعاملة";
+            this.gtsmTransactionInfo.Click += new System.EventHandler(this.gtsmTransactionInfo_Click);
             // 
             // gtsmDelete
             // 
             this.gtsmDelete.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gtsmDelete.Image = ((System.Drawing.Image)(resources.GetObject("gtsmDelete.Image")));
             this.gtsmDelete.Name = "gtsmDelete";
-            this.gtsmDelete.Size = new System.Drawing.Size(177, 36);
+            this.gtsmDelete.Size = new System.Drawing.Size(205, 36);
             this.gtsmDelete.Text = "حذف";
             this.gtsmDelete.Click += new System.EventHandler(this.gtsmDelete_Click);
+            // 
+            // gtsmExport
+            // 
+            this.gtsmExport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.gtsmExportExcel});
+            this.gtsmExport.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gtsmExport.Image = ((System.Drawing.Image)(resources.GetObject("gtsmExport.Image")));
+            this.gtsmExport.Name = "gtsmExport";
+            this.gtsmExport.Size = new System.Drawing.Size(205, 36);
+            this.gtsmExport.Text = "تصدير";
+            // 
+            // gtsmExportExcel
+            // 
+            this.gtsmExportExcel.AutoSize = false;
+            this.gtsmExportExcel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gtsmExportExcel.Image = ((System.Drawing.Image)(resources.GetObject("gtsmExportExcel.Image")));
+            this.gtsmExportExcel.Name = "gtsmExportExcel";
+            this.gtsmExportExcel.Size = new System.Drawing.Size(194, 27);
+            this.gtsmExportExcel.Text = "       Excel";
+            this.gtsmExportExcel.Click += new System.EventHandler(this.gtsmExportExcel_Click);
             // 
             // lblHeader
             // 
@@ -1301,5 +1335,8 @@
         private System.Windows.Forms.ToolStripMenuItem gtsmDelete;
         private Guna.UI2.WinForms.Guna2ImageButton gibtnDeleteVoucher;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ToolStripMenuItem gtsmTransactionInfo;
+        private System.Windows.Forms.ToolStripMenuItem gtsmExport;
+        private System.Windows.Forms.ToolStripMenuItem gtsmExportExcel;
     }
 }

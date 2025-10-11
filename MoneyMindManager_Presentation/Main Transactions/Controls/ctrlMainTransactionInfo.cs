@@ -35,6 +35,21 @@ namespace MoneyMindManager_Presentation.Transactions.Controls
             return true;
         }
 
+        public bool  LoadMainTransaction(clsMainTransaction _mainTransaction)
+        {
+            MainTransaction = _mainTransaction;
+
+            if (MainTransaction == null)
+            {
+                ResetControls();
+                return false;
+            }
+
+            _ShowData();
+
+            return true;
+        }
+
         void _ShowData()
         {
             kgtxtTransactionID.Text = MainTransaction?.MainTransactionID?.ToString();

@@ -117,7 +117,7 @@
             this.kgtxtPurpose.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
             this.kgtxtPurpose.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
             this.kgtxtPurpose.PlaceholderForeColor = System.Drawing.Color.Gray;
-            this.kgtxtPurpose.PlaceholderText = "البيان";
+            this.kgtxtPurpose.PlaceholderText = "";
             this.kgtxtPurpose.ReadOnly = true;
             this.kgtxtPurpose.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.kgtxtPurpose.SelectedText = "";
@@ -521,7 +521,7 @@
             this.kgtxtTransactionType.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.N4;
             this.kgtxtTransactionType.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.DecimalNumber;
             this.kgtxtTransactionType.PlaceholderForeColor = System.Drawing.Color.Gray;
-            this.kgtxtTransactionType.PlaceholderText = "فئة المعاملة";
+            this.kgtxtTransactionType.PlaceholderText = "نوع المعاملة";
             this.kgtxtTransactionType.ReadOnly = true;
             this.kgtxtTransactionType.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.kgtxtTransactionType.SelectedText = "";
@@ -749,7 +749,7 @@
             this.guna2PictureBox4.BackColor = System.Drawing.Color.Transparent;
             this.guna2PictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox4.Image")));
             this.guna2PictureBox4.ImageRotate = 0F;
-            this.guna2PictureBox4.Location = new System.Drawing.Point(378, 259);
+            this.guna2PictureBox4.Location = new System.Drawing.Point(373, 259);
             this.guna2PictureBox4.Name = "guna2PictureBox4";
             this.guna2PictureBox4.Size = new System.Drawing.Size(36, 27);
             this.guna2PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -761,12 +761,12 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(415, 259);
+            this.label12.Location = new System.Drawing.Point(409, 259);
             this.label12.Name = "label12";
             this.label12.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.label12.Size = new System.Drawing.Size(86, 24);
+            this.label12.Size = new System.Drawing.Size(92, 24);
             this.label12.TabIndex = 138;
-            this.label12.Text = "فئة المعاملة :";
+            this.label12.Text = "نوع المعاملة :";
             // 
             // guna2PictureBox5
             // 

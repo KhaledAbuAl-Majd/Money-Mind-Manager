@@ -187,7 +187,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 dgvTransactions.Columns["CreatedDate"].Width = 190;
                 dgvTransactions.Columns["CreatedDate"].DefaultCellStyle.Format = "hh:mm:ss tt dd-MM-yyyy";
 
-                dgvTransactions.Columns["TransactionTypeName"].HeaderText = "فئة المعاملة";
+                dgvTransactions.Columns["TransactionTypeName"].HeaderText = "نوع المعاملة";
                 dgvTransactions.Columns["TransactionTypeName"].Width = 100;
 
                 dgvTransactions.Columns["CreatedByUserName"].HeaderText = "اسم المستخدم المنشئ";
@@ -440,8 +440,17 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             if (!_CheckValidationChildren())
                 return;
 
+            if (dgvTransactions.Rows.Count < 1)
+            {
+                lblUserMessage.Text = "لا يوجد صفوف لتصديرها !";
+                lblUserMessage.Visible = true;
+                return;
+            }
 
-           DataTable dtTransactions = null;
+            lblUserMessage.Visible = false;
+
+
+            DataTable dtTransactions = null;
 
             bool filterByCreatedDate = false;
 
@@ -487,8 +496,8 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             dtTransactions.Columns["Amount"].ColumnName = "قيمة المعاملة";
             dtTransactions.Columns["TransactionDate"].ColumnName = "تاريخ المعاملة";
             dtTransactions.Columns["CreatedDate"].ColumnName = "تاريخ الإنشاء";
-            dtTransactions.Columns["TransactionTypeID"].ColumnName = "معرف فئة المعاملة";
-            dtTransactions.Columns["TransactionTypeName"].ColumnName = "فئة المعاملة";
+            dtTransactions.Columns["TransactionTypeID"].ColumnName = "معرف نوع المعاملة";
+            dtTransactions.Columns["TransactionTypeName"].ColumnName = "نوع المعاملة";
             dtTransactions.Columns["CreatedByUserID"].ColumnName = "معرف المستخدم المنشئ";
             dtTransactions.Columns["CreatedByUserName"].ColumnName = "اسم المستخدم المنشئ";
             dtTransactions.Columns["Purpose"].ColumnName = "البيان";

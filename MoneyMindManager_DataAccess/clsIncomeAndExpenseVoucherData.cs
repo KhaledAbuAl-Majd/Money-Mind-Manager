@@ -287,7 +287,7 @@ namespace MoneyMindManager_DataAccess
         /// if variable is null will not filter by it
         /// </summary>
         public static async Task<clsGetAllVouchers> GetAllVouchers(int? voucherID,bool? isIncome,bool? isReturn,string voucherName,
-            DateTime? fromCreatedDate,DateTime? toCreatedDate,DateTime? fromVoucherDate,DateTime? toVoucherDate,
+            string userName,DateTime? fromCreatedDate,DateTime? toCreatedDate,DateTime? fromVoucherDate,DateTime? toVoucherDate,
             int currentUserID, short pageNumber, bool RaiseEventOnErrorOccured = true)
         {
             clsGetAllVouchers allVouchers = null;
@@ -304,6 +304,7 @@ namespace MoneyMindManager_DataAccess
                         command.Parameters.AddWithValue("@IsIncome", (object)isIncome ?? DBNull.Value);
                         command.Parameters.AddWithValue("@IsReturn", (object)isReturn ?? DBNull.Value);
                         command.Parameters.AddWithValue("@VoucherName", string.IsNullOrWhiteSpace(voucherName) ? DBNull.Value : (object)voucherName);
+                        command.Parameters.AddWithValue("@UserName", string.IsNullOrWhiteSpace(userName) ? DBNull.Value : (object)userName);
                         command.Parameters.AddWithValue("@FromCreatedDate", (object)fromCreatedDate ?? DBNull.Value);
                         command.Parameters.AddWithValue("@ToCreatedDate", (object)toCreatedDate ?? DBNull.Value);
                         command.Parameters.AddWithValue("@FromVoucherDate", (object)fromVoucherDate ?? DBNull.Value);
@@ -367,6 +368,58 @@ namespace MoneyMindManager_DataAccess
             }
 
             return allVouchers;
+        }
+
+        /// <summary>
+        /// if variable is null will not filter by it
+        /// </summary>
+        public static async Task<DataTable> GetAllVouchersWithoutPaging(int? voucherID,bool? isIncome,bool? isReturn,string voucherName,
+            string userName,DateTime? fromCreatedDate,DateTime? toCreatedDate,DateTime? fromVoucherDate,DateTime? toVoucherDate,
+            int currentUserID, bool RaiseEventOnErrorOccured = true)
+        {
+            DataTable dtVouchers = null;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("[dbo].[SP_IncomeAndExpenseVouchers_GetAllByWithoutPaging]", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("@VoucherID", (object)voucherID ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@IsIncome", (object)isIncome ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@IsReturn", (object)isReturn ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@VoucherName", string.IsNullOrWhiteSpace(voucherName) ? DBNull.Value : (object)voucherName);
+                        command.Parameters.AddWithValue("@UserName", string.IsNullOrWhiteSpace(userName) ? DBNull.Value : (object)userName);
+                        command.Parameters.AddWithValue("@FromCreatedDate", (object)fromCreatedDate ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@ToCreatedDate", (object)toCreatedDate ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@FromVoucherDate", (object)fromVoucherDate ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@ToVoucherDate", (object)toVoucherDate ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@CurrentUserID", currentUserID);
+
+                        await connection.OpenAsync();
+
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            dtVouchers = new DataTable();
+                            dtVouchers.Load(reader);
+                        }
+                    }
+                }
+
+                if (dtVouchers == null)
+                    throw new Exception("فشلت العملية");
+            }
+            catch (Exception ex)
+            {
+                dtVouchers = null;
+
+                if (RaiseEventOnErrorOccured)
+                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+            }
+
+            return dtVouchers;
         }
     }
 }

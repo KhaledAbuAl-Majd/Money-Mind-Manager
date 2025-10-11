@@ -23,7 +23,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
         { 
             InitializeComponent();
         }
-        enum enFilterBy { All, DebtID, PersonName };
+        enum enFilterBy { All, DebtID, PersonName,UserName };
 
         enFilterBy _filterBy = enFilterBy.All;
 
@@ -36,7 +36,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
         {
             if (!ValidateChildren())
             {
-                gdgvVouchers.DataSource = null;
+                gdgvDebts.DataSource = null;
                 _IsHeaderCreated = false;
                 lblNoRecordsFoundMessage.Visible = true;
                 lblUserMessage.Text = "تم العثور على حقول غير صالحة. ضع المؤشر على العلامات الحمراء لعرض سبب الخطأ.";
@@ -109,6 +109,12 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 result = await clsDebt.GetAllDebts(personName,isLending, filterByCreatedDate, kgtxtFromData.ValidatedText, kgtxtToDate.ValidatedText,
                     isPaid, currentUserID, _pageNumber);
             }
+            else if (filterBy == enFilterBy.UserName)
+            {
+                string userName = kgtxtFilterValue.ValidatedText;
+                result = await clsDebt.GetAllDebtsByUserName(userName,isLending, filterByCreatedDate, kgtxtFromData.ValidatedText, kgtxtToDate.ValidatedText,
+                    isPaid, currentUserID, _pageNumber);
+            }
             else
                 return;
 
@@ -118,14 +124,14 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             if (result.dtDebts.Rows.Count == 0)
             {
                 lblNoRecordsFoundMessage.Visible = true;
-                gdgvVouchers.DataSource = null;
+                gdgvDebts.DataSource = null;
                 _IsHeaderCreated = false;
                 _pageNumber = 1;
             }
             else
             {
                 lblNoRecordsFoundMessage.Visible = false;
-                gdgvVouchers.DataSource = result.dtDebts;
+                gdgvDebts.DataSource = result.dtDebts;
             }
 
             lblUserMessage.Visible = false;
@@ -137,7 +143,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             lblCurrentPageOfNumberOfPages.Text = string.Concat(_pageNumber, "   من   ", result.NumberOfPages, "  صفحات");
             kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValueOption = true;
             kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValue = (result.NumberOfPages < 1) ? 1 : result.NumberOfPages;
-            lblCurrentPageRecordsCount.Text = gdgvVouchers.Rows.Count.ToString();
+            lblCurrentPageRecordsCount.Text = gdgvDebts.Rows.Count.ToString();
 
             gibtnNextPage.Enabled = (_pageNumber < result.NumberOfPages);
             gibtnPreviousPage.Enabled = (_pageNumber > 1);
@@ -146,32 +152,35 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             klblCurrentPageVouchersValue.Text = result.CurrentPageDebtsValue.ToString();
             //
 
-            if (!_IsHeaderCreated && gdgvVouchers.Rows.Count > 0)
+            if (!_IsHeaderCreated && gdgvDebts.Rows.Count > 0)
             {
-                gdgvVouchers.Columns["DebtID"].HeaderText = "معرف سند الدين";
-                gdgvVouchers.Columns["DebtID"].Width = 125;
+                gdgvDebts.Columns["DebtID"].HeaderText = "معرف سند الدين";
+                gdgvDebts.Columns["DebtID"].Width = 125;
 
-                gdgvVouchers.Columns["PersonName"].HeaderText = "اسم الشخص";
-                gdgvVouchers.Columns["PersonName"].Width = 265;
+                gdgvDebts.Columns["PersonName"].HeaderText = "اسم الشخص";
+                gdgvDebts.Columns["PersonName"].Width = 265;
 
-                gdgvVouchers.Columns["DebtValue"].HeaderText = "قيمة الدين";
-                gdgvVouchers.Columns["DebtValue"].Width = 215;
-                gdgvVouchers.Columns["DebtValue"].DefaultCellStyle.Format = "N4";
+                gdgvDebts.Columns["DebtValue"].HeaderText = "قيمة الدين";
+                gdgvDebts.Columns["DebtValue"].Width = 215;
+                gdgvDebts.Columns["DebtValue"].DefaultCellStyle.Format = "N4";
 
-                gdgvVouchers.Columns["RemainingAmount"].HeaderText = "القيمة المتبقية للسداد";
-                gdgvVouchers.Columns["RemainingAmount"].Width = 215;
-                gdgvVouchers.Columns["RemainingAmount"].DefaultCellStyle.Format = "N4";
+                gdgvDebts.Columns["RemainingAmount"].HeaderText = "القيمة المتبقية للسداد";
+                gdgvDebts.Columns["RemainingAmount"].Width = 215;
+                gdgvDebts.Columns["RemainingAmount"].DefaultCellStyle.Format = "N4";
 
-                gdgvVouchers.Columns["DebtDate"].HeaderText = "تاريخ السند";
-                gdgvVouchers.Columns["DebtDate"].Width = 115;
-                gdgvVouchers.Columns["DebtDate"].DefaultCellStyle.Format = "dd-MM-yyyy";
+                gdgvDebts.Columns["DebtDate"].HeaderText = "تاريخ السند";
+                gdgvDebts.Columns["DebtDate"].Width = 115;
+                gdgvDebts.Columns["DebtDate"].DefaultCellStyle.Format = "dd-MM-yyyy";
 
-                gdgvVouchers.Columns["CreatedDate"].HeaderText = "تاريخ الإنشاء";
-                gdgvVouchers.Columns["CreatedDate"].Width = 190;
-                gdgvVouchers.Columns["CreatedDate"].DefaultCellStyle.Format = "hh:mm:ss tt dd-MM-yyyy";
+                gdgvDebts.Columns["CreatedDate"].HeaderText = "تاريخ الإنشاء";
+                gdgvDebts.Columns["CreatedDate"].Width = 190;
+                gdgvDebts.Columns["CreatedDate"].DefaultCellStyle.Format = "hh:mm:ss tt dd-MM-yyyy";
 
-                gdgvVouchers.Columns["DebtType"].HeaderText = "نوع الدين";
-                gdgvVouchers.Columns["DebtType"].Width = 70;
+                gdgvDebts.Columns["DebtType"].HeaderText = "نوع الدين";
+                gdgvDebts.Columns["DebtType"].Width = 70;
+
+                gdgvDebts.Columns["CreatedByUserName"].HeaderText = "اسم المستخدم المنشئ";
+                gdgvDebts.Columns["CreatedByUserName"].Width = 265;
 
                 _IsHeaderCreated = true;
 
@@ -187,10 +196,10 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
         void _UpdateDebt()
         {
-            if (gdgvVouchers.SelectedRows.Count < 1)
+            if (gdgvDebts.SelectedRows.Count < 1)
                 return;
 
-            int debtID = Convert.ToInt32(gdgvVouchers.SelectedRows[0].Cells[0].Value);
+            int debtID = Convert.ToInt32(gdgvDebts.SelectedRows[0].Cells[0].Value);
 
             frmAddUpdateDebt frm = new frmAddUpdateDebt(debtID);
             frm.OnCloseAndSaved += _RefreshFilter;
@@ -292,6 +301,13 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 kgtxtFilterValue.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
                 kgtxtFilterValue.AllowWhiteSpace = true;
             }
+            else if (gcbFilterBy.Text == "اسم المستخدم")
+            {
+                _filterBy = enFilterBy.UserName;
+
+                kgtxtFilterValue.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
+                kgtxtFilterValue.AllowWhiteSpace = false;
+            }
 
             await _LoadDataAtDataGridView(_filterBy);
         }
@@ -392,6 +408,15 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             if (!_CheckValidationChildren())
                 return;
 
+            if (gdgvDebts.Rows.Count < 1)
+            {
+                lblUserMessage.Text = "لا يوجد صفوف لتصديرها !";
+                lblUserMessage.Visible = true;
+                return;
+            }
+
+            lblUserMessage.Visible = false;
+
 
             DataTable dtDebts = null;
 
@@ -441,6 +466,12 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 dtDebts = await clsDebt.GetAllDebtsWithoutPaging(personName, isLending, filterByCreatedDate, kgtxtFromData.ValidatedText, kgtxtToDate.ValidatedText,
                     isPaid, currentUserID);
             }
+            else if (_filterBy == enFilterBy.UserName)
+            {
+                string userName = kgtxtFilterValue.ValidatedText;
+                dtDebts = await clsDebt.GetAllDebtsByUserNameWithoutPaging(userName, isLending, filterByCreatedDate, kgtxtFromData.ValidatedText, kgtxtToDate.ValidatedText,
+                    isPaid, currentUserID);
+            }
             else
                 return;
 
@@ -465,7 +496,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             dtDebts.Columns["CreatedByUserName"].ColumnName = "اسم المستخدم المنشئ";
             dtDebts.Columns["AccountID"].ColumnName = "معرف الحساب";
 
-            await clsExportHelper.ExportToExcelWithDialog(dtDebts, "تقرير الديون");
+            await clsExportHelper.ExportToExcelWithDialog(dtDebts, "تقرير سند الديون");
         }
     }
 }

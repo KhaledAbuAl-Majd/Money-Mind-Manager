@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -196,6 +197,18 @@ namespace MoneyMindManager_Business
            return await clsIncomeAndExpenseTransaction.GetAllIncomeAndExpensTransactions(voucherID, currentUserID, pageNumber);
         }
 
+        //
+
+        public async Task<DataTable> GetVoucheTransactionsWithoutPaging(int currentUserID)
+        {
+            return await GetVoucheTransactionsWithoutPaging(Convert.ToInt32(VoucherID), currentUserID);
+        }
+
+        public static async Task<DataTable> GetVoucheTransactionsWithoutPaging(int voucherID, int currentUserID)
+        {
+            return await clsIncomeAndExpenseTransaction.GetAllIncomeAndExpensTransactionsWithoutPaging(voucherID, currentUserID);
+        }
+
         public static enVoucherType GetVoucherType(bool isIncome, bool isReturn)
         {
             if (isIncome)
@@ -216,8 +229,8 @@ namespace MoneyMindManager_Business
 
         }
 
-        private static async Task<clsGetAllVouchers> _GetAllVouchers(int? voucherID,string voucherName,bool byCreatedDate, string fromDateString,
-            string toDateString, enVoucherType voucherType, int currentUserID,short pageNumber)
+        private static async Task<clsGetAllVouchers> _GetAllVouchers(int? voucherID,string voucherName,string userName
+            ,bool byCreatedDate, string fromDateString, string toDateString, enVoucherType voucherType, int currentUserID,short pageNumber)
         {
             bool isIncome = false, isReturn = false;
 
@@ -263,7 +276,7 @@ namespace MoneyMindManager_Business
             }
 
 
-                return await clsIncomeAndExpenseVoucherData.GetAllVouchers(voucherID, isIncome, isReturn, voucherName,fromCreatedDate,
+                return await clsIncomeAndExpenseVoucherData.GetAllVouchers(voucherID, isIncome, isReturn, voucherName,userName,fromCreatedDate,
                     toCreatedDate,fromVoucherDate,toVoucherDate,currentUserID,pageNumber);
         }
 
@@ -275,7 +288,7 @@ namespace MoneyMindManager_Business
         public static async Task<clsGetAllVouchers> GetAllVouchers(bool byCreatedDate, string fromDateString, string toDateString,
             enVoucherType voucherType, int currentUserID, short pageNumber)
         {
-            return await _GetAllVouchers(null, null, byCreatedDate, fromDateString, toDateString, voucherType, currentUserID, pageNumber);
+            return await _GetAllVouchers(null, null,null, byCreatedDate, fromDateString, toDateString, voucherType, currentUserID, pageNumber);
         }
 
         /// <summary>
@@ -283,10 +296,10 @@ namespace MoneyMindManager_Business
         /// </summary>
         /// <param name="byCreatedDate">filter by createdDate or not (voucherDate)</param>
         /// <returns>Object of all vouchers if exists, if not returns null</returns>
-        public static async Task<clsGetAllVouchers> GetAllVouchers(int voucherID,bool byCreatedDate, string fromDateString, string toDateString,
+        public static async Task<clsGetAllVouchers> GetAllVouchersByVoucherID(int voucherID,bool byCreatedDate, string fromDateString, string toDateString,
             enVoucherType voucherType, int currentUserID, short pageNumber)
         {
-            return await _GetAllVouchers(voucherID, null, byCreatedDate, fromDateString, toDateString, voucherType, currentUserID, pageNumber);
+            return await _GetAllVouchers(voucherID, null,null, byCreatedDate, fromDateString, toDateString, voucherType, currentUserID, pageNumber);
         }
 
         /// <summary>
@@ -294,11 +307,122 @@ namespace MoneyMindManager_Business
         /// </summary>
         /// <param name="byCreatedDate">filter by createdDate or not (voucherDate)</param>
         /// <returns>Object of all vouchers if exists, if not returns null</returns>
-        public static async Task<clsGetAllVouchers> GetAllVouchers(string voucherName,bool byCreatedDate, string fromDateString, string toDateString,
+        public static async Task<clsGetAllVouchers> GetAllVouchersByVoucherName(string voucherName,bool byCreatedDate, string fromDateString, string toDateString,
             enVoucherType voucherType, int currentUserID, short pageNumber)
         {
-            return await _GetAllVouchers(null, voucherName, byCreatedDate, fromDateString, toDateString, voucherType, currentUserID, pageNumber);
+            return await _GetAllVouchers(null, voucherName,null, byCreatedDate, fromDateString, toDateString, voucherType, currentUserID, pageNumber);
         }
 
+        /// <summary>
+        /// Get All Vouchers by Created By UserName, if variable is null will not filter by it
+        /// </summary>
+        /// <param name="byCreatedDate">filter by createdDate or not (voucherDate)</param>
+        /// <returns>Object of all vouchers if exists, if not returns null</returns>
+        public static async Task<clsGetAllVouchers> GetAllVouchersByUserName(string userName,bool byCreatedDate, string fromDateString, string toDateString,
+            enVoucherType voucherType, int currentUserID, short pageNumber)
+        {
+            return await _GetAllVouchers(null,null,userName, byCreatedDate, fromDateString, toDateString, voucherType, currentUserID, pageNumber);
+        }
+
+        //
+
+        private static async Task<DataTable> _GetAllVouchersWithoutPaging(int? voucherID, string voucherName, string userName
+            , bool byCreatedDate, string fromDateString, string toDateString, enVoucherType voucherType, int currentUserID)
+        {
+            bool isIncome = false, isReturn = false;
+
+            switch (voucherType)
+            {
+                case enVoucherType.Incomes:
+                    isIncome = true;
+                    isReturn = false;
+                    break;
+
+                case enVoucherType.Expenses:
+                    isIncome = false;
+                    isReturn = false;
+                    break;
+
+                case enVoucherType.ExpensesReturn:
+                    isIncome = false;
+                    isReturn = true;
+                    break;
+
+                default:
+                    return null;
+            }
+
+            DateTime? fromCreatedDate = null, toCreatedDate = null,
+                fromVoucherDate = null, toVoucherDate = null;
+
+            if (byCreatedDate)
+            {
+                fromCreatedDate = clsFormat.TryConvertToDateTime(fromDateString);
+                toCreatedDate = clsFormat.TryConvertToDateTime(toDateString);
+
+                fromVoucherDate = null;
+                toVoucherDate = null;
+            }
+            else
+            {
+                fromVoucherDate = clsFormat.TryConvertToDateTime(fromDateString);
+                toVoucherDate = clsFormat.TryConvertToDateTime(toDateString);
+
+                fromCreatedDate = null;
+                toCreatedDate = null;
+            }
+
+
+            return await clsIncomeAndExpenseVoucherData.GetAllVouchersWithoutPaging(voucherID, isIncome, isReturn, voucherName, userName, fromCreatedDate,
+                toCreatedDate, fromVoucherDate, toVoucherDate, currentUserID);
+        }
+
+        /// <summary>
+        /// Get All Vouchers WithoutPaging, if variable is null will not filter by it
+        /// </summary>
+        /// <param name="byCreatedDate">filter by createdDate or not (voucherDate)</param>
+        /// <returns>Object of all vouchers if exists, if not returns null</returns>
+        public static async Task<DataTable> GetAllVouchersWithoutPaging(bool byCreatedDate, string fromDateString, string toDateString,
+            enVoucherType voucherType, int currentUserID)
+        {
+            return await _GetAllVouchersWithoutPaging(null, null, null, byCreatedDate, fromDateString, toDateString,
+                voucherType, currentUserID);
+        }
+
+        /// <summary>
+        /// Get All Vouchers By VoucherID WithoutPaging, if variable is null will not filter by it
+        /// </summary>
+        /// <param name="byCreatedDate">filter by createdDate or not (voucherDate)</param>
+        /// <returns>Object of all vouchers if exists, if not returns null</returns>
+        public static async Task<DataTable> GetAllVouchersByVoucherIDWithoutPaging(int voucherID, bool byCreatedDate, string fromDateString, string toDateString,
+            enVoucherType voucherType, int currentUserID)
+        {
+            return await _GetAllVouchersWithoutPaging(voucherID, null, null, byCreatedDate, fromDateString, toDateString, 
+                voucherType, currentUserID);
+        }
+
+        /// <summary>
+        /// Get All Vouchers by voucher name WithoutPaging, if variable is null will not filter by it
+        /// </summary>
+        /// <param name="byCreatedDate">filter by createdDate or not (voucherDate)</param>
+        /// <returns>Object of all vouchers if exists, if not returns null</returns>
+        public static async Task<DataTable> GetAllVouchersByVoucherNameWithoutPaging(string voucherName, bool byCreatedDate, string fromDateString, string toDateString,
+            enVoucherType voucherType, int currentUserID)
+        {
+            return await _GetAllVouchersWithoutPaging(null, voucherName, null, byCreatedDate, fromDateString,
+                toDateString, voucherType, currentUserID);
+        }
+
+        /// <summary>
+        /// Get All Vouchers by Created By UserName WithoutPaging, if variable is null will not filter by it
+        /// </summary>
+        /// <param name="byCreatedDate">filter by createdDate or not (voucherDate)</param>
+        /// <returns>Object of all vouchers if exists, if not returns null</returns>
+        public static async Task<DataTable> GetAllVouchersByUserNameWithoutPaging(string userName, bool byCreatedDate, string fromDateString, string toDateString,
+            enVoucherType voucherType, int currentUserID)
+        {
+            return await _GetAllVouchersWithoutPaging(null, null, userName, byCreatedDate, fromDateString, toDateString, 
+                voucherType, currentUserID);
+        }
     }
 }

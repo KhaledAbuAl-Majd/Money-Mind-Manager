@@ -154,6 +154,12 @@
     <Compile Include="Income And Expense\IAE_Transactions\frmAddUpdateIncomeAndExpeseTransaction.Designer.cs">
       <DependentUpon>frmAddUpdateIncomeAndExpeseTransaction.cs</DependentUpon>
     </Compile>
+    <Compile Include="Income And Expense\IAE_Transactions\frmIncomeAndExpenseTransactionInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Income And Expense\IAE_Transactions\frmIncomeAndExpenseTransactionInfo.Designer.cs">
+      <DependentUpon>frmIncomeAndExpenseTransactionInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Income And Expense\Vouchers\frmAddUpdateVoucher.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -290,6 +296,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Income And Expense\IAE_Transactions\frmAddUpdateIncomeAndExpeseTransaction.resx">
       <DependentUpon>frmAddUpdateIncomeAndExpeseTransaction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Income And Expense\IAE_Transactions\frmIncomeAndExpenseTransactionInfo.resx">
+      <DependentUpon>frmIncomeAndExpenseTransactionInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Income And Expense\Vouchers\frmAddUpdateVoucher.resx">
       <DependentUpon>frmAddUpdateVoucher.cs</DependentUpon>

@@ -225,7 +225,17 @@ namespace MoneyMindManager_Business
             return await clsDebtPayment.GetAllDebtPyamentsByDebtID(debtID, currentUserID, pageNumber);
         }
 
-        private static async Task<clsGetAllDebts> _GetAllDebts(int? debtID,bool? isLending,string personName, bool byCreatedDate,
+        //
+        public async Task<DataTable> GetDebtPaymentsWithoutPaging(int currentUserID)
+        {
+            return await GetDebtPaymentsWithoutPaging(Convert.ToInt32(DebtID), currentUserID);
+        }
+        public static async Task<DataTable> GetDebtPaymentsWithoutPaging(int debtID, int currentUserID)
+        {
+            return await clsDebtPayment.GetAllDebtPyamentsByDebtIDWithoutPaging(debtID, currentUserID);
+        }
+
+        private static async Task<clsGetAllDebts> _GetAllDebts(int? debtID,bool? isLending,string personName,string userName, bool byCreatedDate,
             string fromDateString, string toDateString,bool? isPaid, int currentUserID, short pageNumber)
         {
 
@@ -249,7 +259,7 @@ namespace MoneyMindManager_Business
                 toCreatedDate = null;
             }
 
-            return await clsDebtData.GetAllDebts(debtID, isLending, personName, fromCreatedDate, toCreatedDate, fromDebtDate,
+            return await clsDebtData.GetAllDebts(debtID, isLending, personName,userName, fromCreatedDate, toCreatedDate, fromDebtDate,
                 toDebtDate, isPaid, currentUserID, pageNumber);
         }
 
@@ -262,11 +272,11 @@ namespace MoneyMindManager_Business
            string fromDateString, string toDateString, bool? isPaid, int currentUserID, short pageNumber)
         {
 
-            return await _GetAllDebts(null, isLending, null, byCreatedDate, fromDateString, toDateString, isPaid, currentUserID, pageNumber);
+            return await _GetAllDebts(null, isLending, null,null, byCreatedDate, fromDateString, toDateString, isPaid, currentUserID, pageNumber);
         }
 
         /// <summary>
-        /// Get All Debts, if variable is null will not filter by it
+        /// Get All Debts By DebtID, if variable is null will not filter by it
         /// </summary>
         /// <param name="byCreatedDate">filter by createdDate or not (DebtData)</param>
         /// <returns>Object of all debts if exists, if not returns null</returns>
@@ -274,11 +284,11 @@ namespace MoneyMindManager_Business
            string fromDateString, string toDateString, bool? isPaid, int currentUserID, short pageNumber)
         {
 
-            return await _GetAllDebts(debtID, isLending, null, byCreatedDate, fromDateString, toDateString, isPaid, currentUserID, pageNumber);
+            return await _GetAllDebts(debtID, isLending, null,null, byCreatedDate, fromDateString, toDateString, isPaid, currentUserID, pageNumber);
         }
 
         /// <summary>
-        /// Get All Debts, if variable is null will not filter by it
+        /// Get All Debts By PersonName, if variable is null will not filter by it
         /// </summary>
         /// <param name="byCreatedDate">filter by createdDate or not (DebtData)</param>
         /// <returns>Object of all debts if exists, if not returns null</returns>
@@ -286,12 +296,26 @@ namespace MoneyMindManager_Business
            string fromDateString, string toDateString, bool? isPaid, int currentUserID, short pageNumber)
         {
 
-            return await _GetAllDebts(null, isLending, personName, byCreatedDate, fromDateString, toDateString, isPaid, currentUserID, pageNumber);
+            return await _GetAllDebts(null, isLending, personName,null, byCreatedDate, fromDateString, toDateString,
+                isPaid, currentUserID, pageNumber);
+        }
+
+        /// <summary>
+        /// Get All Debts By UserName, if variable is null will not filter by it
+        /// </summary>
+        /// <param name="byCreatedDate">filter by createdDate or not (DebtData)</param>
+        /// <returns>Object of all debts if exists, if not returns null</returns>
+        public static async Task<clsGetAllDebts> GetAllDebtsByUserName(string userName, bool? isLending, bool byCreatedDate,
+           string fromDateString, string toDateString, bool? isPaid, int currentUserID, short pageNumber)
+        {
+
+            return await _GetAllDebts(null, isLending, null,userName, byCreatedDate, fromDateString,
+                toDateString, isPaid, currentUserID, pageNumber);
         }
 
         //
 
-        private static async Task<DataTable> _GetAllDebtsWithoutPaging(int? debtID, bool? isLending, string personName, bool byCreatedDate,
+        private static async Task<DataTable> _GetAllDebtsWithoutPaging(int? debtID, bool? isLending, string personName,string userName, bool byCreatedDate,
            string fromDateString, string toDateString, bool? isPaid, int currentUserID)
         {
 
@@ -315,7 +339,7 @@ namespace MoneyMindManager_Business
                 toCreatedDate = null;
             }
 
-            return await clsDebtData.GetAllDebtsWithoutPaging(debtID, isLending, personName, fromCreatedDate, toCreatedDate, fromDebtDate,
+            return await clsDebtData.GetAllDebtsWithoutPaging(debtID, isLending, personName,userName, fromCreatedDate, toCreatedDate, fromDebtDate,
                 toDebtDate, isPaid, currentUserID);
         }
 
@@ -328,7 +352,7 @@ namespace MoneyMindManager_Business
            string fromDateString, string toDateString, bool? isPaid, int currentUserID)
         {
 
-            return await _GetAllDebtsWithoutPaging(null, isLending, null, byCreatedDate, fromDateString, toDateString, isPaid, currentUserID);
+            return await _GetAllDebtsWithoutPaging(null, isLending, null,null, byCreatedDate, fromDateString, toDateString, isPaid, currentUserID);
         }
 
         /// <summary>
@@ -340,7 +364,7 @@ namespace MoneyMindManager_Business
            string fromDateString, string toDateString, bool? isPaid, int currentUserID)
         {
 
-            return await _GetAllDebtsWithoutPaging(debtID, isLending, null, byCreatedDate, fromDateString, toDateString, isPaid, currentUserID);
+            return await _GetAllDebtsWithoutPaging(debtID, isLending, null,null, byCreatedDate, fromDateString, toDateString, isPaid, currentUserID);
         }
 
         /// <summary>
@@ -352,7 +376,19 @@ namespace MoneyMindManager_Business
            string fromDateString, string toDateString, bool? isPaid, int currentUserID)
         {
 
-            return await _GetAllDebtsWithoutPaging(null, isLending, personName, byCreatedDate, fromDateString, toDateString, isPaid, currentUserID);
+            return await _GetAllDebtsWithoutPaging(null, isLending, personName,null, byCreatedDate, fromDateString, toDateString, isPaid, currentUserID);
+        }
+
+        /// <summary>
+        /// Get All Debts WithoutPaging, if variable is null will not filter by it
+        /// </summary>
+        /// <param name="byCreatedDate">filter by createdDate or not (DebtData)</param>
+        /// <returns>DataTable of all debts if exists, if not returns null</returns>
+        public static async Task<DataTable> GetAllDebtsByUserNameWithoutPaging(string userName, bool? isLending, bool byCreatedDate,
+           string fromDateString, string toDateString, bool? isPaid, int currentUserID)
+        {
+
+            return await _GetAllDebtsWithoutPaging(null, isLending, null,userName, byCreatedDate, fromDateString, toDateString, isPaid, currentUserID);
         }
     }
 }

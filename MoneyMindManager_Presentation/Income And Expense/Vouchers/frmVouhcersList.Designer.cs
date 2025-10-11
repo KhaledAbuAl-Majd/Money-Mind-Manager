@@ -64,6 +64,8 @@
             this.gbtnAddVoucher = new Guna.UI2.WinForms.Guna2Button();
             this.gcbFilterByDate = new Guna.UI2.WinForms.Guna2ComboBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.gtsmExport = new System.Windows.Forms.ToolStripMenuItem();
+            this.gtsmExportExcel = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gdgvVouchers)).BeginInit();
             this.guna2ContextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -199,7 +201,8 @@
             this.gcbFilterBy.Items.AddRange(new object[] {
             "بدون",
             "معرف المستند",
-            "اسم المستند"});
+            "اسم المستند",
+            "اسم المستخدم"});
             this.gcbFilterBy.Location = new System.Drawing.Point(935, 10);
             this.gcbFilterBy.Name = "gcbFilterBy";
             this.gcbFilterBy.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -466,7 +469,8 @@
             this.guna2ContextMenuStrip1.ImageScalingSize = new System.Drawing.Size(30, 30);
             this.guna2ContextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.gtsmAddVoucher,
-            this.gtsmEdit});
+            this.gtsmEdit,
+            this.gtsmExport});
             this.guna2ContextMenuStrip1.Name = "guna2ContextMenuStrip1";
             this.guna2ContextMenuStrip1.RenderStyle.ArrowColor = System.Drawing.Color.FromArgb(((int)(((byte)(151)))), ((int)(((byte)(143)))), ((int)(((byte)(255)))));
             this.guna2ContextMenuStrip1.RenderStyle.BorderColor = System.Drawing.Color.Gainsboro;
@@ -477,7 +481,7 @@
             this.guna2ContextMenuStrip1.RenderStyle.SelectionForeColor = System.Drawing.Color.White;
             this.guna2ContextMenuStrip1.RenderStyle.SeparatorColor = System.Drawing.Color.Gainsboro;
             this.guna2ContextMenuStrip1.RenderStyle.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
-            this.guna2ContextMenuStrip1.Size = new System.Drawing.Size(167, 76);
+            this.guna2ContextMenuStrip1.Size = new System.Drawing.Size(195, 134);
             // 
             // gtsmAddVoucher
             // 
@@ -486,7 +490,7 @@
             this.gtsmAddVoucher.Name = "gtsmAddVoucher";
             this.gtsmAddVoucher.ShortcutKeys = System.Windows.Forms.Keys.Insert;
             this.gtsmAddVoucher.ShowShortcutKeys = false;
-            this.gtsmAddVoucher.Size = new System.Drawing.Size(166, 36);
+            this.gtsmAddVoucher.Size = new System.Drawing.Size(194, 36);
             this.gtsmAddVoucher.Text = "إضافة مستند";
             this.gtsmAddVoucher.Click += new System.EventHandler(this.gtsmAddVoucher_Click);
             // 
@@ -495,7 +499,7 @@
             this.gtsmEdit.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gtsmEdit.Image = ((System.Drawing.Image)(resources.GetObject("gtsmEdit.Image")));
             this.gtsmEdit.Name = "gtsmEdit";
-            this.gtsmEdit.Size = new System.Drawing.Size(166, 36);
+            this.gtsmEdit.Size = new System.Drawing.Size(194, 36);
             this.gtsmEdit.Text = "تعديل";
             this.gtsmEdit.Click += new System.EventHandler(this.gtsmEdit_Click);
             // 
@@ -808,6 +812,26 @@
             this.label6.TabIndex = 134;
             this.label6.Text = "نوع التاريخ";
             // 
+            // gtsmExport
+            // 
+            this.gtsmExport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.gtsmExportExcel});
+            this.gtsmExport.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gtsmExport.Image = ((System.Drawing.Image)(resources.GetObject("gtsmExport.Image")));
+            this.gtsmExport.Name = "gtsmExport";
+            this.gtsmExport.Size = new System.Drawing.Size(194, 36);
+            this.gtsmExport.Text = "تصدير";
+            // 
+            // gtsmExportExcel
+            // 
+            this.gtsmExportExcel.AutoSize = false;
+            this.gtsmExportExcel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gtsmExportExcel.Image = ((System.Drawing.Image)(resources.GetObject("gtsmExportExcel.Image")));
+            this.gtsmExportExcel.Name = "gtsmExportExcel";
+            this.gtsmExportExcel.Size = new System.Drawing.Size(194, 27);
+            this.gtsmExportExcel.Text = "       Excel";
+            this.gtsmExportExcel.Click += new System.EventHandler(this.gtsmExportExcel_Click);
+            // 
             // frmVouhcersList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -882,5 +906,7 @@
         private KhaledControlLibrary1.KhaledLabel klblAllVouchersValue;
         private Guna.UI2.WinForms.Guna2ImageButton gibtnRefreshData;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ToolStripMenuItem gtsmExport;
+        private System.Windows.Forms.ToolStripMenuItem gtsmExportExcel;
     }
 }

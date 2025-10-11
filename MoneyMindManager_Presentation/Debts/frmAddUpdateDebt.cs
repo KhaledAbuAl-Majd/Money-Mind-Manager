@@ -16,6 +16,7 @@ using MoneyMindManager_Presentation.Income_And_Expense.Categories;
 using MoneyMindManager_Presentation.Main;
 using MoneyMindManager_Presentation.People;
 using MoneyMindManager_Presentation.Properties;
+using MoneyMindManager_Presentation.Transactions;
 using MoneyMindManagerGlobal;
 using static Guna.UI2.Native.WinApi;
 using static MoneyMindManager_Business.clsIncomeAndExpenseVoucher;
@@ -125,7 +126,8 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 gdgvDebtPaymentTransctions.DataSource = result.dtDebtPayment;
             }
 
-            lblUserMessage.Visible = false;
+            if (!_Debt.IsLocked)
+                lblUserMessage.Visible = false;
 
             lblTotalRecordsNumber.Text = result.RecordsCount.ToString();
 
@@ -158,13 +160,16 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 gdgvDebtPaymentTransctions.Columns["Amount"].Width = 250;
                 gdgvDebtPaymentTransctions.Columns["Amount"].DefaultCellStyle.Format = "N4";
 
-                gdgvDebtPaymentTransctions.Columns["DebtDate"].HeaderText = "تاريخ الإنشاء";
-                gdgvDebtPaymentTransctions.Columns["DebtDate"].Width = 250;
-                gdgvDebtPaymentTransctions.Columns["DebtDate"].DefaultCellStyle.Format = "hh:mm:ss tt dd-MM-yyyy";
+                gdgvDebtPaymentTransctions.Columns["DebtDate"].HeaderText = "تاريخ المعاملة";
+                gdgvDebtPaymentTransctions.Columns["DebtDate"].Width = 130;
+                gdgvDebtPaymentTransctions.Columns["DebtDate"].DefaultCellStyle.Format = "dd-MM-yyyy";
 
                 gdgvDebtPaymentTransctions.Columns["CreatedDate"].HeaderText = "تاريخ الإنشاء";
                 gdgvDebtPaymentTransctions.Columns["CreatedDate"].Width = 250;
                 gdgvDebtPaymentTransctions.Columns["CreatedDate"].DefaultCellStyle.Format = "hh:mm:ss tt dd-MM-yyyy";
+
+                gdgvDebtPaymentTransctions.Columns["CreatedByUserName"].HeaderText = "اسم المستخدم المنشئ";
+                gdgvDebtPaymentTransctions.Columns["CreatedByUserName"].Width = 250;
 
                 gdgvDebtPaymentTransctions.Columns["Purpose"].HeaderText = "البيان";
                 gdgvDebtPaymentTransctions.Columns["Purpose"].Width = 300;
@@ -420,6 +425,23 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
         }
 
+        void _ShowTransactionInfo()
+        {
+            if (gdgvDebtPaymentTransctions.SelectedRows.Count < 1 || _DebtID == null)
+            {
+                lblUserMessage.Text = "قم بإختيار معاملة سداد أولا ; لتتمكن من رؤية معلوماتها";
+                lblUserMessage.Visible = true;
+                return;
+            }
+
+            lblUserMessage.Visible = false;
+
+            int transactionID = Convert.ToInt32(gdgvDebtPaymentTransctions.SelectedRows[0].Cells[0].Value);
+
+            var frm = new frmMainTransactionInfo(transactionID);
+            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
+        }
+
         private async void frmAddUpdateVoucher_Load(object sender, EventArgs e)
         {
             _SetReadOnlyAtTextBox(kgtxtPersonName);
@@ -556,6 +578,10 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             }
 
         }
+        private void gtsmTransactionInfo_Click(object sender, EventArgs e)
+        {
+            _ShowTransactionInfo();
+        }
 
         private async void gibtnDeleteDebt_Click(object sender, EventArgs e)
         {
@@ -630,6 +656,47 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             frmPersonInfo frm = new frmPersonInfo(Convert.ToInt32(_PersonID),false);
             clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
+        }
+
+        private async void gtsmExportExcel_Click(object sender, EventArgs e)
+        {
+            if (!_CheckValidationChildren())
+                return;
+
+            if (gdgvDebtPaymentTransctions.Rows.Count < 1)
+            {
+                lblUserMessage.Text = "لا يوجد صفوف لتصديرها !";
+                lblUserMessage.Visible = true;
+                return;
+            }
+
+            lblUserMessage.Visible = false;
+
+
+            int currentUserID = Convert.ToInt32(clsGlobal_UI.CurrentUser.UserID);
+
+            var dt = await _Debt.GetDebtPaymentsWithoutPaging(currentUserID);
+
+
+            if (dt == null)
+                return;
+
+            if (dt == null)
+            {
+                clsGlobalMessageBoxs.ShowErrorMessage("فشل تصدير البيانات !");
+                return;
+            }
+
+            dt.Columns["MainTransactionID"].ColumnName = "معرف المعاملة";
+            dt.Columns["Amount"].ColumnName = "المبلغ";
+            dt.Columns["DebtDate"].ColumnName = "تاريخ المعاملة";
+            dt.Columns["CreatedDate"].ColumnName = "تاريخ الإنشاء";
+            dt.Columns["Purpose"].ColumnName = "البيان";
+            dt.Columns["CreatedByUserID"].ColumnName = "معرف المستخدم المنشئ";
+            dt.Columns["CreatedByUserName"].ColumnName = "اسم المستخدم المنشئ";
+            dt.Columns["AccountID"].ColumnName = "معرف الحساب";
+
+            await clsExportHelper.ExportToExcelWithDialog(dt, $"تقرير معاملات سداد سند الدين [ {_DebtID?.ToString()} ]");
         }
 
     }

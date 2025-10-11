@@ -263,7 +263,7 @@ namespace MoneyMindManager_DataAccess
         /// <summary>
         /// if variable is null will not filter by it
         /// </summary>
-        public static async Task<clsGetAllDebts> GetAllDebts(int? debtID, bool? isLending, string personName,
+        public static async Task<clsGetAllDebts> GetAllDebts(int? debtID, bool? isLending, string personName,string userName,
             DateTime? fromCreatedDate, DateTime? toCreatedDate, DateTime? fromDebtDate, DateTime? toDebtDate,
             bool? isPaid,int currentUserID, short pageNumber, bool RaiseEventOnErrorOccured = true)
         {
@@ -280,6 +280,7 @@ namespace MoneyMindManager_DataAccess
                         command.Parameters.AddWithValue("@DebtID", (object)debtID ?? DBNull.Value);
                         command.Parameters.AddWithValue("@IsLending", (object)isLending ?? DBNull.Value);
                         command.Parameters.AddWithValue("@PersonName", string.IsNullOrWhiteSpace(personName) ? DBNull.Value : (object)personName);
+                        command.Parameters.AddWithValue("@UserName", string.IsNullOrWhiteSpace(userName) ? DBNull.Value : (object)userName);
                         command.Parameters.AddWithValue("@FromCreatedDate", (object)fromCreatedDate ?? DBNull.Value);
                         command.Parameters.AddWithValue("@ToCreatedDate", (object)toCreatedDate ?? DBNull.Value);
                         command.Parameters.AddWithValue("@FromDebtDate", (object)fromDebtDate ?? DBNull.Value);
@@ -346,7 +347,7 @@ namespace MoneyMindManager_DataAccess
             return allDebts;
         }
 
-        public static async Task<DataTable> GetAllDebtsWithoutPaging(int? debtID, bool? isLending, string personName,
+        public static async Task<DataTable> GetAllDebtsWithoutPaging(int? debtID, bool? isLending, string personName, string userName,
             DateTime? fromCreatedDate, DateTime? toCreatedDate, DateTime? fromDebtDate, DateTime? toDebtDate,
             bool? isPaid, int currentUserID, bool RaiseEventOnErrorOccured = true)
         {
@@ -363,6 +364,7 @@ namespace MoneyMindManager_DataAccess
                         command.Parameters.AddWithValue("@DebtID", (object)debtID ?? DBNull.Value);
                         command.Parameters.AddWithValue("@IsLending", (object)isLending ?? DBNull.Value);
                         command.Parameters.AddWithValue("@PersonName", string.IsNullOrWhiteSpace(personName) ? DBNull.Value : (object)personName);
+                        command.Parameters.AddWithValue("@UserName", string.IsNullOrWhiteSpace(userName) ? DBNull.Value : (object)userName);
                         command.Parameters.AddWithValue("@FromCreatedDate", (object)fromCreatedDate ?? DBNull.Value);
                         command.Parameters.AddWithValue("@ToCreatedDate", (object)toCreatedDate ?? DBNull.Value);
                         command.Parameters.AddWithValue("@FromDebtDate", (object)fromDebtDate ?? DBNull.Value);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -123,6 +124,11 @@ namespace MoneyMindManager_Business
         public static async Task<clsGetAllIncomeAndExpenseTransactions> GetAllIncomeAndExpensTransactions(int voucherID, int currentUserID, short pageNumber)
         {
             return await clsIncomeAndExpenseTransactionData.GetAllIncomeAndExpensTransactions(voucherID, currentUserID, pageNumber);
+        }
+
+        public static async Task<DataTable> GetAllIncomeAndExpensTransactionsWithoutPaging(int voucherID, int currentUserID)
+        {
+            return await clsIncomeAndExpenseTransactionData.GetAllIncomeAndExpensTransactionsWithoutPaging(voucherID, currentUserID);
         }
     }
 }

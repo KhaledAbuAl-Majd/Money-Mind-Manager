@@ -484,7 +484,7 @@
             this.guna2ContextMenuStrip1.RenderStyle.SelectionForeColor = System.Drawing.Color.White;
             this.guna2ContextMenuStrip1.RenderStyle.SeparatorColor = System.Drawing.Color.Gainsboro;
             this.guna2ContextMenuStrip1.RenderStyle.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
-            this.guna2ContextMenuStrip1.Size = new System.Drawing.Size(206, 98);
+            this.guna2ContextMenuStrip1.Size = new System.Drawing.Size(206, 76);
             // 
             // gtsmTransactionInfo
             // 
@@ -717,7 +717,7 @@
             this.klblCurrentPageTransactionsValue.DateProperties.YearFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enYearFormate.yyyy__2025;
             this.klblCurrentPageTransactionsValue.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.klblCurrentPageTransactionsValue.InputType = KhaledControlLibrary1.KhaledLabel.enInputType.Number;
-            this.klblCurrentPageTransactionsValue.Location = new System.Drawing.Point(1, 702);
+            this.klblCurrentPageTransactionsValue.Location = new System.Drawing.Point(-1, 702);
             this.klblCurrentPageTransactionsValue.Name = "klblCurrentPageTransactionsValue";
             this.klblCurrentPageTransactionsValue.NumberFormat = KhaledControlLibrary1.KhaledLabel.enNumberFormat.N4;
             this.klblCurrentPageTransactionsValue.Size = new System.Drawing.Size(241, 28);
@@ -826,11 +826,11 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(1101, 37);
+            this.label4.Location = new System.Drawing.Point(1103, 37);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(91, 17);
+            this.label4.Size = new System.Drawing.Size(89, 17);
             this.label4.TabIndex = 136;
-            this.label4.Text = "فئات المعاملات";
+            this.label4.Text = "أنواع المعاملات";
             // 
             // guna2Panel2
             // 

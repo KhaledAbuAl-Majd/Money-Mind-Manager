@@ -77,7 +77,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(596, 540);
+            this.label1.Location = new System.Drawing.Point(596, 515);
             this.label1.Name = "label1";
             this.label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label1.Size = new System.Drawing.Size(194, 24);
@@ -94,7 +94,7 @@
             this.gtswNewTransactionAfterAdd.CheckedState.InnerBorderColor = System.Drawing.Color.White;
             this.gtswNewTransactionAfterAdd.CheckedState.InnerColor = System.Drawing.Color.White;
             this.gtswNewTransactionAfterAdd.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.gtswNewTransactionAfterAdd.Location = new System.Drawing.Point(556, 543);
+            this.gtswNewTransactionAfterAdd.Location = new System.Drawing.Point(556, 518);
             this.gtswNewTransactionAfterAdd.Name = "gtswNewTransactionAfterAdd";
             this.gtswNewTransactionAfterAdd.Size = new System.Drawing.Size(35, 20);
             this.gtswNewTransactionAfterAdd.TabIndex = 5;
@@ -119,7 +119,7 @@
             this.gibtnDeleteTransaction.ImageOffset = new System.Drawing.Point(0, 0);
             this.gibtnDeleteTransaction.ImageRotate = 0F;
             this.gibtnDeleteTransaction.ImageSize = new System.Drawing.Size(28, 28);
-            this.gibtnDeleteTransaction.Location = new System.Drawing.Point(479, 532);
+            this.gibtnDeleteTransaction.Location = new System.Drawing.Point(479, 507);
             this.gibtnDeleteTransaction.Name = "gibtnDeleteTransaction";
             this.gibtnDeleteTransaction.PressedState.ImageSize = new System.Drawing.Size(64, 64);
             this.gibtnDeleteTransaction.Size = new System.Drawing.Size(40, 42);
@@ -150,7 +150,7 @@
             this.gbtnNewTransaction.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnNewTransaction.ImageSize = new System.Drawing.Size(25, 25);
             this.gbtnNewTransaction.IndicateFocus = true;
-            this.gbtnNewTransaction.Location = new System.Drawing.Point(464, 584);
+            this.gbtnNewTransaction.Location = new System.Drawing.Point(464, 559);
             this.gbtnNewTransaction.Name = "gbtnNewTransaction";
             this.gbtnNewTransaction.Size = new System.Drawing.Size(283, 41);
             this.gbtnNewTransaction.TabIndex = 7;
@@ -162,10 +162,10 @@
             this.lblUserMessage.Font = new System.Drawing.Font("Segoe Script", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUserMessage.ForeColor = System.Drawing.Color.Red;
             this.lblUserMessage.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.lblUserMessage.Location = new System.Drawing.Point(38, 65);
+            this.lblUserMessage.Location = new System.Drawing.Point(38, 50);
             this.lblUserMessage.Name = "lblUserMessage";
             this.lblUserMessage.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.lblUserMessage.Size = new System.Drawing.Size(1148, 42);
+            this.lblUserMessage.Size = new System.Drawing.Size(1148, 30);
             this.lblUserMessage.TabIndex = 106;
             this.lblUserMessage.Text = "\"تم العثور على حقول غير صالحة. ضع المؤشر على العلامات الحمراء لعرض سبب الخطأ.\"";
             this.lblUserMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -187,7 +187,7 @@
             this.guna2Panel2.Controls.Add(this.kgtxtAmount);
             this.guna2Panel2.Controls.Add(this.kgtxtPaymentDate);
             this.guna2Panel2.FillColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.guna2Panel2.Location = new System.Drawing.Point(427, 111);
+            this.guna2Panel2.Location = new System.Drawing.Point(427, 86);
             this.guna2Panel2.Name = "guna2Panel2";
             this.guna2Panel2.ShadowDecoration.BorderRadius = 20;
             this.guna2Panel2.ShadowDecoration.Color = System.Drawing.Color.DarkGray;
