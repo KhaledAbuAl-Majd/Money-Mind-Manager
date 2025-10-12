@@ -18,9 +18,18 @@ namespace MoneyMindManager_Business
 
         public clsCurrency DefaultCurrencyInfo { get; private set; }
 
+        /// <summary>
+        /// Get AccountOwner
+        /// </summary>
+        public async Task<clsUser> GetCreatedbyUserInfo(int currentUserID)
+        {
+            return await clsUser.FindUserByUserID(Convert.ToInt32(AccountOwnerUserID), currentUserID);
+        }
+
+
         private clsAccount(short accountID, string accountName, DateTime createdDate, bool isActive, byte defaultCurrencyID,
-                string description,decimal balance, clsCurrency defaultCurrencyInfo)
-            : base(accountID, accountName, createdDate, isActive, defaultCurrencyID, description,balance)
+                string description,decimal balance,int accountOwnerUserID, clsCurrency defaultCurrencyInfo)
+            : base(accountID, accountName, createdDate, isActive, defaultCurrencyID, description,balance,accountOwnerUserID)
         {
             this.Mode = enMode.Update;
             this.DefaultCurrencyInfo = defaultCurrencyInfo;
@@ -74,8 +83,9 @@ namespace MoneyMindManager_Business
             if (defaultCurrencyInfo == null)
                 return null;
 
-            return new clsAccount(accountColumns.AccountID, accountColumns.AccountName, accountColumns.CreatedDate, accountColumns.IsActive,
-                accountColumns.DefaultCurrencyID, accountColumns.Description,accountColumns.Balance,  defaultCurrencyInfo);
+            return new clsAccount(accountColumns.AccountID, accountColumns.AccountName, accountColumns.CreatedDate,
+                accountColumns.IsActive, accountColumns.DefaultCurrencyID, accountColumns.Description,
+                accountColumns.Balance,accountColumns.AccountOwnerUserID,  defaultCurrencyInfo);
         }
 
         /// <returns>New AccountID if Success and CreatringResult is true, if failed return null and CreatingResult is false</returns>

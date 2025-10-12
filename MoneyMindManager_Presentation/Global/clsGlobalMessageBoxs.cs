@@ -29,7 +29,7 @@ namespace MoneyMindManager_Presentation.Global
 
             DialogResult d = DialogResult.Cancel;
 
-            clsGlobal_UI.MainForm.Invoke(new Action(() =>
+            clsGlobal_UI.ActiveForm.Invoke(new Action(() =>
               {
                   d = MessageBox.Show(message, caption, buttons, icon, defaultButton, options);
               }));

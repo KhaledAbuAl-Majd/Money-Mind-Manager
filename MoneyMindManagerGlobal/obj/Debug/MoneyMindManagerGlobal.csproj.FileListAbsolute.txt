@@ -7,3 +7,12 @@ E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\Mo
 E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManagerGlobal\obj\Debug\MoneyMin.2EB0F2F7.Up2Date
 E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManagerGlobal\obj\Debug\MoneyMindManagerGlobal.dll
 E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManagerGlobal\obj\Debug\MoneyMindManagerGlobal.pdb
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManagerGlobal\bin\Debug\LiveCharts.dll
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManagerGlobal\bin\Debug\LiveCharts.WinForms.dll
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManagerGlobal\bin\Debug\LiveCharts.Wpf.dll
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManagerGlobal\bin\Debug\LiveCharts.pdb
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManagerGlobal\bin\Debug\LiveCharts.xml
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManagerGlobal\bin\Debug\LiveCharts.WinForms.pdb
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManagerGlobal\bin\Debug\LiveCharts.WinForms.xml
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManagerGlobal\bin\Debug\LiveCharts.Wpf.pdb
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManagerGlobal\bin\Debug\LiveCharts.Wpf.xml

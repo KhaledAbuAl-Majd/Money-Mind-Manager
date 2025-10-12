@@ -50,8 +50,8 @@ namespace MoneyMindManager_Presentation.Users
             this.kgtxtConfirmPassword = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.kgtxtpassword = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.gbtnSave = new Guna.UI2.WinForms.Guna2Button();
-            this.lblHeader = new System.Windows.Forms.Label();
             this.ctrlPersonCardWithFilter1 = new MoneyMindManager_Presentation.People.Controls.ctrlPersonCardWithFilter();
+            this.lblHeader = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.guna2Panel1.SuspendLayout();
             this.guna2Panel2.SuspendLayout();
@@ -66,10 +66,10 @@ namespace MoneyMindManager_Presentation.Users
             // lblUserID
             // 
             this.lblUserID.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUserID.Location = new System.Drawing.Point(118, 10);
+            this.lblUserID.Location = new System.Drawing.Point(111, 10);
             this.lblUserID.Name = "lblUserID";
             this.lblUserID.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.lblUserID.Size = new System.Drawing.Size(100, 23);
+            this.lblUserID.Size = new System.Drawing.Size(120, 23);
             this.lblUserID.TabIndex = 96;
             this.lblUserID.Text = "N/A";
             // 
@@ -77,7 +77,7 @@ namespace MoneyMindManager_Presentation.Users
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(225, 8);
+            this.label2.Location = new System.Drawing.Point(231, 8);
             this.label2.Name = "label2";
             this.label2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label2.Size = new System.Drawing.Size(105, 24);
@@ -104,7 +104,7 @@ namespace MoneyMindManager_Presentation.Users
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(61, 10);
+            this.label1.Location = new System.Drawing.Point(57, 10);
             this.label1.Name = "label1";
             this.label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label1.Size = new System.Drawing.Size(50, 24);
@@ -121,7 +121,7 @@ namespace MoneyMindManager_Presentation.Users
             this.gtswIsActive.CheckedState.InnerBorderColor = System.Drawing.Color.White;
             this.gtswIsActive.CheckedState.InnerColor = System.Drawing.Color.White;
             this.gtswIsActive.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.gtswIsActive.Location = new System.Drawing.Point(23, 13);
+            this.gtswIsActive.Location = new System.Drawing.Point(19, 13);
             this.gtswIsActive.Name = "gtswIsActive";
             this.gtswIsActive.Size = new System.Drawing.Size(35, 20);
             this.gtswIsActive.TabIndex = 99;
@@ -607,18 +607,6 @@ namespace MoneyMindManager_Presentation.Users
             this.gbtnSave.Text = "حفظ";
             this.gbtnSave.Click += new System.EventHandler(this.gbtnSave_Click);
             // 
-            // lblHeader
-            // 
-            this.lblHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblHeader.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold);
-            this.lblHeader.ForeColor = System.Drawing.Color.Black;
-            this.lblHeader.Location = new System.Drawing.Point(0, 0);
-            this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(1210, 50);
-            this.lblHeader.TabIndex = 37;
-            this.lblHeader.Text = "إضافة مستخدم";
-            this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // ctrlPersonCardWithFilter1
             // 
             this.ctrlPersonCardWithFilter1.BackColor = System.Drawing.Color.White;
@@ -630,6 +618,18 @@ namespace MoneyMindManager_Presentation.Users
             this.ctrlPersonCardWithFilter1.OnSuccess += new System.Action(this.ctrlPersonCardWithFilter1_OnSuccess);
             this.ctrlPersonCardWithFilter1.OnFailed += new System.Action(this.ctrlPersonCardWithFilter1_OnFailed);
             this.ctrlPersonCardWithFilter1.OnEditingPerson += new System.Action(this.ctrlPersonCardWithFilter1_OnEditingPerson);
+            // 
+            // lblHeader
+            // 
+            this.lblHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblHeader.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold);
+            this.lblHeader.ForeColor = System.Drawing.Color.Black;
+            this.lblHeader.Location = new System.Drawing.Point(0, 0);
+            this.lblHeader.Name = "lblHeader";
+            this.lblHeader.Size = new System.Drawing.Size(1210, 50);
+            this.lblHeader.TabIndex = 37;
+            this.lblHeader.Text = "إضافة مستخدم";
+            this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // frmAddUpdateUser
             // 

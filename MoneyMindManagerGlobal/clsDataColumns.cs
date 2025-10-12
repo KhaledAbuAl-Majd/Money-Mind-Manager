@@ -254,8 +254,10 @@ namespace MoneyMindManagerGlobal
                 public string Description { get; set; }
 
                 public decimal Balance { get; protected set; }
+
+                public int AccountOwnerUserID { get; protected set; }
                 public clsAccountColumns(short accountID, string accountName, DateTime createdDate, bool isActive, byte defaultCurrencyID,
-                    string description,decimal balance)
+                    string description,decimal balance,int accountOwnerUserID)
                 {
                     this.AccountID = accountID;
                     this.AccountName = accountName;
@@ -264,6 +266,7 @@ namespace MoneyMindManagerGlobal
                     this.DefaultCurrencyID = defaultCurrencyID;
                     this.Description = description;
                     this.Balance = balance;
+                    this.AccountOwnerUserID = accountOwnerUserID;
                 }
             }
         }
@@ -656,6 +659,28 @@ namespace MoneyMindManagerGlobal
                     this.NumberOfPages = numberOfPages;
                     this.RecordsCount = recordsCount;
                     this.RemainingAmount = remainingAmount;
+                }
+            }
+        }
+
+        //
+
+        public static class clsReportClassess
+        {
+            public class clsMonthlyFlow
+            {
+                public byte mon { get; set; }      
+                public decimal Income { get; set; }      
+                public decimal NetExpense { get; set; }  
+                public decimal NetCashFlow { get; set; }  
+
+
+                public clsMonthlyFlow(byte month,decimal income,decimal netExpense,decimal netCashFlow)
+                {
+                    this.mon = month;
+                    this.Income = income;
+                    this.NetExpense = netExpense;
+                    this.NetCashFlow = netCashFlow;
                 }
             }
         }

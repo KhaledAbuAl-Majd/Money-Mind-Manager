@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAddUpdateCategory));
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
+            this.ctrlInfoIcon3 = new KhaledControlLibrary1.ctrlInfoIcon();
             this.gibtnDeleteVoucher = new Guna.UI2.WinForms.Guna2ImageButton();
             this.label10 = new System.Windows.Forms.Label();
             this.klblCreatedDate = new KhaledControlLibrary1.KhaledLabel();
@@ -60,13 +61,12 @@
             this.lblHeader = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.ctrlInfoIcon3 = new KhaledControlLibrary1.ctrlInfoIcon();
             this.guna2Panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ctrlInfoIcon3.PictureBoxControl)).BeginInit();
             this.guna2Panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ctrlInfoIcon1.PictureBoxControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ctrlInfoIcon2.PictureBoxControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ctrlInfoIcon3.PictureBoxControl)).BeginInit();
             this.SuspendLayout();
             // 
             // guna2Panel2
@@ -109,6 +109,33 @@
             this.guna2Panel2.ShadowDecoration.Enabled = true;
             this.guna2Panel2.Size = new System.Drawing.Size(656, 393);
             this.guna2Panel2.TabIndex = 1;
+            // 
+            // ctrlInfoIcon3
+            // 
+            this.ctrlInfoIcon3.BackColor = System.Drawing.Color.Transparent;
+            this.ctrlInfoIcon3.IconImage = ((System.Drawing.Image)(resources.GetObject("ctrlInfoIcon3.IconImage")));
+            this.ctrlInfoIcon3.Location = new System.Drawing.Point(20, 155);
+            this.ctrlInfoIcon3.Name = "ctrlInfoIcon3";
+            // 
+            // 
+            // 
+            this.ctrlInfoIcon3.PictureBoxControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctrlInfoIcon3.PictureBoxControl.Image = ((System.Drawing.Image)(resources.GetObject("ctrlInfoIcon3.PictureBoxControl.Image")));
+            this.ctrlInfoIcon3.PictureBoxControl.ImageRotate = 0F;
+            this.ctrlInfoIcon3.PictureBoxControl.Location = new System.Drawing.Point(0, 0);
+            this.ctrlInfoIcon3.PictureBoxControl.Name = "gpbInfoIcon";
+            this.ctrlInfoIcon3.PictureBoxControl.Size = new System.Drawing.Size(20, 20);
+            this.ctrlInfoIcon3.PictureBoxControl.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.ctrlInfoIcon3.PictureBoxControl.TabIndex = 0;
+            this.ctrlInfoIcon3.PictureBoxControl.TabStop = false;
+            this.ctrlInfoIcon3.PictureBoxControl.UseTransparentBackground = true;
+            this.ctrlInfoIcon3.Size = new System.Drawing.Size(20, 20);
+            this.ctrlInfoIcon3.TabIndex = 12;
+            // 
+            // 
+            // 
+            this.ctrlInfoIcon3.ToolTipControl.IsBalloon = true;
+            this.ctrlInfoIcon3.ToolTipText = "تنبيه : عند الغاء فعالية فئة يتم الغاء فعالية الفئات التابعة لها";
             // 
             // gibtnDeleteVoucher
             // 
@@ -433,10 +460,10 @@
             // lblCategoryID
             // 
             this.lblCategoryID.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCategoryID.Location = new System.Drawing.Point(8, 10);
+            this.lblCategoryID.Location = new System.Drawing.Point(6, 10);
             this.lblCategoryID.Name = "lblCategoryID";
             this.lblCategoryID.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.lblCategoryID.Size = new System.Drawing.Size(100, 23);
+            this.lblCategoryID.Size = new System.Drawing.Size(120, 23);
             this.lblCategoryID.TabIndex = 96;
             this.lblCategoryID.Text = "N/A";
             // 
@@ -444,7 +471,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(115, 8);
+            this.label3.Location = new System.Drawing.Point(123, 8);
             this.label3.Name = "label3";
             this.label3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label3.Size = new System.Drawing.Size(85, 24);
@@ -845,33 +872,6 @@
             // 
             this.toolTip1.IsBalloon = true;
             // 
-            // ctrlInfoIcon3
-            // 
-            this.ctrlInfoIcon3.BackColor = System.Drawing.Color.Transparent;
-            this.ctrlInfoIcon3.IconImage = ((System.Drawing.Image)(resources.GetObject("ctrlInfoIcon3.IconImage")));
-            this.ctrlInfoIcon3.Location = new System.Drawing.Point(20, 155);
-            this.ctrlInfoIcon3.Name = "ctrlInfoIcon3";
-            // 
-            // 
-            // 
-            this.ctrlInfoIcon3.PictureBoxControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ctrlInfoIcon3.PictureBoxControl.Image = ((System.Drawing.Image)(resources.GetObject("ctrlInfoIcon3.PictureBoxControl.Image")));
-            this.ctrlInfoIcon3.PictureBoxControl.ImageRotate = 0F;
-            this.ctrlInfoIcon3.PictureBoxControl.Location = new System.Drawing.Point(0, 0);
-            this.ctrlInfoIcon3.PictureBoxControl.Name = "gpbInfoIcon";
-            this.ctrlInfoIcon3.PictureBoxControl.Size = new System.Drawing.Size(20, 20);
-            this.ctrlInfoIcon3.PictureBoxControl.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.ctrlInfoIcon3.PictureBoxControl.TabIndex = 0;
-            this.ctrlInfoIcon3.PictureBoxControl.TabStop = false;
-            this.ctrlInfoIcon3.PictureBoxControl.UseTransparentBackground = true;
-            this.ctrlInfoIcon3.Size = new System.Drawing.Size(20, 20);
-            this.ctrlInfoIcon3.TabIndex = 12;
-            // 
-            // 
-            // 
-            this.ctrlInfoIcon3.ToolTipControl.IsBalloon = true;
-            this.ctrlInfoIcon3.ToolTipText = "تنبيه : عند الغاء تنشيط فئة يتم الغاء تنشيط الفئات التابعة لها";
-            // 
             // frmAddUpdateCategory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -888,12 +888,12 @@
             this.Load += new System.EventHandler(this.frmAddUpdateCategory_Load);
             this.guna2Panel2.ResumeLayout(false);
             this.guna2Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ctrlInfoIcon3.PictureBoxControl)).EndInit();
             this.guna2Panel3.ResumeLayout(false);
             this.guna2Panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ctrlInfoIcon1.PictureBoxControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ctrlInfoIcon2.PictureBoxControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ctrlInfoIcon3.PictureBoxControl)).EndInit();
             this.ResumeLayout(false);
 
         }

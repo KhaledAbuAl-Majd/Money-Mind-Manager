@@ -23,6 +23,8 @@ namespace MoneyMindManager_Presentation
 
         public static frmMain MainForm { get; private set; }
 
+        public static Form ActiveForm { get; set; }
+
         private static void _StartTimer()
         {
             _refreshTimer = new System.Timers.Timer(300000);
@@ -39,26 +41,29 @@ namespace MoneyMindManager_Presentation
             _refreshTimer = null;
         }
 
-        public static async Task RefreshCurrentUser()
+        public static async Task<bool> RefreshCurrentUser()
         {
+            _refreshTimer.Stop();
+
             CurrentUser = await clsUser.FindUserByUserID(Convert.ToInt32(CurrentUser?.UserID), Convert.ToInt32(CurrentUser?.UserID));
 
             if (CurrentUser == null)
             {
                 clsGlobalMessageBoxs.ShowErrorMessage("المستخدم الحالي غير موجود سيتم تسجيل خروجك !");
                 Logout();
-                return;
+                return false;
             }
 
             if (CurrentUser?.IsActive == false)
             {
                 clsGlobalMessageBoxs.ShowErrorMessage("المستخدم الحالي موقوف, سيتم تسجيل خروجك !");
                 Logout();
-                return;
+                return false;
             }
 
-            _refreshTimer.Stop();
             _refreshTimer.Start();
+
+            return true;
         }
 
         public static async Task Login(int userID,frmMain frmmain)
@@ -73,6 +78,7 @@ namespace MoneyMindManager_Presentation
 
             CurrentUser = user;
             MainForm = frmmain;
+            ActiveForm = frmmain;
             _StartTimer();
         }
 
@@ -85,6 +91,7 @@ namespace MoneyMindManager_Presentation
             {
                 MainForm.Invoke(new Action(() =>
                 {
+                    ActiveForm = null;
                     MainForm?.Close();
                     MainForm = null;
                 }
@@ -94,25 +101,6 @@ namespace MoneyMindManager_Presentation
         public static void SubscribeToErrorOcrruedEvent()
         {
             clsGlobalEvents.OnErrorOccured +=  clsGlobalMessageBoxs.ShowErrorMessage;
-
-            //SynchronizationContext uiContext = SynchronizationContext.Current;
-
-            //clsGlobalEvents.OnErrorOccured += message =>
-            //{
-            //    uiContext.Post(_ =>
-            //    {
-            //        MessageBoxOptions options = 0;
-
-            //        // التشييك لو الرسالة فيها حروف عربية
-            //        if (message.Any(c => c >= 0x0600 && c <= 0x06FF))
-            //        {
-            //            options = MessageBoxOptions.RightAlign | MessageBoxOptions.RtlReading;
-            //        }
-
-            //        MessageBox.Show(message, "حدث خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, options);
-            //    }, null);
-
-            //};
         }
 
         private static class clsRegisteryConstants

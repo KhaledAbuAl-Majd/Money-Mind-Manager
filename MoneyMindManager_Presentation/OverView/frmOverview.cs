@@ -8,13 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MoneyMindManager_Presentation
+namespace MoneyMindManager_Presentation.OverView
 {
-    public partial class Form1 : Form
+    public partial class frmOverview : Form
     {
-        public Form1()
+        public frmOverview()
         {
             InitializeComponent();
+        }
+
+        private async void frmOverview_Load(object sender, EventArgs e)
+        {
+          await  ctrlTest1.LoadData();
         }
     }
 }

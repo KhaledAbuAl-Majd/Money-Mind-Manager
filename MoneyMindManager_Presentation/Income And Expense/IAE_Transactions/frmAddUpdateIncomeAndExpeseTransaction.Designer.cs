@@ -571,7 +571,7 @@
             this.gibtnDeleteTransaction.ImageOffset = new System.Drawing.Point(0, 0);
             this.gibtnDeleteTransaction.ImageRotate = 0F;
             this.gibtnDeleteTransaction.ImageSize = new System.Drawing.Size(28, 28);
-            this.gibtnDeleteTransaction.Location = new System.Drawing.Point(479, 536);
+            this.gibtnDeleteTransaction.Location = new System.Drawing.Point(497, 512);
             this.gibtnDeleteTransaction.Name = "gibtnDeleteTransaction";
             this.gibtnDeleteTransaction.PressedState.ImageSize = new System.Drawing.Size(64, 64);
             this.gibtnDeleteTransaction.Size = new System.Drawing.Size(40, 42);

@@ -131,6 +131,7 @@ namespace MoneyMindManager_Presentation.Login
 
         private async void frmLogin_Load(object sender, EventArgs e)
         {
+            clsGlobal_UI.ActiveForm = this;
             _enableShowPasswordAfterBeEmpty = false;
             _loadCredentials = true;
             await _ChangeMode(enMode.Login);
@@ -260,8 +261,10 @@ namespace MoneyMindManager_Presentation.Login
             frmMain frm = new frmMain(Convert.ToInt32(user.UserID));
             frm.OnCloseProgramm += frmMain_OnCloseProgramm;
             frm.ShowDialog();
+
             if (!this.IsDisposed)
             {
+                clsGlobal_UI.ActiveForm = this;
                 this.Show();
                 await _ChangeMode(enMode.Login);
             }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -20,6 +21,19 @@ namespace MoneyMindManager_Business
         public enMode Mode { get; private set; } = enMode.AddNew;
         public clsPerson PersonInfo { get; private set; }
         public clsAccount AccountInfo { get; private set; }
+
+        //
+
+        public enum enPermissions
+        {
+            [Description("لمحة عامة")]
+            OverView = 1,
+
+            [Description("قائمة الأشخاص")]
+            PeopleList = 2
+        }
+
+        //
 
         public bool EnterPersonIDAtAddMode(int personID  )
         {

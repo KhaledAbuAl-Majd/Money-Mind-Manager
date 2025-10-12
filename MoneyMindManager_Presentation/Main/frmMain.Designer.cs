@@ -50,6 +50,8 @@
             this.guna2DragControl3 = new Guna.UI2.WinForms.Guna2DragControl(this.components);
             this.gpnlFormContainer = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
+            this.gbtnAccount = new Guna.UI2.WinForms.Guna2Button();
+            this.gbtnSettings = new Guna.UI2.WinForms.Guna2Button();
             this.gpnlRightBar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -124,7 +126,7 @@
             this.gbtnPeople.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnPeople.ImageSize = new System.Drawing.Size(40, 40);
             this.gbtnPeople.IndicateFocus = true;
-            this.gbtnPeople.Location = new System.Drawing.Point(6, 179);
+            this.gbtnPeople.Location = new System.Drawing.Point(6, 181);
             this.gbtnPeople.Name = "gbtnPeople";
             this.gbtnPeople.Size = new System.Drawing.Size(254, 48);
             this.gbtnPeople.TabIndex = 1;
@@ -133,6 +135,8 @@
             // 
             // gpnlRightBar
             // 
+            this.gpnlRightBar.Controls.Add(this.gbtnSettings);
+            this.gpnlRightBar.Controls.Add(this.gbtnAccount);
             this.gpnlRightBar.Controls.Add(this.gbtnDebts);
             this.gpnlRightBar.Controls.Add(this.gbtnTransactions);
             this.gpnlRightBar.Controls.Add(this.gbtnExpense);
@@ -176,7 +180,7 @@
             this.gbtnDebts.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnDebts.ImageSize = new System.Drawing.Size(40, 40);
             this.gbtnDebts.IndicateFocus = true;
-            this.gbtnDebts.Location = new System.Drawing.Point(6, 444);
+            this.gbtnDebts.Location = new System.Drawing.Point(6, 456);
             this.gbtnDebts.Name = "gbtnDebts";
             this.gbtnDebts.Size = new System.Drawing.Size(254, 48);
             this.gbtnDebts.TabIndex = 6;
@@ -207,7 +211,7 @@
             this.gbtnTransactions.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnTransactions.ImageSize = new System.Drawing.Size(40, 40);
             this.gbtnTransactions.IndicateFocus = true;
-            this.gbtnTransactions.Location = new System.Drawing.Point(6, 497);
+            this.gbtnTransactions.Location = new System.Drawing.Point(6, 511);
             this.gbtnTransactions.Name = "gbtnTransactions";
             this.gbtnTransactions.Size = new System.Drawing.Size(254, 48);
             this.gbtnTransactions.TabIndex = 7;
@@ -238,7 +242,7 @@
             this.gbtnExpense.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnExpense.ImageSize = new System.Drawing.Size(40, 40);
             this.gbtnExpense.IndicateFocus = true;
-            this.gbtnExpense.Location = new System.Drawing.Point(6, 338);
+            this.gbtnExpense.Location = new System.Drawing.Point(6, 346);
             this.gbtnExpense.Name = "gbtnExpense";
             this.gbtnExpense.Size = new System.Drawing.Size(254, 48);
             this.gbtnExpense.TabIndex = 4;
@@ -269,7 +273,7 @@
             this.gbtnExpensesReturn.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnExpensesReturn.ImageSize = new System.Drawing.Size(40, 40);
             this.gbtnExpensesReturn.IndicateFocus = true;
-            this.gbtnExpensesReturn.Location = new System.Drawing.Point(6, 391);
+            this.gbtnExpensesReturn.Location = new System.Drawing.Point(6, 401);
             this.gbtnExpensesReturn.Name = "gbtnExpensesReturn";
             this.gbtnExpensesReturn.Size = new System.Drawing.Size(254, 48);
             this.gbtnExpensesReturn.TabIndex = 5;
@@ -300,7 +304,7 @@
             this.gbtnIncome.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnIncome.ImageSize = new System.Drawing.Size(40, 40);
             this.gbtnIncome.IndicateFocus = true;
-            this.gbtnIncome.Location = new System.Drawing.Point(6, 285);
+            this.gbtnIncome.Location = new System.Drawing.Point(6, 291);
             this.gbtnIncome.Name = "gbtnIncome";
             this.gbtnIncome.Size = new System.Drawing.Size(254, 48);
             this.gbtnIncome.TabIndex = 3;
@@ -376,10 +380,10 @@
             this.gbtnLogout.ImageSize = new System.Drawing.Size(40, 40);
             this.gbtnLogout.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.gbtnLogout.IndicateFocus = true;
-            this.gbtnLogout.Location = new System.Drawing.Point(6, 550);
+            this.gbtnLogout.Location = new System.Drawing.Point(6, 676);
             this.gbtnLogout.Name = "gbtnLogout";
             this.gbtnLogout.Size = new System.Drawing.Size(254, 48);
-            this.gbtnLogout.TabIndex = 8;
+            this.gbtnLogout.TabIndex = 10;
             this.gbtnLogout.Text = "تسجيل الخروج";
             this.gbtnLogout.Click += new System.EventHandler(this.gbtnLogout_Click);
             // 
@@ -407,7 +411,7 @@
             this.gbtnUsers.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnUsers.ImageSize = new System.Drawing.Size(40, 40);
             this.gbtnUsers.IndicateFocus = true;
-            this.gbtnUsers.Location = new System.Drawing.Point(6, 232);
+            this.gbtnUsers.Location = new System.Drawing.Point(6, 236);
             this.gbtnUsers.Name = "gbtnUsers";
             this.gbtnUsers.Size = new System.Drawing.Size(254, 48);
             this.gbtnUsers.TabIndex = 2;
@@ -446,6 +450,70 @@
             // 
             this.guna2Elipse1.BorderRadius = 20;
             this.guna2Elipse1.TargetControl = this;
+            // 
+            // gbtnAccount
+            // 
+            this.gbtnAccount.Animated = true;
+            this.gbtnAccount.BackColor = System.Drawing.Color.Transparent;
+            this.gbtnAccount.BorderRadius = 5;
+            this.gbtnAccount.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            this.gbtnAccount.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(102)))), ((int)(((byte)(194)))));
+            this.gbtnAccount.CheckedState.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnAccount.CheckedState.ForeColor = System.Drawing.Color.White;
+            this.gbtnAccount.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gbtnAccount.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnAccount.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnAccount.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.gbtnAccount.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.gbtnAccount.FillColor = System.Drawing.Color.White;
+            this.gbtnAccount.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnAccount.ForeColor = System.Drawing.Color.Black;
+            this.gbtnAccount.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(102)))), ((int)(((byte)(194)))));
+            this.gbtnAccount.HoverState.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnAccount.HoverState.ForeColor = System.Drawing.Color.White;
+            this.gbtnAccount.Image = ((System.Drawing.Image)(resources.GetObject("gbtnAccount.Image")));
+            this.gbtnAccount.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.gbtnAccount.ImageSize = new System.Drawing.Size(40, 40);
+            this.gbtnAccount.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.gbtnAccount.IndicateFocus = true;
+            this.gbtnAccount.Location = new System.Drawing.Point(6, 566);
+            this.gbtnAccount.Name = "gbtnAccount";
+            this.gbtnAccount.Size = new System.Drawing.Size(254, 48);
+            this.gbtnAccount.TabIndex = 8;
+            this.gbtnAccount.Text = "الحساب";
+            this.gbtnAccount.Click += new System.EventHandler(this.gbtnAccount_Click);
+            // 
+            // gbtnSettings
+            // 
+            this.gbtnSettings.Animated = true;
+            this.gbtnSettings.BackColor = System.Drawing.Color.Transparent;
+            this.gbtnSettings.BorderRadius = 5;
+            this.gbtnSettings.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            this.gbtnSettings.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(102)))), ((int)(((byte)(194)))));
+            this.gbtnSettings.CheckedState.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnSettings.CheckedState.ForeColor = System.Drawing.Color.White;
+            this.gbtnSettings.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gbtnSettings.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnSettings.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnSettings.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.gbtnSettings.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.gbtnSettings.FillColor = System.Drawing.Color.White;
+            this.gbtnSettings.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnSettings.ForeColor = System.Drawing.Color.Black;
+            this.gbtnSettings.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(102)))), ((int)(((byte)(194)))));
+            this.gbtnSettings.HoverState.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnSettings.HoverState.ForeColor = System.Drawing.Color.White;
+            this.gbtnSettings.Image = ((System.Drawing.Image)(resources.GetObject("gbtnSettings.Image")));
+            this.gbtnSettings.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.gbtnSettings.ImageSize = new System.Drawing.Size(40, 40);
+            this.gbtnSettings.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.gbtnSettings.IndicateFocus = true;
+            this.gbtnSettings.Location = new System.Drawing.Point(6, 621);
+            this.gbtnSettings.Name = "gbtnSettings";
+            this.gbtnSettings.Size = new System.Drawing.Size(254, 48);
+            this.gbtnSettings.TabIndex = 9;
+            this.gbtnSettings.Text = "الإعدادات";
+            this.gbtnSettings.Click += new System.EventHandler(this.gbtnSettings_Click);
             // 
             // frmMain
             // 
@@ -492,5 +560,7 @@
         private Guna.UI2.WinForms.Guna2Elipse guna2Elipse1;
         private Guna.UI2.WinForms.Guna2Button gbtnDebts;
         private Guna.UI2.WinForms.Guna2Button gbtnTransactions;
+        private Guna.UI2.WinForms.Guna2Button gbtnSettings;
+        private Guna.UI2.WinForms.Guna2Button gbtnAccount;
     }
 }

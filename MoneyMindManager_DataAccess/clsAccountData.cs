@@ -145,9 +145,10 @@ namespace MoneyMindManager_DataAccess
                                 byte defaultCurrencyID = Convert.ToByte(reader["DefaultCurrencyID"]);
                                 string description = (reader["Description"] == DBNull.Value) ? null : reader["Description"] as string;
                                 decimal balance = Convert.ToDecimal(reader["Balance"]);
+                                int accountOwnerUserID = Convert.ToInt32(reader["AccountOwnerUserID"]);
 
                                 accountColumns = new clsAccountColumns(accountID, accountName, createdDate, isActive,
-                                    defaultCurrencyID, description,balance);
+                                    defaultCurrencyID, description,balance,accountOwnerUserID);
                             }
                             else
                                 accountColumns = null;

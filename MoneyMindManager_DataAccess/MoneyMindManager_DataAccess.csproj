@@ -49,6 +49,7 @@
     <Compile Include="clsIncomeAndExpenseCategoryData.cs" />
     <Compile Include="clsIncomeAndExpenseVoucherData.cs" />
     <Compile Include="clsMainTransactionData.cs" />
+    <Compile Include="clsReportData.cs" />
     <Compile Include="clsTransactionTypeData.cs" />
     <Compile Include="clsCurrencyData.cs" />
     <Compile Include="clsDataAccessSettings.cs" />
