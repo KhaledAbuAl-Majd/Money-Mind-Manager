@@ -199,11 +199,17 @@
     <Compile Include="OverView\Controls\ctrlMonthlyFlow.Designer.cs">
       <DependentUpon>ctrlMonthlyFlow.cs</DependentUpon>
     </Compile>
-    <Compile Include="OverView\frmOverview.cs">
+    <Compile Include="OverView\frmOverView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="OverView\frmOverview.Designer.cs">
-      <DependentUpon>frmOverview.cs</DependentUpon>
+    <Compile Include="OverView\frmOverView.Designer.cs">
+      <DependentUpon>frmOverView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OverView\frmOverviewGeneral.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OverView\frmOverviewGeneral.Designer.cs">
+      <DependentUpon>frmOverviewGeneral.cs</DependentUpon>
     </Compile>
     <Compile Include="People\Controls\ctrlPersonCardWithFilter.cs">
       <SubType>UserControl</SubType>
@@ -339,8 +345,11 @@
     <EmbeddedResource Include="OverView\Controls\ctrlMonthlyFlow.resx">
       <DependentUpon>ctrlMonthlyFlow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OverView\frmOverview.resx">
-      <DependentUpon>frmOverview.cs</DependentUpon>
+    <EmbeddedResource Include="OverView\frmOverView.resx">
+      <DependentUpon>frmOverView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OverView\frmOverviewGeneral.resx">
+      <DependentUpon>frmOverviewGeneral.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="People\Controls\ctrlPersonCardWithFilter.resx">
       <DependentUpon>ctrlPersonCardWithFilter.cs</DependentUpon>

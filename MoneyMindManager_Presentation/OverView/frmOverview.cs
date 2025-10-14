@@ -10,16 +10,44 @@ using System.Windows.Forms;
 
 namespace MoneyMindManager_Presentation.OverView
 {
-    public partial class frmOverview : Form
+    public partial class frmOverView : Form
     {
-        public frmOverview()
+        public frmOverView()
         {
             InitializeComponent();
         }
 
-        private async void frmOverview_Load(object sender, EventArgs e)
+        void _LoadFormAtPanelContainer(Form frm, bool clearOldControls)
         {
-          await  ctrlTest1.LoadData();
+            if (frm == null)
+                return;
+
+            frm.TopLevel = false;
+            frm.FormBorderStyle = FormBorderStyle.None;
+            frm.Dock = DockStyle.Fill;
+
+            if (clearOldControls)
+            {
+                gpnlFormContainer.Controls.Clear();
+                //clsGlobal_Presentation.RefreshCurrentUser();
+            }
+
+            gpnlFormContainer.Controls.Add(frm);
+
+            if (!frm.IsDisposed)
+            {
+                frm.Show();
+                frm.BringToFront();
+            }
+        }
+        private void gbtnGeneral_Click(object sender, EventArgs e)
+        {
+            _LoadFormAtPanelContainer(new frmOverviewGeneral(), true);
+        }
+
+        private void frmOverView_Load(object sender, EventArgs e)
+        {
+            gbtnGeneral.PerformClick();
         }
     }
 }

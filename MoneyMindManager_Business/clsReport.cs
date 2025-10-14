@@ -10,9 +10,14 @@ namespace MoneyMindManager_Business
 {
     public class clsReport
     {
-        public static async Task<List<clsMonthlyFlow>> GetMonthlyFlow(int accountID)
+        public static async Task<List<clsMonthlyFlow>> GetMonthlyFlow(DateTime startDate, DateTime EndDate, short accountID)
         {
-            return await clsReportData.GetMonthlyFlow();
+            return await clsReportData.GetMonthlyFlow(startDate,EndDate,accountID);
+        }
+
+        public static async Task<clsMainKpis> GetMainKPIS(short accountID)
+        {
+            return await clsReportData.GetMainKPIS(accountID);
         }
     }
 }

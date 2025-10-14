@@ -84,3 +84,4 @@ E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\Mo
 E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\bin\Debug\LiveCharts.Wpf.xml
 E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\obj\Debug\MoneyMindManager_Presentation.OverView.frmOverview.resources
 E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\obj\Debug\MoneyMindManager_Presentation.OverView.Controls.ctrlMonthlyFlow.resources
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\obj\Debug\MoneyMindManager_Presentation.OverView.frmOverviewGeneral.resources

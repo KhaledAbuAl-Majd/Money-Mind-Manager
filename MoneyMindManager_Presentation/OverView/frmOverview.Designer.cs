@@ -1,6 +1,6 @@
 ﻿namespace MoneyMindManager_Presentation.OverView
 {
-    partial class frmOverview
+    partial class frmOverView
     {
         /// <summary>
         /// Required designer variable.
@@ -28,34 +28,120 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ctrlTest1 = new MoneyMindManager_Presentation.OverView.Controls.ctrlMonthlyFlow();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmOverView));
+            this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            this.gbtnCategories = new Guna.UI2.WinForms.Guna2Button();
+            this.gbtnGeneral = new Guna.UI2.WinForms.Guna2Button();
+            this.gpnlFormContainer = new Guna.UI2.WinForms.Guna2Panel();
+            this.guna2Panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // ctrlTest1
+            // guna2Panel1
             // 
-            this.ctrlTest1.BackColor = System.Drawing.Color.White;
-            this.ctrlTest1.Location = new System.Drawing.Point(5, 12);
-            this.ctrlTest1.Name = "ctrlTest1";
-            this.ctrlTest1.Size = new System.Drawing.Size(1193, 398);
-            this.ctrlTest1.TabIndex = 0;
+            this.guna2Panel1.BackColor = System.Drawing.Color.Transparent;
+            this.guna2Panel1.BorderColor = System.Drawing.Color.Silver;
+            this.guna2Panel1.BorderRadius = 10;
+            this.guna2Panel1.BorderThickness = 1;
+            this.guna2Panel1.Controls.Add(this.gbtnCategories);
+            this.guna2Panel1.Controls.Add(this.gbtnGeneral);
+            this.guna2Panel1.Location = new System.Drawing.Point(945, 6);
+            this.guna2Panel1.Name = "guna2Panel1";
+            this.guna2Panel1.Size = new System.Drawing.Size(258, 59);
+            this.guna2Panel1.TabIndex = 21;
             // 
-            // frmOverview
+            // gbtnCategories
+            // 
+            this.gbtnCategories.Animated = true;
+            this.gbtnCategories.BackColor = System.Drawing.Color.Transparent;
+            this.gbtnCategories.BorderRadius = 5;
+            this.gbtnCategories.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            this.gbtnCategories.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(102)))), ((int)(((byte)(194)))));
+            this.gbtnCategories.CheckedState.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnCategories.CheckedState.ForeColor = System.Drawing.Color.White;
+            this.gbtnCategories.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gbtnCategories.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnCategories.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnCategories.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.gbtnCategories.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.gbtnCategories.FillColor = System.Drawing.Color.White;
+            this.gbtnCategories.Font = new System.Drawing.Font("Segoe UI", 11.25F);
+            this.gbtnCategories.ForeColor = System.Drawing.Color.Black;
+            this.gbtnCategories.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(102)))), ((int)(((byte)(194)))));
+            this.gbtnCategories.HoverState.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnCategories.HoverState.ForeColor = System.Drawing.Color.White;
+            this.gbtnCategories.Image = ((System.Drawing.Image)(resources.GetObject("gbtnCategories.Image")));
+            this.gbtnCategories.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.gbtnCategories.ImageOffset = new System.Drawing.Point(5, 0);
+            this.gbtnCategories.ImageSize = new System.Drawing.Size(25, 25);
+            this.gbtnCategories.IndicateFocus = true;
+            this.gbtnCategories.Location = new System.Drawing.Point(7, 6);
+            this.gbtnCategories.Name = "gbtnCategories";
+            this.gbtnCategories.Size = new System.Drawing.Size(122, 48);
+            this.gbtnCategories.TabIndex = 2;
+            this.gbtnCategories.Text = "الفئات  ";
+            this.gbtnCategories.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // gbtnGeneral
+            // 
+            this.gbtnGeneral.Animated = true;
+            this.gbtnGeneral.BackColor = System.Drawing.Color.Transparent;
+            this.gbtnGeneral.BorderRadius = 5;
+            this.gbtnGeneral.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            this.gbtnGeneral.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(102)))), ((int)(((byte)(194)))));
+            this.gbtnGeneral.CheckedState.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnGeneral.CheckedState.ForeColor = System.Drawing.Color.White;
+            this.gbtnGeneral.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gbtnGeneral.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnGeneral.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnGeneral.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.gbtnGeneral.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.gbtnGeneral.FillColor = System.Drawing.Color.White;
+            this.gbtnGeneral.Font = new System.Drawing.Font("Segoe UI", 11.25F);
+            this.gbtnGeneral.ForeColor = System.Drawing.Color.Black;
+            this.gbtnGeneral.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(102)))), ((int)(((byte)(194)))));
+            this.gbtnGeneral.HoverState.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnGeneral.HoverState.ForeColor = System.Drawing.Color.White;
+            this.gbtnGeneral.Image = ((System.Drawing.Image)(resources.GetObject("gbtnGeneral.Image")));
+            this.gbtnGeneral.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.gbtnGeneral.ImageSize = new System.Drawing.Size(25, 25);
+            this.gbtnGeneral.IndicateFocus = true;
+            this.gbtnGeneral.Location = new System.Drawing.Point(130, 6);
+            this.gbtnGeneral.Name = "gbtnGeneral";
+            this.gbtnGeneral.Size = new System.Drawing.Size(122, 48);
+            this.gbtnGeneral.TabIndex = 1;
+            this.gbtnGeneral.Text = "    عام";
+            this.gbtnGeneral.Click += new System.EventHandler(this.gbtnGeneral_Click);
+            // 
+            // gpnlFormContainer
+            // 
+            this.gpnlFormContainer.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.gpnlFormContainer.Location = new System.Drawing.Point(0, 71);
+            this.gpnlFormContainer.Name = "gpnlFormContainer";
+            this.gpnlFormContainer.Size = new System.Drawing.Size(1210, 666);
+            this.gpnlFormContainer.TabIndex = 22;
+            // 
+            // frmOverView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1210, 737);
-            this.Controls.Add(this.ctrlTest1);
+            this.Controls.Add(this.gpnlFormContainer);
+            this.Controls.Add(this.guna2Panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "frmOverview";
-            this.Text = "frmOverview";
-            this.Load += new System.EventHandler(this.frmOverview_Load);
+            this.Name = "frmOverView";
+            this.Text = "frmOverView";
+            this.Load += new System.EventHandler(this.frmOverView_Load);
+            this.guna2Panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private Controls.ctrlMonthlyFlow ctrlTest1;
+        private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
+        private Guna.UI2.WinForms.Guna2Button gbtnCategories;
+        private Guna.UI2.WinForms.Guna2Button gbtnGeneral;
+        private Guna.UI2.WinForms.Guna2Panel gpnlFormContainer;
     }
 }

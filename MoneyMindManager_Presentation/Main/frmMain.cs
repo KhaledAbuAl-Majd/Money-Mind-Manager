@@ -76,7 +76,7 @@ namespace MoneyMindManager_Presentation.Main
 
         private void gbtnOverOview_Click(object sender, EventArgs e)
         {
-            _LoadFormAtPanelContainer(new frmOverview(), true);
+            _LoadFormAtPanelContainer(new frmOverView(), true);
         }
 
         private async void frmMain_Load(object sender, EventArgs e)
