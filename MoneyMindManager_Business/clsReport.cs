@@ -19,5 +19,20 @@ namespace MoneyMindManager_Business
         {
             return await clsReportData.GetMainKPIS(accountID);
         }
+
+        public static async Task<List<clsDebtRepaymentSchedule>> GetDebtsRepaymentSchedule(short accountID)
+        {
+            return await clsReportData.GetDebtsRepaymentSchedule(accountID);
+        }
+
+        public static async Task<List<clsTopDebtorsRanking>> GetTopDebtorsRanking(bool isLending, short accountID)
+        {
+            return await clsReportData.GetTopDebtorsRanking(isLending, accountID);
+        }
+
+        public static async Task<List<clsTopPeopleDebtsSumRanking>> GetTopPeopleDebtsSumRanking(bool isLending, short accountID)
+        {
+            return await clsReportData.GetTopPeopleDebtsSumRanking(isLending, accountID);
+        }
     }
 }

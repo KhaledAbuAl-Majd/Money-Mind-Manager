@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
+            this.guna2WinProgressIndicator1 = new Guna.UI2.WinForms.Guna2WinProgressIndicator();
             this.guna2Panel5 = new Guna.UI2.WinForms.Guna2Panel();
             this.klblTotalReceivables = new KhaledControlLibrary1.KhaledLabel();
             this.label6 = new System.Windows.Forms.Label();
@@ -73,6 +74,7 @@
             this.guna2Panel2.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.guna2Panel2.BorderRadius = 20;
             this.guna2Panel2.BorderThickness = 2;
+            this.guna2Panel2.Controls.Add(this.guna2WinProgressIndicator1);
             this.guna2Panel2.Controls.Add(this.ctrlTest1);
             this.guna2Panel2.FillColor = System.Drawing.SystemColors.ButtonHighlight;
             this.guna2Panel2.Location = new System.Drawing.Point(12, 222);
@@ -83,6 +85,19 @@
             this.guna2Panel2.ShadowDecoration.Enabled = true;
             this.guna2Panel2.Size = new System.Drawing.Size(1186, 436);
             this.guna2Panel2.TabIndex = 1;
+            // 
+            // guna2WinProgressIndicator1
+            // 
+            this.guna2WinProgressIndicator1.AutoStart = true;
+            this.guna2WinProgressIndicator1.BackColor = System.Drawing.Color.Transparent;
+            this.guna2WinProgressIndicator1.CircleSize = 1F;
+            this.guna2WinProgressIndicator1.Location = new System.Drawing.Point(562, 63);
+            this.guna2WinProgressIndicator1.Name = "guna2WinProgressIndicator1";
+            this.guna2WinProgressIndicator1.NumberOfCircles = 7;
+            this.guna2WinProgressIndicator1.Size = new System.Drawing.Size(55, 55);
+            this.guna2WinProgressIndicator1.TabIndex = 16;
+            this.guna2WinProgressIndicator1.TabStop = false;
+            this.guna2WinProgressIndicator1.UseTransparentBackground = true;
             // 
             // guna2Panel5
             // 
@@ -464,8 +479,8 @@
             this.klblNext30DayDebtsDue.TabIndex = 13;
             this.klblNext30DayDebtsDue.Text = "111,111,111,111,111.00";
             this.klblNext30DayDebtsDue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.klblNext30DayDebtsDue, "إجمالي الديون (المستحقات عليك) المتأخرة، بالإضافة إلى الديون المستحقة خلال الـ 30" +
-        " يومًا القادمة.");
+            this.toolTip1.SetToolTip(this.klblNext30DayDebtsDue, " إجمالي الديون (المستحقات عليك) المتأخرة، بالإضافة إلى الديون المستحقة خلال الـ 3" +
+        "0 يومًا القادمة  (للديون التي لديها تاريخ إستحقاق فقط).");
             // 
             // label16
             // 
@@ -477,8 +492,8 @@
             this.label16.TabIndex = 4;
             this.label16.Text = "ديون مستحقة (30 يوم)";
             this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.label16, "إجمالي الديون (المستحقات عليك) المتأخرة، بالإضافة إلى الديون المستحقة خلال الـ 30" +
-        " يومًا القادمة.");
+            this.toolTip1.SetToolTip(this.label16, " إجمالي الديون (المستحقات عليك) المتأخرة، بالإضافة إلى الديون المستحقة خلال الـ 3" +
+        "0 يومًا القادمة  (للديون التي لديها تاريخ إستحقاق فقط).");
             // 
             // toolTip1
             // 
@@ -553,5 +568,6 @@
         private KhaledControlLibrary1.KhaledLabel klblAvgNetProfitLast6Months;
         private KhaledControlLibrary1.KhaledLabel klblNext30DayDebtsDue;
         private System.Windows.Forms.ToolTip toolTip1;
+        private Guna.UI2.WinForms.Guna2WinProgressIndicator guna2WinProgressIndicator1;
     }
 }

@@ -110,5 +110,139 @@ namespace MoneyMindManager_DataAccess
             return Data;
         }
 
+        public static async Task<List<clsDebtRepaymentSchedule>> GetDebtsRepaymentSchedule(short accountID, bool RaiseEventOnErrorOccured = true)
+        {
+            List<clsDebtRepaymentSchedule> Data = new List<clsDebtRepaymentSchedule>();
+
+            try
+            {
+
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("SP_Report_GetDebtsRepaymentSchedule", connection))
+                    {
+                        command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("@AccountID", accountID);
+
+                        await connection.OpenAsync();
+
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                Data.Add(new clsDebtRepaymentSchedule(
+                                    month: (reader["mon"] == DBNull.Value)? null: Convert.ToByte(reader["mon"]) as byte?,
+                                    year: (reader["Year"] == DBNull.Value) ? null : Convert.ToInt16(reader["Year"]) as short?,
+                                    receivable: Convert.ToDecimal(reader["Receivable"]),
+                                    payables: Convert.ToDecimal(reader["Payables"]),
+                                    netCashFlow: Convert.ToDecimal(reader["NetCashFlow"])
+                                ));
+                            }
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Data = null;
+
+                if (RaiseEventOnErrorOccured)
+                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+            }
+
+            return Data;
+        }
+
+        public static async Task<List<clsTopDebtorsRanking>> GetTopDebtorsRanking(bool isLending, short accountID, bool RaiseEventOnErrorOccured = true)
+        {
+            List<clsTopDebtorsRanking> Data = new List<clsTopDebtorsRanking>();
+
+            try
+            {
+
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("SP_Report_Top5DebtorsRanking", connection))
+                    {
+                        command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("@IsLending", isLending);
+                        command.Parameters.AddWithValue("@AccountID", accountID);
+
+                        await connection.OpenAsync();
+
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                Data.Add(new clsTopDebtorsRanking(
+                                    personID: Convert.ToInt32(reader["PersonID"]),
+                                    personName: Convert.ToString(reader["PersonName"]),
+                                    personRemaining: Convert.ToDecimal(reader["PersonRemaining"]),
+                                    personOrder: Convert.ToByte(reader["PersonOrder"])
+                                ));
+                            }
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Data = null;
+
+                if (RaiseEventOnErrorOccured)
+                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+            }
+
+            return Data;
+        }
+
+        public static async Task<List<clsTopPeopleDebtsSumRanking>> GetTopPeopleDebtsSumRanking(bool isLending, short accountID, bool RaiseEventOnErrorOccured = true)
+        {
+            List<clsTopPeopleDebtsSumRanking> Data = new List<clsTopPeopleDebtsSumRanking>();
+
+            try
+            {
+
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("[dbo].[SP_Report_Top5PeopleDebtsSumRanking]", connection))
+                    {
+                        command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("@IsLending", isLending);
+                        command.Parameters.AddWithValue("@AccountID", accountID);
+
+                        await connection.OpenAsync();
+
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                Data.Add(new clsTopPeopleDebtsSumRanking(
+                                    personID: Convert.ToInt32(reader["PersonID"]),
+                                    personName: Convert.ToString(reader["PersonName"]),
+                                    personDebtsSum : Convert.ToDecimal(reader["PersonDebtsSum"]),
+                                    personOrder: Convert.ToByte(reader["PersonOrder"])
+                                ));
+                            }
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Data = null;
+
+                if (RaiseEventOnErrorOccured)
+                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+            }
+
+            return Data;
+        }
     }
 }

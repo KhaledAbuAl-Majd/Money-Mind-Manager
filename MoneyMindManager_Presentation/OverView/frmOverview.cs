@@ -17,37 +17,38 @@ namespace MoneyMindManager_Presentation.OverView
             InitializeComponent();
         }
 
-        void _LoadFormAtPanelContainer(Form frm, bool clearOldControls)
+        void _LoadFormAtPanelContainer(Form frm)
         {
             if (frm == null)
                 return;
 
             frm.TopLevel = false;
             frm.FormBorderStyle = FormBorderStyle.None;
-            frm.Dock = DockStyle.Fill;
+            //frm.Dock = DockStyle.Fill;
 
-            if (clearOldControls)
-            {
-                gpnlFormContainer.Controls.Clear();
-                //clsGlobal_Presentation.RefreshCurrentUser();
-            }
-
+             gpnlFormContainer.Controls.Clear();
+            
             gpnlFormContainer.Controls.Add(frm);
 
             if (!frm.IsDisposed)
             {
                 frm.Show();
                 frm.BringToFront();
-            }
+            } 
         }
-        private void gbtnGeneral_Click(object sender, EventArgs e)
-        {
-            _LoadFormAtPanelContainer(new frmOverviewGeneral(), true);
-        }
-
         private void frmOverView_Load(object sender, EventArgs e)
         {
             gbtnGeneral.PerformClick();
+        }
+        private void gbtnGeneral_Click(object sender, EventArgs e)
+        {
+            _LoadFormAtPanelContainer(new frmOverviewGeneral());
+        }
+
+
+        private void gbtnDebts_Click(object sender, EventArgs e)
+        {
+            _LoadFormAtPanelContainer(new frmOverViewDebts());
         }
     }
 }

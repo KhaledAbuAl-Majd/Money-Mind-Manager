@@ -38,8 +38,17 @@ namespace MoneyMindManager_Presentation.OverView
 
         private async void frmOverview_Load(object sender, EventArgs e)
         {
+            guna2WinProgressIndicator1.BringToFront();
+            guna2WinProgressIndicator1.Start();
+            guna2WinProgressIndicator1.Show();
+            this.UseWaitCursor = true;
+
             await _LoadKPIS();
             await ctrlTest1.LoadData();
+
+            this.UseWaitCursor = false;
+            guna2WinProgressIndicator1.Stop();
+            guna2WinProgressIndicator1.Hide();
         }
     }
 }

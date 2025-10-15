@@ -712,6 +712,62 @@ namespace MoneyMindManagerGlobal
                     this.AvgNetProfitLast6Months = avgNetProfitLast6Months;
                 }
             }
+
+            public class clsDebtRepaymentSchedule
+            {
+                public byte? mon { get; set; }
+                public short? Year { get; set; }
+                public decimal Receivable { get; set; }
+                public decimal Payables { get; set; }
+                public decimal NetCashFlow { get; set; }
+
+
+                public clsDebtRepaymentSchedule(byte? month, short? year, decimal receivable, decimal payables, decimal netCashFlow)
+                {
+                    this.mon = month;
+                    this.Year = year;
+                    this.Receivable = receivable;
+                    this.Payables = payables;
+                    this.NetCashFlow = netCashFlow;
+                }
+
+            }
+
+            public class clsTopDebtorsRanking
+            {
+                public int PersonID { get; set; }
+                public string PersonName { get; set; }
+                public decimal PersonRemaining { get; set; }
+                public byte PersonOrder { get; set; }
+
+
+                public clsTopDebtorsRanking(int personID, string personName, decimal personRemaining, byte personOrder)
+                {
+                    this.PersonID = personID;
+                    this.PersonName = personName;
+                    this.PersonRemaining = personRemaining;
+                    this.PersonOrder = personOrder;
+                }
+
+            }
+
+            public class clsTopPeopleDebtsSumRanking
+            {
+                public int PersonID { get; set; }
+                public string PersonName { get; set; }
+                public decimal PersonDebtsSum { get; set; }
+                public byte PersonOrder { get; set; }
+
+
+                public clsTopPeopleDebtsSumRanking(int personID, string personName, decimal personDebtsSum, byte personOrder)
+                {
+                    this.PersonID = personID;
+                    this.PersonName = personName;
+                    this.PersonDebtsSum = personDebtsSum;
+                    this.PersonOrder = personOrder;
+                }
+
+            }
         }
     }
 }

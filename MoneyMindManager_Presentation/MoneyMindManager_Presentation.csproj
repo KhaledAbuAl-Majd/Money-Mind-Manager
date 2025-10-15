@@ -193,6 +193,24 @@
     <Compile Include="Login\frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="OverView\Controls\ctrlTopPersonDebtsSumRanking.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="OverView\Controls\ctrlTopPersonDebtsSumRanking.Designer.cs">
+      <DependentUpon>ctrlTopPersonDebtsSumRanking.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OverView\Controls\ctrlTopDebtorsRanking.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="OverView\Controls\ctrlTopDebtorsRanking.Designer.cs">
+      <DependentUpon>ctrlTopDebtorsRanking.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OverView\Controls\ctlDebtsRepaymentSchedule.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="OverView\Controls\ctlDebtsRepaymentSchedule.Designer.cs">
+      <DependentUpon>ctlDebtsRepaymentSchedule.cs</DependentUpon>
+    </Compile>
     <Compile Include="OverView\Controls\ctrlMonthlyFlow.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -204,6 +222,12 @@
     </Compile>
     <Compile Include="OverView\frmOverView.Designer.cs">
       <DependentUpon>frmOverView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OverView\frmOverViewDebts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OverView\frmOverViewDebts.Designer.cs">
+      <DependentUpon>frmOverViewDebts.cs</DependentUpon>
     </Compile>
     <Compile Include="OverView\frmOverviewGeneral.cs">
       <SubType>Form</SubType>
@@ -342,11 +366,23 @@
     <EmbeddedResource Include="Login\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OverView\Controls\ctrlTopPersonDebtsSumRanking.resx">
+      <DependentUpon>ctrlTopPersonDebtsSumRanking.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OverView\Controls\ctrlTopDebtorsRanking.resx">
+      <DependentUpon>ctrlTopDebtorsRanking.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OverView\Controls\ctlDebtsRepaymentSchedule.resx">
+      <DependentUpon>ctlDebtsRepaymentSchedule.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OverView\Controls\ctrlMonthlyFlow.resx">
       <DependentUpon>ctrlMonthlyFlow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OverView\frmOverView.resx">
       <DependentUpon>frmOverView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OverView\frmOverViewDebts.resx">
+      <DependentUpon>frmOverViewDebts.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OverView\frmOverviewGeneral.resx">
       <DependentUpon>frmOverviewGeneral.cs</DependentUpon>
