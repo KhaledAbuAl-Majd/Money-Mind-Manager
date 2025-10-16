@@ -46,7 +46,7 @@
             this.CartesianChart1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CartesianChart1.Location = new System.Drawing.Point(0, 17);
             this.CartesianChart1.Name = "CartesianChart1";
-            this.CartesianChart1.Size = new System.Drawing.Size(757, 400);
+            this.CartesianChart1.Size = new System.Drawing.Size(757, 428);
             this.CartesianChart1.TabIndex = 0;
             this.CartesianChart1.Text = "cartesianChart1";
             // 
@@ -141,7 +141,7 @@
             this.Controls.Add(this.grbColumnsShape);
             this.Controls.Add(this.CartesianChart1);
             this.Name = "ctlDebtsRepaymentSchedule";
-            this.Size = new System.Drawing.Size(757, 417);
+            this.Size = new System.Drawing.Size(757, 445);
             this.Load += new System.EventHandler(this.ctrlMonthlyFlow_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ctrlInfoIcon1.PictureBoxControl)).EndInit();

@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2WinProgressIndicator1 = new Guna.UI2.WinForms.Guna2WinProgressIndicator();
+            this.ctrlTest1 = new MoneyMindManager_Presentation.OverView.Controls.ctrlMonthlyFlow();
             this.guna2Panel5 = new Guna.UI2.WinForms.Guna2Panel();
             this.klblTotalReceivables = new KhaledControlLibrary1.KhaledLabel();
             this.label6 = new System.Windows.Forms.Label();
@@ -56,7 +57,7 @@
             this.klblNext30DayDebtsDue = new KhaledControlLibrary1.KhaledLabel();
             this.label16 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.ctrlTest1 = new MoneyMindManager_Presentation.OverView.Controls.ctrlMonthlyFlow();
+            this.label1 = new System.Windows.Forms.Label();
             this.guna2Panel2.SuspendLayout();
             this.guna2Panel5.SuspendLayout();
             this.guna2Panel6.SuspendLayout();
@@ -98,6 +99,14 @@
             this.guna2WinProgressIndicator1.TabIndex = 16;
             this.guna2WinProgressIndicator1.TabStop = false;
             this.guna2WinProgressIndicator1.UseTransparentBackground = true;
+            // 
+            // ctrlTest1
+            // 
+            this.ctrlTest1.BackColor = System.Drawing.Color.White;
+            this.ctrlTest1.Location = new System.Drawing.Point(13, 10);
+            this.ctrlTest1.Name = "ctrlTest1";
+            this.ctrlTest1.Size = new System.Drawing.Size(1165, 417);
+            this.ctrlTest1.TabIndex = 0;
             // 
             // guna2Panel5
             // 
@@ -499,13 +508,16 @@
             // 
             this.toolTip1.IsBalloon = true;
             // 
-            // ctrlTest1
+            // label1
             // 
-            this.ctrlTest1.BackColor = System.Drawing.Color.White;
-            this.ctrlTest1.Location = new System.Drawing.Point(13, 10);
-            this.ctrlTest1.Name = "ctrlTest1";
-            this.ctrlTest1.Size = new System.Drawing.Size(1165, 417);
-            this.ctrlTest1.TabIndex = 0;
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(1087, 204);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(103, 17);
+            this.label1.TabIndex = 112;
+            this.label1.Text = "تحليل الأداء المالي";
             // 
             // frmOverviewGeneral
             // 
@@ -513,6 +525,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1210, 666);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.guna2Panel9);
             this.Controls.Add(this.guna2Panel3);
             this.Controls.Add(this.guna2Panel8);
@@ -536,6 +549,7 @@
             this.guna2Panel8.ResumeLayout(false);
             this.guna2Panel9.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -569,5 +583,6 @@
         private KhaledControlLibrary1.KhaledLabel klblNext30DayDebtsDue;
         private System.Windows.Forms.ToolTip toolTip1;
         private Guna.UI2.WinForms.Guna2WinProgressIndicator guna2WinProgressIndicator1;
+        private System.Windows.Forms.Label label1;
     }
 }

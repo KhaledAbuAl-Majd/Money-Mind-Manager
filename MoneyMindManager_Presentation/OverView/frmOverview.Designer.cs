@@ -111,7 +111,6 @@
             // gpnlFormContainer
             // 
             this.gpnlFormContainer.AutoScroll = true;
-            this.gpnlFormContainer.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.gpnlFormContainer.Location = new System.Drawing.Point(0, 71);
             this.gpnlFormContainer.Name = "gpnlFormContainer";
             this.gpnlFormContainer.Size = new System.Drawing.Size(1210, 666);

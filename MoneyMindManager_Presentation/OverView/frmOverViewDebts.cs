@@ -15,6 +15,11 @@ namespace MoneyMindManager_Presentation.OverView
         public frmOverViewDebts()
         {
             InitializeComponent();
+
+            this.SetStyle(ControlStyles.UserPaint |
+                ControlStyles.AllPaintingInWmPaint |
+                ControlStyles.OptimizedDoubleBuffer, true);
+            this.UpdateStyles();
         }
 
         private async void frmOverViewDebts_Load(object sender, EventArgs e)
@@ -27,6 +32,7 @@ namespace MoneyMindManager_Presentation.OverView
             await ctlDebtsRepaymentSchedule2.LoadData();
             await ctrlTopDebtorsRanking2.LoadData();
             await ctrlTopPersonDebtsSumRanking1.LoadData();
+            await ctrlDebtsMonthlyFlow1.LoadData();
 
             this.UseWaitCursor = false;
             guna2WinProgressIndicator1.Stop();

@@ -77,7 +77,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
                     Values = new ChartValues<decimal>(chartData.Select(x => x.PersonDebtsSum)),
                     Fill = System.Windows.Media.Brushes.SlateBlue,
                     DataLabels = true,
-                    LabelPoint = point => point.Y.ToString("N0")
+                    LabelPoint = point => point.Y.ToString("N0"),
                 },
             };
 
@@ -89,6 +89,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
 
                 Foreground = System.Windows.Media.Brushes.Black,
                 FontSize = 15,
+                
             });
 
 

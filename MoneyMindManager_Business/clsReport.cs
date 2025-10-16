@@ -34,5 +34,10 @@ namespace MoneyMindManager_Business
         {
             return await clsReportData.GetTopPeopleDebtsSumRanking(isLending, accountID);
         }
+
+        public static async Task<List<clsDebtsMonthlyFlow>> GetDebtsMonthlyFlow(DateTime startDate, DateTime EndDate, short accountID)
+        {
+            return await clsReportData.GetDebtsMonthlyFlow(startDate, EndDate, accountID);
+        }
     }
 }

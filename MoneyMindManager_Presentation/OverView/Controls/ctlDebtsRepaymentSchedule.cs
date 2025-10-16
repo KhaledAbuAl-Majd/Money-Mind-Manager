@@ -90,7 +90,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
                     Fill = System.Windows.Media.Brushes.Transparent,
 
                     PointGeometry = LiveCharts.Wpf.DefaultGeometries.Circle,
-                    PointGeometrySize = 10,
+                    PointGeometrySize = 12,
 
                     DataLabels = false,
                     LabelPoint = point => point.Y.ToString("N0")
@@ -152,11 +152,11 @@ namespace MoneyMindManager_Presentation.OverView.Controls
                     Fill = System.Windows.Media.Brushes.Transparent, 
             
                     // Stroke: لون الخط نفسه
-                    Stroke = System.Windows.Media.Brushes.DarkGreen, 
-            
+                    Stroke = System.Windows.Media.Brushes.DarkGreen,
+            StrokeThickness = 2,
                     // Point Geometry: لإظهار النقاط على الخط (مثل الدوائر في الصورة)
                     PointGeometry = DefaultGeometries.Circle,
-                    PointGeometrySize = 8,
+                    PointGeometrySize = 10,
 
                     // يمكنك إزالة DataLabels هنا لتجنب الازدحام
                     DataLabels = false,
@@ -169,9 +169,10 @@ namespace MoneyMindManager_Presentation.OverView.Controls
                     Values = new ChartValues<decimal>(chartData.Select(x => x.Payables)),
                     
                     Fill = System.Windows.Media.Brushes.Transparent,
+                    StrokeThickness = 2,
                     Stroke = System.Windows.Media.Brushes.DarkRed,
                     PointGeometry = DefaultGeometries.Circle,
-                    PointGeometrySize = 8,
+                    PointGeometrySize = 10,
 
                     DataLabels = false,
                     LabelPoint = point => point.Y.ToString("N0")
@@ -186,7 +187,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
 
                     Fill = new SolidColorBrush(System.Windows.Media.Color.FromArgb(120, 100, 149, 237)),
                     PointGeometry = LiveCharts.Wpf.DefaultGeometries.Circle,
-                    PointGeometrySize = 10,
+                    PointGeometrySize = 12,
 
                     DataLabels = true,
                     LabelPoint = point => point.Y.ToString("N0")

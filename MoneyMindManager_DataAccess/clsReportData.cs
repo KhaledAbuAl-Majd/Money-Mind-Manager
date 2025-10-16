@@ -244,5 +244,54 @@ namespace MoneyMindManager_DataAccess
 
             return Data;
         }
+
+        public static async Task<List<clsDebtsMonthlyFlow>> GetDebtsMonthlyFlow(DateTime startDate, DateTime EndDate, short accountID, bool RaiseEventOnErrorOccured = true)
+        {
+            List<clsDebtsMonthlyFlow> Data = new List<clsDebtsMonthlyFlow>();
+
+            try
+            {
+
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("[SP_Report_GetDebtsMonthlyFlow]", connection))
+                    {
+                        command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("@StartDate", startDate);
+                        command.Parameters.AddWithValue("@EndDate", EndDate);
+                        command.Parameters.AddWithValue("@AccountID", accountID);
+
+                        await connection.OpenAsync();
+
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                Data.Add(new clsDebtsMonthlyFlow(
+                                    month: Convert.ToByte(reader["mon"]),
+                                    year: Convert.ToInt16(reader["Year"]),
+                                    lendingDebtsSum: Convert.ToDecimal(reader["LendingDebtsSum"]),
+                                    borrowingDebtsSum: Convert.ToDecimal(reader["BorrowingDebtsSum"]),
+                                    lendingPaymentsSum: Convert.ToDecimal(reader["LendingPaymentsSum"]),
+                                    borrowingPaymentsSum: Convert.ToDecimal(reader["BorrowingPaymentsSum"])
+                                ));
+                            }
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Data = null;
+
+                if (RaiseEventOnErrorOccured)
+                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+            }
+
+            return Data;
+        }
+
     }
 }

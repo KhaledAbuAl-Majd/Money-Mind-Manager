@@ -24,7 +24,6 @@ namespace MoneyMindManager_Presentation.OverView
 
             frm.TopLevel = false;
             frm.FormBorderStyle = FormBorderStyle.None;
-            //frm.Dock = DockStyle.Fill;
 
              gpnlFormContainer.Controls.Clear();
             

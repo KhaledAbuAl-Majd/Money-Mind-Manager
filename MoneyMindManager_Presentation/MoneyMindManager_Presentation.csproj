@@ -193,6 +193,12 @@
     <Compile Include="Login\frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="OverView\Controls\ctrlDebtsMonthlyFlow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="OverView\Controls\ctrlDebtsMonthlyFlow.Designer.cs">
+      <DependentUpon>ctrlDebtsMonthlyFlow.cs</DependentUpon>
+    </Compile>
     <Compile Include="OverView\Controls\ctrlTopPersonDebtsSumRanking.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -365,6 +371,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Login\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OverView\Controls\ctrlDebtsMonthlyFlow.resx">
+      <DependentUpon>ctrlDebtsMonthlyFlow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OverView\Controls\ctrlTopPersonDebtsSumRanking.resx">
       <DependentUpon>ctrlTopPersonDebtsSumRanking.cs</DependentUpon>
