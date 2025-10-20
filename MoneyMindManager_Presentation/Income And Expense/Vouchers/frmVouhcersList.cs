@@ -156,7 +156,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
                 gdgvVouchers.Columns["VoucherValue"].HeaderText = "قيمة المستند";
                 gdgvVouchers.Columns["VoucherValue"].Width = 250;
-                gdgvVouchers.Columns["VoucherValue"].DefaultCellStyle.Format = "N4";
+                gdgvVouchers.Columns["VoucherValue"].DefaultCellStyle.Format = "N2";
 
                 gdgvVouchers.Columns["TransactionsCount"].HeaderText = "عدد المعاملات";
                 gdgvVouchers.Columns["TransactionsCount"].Width = 125;
@@ -351,10 +351,10 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             await _LoadDataAtDataGridView(_filterBy);
         }
 
-        private async void kgtxtDataFrom_Leave(object sender, EventArgs e)
+        private void kgtxtDate_KeyDown(object sender, KeyEventArgs e)
         {
-            _pageNumber = 1;
-            await _LoadDataAtDataGridView(_filterBy);
+            if (e.KeyCode == Keys.Enter)
+                gibtnRefreshData.PerformClick();
         }
 
         private void gtsmAddVoucher_Click(object sender, EventArgs e)
@@ -480,6 +480,46 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             }
 
             await clsExportHelper.ExportToExcelWithDialog(result, $"تقرير مستندات {vouchersTypeName}");
+        }
+
+        private void klblCurrentPageVouchersValue_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void klblAllVouchersValue_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblCurrentPageRecordsCount_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblCurrentPageOfNumberOfPages_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblTotalRecordsNumber_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -49,7 +49,7 @@
             this.CartesianChart1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CartesianChart1.Location = new System.Drawing.Point(0, 17);
             this.CartesianChart1.Name = "CartesianChart1";
-            this.CartesianChart1.Size = new System.Drawing.Size(1165, 400);
+            this.CartesianChart1.Size = new System.Drawing.Size(1165, 429);
             this.CartesianChart1.TabIndex = 0;
             this.CartesianChart1.Text = "cartesianChart1";
             // 
@@ -297,8 +297,8 @@
             // 
             // 
             this.ctrlInfoIcon1.ToolTipControl.IsBalloon = true;
-            this.ctrlInfoIcon1.ToolTipText = "هذا المخطط يشمل (الواردات - المصروفات - مرتجع المصروفات) فقط , \"صافي المصروفات = " +
-    "المصروفات - مرتجع المصروفات \" . لا يشمل الديون";
+            this.ctrlInfoIcon1.ToolTipText = "هذا المخطط يشمل (الواردات , المصروفات , مرتجعات المصروفات) فقط , \"صافي المصروفات " +
+    "= المصروفات - مرتجع المصروفات \" . لا يشمل الديون";
             // 
             // ctrlMonthlyFlow
             // 
@@ -313,7 +313,7 @@
             this.Controls.Add(this.kgtxtFromData);
             this.Controls.Add(this.CartesianChart1);
             this.Name = "ctrlMonthlyFlow";
-            this.Size = new System.Drawing.Size(1165, 417);
+            this.Size = new System.Drawing.Size(1165, 446);
             this.Load += new System.EventHandler(this.ctrlMonthlyFlow_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ctrlInfoIcon1.PictureBoxControl)).EndInit();

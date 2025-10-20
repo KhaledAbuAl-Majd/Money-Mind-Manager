@@ -35,12 +35,6 @@ namespace MoneyMindManager_Presentation.OverView.Controls
             CartesianChart1.AxisY.Clear();
         }
 
-        //void LoadChart()
-        //{
-        //    _EmptyChart();
-        //    LoadChartColumn(_chartData);
-        //}
-
         public async Task LoadData()
         {
             bool isLending = false;
@@ -66,8 +60,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
         {
             if (chartData == null || chartData.Count == 0) return;
 
-
-            string[] labels = chartData.Select(x => x.PersonOrder.ToString()).ToArray();
+            string[] labels = chartData.Select(x => $"{x.PersonName} : الاسم\nمعرف الشخص : {x.PersonID}").ToArray();
 
             CartesianChart1.Series = new SeriesCollection
             {
@@ -84,7 +77,8 @@ namespace MoneyMindManager_Presentation.OverView.Controls
             CartesianChart1.AxisX.Add(new LiveCharts.Wpf.Axis
             {
                 Labels = labels,
-                Title = "الترتيب",
+                ShowLabels = false,
+                Title = "ترتيب أكبر 5 أشخاص أقرضتهم / إقترضت منهم",
                 Separator = new Separator { Step = 1 },
 
                 Foreground = System.Windows.Media.Brushes.Black,
@@ -98,8 +92,8 @@ namespace MoneyMindManager_Presentation.OverView.Controls
             CartesianChart1.AxisY.Add(new LiveCharts.Wpf.Axis
             {
                 Title = $"القيمة ({currency})",
-                LabelFormatter = value => value.ToString("N0") + $" {currency}",
-                
+                LabelFormatter = value => value.ToString("N0"),
+
                 Foreground = System.Windows.Media.Brushes.Black,
                 FontSize = 15
             });
@@ -109,6 +103,8 @@ namespace MoneyMindManager_Presentation.OverView.Controls
         private void ctrlMonthlyFlow_Load(object sender, EventArgs e)
         {
             CartesianChart1.LegendLocation = LegendLocation.Top;
+            CartesianChart1.DefaultLegend.FontSize = 15;
+            CartesianChart1.DataTooltip.FontSize = 14;
         }
 
         private async void gcbDebtType_SelectedIndexChanged(object sender, EventArgs e)

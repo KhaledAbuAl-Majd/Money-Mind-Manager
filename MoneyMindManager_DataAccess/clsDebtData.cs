@@ -313,10 +313,25 @@ namespace MoneyMindManager_DataAccess
                             Scale = 4
                         };
 
+                        SqlParameter outputTotalRemainingAmount = new SqlParameter("@TotalRemainingAmount", SqlDbType.Decimal)
+                        {
+                            Direction = ParameterDirection.Output,
+                            Precision = 19,
+                            Scale = 4
+                        };
+                        SqlParameter outputCurrentPageRemainingAmount = new SqlParameter("@CurrentPageRemainingAmount", SqlDbType.Decimal)
+                        {
+                            Direction = ParameterDirection.Output,
+                            Precision = 19,
+                            Scale = 4
+                        };
+
                         command.Parameters.Add(outputNumberOfPages);
                         command.Parameters.Add(outputRecordsCount);
                         command.Parameters.Add(outputTotalDebtsValue);
                         command.Parameters.Add(outputCurrentPageDebtsValue);
+                        command.Parameters.Add(outputTotalRemainingAmount);
+                        command.Parameters.Add(outputCurrentPageRemainingAmount);
 
                         await connection.OpenAsync();
 
@@ -326,9 +341,13 @@ namespace MoneyMindManager_DataAccess
                             dtDebts.Load(reader);
                             short numberOfPages = Convert.ToInt16(outputNumberOfPages.Value);
                             int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
+                            decimal totalDebtsValue = Convert.ToDecimal(outputTotalDebtsValue.Value);
+                            decimal currentPageDebtsValue = Convert.ToDecimal(outputCurrentPageDebtsValue.Value);
+                            decimal totalRemainingAmount = Convert.ToDecimal(outputTotalRemainingAmount.Value);
+                            decimal currentPageRemainingAmount = Convert.ToDecimal(outputCurrentPageRemainingAmount.Value);
 
-                            allDebts = new clsGetAllDebts(dtDebts, numberOfPages, recordsCount,
-                                Convert.ToDecimal(outputTotalDebtsValue.Value), Convert.ToDecimal(outputCurrentPageDebtsValue.Value));
+                            allDebts = new clsGetAllDebts(dtDebts, numberOfPages, recordsCount,totalDebtsValue,
+                                currentPageDebtsValue,totalRemainingAmount,currentPageRemainingAmount);
                         }
                     }
                 }

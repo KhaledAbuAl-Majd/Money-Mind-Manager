@@ -49,5 +49,10 @@ namespace MoneyMindManager_Presentation.OverView
         {
             _LoadFormAtPanelContainer(new frmOverViewDebts());
         }
+
+        private void gbtnCategories_Click(object sender, EventArgs e)
+        {
+            _LoadFormAtPanelContainer(new frmOverViewCategories());
+        }
     }
 }

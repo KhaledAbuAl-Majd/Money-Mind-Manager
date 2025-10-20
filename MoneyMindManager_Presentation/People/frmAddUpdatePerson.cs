@@ -86,6 +86,11 @@ namespace MoneyMindManager_Presentation.People
         }
         async Task _Save()
         {
+            if (!gbtnSave.Enabled)
+                return;
+
+            gbtnSave.Enabled = false;
+
             if (!ValidateChildren())
             {
                 clsGlobalMessageBoxs.ShowValidateChildrenFailedMessage();
@@ -174,6 +179,7 @@ namespace MoneyMindManager_Presentation.People
         private async void gbtnSave_Click(object sender, EventArgs e)
         {
             await _Save();
+            gbtnSave.Enabled = true;
         }
 
         private void gbtnClose_Click(object sender, EventArgs e)

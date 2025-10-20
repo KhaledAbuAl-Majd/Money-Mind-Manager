@@ -129,27 +129,35 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             if (!_Debt.IsLocked)
                 lblUserMessage.Visible = false;
 
+            _searchByPageNumber = false;
+            kgtxtPageNumber.Text = _pageNumber.ToString();
+            _searchByPageNumber = true;
+
             lblTotalRecordsNumber.Text = result.RecordsCount.ToString();
+            lblCurrentPageOfNumberOfPages.Text = string.Concat(_pageNumber, "   من   ", result.NumberOfPages, "  صفحات");
+            kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValueOption = true;
+            kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValue = (result.NumberOfPages < 1) ? 1 : result.NumberOfPages;
+            lblCurrentPageRecordsCount.Text = gdgvDebtPaymentTransctions.Rows.Count.ToString();
 
             gibtnNextPage.Enabled = (_pageNumber < result.NumberOfPages);
             gibtnPreviousPage.Enabled = (_pageNumber > 1);
             //
 
-            if (result.NumberOfPages < 2)
-            {
-                _ChangeEnablithForPagingControls(false);
-            }
-            else
-            {
-                _searchByPageNumber = false;
-                kgtxtPageNumber.Text = _pageNumber.ToString();
-                _searchByPageNumber = true;
-                kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValueOption = true;
-                kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValue = (result.NumberOfPages < 1) ? 1 : result.NumberOfPages;
-                lblCurrentPageRecordsCount.Text = gdgvDebtPaymentTransctions.Rows.Count.ToString();
-                lblCurrentPageOfNumberOfPages.Text = string.Concat(_pageNumber, "   من   ", result.NumberOfPages, "  صفحات");
-                _ChangeEnablithForPagingControls(true);
-            }
+            //if (result.NumberOfPages < 2)
+            //{
+            //    _ChangeEnablithForPagingControls(false);
+            //}
+            //else
+            //{
+            //    _searchByPageNumber = false;
+            //    kgtxtPageNumber.Text = _pageNumber.ToString();
+            //    _searchByPageNumber = true;
+            //    kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValueOption = true;
+            //    kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValue = (result.NumberOfPages < 1) ? 1 : result.NumberOfPages;
+            //    lblCurrentPageRecordsCount.Text = gdgvDebtPaymentTransctions.Rows.Count.ToString();
+            //    lblCurrentPageOfNumberOfPages.Text = string.Concat(_pageNumber, "   من   ", result.NumberOfPages, "  صفحات");
+            //    _ChangeEnablithForPagingControls(true);
+            //}
 
             if (!_IsHeaderCreated && gdgvDebtPaymentTransctions.Rows.Count > 0)
             {
@@ -158,7 +166,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
                 gdgvDebtPaymentTransctions.Columns["Amount"].HeaderText = "المبلغ";
                 gdgvDebtPaymentTransctions.Columns["Amount"].Width = 250;
-                gdgvDebtPaymentTransctions.Columns["Amount"].DefaultCellStyle.Format = "N4";
+                gdgvDebtPaymentTransctions.Columns["Amount"].DefaultCellStyle.Format = "N2";
 
                 gdgvDebtPaymentTransctions.Columns["DebtDate"].HeaderText = "تاريخ المعاملة";
                 gdgvDebtPaymentTransctions.Columns["DebtDate"].Width = 130;
@@ -259,7 +267,11 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             kgtxtPersonName.Focus();
 
             _ChangeEnablityForButton(gbtnAddDebtPaymentTransaction, false);
-           
+
+            gibtnNextPage.Enabled = false;
+            gibtnPreviousPage.Enabled = false;
+            kgtxtPageNumber.Enabled = false;
+
             lblNoTransactionsFoundMessage.Visible = true;
             gibtnDeleteDebt.Enabled = false;
         }
@@ -313,8 +325,9 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 return;
             }
 
-            lblUserMessage.Visible = false;
+            gbtnSave.Enabled = false;
 
+            lblUserMessage.Visible = false;
 
             if (!ValidateChildren())
             {
@@ -450,7 +463,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             _SetReadOnlyAtTextBox(kgtxtCreatedByUserName);
             _SetReadOnlyAtTextBox(kgtxtDebtID);
 
-            _ChangeEnablithForPagingControls(false);
+            //_ChangeEnablithForPagingControls(false);
             _IsHeaderCreated = false;
             _searchByPageNumber = false;
             kgtxtPageNumber.Text = "1";
@@ -517,6 +530,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
         private async void FrmAddUpdateDebtPayment_OnCloseAndSaved(int obj)
         {
+            _pageNumber = 1;
             _isSaved = true;
            await _LoadDataAtDataGridView();
         }
@@ -524,6 +538,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
         private async void gbtnSave_Click(object sender, EventArgs e)
         {
             await _Save();
+            gbtnSave.Enabled = true;
         }
 
         private void gbtnClose_Click(object sender, EventArgs e)
@@ -571,6 +586,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 int transactionID = Convert.ToInt32(gdgvDebtPaymentTransctions.SelectedRows[0].Cells[0].Value);
                 if(await clsDebtPayment.DeleteDebtPaymentByID(transactionID, Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID)))
                 {
+                    _pageNumber = 1;
                     _isSaved = true;
                     await _LoadDataAtDataGridView();
                 }
@@ -699,5 +715,144 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             await clsExportHelper.ExportToExcelWithDialog(dt, $"تقرير معاملات سداد سند الدين [ {_DebtID?.ToString()} ]");
         }
 
+        private void lblCurrentPageRecordsCount_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblDescriptionOfCurrentPageNumOfRcords_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblCurrentPageOfNumberOfPages_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblTotalRecordsNumber_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblHeader_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblUserMessage_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void kgtxtDebtValue_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void kgtxtPaymentDueDate_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gcbDebtType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void kgtxtPersonName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void kgtxtDebtID_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void kgtxtCreatedByUserName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void kgtxtRemainingAmount_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void kgtxtCreatedDate_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void kgtxtNotes_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void kgtxtDebtDate_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblNoTransactionsFoundMessage_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

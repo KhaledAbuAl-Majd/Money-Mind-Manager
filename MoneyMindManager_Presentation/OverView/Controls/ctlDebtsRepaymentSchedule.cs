@@ -88,7 +88,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
                     Stroke = System.Windows.Media.Brushes.CornflowerBlue,
                     StrokeThickness = 3,
                     Fill = System.Windows.Media.Brushes.Transparent,
-
+                    LineSmoothness = 0.8,
                     PointGeometry = LiveCharts.Wpf.DefaultGeometries.Circle,
                     PointGeometrySize = 12,
 
@@ -114,7 +114,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
             CartesianChart1.AxisY.Add(new LiveCharts.Wpf.Axis
             {
                 Title = $"القيمة ({currency})",
-                LabelFormatter = value => value.ToString("N0") + $" {currency}",
+                LabelFormatter = value => value.ToString("N0"),
                 
                 Foreground = System.Windows.Media.Brushes.Black,
                 FontSize = 15
@@ -135,30 +135,24 @@ namespace MoneyMindManager_Presentation.OverView.Controls
         {
             if (chartData == null || chartData.Count == 0) return;
 
-            // 1. تنظيف وإعداد التسميات
-
-            // نستخدم Select لإنشاء تسميات المحور X (نحول الأرقام إلى نص)
             string[] labels = chartData.Select(x => GetMonthName(x.mon, x.Year)).ToArray();
 
-            // 2. ربط السلاسل
             CartesianChart1.Series = new SeriesCollection
             {
-        // === السلسلة 1: الإيرادات (Income) - LineSeries/AreaSeries ===
-                new LineSeries // <--- التعديل هنا لجعله خطي
+                new LineSeries 
                 {
                     Title = "المستحقات لك",
                     Values = new ChartValues<decimal>(chartData.Select(x => x.Receivable)),
 
-                    Fill = System.Windows.Media.Brushes.Transparent, 
-            
-                    // Stroke: لون الخط نفسه
+                    Fill = System.Windows.Media.Brushes.Transparent,
+                    LineSmoothness = 0.8,
+
                     Stroke = System.Windows.Media.Brushes.DarkGreen,
-            StrokeThickness = 2,
-                    // Point Geometry: لإظهار النقاط على الخط (مثل الدوائر في الصورة)
+                    StrokeThickness = 2.5,
+
                     PointGeometry = DefaultGeometries.Circle,
                     PointGeometrySize = 10,
 
-                    // يمكنك إزالة DataLabels هنا لتجنب الازدحام
                     DataLabels = false,
                     LabelPoint = point => point.Y.ToString("N0")
                 },
@@ -169,7 +163,8 @@ namespace MoneyMindManager_Presentation.OverView.Controls
                     Values = new ChartValues<decimal>(chartData.Select(x => x.Payables)),
                     
                     Fill = System.Windows.Media.Brushes.Transparent,
-                    StrokeThickness = 2,
+                    LineSmoothness = 0.8,
+                    StrokeThickness = 2.5,
                     Stroke = System.Windows.Media.Brushes.DarkRed,
                     PointGeometry = DefaultGeometries.Circle,
                     PointGeometrySize = 10,
@@ -181,6 +176,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
                  new LineSeries
                 {
                     Title = "صافي التدفق النقدي",
+                    LineSmoothness = 0.8,
                     Values = new ChartValues<decimal>(chartData.Select(x => x.NetCashFlow)),
                     Stroke = System.Windows.Media.Brushes.CornflowerBlue,
                     StrokeThickness = 3,
@@ -210,14 +206,12 @@ namespace MoneyMindManager_Presentation.OverView.Controls
             CartesianChart1.AxisY.Add(new LiveCharts.Wpf.Axis
             {
                 Title = $"القيمة ({currency})",
-                LabelFormatter = value => value.ToString("N0") + $" {currency}",
+                LabelFormatter = value => value.ToString("N0"),
 
                 Foreground = System.Windows.Media.Brushes.Black,
                 FontSize = 14
             });
 
-
-            // 4. تحديث الكنترول
             CartesianChart1.Update();
         }
 
@@ -229,6 +223,8 @@ namespace MoneyMindManager_Presentation.OverView.Controls
         private void ctrlMonthlyFlow_Load(object sender, EventArgs e)
         {
             CartesianChart1.LegendLocation = LegendLocation.Top;
+            CartesianChart1.DefaultLegend.FontSize = 15;
+            CartesianChart1.DataTooltip.FontSize = 14;
         }
     }
 }

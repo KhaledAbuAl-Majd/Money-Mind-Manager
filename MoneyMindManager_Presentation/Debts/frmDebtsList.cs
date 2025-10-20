@@ -148,8 +148,10 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             gibtnNextPage.Enabled = (_pageNumber < result.NumberOfPages);
             gibtnPreviousPage.Enabled = (_pageNumber > 1);
 
-            klblAllVouchersValue.Text = result.TotalDebtsValue.ToString();
-            klblCurrentPageVouchersValue.Text = result.CurrentPageDebtsValue.ToString();
+            klblAllDebtsValue.Text = result.TotalDebtsValue.ToString();
+            klblCurrentPageDebtsValue.Text = result.CurrentPageDebtsValue.ToString();
+            klblTotalRemainingAmount.Text = result.TotalRemainingAmount.ToString();
+            klblCurrentPageRemainingAmount.Text = result.CurrentPageRemainingAmount.ToString();
             //
 
             if (!_IsHeaderCreated && gdgvDebts.Rows.Count > 0)
@@ -162,11 +164,11 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
                 gdgvDebts.Columns["DebtValue"].HeaderText = "قيمة الدين";
                 gdgvDebts.Columns["DebtValue"].Width = 215;
-                gdgvDebts.Columns["DebtValue"].DefaultCellStyle.Format = "N4";
+                gdgvDebts.Columns["DebtValue"].DefaultCellStyle.Format = "N2";
 
                 gdgvDebts.Columns["RemainingAmount"].HeaderText = "القيمة المتبقية للسداد";
                 gdgvDebts.Columns["RemainingAmount"].Width = 215;
-                gdgvDebts.Columns["RemainingAmount"].DefaultCellStyle.Format = "N4";
+                gdgvDebts.Columns["RemainingAmount"].DefaultCellStyle.Format = "N2";
 
                 gdgvDebts.Columns["DebtDate"].HeaderText = "تاريخ السند";
                 gdgvDebts.Columns["DebtDate"].Width = 115;
@@ -208,6 +210,8 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
         async void _RefreshFilter()
         {
+            _pageNumber = 1;
+
             if (gcbFilterBy.SelectedIndex == 0)
                 await _LoadDataAtDataGridView(enFilterBy.All);
             else
@@ -360,10 +364,11 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             await _LoadDataAtDataGridView(_filterBy);
         }
 
-        private async void kgtxtDataFrom_Leave(object sender, EventArgs e)
+
+        private void kgtxtDate_KeyDown(object sender, KeyEventArgs e)
         {
-            _pageNumber = 1;
-            await _LoadDataAtDataGridView(_filterBy);
+            if (e.KeyCode == Keys.Enter)
+                gibtnRefreshData.PerformClick();
         }
 
         private void gtsmAddVoucher_Click(object sender, EventArgs e)

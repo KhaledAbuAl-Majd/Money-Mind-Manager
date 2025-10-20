@@ -252,7 +252,7 @@ namespace MoneyMindManager_Presentation.Users
             this.kgtxtUserName.IsRequired = true;
             this.kgtxtUserName.Location = new System.Drawing.Point(64, 106);
             this.kgtxtUserName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.kgtxtUserName.MaxLength = 150;
+            this.kgtxtUserName.MaxLength = 30;
             this.kgtxtUserName.Name = "kgtxtUserName";
             this.kgtxtUserName.NumberProperties.DecimalNumberProperties.AllowNegative = true;
             this.kgtxtUserName.NumberProperties.DecimalNumberProperties.MaxValue = new decimal(new int[] {

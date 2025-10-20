@@ -51,6 +51,8 @@
             this.guna2ContextMenuStrip1 = new Guna.UI2.WinForms.Guna2ContextMenuStrip();
             this.gtsmAddVoucher = new System.Windows.Forms.ToolStripMenuItem();
             this.gtsmEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.gtsmExport = new System.Windows.Forms.ToolStripMenuItem();
+            this.gtsmExportExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.kgtxtFromData = new KhaledControlLibrary1.KhaledGuna2TextBox();
@@ -64,8 +66,6 @@
             this.gbtnAddVoucher = new Guna.UI2.WinForms.Guna2Button();
             this.gcbFilterByDate = new Guna.UI2.WinForms.Guna2ComboBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.gtsmExport = new System.Windows.Forms.ToolStripMenuItem();
-            this.gtsmExportExcel = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gdgvVouchers)).BeginInit();
             this.guna2ContextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -214,23 +214,25 @@
             // lblCurrentPageRecordsCount
             // 
             this.lblCurrentPageRecordsCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCurrentPageRecordsCount.Location = new System.Drawing.Point(888, 555);
+            this.lblCurrentPageRecordsCount.Location = new System.Drawing.Point(888, 656);
             this.lblCurrentPageRecordsCount.Name = "lblCurrentPageRecordsCount";
             this.lblCurrentPageRecordsCount.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblCurrentPageRecordsCount.Size = new System.Drawing.Size(114, 24);
             this.lblCurrentPageRecordsCount.TabIndex = 26;
             this.lblCurrentPageRecordsCount.Text = "N/A";
+            this.lblCurrentPageRecordsCount.Click += new System.EventHandler(this.lblCurrentPageRecordsCount_Click);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(998, 555);
+            this.label3.Location = new System.Drawing.Point(998, 656);
             this.label3.Name = "label3";
             this.label3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label3.Size = new System.Drawing.Size(205, 24);
             this.label3.TabIndex = 25;
             this.label3.Text = "# عدد صفوف الصفحة الحالية : ";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // kgtxtPageNumber
             // 
@@ -253,7 +255,7 @@
             this.kgtxtPageNumber.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtPageNumber.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Number;
             this.kgtxtPageNumber.IsRequired = true;
-            this.kgtxtPageNumber.Location = new System.Drawing.Point(768, 533);
+            this.kgtxtPageNumber.Location = new System.Drawing.Point(768, 634);
             this.kgtxtPageNumber.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtPageNumber.MaxLength = 150;
             this.kgtxtPageNumber.Name = "kgtxtPageNumber";
@@ -325,7 +327,7 @@
             this.gibtnPreviousPage.ImageOffset = new System.Drawing.Point(0, 0);
             this.gibtnPreviousPage.ImageRotate = 0F;
             this.gibtnPreviousPage.ImageSize = new System.Drawing.Size(25, 25);
-            this.gibtnPreviousPage.Location = new System.Drawing.Point(443, 529);
+            this.gibtnPreviousPage.Location = new System.Drawing.Point(443, 630);
             this.gibtnPreviousPage.Name = "gibtnPreviousPage";
             this.gibtnPreviousPage.PressedState.ImageSize = new System.Drawing.Size(64, 64);
             this.gibtnPreviousPage.Size = new System.Drawing.Size(40, 42);
@@ -344,7 +346,7 @@
             this.gibtnNextPage.ImageOffset = new System.Drawing.Point(0, 0);
             this.gibtnNextPage.ImageRotate = 0F;
             this.gibtnNextPage.ImageSize = new System.Drawing.Size(25, 25);
-            this.gibtnNextPage.Location = new System.Drawing.Point(721, 529);
+            this.gibtnNextPage.Location = new System.Drawing.Point(721, 630);
             this.gibtnNextPage.Name = "gibtnNextPage";
             this.gibtnNextPage.PressedState.ImageSize = new System.Drawing.Size(64, 64);
             this.gibtnNextPage.Size = new System.Drawing.Size(40, 42);
@@ -356,29 +358,31 @@
             // lblCurrentPageOfNumberOfPages
             // 
             this.lblCurrentPageOfNumberOfPages.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCurrentPageOfNumberOfPages.Location = new System.Drawing.Point(478, 533);
+            this.lblCurrentPageOfNumberOfPages.Location = new System.Drawing.Point(478, 634);
             this.lblCurrentPageOfNumberOfPages.Name = "lblCurrentPageOfNumberOfPages";
             this.lblCurrentPageOfNumberOfPages.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblCurrentPageOfNumberOfPages.Size = new System.Drawing.Size(249, 30);
             this.lblCurrentPageOfNumberOfPages.TabIndex = 21;
             this.lblCurrentPageOfNumberOfPages.Text = "0 من  0  صفحات";
             this.lblCurrentPageOfNumberOfPages.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblCurrentPageOfNumberOfPages.Click += new System.EventHandler(this.lblCurrentPageOfNumberOfPages_Click);
             // 
             // lblTotalRecordsNumber
             // 
             this.lblTotalRecordsNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalRecordsNumber.Location = new System.Drawing.Point(938, 526);
+            this.lblTotalRecordsNumber.Location = new System.Drawing.Point(938, 627);
             this.lblTotalRecordsNumber.Name = "lblTotalRecordsNumber";
             this.lblTotalRecordsNumber.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblTotalRecordsNumber.Size = new System.Drawing.Size(114, 24);
             this.lblTotalRecordsNumber.TabIndex = 20;
             this.lblTotalRecordsNumber.Text = "N/A";
+            this.lblTotalRecordsNumber.Click += new System.EventHandler(this.lblTotalRecordsNumber_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(1048, 526);
+            this.label1.Location = new System.Drawing.Point(1048, 627);
             this.label1.Name = "label1";
             this.label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label1.Size = new System.Drawing.Size(155, 24);
@@ -437,7 +441,7 @@
             this.gdgvVouchers.RowHeadersVisible = false;
             this.gdgvVouchers.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gdgvVouchers.RowTemplate.Height = 40;
-            this.gdgvVouchers.Size = new System.Drawing.Size(1186, 463);
+            this.gdgvVouchers.Size = new System.Drawing.Size(1186, 563);
             this.gdgvVouchers.TabIndex = 18;
             this.gdgvVouchers.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.gdgvVouchers.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -481,7 +485,7 @@
             this.guna2ContextMenuStrip1.RenderStyle.SelectionForeColor = System.Drawing.Color.White;
             this.guna2ContextMenuStrip1.RenderStyle.SeparatorColor = System.Drawing.Color.Gainsboro;
             this.guna2ContextMenuStrip1.RenderStyle.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
-            this.guna2ContextMenuStrip1.Size = new System.Drawing.Size(195, 134);
+            this.guna2ContextMenuStrip1.Size = new System.Drawing.Size(167, 112);
             // 
             // gtsmAddVoucher
             // 
@@ -490,7 +494,7 @@
             this.gtsmAddVoucher.Name = "gtsmAddVoucher";
             this.gtsmAddVoucher.ShortcutKeys = System.Windows.Forms.Keys.Insert;
             this.gtsmAddVoucher.ShowShortcutKeys = false;
-            this.gtsmAddVoucher.Size = new System.Drawing.Size(194, 36);
+            this.gtsmAddVoucher.Size = new System.Drawing.Size(166, 36);
             this.gtsmAddVoucher.Text = "إضافة مستند";
             this.gtsmAddVoucher.Click += new System.EventHandler(this.gtsmAddVoucher_Click);
             // 
@@ -499,9 +503,29 @@
             this.gtsmEdit.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gtsmEdit.Image = ((System.Drawing.Image)(resources.GetObject("gtsmEdit.Image")));
             this.gtsmEdit.Name = "gtsmEdit";
-            this.gtsmEdit.Size = new System.Drawing.Size(194, 36);
+            this.gtsmEdit.Size = new System.Drawing.Size(166, 36);
             this.gtsmEdit.Text = "تعديل";
             this.gtsmEdit.Click += new System.EventHandler(this.gtsmEdit_Click);
+            // 
+            // gtsmExport
+            // 
+            this.gtsmExport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.gtsmExportExcel});
+            this.gtsmExport.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gtsmExport.Image = ((System.Drawing.Image)(resources.GetObject("gtsmExport.Image")));
+            this.gtsmExport.Name = "gtsmExport";
+            this.gtsmExport.Size = new System.Drawing.Size(166, 36);
+            this.gtsmExport.Text = "تصدير";
+            // 
+            // gtsmExportExcel
+            // 
+            this.gtsmExportExcel.AutoSize = false;
+            this.gtsmExportExcel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gtsmExportExcel.Image = ((System.Drawing.Image)(resources.GetObject("gtsmExportExcel.Image")));
+            this.gtsmExportExcel.Name = "gtsmExportExcel";
+            this.gtsmExportExcel.Size = new System.Drawing.Size(194, 27);
+            this.gtsmExportExcel.Text = "       Excel";
+            this.gtsmExportExcel.Click += new System.EventHandler(this.gtsmExportExcel_Click);
             // 
             // errorProvider1
             // 
@@ -583,7 +607,7 @@
             this.kgtxtFromData.TrimStart = true;
             this.kgtxtFromData.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxt_OnValidationError);
             this.kgtxtFromData.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxt_OnValidationSuccess);
-            this.kgtxtFromData.Leave += new System.EventHandler(this.kgtxtDataFrom_Leave);
+            this.kgtxtFromData.KeyDown += new System.Windows.Forms.KeyEventHandler(this.kgtxtDate_KeyDown);
             // 
             // kgtxtToDate
             // 
@@ -657,7 +681,7 @@
             this.kgtxtToDate.TrimStart = true;
             this.kgtxtToDate.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxt_OnValidationError);
             this.kgtxtToDate.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxt_OnValidationSuccess);
-            this.kgtxtToDate.Leave += new System.EventHandler(this.kgtxtDataFrom_Leave);
+            this.kgtxtToDate.KeyDown += new System.Windows.Forms.KeyEventHandler(this.kgtxtDate_KeyDown);
             // 
             // klblAllVouchersValue
             // 
@@ -668,7 +692,7 @@
             this.klblAllVouchersValue.DateProperties.YearFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enYearFormate.yyyy__2025;
             this.klblAllVouchersValue.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.klblAllVouchersValue.InputType = KhaledControlLibrary1.KhaledLabel.enInputType.Number;
-            this.klblAllVouchersValue.Location = new System.Drawing.Point(6, 524);
+            this.klblAllVouchersValue.Location = new System.Drawing.Point(6, 625);
             this.klblAllVouchersValue.Name = "klblAllVouchersValue";
             this.klblAllVouchersValue.NumberFormat = KhaledControlLibrary1.KhaledLabel.enNumberFormat.N4;
             this.klblAllVouchersValue.Size = new System.Drawing.Size(277, 28);
@@ -676,6 +700,7 @@
             this.klblAllVouchersValue.Text = "111,111,111,111,111.0000";
             this.klblAllVouchersValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.toolTip1.SetToolTip(this.klblAllVouchersValue, "قيمة المستندات الكلية لنتيجة البحث");
+            this.klblAllVouchersValue.Click += new System.EventHandler(this.klblAllVouchersValue_Click);
             // 
             // gibtnRefreshData
             // 
@@ -705,7 +730,7 @@
             this.klblCurrentPageVouchersValue.DateProperties.YearFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enYearFormate.yyyy__2025;
             this.klblCurrentPageVouchersValue.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.klblCurrentPageVouchersValue.InputType = KhaledControlLibrary1.KhaledLabel.enInputType.Number;
-            this.klblCurrentPageVouchersValue.Location = new System.Drawing.Point(1, 552);
+            this.klblCurrentPageVouchersValue.Location = new System.Drawing.Point(1, 653);
             this.klblCurrentPageVouchersValue.Name = "klblCurrentPageVouchersValue";
             this.klblCurrentPageVouchersValue.NumberFormat = KhaledControlLibrary1.KhaledLabel.enNumberFormat.N4;
             this.klblCurrentPageVouchersValue.Size = new System.Drawing.Size(241, 28);
@@ -713,30 +738,33 @@
             this.klblCurrentPageVouchersValue.Text = "111,111,111,111,111.0000";
             this.klblCurrentPageVouchersValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.toolTip1.SetToolTip(this.klblCurrentPageVouchersValue, "قيمة المستندات الكلية لنتيجة البحث للصفحة الحالية");
+            this.klblCurrentPageVouchersValue.Click += new System.EventHandler(this.klblCurrentPageVouchersValue_Click);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(231, 556);
+            this.label5.Location = new System.Drawing.Point(231, 657);
             this.label5.Name = "label5";
             this.label5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label5.Size = new System.Drawing.Size(214, 24);
             this.label5.TabIndex = 39;
             this.label5.Text = "# قيمة مستندات الصفحة الحالية : ";
             this.toolTip1.SetToolTip(this.label5, "قيمة المستندات الكلية لنتيجة البحث للصفحة الحالية");
+            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(286, 527);
+            this.label7.Location = new System.Drawing.Point(286, 628);
             this.label7.Name = "label7";
             this.label7.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label7.Size = new System.Drawing.Size(159, 24);
             this.label7.TabIndex = 37;
             this.label7.Text = "# قيمة المستندات الكلية :";
             this.toolTip1.SetToolTip(this.label7, "قيمة المستندات الكلية لنتيجة البحث");
+            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // SearchAfterTimerFinish
             // 
@@ -812,33 +840,13 @@
             this.label6.TabIndex = 134;
             this.label6.Text = "نوع التاريخ";
             // 
-            // gtsmExport
-            // 
-            this.gtsmExport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.gtsmExportExcel});
-            this.gtsmExport.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gtsmExport.Image = ((System.Drawing.Image)(resources.GetObject("gtsmExport.Image")));
-            this.gtsmExport.Name = "gtsmExport";
-            this.gtsmExport.Size = new System.Drawing.Size(194, 36);
-            this.gtsmExport.Text = "تصدير";
-            // 
-            // gtsmExportExcel
-            // 
-            this.gtsmExportExcel.AutoSize = false;
-            this.gtsmExportExcel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gtsmExportExcel.Image = ((System.Drawing.Image)(resources.GetObject("gtsmExportExcel.Image")));
-            this.gtsmExportExcel.Name = "gtsmExportExcel";
-            this.gtsmExportExcel.Size = new System.Drawing.Size(194, 27);
-            this.gtsmExportExcel.Text = "       Excel";
-            this.gtsmExportExcel.Click += new System.EventHandler(this.gtsmExportExcel_Click);
-            // 
             // frmVouhcersList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1210, 587);
+            this.ClientSize = new System.Drawing.Size(1210, 687);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.gibtnRefreshData);
             this.Controls.Add(this.klblCurrentPageVouchersValue);

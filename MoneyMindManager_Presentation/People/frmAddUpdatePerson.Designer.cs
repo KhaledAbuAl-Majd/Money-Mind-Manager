@@ -653,10 +653,10 @@ namespace MoneyMindManager_Presentation.People
             this.lblHeader.ForeColor = System.Drawing.Color.Black;
             this.lblHeader.Location = new System.Drawing.Point(0, 0);
             this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(1210, 50);
+            this.lblHeader.Size = new System.Drawing.Size(1210, 60);
             this.lblHeader.TabIndex = 39;
             this.lblHeader.Text = "إضافة شخص";
-            this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblHeader.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // frmAddUpdatePerson
             // 

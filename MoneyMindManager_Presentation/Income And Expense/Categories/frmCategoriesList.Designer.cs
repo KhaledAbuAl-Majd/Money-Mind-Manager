@@ -151,7 +151,7 @@
             this.kgtxtPageNumber.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtPageNumber.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Number;
             this.kgtxtPageNumber.IsRequired = true;
-            this.kgtxtPageNumber.Location = new System.Drawing.Point(250, 532);
+            this.kgtxtPageNumber.Location = new System.Drawing.Point(250, 633);
             this.kgtxtPageNumber.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtPageNumber.MaxLength = 150;
             this.kgtxtPageNumber.Name = "kgtxtPageNumber";
@@ -223,7 +223,7 @@
             this.gibtnPreviousPage.ImageOffset = new System.Drawing.Point(0, 0);
             this.gibtnPreviousPage.ImageRotate = 0F;
             this.gibtnPreviousPage.ImageSize = new System.Drawing.Size(25, 25);
-            this.gibtnPreviousPage.Location = new System.Drawing.Point(446, 530);
+            this.gibtnPreviousPage.Location = new System.Drawing.Point(446, 631);
             this.gibtnPreviousPage.Name = "gibtnPreviousPage";
             this.gibtnPreviousPage.PressedState.ImageSize = new System.Drawing.Size(64, 64);
             this.gibtnPreviousPage.Size = new System.Drawing.Size(40, 42);
@@ -242,7 +242,7 @@
             this.gibtnNextPage.ImageOffset = new System.Drawing.Point(0, 0);
             this.gibtnNextPage.ImageRotate = 0F;
             this.gibtnNextPage.ImageSize = new System.Drawing.Size(25, 25);
-            this.gibtnNextPage.Location = new System.Drawing.Point(724, 530);
+            this.gibtnNextPage.Location = new System.Drawing.Point(724, 631);
             this.gibtnNextPage.Name = "gibtnNextPage";
             this.gibtnNextPage.PressedState.ImageSize = new System.Drawing.Size(64, 64);
             this.gibtnNextPage.Size = new System.Drawing.Size(40, 42);
@@ -435,57 +435,61 @@
             // lblCurrentPageRecordsCount
             // 
             this.lblCurrentPageRecordsCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCurrentPageRecordsCount.Location = new System.Drawing.Point(891, 556);
+            this.lblCurrentPageRecordsCount.Location = new System.Drawing.Point(891, 657);
             this.lblCurrentPageRecordsCount.Name = "lblCurrentPageRecordsCount";
             this.lblCurrentPageRecordsCount.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblCurrentPageRecordsCount.Size = new System.Drawing.Size(114, 24);
             this.lblCurrentPageRecordsCount.TabIndex = 109;
             this.lblCurrentPageRecordsCount.Text = "N/A";
+            this.lblCurrentPageRecordsCount.Click += new System.EventHandler(this.lblCurrentPageRecordsCount_Click);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(1001, 556);
+            this.label3.Location = new System.Drawing.Point(1001, 657);
             this.label3.Name = "label3";
             this.label3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label3.Size = new System.Drawing.Size(205, 24);
             this.label3.TabIndex = 108;
             this.label3.Text = "# عدد صفوف الصفحة الحالية : ";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // lblCurrentPageOfNumberOfPages
             // 
             this.lblCurrentPageOfNumberOfPages.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCurrentPageOfNumberOfPages.Location = new System.Drawing.Point(481, 534);
+            this.lblCurrentPageOfNumberOfPages.Location = new System.Drawing.Point(481, 635);
             this.lblCurrentPageOfNumberOfPages.Name = "lblCurrentPageOfNumberOfPages";
             this.lblCurrentPageOfNumberOfPages.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblCurrentPageOfNumberOfPages.Size = new System.Drawing.Size(249, 30);
             this.lblCurrentPageOfNumberOfPages.TabIndex = 104;
             this.lblCurrentPageOfNumberOfPages.Text = "0 من  0  صفحات";
             this.lblCurrentPageOfNumberOfPages.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblCurrentPageOfNumberOfPages.Click += new System.EventHandler(this.lblCurrentPageOfNumberOfPages_Click);
             // 
             // lblTotalRecordsNumber
             // 
             this.lblTotalRecordsNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalRecordsNumber.Location = new System.Drawing.Point(941, 527);
+            this.lblTotalRecordsNumber.Location = new System.Drawing.Point(941, 628);
             this.lblTotalRecordsNumber.Name = "lblTotalRecordsNumber";
             this.lblTotalRecordsNumber.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblTotalRecordsNumber.Size = new System.Drawing.Size(114, 24);
             this.lblTotalRecordsNumber.TabIndex = 103;
             this.lblTotalRecordsNumber.Text = "N/A";
+            this.lblTotalRecordsNumber.Click += new System.EventHandler(this.lblTotalRecordsNumber_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(1051, 527);
+            this.label1.Location = new System.Drawing.Point(1051, 628);
             this.label1.Name = "label1";
             this.label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label1.Size = new System.Drawing.Size(155, 24);
             this.label1.TabIndex = 102;
             this.label1.Text = "# عدد الصفوف الكلية : ";
             // 
-            // gdgvPeople
+            // gdgvCategories
             // 
             this.gdgvCategories.AllowUserToAddRows = false;
             this.gdgvCategories.AllowUserToDeleteRows = false;
@@ -521,9 +525,9 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.gdgvCategories.DefaultCellStyle = dataGridViewCellStyle3;
             this.gdgvCategories.GridColor = System.Drawing.Color.White;
-            this.gdgvCategories.Location = new System.Drawing.Point(15, 60);
+            this.gdgvCategories.Location = new System.Drawing.Point(12, 60);
             this.gdgvCategories.MultiSelect = false;
-            this.gdgvCategories.Name = "gdgvPeople";
+            this.gdgvCategories.Name = "gdgvCategories";
             this.gdgvCategories.ReadOnly = true;
             this.gdgvCategories.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -537,7 +541,7 @@
             this.gdgvCategories.RowHeadersVisible = false;
             this.gdgvCategories.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gdgvCategories.RowTemplate.Height = 40;
-            this.gdgvCategories.Size = new System.Drawing.Size(1186, 463);
+            this.gdgvCategories.Size = new System.Drawing.Size(1188, 563);
             this.gdgvCategories.TabIndex = 101;
             this.gdgvCategories.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.gdgvCategories.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -679,7 +683,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1210, 587);
+            this.ClientSize = new System.Drawing.Size(1210, 687);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.guna2Panel2);

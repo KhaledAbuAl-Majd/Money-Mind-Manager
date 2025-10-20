@@ -36,7 +36,13 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             this._isIncome = isIncome;
         }
 
-        bool _isIncome;
+        public frmSelectCategory()
+        {
+            InitializeComponent();
+            this._isIncome = null;
+        }
+
+        bool? _isIncome;
 
         bool _searchByPageNumber = false;
         short _pageNumber = 1;
@@ -176,7 +182,12 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
             await _LoadDataAtDataGridView();
 
-            this.Text = (_isIncome) ? "اختيار فئة واردات" : "اختيار فئة مصروفات";
+            if (_isIncome == true)
+                this.Text = "اختيار فئة واردات";
+            else if (_isIncome == false)
+                this.Text = "اختيار فئة مصروفات";
+            else
+                this.Text = "اختيار فئة";
 
             kgtxtFilterValue.Focus();
         }

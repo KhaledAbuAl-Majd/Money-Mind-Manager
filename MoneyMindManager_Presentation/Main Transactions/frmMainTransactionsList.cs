@@ -115,20 +115,20 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             if (filterBy == enFilterBy.All || string.IsNullOrEmpty(kgtxtFilterValue.ValidatedText))
             {
-                result = await clsMainTransaction.GetAllTransactions(transactionTypes, filterByCreatedDate, kgtxtFromData.ValidatedText,
+                result = await clsMainTransaction.GetAllTransactions(transactionTypes, filterByCreatedDate, kgtxtFromDate.ValidatedText,
                     kgtxtToDate.ValidatedText , currentUserID, _pageNumber);
             }
             else if (filterBy == enFilterBy.TransactionID)
             {
                 int transactionID = Convert.ToInt32(kgtxtFilterValue.ValidatedText);
 
-                result = await clsMainTransaction.GetAllTransactions(transactionID,transactionTypes, filterByCreatedDate, kgtxtFromData.ValidatedText,
+                result = await clsMainTransaction.GetAllTransactions(transactionID,transactionTypes, filterByCreatedDate, kgtxtFromDate.ValidatedText,
                     kgtxtToDate.ValidatedText, currentUserID, _pageNumber);
             }
             else if (filterBy == enFilterBy.UserName)
             {
                 string userName = kgtxtFilterValue.ValidatedText;
-                result = await clsMainTransaction.GetAllTransactions(userName,transactionTypes, filterByCreatedDate, kgtxtFromData.ValidatedText,
+                result = await clsMainTransaction.GetAllTransactions(userName,transactionTypes, filterByCreatedDate, kgtxtFromDate.ValidatedText,
                     kgtxtToDate.ValidatedText, currentUserID, _pageNumber);
             }
             else
@@ -177,7 +177,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
                 dgvTransactions.Columns["Amount"].HeaderText = "قيمة المعاملة";
                 dgvTransactions.Columns["Amount"].Width = 215;
-                dgvTransactions.Columns["Amount"].DefaultCellStyle.Format = "N4";
+                dgvTransactions.Columns["Amount"].DefaultCellStyle.Format = "N2";
 
                 dgvTransactions.Columns["TransactionDate"].HeaderText = "تاريخ المعاملة";
                 dgvTransactions.Columns["TransactionDate"].Width = 115;
@@ -210,14 +210,6 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             var frm = new frmMainTransactionInfo(transactionID);
             clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
-        }
-
-        async void _RefreshFilter()
-        {
-            if (gcbFilterBy.SelectedIndex == 0)
-                await _LoadDataAtDataGridView(enFilterBy.All);
-            else
-                gcbFilterBy.SelectedIndex = 0;
         }
 
         void _SetReadOnlyAtTextBox(KhaledGuna2TextBox kgtxt)
@@ -368,12 +360,6 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             await _LoadDataAtDataGridView(_filterBy);
         }
 
-        private async void kgtxtDataFrom_Leave(object sender, EventArgs e)
-        {
-            _pageNumber = 1;
-            await _LoadDataAtDataGridView(_filterBy);
-        }
-
         private void gtsmTransactionInfo_Click(object sender, EventArgs e)
         {
             _ShowTransactionInfo();
@@ -467,20 +453,20 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             if (_filterBy == enFilterBy.All || string.IsNullOrEmpty(kgtxtFilterValue.ValidatedText))
             {
-                dtTransactions = await clsMainTransaction.GetAllTransactionsWithoutPaging(transactionTypes, filterByCreatedDate, kgtxtFromData.ValidatedText,
+                dtTransactions = await clsMainTransaction.GetAllTransactionsWithoutPaging(transactionTypes, filterByCreatedDate, kgtxtFromDate.ValidatedText,
                     kgtxtToDate.ValidatedText, currentUserID);
             }
             else if (_filterBy == enFilterBy.TransactionID)
             {
                 int transactionID = Convert.ToInt32(kgtxtFilterValue.ValidatedText);
 
-                dtTransactions = await clsMainTransaction.GetAllTransactionsWithoutPaging(transactionID, transactionTypes, filterByCreatedDate, kgtxtFromData.ValidatedText,
+                dtTransactions = await clsMainTransaction.GetAllTransactionsWithoutPaging(transactionID, transactionTypes, filterByCreatedDate, kgtxtFromDate.ValidatedText,
                     kgtxtToDate.ValidatedText, currentUserID);
             }
             else if (_filterBy == enFilterBy.UserName)
             {
                 string userName = kgtxtFilterValue.ValidatedText;
-                dtTransactions = await clsMainTransaction.GetAllTransactionsWithoutPaging(userName, transactionTypes, filterByCreatedDate, kgtxtFromData.ValidatedText,
+                dtTransactions = await clsMainTransaction.GetAllTransactionsWithoutPaging(userName, transactionTypes, filterByCreatedDate, kgtxtFromDate.ValidatedText,
                     kgtxtToDate.ValidatedText, currentUserID);
             }
             else
@@ -504,6 +490,43 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             dtTransactions.Columns["AccountID"].ColumnName = "معرف الحساب";
 
            await clsExportHelper.ExportToExcelWithDialog(dtTransactions, "تقرير المعاملات");
+        }
+
+ 
+        private void kgtxtDate_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                gibtnRefreshData.PerformClick();
+        }
+
+        private void ctrlInfoIcon1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void guna2Panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void kgtxtToDate_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void kgtxtFromDate_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

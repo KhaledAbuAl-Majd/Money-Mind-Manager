@@ -192,6 +192,8 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
         async void _RefreshFilter()
         {
+            _pageNumber = 1;
+
             if (gcbFilterBy.SelectedIndex == 0)
                 await _LoadDataAtDataGridView(enFilterBy.All);
             else
@@ -385,6 +387,26 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                 e.CellStyle.ForeColor = Color.Red;
                 e.CellStyle.SelectionForeColor = Color.Orange;
             }
+        }
+
+        private void lblCurrentPageRecordsCount_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblCurrentPageOfNumberOfPages_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblTotalRecordsNumber_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

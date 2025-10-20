@@ -181,7 +181,7 @@ namespace MoneyMindManager_DataAccess
                                     personID: Convert.ToInt32(reader["PersonID"]),
                                     personName: Convert.ToString(reader["PersonName"]),
                                     personRemaining: Convert.ToDecimal(reader["PersonRemaining"]),
-                                    personOrder: Convert.ToByte(reader["PersonOrder"])
+                                    personOrder: Convert.ToInt32(reader["PersonOrder"])
                                 ));
                             }
                         }
@@ -226,7 +226,7 @@ namespace MoneyMindManager_DataAccess
                                     personID: Convert.ToInt32(reader["PersonID"]),
                                     personName: Convert.ToString(reader["PersonName"]),
                                     personDebtsSum : Convert.ToDecimal(reader["PersonDebtsSum"]),
-                                    personOrder: Convert.ToByte(reader["PersonOrder"])
+                                    personOrder: Convert.ToInt32(reader["PersonOrder"])
                                 ));
                             }
                         }
@@ -275,6 +275,101 @@ namespace MoneyMindManager_DataAccess
                                     borrowingDebtsSum: Convert.ToDecimal(reader["BorrowingDebtsSum"]),
                                     lendingPaymentsSum: Convert.ToDecimal(reader["LendingPaymentsSum"]),
                                     borrowingPaymentsSum: Convert.ToDecimal(reader["BorrowingPaymentsSum"])
+                                ));
+                            }
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Data = null;
+
+                if (RaiseEventOnErrorOccured)
+                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+            }
+
+            return Data;
+        }
+
+        public static async Task<List<clsTopCategories >> GetTopCategories(DateTime? startDate, DateTime? EndDate,bool isIncome, short accountID, bool RaiseEventOnErrorOccured = true)
+        {
+            List<clsTopCategories> Data = new List<clsTopCategories>();
+
+            try
+            {
+
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("SP_Report_GetTopCategories", connection))
+                    {
+                        command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("@StartDate", (object)startDate ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@EndDate", (object)EndDate ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@IsIncome", isIncome);
+                        command.Parameters.AddWithValue("@AccountID", accountID);
+
+                        await connection.OpenAsync();
+
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                Data.Add(new clsTopCategories(
+                                    categoryName: reader["CategoryName"].ToString(),
+                                    value: Convert.ToDecimal(reader["Value"]),
+                                    ranking: Convert.ToInt32(reader["Ranking"]),
+                                    percentage: Convert.ToDecimal(reader["Percentage"]) 
+                                ));
+                            }
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Data = null;
+
+                if (RaiseEventOnErrorOccured)
+                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+            }
+
+            return Data;
+        }
+
+        public static async Task<List<clsCategoryMonthlyFlow>> GetCategoryMonthlyFlow(int categoryID, DateTime startDate, DateTime EndDate, short accountID, bool RaiseEventOnErrorOccured = true)
+        {
+            List<clsCategoryMonthlyFlow> Data = new List<clsCategoryMonthlyFlow>();
+
+            try
+            {
+
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("[dbo].[SP_Report_GetCategoryMonthlyFlow]", connection))
+                    {
+                        command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("@CategoryID", categoryID);
+                        command.Parameters.AddWithValue("@StartDate", startDate);
+                        command.Parameters.AddWithValue("@EndDate", EndDate);
+                        command.Parameters.AddWithValue("@AccountID", accountID);
+
+                        await connection.OpenAsync();
+
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                Data.Add(new clsCategoryMonthlyFlow(
+                                    month: Convert.ToByte(reader["mon"]),
+                                    year: Convert.ToInt16(reader["Year"]),
+                                    categorySum: Convert.ToDecimal(reader["CategorySum"]),
+                                    categorySonsSum: Convert.ToDecimal(reader["CategorySonsSum"]),
+                                    total: Convert.ToDecimal(reader["Total"])
                                 ));
                             }
                         }

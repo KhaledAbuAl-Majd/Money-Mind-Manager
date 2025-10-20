@@ -192,17 +192,17 @@ namespace MoneyMindManager_Business
         }
 
         /// <summary>
-        /// Filter by CategoryType - isIncome
+        /// Filter by CategoryType - isIncome, if vairable is null will not filter by it
         /// </summary>
-        public static async Task<clsGetAllCategories> GetAllCategoriesForSelectOne(bool isIncome,int currentUserID,short pageNumber)
+        public static async Task<clsGetAllCategories> GetAllCategoriesForSelectOne(bool? isIncome,int currentUserID,short pageNumber)
         {
          return  await clsIncomeAndExpenseCategoryData.GetAllCategoriesForSelectOne(null, isIncome, currentUserID,pageNumber);
         }
 
         /// <summary>
-        /// Filter by CategoryName AND CategoryType - isIncome
+        /// Filter by CategoryName AND CategoryType - isIncome, if vairable is null will not filter by it
         /// </summary>
-        public static async Task<clsGetAllCategories> GetAllCategoriesForSelectOne(string categoryName ,bool isIncome,int currentUserID,short pageNumber)
+        public static async Task<clsGetAllCategories> GetAllCategoriesForSelectOne(string categoryName ,bool? isIncome,int currentUserID,short pageNumber)
         {
          return  await clsIncomeAndExpenseCategoryData.GetAllCategoriesForSelectOne(categoryName, isIncome, currentUserID,pageNumber);
         }

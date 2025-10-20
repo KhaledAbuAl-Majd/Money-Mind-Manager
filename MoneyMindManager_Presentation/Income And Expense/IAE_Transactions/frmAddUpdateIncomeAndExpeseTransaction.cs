@@ -164,12 +164,14 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
         }
         async Task _Save()
         {
-            if (_isLocked)
+            if (_isLocked || !gbtnSave.Enabled)
             {
                 lblUserMessage.Text = "المعاملة مغلقة لايمكن التعديل عليها";
                 lblUserMessage.Visible = true;
                 return;
             }
+
+            gbtnSave.Enabled = false;
 
             if (!ValidateChildren())
             {
@@ -273,6 +275,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
         private async void gbtnSave_Click(object sender, EventArgs e)
         {
             await _Save();
+            gbtnSave.Enabled = true;
         }
 
         private void gbtnClose_Click(object sender, EventArgs e)

@@ -32,17 +32,17 @@
             this.guna2WinProgressIndicator1 = new Guna.UI2.WinForms.Guna2WinProgressIndicator();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
+            this.ctlDebtsRepaymentSchedule2 = new MoneyMindManager_Presentation.OverView.Controls.ctlDebtsRepaymentSchedule();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            this.ctrlTopDebtorsRanking2 = new MoneyMindManager_Presentation.OverView.Controls.ctrlTopDebtorsRanking();
             this.guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
+            this.ctrlTopPersonDebtsSumRanking1 = new MoneyMindManager_Presentation.OverView.Controls.ctrlTopPersonDebtsSumRanking();
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.guna2Panel4 = new Guna.UI2.WinForms.Guna2Panel();
-            this.label3 = new System.Windows.Forms.Label();
             this.ctrlDebtsMonthlyFlow1 = new MoneyMindManager_Presentation.OverView.Controls.ctrlDebtsMonthlyFlow();
-            this.ctrlTopPersonDebtsSumRanking1 = new MoneyMindManager_Presentation.OverView.Controls.ctrlTopPersonDebtsSumRanking();
-            this.ctrlTopDebtorsRanking2 = new MoneyMindManager_Presentation.OverView.Controls.ctrlTopDebtorsRanking();
-            this.ctlDebtsRepaymentSchedule2 = new MoneyMindManager_Presentation.OverView.Controls.ctlDebtsRepaymentSchedule();
+            this.label3 = new System.Windows.Forms.Label();
             this.guna2Panel2.SuspendLayout();
             this.guna2Panel1.SuspendLayout();
             this.guna2Panel3.SuspendLayout();
@@ -54,7 +54,7 @@
             this.guna2WinProgressIndicator1.AutoStart = true;
             this.guna2WinProgressIndicator1.BackColor = System.Drawing.Color.Transparent;
             this.guna2WinProgressIndicator1.CircleSize = 1F;
-            this.guna2WinProgressIndicator1.Location = new System.Drawing.Point(596, 181);
+            this.guna2WinProgressIndicator1.Location = new System.Drawing.Point(630, 350);
             this.guna2WinProgressIndicator1.Name = "guna2WinProgressIndicator1";
             this.guna2WinProgressIndicator1.NumberOfCircles = 7;
             this.guna2WinProgressIndicator1.Size = new System.Drawing.Size(55, 55);
@@ -83,6 +83,14 @@
             this.guna2Panel2.Size = new System.Drawing.Size(769, 466);
             this.guna2Panel2.TabIndex = 19;
             // 
+            // ctlDebtsRepaymentSchedule2
+            // 
+            this.ctlDebtsRepaymentSchedule2.BackColor = System.Drawing.Color.White;
+            this.ctlDebtsRepaymentSchedule2.Location = new System.Drawing.Point(6, 9);
+            this.ctlDebtsRepaymentSchedule2.Name = "ctlDebtsRepaymentSchedule2";
+            this.ctlDebtsRepaymentSchedule2.Size = new System.Drawing.Size(757, 445);
+            this.ctlDebtsRepaymentSchedule2.TabIndex = 0;
+            // 
             // guna2Panel1
             // 
             this.guna2Panel1.BackColor = System.Drawing.Color.Transparent;
@@ -99,6 +107,14 @@
             this.guna2Panel1.ShadowDecoration.Enabled = true;
             this.guna2Panel1.Size = new System.Drawing.Size(401, 466);
             this.guna2Panel1.TabIndex = 20;
+            // 
+            // ctrlTopDebtorsRanking2
+            // 
+            this.ctrlTopDebtorsRanking2.BackColor = System.Drawing.Color.White;
+            this.ctrlTopDebtorsRanking2.Location = new System.Drawing.Point(7, 9);
+            this.ctrlTopDebtorsRanking2.Name = "ctrlTopDebtorsRanking2";
+            this.ctrlTopDebtorsRanking2.Size = new System.Drawing.Size(388, 445);
+            this.ctrlTopDebtorsRanking2.TabIndex = 0;
             // 
             // guna2Panel3
             // 
@@ -117,6 +133,14 @@
             this.guna2Panel3.Size = new System.Drawing.Size(401, 466);
             this.guna2Panel3.TabIndex = 21;
             this.guna2Panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2Panel3_Paint);
+            // 
+            // ctrlTopPersonDebtsSumRanking1
+            // 
+            this.ctrlTopPersonDebtsSumRanking1.BackColor = System.Drawing.Color.White;
+            this.ctrlTopPersonDebtsSumRanking1.Location = new System.Drawing.Point(7, 9);
+            this.ctrlTopPersonDebtsSumRanking1.Name = "ctrlTopPersonDebtsSumRanking1";
+            this.ctrlTopPersonDebtsSumRanking1.Size = new System.Drawing.Size(388, 445);
+            this.ctrlTopPersonDebtsSumRanking1.TabIndex = 0;
             // 
             // label4
             // 
@@ -168,6 +192,14 @@
             this.guna2Panel4.Size = new System.Drawing.Size(769, 466);
             this.guna2Panel4.TabIndex = 20;
             // 
+            // ctrlDebtsMonthlyFlow1
+            // 
+            this.ctrlDebtsMonthlyFlow1.BackColor = System.Drawing.Color.White;
+            this.ctrlDebtsMonthlyFlow1.Location = new System.Drawing.Point(6, 9);
+            this.ctrlDebtsMonthlyFlow1.Name = "ctrlDebtsMonthlyFlow1";
+            this.ctrlDebtsMonthlyFlow1.Size = new System.Drawing.Size(757, 445);
+            this.ctrlDebtsMonthlyFlow1.TabIndex = 0;
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -178,38 +210,6 @@
             this.label3.Size = new System.Drawing.Size(159, 17);
             this.label3.TabIndex = 113;
             this.label3.Text = "تحليل حركات الديون والسداد";
-            // 
-            // ctrlDebtsMonthlyFlow1
-            // 
-            this.ctrlDebtsMonthlyFlow1.BackColor = System.Drawing.Color.White;
-            this.ctrlDebtsMonthlyFlow1.Location = new System.Drawing.Point(6, 9);
-            this.ctrlDebtsMonthlyFlow1.Name = "ctrlDebtsMonthlyFlow1";
-            this.ctrlDebtsMonthlyFlow1.Size = new System.Drawing.Size(757, 445);
-            this.ctrlDebtsMonthlyFlow1.TabIndex = 0;
-            // 
-            // ctrlTopPersonDebtsSumRanking1
-            // 
-            this.ctrlTopPersonDebtsSumRanking1.BackColor = System.Drawing.Color.White;
-            this.ctrlTopPersonDebtsSumRanking1.Location = new System.Drawing.Point(7, 9);
-            this.ctrlTopPersonDebtsSumRanking1.Name = "ctrlTopPersonDebtsSumRanking1";
-            this.ctrlTopPersonDebtsSumRanking1.Size = new System.Drawing.Size(388, 445);
-            this.ctrlTopPersonDebtsSumRanking1.TabIndex = 0;
-            // 
-            // ctrlTopDebtorsRanking2
-            // 
-            this.ctrlTopDebtorsRanking2.BackColor = System.Drawing.Color.White;
-            this.ctrlTopDebtorsRanking2.Location = new System.Drawing.Point(7, 9);
-            this.ctrlTopDebtorsRanking2.Name = "ctrlTopDebtorsRanking2";
-            this.ctrlTopDebtorsRanking2.Size = new System.Drawing.Size(388, 445);
-            this.ctrlTopDebtorsRanking2.TabIndex = 0;
-            // 
-            // ctlDebtsRepaymentSchedule2
-            // 
-            this.ctlDebtsRepaymentSchedule2.BackColor = System.Drawing.Color.White;
-            this.ctlDebtsRepaymentSchedule2.Location = new System.Drawing.Point(6, 9);
-            this.ctlDebtsRepaymentSchedule2.Name = "ctlDebtsRepaymentSchedule2";
-            this.ctlDebtsRepaymentSchedule2.Size = new System.Drawing.Size(757, 445);
-            this.ctlDebtsRepaymentSchedule2.TabIndex = 0;
             // 
             // frmOverViewDebts
             // 
@@ -223,8 +223,8 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.guna2Panel3);
             this.Controls.Add(this.guna2Panel1);
-            this.Controls.Add(this.guna2Panel2);
             this.Controls.Add(this.guna2WinProgressIndicator1);
+            this.Controls.Add(this.guna2Panel2);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmOverViewDebts";

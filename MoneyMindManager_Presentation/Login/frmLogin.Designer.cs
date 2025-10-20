@@ -312,7 +312,7 @@
             this.kgtxtLoginUserName.IsRequired = true;
             this.kgtxtLoginUserName.Location = new System.Drawing.Point(31, 181);
             this.kgtxtLoginUserName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.kgtxtLoginUserName.MaxLength = 150;
+            this.kgtxtLoginUserName.MaxLength = 50;
             this.kgtxtLoginUserName.Name = "kgtxtLoginUserName";
             this.kgtxtLoginUserName.NumberProperties.DecimalNumberProperties.AllowNegative = true;
             this.kgtxtLoginUserName.NumberProperties.DecimalNumberProperties.MaxValue = new decimal(new int[] {
@@ -909,7 +909,7 @@
             this.kgtxtCreateAccount_UserName.IsRequired = true;
             this.kgtxtCreateAccount_UserName.Location = new System.Drawing.Point(31, 119);
             this.kgtxtCreateAccount_UserName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.kgtxtCreateAccount_UserName.MaxLength = 150;
+            this.kgtxtCreateAccount_UserName.MaxLength = 30;
             this.kgtxtCreateAccount_UserName.Name = "kgtxtCreateAccount_UserName";
             this.kgtxtCreateAccount_UserName.NumberProperties.DecimalNumberProperties.AllowNegative = true;
             this.kgtxtCreateAccount_UserName.NumberProperties.DecimalNumberProperties.MaxValue = new decimal(new int[] {

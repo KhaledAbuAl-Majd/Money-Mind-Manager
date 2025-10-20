@@ -42,9 +42,9 @@
             // gpnlFormContainer
             // 
             this.gpnlFormContainer.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.gpnlFormContainer.Location = new System.Drawing.Point(0, 150);
+            this.gpnlFormContainer.Location = new System.Drawing.Point(0, 122);
             this.gpnlFormContainer.Name = "gpnlFormContainer";
-            this.gpnlFormContainer.Size = new System.Drawing.Size(1210, 587);
+            this.gpnlFormContainer.Size = new System.Drawing.Size(1210, 687);
             this.gpnlFormContainer.TabIndex = 6;
             // 
             // lblHeader
@@ -54,10 +54,10 @@
             this.lblHeader.ForeColor = System.Drawing.Color.Black;
             this.lblHeader.Location = new System.Drawing.Point(0, 0);
             this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(1210, 50);
+            this.lblHeader.Size = new System.Drawing.Size(1210, 60);
             this.lblHeader.TabIndex = 19;
             this.lblHeader.Text = "الأشخاص";
-            this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblHeader.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // guna2Panel1
             // 
@@ -67,7 +67,7 @@
             this.guna2Panel1.BorderThickness = 1;
             this.guna2Panel1.Controls.Add(this.gbtnCategories);
             this.guna2Panel1.Controls.Add(this.gbtnVouchers);
-            this.guna2Panel1.Location = new System.Drawing.Point(942, 52);
+            this.guna2Panel1.Location = new System.Drawing.Point(942, 57);
             this.guna2Panel1.Name = "guna2Panel1";
             this.guna2Panel1.Size = new System.Drawing.Size(258, 59);
             this.guna2Panel1.TabIndex = 20;
@@ -141,7 +141,7 @@
             // 
             this.ciiExepnsesReturn.BackColor = System.Drawing.Color.Transparent;
             this.ciiExepnsesReturn.IconImage = ((System.Drawing.Image)(resources.GetObject("ciiExepnsesReturn.IconImage")));
-            this.ciiExepnsesReturn.Location = new System.Drawing.Point(914, 73);
+            this.ciiExepnsesReturn.Location = new System.Drawing.Point(914, 78);
             this.ciiExepnsesReturn.Name = "ciiExepnsesReturn";
             // 
             // 
@@ -170,7 +170,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1210, 737);
+            this.ClientSize = new System.Drawing.Size(1210, 809);
             this.Controls.Add(this.ciiExepnsesReturn);
             this.Controls.Add(this.guna2Panel1);
             this.Controls.Add(this.lblHeader);

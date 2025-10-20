@@ -31,10 +31,12 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAddUpdateCategory));
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
+            this.kgtxtCreatedDate = new KhaledControlLibrary1.KhaledGuna2TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.kgtxtCreatedByUserName = new Guna.UI2.WinForms.Guna2TextBox();
             this.ctrlInfoIcon3 = new KhaledControlLibrary1.ctrlInfoIcon();
             this.gibtnDeleteVoucher = new Guna.UI2.WinForms.Guna2ImageButton();
             this.label10 = new System.Windows.Forms.Label();
-            this.klblCreatedDate = new KhaledControlLibrary1.KhaledLabel();
             this.label9 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.gbtnClose = new Guna.UI2.WinForms.Guna2Button();
@@ -75,10 +77,12 @@
             this.guna2Panel2.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.guna2Panel2.BorderRadius = 20;
             this.guna2Panel2.BorderThickness = 2;
+            this.guna2Panel2.Controls.Add(this.kgtxtCreatedDate);
+            this.guna2Panel2.Controls.Add(this.label11);
+            this.guna2Panel2.Controls.Add(this.kgtxtCreatedByUserName);
             this.guna2Panel2.Controls.Add(this.ctrlInfoIcon3);
             this.guna2Panel2.Controls.Add(this.gibtnDeleteVoucher);
             this.guna2Panel2.Controls.Add(this.label10);
-            this.guna2Panel2.Controls.Add(this.klblCreatedDate);
             this.guna2Panel2.Controls.Add(this.label9);
             this.guna2Panel2.Controls.Add(this.label2);
             this.guna2Panel2.Controls.Add(this.gbtnClose);
@@ -101,14 +105,125 @@
             this.guna2Panel2.Controls.Add(this.kgtxtParentCategoryName);
             this.guna2Panel2.Controls.Add(this.kgtxtCategoryName);
             this.guna2Panel2.FillColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.guna2Panel2.Location = new System.Drawing.Point(279, 74);
+            this.guna2Panel2.Location = new System.Drawing.Point(279, 78);
             this.guna2Panel2.Name = "guna2Panel2";
             this.guna2Panel2.ShadowDecoration.BorderRadius = 20;
             this.guna2Panel2.ShadowDecoration.Color = System.Drawing.Color.DarkGray;
             this.guna2Panel2.ShadowDecoration.Depth = 20;
             this.guna2Panel2.ShadowDecoration.Enabled = true;
-            this.guna2Panel2.Size = new System.Drawing.Size(656, 393);
+            this.guna2Panel2.Size = new System.Drawing.Size(656, 452);
             this.guna2Panel2.TabIndex = 1;
+            // 
+            // kgtxtCreatedDate
+            // 
+            this.kgtxtCreatedDate.AllowWhiteSpace = false;
+            this.kgtxtCreatedDate.ApplyTrimAtTextBoxValue = false;
+            this.kgtxtCreatedDate.BorderColor = System.Drawing.Color.DimGray;
+            this.kgtxtCreatedDate.BorderRadius = 10;
+            this.kgtxtCreatedDate.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.kgtxtCreatedDate.DefaultText = "";
+            this.kgtxtCreatedDate.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.kgtxtCreatedDate.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.kgtxtCreatedDate.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.kgtxtCreatedDate.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.kgtxtCreatedDate.FillColor = System.Drawing.SystemColors.ControlLight;
+            this.kgtxtCreatedDate.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.kgtxtCreatedDate.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.kgtxtCreatedDate.ForeColor = System.Drawing.Color.Black;
+            this.kgtxtCreatedDate.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.kgtxtCreatedDate.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Text;
+            this.kgtxtCreatedDate.IsRequired = false;
+            this.kgtxtCreatedDate.Location = new System.Drawing.Point(27, 339);
+            this.kgtxtCreatedDate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.kgtxtCreatedDate.Name = "kgtxtCreatedDate";
+            this.kgtxtCreatedDate.NumberProperties.DecimalNumberProperties.AllowNegative = true;
+            this.kgtxtCreatedDate.NumberProperties.DecimalNumberProperties.MaxValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.kgtxtCreatedDate.NumberProperties.DecimalNumberProperties.MaxValueIncluded = true;
+            this.kgtxtCreatedDate.NumberProperties.DecimalNumberProperties.MaxValueOption = false;
+            this.kgtxtCreatedDate.NumberProperties.DecimalNumberProperties.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.kgtxtCreatedDate.NumberProperties.DecimalNumberProperties.MinValueIncluded = true;
+            this.kgtxtCreatedDate.NumberProperties.DecimalNumberProperties.MinValueOption = false;
+            this.kgtxtCreatedDate.NumberProperties.FloatNumberProperties.AllowNegative = true;
+            this.kgtxtCreatedDate.NumberProperties.FloatNumberProperties.MaxValue = 0F;
+            this.kgtxtCreatedDate.NumberProperties.FloatNumberProperties.MaxValueIncluded = true;
+            this.kgtxtCreatedDate.NumberProperties.FloatNumberProperties.MaxValueOption = false;
+            this.kgtxtCreatedDate.NumberProperties.FloatNumberProperties.MinValue = 0F;
+            this.kgtxtCreatedDate.NumberProperties.FloatNumberProperties.MinValueIncluded = true;
+            this.kgtxtCreatedDate.NumberProperties.FloatNumberProperties.MinValueOption = false;
+            this.kgtxtCreatedDate.NumberProperties.IntegerNumberProperties.AllowNegative = true;
+            this.kgtxtCreatedDate.NumberProperties.IntegerNumberProperties.MaxValue = 0;
+            this.kgtxtCreatedDate.NumberProperties.IntegerNumberProperties.MaxValueIncluded = true;
+            this.kgtxtCreatedDate.NumberProperties.IntegerNumberProperties.MaxValueOption = false;
+            this.kgtxtCreatedDate.NumberProperties.IntegerNumberProperties.MinValue = 0;
+            this.kgtxtCreatedDate.NumberProperties.IntegerNumberProperties.MinValueIncluded = true;
+            this.kgtxtCreatedDate.NumberProperties.IntegerNumberProperties.MinValueOption = false;
+            this.kgtxtCreatedDate.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
+            this.kgtxtCreatedDate.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
+            this.kgtxtCreatedDate.PlaceholderForeColor = System.Drawing.Color.Gray;
+            this.kgtxtCreatedDate.PlaceholderText = "";
+            this.kgtxtCreatedDate.SelectedText = "";
+            this.kgtxtCreatedDate.Size = new System.Drawing.Size(283, 41);
+            this.kgtxtCreatedDate.TabIndex = 9;
+            this.kgtxtCreatedDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.kgtxtCreatedDate.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
+            this.kgtxtCreatedDate.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.kgtxtCreatedDate.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
+            this.kgtxtCreatedDate.TextProperties.DateTimeProperties.TimeFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enTimeFormate.TwelveHours;
+            this.kgtxtCreatedDate.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
+            this.kgtxtCreatedDate.TextProperties.MinLength = ((short)(0));
+            this.kgtxtCreatedDate.TextProperties.MinLengthOption = false;
+            this.kgtxtCreatedDate.TextProperties.PhoneProperties.AllowPlusSign = true;
+            this.kgtxtCreatedDate.TextProperties.PhoneProperties.MaxPhoneLength = ((byte)(15));
+            this.kgtxtCreatedDate.TextProperties.TextFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.enTextFormat.Date;
+            this.kgtxtCreatedDate.TrimEnd = false;
+            this.kgtxtCreatedDate.TrimStart = false;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.BackColor = System.Drawing.Color.Transparent;
+            this.label11.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(498, 321);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(129, 17);
+            this.label11.TabIndex = 132;
+            this.label11.Text = "اسم المستخدم المنشئ";
+            // 
+            // kgtxtCreatedByUserName
+            // 
+            this.kgtxtCreatedByUserName.BackColor = System.Drawing.Color.Transparent;
+            this.kgtxtCreatedByUserName.BorderColor = System.Drawing.Color.DimGray;
+            this.kgtxtCreatedByUserName.BorderRadius = 10;
+            this.kgtxtCreatedByUserName.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.kgtxtCreatedByUserName.DefaultText = "";
+            this.kgtxtCreatedByUserName.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.kgtxtCreatedByUserName.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.kgtxtCreatedByUserName.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.kgtxtCreatedByUserName.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.kgtxtCreatedByUserName.FillColor = System.Drawing.SystemColors.ControlLight;
+            this.kgtxtCreatedByUserName.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.kgtxtCreatedByUserName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kgtxtCreatedByUserName.ForeColor = System.Drawing.Color.Black;
+            this.kgtxtCreatedByUserName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.kgtxtCreatedByUserName.Location = new System.Drawing.Point(345, 339);
+            this.kgtxtCreatedByUserName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.kgtxtCreatedByUserName.Name = "kgtxtCreatedByUserName";
+            this.kgtxtCreatedByUserName.PlaceholderForeColor = System.Drawing.Color.Gray;
+            this.kgtxtCreatedByUserName.PlaceholderText = "";
+            this.kgtxtCreatedByUserName.ReadOnly = true;
+            this.kgtxtCreatedByUserName.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
+            this.kgtxtCreatedByUserName.SelectedText = "";
+            this.kgtxtCreatedByUserName.Size = new System.Drawing.Size(283, 41);
+            this.kgtxtCreatedByUserName.TabIndex = 8;
+            this.kgtxtCreatedByUserName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // ctrlInfoIcon3
             // 
@@ -161,29 +276,12 @@
             this.label10.AutoSize = true;
             this.label10.BackColor = System.Drawing.Color.Transparent;
             this.label10.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(240, 300);
+            this.label10.Location = new System.Drawing.Point(228, 321);
             this.label10.Name = "label10";
             this.label10.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label10.Size = new System.Drawing.Size(78, 17);
             this.label10.TabIndex = 129;
             this.label10.Text = "تاريخ الإنشاء :";
-            // 
-            // klblCreatedDate
-            // 
-            this.klblCreatedDate.DateProperties.DayFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enDayFormate.dd__01;
-            this.klblCreatedDate.DateProperties.MonthFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enMonthFormate.MM__01;
-            this.klblCreatedDate.DateProperties.SeparatorFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enSeparator.Dash;
-            this.klblCreatedDate.DateProperties.TimeFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enTimeFormate.TwelveHours;
-            this.klblCreatedDate.DateProperties.YearFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enYearFormate.yyyy__2025;
-            this.klblCreatedDate.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.klblCreatedDate.InputType = KhaledControlLibrary1.KhaledLabel.enInputType.Date;
-            this.klblCreatedDate.Location = new System.Drawing.Point(27, 296);
-            this.klblCreatedDate.Name = "klblCreatedDate";
-            this.klblCreatedDate.NumberFormat = KhaledControlLibrary1.KhaledLabel.enNumberFormat.None;
-            this.klblCreatedDate.Size = new System.Drawing.Size(219, 23);
-            this.klblCreatedDate.TabIndex = 128;
-            this.klblCreatedDate.Text = "N/A";
-            this.klblCreatedDate.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label9
             // 
@@ -231,11 +329,11 @@
             this.gbtnClose.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnClose.ImageSize = new System.Drawing.Size(25, 25);
             this.gbtnClose.IndicateFocus = true;
-            this.gbtnClose.Location = new System.Drawing.Point(27, 340);
+            this.gbtnClose.Location = new System.Drawing.Point(27, 396);
             this.gbtnClose.Name = "gbtnClose";
             this.gbtnClose.PressedColor = System.Drawing.Color.White;
             this.gbtnClose.Size = new System.Drawing.Size(283, 41);
-            this.gbtnClose.TabIndex = 9;
+            this.gbtnClose.TabIndex = 11;
             this.gbtnClose.Text = "غلق";
             this.gbtnClose.Click += new System.EventHandler(this.gbtnClose_Click);
             // 
@@ -262,11 +360,11 @@
             this.gbtnSave.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnSave.ImageSize = new System.Drawing.Size(25, 25);
             this.gbtnSave.IndicateFocus = true;
-            this.gbtnSave.Location = new System.Drawing.Point(345, 340);
+            this.gbtnSave.Location = new System.Drawing.Point(345, 396);
             this.gbtnSave.Name = "gbtnSave";
             this.gbtnSave.PressedColor = System.Drawing.Color.White;
             this.gbtnSave.Size = new System.Drawing.Size(283, 41);
-            this.gbtnSave.TabIndex = 8;
+            this.gbtnSave.TabIndex = 10;
             this.gbtnSave.Text = "حفظ";
             this.gbtnSave.Click += new System.EventHandler(this.gbtnSave_Click);
             // 
@@ -334,7 +432,7 @@
             this.gtxtCategoryHierarchical.ReadOnly = true;
             this.gtxtCategoryHierarchical.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.gtxtCategoryHierarchical.SelectedText = "";
-            this.gtxtCategoryHierarchical.Size = new System.Drawing.Size(283, 77);
+            this.gtxtCategoryHierarchical.Size = new System.Drawing.Size(283, 107);
             this.gtxtCategoryHierarchical.TabIndex = 7;
             this.gtxtCategoryHierarchical.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -859,10 +957,10 @@
             this.lblHeader.ForeColor = System.Drawing.Color.Black;
             this.lblHeader.Location = new System.Drawing.Point(0, 0);
             this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(1210, 50);
+            this.lblHeader.Size = new System.Drawing.Size(1210, 60);
             this.lblHeader.TabIndex = 11;
             this.lblHeader.Text = "إضافة شخص";
-            this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblHeader.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // errorProvider1
             // 
@@ -927,9 +1025,11 @@
         private Guna.UI2.WinForms.Guna2TextBox gtxtMainCategoryName;
         private Guna.UI2.WinForms.Guna2TextBox gtxtCategoryHierarchical;
         private System.Windows.Forms.Label label9;
-        private KhaledControlLibrary1.KhaledLabel klblCreatedDate;
         private System.Windows.Forms.Label label10;
         private Guna.UI2.WinForms.Guna2ImageButton gibtnDeleteVoucher;
         private KhaledControlLibrary1.ctrlInfoIcon ctrlInfoIcon3;
+        private System.Windows.Forms.Label label11;
+        private Guna.UI2.WinForms.Guna2TextBox kgtxtCreatedByUserName;
+        private KhaledControlLibrary1.KhaledGuna2TextBox kgtxtCreatedDate;
     }
 }

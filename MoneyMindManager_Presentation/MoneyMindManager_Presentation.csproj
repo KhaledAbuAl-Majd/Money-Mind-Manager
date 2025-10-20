@@ -199,6 +199,18 @@
     <Compile Include="OverView\Controls\ctrlDebtsMonthlyFlow.Designer.cs">
       <DependentUpon>ctrlDebtsMonthlyFlow.cs</DependentUpon>
     </Compile>
+    <Compile Include="OverView\Controls\ctrlCategoryMonthlyFlow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="OverView\Controls\ctrlCategoryMonthlyFlow.Designer.cs">
+      <DependentUpon>ctrlCategoryMonthlyFlow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OverView\Controls\ctrlTopCategories.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="OverView\Controls\ctrlTopCategories.Designer.cs">
+      <DependentUpon>ctrlTopCategories.cs</DependentUpon>
+    </Compile>
     <Compile Include="OverView\Controls\ctrlTopPersonDebtsSumRanking.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -228,6 +240,12 @@
     </Compile>
     <Compile Include="OverView\frmOverView.Designer.cs">
       <DependentUpon>frmOverView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OverView\frmOverViewCategories.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OverView\frmOverViewCategories.Designer.cs">
+      <DependentUpon>frmOverViewCategories.cs</DependentUpon>
     </Compile>
     <Compile Include="OverView\frmOverViewDebts.cs">
       <SubType>Form</SubType>
@@ -375,6 +393,12 @@
     <EmbeddedResource Include="OverView\Controls\ctrlDebtsMonthlyFlow.resx">
       <DependentUpon>ctrlDebtsMonthlyFlow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OverView\Controls\ctrlCategoryMonthlyFlow.resx">
+      <DependentUpon>ctrlCategoryMonthlyFlow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OverView\Controls\ctrlTopCategories.resx">
+      <DependentUpon>ctrlTopCategories.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OverView\Controls\ctrlTopPersonDebtsSumRanking.resx">
       <DependentUpon>ctrlTopPersonDebtsSumRanking.cs</DependentUpon>
     </EmbeddedResource>
@@ -383,12 +407,16 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OverView\Controls\ctlDebtsRepaymentSchedule.resx">
       <DependentUpon>ctlDebtsRepaymentSchedule.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="OverView\Controls\ctrlMonthlyFlow.resx">
       <DependentUpon>ctrlMonthlyFlow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OverView\frmOverView.resx">
       <DependentUpon>frmOverView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OverView\frmOverViewCategories.resx">
+      <DependentUpon>frmOverViewCategories.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OverView\frmOverViewDebts.resx">
       <DependentUpon>frmOverViewDebts.cs</DependentUpon>

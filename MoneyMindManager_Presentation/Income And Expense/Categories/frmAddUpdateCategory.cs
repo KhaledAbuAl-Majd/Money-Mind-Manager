@@ -141,7 +141,8 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
             gtxtMainCategoryName.Text = _Category.MainCategoryName;
             gtxtCategoryHierarchical.Text = _Category.CategoryHierarchical;
-            klblCreatedDate.Text = _Category.CreatedDate.ToString();
+            kgtxtCreatedDate.RefreshNumber_DateTimeFormattedText(_Category.CreatedDate.ToString());
+            kgtxtCreatedByUserName.Text = _Category?.CreatedByUserInfo?.UserName;
 
             gibtnDeleteVoucher.Enabled = true;
         }
@@ -163,6 +164,11 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
         }
         async Task _Save()
         {
+            if (!gbtnSave.Enabled)
+                return;
+
+            gbtnSave.Enabled = false;
+
             if (!ValidateChildren())
             {
                 clsGlobalMessageBoxs.ShowValidateChildrenFailedMessage();
@@ -221,7 +227,8 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
                     gtxtMainCategoryName.Text = _Category.MainCategoryName;
                     gtxtCategoryHierarchical.Text = _Category.CategoryHierarchical;
-                    klblCreatedDate.Text = _Category.CreatedDate.ToString();
+                    kgtxtCreatedDate.RefreshNumber_DateTimeFormattedText(_Category.CreatedDate.ToString());
+                    kgtxtCreatedByUserName.Text = _Category?.CreatedByUserInfo?.UserName;
                     gibtnDeleteVoucher.Enabled = true;
                 }
                 else if (Mode == enMode.Update)
@@ -270,6 +277,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
         private async void gbtnSave_Click(object sender, EventArgs e)
         {
             await _Save();
+            gbtnSave.Enabled = true;
         }
 
         private void gbtnClose_Click(object sender, EventArgs e)
@@ -387,5 +395,6 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                 _ShowSelectCategoryForm();
             }
         }
+
     }
 }

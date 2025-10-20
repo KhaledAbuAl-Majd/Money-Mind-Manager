@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Drawing;
+
 //using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -61,9 +63,9 @@ namespace MoneyMindManager_Presentation.OverView.Controls
             LoadChart();
         }
 
-        public Brush GetBrush(string hexColor)
+        public System.Windows.Media.Brush GetBrush(string hexColor)
         {
-            return new SolidColorBrush((Color)ColorConverter.ConvertFromString(hexColor));
+            return new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(hexColor));
         }
         void LoadChartColumn(List<clsDebtsMonthlyFlow> chartData)
         {
@@ -78,7 +80,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
                 {
                     Title = "الإقراض",
                     Values = new ChartValues<decimal>(chartData.Select(x => x.LendingDebtsSum)),
-                    Fill = GetBrush("#0077B6"),
+                    Fill = GetBrush("#0A66C2"),
                     DataLabels = true,
                     LabelPoint = point => point.Y.ToString("N0")
                 },
@@ -87,7 +89,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
                 {
                     Title = "الإقتراض",
                     Values = new ChartValues<decimal>(chartData.Select(x => x.BorrowingDebtsSum)),
-                  Fill = GetBrush("#6099B6"),
+                  Fill = GetBrush("#005F8E"),
                     DataLabels = true,
                     LabelPoint = point => point.Y.ToString("N0")
                 },
@@ -96,7 +98,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
                 {
                     Title = "سداد الإقراض",
                     Values = new ChartValues<decimal>(chartData.Select(x => x.LendingPaymentsSum)),
-                   Fill = GetBrush("#C74BFF"),
+                   Fill = System.Windows.Media.Brushes.SlateBlue,
                     DataLabels = true,
                     LabelPoint = point => point.Y.ToString("N0")
                 },
@@ -105,7 +107,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
                 {
                     Title = "سداد الإقتراض",
                     Values = new ChartValues<decimal>(chartData.Select(x => x.BorrowingPaymentsSum)),
-                    Fill =  GetBrush("#D99478"),
+                    Fill =  GetBrush("#FF9F1C"),
                     DataLabels = true,
                     LabelPoint = point => point.Y.ToString("N0")
                 }
@@ -128,8 +130,8 @@ namespace MoneyMindManager_Presentation.OverView.Controls
             CartesianChart1.AxisY.Add(new LiveCharts.Wpf.Axis
             {
                 Title = $"القيمة ({currency})",
-                LabelFormatter = value => value.ToString("N0") + $" {currency}",
-                
+                LabelFormatter = value => value.ToString("N0"),
+
                 Foreground = System.Windows.Media.Brushes.Black,
                 FontSize = 15
             });
@@ -145,142 +147,65 @@ namespace MoneyMindManager_Presentation.OverView.Controls
         void LoadChartLiner(List<clsDebtsMonthlyFlow> chartData)
         {
             if (chartData == null || chartData.Count == 0) return;
-
-            // 1. تنظيف وإعداد التسميات
-
-            // نستخدم Select لإنشاء تسميات المحور X (نحول الأرقام إلى نص)
+     
             string[] labels = chartData.Select(x => GetMonthName(x.mon, x.Year)).ToArray();
 
-            // 2. ربط السلاسل
-            //    CartesianChart1.Series = new SeriesCollection
-            //    {
-            //// === السلسلة 1: الإيرادات (Income) - LineSeries/AreaSeries ===
-            //        new LineSeries // <--- التعديل هنا لجعله خطي
-            //        {
-            //            Title = "الإقراض",
-            //            Values = new ChartValues<decimal>(chartData.Select(x => x.LendingDebtsSum)),
-
-            //            Fill = System.Windows.Media.Brushes.Transparent, 
-
-            //            // Stroke: لون الخط نفسه
-            //            Stroke = System.Windows.Media.Brushes.DarkCyan, 
-
-            //            // Point Geometry: لإظهار النقاط على الخط (مثل الدوائر في الصورة)
-            //            PointGeometry = DefaultGeometries.Circle,
-            //            PointGeometrySize = 8,
-
-            //            // يمكنك إزالة DataLabels هنا لتجنب الازدحام
-            //            DataLabels = false,
-            //            LabelPoint = point => point.Y.ToString("N0")
-            //        },
-
-            //        new LineSeries
-            //        {
-            //             Title = "الإقتراض",
-            //            Values = new ChartValues<decimal>(chartData.Select(x => x.BorrowingDebtsSum)),
-
-            //            Fill = System.Windows.Media.Brushes.Transparent,
-            //            Stroke = System.Windows.Media.Brushes.Orange,
-            //            PointGeometry = DefaultGeometries.Circle,
-            //            PointGeometrySize = 8,
-
-            //            DataLabels = false,
-            //            LabelPoint = point => point.Y.ToString("N0")
-            //        },
-
-            //         new LineSeries
-            //        {
-            //             Title = "سداد الإقراض",
-            //             Values = new ChartValues<decimal>(chartData.Select(x => x.LendingPaymentsSum)),
-
-            //            Fill = System.Windows.Media.Brushes.Transparent,
-            //            Stroke = System.Windows.Media.Brushes.Orange,
-            //            PointGeometry = DefaultGeometries.Circle,
-            //            PointGeometrySize = 8,
-
-            //            DataLabels = false,
-            //            LabelPoint = point => point.Y.ToString("N0")
-            //        },
-
-            //          new LineSeries
-            //        {
-            //             Title = "سداد الإقتراض",
-            //              Values = new ChartValues<decimal>(chartData.Select(x => x.BorrowingPaymentsSum)),
-
-            //            Fill = System.Windows.Media.Brushes.Transparent,
-            //            Stroke = System.Windows.Media.Brushes.LightSkyBlue,
-            //            PointGeometry = DefaultGeometries.Circle,
-            //            PointGeometrySize = 8,
-
-            //            DataLabels = false,
-            //            LabelPoint = point => point.Y.ToString("N0")
-            //        }
-
-
-            //    };
-
-            // استخدم هذه الدالة لتحويل الألوان (كما اتفقنا سابقاً)
-            // public Brush GetBrush(string hexColor) => new SolidColorBrush((Color)ColorConverter.ConvertFromString(hexColor));
 
             CartesianChart1.Series = new SeriesCollection
             {
-                // === 1. الإقراض (القيمة الأساسية - خط متصل وسميك) ===
                 new LineSeries
                 {
                     Title = "الإقراض",
                     Values = new ChartValues<decimal>(chartData.Select(x => x.LendingDebtsSum)),
                     Fill = System.Windows.Media.Brushes.Transparent,
-                   Stroke = GetBrush("#0A4C75"),
-                    PointForeground = GetBrush("#0A4C75"), // الأزرق الأطلسي
-                    StrokeThickness = 3, // جعل الخط أسمك
+                   Stroke = GetBrush("#0A66C2"),
+                    PointForeground = GetBrush("#0A66C2"),
+                    StrokeThickness = 3,
         
                     PointGeometry = DefaultGeometries.Circle,
-                    PointGeometrySize = 10, // تكبير النقطة قليلاً
-
-                    // (DataLabels = false, LabelPoint = ...)
+                    PointGeometrySize = 10,
+                   LineSmoothness = 0.8,
                 },
 
-                // === 2. الاقتراض (القيمة الأساسية - خط متصل وسميك) ===
                 new LineSeries
                 {
                     Title = "الإقتراض",
                     Values = new ChartValues<decimal>(chartData.Select(x => x.BorrowingDebtsSum)),
                     Fill = System.Windows.Media.Brushes.Transparent,
-                  Stroke = GetBrush("#6099B6"),
-        PointForeground = GetBrush("#6099B6"),
+                  Stroke = GetBrush("#005F8E"),
+        PointForeground = GetBrush("#005F8E"),
                     StrokeThickness = 3,
 
                     PointGeometry = DefaultGeometries.Circle,
                     PointGeometrySize = 10,
+                    LineSmoothness = 0.8,
                 },
 
-                // === 3. سداد الإقراض (السداد - خط متقطع ورقيق) ===
                 new LineSeries
                 {
                     Title = "سداد الإقراض",
                     Values = new ChartValues<decimal>(chartData.Select(x => x.LendingPaymentsSum)),
                     Fill = System.Windows.Media.Brushes.Transparent,
-                    Stroke = GetBrush("#C74BFF"), // البنفسجي المشرق
-                    StrokeThickness = 2, // خط أرق
+                    Stroke = System.Windows.Media.Brushes.SlateBlue, 
+                    StrokeThickness = 3, 
                     StrokeDashArray = new DoubleCollection { 4, 4 }, // إضافة تنقيط (Dash) لتمييز السداد
-
-                    PointGeometry = DefaultGeometries.Diamond, // تغيير شكل النقطة للتمييز
+                    LineSmoothness = 0.8,
+                    PointGeometry = DefaultGeometries.Diamond, 
                     PointGeometrySize = 7,
-                    PointForeground = GetBrush("#C74BFF")
+                    PointForeground = System.Windows.Media.Brushes.SlateBlue
                 },
 
-                // === 4. سداد الاقتراض (السداد - خط متقطع ورقيق) ===
                 new LineSeries
                 {
                     Title = "سداد الإقتراض",
                     Values = new ChartValues<decimal>(chartData.Select(x => x.BorrowingPaymentsSum)),
                     Fill = System.Windows.Media.Brushes.Transparent,
-                    Stroke = GetBrush("#D99478"),
-        PointForeground = GetBrush("#D99478"),
-                    StrokeThickness = 2,
-                    StrokeDashArray = new DoubleCollection { 4, 4 }, // إضافة تنقيط
-
-                    PointGeometry = DefaultGeometries.Diamond, // تغيير شكل النقطة للتمييز
+                    Stroke = GetBrush("#FF9F1C"),
+        PointForeground = GetBrush("#FF9F1C"),
+                    StrokeThickness = 3,
+                    StrokeDashArray = new DoubleCollection { 4, 4 },
+                    LineSmoothness = 0.8,
+                    PointGeometry = DefaultGeometries.Diamond, 
                     PointGeometrySize = 7,
                 }
             };
@@ -300,7 +225,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
             CartesianChart1.AxisY.Add(new LiveCharts.Wpf.Axis
             {
                 Title = $"القيمة ({currency})",
-                LabelFormatter = value => value.ToString("N0") + $" {currency}",
+                LabelFormatter = value => value.ToString("N0"),
 
                 Foreground = System.Windows.Media.Brushes.Black,
                 FontSize = 14
@@ -344,7 +269,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
             {
                 KhaledGuna2TextBox kgtxt = (KhaledGuna2TextBox)sender;
                 e.Cancel = true;
-                errorProvider1.SetError(kgtxt, "أقصى عدد من الشهور هو 4 شهرا مختلفين !");
+                errorProvider1.SetError(kgtxt, "أقصى عدد من الشهور هو 4 أشهر مختلفين !");
             }
             else
             {
@@ -358,26 +283,16 @@ namespace MoneyMindManager_Presentation.OverView.Controls
             kgtxtFromData.RefreshNumber_DateTimeFormattedText(new DateTime(bofore12Month.Year,bofore12Month.Month,1).ToString());
 
             CartesianChart1.LegendLocation = LegendLocation.Top;
+            CartesianChart1.DefaultLegend.FontSize = 15;
+            CartesianChart1.DataTooltip.FontSize = 14;
         }
 
         private async void gibtnFindPerson_Click(object sender, EventArgs e)
         {
+            gibtnRefresh.Enabled = false;
             await LoadData();
+            gibtnRefresh.Enabled = true;
         }
 
-        private void kgtxtFromData_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void kgtxtToDate_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ctrlInfoIcon1_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

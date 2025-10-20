@@ -39,5 +39,15 @@ namespace MoneyMindManager_Business
         {
             return await clsReportData.GetDebtsMonthlyFlow(startDate, EndDate, accountID);
         }
+
+        public static async Task<List<clsTopCategories>> GetTopCategories(DateTime? startDate, DateTime? EndDate, bool isIncome, short accountID)
+        {
+            return await clsReportData.GetTopCategories(startDate, EndDate, isIncome, accountID);
+        }
+
+        public static async Task<List<clsCategoryMonthlyFlow>> GetCategoryMonthlyFlow(int categoryID, DateTime startDate, DateTime EndDate, short accountID)
+        {
+            return await clsReportData.GetCategoryMonthlyFlow(categoryID, startDate, EndDate, accountID);
+        }
     }
 }

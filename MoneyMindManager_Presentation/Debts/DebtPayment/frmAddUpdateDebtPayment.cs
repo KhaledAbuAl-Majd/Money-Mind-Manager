@@ -26,7 +26,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
         bool _isSaved = false;
 
-        bool _isIncome;
+        //bool _isIncome;
 
         bool _isLocked;
         enum enMode { AddNew, Update };
@@ -152,7 +152,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
         async Task _Save()
         {
-            if (_isLocked)
+            if (_isLocked || !gbtnSave.Enabled)
             {
                 lblUserMessage.Text = "المعاملة مغلقة لايمكن التعديل عليها";
                 lblUserMessage.Visible = true;
@@ -166,6 +166,8 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                 lblUserMessage.Visible = true;
                 return;
             }
+
+            gbtnSave.Enabled = false;
 
             lblUserMessage.Visible = false;
 
@@ -251,6 +253,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
         private async void gbtnSave_Click(object sender, EventArgs e)
         {
             await _Save();
+            gbtnSave.Enabled = true;
         }
 
         private void gbtnClose_Click(object sender, EventArgs e)

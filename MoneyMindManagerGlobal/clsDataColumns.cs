@@ -634,13 +634,20 @@ namespace MoneyMindManagerGlobal
 
                 public decimal CurrentPageDebtsValue;
 
-                public clsGetAllDebts(DataTable dtDebts, short numberOfPages, int recordsCount, decimal totalDebtsValue, decimal currentPageDebtsValue)
+                public decimal TotalRemainingAmount;
+
+                public decimal CurrentPageRemainingAmount;
+
+                public clsGetAllDebts(DataTable dtDebts, short numberOfPages, int recordsCount, decimal totalDebtsValue,
+                    decimal currentPageDebtsValue, decimal totalRemainingAmount, decimal currentPageRemainingAmount)
                 {
                     this.dtDebts = dtDebts;
                     this.NumberOfPages = numberOfPages;
                     this.RecordsCount = recordsCount;
                     this.TotalDebtsValue = totalDebtsValue;
                     this.CurrentPageDebtsValue = currentPageDebtsValue;
+                    this.TotalRemainingAmount = totalRemainingAmount;
+                    this.CurrentPageRemainingAmount = currentPageRemainingAmount;
                 }
             }
         }
@@ -738,10 +745,10 @@ namespace MoneyMindManagerGlobal
                 public int PersonID { get; set; }
                 public string PersonName { get; set; }
                 public decimal PersonRemaining { get; set; }
-                public byte PersonOrder { get; set; }
+                public int PersonOrder { get; set; }
 
 
-                public clsTopDebtorsRanking(int personID, string personName, decimal personRemaining, byte personOrder)
+                public clsTopDebtorsRanking(int personID, string personName, decimal personRemaining, int personOrder)
                 {
                     this.PersonID = personID;
                     this.PersonName = personName;
@@ -756,10 +763,10 @@ namespace MoneyMindManagerGlobal
                 public int PersonID { get; set; }
                 public string PersonName { get; set; }
                 public decimal PersonDebtsSum { get; set; }
-                public byte PersonOrder { get; set; }
+                public int PersonOrder { get; set; }
 
 
-                public clsTopPeopleDebtsSumRanking(int personID, string personName, decimal personDebtsSum, byte personOrder)
+                public clsTopPeopleDebtsSumRanking(int personID, string personName, decimal personDebtsSum, int personOrder)
                 {
                     this.PersonID = personID;
                     this.PersonName = personName;
@@ -787,6 +794,41 @@ namespace MoneyMindManagerGlobal
                     this.BorrowingDebtsSum = borrowingDebtsSum;
                     this.LendingPaymentsSum = lendingPaymentsSum;
                     this.BorrowingPaymentsSum = borrowingPaymentsSum;
+                }
+
+            }
+
+            public class clsTopCategories
+            {
+                public string CategoryName { get; set; }
+                public decimal Value { get; set; }
+                public int Ranking { get; set; }
+                public decimal Percentage { get; set; }
+                public clsTopCategories(string categoryName,decimal value,int ranking,decimal percentage)
+                {
+                    this.CategoryName = categoryName;
+                    this.Value = value;
+                    this.Ranking = ranking;
+                    this.Percentage = percentage;
+                }
+            }
+
+            public class clsCategoryMonthlyFlow
+            {
+                public byte mon { get; set; }
+                public short Year { get; set; }
+                public decimal CategorySum { get; set; }
+                public decimal CategorySonsSum { get; set; }
+                public decimal Total { get; set; }
+
+
+                public clsCategoryMonthlyFlow(byte month, short year, decimal categorySum, decimal categorySonsSum, decimal total)
+                {
+                    this.mon = month;
+                    this.Year = year;
+                    this.CategorySum = categorySum;
+                    this.CategorySonsSum = categorySonsSum;
+                    this.Total = total;
                 }
 
             }

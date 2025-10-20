@@ -57,11 +57,15 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.kgtxtFromData = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.kgtxtToDate = new KhaledControlLibrary1.KhaledGuna2TextBox();
-            this.klblAllVouchersValue = new KhaledControlLibrary1.KhaledLabel();
+            this.klblAllDebtsValue = new KhaledControlLibrary1.KhaledLabel();
             this.gibtnRefreshData = new Guna.UI2.WinForms.Guna2ImageButton();
-            this.klblCurrentPageVouchersValue = new KhaledControlLibrary1.KhaledLabel();
+            this.klblCurrentPageDebtsValue = new KhaledControlLibrary1.KhaledLabel();
             this.label5 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.klblTotalRemainingAmount = new KhaledControlLibrary1.KhaledLabel();
+            this.label9 = new System.Windows.Forms.Label();
+            this.klblCurrentPageRemainingAmount = new KhaledControlLibrary1.KhaledLabel();
+            this.label10 = new System.Windows.Forms.Label();
             this.SearchAfterTimerFinish = new System.Windows.Forms.Timer(this.components);
             this.gbtnAddDebt = new Guna.UI2.WinForms.Guna2Button();
             this.gcbFilterByDate = new Guna.UI2.WinForms.Guna2ComboBox();
@@ -107,7 +111,7 @@
             this.kgtxtFilterValue.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtFilterValue.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
             this.kgtxtFilterValue.IsRequired = false;
-            this.kgtxtFilterValue.Location = new System.Drawing.Point(771, 112);
+            this.kgtxtFilterValue.Location = new System.Drawing.Point(771, 95);
             this.kgtxtFilterValue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtFilterValue.Name = "kgtxtFilterValue";
             this.kgtxtFilterValue.NumberProperties.DecimalNumberProperties.AllowNegative = true;
@@ -180,7 +184,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(1106, 117);
+            this.label2.Location = new System.Drawing.Point(1106, 100);
             this.label2.Name = "label2";
             this.label2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label2.Size = new System.Drawing.Size(97, 24);
@@ -208,7 +212,7 @@
             "معرف السند",
             "اسم الشخص",
             "اسم المستخدم"});
-            this.gcbFilterBy.Location = new System.Drawing.Point(943, 112);
+            this.gcbFilterBy.Location = new System.Drawing.Point(943, 95);
             this.gcbFilterBy.Name = "gcbFilterBy";
             this.gcbFilterBy.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.gcbFilterBy.Size = new System.Drawing.Size(157, 36);
@@ -219,10 +223,10 @@
             // lblCurrentPageRecordsCount
             // 
             this.lblCurrentPageRecordsCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCurrentPageRecordsCount.Location = new System.Drawing.Point(888, 705);
+            this.lblCurrentPageRecordsCount.Location = new System.Drawing.Point(887, 751);
             this.lblCurrentPageRecordsCount.Name = "lblCurrentPageRecordsCount";
             this.lblCurrentPageRecordsCount.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.lblCurrentPageRecordsCount.Size = new System.Drawing.Size(114, 24);
+            this.lblCurrentPageRecordsCount.Size = new System.Drawing.Size(123, 24);
             this.lblCurrentPageRecordsCount.TabIndex = 26;
             this.lblCurrentPageRecordsCount.Text = "N/A";
             // 
@@ -230,7 +234,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(998, 705);
+            this.label3.Location = new System.Drawing.Point(1000, 750);
             this.label3.Name = "label3";
             this.label3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label3.Size = new System.Drawing.Size(205, 24);
@@ -258,7 +262,7 @@
             this.kgtxtPageNumber.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtPageNumber.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Number;
             this.kgtxtPageNumber.IsRequired = true;
-            this.kgtxtPageNumber.Location = new System.Drawing.Point(768, 683);
+            this.kgtxtPageNumber.Location = new System.Drawing.Point(768, 742);
             this.kgtxtPageNumber.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtPageNumber.MaxLength = 150;
             this.kgtxtPageNumber.Name = "kgtxtPageNumber";
@@ -330,7 +334,7 @@
             this.gibtnPreviousPage.ImageOffset = new System.Drawing.Point(0, 0);
             this.gibtnPreviousPage.ImageRotate = 0F;
             this.gibtnPreviousPage.ImageSize = new System.Drawing.Size(25, 25);
-            this.gibtnPreviousPage.Location = new System.Drawing.Point(443, 679);
+            this.gibtnPreviousPage.Location = new System.Drawing.Point(443, 738);
             this.gibtnPreviousPage.Name = "gibtnPreviousPage";
             this.gibtnPreviousPage.PressedState.ImageSize = new System.Drawing.Size(64, 64);
             this.gibtnPreviousPage.Size = new System.Drawing.Size(40, 42);
@@ -349,7 +353,7 @@
             this.gibtnNextPage.ImageOffset = new System.Drawing.Point(0, 0);
             this.gibtnNextPage.ImageRotate = 0F;
             this.gibtnNextPage.ImageSize = new System.Drawing.Size(25, 25);
-            this.gibtnNextPage.Location = new System.Drawing.Point(721, 679);
+            this.gibtnNextPage.Location = new System.Drawing.Point(721, 738);
             this.gibtnNextPage.Name = "gibtnNextPage";
             this.gibtnNextPage.PressedState.ImageSize = new System.Drawing.Size(64, 64);
             this.gibtnNextPage.Size = new System.Drawing.Size(40, 42);
@@ -361,7 +365,7 @@
             // lblCurrentPageOfNumberOfPages
             // 
             this.lblCurrentPageOfNumberOfPages.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCurrentPageOfNumberOfPages.Location = new System.Drawing.Point(478, 683);
+            this.lblCurrentPageOfNumberOfPages.Location = new System.Drawing.Point(478, 742);
             this.lblCurrentPageOfNumberOfPages.Name = "lblCurrentPageOfNumberOfPages";
             this.lblCurrentPageOfNumberOfPages.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblCurrentPageOfNumberOfPages.Size = new System.Drawing.Size(249, 30);
@@ -372,10 +376,10 @@
             // lblTotalRecordsNumber
             // 
             this.lblTotalRecordsNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalRecordsNumber.Location = new System.Drawing.Point(938, 676);
+            this.lblTotalRecordsNumber.Location = new System.Drawing.Point(924, 725);
             this.lblTotalRecordsNumber.Name = "lblTotalRecordsNumber";
             this.lblTotalRecordsNumber.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.lblTotalRecordsNumber.Size = new System.Drawing.Size(114, 24);
+            this.lblTotalRecordsNumber.Size = new System.Drawing.Size(130, 24);
             this.lblTotalRecordsNumber.TabIndex = 20;
             this.lblTotalRecordsNumber.Text = "N/A";
             // 
@@ -383,7 +387,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(1048, 676);
+            this.label1.Location = new System.Drawing.Point(1050, 723);
             this.label1.Name = "label1";
             this.label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label1.Size = new System.Drawing.Size(155, 24);
@@ -426,7 +430,7 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.gdgvDebts.DefaultCellStyle = dataGridViewCellStyle3;
             this.gdgvDebts.GridColor = System.Drawing.Color.White;
-            this.gdgvDebts.Location = new System.Drawing.Point(12, 209);
+            this.gdgvDebts.Location = new System.Drawing.Point(12, 191);
             this.gdgvDebts.MultiSelect = false;
             this.gdgvDebts.Name = "gdgvDebts";
             this.gdgvDebts.ReadOnly = true;
@@ -442,7 +446,7 @@
             this.gdgvDebts.RowHeadersVisible = false;
             this.gdgvDebts.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gdgvDebts.RowTemplate.Height = 40;
-            this.gdgvDebts.Size = new System.Drawing.Size(1186, 463);
+            this.gdgvDebts.Size = new System.Drawing.Size(1186, 527);
             this.gdgvDebts.TabIndex = 18;
             this.gdgvDebts.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.gdgvDebts.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -555,7 +559,7 @@
             this.kgtxtFromData.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtFromData.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Text;
             this.kgtxtFromData.IsRequired = false;
-            this.kgtxtFromData.Location = new System.Drawing.Point(825, 165);
+            this.kgtxtFromData.Location = new System.Drawing.Point(825, 148);
             this.kgtxtFromData.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtFromData.Name = "kgtxtFromData";
             this.kgtxtFromData.NumberProperties.DecimalNumberProperties.AllowNegative = true;
@@ -609,7 +613,7 @@
             this.kgtxtFromData.TrimStart = true;
             this.kgtxtFromData.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxt_OnValidationError);
             this.kgtxtFromData.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxt_OnValidationSuccess);
-            this.kgtxtFromData.Leave += new System.EventHandler(this.kgtxtDataFrom_Leave);
+            this.kgtxtFromData.KeyDown += new System.Windows.Forms.KeyEventHandler(this.kgtxtDate_KeyDown);
             // 
             // kgtxtToDate
             // 
@@ -629,7 +633,7 @@
             this.kgtxtToDate.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtToDate.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Text;
             this.kgtxtToDate.IsRequired = false;
-            this.kgtxtToDate.Location = new System.Drawing.Point(686, 165);
+            this.kgtxtToDate.Location = new System.Drawing.Point(686, 148);
             this.kgtxtToDate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtToDate.Name = "kgtxtToDate";
             this.kgtxtToDate.NumberProperties.DecimalNumberProperties.AllowNegative = true;
@@ -683,25 +687,25 @@
             this.kgtxtToDate.TrimStart = true;
             this.kgtxtToDate.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxt_OnValidationError);
             this.kgtxtToDate.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxt_OnValidationSuccess);
-            this.kgtxtToDate.Leave += new System.EventHandler(this.kgtxtDataFrom_Leave);
+            this.kgtxtToDate.KeyDown += new System.Windows.Forms.KeyEventHandler(this.kgtxtDate_KeyDown);
             // 
-            // klblAllVouchersValue
+            // klblAllDebtsValue
             // 
-            this.klblAllVouchersValue.DateProperties.DayFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enDayFormate.dd__01;
-            this.klblAllVouchersValue.DateProperties.MonthFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enMonthFormate.MM__01;
-            this.klblAllVouchersValue.DateProperties.SeparatorFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enSeparator.Dash;
-            this.klblAllVouchersValue.DateProperties.TimeFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enTimeFormate.None;
-            this.klblAllVouchersValue.DateProperties.YearFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enYearFormate.yyyy__2025;
-            this.klblAllVouchersValue.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.klblAllVouchersValue.InputType = KhaledControlLibrary1.KhaledLabel.enInputType.Number;
-            this.klblAllVouchersValue.Location = new System.Drawing.Point(9, 674);
-            this.klblAllVouchersValue.Name = "klblAllVouchersValue";
-            this.klblAllVouchersValue.NumberFormat = KhaledControlLibrary1.KhaledLabel.enNumberFormat.N4;
-            this.klblAllVouchersValue.Size = new System.Drawing.Size(277, 28);
-            this.klblAllVouchersValue.TabIndex = 98;
-            this.klblAllVouchersValue.Text = "111,111,111,111,111.0000";
-            this.klblAllVouchersValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.toolTip1.SetToolTip(this.klblAllVouchersValue, "قيمة سندات الديون الكلية لنتيجة البحث");
+            this.klblAllDebtsValue.DateProperties.DayFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enDayFormate.dd__01;
+            this.klblAllDebtsValue.DateProperties.MonthFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.klblAllDebtsValue.DateProperties.SeparatorFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enSeparator.Dash;
+            this.klblAllDebtsValue.DateProperties.TimeFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enTimeFormate.None;
+            this.klblAllDebtsValue.DateProperties.YearFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enYearFormate.yyyy__2025;
+            this.klblAllDebtsValue.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.klblAllDebtsValue.InputType = KhaledControlLibrary1.KhaledLabel.enInputType.Number;
+            this.klblAllDebtsValue.Location = new System.Drawing.Point(17, 721);
+            this.klblAllDebtsValue.Name = "klblAllDebtsValue";
+            this.klblAllDebtsValue.NumberFormat = KhaledControlLibrary1.KhaledLabel.enNumberFormat.N4;
+            this.klblAllDebtsValue.Size = new System.Drawing.Size(277, 28);
+            this.klblAllDebtsValue.TabIndex = 98;
+            this.klblAllDebtsValue.Text = "111,111,111,111,111.0000";
+            this.klblAllDebtsValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolTip1.SetToolTip(this.klblAllDebtsValue, "قيمة سندات الديون الكلية لنتيجة البحث");
             // 
             // gibtnRefreshData
             // 
@@ -713,7 +717,7 @@
             this.gibtnRefreshData.ImageOffset = new System.Drawing.Point(0, 0);
             this.gibtnRefreshData.ImageRotate = 0F;
             this.gibtnRefreshData.ImageSize = new System.Drawing.Size(28, 28);
-            this.gibtnRefreshData.Location = new System.Drawing.Point(435, 107);
+            this.gibtnRefreshData.Location = new System.Drawing.Point(435, 90);
             this.gibtnRefreshData.Name = "gibtnRefreshData";
             this.gibtnRefreshData.PressedState.ImageSize = new System.Drawing.Size(64, 64);
             this.gibtnRefreshData.Size = new System.Drawing.Size(40, 42);
@@ -722,29 +726,29 @@
             this.gibtnRefreshData.UseTransparentBackground = true;
             this.gibtnRefreshData.Click += new System.EventHandler(this.gibtnRefreshData_Click);
             // 
-            // klblCurrentPageVouchersValue
+            // klblCurrentPageDebtsValue
             // 
-            this.klblCurrentPageVouchersValue.DateProperties.DayFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enDayFormate.dd__01;
-            this.klblCurrentPageVouchersValue.DateProperties.MonthFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enMonthFormate.MM__01;
-            this.klblCurrentPageVouchersValue.DateProperties.SeparatorFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enSeparator.Dash;
-            this.klblCurrentPageVouchersValue.DateProperties.TimeFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enTimeFormate.None;
-            this.klblCurrentPageVouchersValue.DateProperties.YearFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enYearFormate.yyyy__2025;
-            this.klblCurrentPageVouchersValue.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.klblCurrentPageVouchersValue.InputType = KhaledControlLibrary1.KhaledLabel.enInputType.Number;
-            this.klblCurrentPageVouchersValue.Location = new System.Drawing.Point(1, 702);
-            this.klblCurrentPageVouchersValue.Name = "klblCurrentPageVouchersValue";
-            this.klblCurrentPageVouchersValue.NumberFormat = KhaledControlLibrary1.KhaledLabel.enNumberFormat.N4;
-            this.klblCurrentPageVouchersValue.Size = new System.Drawing.Size(241, 28);
-            this.klblCurrentPageVouchersValue.TabIndex = 99;
-            this.klblCurrentPageVouchersValue.Text = "111,111,111,111,111.0000";
-            this.klblCurrentPageVouchersValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.toolTip1.SetToolTip(this.klblCurrentPageVouchersValue, "قيمة سندات الديون الكلية لنتيجة البحث للصفحة الحالية");
+            this.klblCurrentPageDebtsValue.DateProperties.DayFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enDayFormate.dd__01;
+            this.klblCurrentPageDebtsValue.DateProperties.MonthFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.klblCurrentPageDebtsValue.DateProperties.SeparatorFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enSeparator.Dash;
+            this.klblCurrentPageDebtsValue.DateProperties.TimeFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enTimeFormate.None;
+            this.klblCurrentPageDebtsValue.DateProperties.YearFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enYearFormate.yyyy__2025;
+            this.klblCurrentPageDebtsValue.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.klblCurrentPageDebtsValue.InputType = KhaledControlLibrary1.KhaledLabel.enInputType.Number;
+            this.klblCurrentPageDebtsValue.Location = new System.Drawing.Point(7, 749);
+            this.klblCurrentPageDebtsValue.Name = "klblCurrentPageDebtsValue";
+            this.klblCurrentPageDebtsValue.NumberFormat = KhaledControlLibrary1.KhaledLabel.enNumberFormat.N4;
+            this.klblCurrentPageDebtsValue.Size = new System.Drawing.Size(241, 28);
+            this.klblCurrentPageDebtsValue.TabIndex = 99;
+            this.klblCurrentPageDebtsValue.Text = "111,111,111,111,111.0000";
+            this.klblCurrentPageDebtsValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolTip1.SetToolTip(this.klblCurrentPageDebtsValue, "قيمة سندات الديون الكلية لنتيجة البحث للصفحة الحالية");
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(240, 706);
+            this.label5.Location = new System.Drawing.Point(240, 751);
             this.label5.Name = "label5";
             this.label5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label5.Size = new System.Drawing.Size(202, 24);
@@ -756,13 +760,73 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(295, 677);
+            this.label7.Location = new System.Drawing.Point(295, 724);
             this.label7.Name = "label7";
             this.label7.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label7.Size = new System.Drawing.Size(147, 24);
             this.label7.TabIndex = 37;
             this.label7.Text = "# قيمة السندات الكلية :";
             this.toolTip1.SetToolTip(this.label7, "قيمة سندات الديون الكلية لنتيجة البحث");
+            // 
+            // klblTotalRemainingAmount
+            // 
+            this.klblTotalRemainingAmount.DateProperties.DayFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enDayFormate.dd__01;
+            this.klblTotalRemainingAmount.DateProperties.MonthFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.klblTotalRemainingAmount.DateProperties.SeparatorFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enSeparator.Dash;
+            this.klblTotalRemainingAmount.DateProperties.TimeFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enTimeFormate.None;
+            this.klblTotalRemainingAmount.DateProperties.YearFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enYearFormate.yyyy__2025;
+            this.klblTotalRemainingAmount.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.klblTotalRemainingAmount.InputType = KhaledControlLibrary1.KhaledLabel.enInputType.Number;
+            this.klblTotalRemainingAmount.Location = new System.Drawing.Point(-20, 777);
+            this.klblTotalRemainingAmount.Name = "klblTotalRemainingAmount";
+            this.klblTotalRemainingAmount.NumberFormat = KhaledControlLibrary1.KhaledLabel.enNumberFormat.N4;
+            this.klblTotalRemainingAmount.Size = new System.Drawing.Size(277, 28);
+            this.klblTotalRemainingAmount.TabIndex = 137;
+            this.klblTotalRemainingAmount.Text = "111,111,111,111,111.0000";
+            this.klblTotalRemainingAmount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolTip1.SetToolTip(this.klblTotalRemainingAmount, "القيمة المتبقية للسداد الكلية لنتيجة البحث");
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(253, 778);
+            this.label9.Name = "label9";
+            this.label9.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.label9.Size = new System.Drawing.Size(189, 24);
+            this.label9.TabIndex = 136;
+            this.label9.Text = "# القيمة المتبقية للسداد الكلية :";
+            this.toolTip1.SetToolTip(this.label9, "القيمة المتبقية للسداد الكلية لنتيجة البحث");
+            // 
+            // klblCurrentPageRemainingAmount
+            // 
+            this.klblCurrentPageRemainingAmount.DateProperties.DayFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enDayFormate.dd__01;
+            this.klblCurrentPageRemainingAmount.DateProperties.MonthFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.klblCurrentPageRemainingAmount.DateProperties.SeparatorFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enSeparator.Dash;
+            this.klblCurrentPageRemainingAmount.DateProperties.TimeFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enTimeFormate.None;
+            this.klblCurrentPageRemainingAmount.DateProperties.YearFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enYearFormate.yyyy__2025;
+            this.klblCurrentPageRemainingAmount.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.klblCurrentPageRemainingAmount.InputType = KhaledControlLibrary1.KhaledLabel.enInputType.Number;
+            this.klblCurrentPageRemainingAmount.Location = new System.Drawing.Point(712, 776);
+            this.klblCurrentPageRemainingAmount.Name = "klblCurrentPageRemainingAmount";
+            this.klblCurrentPageRemainingAmount.NumberFormat = KhaledControlLibrary1.KhaledLabel.enNumberFormat.N4;
+            this.klblCurrentPageRemainingAmount.Size = new System.Drawing.Size(247, 28);
+            this.klblCurrentPageRemainingAmount.TabIndex = 139;
+            this.klblCurrentPageRemainingAmount.Text = "1,111,111,111,111,111.1110";
+            this.klblCurrentPageRemainingAmount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolTip1.SetToolTip(this.klblCurrentPageRemainingAmount, "القيمة المتبقية للسداد لنتيجة البحث للصفحة الحالية");
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(957, 777);
+            this.label10.Name = "label10";
+            this.label10.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.label10.Size = new System.Drawing.Size(247, 24);
+            this.label10.TabIndex = 138;
+            this.label10.Text = "# القيمة المتبقية للسداد الصفحة الحالية :";
+            this.toolTip1.SetToolTip(this.label10, "القيمة المتبقية للسداد لنتيجة البحث للصفحة الحالية");
             // 
             // SearchAfterTimerFinish
             // 
@@ -792,7 +856,7 @@
             this.gbtnAddDebt.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnAddDebt.ImageSize = new System.Drawing.Size(28, 28);
             this.gbtnAddDebt.IndicateFocus = true;
-            this.gbtnAddDebt.Location = new System.Drawing.Point(12, 160);
+            this.gbtnAddDebt.Location = new System.Drawing.Point(12, 143);
             this.gbtnAddDebt.Name = "gbtnAddDebt";
             this.gbtnAddDebt.PressedColor = System.Drawing.Color.White;
             this.gbtnAddDebt.Size = new System.Drawing.Size(180, 41);
@@ -819,7 +883,7 @@
             this.gcbFilterByDate.Items.AddRange(new object[] {
             "تاريخ السند",
             "تاريخ الإنشاء"});
-            this.gcbFilterByDate.Location = new System.Drawing.Point(964, 165);
+            this.gcbFilterByDate.Location = new System.Drawing.Point(964, 148);
             this.gcbFilterByDate.Name = "gcbFilterByDate";
             this.gcbFilterByDate.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.gcbFilterByDate.Size = new System.Drawing.Size(136, 36);
@@ -835,10 +899,10 @@
             this.lblHeader.ForeColor = System.Drawing.Color.Black;
             this.lblHeader.Location = new System.Drawing.Point(0, 0);
             this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(1210, 50);
+            this.lblHeader.Size = new System.Drawing.Size(1210, 60);
             this.lblHeader.TabIndex = 101;
             this.lblHeader.Text = "سندات الديون";
-            this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblHeader.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // gcbFilterByDebtType
             // 
@@ -860,7 +924,7 @@
             "الكل",
             "إقراض",
             "إقتراض"});
-            this.gcbFilterByDebtType.Location = new System.Drawing.Point(484, 112);
+            this.gcbFilterByDebtType.Location = new System.Drawing.Point(484, 95);
             this.gcbFilterByDebtType.Name = "gcbFilterByDebtType";
             this.gcbFilterByDebtType.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.gcbFilterByDebtType.Size = new System.Drawing.Size(136, 36);
@@ -873,7 +937,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(558, 99);
+            this.label4.Location = new System.Drawing.Point(558, 82);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(58, 17);
             this.label4.TabIndex = 132;
@@ -883,7 +947,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(1035, 152);
+            this.label6.Location = new System.Drawing.Point(1035, 135);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(63, 17);
             this.label6.TabIndex = 133;
@@ -893,7 +957,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(691, 99);
+            this.label8.Location = new System.Drawing.Point(691, 82);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(69, 17);
             this.label8.TabIndex = 135;
@@ -919,7 +983,7 @@
             "الكل",
             "مسدد",
             "غير مسدد"});
-            this.gcbFilterbyPaymentStatus.Location = new System.Drawing.Point(626, 112);
+            this.gcbFilterbyPaymentStatus.Location = new System.Drawing.Point(626, 95);
             this.gcbFilterbyPaymentStatus.Name = "gcbFilterbyPaymentStatus";
             this.gcbFilterbyPaymentStatus.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.gcbFilterbyPaymentStatus.Size = new System.Drawing.Size(136, 36);
@@ -934,7 +998,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1210, 737);
+            this.ClientSize = new System.Drawing.Size(1210, 809);
+            this.Controls.Add(this.klblCurrentPageRemainingAmount);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.klblTotalRemainingAmount);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.gcbFilterbyPaymentStatus);
             this.Controls.Add(this.label6);
@@ -942,8 +1010,8 @@
             this.Controls.Add(this.gcbFilterByDebtType);
             this.Controls.Add(this.lblHeader);
             this.Controls.Add(this.gibtnRefreshData);
-            this.Controls.Add(this.klblCurrentPageVouchersValue);
-            this.Controls.Add(this.klblAllVouchersValue);
+            this.Controls.Add(this.klblCurrentPageDebtsValue);
+            this.Controls.Add(this.klblAllDebtsValue);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.kgtxtToDate);
@@ -1003,8 +1071,8 @@
         private KhaledControlLibrary1.KhaledGuna2TextBox kgtxtFromData;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label7;
-        private KhaledControlLibrary1.KhaledLabel klblCurrentPageVouchersValue;
-        private KhaledControlLibrary1.KhaledLabel klblAllVouchersValue;
+        private KhaledControlLibrary1.KhaledLabel klblCurrentPageDebtsValue;
+        private KhaledControlLibrary1.KhaledLabel klblAllDebtsValue;
         private Guna.UI2.WinForms.Guna2ImageButton gibtnRefreshData;
         private System.Windows.Forms.Label lblHeader;
         private Guna.UI2.WinForms.Guna2ComboBox gcbFilterByDebtType;
@@ -1014,5 +1082,9 @@
         private Guna.UI2.WinForms.Guna2ComboBox gcbFilterbyPaymentStatus;
         private System.Windows.Forms.ToolStripMenuItem gtsmExport;
         private System.Windows.Forms.ToolStripMenuItem gtsmExportExcel;
+        private KhaledControlLibrary1.KhaledLabel klblTotalRemainingAmount;
+        private System.Windows.Forms.Label label9;
+        private KhaledControlLibrary1.KhaledLabel klblCurrentPageRemainingAmount;
+        private System.Windows.Forms.Label label10;
     }
 }

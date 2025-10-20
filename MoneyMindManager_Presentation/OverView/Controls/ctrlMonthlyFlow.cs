@@ -76,7 +76,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
                     Values = new ChartValues<decimal>(chartData.Select(x => x.Income)),
                     Fill = System.Windows.Media.Brushes.SeaGreen,
                     DataLabels = true,
-                    LabelPoint = point => point.Y.ToString("N0")
+                    LabelPoint = point => point.Y.ToString("N0"),
                 },
 
                 new ColumnSeries
@@ -85,11 +85,10 @@ namespace MoneyMindManager_Presentation.OverView.Controls
                     Values = new ChartValues<decimal>(chartData.Select(x => x.NetExpense)),
                     Fill = System.Windows.Media.Brushes.Crimson,
                     DataLabels = true,
-                    LabelPoint = point => point.Y.ToString("N0")
+                    LabelPoint = point => point.Y.ToString("N0"),
                 },
 
-
-                new LineSeries // <--- تحويل إلى خط
+                new LineSeries
                 {
                     Title = "صافي التدفق النقدي",
                     Values = new ChartValues<decimal>(chartData.Select(x => x.NetCashFlow)),
@@ -97,12 +96,12 @@ namespace MoneyMindManager_Presentation.OverView.Controls
                     Stroke = System.Windows.Media.Brushes.CornflowerBlue,
                     StrokeThickness = 3,
                     Fill = System.Windows.Media.Brushes.Transparent,
-
                     PointGeometry = LiveCharts.Wpf.DefaultGeometries.Circle,
                     PointGeometrySize = 12,
-
+                    LineSmoothness = 0.8,
                     DataLabels = false,
                     LabelPoint = point => point.Y.ToString("N0")
+
                 }
             };
 
@@ -122,8 +121,8 @@ namespace MoneyMindManager_Presentation.OverView.Controls
             CartesianChart1.AxisY.Add(new LiveCharts.Wpf.Axis
             {
                 Title = $"القيمة ({currency})",
-                LabelFormatter = value => value.ToString("N0") + $" {currency}",
-                
+                LabelFormatter = value => value.ToString("N0"),
+
                 Foreground = System.Windows.Media.Brushes.Black,
                 FontSize = 15
             });
@@ -140,31 +139,23 @@ namespace MoneyMindManager_Presentation.OverView.Controls
         {
             if (chartData == null || chartData.Count == 0) return;
 
-            // 1. تنظيف وإعداد التسميات
-
-            // نستخدم Select لإنشاء تسميات المحور X (نحول الأرقام إلى نص)
             string[] labels = chartData.Select(x => GetMonthName(x.mon, x.Year)).ToArray();
 
-            // 2. ربط السلاسل
             CartesianChart1.Series = new SeriesCollection
             {
-        // === السلسلة 1: الإيرادات (Income) - LineSeries/AreaSeries ===
-                new LineSeries // <--- التعديل هنا لجعله خطي
+                new LineSeries
                 {
                     Title = "الإيرادات",
                     Values = new ChartValues<decimal>(chartData.Select(x => x.Income)),
 
                     Fill = System.Windows.Media.Brushes.Transparent, 
-            
-                    // Stroke: لون الخط نفسه
+
                     Stroke = System.Windows.Media.Brushes.DarkGreen,
-                    StrokeThickness = 2,
+                    StrokeThickness = 2.5,
             
-                    // Point Geometry: لإظهار النقاط على الخط (مثل الدوائر في الصورة)
                     PointGeometry = DefaultGeometries.Circle,
                     PointGeometrySize = 10,
-
-                    // يمكنك إزالة DataLabels هنا لتجنب الازدحام
+                    LineSmoothness = 0.8,
                     DataLabels = false,
                     LabelPoint = point => point.Y.ToString("N0")
                 },
@@ -176,10 +167,10 @@ namespace MoneyMindManager_Presentation.OverView.Controls
                     
                     Fill = System.Windows.Media.Brushes.Transparent,
                     Stroke = System.Windows.Media.Brushes.DarkRed,
-                    StrokeThickness = 2,
+                    StrokeThickness = 2.5,
                     PointGeometry = DefaultGeometries.Circle,
                     PointGeometrySize = 10,
-
+                    LineSmoothness = 0.8,
                     DataLabels = false,
                     LabelPoint = point => point.Y.ToString("N0")
                 },
@@ -194,7 +185,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
                     Fill = new SolidColorBrush(System.Windows.Media.Color.FromArgb(120, 100, 149, 237)),
                     PointGeometry = LiveCharts.Wpf.DefaultGeometries.Circle,
                     PointGeometrySize = 12,
-
+                    LineSmoothness = 0.8,
                     DataLabels = true,
                     LabelPoint = point => point.Y.ToString("N0")
                 }
@@ -215,7 +206,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
             CartesianChart1.AxisY.Add(new LiveCharts.Wpf.Axis
             {
                 Title = $"القيمة ({currency})",
-                LabelFormatter = value => value.ToString("N0") + $" {currency}",
+                LabelFormatter = value => value.ToString("N0"),
 
                 Foreground = System.Windows.Media.Brushes.Black,
                 FontSize = 14
@@ -273,6 +264,8 @@ namespace MoneyMindManager_Presentation.OverView.Controls
             kgtxtFromData.RefreshNumber_DateTimeFormattedText(new DateTime(bofore12Month.Year,bofore12Month.Month,1).ToString());
 
             CartesianChart1.LegendLocation = LegendLocation.Top;
+            CartesianChart1.DefaultLegend.FontSize = 15;
+            CartesianChart1.DataTooltip.FontSize = 14;
         }
 
         private async void gibtnFindPerson_Click(object sender, EventArgs e)

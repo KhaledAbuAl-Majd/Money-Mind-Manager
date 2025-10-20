@@ -30,6 +30,10 @@ namespace MoneyMindManager_Presentation.Main
             _userID = userID;
         }
 
+        public void LoadMainFormLabels()
+        {
+            lblCurrentUserName.Text = clsGlobal_UI.CurrentUser?.UserName;
+        }
         public void AddNewFormAsDialog(Form frm)
         {
             if (frm == null)
@@ -90,6 +94,7 @@ namespace MoneyMindManager_Presentation.Main
             this.UseWaitCursor = false;
             this.Cursor = Cursors.Default;
 
+            LoadMainFormLabels();
             gbtnOverOview.PerformClick();
 
         }

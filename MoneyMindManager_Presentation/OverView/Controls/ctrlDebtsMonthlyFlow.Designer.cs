@@ -34,7 +34,7 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.kgtxtToDate = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.kgtxtFromData = new KhaledControlLibrary1.KhaledGuna2TextBox();
-            this.gibtnFindPerson = new Guna.UI2.WinForms.Guna2ImageButton();
+            this.gibtnRefresh = new Guna.UI2.WinForms.Guna2ImageButton();
             this.grbLinerShape = new Guna.UI2.WinForms.Guna2RadioButton();
             this.grbColumnsShape = new Guna.UI2.WinForms.Guna2RadioButton();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
@@ -129,7 +129,6 @@
             this.kgtxtToDate.TrimStart = true;
             this.kgtxtToDate.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxt_OnValidationError);
             this.kgtxtToDate.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxtToDate_OnValidationSuccess);
-            this.kgtxtToDate.TextChanged += new System.EventHandler(this.kgtxtToDate_TextChanged);
             // 
             // kgtxtFromData
             // 
@@ -203,27 +202,26 @@
             this.kgtxtFromData.TrimStart = true;
             this.kgtxtFromData.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxt_OnValidationError);
             this.kgtxtFromData.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxt_OnValidationSuccess);
-            this.kgtxtFromData.TextChanged += new System.EventHandler(this.kgtxtFromData_TextChanged);
             // 
-            // gibtnFindPerson
+            // gibtnRefresh
             // 
-            this.gibtnFindPerson.AnimatedGIF = true;
-            this.gibtnFindPerson.BackColor = System.Drawing.Color.Transparent;
-            this.gibtnFindPerson.CheckedState.ImageSize = new System.Drawing.Size(64, 64);
-            this.gibtnFindPerson.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.gibtnFindPerson.HoverState.ImageSize = new System.Drawing.Size(35, 35);
-            this.gibtnFindPerson.Image = ((System.Drawing.Image)(resources.GetObject("gibtnFindPerson.Image")));
-            this.gibtnFindPerson.ImageOffset = new System.Drawing.Point(0, 0);
-            this.gibtnFindPerson.ImageRotate = 0F;
-            this.gibtnFindPerson.ImageSize = new System.Drawing.Size(28, 28);
-            this.gibtnFindPerson.Location = new System.Drawing.Point(115, 2);
-            this.gibtnFindPerson.Name = "gibtnFindPerson";
-            this.gibtnFindPerson.PressedState.ImageSize = new System.Drawing.Size(64, 64);
-            this.gibtnFindPerson.Size = new System.Drawing.Size(32, 27);
-            this.gibtnFindPerson.TabIndex = 100;
-            this.toolTip1.SetToolTip(this.gibtnFindPerson, "إعادة تحميل");
-            this.gibtnFindPerson.UseTransparentBackground = true;
-            this.gibtnFindPerson.Click += new System.EventHandler(this.gibtnFindPerson_Click);
+            this.gibtnRefresh.AnimatedGIF = true;
+            this.gibtnRefresh.BackColor = System.Drawing.Color.Transparent;
+            this.gibtnRefresh.CheckedState.ImageSize = new System.Drawing.Size(64, 64);
+            this.gibtnRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gibtnRefresh.HoverState.ImageSize = new System.Drawing.Size(35, 35);
+            this.gibtnRefresh.Image = ((System.Drawing.Image)(resources.GetObject("gibtnRefresh.Image")));
+            this.gibtnRefresh.ImageOffset = new System.Drawing.Point(0, 0);
+            this.gibtnRefresh.ImageRotate = 0F;
+            this.gibtnRefresh.ImageSize = new System.Drawing.Size(28, 28);
+            this.gibtnRefresh.Location = new System.Drawing.Point(115, 2);
+            this.gibtnRefresh.Name = "gibtnRefresh";
+            this.gibtnRefresh.PressedState.ImageSize = new System.Drawing.Size(64, 64);
+            this.gibtnRefresh.Size = new System.Drawing.Size(32, 27);
+            this.gibtnRefresh.TabIndex = 100;
+            this.toolTip1.SetToolTip(this.gibtnRefresh, "إعادة تحميل");
+            this.gibtnRefresh.UseTransparentBackground = true;
+            this.gibtnRefresh.Click += new System.EventHandler(this.gibtnFindPerson_Click);
             // 
             // grbLinerShape
             // 
@@ -273,6 +271,7 @@
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
+            this.errorProvider1.RightToLeft = true;
             // 
             // ctrlInfoIcon1
             // 
@@ -301,7 +300,6 @@
             this.ctrlInfoIcon1.ToolTipControl.IsBalloon = true;
             this.ctrlInfoIcon1.ToolTipText = "يحلل هذا المخطط التدفقات النقدية الشهرية للديون والمدفوعات خلال الفترة المحددة، م" +
     "ما يوضح الفرق بين الإقراض والاقتراض وعمليات السداد الخاصة بكل منهما.";
-            this.ctrlInfoIcon1.Load += new System.EventHandler(this.ctrlInfoIcon1_Load);
             // 
             // ctrlDebtsMonthlyFlow
             // 
@@ -309,7 +307,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.ctrlInfoIcon1);
-            this.Controls.Add(this.gibtnFindPerson);
+            this.Controls.Add(this.gibtnRefresh);
             this.Controls.Add(this.grbLinerShape);
             this.Controls.Add(this.grbColumnsShape);
             this.Controls.Add(this.kgtxtToDate);
@@ -334,7 +332,7 @@
         private Guna.UI2.WinForms.Guna2RadioButton grbLinerShape;
         private Guna.UI2.WinForms.Guna2RadioButton grbColumnsShape;
         private System.Windows.Forms.ErrorProvider errorProvider1;
-        private Guna.UI2.WinForms.Guna2ImageButton gibtnFindPerson;
+        private Guna.UI2.WinForms.Guna2ImageButton gibtnRefresh;
         private KhaledControlLibrary1.ctrlInfoIcon ctrlInfoIcon1;
     }
 }
