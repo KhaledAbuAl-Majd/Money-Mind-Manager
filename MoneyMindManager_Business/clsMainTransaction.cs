@@ -35,9 +35,9 @@ namespace MoneyMindManager_Business
             TransactionTypeInfo = null;
         }
 
-        protected async Task<bool> _RefresheCompositionObjects(int currentUserID)
+        protected async Task<bool> _RefresheCompositionObjects()
         {
-            this.CreatedByUserInfo = await clsUser.FindUserByUserID(Convert.ToInt32(CreatedByUserID), currentUserID);
+            this.CreatedByUserInfo = await clsUser.FindUserByUserID(Convert.ToInt32(CreatedByUserID));
             this. AccountInfo = CreatedByUserInfo?.AccountInfo;
             this.AccountID = CreatedByUserInfo?.AccountID;
             this.TransactionTypeInfo = await clsTransactionType.FindTransactionTypeByTransactionTypeID(Convert.ToByte(TransactionTypeID));
@@ -45,14 +45,15 @@ namespace MoneyMindManager_Business
             return (CreatedByUserInfo != null && AccountInfo != null && TransactionTypeInfo != null);
         }
 
-        public static async Task<clsMainTransaction> FindMainTransactionInfoByID(int transactionID, int currentUserID)
+        public static async Task<clsMainTransaction> FindMainTransactionInfoByID(int transactionID )
         {
-            var result = await clsMainTransactionData.GetMainTransactionInfoByID(transactionID);
+            int currentUserID = Convert.ToInt32(clsGlobalSession.CurrentUserID);
+            var result = await clsMainTransactionData.GetMainTransactionInfoByID(transactionID,currentUserID);
 
             if (result == null)
                 return null;
 
-            var createdByUserInfo = await clsUser.FindUserByUserID(Convert.ToInt32(result.CreatedByUserID), currentUserID);
+            var createdByUserInfo = await clsUser.FindUserByUserID(Convert.ToInt32(result.CreatedByUserID));
             var accountInfo = createdByUserInfo?.AccountInfo;
             var transactionTypeInfo = await clsTransactionType.FindTransactionTypeByTransactionTypeID(Convert.ToByte(result.TransactionTypeID));
 
@@ -64,9 +65,9 @@ namespace MoneyMindManager_Business
                 result.Purpose,result.IsLocked,result.TransactionDate, accountInfo, createdByUserInfo,transactionTypeInfo);
         }
 
-        protected async Task<bool> RefreshData(int currentUserID)
+        protected async Task<bool> RefreshData()
         {
-            clsMainTransaction fresh = await clsMainTransaction.FindMainTransactionInfoByID(Convert.ToInt32(this.MainTransactionID), currentUserID);
+            clsMainTransaction fresh = await clsMainTransaction.FindMainTransactionInfoByID(Convert.ToInt32(this.MainTransactionID));
 
             if (fresh == null)
                 return false;
@@ -87,7 +88,7 @@ namespace MoneyMindManager_Business
         }
 
         private static async Task<clsGetAllMainTransactions> _GetAllTransactions(int? transactionID, string createdByUserName,  List<int>transactionTypes ,
-            bool byCreatedDate, string fromDateString,  string toDateString, int currentUserID, short pageNumber)
+            bool byCreatedDate, string fromDateString,  string toDateString, short pageNumber)
         {
             DateTime? fromCreatedDate = null, toCreatedDate = null,
                 fromTransactionDate = null, toTransactionDate = null;
@@ -113,7 +114,7 @@ namespace MoneyMindManager_Business
 
 
             return await clsMainTransactionData.GetAllMainTransactions(transactionID, createdByUserName,transactionTypesString, fromCreatedDate,
-                toCreatedDate, fromTransactionDate, toTransactionDate, currentUserID, pageNumber);
+                toCreatedDate, fromTransactionDate, toTransactionDate, Convert.ToInt32(clsGlobalSession.CurrentUserID), pageNumber);
         }
 
         /// <summary>
@@ -122,9 +123,9 @@ namespace MoneyMindManager_Business
         /// <param name="byCreatedDate">filter by createdDate or not (voucherDate)</param>
         /// <returns>Object of all MainTransactions if exists, if not returns null</returns>
         public static async Task<clsGetAllMainTransactions> GetAllTransactions(List<int> transactionTypes ,bool byCreatedDate, string fromDateString, string toDateString,
-            int currentUserID, short pageNumber)
+            short pageNumber)
         {
-            return await _GetAllTransactions(null, null,transactionTypes, byCreatedDate, fromDateString, toDateString, currentUserID, pageNumber);
+            return await _GetAllTransactions(null, null,transactionTypes, byCreatedDate, fromDateString, toDateString, pageNumber);
         }
 
         /// <summary>
@@ -133,9 +134,9 @@ namespace MoneyMindManager_Business
         /// <param name="byCreatedDate">filter by createdDate or not (voucherDate)</param>
         /// <returns>Object of all MainTransactions if exists, if not returns null</returns>
         public static async Task<clsGetAllMainTransactions> GetAllTransactions(int? transactionID,List<int> transactionTypes,
-            bool byCreatedDate, string fromDateString, string toDateString,int currentUserID, short pageNumber)
+            bool byCreatedDate, string fromDateString, string toDateString, short pageNumber)
         {
-            return await _GetAllTransactions(transactionID, null, transactionTypes, byCreatedDate, fromDateString, toDateString, currentUserID, pageNumber);
+            return await _GetAllTransactions(transactionID, null, transactionTypes, byCreatedDate, fromDateString, toDateString, pageNumber);
         }
 
 
@@ -145,15 +146,15 @@ namespace MoneyMindManager_Business
         /// <param name="byCreatedDate">filter by createdDate or not (voucherDate)</param>
         /// <returns>Object of all MainTransactions if exists, if not returns null</returns>
         public static async Task<clsGetAllMainTransactions> GetAllTransactions(string createdByUserName, List<int> transactionTypes,
-            bool byCreatedDate, string fromDateString, string toDateString, int currentUserID, short pageNumber)
+            bool byCreatedDate, string fromDateString, string toDateString, short pageNumber)
         {
-            return await _GetAllTransactions(null, createdByUserName, transactionTypes, byCreatedDate, fromDateString, toDateString, currentUserID, pageNumber);
+            return await _GetAllTransactions(null, createdByUserName, transactionTypes, byCreatedDate, fromDateString, toDateString, pageNumber);
         }
 
         //
 
         private static async Task<DataTable> _GetAllTransactionsWithoutPaging(int? transactionID, string createdByUserName, List<int> transactionTypes,
-           bool byCreatedDate, string fromDateString, string toDateString, int currentUserID)
+           bool byCreatedDate, string fromDateString, string toDateString)
         {
             DateTime? fromCreatedDate = null, toCreatedDate = null,
                 fromTransactionDate = null, toTransactionDate = null;
@@ -179,7 +180,7 @@ namespace MoneyMindManager_Business
 
 
             return await clsMainTransactionData.GetAllMainTransactionsWithoutPaging(transactionID, createdByUserName, transactionTypesString, fromCreatedDate,
-                toCreatedDate, fromTransactionDate, toTransactionDate, currentUserID);
+                toCreatedDate, fromTransactionDate, toTransactionDate, Convert.ToInt32(clsGlobalSession.CurrentUserID));
         }
 
         /// <summary>
@@ -187,10 +188,9 @@ namespace MoneyMindManager_Business
         /// </summary>
         /// <param name="byCreatedDate">filter by createdDate or not (voucherDate)</param>
         /// <returns>DataTable of MainTransactions if exists, if not returns null</returns>
-        public static async Task<DataTable> GetAllTransactionsWithoutPaging(List<int> transactionTypes, bool byCreatedDate, string fromDateString, string toDateString,
-            int currentUserID)
+        public static async Task<DataTable> GetAllTransactionsWithoutPaging(List<int> transactionTypes, bool byCreatedDate, string fromDateString, string toDateString)
         {
-            return await _GetAllTransactionsWithoutPaging(null, null, transactionTypes, byCreatedDate, fromDateString, toDateString, currentUserID);
+            return await _GetAllTransactionsWithoutPaging(null, null, transactionTypes, byCreatedDate, fromDateString, toDateString);
         }
 
         /// <summary>
@@ -199,9 +199,9 @@ namespace MoneyMindManager_Business
         /// <param name="byCreatedDate">filter by createdDate or not (voucherDate)</param>
         /// <returns>DataTable of MainTransactions if exists, if not returns null</returns>
         public static async Task<DataTable> GetAllTransactionsWithoutPaging(int? transactionID, List<int> transactionTypes,
-            bool byCreatedDate, string fromDateString, string toDateString, int currentUserID)
+            bool byCreatedDate, string fromDateString, string toDateString)
         {
-            return await _GetAllTransactionsWithoutPaging(transactionID, null, transactionTypes, byCreatedDate, fromDateString, toDateString, currentUserID);
+            return await _GetAllTransactionsWithoutPaging(transactionID, null, transactionTypes, byCreatedDate, fromDateString, toDateString);
         }
 
 
@@ -211,9 +211,9 @@ namespace MoneyMindManager_Business
         /// <param name="byCreatedDate">filter by createdDate or not (voucherDate)</param>
         /// <returns>DataTable of MainTransactions if exists, if not returns null</returns>
         public static async Task<DataTable> GetAllTransactionsWithoutPaging(string createdByUserName, List<int> transactionTypes,
-            bool byCreatedDate, string fromDateString, string toDateString, int currentUserID)
+            bool byCreatedDate, string fromDateString, string toDateString)
         {
-            return await _GetAllTransactionsWithoutPaging(null, createdByUserName, transactionTypes, byCreatedDate, fromDateString, toDateString, currentUserID);
+            return await _GetAllTransactionsWithoutPaging(null, createdByUserName, transactionTypes, byCreatedDate, fromDateString, toDateString);
         }
     }
 }

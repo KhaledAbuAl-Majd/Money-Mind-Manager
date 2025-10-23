@@ -46,6 +46,24 @@ namespace MoneyMindManager_Presentation.OverView.Controls
                 LoadChartLiner(_chartData);
         }
 
+        async Task _SelectCategory(int categoryID,string categoryName)
+        {
+            kgtxtCategoryName.Text = categoryName + "     ";
+            _CategoryID = categoryID;
+            await LoadData();
+        }
+        public async Task<bool> LoadData(int categoryID)
+        {
+            var category = await clsIncomeAndExpenseCategory.FindCategoryByCategoryID(categoryID);
+
+            if (category == null)
+                return false;
+
+            await _SelectCategory(categoryID, category.CategoryName);
+
+            return true;
+        }
+
         private async Task LoadData()
         {
             if (!ValidateChildren() || _CategoryID == null)
@@ -285,9 +303,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
 
         private async void Frm_OnCategorySelected(object sender, frmSelectCategory.SelecteCategoryEventArgs e)
         {
-            kgtxtCategoryName.Text = e.CategoryName + "     " ;
-            _CategoryID = e.CategoryID;
-            await LoadData();
+            await _SelectCategory(e.CategoryID, e.CategoryName); 
         }
 
     }

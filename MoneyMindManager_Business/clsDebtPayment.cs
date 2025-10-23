@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MoneyMindManager_DataAccess;
+using MoneyMindManagerGlobal;
 using static MoneyMindManagerGlobal.clsDataColumns.clsDebtPaymentClasses;
 
 namespace MoneyMindManager_Business
@@ -44,59 +45,63 @@ namespace MoneyMindManager_Business
             this.DebtInfo = null;
         }
 
-        async Task<bool> _AddNewDebtPyament(int currentUserID)
+        async Task<bool> _AddNewDebtPyament()
         {
             this.CreatedDate = DateTime.Now;
-            this.CreatedByUserID = currentUserID;
+            this.CreatedByUserID = Convert.ToInt32(clsGlobalSession.CurrentUserID);
 
             this.MainTransactionID = await clsDebtPaymentData.AddNewDebtPayment(Convert.ToInt32(DebtID)
-                , Amount, TransactionDate, Purpose, currentUserID);
+                , Amount, TransactionDate, Purpose, Convert.ToInt32(CreatedByUserID));
 
             return this.MainTransactionID != null;
         }
 
-        async Task<bool> _UpdateDebtPayment(int currentUserID)
+        async Task<bool> _UpdateDebtPayment()
         {
             return await clsDebtPaymentData.UpdateDebtPaymentByID
-                (Convert.ToInt32(MainTransactionID), Amount, Purpose, TransactionDate, currentUserID);
+                (Convert.ToInt32(MainTransactionID), Amount, Purpose, TransactionDate, Convert.ToInt32(clsGlobalSession.CurrentUserID));
         }
 
-        new private async Task<bool> _RefresheCompositionObjects(int currentUserID)
+        new private async Task<bool> _RefresheCompositionObjects()
         {
-            this.DebtInfo = await clsDebt.FindDebtByDebtID(Convert.ToInt32(DebtID), currentUserID);
+            this.DebtInfo = await clsDebt.FindDebtByDebtID(Convert.ToInt32(DebtID));
 
-            return (DebtInfo != null && await base.RefreshData(currentUserID));
+            return (DebtInfo != null && await base.RefreshData());
         }
 
-        public async Task<bool> Save(int currentUserID)
+        public async Task<bool> Save()
         {
+            if (!clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.AddUpdateDebt_Payments,
+               "ليس لديك صلاحية إضافة/تعديل (سندات - معاملات سداد) الديون."))
+                return false;
+
             switch (Mode)
             {
                 case enMode.AddNew:
                     {
-                        if (await _AddNewDebtPyament(currentUserID))
+                        if (await _AddNewDebtPyament())
                         {
                             Mode = enMode.Update;
-                            await this._RefresheCompositionObjects(currentUserID);
+                            await this._RefresheCompositionObjects();
                             return true;
                         }
                         else
                             return false;
                     }
                 case enMode.Update:
-                    return await _UpdateDebtPayment(currentUserID);
+                    return await _UpdateDebtPayment();
             }
 
             return false;
         }
 
-        public static async Task<clsDebtPayment> FindDebtPaymentByTransactionID(int transactionID, int currentUserID)
+        public static async Task<clsDebtPayment> FindDebtPaymentByTransactionID(int transactionID)
         {
-            int debtID = await clsDebtPaymentData.GetDebtPaymentByID(transactionID, currentUserID);
+            int debtID = await clsDebtPaymentData.GetDebtPaymentByID(transactionID, Convert.ToInt32(clsGlobalSession.CurrentUserID));
 
-            var result = await clsMainTransaction.FindMainTransactionInfoByID(transactionID, currentUserID);
+            var result = await clsMainTransaction.FindMainTransactionInfoByID(transactionID);
 
-            var debtInfo = await clsDebt.FindDebtByDebtID(debtID, currentUserID);
+            var debtInfo = await clsDebt.FindDebtByDebtID(debtID);
 
             if (result == null || debtInfo == null)
                 return null;
@@ -106,19 +111,23 @@ namespace MoneyMindManager_Business
                result.TransactionDate, result.AccountInfo, result.CreatedByUserInfo, result.TransactionTypeInfo, debtInfo);
         }
 
-        public static async Task<bool> DeleteDebtPaymentByID(int transactionID,int currentUserID)
+        public static async Task<bool> DeleteDebtPaymentByID(int transactionID)
         {
-            return await clsDebtPaymentData.DeleteDebtPaymentByID(transactionID, currentUserID);
+            if (!clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.DeleteDebt_Payments,
+               "ليس لديك صلاحية حذف (سندات - معاملات سداد) الديون."))
+                return false;
+
+            return await clsDebtPaymentData.DeleteDebtPaymentByID(transactionID, Convert.ToInt32(clsGlobalSession.CurrentUserID));
         }
 
-        public static async Task<clsGetAllDebtPayments> GetAllDebtPyamentsByDebtID(int debtID, int currentUserID, short pageNumber)
+        public static async Task<clsGetAllDebtPayments> GetAllDebtPyamentsByDebtID(int debtID, short pageNumber)
         {
-            return await clsDebtPaymentData.GetAllDebtPaymentsForDebtID(debtID, currentUserID, pageNumber);
+            return await clsDebtPaymentData.GetAllDebtPaymentsForDebtID(debtID, Convert.ToInt32(clsGlobalSession.CurrentUserID), pageNumber);
         }
 
-        public static async Task<DataTable> GetAllDebtPyamentsByDebtIDWithoutPaging(int debtID, int currentUserID)
+        public static async Task<DataTable> GetAllDebtPyamentsByDebtIDWithoutPaging(int debtID)
         {
-            return await clsDebtPaymentData.GetAllDebtPaymentsForDebtIDWithoutPaging(debtID, currentUserID);
+            return await clsDebtPaymentData.GetAllDebtPaymentsForDebtIDWithoutPaging(debtID, Convert.ToInt32(clsGlobalSession.CurrentUserID));
         }
     }
 }

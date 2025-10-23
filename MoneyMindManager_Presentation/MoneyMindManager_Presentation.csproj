@@ -132,10 +132,10 @@
     <Compile Include="Debts\frmDebtsList.Designer.cs">
       <DependentUpon>frmDebtsList.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmCurrentAccount.cs">
+    <Compile Include="Global\frmCurrentAccount.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmCurrentAccount.Designer.cs">
+    <Compile Include="Global\frmCurrentAccount.Designer.cs">
       <DependentUpon>frmCurrentAccount.cs</DependentUpon>
     </Compile>
     <Compile Include="Global\clsExportHelper.cs" />
@@ -150,6 +150,12 @@
     </Compile>
     <Compile Include="Income And Expense\Categories\frmCategoriesList.Designer.cs">
       <DependentUpon>frmCategoriesList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Income And Expense\Categories\frmCategoryMonthlyFlow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Income And Expense\Categories\frmCategoryMonthlyFlow.Designer.cs">
+      <DependentUpon>frmCategoryMonthlyFlow.cs</DependentUpon>
     </Compile>
     <Compile Include="Income And Expense\Categories\frmSelectCategory.cs">
       <SubType>Form</SubType>
@@ -301,6 +307,12 @@
     <Compile Include="Users\frmAddUpdateUser.Designer.cs">
       <DependentUpon>frmAddUpdateUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Users\frmChangePassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Users\frmChangePassword.Designer.cs">
+      <DependentUpon>frmChangePassword.cs</DependentUpon>
+    </Compile>
     <Compile Include="Users\frmUserInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -357,7 +369,7 @@
     <EmbeddedResource Include="Debts\frmDebtsList.resx">
       <DependentUpon>frmDebtsList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmCurrentAccount.resx">
+    <EmbeddedResource Include="Global\frmCurrentAccount.resx">
       <DependentUpon>frmCurrentAccount.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Income And Expense\Categories\frmAddUpdateCategory.resx">
@@ -365,6 +377,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Income And Expense\Categories\frmCategoriesList.resx">
       <DependentUpon>frmCategoriesList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Income And Expense\Categories\frmCategoryMonthlyFlow.resx">
+      <DependentUpon>frmCategoryMonthlyFlow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Income And Expense\Categories\frmSelectCategory.resx">
       <DependentUpon>frmSelectCategory.cs</DependentUpon>
@@ -444,6 +459,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Users\frmAddUpdateUser.resx">
       <DependentUpon>frmAddUpdateUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Users\frmChangePassword.resx">
+      <DependentUpon>frmChangePassword.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Users\frmUserInfo.resx">
       <DependentUpon>frmUserInfo.cs</DependentUpon>

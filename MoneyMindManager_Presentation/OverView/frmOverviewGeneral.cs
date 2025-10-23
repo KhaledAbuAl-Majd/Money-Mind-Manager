@@ -26,7 +26,8 @@ namespace MoneyMindManager_Presentation.OverView
             if (KPIS == null)
                 this.Close();
 
-            klblBalance.Text = KPIS.Balance.ToString();
+            klblBalance.Text = (clsUser.CheckLogedInUserPermissions(clsUser.enPermissions.AccountBalance)) ?
+                KPIS.Balance.ToString() : "************";
             klblTotalReceivables.Text = KPIS.TotalReceivables.ToString();
             klblTotalPayables.Text = KPIS.TotalPayables.ToString();
             klblNext30DayDebtsDue.Text = KPIS.Next30DayDebtsDue.ToString();

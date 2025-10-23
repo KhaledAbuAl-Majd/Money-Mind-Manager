@@ -101,10 +101,10 @@ namespace MoneyMindManager_Business
             this.CreatedByUserInfo = createdByUserInfo;
         }
 
-        async Task<bool> _AddNewDebt(decimal amount,string purpose,DateTime debtDate,int currentUserID)
+        async Task<bool> _AddNewDebt(decimal amount,string purpose,DateTime debtDate)
         {
             var result = await clsDebtData.AddNewDebt(this.IsLending, Convert.ToInt32(PersonID), PaymentDueDate,
-                amount, purpose, IsLocked, debtDate, currentUserID);
+                amount, purpose, IsLocked, debtDate, Convert.ToInt32(clsGlobalSession.CurrentUserID));
 
             this.DebtID = result.NewDebtID;
             this.DebtTransactionID = result.NewDebtTransactionID;
@@ -112,21 +112,21 @@ namespace MoneyMindManager_Business
             return (this.DebtID != null);
         }
 
-        async Task<bool> _UpdateDebt(decimal amount, string purpose, DateTime debtDate, int currentUserID)
+        async Task<bool> _UpdateDebt(decimal amount, string purpose, DateTime debtDate)
         {
             DebtTransactionInfo.Amount = amount;
             DebtTransactionInfo.Purpose = purpose;
             DebtTransactionInfo.TransactionDate = debtDate;
 
-            var result = await clsDebtData.UpdateDebtByID(Convert.ToInt32(this.DebtID), PaymentDueDate, amount, purpose, debtDate, currentUserID);
+            var result = await clsDebtData.UpdateDebtByID(Convert.ToInt32(this.DebtID), PaymentDueDate, amount, purpose, debtDate, Convert.ToInt32(clsGlobalSession.CurrentUserID));
 
             this.RemainingAmount = result.RemainingAmount;
             return result.UpdateResult;
         }
 
-        public async Task<bool> RefreshData(int currentUserID)
+        public async Task<bool> RefreshData()
         {
-            var freshDate = await clsDebt.FindDebtByDebtID(Convert.ToInt32(this.DebtID), currentUserID);
+            var freshDate = await clsDebt.FindDebtByDebtID(Convert.ToInt32(this.DebtID));
 
             if (freshDate == null)
                 return false;
@@ -147,17 +147,20 @@ namespace MoneyMindManager_Business
             return true;
         }
 
-        public async Task<bool> Save(decimal amount, string purpose, DateTime debtDate, int currentUserID)
+        public async Task<bool> Save(decimal amount, string purpose, DateTime debtDate)
         {
-           
+            if (!clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.AddUpdateDebt_Payments,
+                "ليس لديك صلاحية إضافة/تعديل (سندات - معاملات سداد) الديون."))
+                return false;
+
             switch (Mode)
             {
                 case enMode.AddNew:
                     {
-                        if (await _AddNewDebt(amount,purpose,debtDate,currentUserID))
+                        if (await _AddNewDebt(amount,purpose,debtDate))
                         {
                             Mode = enMode.Update;
-                            await RefreshData(currentUserID);
+                            await RefreshData();
                             return true;
                         }
                         else
@@ -165,18 +168,22 @@ namespace MoneyMindManager_Business
                     }
 
                 case enMode.Update:
-                    return await _UpdateDebt(amount, purpose, debtDate, currentUserID);
+                    return await _UpdateDebt(amount, purpose, debtDate);
             }
 
             return true;
         }
 
-        public async Task<bool> ChangeLocking(bool isLocked, int currentUserID)
+        public async Task<bool> ChangeLocking(bool isLocked)
         {
             if (Mode == enMode.AddNew)
                 return false;
 
-            bool result = await clsDebtData.ChangeDebtLockingByID(Convert.ToInt32(DebtID), isLocked, currentUserID);
+            if (!clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.ChangeDebtsLocking,
+                "ليس لديك صلاحية غلق/فتح سندات الديون."))
+                return false;
+
+            bool result = await clsDebtData.ChangeDebtLockingByID(Convert.ToInt32(DebtID), isLocked, Convert.ToInt32(clsGlobalSession.CurrentUserID));
 
             if (!result)
                 return false;
@@ -185,16 +192,16 @@ namespace MoneyMindManager_Business
             return true;
         }
 
-        public static async Task<clsDebt> FindDebtByDebtID(int debtID, int currentUserID)
+        public static async Task<clsDebt> FindDebtByDebtID(int debtID)
         {
-            var result = await clsDebtData.GetDebtInfoByID(debtID, currentUserID);
+            var result = await clsDebtData.GetDebtInfoByID(debtID, Convert.ToInt32(clsGlobalSession.CurrentUserID));
 
             if (result == null)
                 return null;
 
-            var personInfo = await clsPerson.FindPersonByID(Convert.ToInt32(result.PersonID), currentUserID);
-            var debtTransactionInfo = await clsMainTransaction.FindMainTransactionInfoByID(Convert.ToInt32(result.DebtTransactionID), currentUserID);
-            var createdByUserInfo = await clsUser.FindUserByUserID(Convert.ToInt32(result.CreatedByUserID), currentUserID);
+            var personInfo = await clsPerson.FindPersonByID(Convert.ToInt32(result.PersonID));
+            var debtTransactionInfo = await clsMainTransaction.FindMainTransactionInfoByID(Convert.ToInt32(result.DebtTransactionID));
+            var createdByUserInfo = await clsUser.FindUserByUserID(Convert.ToInt32(result.CreatedByUserID));
             var accountInfo = createdByUserInfo?.AccountInfo;
 
             if (personInfo == null || debtTransactionInfo == null || createdByUserInfo == null || accountInfo == null)
@@ -205,14 +212,18 @@ namespace MoneyMindManager_Business
                 , result.IsLocked, result.RemainingAmount, personInfo, debtTransactionInfo, accountInfo, createdByUserInfo);
         }
 
-        public static async Task<bool> DeleteDebtByDebtID(int debtID, int currentUserID)
+        public static async Task<bool> DeleteDebtByDebtID(int debtID)
         {
-            return await clsDebtData.DeleteDebtByID(debtID, currentUserID);
+            if (!clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.DeleteDebt_Payments,
+                "ليس لديك صلاحية حذف (سندات - معاملات سداد) الديون."))
+                return false;
+
+            return await clsDebtData.DeleteDebtByID(debtID, Convert.ToInt32(clsGlobalSession.CurrentUserID));
         }
 
-        public async Task<clsGetAllDebtPayments> GetDebtPayments(int currentUserID, short pageNumber)
+        public async Task<clsGetAllDebtPayments> GetDebtPayments( short pageNumber)
         {
-            var result = await GetDebtPayments(Convert.ToInt32(DebtID), currentUserID, pageNumber);
+            var result = await GetDebtPayments(Convert.ToInt32(DebtID), pageNumber);
 
             if (result != null)
                 this.RemainingAmount = result.RemainingAmount;
@@ -220,23 +231,23 @@ namespace MoneyMindManager_Business
             return result;
         }
 
-        public static async Task<clsGetAllDebtPayments> GetDebtPayments(int debtID, int currentUserID, short pageNumber)
+        public static async Task<clsGetAllDebtPayments> GetDebtPayments(int debtID, short pageNumber)
         {
-            return await clsDebtPayment.GetAllDebtPyamentsByDebtID(debtID, currentUserID, pageNumber);
+            return await clsDebtPayment.GetAllDebtPyamentsByDebtID(debtID, pageNumber);
         }
 
         //
-        public async Task<DataTable> GetDebtPaymentsWithoutPaging(int currentUserID)
+        public async Task<DataTable> GetDebtPaymentsWithoutPaging()
         {
-            return await GetDebtPaymentsWithoutPaging(Convert.ToInt32(DebtID), currentUserID);
+            return await GetDebtPaymentsWithoutPaging(Convert.ToInt32(DebtID));
         }
-        public static async Task<DataTable> GetDebtPaymentsWithoutPaging(int debtID, int currentUserID)
+        public static async Task<DataTable> GetDebtPaymentsWithoutPaging(int debtID)
         {
-            return await clsDebtPayment.GetAllDebtPyamentsByDebtIDWithoutPaging(debtID, currentUserID);
+            return await clsDebtPayment.GetAllDebtPyamentsByDebtIDWithoutPaging(debtID);
         }
 
         private static async Task<clsGetAllDebts> _GetAllDebts(int? debtID,bool? isLending,string personName,string userName, bool byCreatedDate,
-            string fromDateString, string toDateString,bool? isPaid, int currentUserID, short pageNumber)
+            string fromDateString, string toDateString,bool? isPaid, short pageNumber)
         {
 
             DateTime? fromCreatedDate = null, toCreatedDate = null,
@@ -260,7 +271,7 @@ namespace MoneyMindManager_Business
             }
 
             return await clsDebtData.GetAllDebts(debtID, isLending, personName,userName, fromCreatedDate, toCreatedDate, fromDebtDate,
-                toDebtDate, isPaid, currentUserID, pageNumber);
+                toDebtDate, isPaid, Convert.ToInt32(clsGlobalSession.CurrentUserID), pageNumber);
         }
 
         /// <summary>
@@ -269,10 +280,10 @@ namespace MoneyMindManager_Business
         /// <param name="byCreatedDate">filter by createdDate or not (DebtData)</param>
         /// <returns>Object of all debts if exists, if not returns null</returns>
         public static async Task<clsGetAllDebts> GetAllDebts( bool? isLending, bool byCreatedDate,
-           string fromDateString, string toDateString, bool? isPaid, int currentUserID, short pageNumber)
+           string fromDateString, string toDateString, bool? isPaid, short pageNumber)
         {
 
-            return await _GetAllDebts(null, isLending, null,null, byCreatedDate, fromDateString, toDateString, isPaid, currentUserID, pageNumber);
+            return await _GetAllDebts(null, isLending, null,null, byCreatedDate, fromDateString, toDateString, isPaid, pageNumber);
         }
 
         /// <summary>
@@ -281,10 +292,10 @@ namespace MoneyMindManager_Business
         /// <param name="byCreatedDate">filter by createdDate or not (DebtData)</param>
         /// <returns>Object of all debts if exists, if not returns null</returns>
         public static async Task<clsGetAllDebts> GetAllDebts(int debtID,bool? isLending, bool byCreatedDate,
-           string fromDateString, string toDateString, bool? isPaid, int currentUserID, short pageNumber)
+           string fromDateString, string toDateString, bool? isPaid, short pageNumber)
         {
 
-            return await _GetAllDebts(debtID, isLending, null,null, byCreatedDate, fromDateString, toDateString, isPaid, currentUserID, pageNumber);
+            return await _GetAllDebts(debtID, isLending, null,null, byCreatedDate, fromDateString, toDateString, isPaid, pageNumber);
         }
 
         /// <summary>
@@ -293,11 +304,11 @@ namespace MoneyMindManager_Business
         /// <param name="byCreatedDate">filter by createdDate or not (DebtData)</param>
         /// <returns>Object of all debts if exists, if not returns null</returns>
         public static async Task<clsGetAllDebts> GetAllDebts(string personName, bool? isLending, bool byCreatedDate,
-           string fromDateString, string toDateString, bool? isPaid, int currentUserID, short pageNumber)
+           string fromDateString, string toDateString, bool? isPaid, short pageNumber)
         {
 
             return await _GetAllDebts(null, isLending, personName,null, byCreatedDate, fromDateString, toDateString,
-                isPaid, currentUserID, pageNumber);
+                isPaid, pageNumber);
         }
 
         /// <summary>
@@ -306,17 +317,17 @@ namespace MoneyMindManager_Business
         /// <param name="byCreatedDate">filter by createdDate or not (DebtData)</param>
         /// <returns>Object of all debts if exists, if not returns null</returns>
         public static async Task<clsGetAllDebts> GetAllDebtsByUserName(string userName, bool? isLending, bool byCreatedDate,
-           string fromDateString, string toDateString, bool? isPaid, int currentUserID, short pageNumber)
+           string fromDateString, string toDateString, bool? isPaid, short pageNumber)
         {
 
             return await _GetAllDebts(null, isLending, null,userName, byCreatedDate, fromDateString,
-                toDateString, isPaid, currentUserID, pageNumber);
+                toDateString, isPaid, pageNumber);
         }
 
         //
 
         private static async Task<DataTable> _GetAllDebtsWithoutPaging(int? debtID, bool? isLending, string personName,string userName, bool byCreatedDate,
-           string fromDateString, string toDateString, bool? isPaid, int currentUserID)
+           string fromDateString, string toDateString, bool? isPaid)
         {
 
             DateTime? fromCreatedDate = null, toCreatedDate = null,
@@ -340,7 +351,7 @@ namespace MoneyMindManager_Business
             }
 
             return await clsDebtData.GetAllDebtsWithoutPaging(debtID, isLending, personName,userName, fromCreatedDate, toCreatedDate, fromDebtDate,
-                toDebtDate, isPaid, currentUserID);
+                toDebtDate, isPaid, Convert.ToInt32(clsGlobalSession.CurrentUserID));
         }
 
         /// <summary>
@@ -349,10 +360,10 @@ namespace MoneyMindManager_Business
         /// <param name="byCreatedDate">filter by createdDate or not (DebtData)</param>
         /// <returns>DataTable of all debts if exists, if not returns null</returns>
         public static async Task<DataTable> GetAllDebtsWithoutPaging(bool? isLending, bool byCreatedDate,
-           string fromDateString, string toDateString, bool? isPaid, int currentUserID)
+           string fromDateString, string toDateString, bool? isPaid)
         {
 
-            return await _GetAllDebtsWithoutPaging(null, isLending, null,null, byCreatedDate, fromDateString, toDateString, isPaid, currentUserID);
+            return await _GetAllDebtsWithoutPaging(null, isLending, null,null, byCreatedDate, fromDateString, toDateString, isPaid);
         }
 
         /// <summary>
@@ -361,10 +372,10 @@ namespace MoneyMindManager_Business
         /// <param name="byCreatedDate">filter by createdDate or not (DebtData)</param>
         /// <returns>DataTable of all debts if exists, if not returns null</returns>
         public static async Task<DataTable> GetAllDebtsWithoutPaging(int debtID, bool? isLending, bool byCreatedDate,
-           string fromDateString, string toDateString, bool? isPaid, int currentUserID)
+           string fromDateString, string toDateString, bool? isPaid)
         {
 
-            return await _GetAllDebtsWithoutPaging(debtID, isLending, null,null, byCreatedDate, fromDateString, toDateString, isPaid, currentUserID);
+            return await _GetAllDebtsWithoutPaging(debtID, isLending, null,null, byCreatedDate, fromDateString, toDateString, isPaid);
         }
 
         /// <summary>
@@ -373,10 +384,10 @@ namespace MoneyMindManager_Business
         /// <param name="byCreatedDate">filter by createdDate or not (DebtData)</param>
         /// <returns>DataTable of all debts if exists, if not returns null</returns>
         public static async Task<DataTable> GetAllDebtsWithoutPaging(string personName, bool? isLending, bool byCreatedDate,
-           string fromDateString, string toDateString, bool? isPaid, int currentUserID)
+           string fromDateString, string toDateString, bool? isPaid)
         {
 
-            return await _GetAllDebtsWithoutPaging(null, isLending, personName,null, byCreatedDate, fromDateString, toDateString, isPaid, currentUserID);
+            return await _GetAllDebtsWithoutPaging(null, isLending, personName,null, byCreatedDate, fromDateString, toDateString, isPaid);
         }
 
         /// <summary>
@@ -385,10 +396,10 @@ namespace MoneyMindManager_Business
         /// <param name="byCreatedDate">filter by createdDate or not (DebtData)</param>
         /// <returns>DataTable of all debts if exists, if not returns null</returns>
         public static async Task<DataTable> GetAllDebtsByUserNameWithoutPaging(string userName, bool? isLending, bool byCreatedDate,
-           string fromDateString, string toDateString, bool? isPaid, int currentUserID)
+           string fromDateString, string toDateString, bool? isPaid)
         {
 
-            return await _GetAllDebtsWithoutPaging(null, isLending, null,userName, byCreatedDate, fromDateString, toDateString, isPaid, currentUserID);
+            return await _GetAllDebtsWithoutPaging(null, isLending, null,userName, byCreatedDate, fromDateString, toDateString, isPaid);
         }
     }
 }

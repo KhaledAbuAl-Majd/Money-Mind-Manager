@@ -24,7 +24,7 @@ namespace MoneyMindManager_DataAccess
             {
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_AddNewPerson]", connection))
+                    using (SqlCommand command = new SqlCommand("SP_Person_AddNew", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
@@ -32,7 +32,6 @@ namespace MoneyMindManager_DataAccess
                         command.Parameters.AddWithValue("@Address", string.IsNullOrEmpty(address) ? System.DBNull.Value : (object)address);
                         command.Parameters.AddWithValue("@Email", string.IsNullOrEmpty(email) ? System.DBNull.Value : (object)email);
                         command.Parameters.AddWithValue("@Phone", string.IsNullOrEmpty(phone) ? System.DBNull.Value : (object)phone);
-                        command.Parameters.AddWithValue("@AccountID", accountID);
                         command.Parameters.AddWithValue("@Notes", string.IsNullOrEmpty(notes) ? System.DBNull.Value : (object)notes);
                         command.Parameters.AddWithValue("@CreatedByUserID", createdByUserID);
 
@@ -74,7 +73,7 @@ namespace MoneyMindManager_DataAccess
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>Updating Result</returns>
         public static async Task<bool> UpdatePerson(int personID, string personName, string address, string email, string phone,
-            string notes, bool RaiseEventOnErrorOccured = true)
+            string notes,int currentUserID, bool RaiseEventOnErrorOccured = true)
         {
             bool result = false;
 
@@ -82,7 +81,7 @@ namespace MoneyMindManager_DataAccess
             {
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_UpdatePersonByID]", connection))
+                    using (SqlCommand command = new SqlCommand("SP_Person_UpdateByID", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
@@ -92,6 +91,7 @@ namespace MoneyMindManager_DataAccess
                         command.Parameters.AddWithValue("@Email", string.IsNullOrEmpty(email) ? System.DBNull.Value : (object)email);
                         command.Parameters.AddWithValue("@Phone", string.IsNullOrEmpty(phone) ? System.DBNull.Value : (object)phone);
                         command.Parameters.AddWithValue("@Notes", string.IsNullOrEmpty(notes) ? System.DBNull.Value : (object)notes);
+                        command.Parameters.AddWithValue("@CurrentUserID", currentUserID);
 
                         SqlParameter retunValue = new SqlParameter("@ReturnVal", SqlDbType.Int)
                         {
@@ -120,7 +120,7 @@ namespace MoneyMindManager_DataAccess
 
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>Deleting Result</returns>
-        public static async Task<bool> DeletePersonByID(int personID, bool RaiseEventOnErrorOccured = true)
+        public static async Task<bool> DeletePersonByID(int personID,int currentUserID, bool RaiseEventOnErrorOccured = true)
         {
             bool result = false;
 
@@ -128,11 +128,12 @@ namespace MoneyMindManager_DataAccess
             {
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_DeletePersonByID]", connection))
+                    using (SqlCommand command = new SqlCommand("SP_Person_DeleteByID", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
                         command.Parameters.AddWithValue("@PersonID", personID);
+                        command.Parameters.AddWithValue("@CurrentUserID", currentUserID);
 
                         SqlParameter retunValue = new SqlParameter("@ReturnVal", SqlDbType.Int)
                         {
@@ -192,8 +193,11 @@ namespace MoneyMindManager_DataAccess
                                 string notes = (reader["Notes"] == System.DBNull.Value) ? null : reader["Notes"] as string;
                                 Nullable<int> createdByUserID = Convert.ToInt32(reader["CreatedByUserID"]);
                                 DateTime createdDate = Convert.ToDateTime(reader["CreatedDate"]);
+                                decimal receivable = Convert.ToDecimal(reader["Receivable"]);
+                                decimal payable = Convert.ToDecimal(reader["Payable"]);
 
-                                personData = new clsPersonColumns(personID, personName, address, email, phone, accountID, notes,createdByUserID,createdDate);
+                                personData = new clsPersonColumns(personID, personName, address, email, phone, accountID,
+                                    notes,createdByUserID,createdDate,receivable,payable);
                             }
                             else
                                 personData = null;
@@ -226,7 +230,7 @@ namespace MoneyMindManager_DataAccess
             {
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_IsPersonExistByID]", connection))
+                    using (SqlCommand command = new SqlCommand("SP_Person_IsExistByID", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 

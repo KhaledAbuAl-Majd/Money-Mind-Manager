@@ -11,6 +11,7 @@ using KhaledControlLibrary1;
 using MoneyMindManager_Business;
 using MoneyMindManager_Presentation.Global;
 using MoneyMindManager_Presentation.Properties;
+using MoneyMindManagerGlobal;
 using static Guna.UI2.Native.WinApi;
 
 namespace MoneyMindManager_Presentation.Users
@@ -19,6 +20,12 @@ namespace MoneyMindManager_Presentation.Users
     {
         public frmAddUpdateUser()
         {
+            if(!_CheckUserPermissions())
+            {
+                this.Dispose();
+                return;
+            }
+
             InitializeComponent();
             Mode = enMode.AddNew;
             _UserID = null;
@@ -27,9 +34,21 @@ namespace MoneyMindManager_Presentation.Users
 
         public frmAddUpdateUser(int UserID)
         {
+            if (!_CheckUserPermissions())
+            {
+                this.Dispose();
+                return;
+            }
+
             InitializeComponent();
             Mode = enMode.Update;
             this._UserID = UserID;
+        }
+
+        bool _CheckUserPermissions()
+        {
+            return clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.Admin,
+                  "ليس لديك صلاحية إضافة/تعديل المستخدمين.");
         }
 
         bool _IsPersonEdited = false;
@@ -83,20 +102,8 @@ namespace MoneyMindManager_Presentation.Users
             kgtxtUserName.Enabled = value;
             kgtxtNotes.Enabled = value;
 
-            gpnlPasswordPart.Enabled = (Mode == enMode.AddNew) ? value : false;
-
-            //if(_ChangeMode == enMode.AddNew)
-            //{
-            //    gpnlPasswordPart.Enabled = value;
-            //    kgtxtpassword.IsRequired = true;
-            //    kgtxtConfirmPassword.IsRequired = true;
-            //}
-            //else
-            //{
-            //    gpnlPasswordPart.Enabled = false;
-            //    kgtxtpassword.IsRequired = false;
-            //    kgtxtConfirmPassword.IsRequired = false;
-            //}
+            kgtxtpassword.Enabled = (Mode == enMode.AddNew) ? value : false;
+            kgtxtConfirmPassword.Enabled = kgtxtpassword.Enabled;
         }
 
         void _AddNewMode()
@@ -104,8 +111,7 @@ namespace MoneyMindManager_Presentation.Users
             _ChangeEnablityOfUserControls(false);
             kgtxtpassword.IsRequired = true;
             kgtxtConfirmPassword.IsRequired = true;
-            //gbtnSave.Enabled = false;
-            //gpnlUserPart.Enabled = false;
+
             ChangeHeaderValue("إضافة مستخدم");
             _UserID = null;
             _User = new clsUser();
@@ -117,7 +123,7 @@ namespace MoneyMindManager_Presentation.Users
         {
             ChangeHeaderValue("تعديل بيانات مستخدم");
 
-            clsUser searchedUser = await clsUser.FindUserByUserID(Convert.ToInt32(_UserID), Convert.ToInt32(clsGlobal_UI.CurrentUser.UserID));
+            clsUser searchedUser = await clsUser.FindUserByUserID(Convert.ToInt32(_UserID));
 
             if (searchedUser == null)
             {
@@ -144,12 +150,33 @@ namespace MoneyMindManager_Presentation.Users
             _ChangeEnablityOfUserControls(true);
             kgtxtpassword.IsRequired = false;
             kgtxtConfirmPassword.IsRequired = false;
+
+            if (_User.IsAdmin)
+                chklbUserPermissions.SelectionMode = SelectionMode.None;
         }
 
         void _ResteObject()
         {
             _User = new clsUser();
         }
+
+        List<int> _GetCheckedPermissions()
+        {
+            List<int> items = new List<int>();
+
+            foreach(var item in chklbUserPermissions.CheckedItems)
+            {
+                var permissionItem = item as clsUser.clsPermissionItems;
+
+                if (permissionItem != null)
+                {
+                    items.Add(permissionItem.ItemValue);
+                }
+            }
+
+            return items;
+        }
+
         async Task _Save()
         {
             if (!gbtnSave.Enabled)
@@ -182,26 +209,11 @@ namespace MoneyMindManager_Presentation.Users
                     _ResteObject();
                     return;
                 }
-
-                if (!_User.EnterAccountIDAtAddMode(Convert.ToInt16(clsGlobal_UI.CurrentUser.AccountID)))
-                {
-                    clsGlobalMessageBoxs.ShowErrorMessage("فشل تسجيل معرف الحساب للمستخدم");
-                    _ResteObject();
-                    return;
-                }
-
-                if (!_User.EnterCreatedByUserIDAtAddMode(Convert.ToInt32(clsGlobal_UI.CurrentUser.UserID)))
-                {
-                    clsGlobalMessageBoxs.ShowErrorMessage("فشل تسجيل معرف منشئ الحساب");
-                    _ResteObject();
-                    return;
-                }
             }
             else if (Mode == enMode.Update)
             {
-                if (_User.UserID == clsGlobal_UI.CurrentUser.UserID && !_User.IsActive)
+                if (_User.UserID == clsGlobalSession.CurrentUserID && !_User.IsActive)
                 {
-                    //gtswIsActive.Checked = true;
                     lbluserMessage.Text = "لا يمكنك إلغاء نشاط المستخدم الحالي";
                     lbluserMessage.Visible = true;
                     _ResteObject();
@@ -209,9 +221,12 @@ namespace MoneyMindManager_Presentation.Users
                 }
             }
 
+            if (!_User.IsAdmin)
+                _User.AssingUserPermissions(_GetCheckedPermissions());
+
             lbluserMessage.Visible = false;
 
-            if (await _User.Save(Convert.ToInt32(clsGlobal_UI.CurrentUser.UserID)))
+            if (await _User.Save())
             {
                 if (Mode == enMode.AddNew)
                 {
@@ -221,9 +236,9 @@ namespace MoneyMindManager_Presentation.Users
                     _UserID = _User.PersonID;
                     lblUserID.Text = _UserID.ToString();
                     ChangeHeaderValue("تعديل بيانات المستخدم");
-                    gpnlPasswordPart.Enabled = false;
+                    kgtxtpassword.Enabled = false;
+                    kgtxtConfirmPassword.Enabled = false;
                     ctrlPersonCardWithFilter1.EnablityOfSearchPart = false;
-                    //gpnlPasswordPart.Visible = false;
                 }
                 else if (Mode == enMode.Update)
                 {
@@ -234,6 +249,22 @@ namespace MoneyMindManager_Presentation.Users
             }
             else if (Mode == enMode.AddNew)
                 _ResteObject();
+        }
+
+        void _LoadUserPermissions()
+        {
+            var items = _User.GetUserPermissionItems();
+
+            chklbUserPermissions.DataSource = items;
+            chklbUserPermissions.DisplayMember = "ItemName";
+            chklbUserPermissions.ValueMember = "ItemValue";
+
+            byte index = 0;
+            foreach(var item in items)
+            {
+                chklbUserPermissions.SetItemChecked(index, item.Checked);
+                index++;
+            }
         }
         private async void frmAddUpdateUser_Load(object sender, EventArgs e)
         {
@@ -252,6 +283,8 @@ namespace MoneyMindManager_Presentation.Users
                         break;
                     }
             }
+
+            _LoadUserPermissions();
         }
 
         private void kgtxt_OnValidationError(object sender, KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs e)
@@ -281,7 +314,7 @@ namespace MoneyMindManager_Presentation.Users
             if (_isSaved || _IsPersonEdited)
                 OnCloseAndSavedOrEditing?.Invoke(userID);
 
-            if (userID == clsGlobal_UI.CurrentUser?.UserID)
+            if (userID == clsGlobalSession.CurrentUserID)
                 await clsGlobal_UI.RefreshCurrentUser();
 
             this.Close();
@@ -362,9 +395,9 @@ namespace MoneyMindManager_Presentation.Users
             }
         }
 
-        private void gpnlUserPart_Paint(object sender, PaintEventArgs e)
+        private void chklbUserPermissions_Leave(object sender, EventArgs e)
         {
-
+            chklbUserPermissions.ClearSelected();
         }
     }
 }

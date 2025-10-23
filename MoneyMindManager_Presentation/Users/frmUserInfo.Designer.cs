@@ -31,8 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmUserInfo));
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             this.gbtnClose = new Guna.UI2.WinForms.Guna2Button();
-            this.ctrlUserCard1 = new MoneyMindManager_Presentation.Users.ctrlUserCard();
             this.lblHeader = new System.Windows.Forms.Label();
+            this.ctrlUserCard1 = new MoneyMindManager_Presentation.Users.ctrlUserCard();
             this.guna2Panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -45,13 +45,13 @@
             this.guna2Panel2.Controls.Add(this.gbtnClose);
             this.guna2Panel2.Controls.Add(this.ctrlUserCard1);
             this.guna2Panel2.FillColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.guna2Panel2.Location = new System.Drawing.Point(20, 86);
+            this.guna2Panel2.Location = new System.Drawing.Point(20, 104);
             this.guna2Panel2.Name = "guna2Panel2";
             this.guna2Panel2.ShadowDecoration.BorderRadius = 20;
             this.guna2Panel2.ShadowDecoration.Color = System.Drawing.Color.DarkGray;
             this.guna2Panel2.ShadowDecoration.Depth = 20;
             this.guna2Panel2.ShadowDecoration.Enabled = true;
-            this.guna2Panel2.Size = new System.Drawing.Size(1178, 574);
+            this.guna2Panel2.Size = new System.Drawing.Size(1178, 689);
             this.guna2Panel2.TabIndex = 13;
             // 
             // gbtnClose
@@ -78,23 +78,13 @@
             this.gbtnClose.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnClose.ImageSize = new System.Drawing.Size(25, 25);
             this.gbtnClose.IndicateFocus = true;
-            this.gbtnClose.Location = new System.Drawing.Point(465, 510);
+            this.gbtnClose.Location = new System.Drawing.Point(468, 630);
             this.gbtnClose.Name = "gbtnClose";
             this.gbtnClose.PressedColor = System.Drawing.Color.White;
             this.gbtnClose.Size = new System.Drawing.Size(229, 41);
             this.gbtnClose.TabIndex = 121;
             this.gbtnClose.Text = "غلق";
             this.gbtnClose.Click += new System.EventHandler(this.gbtnClose_Click);
-            // 
-            // ctrlUserCard1
-            // 
-            this.ctrlUserCard1.BackColor = System.Drawing.Color.White;
-            this.ctrlUserCard1.Location = new System.Drawing.Point(30, 17);
-            this.ctrlUserCard1.Name = "ctrlUserCard1";
-            this.ctrlUserCard1.Size = new System.Drawing.Size(1125, 487);
-            this.ctrlUserCard1.TabIndex = 8;
-            this.ctrlUserCard1.OnEditingPerson += new System.Action(this.ctrlUserCard1_OnEditingUserOrPerson);
-            this.ctrlUserCard1.OnEditingUser += new System.Action(this.ctrlUserCard1_OnEditingUserOrPerson);
             // 
             // lblHeader
             // 
@@ -103,10 +93,20 @@
             this.lblHeader.ForeColor = System.Drawing.Color.Black;
             this.lblHeader.Location = new System.Drawing.Point(0, 0);
             this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(1210, 50);
+            this.lblHeader.Size = new System.Drawing.Size(1210, 60);
             this.lblHeader.TabIndex = 38;
             this.lblHeader.Text = "معلومات المستخدم";
-            this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblHeader.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // ctrlUserCard1
+            // 
+            this.ctrlUserCard1.BackColor = System.Drawing.Color.White;
+            this.ctrlUserCard1.Location = new System.Drawing.Point(25, 17);
+            this.ctrlUserCard1.Name = "ctrlUserCard1";
+            this.ctrlUserCard1.Size = new System.Drawing.Size(1125, 603);
+            this.ctrlUserCard1.TabIndex = 8;
+            this.ctrlUserCard1.OnEditingPerson += new System.Action(this.ctrlUserCard1_OnEditingUserOrPerson);
+            this.ctrlUserCard1.OnEditingUser += new System.Action(this.ctrlUserCard1_OnEditingUserOrPerson);
             // 
             // frmUserInfo
             // 
@@ -114,7 +114,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.CancelButton = this.gbtnClose;
-            this.ClientSize = new System.Drawing.Size(1210, 737);
+            this.ClientSize = new System.Drawing.Size(1210, 809);
             this.Controls.Add(this.lblHeader);
             this.Controls.Add(this.guna2Panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

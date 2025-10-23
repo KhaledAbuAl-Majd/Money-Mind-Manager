@@ -17,8 +17,8 @@ namespace MoneyMindManager_DataAccess
 
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>New UserID if Success, if failed return null</returns>
-        public static async Task<Nullable<int>> AddNewUser(string userName,int personID, int? permissions, string password, string salt,
-            bool isActive,short accountID, string notes, int createdByUserID, bool RaiseEventOnErrorOccured = true)
+        public static async Task<Nullable<int>> AddNewUser(string userName,int personID, int permissions, string password, string salt,
+            bool isActive, string notes, int createdByUserID, bool RaiseEventOnErrorOccured = true)
         {
             int? newUserID = null;
 
@@ -26,18 +26,17 @@ namespace MoneyMindManager_DataAccess
             {
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_AddNewUser]", connection))
+                    using (SqlCommand command = new SqlCommand("SP_User_AddNew", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
                         command.Parameters.AddWithValue("@UserName", (string.IsNullOrEmpty(userName)) ? DBNull.Value : (object)userName);
                         command.Parameters.AddWithValue("@PersonID", personID);
-                        command.Parameters.AddWithValue("@Permissions", (object)permissions ?? System.DBNull.Value);
+                        command.Parameters.AddWithValue("@Permissions", permissions);
                         command.Parameters.AddWithValue("@Password", password);
                         command.Parameters.AddWithValue("@Salt", salt);
                         command.Parameters.AddWithValue("@IsActive", isActive);
                         command.Parameters.AddWithValue("@Notes", string.IsNullOrEmpty(notes) ? System.DBNull.Value : (object)notes);
-                        command.Parameters.AddWithValue("@AccountID", accountID);
                         command.Parameters.AddWithValue("@CreatedByUserID", createdByUserID);
 
                         SqlParameter outputnewUserID = new SqlParameter("@NewUserID", System.Data.SqlDbType.Int)
@@ -77,8 +76,8 @@ namespace MoneyMindManager_DataAccess
 
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>Updating Result</returns>
-        public static async Task<bool> UpdateUser(int userID,string userName, int personID, int? permissions, bool isActive,
-            string notes, bool RaiseEventOnErrorOccured = true)
+        public static async Task<bool> UpdateUser(int userID,string userName, int personID, int permissions, bool isActive,
+            string notes,int currentUserID, bool RaiseEventOnErrorOccured = true)
         {
             bool result = false;
 
@@ -86,16 +85,17 @@ namespace MoneyMindManager_DataAccess
             {
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_UpdateUserByUserID]", connection))
+                    using (SqlCommand command = new SqlCommand("SP_User_UpdateByUserID", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
                         command.Parameters.AddWithValue("@UserID", userID);
                         command.Parameters.AddWithValue("@UserName", (string.IsNullOrEmpty(userName)) ? DBNull.Value : (object)userName);
                         command.Parameters.AddWithValue("@PersonID", personID);
-                        command.Parameters.AddWithValue("@Permissions", (object)permissions?? System.DBNull.Value);
+                        command.Parameters.AddWithValue("@Permissions", permissions);
                         command.Parameters.AddWithValue("@IsActive", isActive);
                         command.Parameters.AddWithValue("@Notes", string.IsNullOrEmpty(notes) ? System.DBNull.Value : (object)notes);
+                        command.Parameters.AddWithValue("@CurrentUserID", currentUserID);
 
                         SqlParameter retunValue = new SqlParameter("@ReturnVal", SqlDbType.Int)
                         {
@@ -128,7 +128,7 @@ namespace MoneyMindManager_DataAccess
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>Updating Result</returns>
         public static async Task<bool> ChangeUserPassword(int userID,string oldPassword ,string newPassword,
-            string newSalt, bool RaiseEventOnErrorOccured = true)
+            string newSalt,int currentUserID, bool RaiseEventOnErrorOccured = true)
         {
             bool result = false;
 
@@ -136,7 +136,7 @@ namespace MoneyMindManager_DataAccess
             {
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_ChangeUserPassword]", connection))
+                    using (SqlCommand command = new SqlCommand("SP_User_ChangePassword", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
@@ -144,6 +144,7 @@ namespace MoneyMindManager_DataAccess
                         command.Parameters.AddWithValue("@OldPassword", oldPassword);
                         command.Parameters.AddWithValue("@NewPassword", newPassword);
                         command.Parameters.AddWithValue("@NewSalt", newSalt);
+                        command.Parameters.AddWithValue("@CurrentUserID", currentUserID);
 
                         SqlParameter retunValue = new SqlParameter("@ReturnVal", SqlDbType.Int)
                         {
@@ -180,7 +181,7 @@ namespace MoneyMindManager_DataAccess
             {
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_DeleteUserByUserID]", connection))
+                    using (SqlCommand command = new SqlCommand("SP_User_DeleteByUserID", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
@@ -221,7 +222,7 @@ namespace MoneyMindManager_DataAccess
             {
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("SP_GetUserByUserNameAndPassword_Login", connection))
+                    using (SqlCommand command = new SqlCommand("SP_User_GetByUserNameAndPassword_Login", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
@@ -236,7 +237,7 @@ namespace MoneyMindManager_DataAccess
                             {
                                 Nullable<int> userID = Convert.ToInt32(reader["UserID"]);
                                 Nullable<int> personID = Convert.ToInt32(reader["PersonID"]);
-                                Nullable<int> permissions = (reader["Permissions"] == DBNull.Value) ? null : Convert.ToInt32(reader["Permissions"]) as int?;
+                                int permissions = Convert.ToInt32(reader["Permissions"]);
                                 string salt = (reader["Salt"] == DBNull.Value) ? null : reader["Salt"] as string;
                                 bool isActive = Convert.ToBoolean(reader["IsActive"]);
                                 string notes = (reader["Notes"] == DBNull.Value) ? null : reader["Notes"] as string;
@@ -279,7 +280,7 @@ namespace MoneyMindManager_DataAccess
             {
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_GetUserByUserID]", connection))
+                    using (SqlCommand command = new SqlCommand("SP_User_GetByUserID", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
@@ -293,7 +294,7 @@ namespace MoneyMindManager_DataAccess
                             {
                                 string userName = (reader["UserName"] == DBNull.Value) ? null : reader["UserName"] as string;
                                 Nullable<int> personID = Convert.ToInt32(reader["PersonID"]);
-                                Nullable<int> permissions = (reader["Permissions"] == DBNull.Value) ? null : Convert.ToInt32(reader["Permissions"]) as int?;
+                                int permissions = Convert.ToInt32(reader["Permissions"]);
                                 string password = (reader["Password"] == DBNull.Value) ? null : reader["Password"] as string;
                                 string salt = (reader["Salt"] == DBNull.Value) ? null : reader["Salt"] as string;
                                 bool isActive = Convert.ToBoolean(reader["IsActive"]);
@@ -336,7 +337,7 @@ namespace MoneyMindManager_DataAccess
             {
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_GetUserByUserName]", connection))
+                    using (SqlCommand command = new SqlCommand("SP_User_GetByUserName", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
@@ -350,7 +351,7 @@ namespace MoneyMindManager_DataAccess
                             {
                                 Nullable<int> userID = Convert.ToInt32(reader["UserID"]);
                                 Nullable<int> personID = Convert.ToInt32(reader["PersonID"]);
-                                Nullable<int> permissions = (reader["Permissions"] == DBNull.Value) ? null : Convert.ToInt32(reader["Permissions"]) as int?;
+                                int permissions = Convert.ToInt32(reader["Permissions"]);
                                 string password = (reader["Password"] == DBNull.Value) ? null : reader["Password"] as string;
                                 string salt = (reader["Salt"] == DBNull.Value) ? null : reader["Salt"] as string;
                                 bool isActive = Convert.ToBoolean(reader["IsActive"]);
@@ -393,7 +394,7 @@ namespace MoneyMindManager_DataAccess
             {
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_GetUserByPersonID]", connection))
+                    using (SqlCommand command = new SqlCommand("SP_User_GetByPersonID", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
@@ -407,7 +408,7 @@ namespace MoneyMindManager_DataAccess
                             {
                                 Nullable<int> userID = Convert.ToInt32(reader["UserID"]);
                                 string userName = (reader["UserName"] == DBNull.Value) ? null : reader["UserName"] as string;
-                                Nullable<int> permissions = (reader["Permissions"] == DBNull.Value) ? null : Convert.ToInt32(reader["Permissions"]) as int?;
+                                int permissions = Convert.ToInt32(reader["Permissions"]);
                                 string password = (reader["Password"] == DBNull.Value) ? null : reader["Password"] as string;
                                 string salt = (reader["Salt"] == DBNull.Value) ? null : reader["Salt"] as string;
                                 bool isActive = Convert.ToBoolean(reader["IsActive"]);
@@ -451,7 +452,7 @@ namespace MoneyMindManager_DataAccess
             {
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_IsUserExistByUserID]", connection))
+                    using (SqlCommand command = new SqlCommand("SP_User_IsExistByUserID", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
@@ -493,7 +494,7 @@ namespace MoneyMindManager_DataAccess
             {
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_IsUserExistByPersonID]", connection))
+                    using (SqlCommand command = new SqlCommand("SP_User_IsExistByPersonID", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
@@ -535,7 +536,7 @@ namespace MoneyMindManager_DataAccess
             {
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_IsUserExistByUserName]", connection))
+                    using (SqlCommand command = new SqlCommand("SP_User_IsExistByUserName", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
@@ -577,7 +578,7 @@ namespace MoneyMindManager_DataAccess
             {
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_IsUserExistByUserName]", connection))
+                    using (SqlCommand command = new SqlCommand("SP_User_IsExistByUserName", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
@@ -617,7 +618,7 @@ namespace MoneyMindManager_DataAccess
             {
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_GetUserSaltByUserName]", connection))
+                    using (SqlCommand command = new SqlCommand("SP_User_GetSaltByUserName", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.AddWithValue("@UserName", (string.IsNullOrEmpty(userName)) ? DBNull.Value : (object)userName);

@@ -43,10 +43,10 @@
             this.lblHeader.ForeColor = System.Drawing.Color.Black;
             this.lblHeader.Location = new System.Drawing.Point(0, 0);
             this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(1210, 50);
+            this.lblHeader.Size = new System.Drawing.Size(1210, 60);
             this.lblHeader.TabIndex = 40;
             this.lblHeader.Text = "معلومات المعاملة";
-            this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblHeader.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // guna2Panel2
             // 
@@ -57,7 +57,7 @@
             this.guna2Panel2.Controls.Add(this.ctrlMainTransactionInfo1);
             this.guna2Panel2.Controls.Add(this.gbtnClose);
             this.guna2Panel2.FillColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.guna2Panel2.Location = new System.Drawing.Point(329, 76);
+            this.guna2Panel2.Location = new System.Drawing.Point(329, 108);
             this.guna2Panel2.Name = "guna2Panel2";
             this.guna2Panel2.ShadowDecoration.BorderRadius = 20;
             this.guna2Panel2.ShadowDecoration.Color = System.Drawing.Color.DarkGray;

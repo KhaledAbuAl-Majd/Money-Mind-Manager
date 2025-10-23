@@ -34,6 +34,12 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
         public frmAddUpdateIncomeAndExpeseTransction(bool isIncome,int voucherID)
         {
+            if (!_CheckPermissions())
+            {
+                this.Dispose();
+                return;
+            }
+
             InitializeComponent();
             Mode = enMode.AddNew;
             this._VoucherID = voucherID;
@@ -44,9 +50,21 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
         public frmAddUpdateIncomeAndExpeseTransction(int transactionID)
         {
+            if (!_CheckPermissions())
+            {
+                this.Dispose();
+                return;
+            }
+
             InitializeComponent();
             Mode = enMode.Update;
             this._TransactionID = transactionID;
+        }
+
+        bool _CheckPermissions()
+        {
+            return clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.AddUpdateIETVoucher_Transactions,
+                "ليس لديك صلاحية (إضافة/تعديل مستندات - معاملات (واردات,مصروفات,مرتجعات المصروفات.");
         }
 
         private int? _TransactionID { get; set; }
@@ -115,9 +133,8 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
         async Task _UpdateMode()
         {
             ChangeHeaderValue("تعديل بيانات المعاملة");
-            int currentUserID = Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID);
 
-            var searchedTransaction = await clsIncomeAndExpenseTransaction.FindTransactionByTransactionID(Convert.ToInt32(_TransactionID), currentUserID);
+            var searchedTransaction = await clsIncomeAndExpenseTransaction.FindTransactionByTransactionID(Convert.ToInt32(_TransactionID));
 
             if (searchedTransaction == null)
             {
@@ -208,7 +225,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             }
 
 
-            if (await _Transaction.Save(Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID)))
+            if (await _Transaction.Save())
             {
                 if (Mode == enMode.AddNew)
                 {
@@ -314,7 +331,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             if (clsGlobalMessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف المعاملة ؟ ", "طلب مواقفقة", MessageBoxButtons.OKCancel,
                MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
             {
-                if (await clsIncomeAndExpenseTransaction.DeleteIncomeAndExpenseTransactionByID(Convert.ToInt32(_TransactionID), Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID)))
+                if (await clsIncomeAndExpenseTransaction.DeleteIncomeAndExpenseTransactionByID(Convert.ToInt32(_TransactionID)))
                 {
                     _isSaved = true;
                     gbtnClose.PerformClick();

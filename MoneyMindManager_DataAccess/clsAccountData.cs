@@ -27,7 +27,7 @@ namespace MoneyMindManager_DataAccess
             {
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_CreateAccount]", connection))
+                    using (SqlCommand command = new SqlCommand("SP_Account_Create", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
@@ -75,7 +75,7 @@ namespace MoneyMindManager_DataAccess
 
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>Updating Result</returns>
-        public static async Task<bool> UpdateAccount(int accountID, string accountName, bool isActive, string description, bool RaiseEventOnErrorOccured = true)
+        public static async Task<bool> UpdateAccount( string accountName, bool isActive, string description,int currentUserID, bool RaiseEventOnErrorOccured = true)
         {
             bool result = false;
 
@@ -83,14 +83,14 @@ namespace MoneyMindManager_DataAccess
             {
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_UpdateAccountByAccountID]", connection))
+                    using (SqlCommand command = new SqlCommand("SP_Account_UpdateByUserID", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
-                        command.Parameters.AddWithValue("@AccountID", accountID);
                         command.Parameters.AddWithValue("@AccountName", accountName);
                         command.Parameters.AddWithValue("@IsActive", isActive);
                         command.Parameters.AddWithValue("@Description", string.IsNullOrEmpty(description) ? System.DBNull.Value : (object)description);
+                        command.Parameters.AddWithValue("@CurrentUserID", currentUserID);
 
                         SqlParameter retunValue = new SqlParameter("@ReturnVal", SqlDbType.Int)
                         {
@@ -127,7 +127,7 @@ namespace MoneyMindManager_DataAccess
             {
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_GetAccountByAccountID]", connection))
+                    using (SqlCommand command = new SqlCommand("SP_Account_GetByAccountID", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
@@ -180,7 +180,7 @@ namespace MoneyMindManager_DataAccess
             {
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_IsAccountExistByAccountName]", connection))
+                    using (SqlCommand command = new SqlCommand("SP_Account_IsExistByAccountName", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
@@ -221,7 +221,7 @@ namespace MoneyMindManager_DataAccess
             {
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_IsAccountExistByAccountName]", connection))
+                    using (SqlCommand command = new SqlCommand("SP_Account_IsExistByAccountName", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 

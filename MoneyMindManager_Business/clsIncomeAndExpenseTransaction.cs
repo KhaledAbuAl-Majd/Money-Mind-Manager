@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MoneyMindManager_DataAccess;
+using MoneyMindManagerGlobal;
 using static MoneyMindManagerGlobal.clsDataColumns.clsIncomeAndExpenseTransactionsClasses;
 
 namespace MoneyMindManager_Business
@@ -50,61 +51,65 @@ namespace MoneyMindManager_Business
             this.CategoryInfo = null;
         }
 
-        async Task<bool> _AddNewTransaction(int currentUserID)
+        async Task<bool> _AddNewTransaction()
         {
             this.CreatedDate = DateTime.Now;
-            this.CreatedByUserID = currentUserID;
+            this.CreatedByUserID = Convert.ToInt32(clsGlobalSession.CurrentUserID);
 
             this.MainTransactionID = await clsIncomeAndExpenseTransactionData.AddNewIncomeAndExpenseTransaction(Convert.ToInt32(VoucherID)
-                , Convert.ToInt32(CategoryID), Amount,Purpose, currentUserID);
+                , Convert.ToInt32(CategoryID), Amount,Purpose, Convert.ToInt32(clsGlobalSession.CurrentUserID));
 
             return this.MainTransactionID != null;
         }
 
-        async Task<bool> _UpdateTransaction(int currentUserID)
+        async Task<bool> _UpdateTransaction()
         {
             return await clsIncomeAndExpenseTransactionData.UpdateIncomeAndExpenseTransactoinByID
-                (Convert.ToInt32(MainTransactionID),Amount, Convert.ToInt32(CategoryID),Purpose, currentUserID);
+                (Convert.ToInt32(MainTransactionID),Amount, Convert.ToInt32(CategoryID),Purpose, Convert.ToInt32(clsGlobalSession.CurrentUserID));
         }
 
-        new private async Task<bool> _RefresheCompositionObjects(int currentUserID)
+        new private async Task<bool> _RefresheCompositionObjects()
         {
-            this.VouhcerInfo = await clsIncomeAndExpenseVoucher.FindVoucherByVoucherID(Convert.ToInt32(VoucherID), currentUserID);
-            this.CategoryInfo = await clsIncomeAndExpenseCategory.FindCategoryByCategoryID(Convert.ToInt32(CategoryID), currentUserID);
+            this.VouhcerInfo = await clsIncomeAndExpenseVoucher.FindVoucherByVoucherID(Convert.ToInt32(VoucherID));
+            this.CategoryInfo = await clsIncomeAndExpenseCategory.FindCategoryByCategoryID(Convert.ToInt32(CategoryID));
 
-            return (VouhcerInfo != null && CategoryInfo != null && await base.RefreshData(currentUserID));
+            return (VouhcerInfo != null && CategoryInfo != null && await base.RefreshData());
         }
 
-        public async Task<bool> Save(int currentUserID)
+        public async Task<bool> Save()
         {
+            if (!clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.AddUpdateIETVoucher_Transactions,
+            "ليس لديك صلاحية (إضافة/تعديل مستندات - معاملات (واردات,مصروفات,مرتجعات المصروفات."))
+                return false;
+
             switch (Mode)
             {
                 case enMode.AddNew:
                     {
-                        if (await _AddNewTransaction(currentUserID))
+                        if (await _AddNewTransaction())
                         {
                             Mode = enMode.Update;
-                            await this._RefresheCompositionObjects(currentUserID);
+                            await this._RefresheCompositionObjects();
                             return true;
                         }
                         else
                             return false;
                     }
                 case enMode.Update:
-                    return await _UpdateTransaction(currentUserID);
+                    return await _UpdateTransaction();
             }
 
             return false;
         }
 
-        public static async Task<clsIncomeAndExpenseTransaction> FindTransactionByTransactionID(int transactionID, int currentUserID)
+        public static async Task<clsIncomeAndExpenseTransaction> FindTransactionByTransactionID(int transactionID)
         {
-            var VC = await clsIncomeAndExpenseTransactionData.GetIncomeAndExpenseTransactionInfoByID(transactionID, currentUserID);
+            var VC = await clsIncomeAndExpenseTransactionData.GetIncomeAndExpenseTransactionInfoByID(transactionID, Convert.ToInt32(clsGlobalSession.CurrentUserID));
 
-            var result = await  clsMainTransaction.FindMainTransactionInfoByID(transactionID, currentUserID);
+            var result = await  clsMainTransaction.FindMainTransactionInfoByID(transactionID);
 
-            var voucherInfo = await clsIncomeAndExpenseVoucher.FindVoucherByVoucherID(VC.VoucherID, currentUserID);
-            var categoryInfo = await clsIncomeAndExpenseCategory.FindCategoryByCategoryID(VC.CategoryID, currentUserID);
+            var voucherInfo = await clsIncomeAndExpenseVoucher.FindVoucherByVoucherID(VC.VoucherID);
+            var categoryInfo = await clsIncomeAndExpenseCategory.FindCategoryByCategoryID(VC.CategoryID);
 
             if (result == null || voucherInfo == null || categoryInfo == null)
                 return null;
@@ -116,19 +121,23 @@ namespace MoneyMindManager_Business
                 ,voucherInfo, categoryInfo);
         }
 
-        public static async Task<bool> DeleteIncomeAndExpenseTransactionByID(int transactionID,int currentUserID)
+        public static async Task<bool> DeleteIncomeAndExpenseTransactionByID(int transactionID)
         {
-            return await clsIncomeAndExpenseTransactionData.DeleteIncomeAndExpenseTransactoinByID(transactionID, currentUserID);
+            if (!clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.DeleteIETVoucher_Transactions,
+            "ليس لديك صلاحية (حذف مستندات - معاملات (واردات,مصروفات,مرتجعات المصروفات."))
+                return false;
+
+            return await clsIncomeAndExpenseTransactionData.DeleteIncomeAndExpenseTransactoinByID(transactionID, Convert.ToInt32(clsGlobalSession.CurrentUserID));
         }
 
-        public static async Task<clsGetAllIncomeAndExpenseTransactions> GetAllIncomeAndExpensTransactions(int voucherID, int currentUserID, short pageNumber)
+        public static async Task<clsGetAllIncomeAndExpenseTransactions> GetAllIncomeAndExpensTransactions(int voucherID, short pageNumber)
         {
-            return await clsIncomeAndExpenseTransactionData.GetAllIncomeAndExpensTransactions(voucherID, currentUserID, pageNumber);
+            return await clsIncomeAndExpenseTransactionData.GetAllIncomeAndExpensTransactions(voucherID, Convert.ToInt32(clsGlobalSession.CurrentUserID), pageNumber);
         }
 
-        public static async Task<DataTable> GetAllIncomeAndExpensTransactionsWithoutPaging(int voucherID, int currentUserID)
+        public static async Task<DataTable> GetAllIncomeAndExpensTransactionsWithoutPaging(int voucherID)
         {
-            return await clsIncomeAndExpenseTransactionData.GetAllIncomeAndExpensTransactionsWithoutPaging(voucherID, currentUserID);
+            return await clsIncomeAndExpenseTransactionData.GetAllIncomeAndExpensTransactionsWithoutPaging(voucherID, Convert.ToInt32(clsGlobalSession.CurrentUserID));
         }
     }
 }

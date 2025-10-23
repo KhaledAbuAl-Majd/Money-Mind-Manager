@@ -29,6 +29,8 @@ namespace MoneyMindManager_Presentation.Income_And_Expense
             _voucherType = voucherType;
         }
 
+
+
         enVoucherType _voucherType;
 
         void ChangeHeaderValue(string txt)
@@ -46,12 +48,12 @@ namespace MoneyMindManager_Presentation.Income_And_Expense
             frm.FormBorderStyle = FormBorderStyle.None;
             frm.Dock = DockStyle.Fill;
 
-            gpnlFormContainer.Controls.Clear();
-            
-            gpnlFormContainer.Controls.Add(frm);
 
             if (!frm.IsDisposed)
             {
+                gpnlFormContainer.Controls.Clear();
+
+                gpnlFormContainer.Controls.Add(frm);
                 frm.Show();
                 frm.BringToFront();
             }

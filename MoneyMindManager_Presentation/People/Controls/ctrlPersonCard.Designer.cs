@@ -56,6 +56,12 @@
             this.klblCreatedDate = new KhaledControlLibrary1.KhaledLabel();
             this.gbtnEditPerson = new Guna.UI2.WinForms.Guna2Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.label2 = new System.Windows.Forms.Label();
+            this.kgtxtReceivable = new KhaledControlLibrary1.KhaledGuna2TextBox();
+            this.guna2PictureBox7 = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.kgtxtPayable = new KhaledControlLibrary1.KhaledGuna2TextBox();
+            this.guna2PictureBox10 = new Guna.UI2.WinForms.Guna2PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox3)).BeginInit();
@@ -64,6 +70,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox10)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -128,7 +136,7 @@
             this.guna2PictureBox3.BackColor = System.Drawing.Color.Transparent;
             this.guna2PictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox3.Image")));
             this.guna2PictureBox3.ImageRotate = 0F;
-            this.guna2PictureBox3.Location = new System.Drawing.Point(431, 351);
+            this.guna2PictureBox3.Location = new System.Drawing.Point(431, 349);
             this.guna2PictureBox3.Name = "guna2PictureBox3";
             this.guna2PictureBox3.Size = new System.Drawing.Size(36, 27);
             this.guna2PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -787,7 +795,7 @@
             this.gbtnEditPerson.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnEditPerson.ImageSize = new System.Drawing.Size(25, 25);
             this.gbtnEditPerson.IndicateFocus = true;
-            this.gbtnEditPerson.Location = new System.Drawing.Point(167, 397);
+            this.gbtnEditPerson.Location = new System.Drawing.Point(179, 505);
             this.gbtnEditPerson.Name = "gbtnEditPerson";
             this.gbtnEditPerson.PressedColor = System.Drawing.Color.White;
             this.gbtnEditPerson.Size = new System.Drawing.Size(191, 41);
@@ -800,11 +808,225 @@
             // 
             this.toolTip1.IsBalloon = true;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(422, 399);
+            this.label2.Name = "label2";
+            this.label2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.label2.Size = new System.Drawing.Size(103, 24);
+            this.label2.TabIndex = 121;
+            this.label2.Text = "المستحقات لك :";
+            // 
+            // kgtxtReceivable
+            // 
+            this.kgtxtReceivable.AllowWhiteSpace = true;
+            this.kgtxtReceivable.ApplyTrimAtTextBoxValue = false;
+            this.kgtxtReceivable.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.kgtxtReceivable.BackColor = System.Drawing.Color.Transparent;
+            this.kgtxtReceivable.BorderColor = System.Drawing.Color.DimGray;
+            this.kgtxtReceivable.BorderRadius = 10;
+            this.kgtxtReceivable.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.kgtxtReceivable.DefaultText = "";
+            this.kgtxtReceivable.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.kgtxtReceivable.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.kgtxtReceivable.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.kgtxtReceivable.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.kgtxtReceivable.FillColor = System.Drawing.SystemColors.ControlLight;
+            this.kgtxtReceivable.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.kgtxtReceivable.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kgtxtReceivable.ForeColor = System.Drawing.Color.Black;
+            this.kgtxtReceivable.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.kgtxtReceivable.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Number;
+            this.kgtxtReceivable.IsRequired = false;
+            this.kgtxtReceivable.Location = new System.Drawing.Point(7, 393);
+            this.kgtxtReceivable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.kgtxtReceivable.MaxLength = 150;
+            this.kgtxtReceivable.Name = "kgtxtReceivable";
+            this.kgtxtReceivable.NumberProperties.DecimalNumberProperties.AllowNegative = true;
+            this.kgtxtReceivable.NumberProperties.DecimalNumberProperties.MaxValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.kgtxtReceivable.NumberProperties.DecimalNumberProperties.MaxValueIncluded = true;
+            this.kgtxtReceivable.NumberProperties.DecimalNumberProperties.MaxValueOption = false;
+            this.kgtxtReceivable.NumberProperties.DecimalNumberProperties.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.kgtxtReceivable.NumberProperties.DecimalNumberProperties.MinValueIncluded = true;
+            this.kgtxtReceivable.NumberProperties.DecimalNumberProperties.MinValueOption = false;
+            this.kgtxtReceivable.NumberProperties.FloatNumberProperties.AllowNegative = true;
+            this.kgtxtReceivable.NumberProperties.FloatNumberProperties.MaxValue = 0F;
+            this.kgtxtReceivable.NumberProperties.FloatNumberProperties.MaxValueIncluded = true;
+            this.kgtxtReceivable.NumberProperties.FloatNumberProperties.MaxValueOption = false;
+            this.kgtxtReceivable.NumberProperties.FloatNumberProperties.MinValue = 0F;
+            this.kgtxtReceivable.NumberProperties.FloatNumberProperties.MinValueIncluded = true;
+            this.kgtxtReceivable.NumberProperties.FloatNumberProperties.MinValueOption = false;
+            this.kgtxtReceivable.NumberProperties.IntegerNumberProperties.AllowNegative = true;
+            this.kgtxtReceivable.NumberProperties.IntegerNumberProperties.MaxValue = 0;
+            this.kgtxtReceivable.NumberProperties.IntegerNumberProperties.MaxValueIncluded = true;
+            this.kgtxtReceivable.NumberProperties.IntegerNumberProperties.MaxValueOption = false;
+            this.kgtxtReceivable.NumberProperties.IntegerNumberProperties.MinValue = 0;
+            this.kgtxtReceivable.NumberProperties.IntegerNumberProperties.MinValueIncluded = true;
+            this.kgtxtReceivable.NumberProperties.IntegerNumberProperties.MinValueOption = false;
+            this.kgtxtReceivable.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.N4;
+            this.kgtxtReceivable.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.DecimalNumber;
+            this.kgtxtReceivable.PlaceholderForeColor = System.Drawing.Color.Gray;
+            this.kgtxtReceivable.PlaceholderText = "";
+            this.kgtxtReceivable.ReadOnly = true;
+            this.kgtxtReceivable.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
+            this.kgtxtReceivable.SelectedText = "";
+            this.kgtxtReceivable.ShadowDecoration.BorderRadius = 2;
+            this.kgtxtReceivable.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.kgtxtReceivable.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(2);
+            this.kgtxtReceivable.Size = new System.Drawing.Size(318, 41);
+            this.kgtxtReceivable.TabIndex = 123;
+            this.kgtxtReceivable.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.kgtxtReceivable.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
+            this.kgtxtReceivable.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.kgtxtReceivable.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
+            this.kgtxtReceivable.TextProperties.DateTimeProperties.TimeFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enTimeFormate.None;
+            this.kgtxtReceivable.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
+            this.kgtxtReceivable.TextProperties.MinLength = ((short)(0));
+            this.kgtxtReceivable.TextProperties.MinLengthOption = false;
+            this.kgtxtReceivable.TextProperties.PhoneProperties.AllowPlusSign = true;
+            this.kgtxtReceivable.TextProperties.PhoneProperties.MaxPhoneLength = ((byte)(15));
+            this.kgtxtReceivable.TextProperties.TextFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.enTextFormat.None;
+            this.kgtxtReceivable.TrimEnd = true;
+            this.kgtxtReceivable.TrimStart = true;
+            // 
+            // guna2PictureBox7
+            // 
+            this.guna2PictureBox7.BackColor = System.Drawing.Color.Transparent;
+            this.guna2PictureBox7.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox7.Image")));
+            this.guna2PictureBox7.ImageRotate = 0F;
+            this.guna2PictureBox7.Location = new System.Drawing.Point(384, 396);
+            this.guna2PictureBox7.Name = "guna2PictureBox7";
+            this.guna2PictureBox7.Size = new System.Drawing.Size(36, 27);
+            this.guna2PictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.guna2PictureBox7.TabIndex = 122;
+            this.guna2PictureBox7.TabStop = false;
+            this.guna2PictureBox7.UseTransparentBackground = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(407, 448);
+            this.label3.Name = "label3";
+            this.label3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.label3.Size = new System.Drawing.Size(118, 24);
+            this.label3.TabIndex = 124;
+            this.label3.Text = "المستحقات عليك :";
+            // 
+            // kgtxtPayable
+            // 
+            this.kgtxtPayable.AllowWhiteSpace = true;
+            this.kgtxtPayable.ApplyTrimAtTextBoxValue = false;
+            this.kgtxtPayable.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.kgtxtPayable.BackColor = System.Drawing.Color.Transparent;
+            this.kgtxtPayable.BorderColor = System.Drawing.Color.DimGray;
+            this.kgtxtPayable.BorderRadius = 10;
+            this.kgtxtPayable.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.kgtxtPayable.DefaultText = "";
+            this.kgtxtPayable.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.kgtxtPayable.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.kgtxtPayable.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.kgtxtPayable.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.kgtxtPayable.FillColor = System.Drawing.SystemColors.ControlLight;
+            this.kgtxtPayable.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.kgtxtPayable.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kgtxtPayable.ForeColor = System.Drawing.Color.Black;
+            this.kgtxtPayable.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.kgtxtPayable.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Number;
+            this.kgtxtPayable.IsRequired = false;
+            this.kgtxtPayable.Location = new System.Drawing.Point(7, 442);
+            this.kgtxtPayable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.kgtxtPayable.MaxLength = 150;
+            this.kgtxtPayable.Name = "kgtxtPayable";
+            this.kgtxtPayable.NumberProperties.DecimalNumberProperties.AllowNegative = true;
+            this.kgtxtPayable.NumberProperties.DecimalNumberProperties.MaxValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.kgtxtPayable.NumberProperties.DecimalNumberProperties.MaxValueIncluded = true;
+            this.kgtxtPayable.NumberProperties.DecimalNumberProperties.MaxValueOption = false;
+            this.kgtxtPayable.NumberProperties.DecimalNumberProperties.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.kgtxtPayable.NumberProperties.DecimalNumberProperties.MinValueIncluded = true;
+            this.kgtxtPayable.NumberProperties.DecimalNumberProperties.MinValueOption = false;
+            this.kgtxtPayable.NumberProperties.FloatNumberProperties.AllowNegative = true;
+            this.kgtxtPayable.NumberProperties.FloatNumberProperties.MaxValue = 0F;
+            this.kgtxtPayable.NumberProperties.FloatNumberProperties.MaxValueIncluded = true;
+            this.kgtxtPayable.NumberProperties.FloatNumberProperties.MaxValueOption = false;
+            this.kgtxtPayable.NumberProperties.FloatNumberProperties.MinValue = 0F;
+            this.kgtxtPayable.NumberProperties.FloatNumberProperties.MinValueIncluded = true;
+            this.kgtxtPayable.NumberProperties.FloatNumberProperties.MinValueOption = false;
+            this.kgtxtPayable.NumberProperties.IntegerNumberProperties.AllowNegative = true;
+            this.kgtxtPayable.NumberProperties.IntegerNumberProperties.MaxValue = 0;
+            this.kgtxtPayable.NumberProperties.IntegerNumberProperties.MaxValueIncluded = true;
+            this.kgtxtPayable.NumberProperties.IntegerNumberProperties.MaxValueOption = false;
+            this.kgtxtPayable.NumberProperties.IntegerNumberProperties.MinValue = 0;
+            this.kgtxtPayable.NumberProperties.IntegerNumberProperties.MinValueIncluded = true;
+            this.kgtxtPayable.NumberProperties.IntegerNumberProperties.MinValueOption = false;
+            this.kgtxtPayable.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.N4;
+            this.kgtxtPayable.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.DecimalNumber;
+            this.kgtxtPayable.PlaceholderForeColor = System.Drawing.Color.Gray;
+            this.kgtxtPayable.PlaceholderText = "";
+            this.kgtxtPayable.ReadOnly = true;
+            this.kgtxtPayable.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
+            this.kgtxtPayable.SelectedText = "";
+            this.kgtxtPayable.ShadowDecoration.BorderRadius = 2;
+            this.kgtxtPayable.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.kgtxtPayable.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(2);
+            this.kgtxtPayable.Size = new System.Drawing.Size(318, 41);
+            this.kgtxtPayable.TabIndex = 126;
+            this.kgtxtPayable.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.kgtxtPayable.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
+            this.kgtxtPayable.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.kgtxtPayable.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
+            this.kgtxtPayable.TextProperties.DateTimeProperties.TimeFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enTimeFormate.None;
+            this.kgtxtPayable.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
+            this.kgtxtPayable.TextProperties.MinLength = ((short)(0));
+            this.kgtxtPayable.TextProperties.MinLengthOption = false;
+            this.kgtxtPayable.TextProperties.PhoneProperties.AllowPlusSign = true;
+            this.kgtxtPayable.TextProperties.PhoneProperties.MaxPhoneLength = ((byte)(15));
+            this.kgtxtPayable.TextProperties.TextFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.enTextFormat.None;
+            this.kgtxtPayable.TrimEnd = true;
+            this.kgtxtPayable.TrimStart = true;
+            // 
+            // guna2PictureBox10
+            // 
+            this.guna2PictureBox10.BackColor = System.Drawing.Color.Transparent;
+            this.guna2PictureBox10.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox10.Image")));
+            this.guna2PictureBox10.ImageRotate = 0F;
+            this.guna2PictureBox10.Location = new System.Drawing.Point(374, 445);
+            this.guna2PictureBox10.Name = "guna2PictureBox10";
+            this.guna2PictureBox10.Size = new System.Drawing.Size(36, 27);
+            this.guna2PictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.guna2PictureBox10.TabIndex = 125;
+            this.guna2PictureBox10.TabStop = false;
+            this.guna2PictureBox10.UseTransparentBackground = true;
+            // 
             // ctrlPersonCard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.kgtxtPayable);
+            this.Controls.Add(this.guna2PictureBox10);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.kgtxtReceivable);
+            this.Controls.Add(this.guna2PictureBox7);
             this.Controls.Add(this.gbtnEditPerson);
             this.Controls.Add(this.klblCreatedDate);
             this.Controls.Add(this.label16);
@@ -831,7 +1053,7 @@
             this.Controls.Add(this.guna2PictureBox1);
             this.Controls.Add(this.lblPersonID);
             this.Name = "ctrlPersonCard";
-            this.Size = new System.Drawing.Size(534, 449);
+            this.Size = new System.Drawing.Size(534, 556);
             this.Load += new System.EventHandler(this.ctrlPersonCard_Load);
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox2)).EndInit();
@@ -841,6 +1063,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox10)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -874,5 +1098,11 @@
         private KhaledControlLibrary1.KhaledLabel klblCreatedDate;
         private Guna.UI2.WinForms.Guna2Button gbtnEditPerson;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Label label2;
+        private KhaledControlLibrary1.KhaledGuna2TextBox kgtxtReceivable;
+        private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox7;
+        private System.Windows.Forms.Label label3;
+        private KhaledControlLibrary1.KhaledGuna2TextBox kgtxtPayable;
+        private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox10;
     }
 }

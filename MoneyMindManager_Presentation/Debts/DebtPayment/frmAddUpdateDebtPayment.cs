@@ -34,6 +34,12 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
         public frmAddUpdateDebtPayment(bool isLending, int debtId)
         {
+            if (!_CheckPermissions())
+            {
+                this.Dispose();
+                return;
+            }
+
             InitializeComponent();
             Mode = enMode.AddNew;
             this._DebtID = debtId;
@@ -43,11 +49,22 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
         public frmAddUpdateDebtPayment(int transactionID)
         {
+            if (!_CheckPermissions())
+            {
+                this.Dispose();
+                return;
+            }
+
             InitializeComponent();
             Mode = enMode.Update;
             this._TransactionID = transactionID;
         }
 
+        bool _CheckPermissions()
+        {
+            return clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.AddUpdateDebt_Payments,
+                "ليس لديك صلاحية إضافة/تعديل (سندات - معاملات سداد) الديون.");
+        }
         private int? _TransactionID { get; set; }
 
         private clsDebtPayment _DebtPayment { get; set; }
@@ -114,9 +131,8 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
         async Task _UpdateMode()
         {
             ChangeHeaderValue("تعديل بيانات معاملة سداد دين");
-            int currentUserID = Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID);
 
-            var searchedDebtPayment = await clsDebtPayment.FindDebtPaymentByTransactionID(Convert.ToInt32(_TransactionID), currentUserID);
+            var searchedDebtPayment = await clsDebtPayment.FindDebtPaymentByTransactionID(Convert.ToInt32(_TransactionID));
 
             if (searchedDebtPayment == null)
             {
@@ -186,7 +202,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             }
 
 
-            if (await _DebtPayment.Save(Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID)))
+            if (await _DebtPayment.Save())
             {
                 if (Mode == enMode.AddNew)
                 {
@@ -278,7 +294,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             if (clsGlobalMessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف المعاملة ؟ ", "طلب مواقفقة", MessageBoxButtons.OKCancel,
                MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
             {
-                if (await clsDebtPayment.DeleteDebtPaymentByID(Convert.ToInt32(_TransactionID), Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID)))
+                if (await clsDebtPayment.DeleteDebtPaymentByID(Convert.ToInt32(_TransactionID)))
                 {
                     _isSaved = true;
                     gbtnClose.PerformClick();

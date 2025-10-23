@@ -489,7 +489,7 @@
             this.groupBox1.Controls.Add(this.lblUseID);
             this.groupBox1.Location = new System.Drawing.Point(7, 7);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(540, 474);
+            this.groupBox1.Size = new System.Drawing.Size(540, 585);
             this.groupBox1.TabIndex = 62;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "معلومات المستخدم";
@@ -517,7 +517,7 @@
             this.gbtnEditUser.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnEditUser.ImageSize = new System.Drawing.Size(25, 25);
             this.gbtnEditUser.IndicateFocus = true;
-            this.gbtnEditUser.Location = new System.Drawing.Point(174, 416);
+            this.gbtnEditUser.Location = new System.Drawing.Point(174, 521);
             this.gbtnEditUser.Name = "gbtnEditUser";
             this.gbtnEditUser.PressedColor = System.Drawing.Color.White;
             this.gbtnEditUser.Size = new System.Drawing.Size(191, 41);
@@ -548,17 +548,18 @@
             this.groupBox2.Location = new System.Drawing.Point(553, 7);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.groupBox2.Size = new System.Drawing.Size(558, 474);
+            this.groupBox2.Size = new System.Drawing.Size(558, 585);
             this.groupBox2.TabIndex = 63;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "معلومات الشخص";
             // 
             // ctrlPersonCard1
             // 
+            this.ctrlPersonCard1.AllowEditingPerson = false;
             this.ctrlPersonCard1.BackColor = System.Drawing.Color.White;
             this.ctrlPersonCard1.Location = new System.Drawing.Point(565, 26);
             this.ctrlPersonCard1.Name = "ctrlPersonCard1";
-            this.ctrlPersonCard1.Size = new System.Drawing.Size(532, 449);
+            this.ctrlPersonCard1.Size = new System.Drawing.Size(532, 553);
             this.ctrlPersonCard1.TabIndex = 0;
             // 
             // toolTip1
@@ -574,7 +575,7 @@
             this.Controls.Add(this.ctrlPersonCard1);
             this.Controls.Add(this.groupBox2);
             this.Name = "ctrlUserCard";
-            this.Size = new System.Drawing.Size(1122, 489);
+            this.Size = new System.Drawing.Size(1122, 603);
             this.Load += new System.EventHandler(this.ctrlUserCard_Load);
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox8)).EndInit();

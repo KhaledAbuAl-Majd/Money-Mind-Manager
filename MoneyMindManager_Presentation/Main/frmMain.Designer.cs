@@ -33,10 +33,9 @@
             this.guna2DragControl1 = new Guna.UI2.WinForms.Guna2DragControl(this.components);
             this.guna2ShadowForm1 = new Guna.UI2.WinForms.Guna2ShadowForm(this.components);
             this.guna2AnimateWindow1 = new Guna.UI2.WinForms.Guna2AnimateWindow(this.components);
-            this.gbtnOverOview = new Guna.UI2.WinForms.Guna2Button();
-            this.gbtnPeople = new Guna.UI2.WinForms.Guna2Button();
             this.gpnlRightBar = new Guna.UI2.WinForms.Guna2Panel();
-            this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.llblChangePassword = new System.Windows.Forms.LinkLabel();
+            this.llblCurrentUserInfo = new System.Windows.Forms.LinkLabel();
             this.guna2Separator1 = new Guna.UI2.WinForms.Guna2Separator();
             this.lblCurrentUserName = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -52,6 +51,9 @@
             this.gcbClose = new Guna.UI2.WinForms.Guna2ControlBox();
             this.gbtnLogout = new Guna.UI2.WinForms.Guna2Button();
             this.gbtnUsers = new Guna.UI2.WinForms.Guna2Button();
+            this.gbtnOverOview = new Guna.UI2.WinForms.Guna2Button();
+            this.gbtnPeople = new Guna.UI2.WinForms.Guna2Button();
+            this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
             this.guna2DragControl2 = new Guna.UI2.WinForms.Guna2DragControl(this.components);
             this.guna2DragControl3 = new Guna.UI2.WinForms.Guna2DragControl(this.components);
             this.gpnlFormContainer = new Guna.UI2.WinForms.Guna2Panel();
@@ -77,72 +79,12 @@
             this.guna2AnimateWindow1.Interval = 250;
             this.guna2AnimateWindow1.TargetForm = this;
             // 
-            // gbtnOverOview
-            // 
-            this.gbtnOverOview.Animated = true;
-            this.gbtnOverOview.BackColor = System.Drawing.Color.Transparent;
-            this.gbtnOverOview.BorderRadius = 5;
-            this.gbtnOverOview.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
-            this.gbtnOverOview.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(102)))), ((int)(((byte)(194)))));
-            this.gbtnOverOview.CheckedState.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbtnOverOview.CheckedState.ForeColor = System.Drawing.Color.White;
-            this.gbtnOverOview.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.gbtnOverOview.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.gbtnOverOview.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.gbtnOverOview.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.gbtnOverOview.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.gbtnOverOview.FillColor = System.Drawing.Color.White;
-            this.gbtnOverOview.Font = new System.Drawing.Font("Segoe UI", 11.25F);
-            this.gbtnOverOview.ForeColor = System.Drawing.Color.Black;
-            this.gbtnOverOview.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(102)))), ((int)(((byte)(194)))));
-            this.gbtnOverOview.HoverState.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbtnOverOview.HoverState.ForeColor = System.Drawing.Color.White;
-            this.gbtnOverOview.Image = ((System.Drawing.Image)(resources.GetObject("gbtnOverOview.Image")));
-            this.gbtnOverOview.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.gbtnOverOview.ImageSize = new System.Drawing.Size(40, 40);
-            this.gbtnOverOview.IndicateFocus = true;
-            this.gbtnOverOview.Location = new System.Drawing.Point(4, 163);
-            this.gbtnOverOview.Name = "gbtnOverOview";
-            this.gbtnOverOview.Size = new System.Drawing.Size(254, 48);
-            this.gbtnOverOview.TabIndex = 0;
-            this.gbtnOverOview.Text = "لمحة عامة";
-            this.gbtnOverOview.Click += new System.EventHandler(this.gbtnOverOview_Click);
-            // 
-            // gbtnPeople
-            // 
-            this.gbtnPeople.Animated = true;
-            this.gbtnPeople.BackColor = System.Drawing.Color.Transparent;
-            this.gbtnPeople.BorderRadius = 5;
-            this.gbtnPeople.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
-            this.gbtnPeople.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(102)))), ((int)(((byte)(194)))));
-            this.gbtnPeople.CheckedState.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbtnPeople.CheckedState.ForeColor = System.Drawing.Color.White;
-            this.gbtnPeople.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.gbtnPeople.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.gbtnPeople.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.gbtnPeople.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.gbtnPeople.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.gbtnPeople.FillColor = System.Drawing.Color.White;
-            this.gbtnPeople.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbtnPeople.ForeColor = System.Drawing.Color.Black;
-            this.gbtnPeople.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(102)))), ((int)(((byte)(194)))));
-            this.gbtnPeople.HoverState.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbtnPeople.HoverState.ForeColor = System.Drawing.Color.White;
-            this.gbtnPeople.Image = ((System.Drawing.Image)(resources.GetObject("gbtnPeople.Image")));
-            this.gbtnPeople.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.gbtnPeople.ImageSize = new System.Drawing.Size(40, 40);
-            this.gbtnPeople.IndicateFocus = true;
-            this.gbtnPeople.Location = new System.Drawing.Point(4, 217);
-            this.gbtnPeople.Name = "gbtnPeople";
-            this.gbtnPeople.Size = new System.Drawing.Size(254, 48);
-            this.gbtnPeople.TabIndex = 1;
-            this.gbtnPeople.Text = "الأشخاص";
-            this.gbtnPeople.Click += new System.EventHandler(this.gbtnPeople_Click);
-            // 
             // gpnlRightBar
             // 
             this.gpnlRightBar.BackColor = System.Drawing.Color.Transparent;
             this.gpnlRightBar.BorderRadius = 15;
+            this.gpnlRightBar.Controls.Add(this.llblChangePassword);
+            this.gpnlRightBar.Controls.Add(this.llblCurrentUserInfo);
             this.gpnlRightBar.Controls.Add(this.guna2Separator1);
             this.gpnlRightBar.Controls.Add(this.lblCurrentUserName);
             this.gpnlRightBar.Controls.Add(this.label5);
@@ -168,24 +110,45 @@
             this.gpnlRightBar.Name = "gpnlRightBar";
             this.gpnlRightBar.ShadowDecoration.BorderRadius = 30;
             this.gpnlRightBar.ShadowDecoration.Color = System.Drawing.Color.DarkGray;
+            this.gpnlRightBar.ShadowDecoration.Depth = 40;
             this.gpnlRightBar.ShadowDecoration.Enabled = true;
             this.gpnlRightBar.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(10, 5, 0, 5);
             this.gpnlRightBar.Size = new System.Drawing.Size(263, 809);
             this.gpnlRightBar.TabIndex = 3;
             // 
-            // guna2PictureBox1
+            // llblChangePassword
             // 
-            this.guna2PictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2PictureBox1.FillColor = System.Drawing.Color.Transparent;
-            this.guna2PictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox1.Image")));
-            this.guna2PictureBox1.ImageRotate = 0F;
-            this.guna2PictureBox1.Location = new System.Drawing.Point(6, 29);
-            this.guna2PictureBox1.Name = "guna2PictureBox1";
-            this.guna2PictureBox1.Size = new System.Drawing.Size(252, 128);
-            this.guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.guna2PictureBox1.TabIndex = 126;
-            this.guna2PictureBox1.TabStop = false;
-            this.guna2PictureBox1.UseTransparentBackground = true;
+            this.llblChangePassword.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(95)))), ((int)(((byte)(142)))));
+            this.llblChangePassword.AutoSize = true;
+            this.llblChangePassword.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.llblChangePassword.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.llblChangePassword.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.llblChangePassword.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(91)))), ((int)(((byte)(155)))));
+            this.llblChangePassword.Location = new System.Drawing.Point(42, 123);
+            this.llblChangePassword.Name = "llblChangePassword";
+            this.llblChangePassword.Size = new System.Drawing.Size(107, 21);
+            this.llblChangePassword.TabIndex = 128;
+            this.llblChangePassword.TabStop = true;
+            this.llblChangePassword.Text = "تغيير كلمة السر";
+            this.llblChangePassword.VisitedLinkColor = System.Drawing.Color.Silver;
+            this.llblChangePassword.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llblChangePassword_LinkClicked);
+            // 
+            // llblCurrentUserInfo
+            // 
+            this.llblCurrentUserInfo.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(95)))), ((int)(((byte)(142)))));
+            this.llblCurrentUserInfo.AutoSize = true;
+            this.llblCurrentUserInfo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.llblCurrentUserInfo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.llblCurrentUserInfo.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.llblCurrentUserInfo.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(91)))), ((int)(((byte)(155)))));
+            this.llblCurrentUserInfo.Location = new System.Drawing.Point(147, 123);
+            this.llblCurrentUserInfo.Name = "llblCurrentUserInfo";
+            this.llblCurrentUserInfo.Size = new System.Drawing.Size(72, 21);
+            this.llblCurrentUserInfo.TabIndex = 127;
+            this.llblCurrentUserInfo.TabStop = true;
+            this.llblCurrentUserInfo.Text = "معلوماتك";
+            this.llblCurrentUserInfo.VisitedLinkColor = System.Drawing.Color.Silver;
+            this.llblCurrentUserInfo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llblCurrentUserInfo_LinkClicked);
             // 
             // guna2Separator1
             // 
@@ -204,7 +167,7 @@
             this.lblCurrentUserName.Location = new System.Drawing.Point(3, 45);
             this.lblCurrentUserName.Name = "lblCurrentUserName";
             this.lblCurrentUserName.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.lblCurrentUserName.Size = new System.Drawing.Size(255, 27);
+            this.lblCurrentUserName.Size = new System.Drawing.Size(248, 27);
             this.lblCurrentUserName.TabIndex = 124;
             this.lblCurrentUserName.Text = "خالد أبو المجد";
             // 
@@ -214,7 +177,7 @@
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label5.Location = new System.Drawing.Point(222, 27);
+            this.label5.Location = new System.Drawing.Point(222, 29);
             this.label5.Name = "label5";
             this.label5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label5.Size = new System.Drawing.Size(39, 17);
@@ -486,7 +449,7 @@
             this.guna2ControlBox2.HoverState.FillColor = System.Drawing.Color.Silver;
             this.guna2ControlBox2.HoverState.IconColor = System.Drawing.Color.Black;
             this.guna2ControlBox2.IconColor = System.Drawing.Color.DimGray;
-            this.guna2ControlBox2.Location = new System.Drawing.Point(188, 0);
+            this.guna2ControlBox2.Location = new System.Drawing.Point(182, -1);
             this.guna2ControlBox2.Name = "guna2ControlBox2";
             this.guna2ControlBox2.Size = new System.Drawing.Size(38, 29);
             this.guna2ControlBox2.TabIndex = 12;
@@ -507,7 +470,7 @@
             this.gcbClose.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(17)))), ((int)(((byte)(35)))));
             this.gcbClose.HoverState.IconColor = System.Drawing.Color.White;
             this.gcbClose.IconColor = System.Drawing.Color.DimGray;
-            this.gcbClose.Location = new System.Drawing.Point(225, 0);
+            this.gcbClose.Location = new System.Drawing.Point(223, -1);
             this.gcbClose.Name = "gcbClose";
             this.gcbClose.Size = new System.Drawing.Size(38, 29);
             this.gcbClose.TabIndex = 11;
@@ -578,6 +541,82 @@
             this.gbtnUsers.Text = "المستخدمين";
             this.gbtnUsers.Click += new System.EventHandler(this.gbtnUsers_Click);
             // 
+            // gbtnOverOview
+            // 
+            this.gbtnOverOview.Animated = true;
+            this.gbtnOverOview.BackColor = System.Drawing.Color.Transparent;
+            this.gbtnOverOview.BorderRadius = 5;
+            this.gbtnOverOview.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            this.gbtnOverOview.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(102)))), ((int)(((byte)(194)))));
+            this.gbtnOverOview.CheckedState.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnOverOview.CheckedState.ForeColor = System.Drawing.Color.White;
+            this.gbtnOverOview.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gbtnOverOview.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnOverOview.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnOverOview.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.gbtnOverOview.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.gbtnOverOview.FillColor = System.Drawing.Color.White;
+            this.gbtnOverOview.Font = new System.Drawing.Font("Segoe UI", 11.25F);
+            this.gbtnOverOview.ForeColor = System.Drawing.Color.Black;
+            this.gbtnOverOview.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(102)))), ((int)(((byte)(194)))));
+            this.gbtnOverOview.HoverState.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnOverOview.HoverState.ForeColor = System.Drawing.Color.White;
+            this.gbtnOverOview.Image = ((System.Drawing.Image)(resources.GetObject("gbtnOverOview.Image")));
+            this.gbtnOverOview.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.gbtnOverOview.ImageSize = new System.Drawing.Size(40, 40);
+            this.gbtnOverOview.IndicateFocus = true;
+            this.gbtnOverOview.Location = new System.Drawing.Point(4, 163);
+            this.gbtnOverOview.Name = "gbtnOverOview";
+            this.gbtnOverOview.Size = new System.Drawing.Size(254, 48);
+            this.gbtnOverOview.TabIndex = 0;
+            this.gbtnOverOview.Text = "لمحة عامة";
+            this.gbtnOverOview.Click += new System.EventHandler(this.gbtnOverOview_Click);
+            // 
+            // gbtnPeople
+            // 
+            this.gbtnPeople.Animated = true;
+            this.gbtnPeople.BackColor = System.Drawing.Color.Transparent;
+            this.gbtnPeople.BorderRadius = 5;
+            this.gbtnPeople.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            this.gbtnPeople.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(102)))), ((int)(((byte)(194)))));
+            this.gbtnPeople.CheckedState.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnPeople.CheckedState.ForeColor = System.Drawing.Color.White;
+            this.gbtnPeople.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gbtnPeople.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnPeople.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnPeople.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.gbtnPeople.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.gbtnPeople.FillColor = System.Drawing.Color.White;
+            this.gbtnPeople.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnPeople.ForeColor = System.Drawing.Color.Black;
+            this.gbtnPeople.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(102)))), ((int)(((byte)(194)))));
+            this.gbtnPeople.HoverState.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnPeople.HoverState.ForeColor = System.Drawing.Color.White;
+            this.gbtnPeople.Image = ((System.Drawing.Image)(resources.GetObject("gbtnPeople.Image")));
+            this.gbtnPeople.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.gbtnPeople.ImageSize = new System.Drawing.Size(40, 40);
+            this.gbtnPeople.IndicateFocus = true;
+            this.gbtnPeople.Location = new System.Drawing.Point(4, 217);
+            this.gbtnPeople.Name = "gbtnPeople";
+            this.gbtnPeople.Size = new System.Drawing.Size(254, 48);
+            this.gbtnPeople.TabIndex = 1;
+            this.gbtnPeople.Text = "الأشخاص";
+            this.gbtnPeople.Click += new System.EventHandler(this.gbtnPeople_Click);
+            // 
+            // guna2PictureBox1
+            // 
+            this.guna2PictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.guna2PictureBox1.FillColor = System.Drawing.Color.Transparent;
+            this.guna2PictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox1.Image")));
+            this.guna2PictureBox1.ImageRotate = 0F;
+            this.guna2PictureBox1.Location = new System.Drawing.Point(6, 29);
+            this.guna2PictureBox1.Name = "guna2PictureBox1";
+            this.guna2PictureBox1.Size = new System.Drawing.Size(252, 128);
+            this.guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.guna2PictureBox1.TabIndex = 126;
+            this.guna2PictureBox1.TabStop = false;
+            this.guna2PictureBox1.UseTransparentBackground = true;
+            // 
             // guna2DragControl2
             // 
             this.guna2DragControl2.DockIndicatorTransparencyValue = 0.6D;
@@ -613,8 +652,6 @@
             this.Controls.Add(this.gpnlRightBar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximumSize = new System.Drawing.Size(1473, 809);
-            this.MinimumSize = new System.Drawing.Size(263, 809);
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Money Mind Manager";
@@ -654,5 +691,7 @@
         private System.Windows.Forms.Label label5;
         private Guna.UI2.WinForms.Guna2Separator guna2Separator1;
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
+        private System.Windows.Forms.LinkLabel llblChangePassword;
+        private System.Windows.Forms.LinkLabel llblCurrentUserInfo;
     }
 }

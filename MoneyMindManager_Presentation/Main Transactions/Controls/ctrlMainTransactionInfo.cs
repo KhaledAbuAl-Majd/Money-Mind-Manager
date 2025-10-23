@@ -22,7 +22,7 @@ namespace MoneyMindManager_Presentation.Transactions.Controls
         public async Task<bool> LoadMainTransaction(int transactionID)
         {
 
-            MainTransaction = await clsMainTransaction.FindMainTransactionInfoByID(transactionID, Convert.ToInt32(clsGlobal_UI.CurrentUser.UserID));
+            MainTransaction = await clsMainTransaction.FindMainTransactionInfoByID(transactionID);
 
             if (MainTransaction == null)
             {

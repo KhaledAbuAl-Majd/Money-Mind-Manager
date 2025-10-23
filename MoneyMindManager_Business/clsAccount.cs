@@ -21,9 +21,9 @@ namespace MoneyMindManager_Business
         /// <summary>
         /// Get AccountOwner
         /// </summary>
-        public async Task<clsUser> GetCreatedbyUserInfo(int currentUserID)
+        public async Task<clsUser> GetCreatedbyUserInfo()
         {
-            return await clsUser.FindUserByUserID(Convert.ToInt32(AccountOwnerUserID), currentUserID);
+            return await clsUser.FindUserByUserID(Convert.ToInt32(AccountOwnerUserID));
         }
 
 
@@ -37,7 +37,7 @@ namespace MoneyMindManager_Business
 
         private async Task<bool> _UpdateAccount()
         {
-            return await clsAccountData.UpdateAccount(AccountID, AccountName, IsActive, Description);
+            return await clsAccountData.UpdateAccount(AccountName, IsActive, Description,Convert.ToInt32(clsGlobalSession.CurrentUserID));
         }
 
         public async Task<bool> Save()

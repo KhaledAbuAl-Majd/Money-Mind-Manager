@@ -27,8 +27,44 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 return;
             }
 
-            InitializeComponent();
             _voucherType = voucherType;
+
+            if (!_CheckPermissions())
+            {
+                this.Dispose();
+                return;
+            }
+
+            InitializeComponent();
+        }
+
+        bool _CheckPermissions()
+        {
+            string errorMessage = "";
+            clsUser.enPermissions permission;
+
+            switch (_voucherType)
+            {
+                case enVoucherType.Incomes:
+                    errorMessage = "ليس لديك صلاحية قائمة مستندات الواردات.";
+                    permission = clsUser.enPermissions.IncomeVouchersList;
+                    break;
+
+                case enVoucherType.Expenses:
+                    errorMessage = "ليس لديك صلاحية قائمة مستندات المصروفات.";
+                    permission = clsUser.enPermissions.ExpenseVouchersList;
+                    break;
+
+                case enVoucherType.ExpensesReturn:
+                    errorMessage = "ليس لديك صلاحية قائمة مستندات مرتجعات المصروفات.";
+                    permission = clsUser.enPermissions.ExpenseReturnVouchersList;
+                    break;
+
+                default:
+                    return false;
+            }
+
+            return clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(permission, errorMessage);
         }
 
         enVoucherType _voucherType;
@@ -83,30 +119,28 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             else
                 return;
 
-            int currentUserID = Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID);
-
             if (filterBy == enFilterBy.All || string.IsNullOrEmpty(kgtxtFilterValue.ValidatedText))
             {
                 result = await clsIncomeAndExpenseVoucher.GetAllVouchers(filterByCreatedDate, kgtxtFromData.ValidatedText,
-                    kgtxtToDate.ValidatedText, _voucherType,currentUserID,_pageNumber);
+                    kgtxtToDate.ValidatedText, _voucherType,_pageNumber);
             }
             else if (filterBy == enFilterBy.VoucherID)
             {
          int voucherID = Convert.ToInt32(kgtxtFilterValue.ValidatedText);
                 result = await clsIncomeAndExpenseVoucher.GetAllVouchersByVoucherID(voucherID, filterByCreatedDate, kgtxtFromData.ValidatedText,
-                    kgtxtToDate.ValidatedText, _voucherType, currentUserID, _pageNumber);
+                    kgtxtToDate.ValidatedText, _voucherType, _pageNumber);
             }
             else if (filterBy == enFilterBy.VoucherName)
             {
                 string voucherName = kgtxtFilterValue.ValidatedText;
                 result = await clsIncomeAndExpenseVoucher.GetAllVouchersByVoucherName(voucherName, filterByCreatedDate, kgtxtFromData.ValidatedText,
-                    kgtxtToDate.ValidatedText, _voucherType, currentUserID, _pageNumber);
+                    kgtxtToDate.ValidatedText, _voucherType, _pageNumber);
             }
             else if (filterBy == enFilterBy.UserName)
             {
                 string userName = kgtxtFilterValue.ValidatedText;
                 result = await clsIncomeAndExpenseVoucher.GetAllVouchersByUserName(userName, filterByCreatedDate, kgtxtFromData.ValidatedText,
-                    kgtxtToDate.ValidatedText, _voucherType, currentUserID, _pageNumber);
+                    kgtxtToDate.ValidatedText, _voucherType, _pageNumber);
             }
             else
                 return;
@@ -198,6 +232,8 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
         async void _RefreshFilter()
         {
+            _pageNumber = 1;
+
             if (gcbFilterBy.SelectedIndex == 0)
                 await _LoadDataAtDataGridView(enFilterBy.All);
             else
@@ -411,30 +447,29 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             else
                 return;
 
-            int currentUserID = Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID);
 
             if (_filterBy == enFilterBy.All || string.IsNullOrEmpty(kgtxtFilterValue.ValidatedText))
             {
                 result = await clsIncomeAndExpenseVoucher.GetAllVouchersWithoutPaging(filterByCreatedDate, kgtxtFromData.ValidatedText,
-                    kgtxtToDate.ValidatedText, _voucherType, currentUserID);
+                    kgtxtToDate.ValidatedText, _voucherType);
             }
             else if (_filterBy == enFilterBy.VoucherID)
             {
                 int voucherID = Convert.ToInt32(kgtxtFilterValue.ValidatedText);
                 result = await clsIncomeAndExpenseVoucher.GetAllVouchersByVoucherIDWithoutPaging(voucherID, filterByCreatedDate, kgtxtFromData.ValidatedText,
-                    kgtxtToDate.ValidatedText, _voucherType, currentUserID);
+                    kgtxtToDate.ValidatedText, _voucherType);
             }
             else if (_filterBy == enFilterBy.VoucherName)
             {
                 string voucherName = kgtxtFilterValue.ValidatedText;
                 result = await clsIncomeAndExpenseVoucher.GetAllVouchersByVoucherNameWithoutPaging(voucherName, filterByCreatedDate, kgtxtFromData.ValidatedText,
-                    kgtxtToDate.ValidatedText, _voucherType, currentUserID);
+                    kgtxtToDate.ValidatedText, _voucherType);
             }
             else if (_filterBy == enFilterBy.UserName)
             {
                 string userName = kgtxtFilterValue.ValidatedText;
                 result = await clsIncomeAndExpenseVoucher.GetAllVouchersByUserNameWithoutPaging(userName, filterByCreatedDate, kgtxtFromData.ValidatedText,
-                    kgtxtToDate.ValidatedText, _voucherType, currentUserID);
+                    kgtxtToDate.ValidatedText, _voucherType);
             }
             else
                 return;

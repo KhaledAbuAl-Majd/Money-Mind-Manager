@@ -43,7 +43,7 @@ namespace MoneyMindManager_Presentation
             kgtxtDiscription.Text = _AccountInfo.Description;
             kgtxtBalance.RefreshNumber_DateTimeFormattedText(_AccountInfo.Balance.ToString());
             kgtxtCreatedDate.RefreshNumber_DateTimeFormattedText(_AccountInfo.CreatedDate.ToString());
-            var ownerUser = await _AccountInfo.GetCreatedbyUserInfo(Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID));
+            var ownerUser = await _AccountInfo.GetCreatedbyUserInfo();
             kgtxtCreatedByUserName.Text = ownerUser.UserName;
             kgtxtDefaultCurrency.Text = _AccountInfo.DefaultCurrencyInfo?.CurrencyName;
         }
@@ -59,7 +59,7 @@ namespace MoneyMindManager_Presentation
             _SetReadOnlyAtTextBox(kgtxtCreatedByUserName);
             _SetReadOnlyAtTextBox(kgtxtDefaultCurrency);
 
-            if(_AccountInfo.AccountOwnerUserID == (Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID)))
+            if(clsGlobal_UI.CurrentUser.IsAdmin)
             {
                 _Mode = enMode.UpdatAble;
                 _CancelReadOnlyAtTextBox(kgtxtAccountName);
@@ -74,13 +74,11 @@ namespace MoneyMindManager_Presentation
                 gbtnSave.Enabled = false;
             }
 
+            kgtxtBalance.UseSystemPasswordChar = !clsGlobal_UI.CurrentUser.IsHasPermission(clsUser.enPermissions.AccountBalance); 
+
             await _LoadData();
         }
 
-        private void gbtnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
 
         private async void gbtnSave_Click(object sender, EventArgs e)
         {

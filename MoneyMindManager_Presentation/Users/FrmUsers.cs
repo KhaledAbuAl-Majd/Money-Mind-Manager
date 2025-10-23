@@ -20,8 +20,17 @@ namespace MoneyMindManager_Presentation
     {
         public FrmUsers()
         {
+            if (!clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.UsersList,
+                "ليس لديك صلاحية قائمة المستخدمين."))
+            {
+                this.Dispose();
+                return;
+            }
+
             InitializeComponent();
         }
+
+
 
         enum enFilterBy { All,UserID, UserName, PersonName };
 
@@ -71,26 +80,24 @@ namespace MoneyMindManager_Presentation
 
             clsDataColumns.clsUserClasses.clsGetAllUsers result = null;
 
-            int currentUserID = Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID);
-
             if (filterBy == enFilterBy.All || (string.IsNullOrEmpty(kgtxtFilterValue.ValidatedText)))
             {
-                result = await clsUser.GetAllUsers(isActive, _pageNumber, currentUserID);
+                result = await clsUser.GetAllUsers(isActive, _pageNumber);
             }
             else if (filterBy == enFilterBy.UserID)
             {
                 int userID = Convert.ToInt32(kgtxtFilterValue.ValidatedText);
-                result = await clsUser.GetAllUsersByUserID(userID,isActive, _pageNumber, currentUserID);
+                result = await clsUser.GetAllUsersByUserID(userID,isActive, _pageNumber);
             }
             else if (filterBy == enFilterBy.UserName)
             {
                 string userName = kgtxtFilterValue.ValidatedText;
-                result = await clsUser.GetAllUsersByUserName(userName, isActive, _pageNumber, currentUserID);
+                result = await clsUser.GetAllUsersByUserName(userName, isActive, _pageNumber);
             }
             else if (filterBy == enFilterBy.PersonName)
             {
                 string personName = kgtxtFilterValue.ValidatedText;
-                result = await clsUser.GetAllUsersByPersonName(personName, isActive, _pageNumber, currentUserID);
+                result = await clsUser.GetAllUsersByPersonName(personName, isActive, _pageNumber);
 
             }
             else

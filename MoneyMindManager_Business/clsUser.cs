@@ -5,13 +5,13 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using MoneyMindManager_DataAccess;
 using MoneyMindManagerGlobal;
 using static MoneyMindManagerGlobal.clsDataColumns.clsUserClasses;
-using static MoneyMindManagerGlobal.clsDataColumns.PersonClasses;
 
 namespace MoneyMindManager_Business
 {
@@ -22,15 +22,181 @@ namespace MoneyMindManager_Business
         public clsPerson PersonInfo { get; private set; }
         public clsAccount AccountInfo { get; private set; }
 
-        //
+        public bool IsAdmin
+        {
+            get
+            {
+                return Permissions == (int)enPermissions.Admin;
+            }
+        }
 
+        //
+        [Flags]
         public enum enPermissions
         {
-            [Description("لمحة عامة")]
-            OverView = 1,
+            [Description("(جميع الصلاحيات (أدمن")]
+            Admin = -1,
 
             [Description("قائمة الأشخاص")]
-            PeopleList = 2
+            PeopleList = 1,//done
+
+            [Description("إضافة/تعديل شخص")]
+            AddUpdatePerson = 2,//done
+
+            [Description("حذف شخص")]
+            DeletePerson = 4,//done
+
+            [Description("قائمة المستخدمين")]
+            UsersList = 8,//done
+
+            [Description("قائمة مستندات الواردات")]
+            IncomeVouchersList = 16,//done
+
+            [Description("قائمة مستندات المصروفات")]
+            ExpenseVouchersList = 32,//done
+
+            [Description("قائمة مستندات مرتجعات المصروفات")]
+            ExpenseReturnVouchersList = 64,//done
+
+            [Description("(غلق/فتح المستندات (واردات,مصروفات,مرتجعات المصروفات")]
+            ChangeIETVoucherLocking = 128,//done
+
+            [Description("(إضافة/تعديل مستندات - معاملات (واردات,مصروفات,مرتجعات المصروفات")]
+            AddUpdateIETVoucher_Transactions = 256,//done
+
+            [Description("(حذف مستندات - معاملات (واردات,مصروفات,مرتجعات المصروفات")]
+            DeleteIETVoucher_Transactions = 512,//done
+
+            [Description("قائمة سندات الديون")]
+            DebtsList = 1024,//done
+
+            [Description("غلق/فتح سندات الديون")]
+            ChangeDebtsLocking = 2048,//done
+
+            [Description("إضافة/تعديل (سندات - معاملات سداد) الديون")]
+            AddUpdateDebt_Payments = 4096,//done
+
+            [Description("حذف (سندات - معاملات سداد) الديون")]
+            DeleteDebt_Payments = 8192,//done
+
+            [Description("قائمة الفئات")]//done
+            CategoriesList = 16384,
+
+            [Description("إضافة/تعديل فئة")]
+            AddUpdateCategory = 32768,//done
+
+            [Description("حذف فئة")]
+            DeleteCategory = 65536,//done
+
+            [Description("تغيير فعالية فئة")]//done
+            ChangeCategoryActivation = 131072,
+
+            [Description("تخطي الميزانية الشهرية لفئات المصروفات")]
+            ExceedsCategoryBudget = 262144,
+
+            [Description("قائمة المعاملات")]
+            MainTransactionsList = 524288,//done
+
+            [Description("شاشة اللمحة العامة")]
+            OverView = 1048576,//done
+
+            [Description("رؤية رصيد الحساب")]
+            AccountBalance = 2097152 //done
+        }
+
+        public static bool IsHasPermission(int userPermission,enPermissions checkedPermission)
+        {
+            int permissionFor = (int)checkedPermission;
+            return (userPermission == (int)enPermissions.Admin) || ((permissionFor & userPermission) == permissionFor);
+        }
+
+        public bool IsHasPermission( enPermissions checkedPermission)
+        {
+            return IsHasPermission(Permissions, checkedPermission);
+        }
+
+        public static bool CheckLogedInUserPermissions(enPermissions checkedPermission)
+        {
+            return IsHasPermission(clsGlobalSession.CurrentUserPermissions, checkedPermission);
+        }
+
+        public static bool IsHasPermission_RaiseErrorEvent(int userPermission, enPermissions checkedPermission,string errorMessage)
+        {
+            bool result = IsHasPermission(userPermission, checkedPermission);
+
+            if (!result)
+            {
+                errorMessage += $"\n معرف المستخدم الحالي [{clsGlobalSession.CurrentUserID}]";
+                clsGlobalEvents.RaiseEvent(errorMessage, true);
+            }
+
+            return result;
+        }
+
+        public bool IsHasPermission_RaiseErrorEvent(enPermissions checkedPermission, string errorMessage)
+        {
+            return IsHasPermission_RaiseErrorEvent(Permissions, checkedPermission, errorMessage);
+        }
+
+        public static bool CheckLogedInUserPermissions_RaiseErrorEvent(enPermissions checkedPermission, string errorMessage)
+        {
+            return IsHasPermission_RaiseErrorEvent(clsGlobalSession.CurrentUserPermissions, checkedPermission, errorMessage);
+        }
+
+        public class clsPermissionItems
+        {
+            public string ItemName { get; }
+            public int ItemValue { get; }
+            public bool Checked { get; }
+
+            public clsPermissionItems(string name, int value, bool isChecked)
+            {
+                this.ItemName = name;
+                this.ItemValue = value;
+                this.Checked = isChecked;
+            }
+        }
+
+        public static List<clsPermissionItems>GetUserPermissionItems(int userPermission)
+        {
+            List<clsPermissionItems> items = new List<clsPermissionItems>();
+
+            var fileds = typeof(enPermissions).GetFields(System.Reflection.BindingFlags.Public |
+                System.Reflection.BindingFlags.Static).Where(x => x.Name != nameof(enPermissions.Admin));
+
+            int val;
+            bool isChecked = false;
+            string name;
+
+            foreach(var field in fileds)
+            {
+                val = Convert.ToInt32(field.GetRawConstantValue());
+                isChecked = IsHasPermission(userPermission, (enPermissions)val);
+                var descriptionAttribute = field.GetCustomAttribute<DescriptionAttribute>();
+
+                name = (descriptionAttribute != null) ? descriptionAttribute.Description : field.Name;
+
+                items.Add(new clsPermissionItems(name, val, isChecked));
+            }
+
+            return items;
+        }
+
+        public  List<clsPermissionItems> GetUserPermissionItems()
+        {
+            return GetUserPermissionItems(Permissions);
+        }
+
+        public void AssingUserPermissions(List<int> checkedItemsValue)
+        {
+            int permission = 0;
+
+            foreach(var item in checkedItemsValue)
+            {
+                permission |= item;
+            }
+
+            this.Permissions = permission;
         }
 
         //
@@ -45,15 +211,6 @@ namespace MoneyMindManager_Business
             return true;
         }
 
-        public bool EnterAccountIDAtAddMode(short accountID)
-        {
-            if (Mode == enMode.Update)
-                return false;
-
-            this.AccountID = accountID;
-
-            return true;
-        }
 
         /// <summary>
         /// Generate Salt for firstTime and hash password and store them at this object
@@ -71,19 +228,19 @@ namespace MoneyMindManager_Business
             return true;
         }
 
-        public bool EnterCreatedByUserIDAtAddMode(int createdByUserID)
+        //public bool EnterCreatedByUserIDAtAddMode(int createdByUserID)
+        //{
+        //    if (Mode == enMode.Update)
+        //        return false;
+
+        //    this.CreatedByUserID = createdByUserID;
+
+        //    return true;
+        //}
+
+        public async Task<clsUser> GetCreatedbyUserInfo()
         {
-            if (Mode == enMode.Update)
-                return false;
-
-            this.CreatedByUserID = createdByUserID;
-
-            return true;
-        }
-
-        public async Task<clsUser> GetCreatedbyUserInfo(int currentUserID)
-        {
-            return await clsUser.FindUserByUserID(Convert.ToInt32(CreatedByUserID),currentUserID);
+            return await clsUser.FindUserByUserID(Convert.ToInt32(CreatedByUserID));
         }
 
         public clsUser() : base()
@@ -93,7 +250,7 @@ namespace MoneyMindManager_Business
             AccountInfo = null;
         }
 
-        private clsUser(int? userID, string userName, int? personID, int? permissions, string password,
+        private clsUser(int? userID, string userName, int? personID, int permissions, string password,
             string salt, bool isActive, string notes, int? accountID, bool isDeleted, clsPerson personInfo,
             clsAccount accountInfo, int? createdByUserID, DateTime createdDate)
             : base(userID, userName, personID, permissions, password, salt, isActive, notes, Convert.ToInt16(accountID),
@@ -106,28 +263,31 @@ namespace MoneyMindManager_Business
 
         private async Task<bool> _AddNewUser()
         {
+            this.CreatedByUserID = Convert.ToInt32(clsGlobalSession.CurrentUserID);
             this.CreatedDate = DateTime.Now;
 
             UserID = await clsUserData.AddNewUser(UserName, Convert.ToInt32(PersonID), Permissions, Password, Salt,
-                IsActive, Convert.ToInt16(AccountID), Notes,Convert.ToInt32(CreatedByUserID));
+                IsActive, Notes,Convert.ToInt32(CreatedByUserID));
 
             return (UserID != null);
         }
 
         private async Task<bool> _UpdateUser()
         {
-            return await clsUserData.UpdateUser(Convert.ToInt32(UserID), UserName, Convert.ToInt32(PersonID), Permissions, IsActive, Notes);
+            return await clsUserData.UpdateUser(Convert.ToInt32(UserID), UserName, Convert.ToInt32(PersonID),
+                Permissions, IsActive, Notes, Convert.ToInt32(clsGlobalSession.CurrentUserID));
         }
 
-        async Task<bool> _RefeshCompositionObjects(int currentUserID)
+        async Task<bool> _RefeshCompositionObjects()
         {
-            PersonInfo = await clsPerson.FindPersonByID(Convert.ToInt32(this.PersonID),currentUserID);
-            AccountInfo = await clsAccount.FindAccountByAccountID(Convert.ToInt16(AccountID));
+            PersonInfo = await clsPerson.FindPersonByID(Convert.ToInt32(this.PersonID));
+            this.AccountID = PersonInfo.AccountID;
+            AccountInfo = PersonInfo.AccountInfo ;
 
             return ((PersonInfo != null) && (AccountInfo != null));
         }
 
-        public async Task<bool> Save(int currentUserID)
+        public async Task<bool> Save()
         {
             switch (Mode)
             {
@@ -136,7 +296,7 @@ namespace MoneyMindManager_Business
                         if (await _AddNewUser())
                         {
                             Mode = enMode.Update;
-                            await _RefeshCompositionObjects(currentUserID);
+                            await _RefeshCompositionObjects();
                             return true;
                         }
                         else
@@ -172,7 +332,8 @@ namespace MoneyMindManager_Business
             string newHashedPassword = newHashedPasswordWithSalt.HashedPassword;
             string newSalt = newHashedPasswordWithSalt.Salt;
 
-            bool result = await clsUserData.ChangeUserPassword(Convert.ToInt32(this.UserID), oldHashedPassword, newHashedPassword, newSalt);
+            bool result = await clsUserData.ChangeUserPassword(Convert.ToInt32(this.UserID), oldHashedPassword, 
+                newHashedPassword, newSalt, Convert.ToInt32(clsGlobalSession.CurrentUserID));
 
             if (result)
             {
@@ -204,7 +365,7 @@ namespace MoneyMindManager_Business
             if (userColumns == null)
                 return null;
 
-            clsPerson personInfo = await clsPerson.FindPersonByID(Convert.ToInt32(userColumns.PersonID), Convert.ToInt32(userColumns.UserID));
+            clsPerson personInfo = await clsPerson.FindPersonByID(Convert.ToInt32(userColumns.PersonID),Convert.ToInt32(userColumns.UserID));
             clsAccount accountInfo = await clsAccount.FindAccountByAccountID(Convert.ToInt16(userColumns.AccountID));
 
             if ((personInfo == null) || (accountInfo == null))
@@ -216,14 +377,14 @@ namespace MoneyMindManager_Business
         }
 
         /// <returns>Object of clsUserColumns, if user is not found it will return null</returns>
-        public static async Task<clsUser> FindUserByUserID(int userID, int currentUserID)
+        public static async Task<clsUser> FindUserByUserID(int userID)
         {
             var userColumns = await clsUserData.GetUserInfoByUserID(userID);
 
             if (userColumns == null)
                 return null;
 
-            clsPerson personInfo = await clsPerson.FindPersonByID(Convert.ToInt32(userColumns.PersonID),currentUserID);
+            clsPerson personInfo = await clsPerson.FindPersonByID(Convert.ToInt32(userColumns.PersonID));
 
             clsAccount accountInfo = await clsAccount.FindAccountByAccountID(Convert.ToInt16(userColumns.AccountID));
 
@@ -236,14 +397,14 @@ namespace MoneyMindManager_Business
         }
 
         /// <returns>Object of clsUserColumns, if user is not found it will return null</returns>
-        public static async Task<clsUser> FindUserByUserName(string userName, int currentUserID)
+        public static async Task<clsUser> FindUserByUserName(string userName)
         {
             clsUserColumns userColumns = await clsUserData.GetUserInfoByUserName(userName);
 
             if (userColumns == null)
                 return null;
 
-            clsPerson personInfo = await clsPerson.FindPersonByID(Convert.ToInt32(userColumns.PersonID),currentUserID);
+            clsPerson personInfo = await clsPerson.FindPersonByID(Convert.ToInt32(userColumns.PersonID));
             clsAccount accountInfo = await clsAccount.FindAccountByAccountID(Convert.ToInt16(userColumns.AccountID));
 
             if ((personInfo == null) || (accountInfo == null))
@@ -255,14 +416,14 @@ namespace MoneyMindManager_Business
         }
 
         /// <returns>Object of clsUserColumns, if user is not found it will return null</returns>
-        public static async Task<clsUser> FindUserByPersonID(int personID, int currentUserID)
+        public static async Task<clsUser> FindUserByPersonID(int personID)
         {
             clsUserColumns userColumns = await clsUserData.GetUserInfoByPersonID(personID);
 
             if (userColumns == null)
                 return null;
 
-            clsPerson personInfo = await clsPerson.FindPersonByID(Convert.ToInt32(userColumns.PersonID),currentUserID);
+            clsPerson personInfo = await clsPerson.FindPersonByID(Convert.ToInt32(userColumns.PersonID));
             clsAccount accountInfo = await clsAccount.FindAccountByAccountID(Convert.ToInt16(userColumns.AccountID));
 
             if ((personInfo == null) || (accountInfo == null))
@@ -278,9 +439,9 @@ namespace MoneyMindManager_Business
             return await clsUserData.DeleteUserByUserID(userID);
         }
 
-        public async Task<bool> RefreshData(int currentUserID)
+        public async Task<bool> RefreshData()
         {
-            clsUser freshUser = await clsUser.FindUserByUserID(Convert.ToInt32(this.UserID),currentUserID);
+            clsUser freshUser = await clsUser.FindUserByUserID(Convert.ToInt32(this.UserID));
 
             if (freshUser == null)
                 return false;
@@ -325,36 +486,36 @@ namespace MoneyMindManager_Business
         /// Get All Users For Account Using Paging [10 rows per page] , if variable is null will not filter by it
         /// </summary>
         /// <returns>object of clsGetAllUsers : if error happend, return null</returns>
-        public static async Task<clsGetAllUsers> GetAllUsers(bool? isActive, short pageNumber, int currentUserID)
+        public static async Task<clsGetAllUsers> GetAllUsers(bool? isActive, short pageNumber)
         {
-            return await clsUserData.GetAllUsers(null,null,null,isActive,pageNumber,currentUserID);
+            return await clsUserData.GetAllUsers(null,null,null,isActive,pageNumber, Convert.ToInt32(clsGlobalSession.CurrentUserID));
         }
 
         /// <summary>
         /// Get All Users By UserID For Account Using Paging [10 rows per page] , if variable is null will not filter by it
         /// </summary>
         /// <returns>object of clsGetAllUsers : if error happend, return null</returns>
-        public static async Task<clsGetAllUsers> GetAllUsersByUserID(int userID,bool? isActive, short pageNumber, int currentUserID)
+        public static async Task<clsGetAllUsers> GetAllUsersByUserID(int userID,bool? isActive, short pageNumber)
         {
-            return await clsUserData.GetAllUsers(userID, null, null, isActive, pageNumber, currentUserID);
+            return await clsUserData.GetAllUsers(userID, null, null, isActive, pageNumber, Convert.ToInt32(clsGlobalSession.CurrentUserID));
         }
 
         /// <summary>
         /// Get All Users By UserName For Account Using Paging [10 rows per page], if variable is null will not filter by it
         /// </summary>
         /// <returns>object of clsGetAllUsers : if error happend, return null</returns>
-        public static async Task<clsGetAllUsers> GetAllUsersByUserName(string userName, bool? isActive, short pageNumber, int currentUserID)
+        public static async Task<clsGetAllUsers> GetAllUsersByUserName(string userName, bool? isActive, short pageNumber)
         {
-            return await clsUserData.GetAllUsers(null, userName, null, isActive, pageNumber, currentUserID);
+            return await clsUserData.GetAllUsers(null, userName, null, isActive, pageNumber, Convert.ToInt32(clsGlobalSession.CurrentUserID));
         }
 
         /// <summary>
         /// Get All Users By personName For Account Using Paging [10 rows per page], if variable is null will not filter by it
         /// </summary>
         /// <returns>object of clsGetAllUsers : if error happend, return null</returns>
-        public static async Task<clsGetAllUsers> GetAllUsersByPersonName(string personName, bool? isActive, short pageNumber, int currentUserID)
+        public static async Task<clsGetAllUsers> GetAllUsersByPersonName(string personName, bool? isActive, short pageNumber)
         {
-            return await clsUserData.GetAllUsers(null, null,personName, isActive, pageNumber, currentUserID);
+            return await clsUserData.GetAllUsers(null, null,personName, isActive, pageNumber, Convert.ToInt32(clsGlobalSession.CurrentUserID));
         }
 
         /// <param name="userID">UserID of user you want to find</param>

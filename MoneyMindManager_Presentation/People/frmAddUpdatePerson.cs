@@ -29,6 +29,12 @@ namespace MoneyMindManager_Presentation.People
         private clsPerson _Person { get; set; }
         public frmAddUpdatePerson()
         {
+            if (!_CheckPermissions())
+            {
+                this.Dispose();
+                return;
+            }
+
             InitializeComponent();
             Mode = enMode.AddNew;
             _PersonID = null;
@@ -36,9 +42,21 @@ namespace MoneyMindManager_Presentation.People
         }
         public frmAddUpdatePerson(int personID)
         {
+            if (!_CheckPermissions())
+            {
+                this.Dispose();
+                return;
+            }
+
             InitializeComponent();
             Mode = enMode.Update;
             this._PersonID = personID;
+        }
+
+        bool _CheckPermissions()
+        {
+            return clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.AddUpdatePerson,
+                 "ليس لديك صلاحية إضافة/تعديل شخص.");
         }
 
         void ChangeHeaderValue(string txt)
@@ -60,7 +78,7 @@ namespace MoneyMindManager_Presentation.People
         {
             ChangeHeaderValue("تعديل بيانات شخص");
 
-            clsPerson searchedPerson = await clsPerson.FindPersonByID(Convert.ToInt32(_PersonID), Convert.ToInt32(clsGlobal_UI.CurrentUser.UserID));
+            clsPerson searchedPerson = await clsPerson.FindPersonByID(Convert.ToInt32(_PersonID));
 
             if (searchedPerson == null)
             {

@@ -15,7 +15,7 @@ namespace MoneyMindManager_DataAccess
         /// <summary>
         /// Get Single record of Main Transaction Table
         /// </summary>
-        public static async Task<clsMainTransactionColumns> GetMainTransactionInfoByID(int transactionID, bool RaiseEventOnErrorOccured = true)
+        public static async Task<clsMainTransactionColumns> GetMainTransactionInfoByID(int transactionID,int currentUserID, bool RaiseEventOnErrorOccured = true)
         {
             clsMainTransactionColumns transactionTypeData = null;
 
@@ -27,6 +27,7 @@ namespace MoneyMindManager_DataAccess
                     {
                         command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.AddWithValue("@MainTransactionID", transactionID);
+                        command.Parameters.AddWithValue("@CurrentUserID", currentUserID);
 
                         await connection.OpenAsync();
 

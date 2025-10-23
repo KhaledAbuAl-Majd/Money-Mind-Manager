@@ -22,7 +22,7 @@ namespace MoneyMindManager_DataAccess
             {
                 using(SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
                 {
-                    using(SqlCommand command = new SqlCommand("[dbo].[SP_GetTransactionTypeByID]", connection))
+                    using(SqlCommand command = new SqlCommand("SP_TransactionType_GetByID", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.AddWithValue("@TransactionTypeID", transactionTypeID);
@@ -66,7 +66,7 @@ namespace MoneyMindManager_DataAccess
             {
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_GetTransactionTypeByName]", connection))
+                    using (SqlCommand command = new SqlCommand("SP_TransactionType_GetByName", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.AddWithValue("@TransactionTypeName", transactionName);

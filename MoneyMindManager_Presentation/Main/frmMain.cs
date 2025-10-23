@@ -15,6 +15,7 @@ using MoneyMindManager_Presentation.Income_And_Expense.Vouchers;
 using MoneyMindManager_Presentation.Login;
 using MoneyMindManager_Presentation.OverView;
 using MoneyMindManager_Presentation.People;
+using MoneyMindManager_Presentation.Users;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace MoneyMindManager_Presentation.Main
@@ -22,12 +23,9 @@ namespace MoneyMindManager_Presentation.Main
     public partial class frmMain : Form
     {
         public event Action OnCloseProgramm;
-
-        int _userID;
-        public frmMain(int userID)
+        public frmMain()
         {
             InitializeComponent();
-            _userID = userID;
         }
 
         public void LoadMainFormLabels()
@@ -36,7 +34,7 @@ namespace MoneyMindManager_Presentation.Main
         }
         public void AddNewFormAsDialog(Form frm)
         {
-            if (frm == null)
+            if (frm == null || frm.IsDisposed)
                 return;
 
             //frm.Move += (sender, e) =>
@@ -63,16 +61,14 @@ namespace MoneyMindManager_Presentation.Main
             frm.FormBorderStyle = FormBorderStyle.None;
             frm.Dock = DockStyle.Fill;
 
-            if (clearOldControls)
-            {
-                gpnlFormContainer.Controls.Clear();
-                //clsGlobal_Presentation.RefreshCurrentUser();
-            }
-
-            gpnlFormContainer.Controls.Add(frm);
-
             if (!frm.IsDisposed)
             {
+                if (clearOldControls)
+                {
+                    gpnlFormContainer.Controls.Clear();
+                }
+                gpnlFormContainer.Controls.Add(frm);
+
                 frm.Show();
                 frm.BringToFront();
             }
@@ -83,20 +79,21 @@ namespace MoneyMindManager_Presentation.Main
             _LoadFormAtPanelContainer(new frmOverView(), true);
         }
 
-        private async void frmMain_Load(object sender, EventArgs e)
+        private void frmMain_Load(object sender, EventArgs e)
         {
             this.UseWaitCursor = true;
             this.Enabled = false;
 
-            await clsGlobal_UI.Login(_userID, this);
+            LoadMainFormLabels();
 
-            this.Enabled = true;
+            if (clsUser.CheckLogedInUserPermissions(clsUser.enPermissions.OverView))
+                gbtnOverOview.PerformClick();
+            else
+                gbtnAccount.PerformClick();
+
+                this.Enabled = true;
             this.UseWaitCursor = false;
             this.Cursor = Cursors.Default;
-
-            LoadMainFormLabels();
-            gbtnOverOview.PerformClick();
-
         }
 
         private void gbtnPeople_Click(object sender, EventArgs e)
@@ -151,6 +148,18 @@ namespace MoneyMindManager_Presentation.Main
         private void gbtnAccount_Click(object sender, EventArgs e)
         {
             _LoadFormAtPanelContainer(new frmCurrentAccount(), true);
+        }
+
+        private void llblCurrentUserInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var frm = new frmUserInfo(Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID));
+            AddNewFormAtContainer(frm);
+        }
+
+        private void llblChangePassword_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var frm = new frmChangePassword(Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID));
+            AddNewFormAtContainer(frm);
         }
     }
 }

@@ -46,8 +46,15 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 return;
             }
 
-            InitializeComponent();
             this._voucherType = voucherType;
+
+            if (!_CheckPermissions())
+            {
+                this.Dispose();
+                return;
+            }
+
+            InitializeComponent();
             this._voucherMode = enVoucherMode.AddNew;
             this._VoucherID = null;
             this._Voucher = null;
@@ -55,14 +62,27 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
         public frmAddUpdateVoucher(int voucherID)
         {
+            if (!_CheckPermissions())
+            {
+                this.Dispose();
+                return;
+            }
+
             InitializeComponent();
             this._voucherMode = enVoucherMode.Update;
             this._VoucherID = voucherID;
         }
 
+        bool _CheckPermissions()
+        {
+            return clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.AddUpdateIETVoucher_Transactions,
+                "ليس لديك صلاحية (إضافة/تعديل مستندات - معاملات (واردات,مصروفات,مرتجعات المصروفات.");
+        }
+
         bool _IsHeaderCreated = false;
         bool _searchByPageNumber = false;
         short _pageNumber = 1;
+        bool _LockingChangingEvent = false;
 
         bool _CheckValidationChildren()
         {
@@ -112,9 +132,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             //if (_pageNumber < 1)
             //    return;
 
-            int currentUserID = Convert.ToInt32(clsGlobal_UI.CurrentUser.UserID);
-
-            var result = await _Voucher.GetVoucheTransactions(currentUserID, _pageNumber);
+            var result = await _Voucher.GetVoucheTransactions(_pageNumber);
 
 
             if (result == null)
@@ -149,26 +167,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             gibtnNextPage.Enabled = (_pageNumber < result.NumberOfPages);
             gibtnPreviousPage.Enabled = (_pageNumber > 1);
 
-
-            //gibtnNextPage.Enabled = (_pageNumber < result.NumberOfPages);
-            //gibtnPreviousPage.Enabled = (_pageNumber > 1);
-            ////
-
-            //if (result.NumberOfPages < 2)
-            //{
-            //    _ChangeEnablithForPagingControls(false);
-            //}
-            //else
-            //{
-            //    _searchByPageNumber = false;
-            //    kgtxtPageNumber.Text = _pageNumber.ToString();
-            //    _searchByPageNumber = true;
-            //    kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValueOption = true;
-            //    kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValue = (result.NumberOfPages < 1) ? 1 : result.NumberOfPages;
-            //    lblCurrentPageRecordsCount.Text = gdgvTransactions.Rows.Count.ToString();
-            //    lblCurrentPageOfNumberOfPages.Text = string.Concat(_pageNumber, "   من   ", result.NumberOfPages, "  صفحات");
-            //    _ChangeEnablithForPagingControls(true);
-            //} 
+ 
 
             if (!_IsHeaderCreated && gdgvTransactions.Rows.Count > 0)
             {
@@ -310,12 +309,8 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
         async Task _UpdateMode()
         {
-            //ChangeHeaderValue("تعديل بيانات المستند");
 
-
-            int currentUserID = Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID);
-
-            var searchedVoucher = await clsIncomeAndExpenseVoucher.FindVoucherByVoucherID(Convert.ToInt32(_VoucherID), currentUserID);
+            var searchedVoucher = await clsIncomeAndExpenseVoucher.FindVoucherByVoucherID(Convert.ToInt32(_VoucherID));
 
             if (searchedVoucher == null)
             {
@@ -336,7 +331,9 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             kgtxtCreatedByUserName.Text = _Voucher.CreatedByUserInfo.UserName;
             kgtxtCreatedDate.RefreshNumber_DateTimeFormattedText(_Voucher.CreatedDate.ToString());
             kgtxtVoucherID.Text = _Voucher.VoucherID.ToString();
+            _LockingChangingEvent = false;
             gchkIsLocked.Checked = _Voucher.IsLocked;
+            _LockingChangingEvent = true;
 
             await _LoadDataAtDataGridView();
         }
@@ -383,7 +380,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             }
             // permissions
 
-            if (await _Voucher.Save(Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID)))
+            if (await _Voucher.Save())
             {
                 if (_voucherMode == enVoucherMode.AddNew)
                 {
@@ -400,6 +397,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                     _ChangeEnablityForButton(gbtnAddTransaction, true);
 
                     _UpdateModeChangesAtUi();
+
                 }
                 else if (_voucherMode == enVoucherMode.Update)
                 {
@@ -496,8 +494,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                     }
             }
 
-
-            
+            _LockingChangingEvent = true;
         }
 
         private async void gibtnNextPage_Click(object sender, EventArgs e)
@@ -573,16 +570,17 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
         private async void gchkIsLocked_CheckedChanged(object sender, EventArgs e)
         {
-            if(this._voucherMode == enVoucherMode.Update)
+            if(this._voucherMode == enVoucherMode.Update && _LockingChangingEvent)
             {
-                if (await _Voucher.ChangeLocking(gchkIsLocked.Checked, Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID)))
+                if (await _Voucher.ChangeLocking(gchkIsLocked.Checked))
                 {
                     LockAndUnLockMode(_Voucher.IsLocked);
                 }
                 else
                 {
-                    clsGlobalMessageBoxs.ShowErrorMessage("فشل تغيير قفل المستند !");
+                    _LockingChangingEvent = false;
                     gchkIsLocked.Checked = _Voucher.IsLocked;
+                    _LockingChangingEvent = true;
                 }
             }
         }
@@ -596,7 +594,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
             {
                 int transactionID = Convert.ToInt32(gdgvTransactions.SelectedRows[0].Cells[0].Value);
-                if(await clsIncomeAndExpenseTransaction.DeleteIncomeAndExpenseTransactionByID(transactionID, Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID)))
+                if(await clsIncomeAndExpenseTransaction.DeleteIncomeAndExpenseTransactionByID(transactionID))
                 {
                     _isSaved = true;
                     _pageNumber = 1;
@@ -622,7 +620,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             if (clsGlobalMessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف المستند ؟ ", "طلب مواقفقة", MessageBoxButtons.OKCancel,
                MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
             {
-                if (await clsIncomeAndExpenseVoucher.DeleteVoucherByVoucherID(Convert.ToInt32(_VoucherID), Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID)))
+                if (await clsIncomeAndExpenseVoucher.DeleteVoucherByVoucherID(Convert.ToInt32(_VoucherID)))
                 {
                     _isSaved = true;
                     gbtnClose.PerformClick();
@@ -660,10 +658,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             lblUserMessage.Visible = false;
 
-
-            int currentUserID = Convert.ToInt32(clsGlobal_UI.CurrentUser.UserID);
-
-            var dt = await _Voucher.GetVoucheTransactionsWithoutPaging(currentUserID);
+            var dt = await _Voucher.GetVoucheTransactionsWithoutPaging();
 
 
             if (dt == null)

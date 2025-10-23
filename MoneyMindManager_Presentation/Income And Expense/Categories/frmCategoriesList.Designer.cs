@@ -37,6 +37,7 @@
             this.guna2ContextMenuStrip1 = new Guna.UI2.WinForms.Guna2ContextMenuStrip();
             this.gtsmAddVoucher = new System.Windows.Forms.ToolStripMenuItem();
             this.gtsmEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.gtsmShowCategoryMonthlyFlow = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.gibtnRefreshData = new Guna.UI2.WinForms.Guna2ImageButton();
             this.kgtxtPageNumber = new KhaledControlLibrary1.KhaledGuna2TextBox();
@@ -74,7 +75,8 @@
             this.guna2ContextMenuStrip1.ImageScalingSize = new System.Drawing.Size(30, 30);
             this.guna2ContextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.gtsmAddVoucher,
-            this.gtsmEdit});
+            this.gtsmEdit,
+            this.gtsmShowCategoryMonthlyFlow});
             this.guna2ContextMenuStrip1.Name = "guna2ContextMenuStrip1";
             this.guna2ContextMenuStrip1.RenderStyle.ArrowColor = System.Drawing.Color.FromArgb(((int)(((byte)(151)))), ((int)(((byte)(143)))), ((int)(((byte)(255)))));
             this.guna2ContextMenuStrip1.RenderStyle.BorderColor = System.Drawing.Color.Gainsboro;
@@ -85,7 +87,7 @@
             this.guna2ContextMenuStrip1.RenderStyle.SelectionForeColor = System.Drawing.Color.White;
             this.guna2ContextMenuStrip1.RenderStyle.SeparatorColor = System.Drawing.Color.Gainsboro;
             this.guna2ContextMenuStrip1.RenderStyle.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
-            this.guna2ContextMenuStrip1.Size = new System.Drawing.Size(148, 76);
+            this.guna2ContextMenuStrip1.Size = new System.Drawing.Size(261, 134);
             // 
             // gtsmAddVoucher
             // 
@@ -94,7 +96,7 @@
             this.gtsmAddVoucher.Name = "gtsmAddVoucher";
             this.gtsmAddVoucher.ShortcutKeys = System.Windows.Forms.Keys.Insert;
             this.gtsmAddVoucher.ShowShortcutKeys = false;
-            this.gtsmAddVoucher.Size = new System.Drawing.Size(147, 36);
+            this.gtsmAddVoucher.Size = new System.Drawing.Size(260, 36);
             this.gtsmAddVoucher.Text = "إضافة فئة";
             this.gtsmAddVoucher.Click += new System.EventHandler(this.gtsmAddVoucher_Click);
             // 
@@ -103,9 +105,18 @@
             this.gtsmEdit.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gtsmEdit.Image = ((System.Drawing.Image)(resources.GetObject("gtsmEdit.Image")));
             this.gtsmEdit.Name = "gtsmEdit";
-            this.gtsmEdit.Size = new System.Drawing.Size(147, 36);
+            this.gtsmEdit.Size = new System.Drawing.Size(260, 36);
             this.gtsmEdit.Text = "تعديل";
             this.gtsmEdit.Click += new System.EventHandler(this.gtsmEdit_Click);
+            // 
+            // gtsmShowCategoryMonthlyFlow
+            // 
+            this.gtsmShowCategoryMonthlyFlow.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gtsmShowCategoryMonthlyFlow.Image = ((System.Drawing.Image)(resources.GetObject("gtsmShowCategoryMonthlyFlow.Image")));
+            this.gtsmShowCategoryMonthlyFlow.Name = "gtsmShowCategoryMonthlyFlow";
+            this.gtsmShowCategoryMonthlyFlow.Size = new System.Drawing.Size(260, 36);
+            this.gtsmShowCategoryMonthlyFlow.Text = "صافي التدفق الشهري للفئة";
+            this.gtsmShowCategoryMonthlyFlow.Click += new System.EventHandler(this.gtsmShowCategoryMonthlyFlow_Click);
             // 
             // toolTip1
             // 
@@ -441,7 +452,6 @@
             this.lblCurrentPageRecordsCount.Size = new System.Drawing.Size(114, 24);
             this.lblCurrentPageRecordsCount.TabIndex = 109;
             this.lblCurrentPageRecordsCount.Text = "N/A";
-            this.lblCurrentPageRecordsCount.Click += new System.EventHandler(this.lblCurrentPageRecordsCount_Click);
             // 
             // label3
             // 
@@ -453,7 +463,6 @@
             this.label3.Size = new System.Drawing.Size(205, 24);
             this.label3.TabIndex = 108;
             this.label3.Text = "# عدد صفوف الصفحة الحالية : ";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // lblCurrentPageOfNumberOfPages
             // 
@@ -465,7 +474,6 @@
             this.lblCurrentPageOfNumberOfPages.TabIndex = 104;
             this.lblCurrentPageOfNumberOfPages.Text = "0 من  0  صفحات";
             this.lblCurrentPageOfNumberOfPages.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblCurrentPageOfNumberOfPages.Click += new System.EventHandler(this.lblCurrentPageOfNumberOfPages_Click);
             // 
             // lblTotalRecordsNumber
             // 
@@ -476,7 +484,6 @@
             this.lblTotalRecordsNumber.Size = new System.Drawing.Size(114, 24);
             this.lblTotalRecordsNumber.TabIndex = 103;
             this.lblTotalRecordsNumber.Text = "N/A";
-            this.lblTotalRecordsNumber.Click += new System.EventHandler(this.lblTotalRecordsNumber_Click);
             // 
             // label1
             // 
@@ -748,5 +755,6 @@
         private System.Windows.Forms.Label label5;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ToolStripMenuItem gtsmShowCategoryMonthlyFlow;
     }
 }

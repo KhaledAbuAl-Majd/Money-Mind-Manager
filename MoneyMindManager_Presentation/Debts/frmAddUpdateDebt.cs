@@ -42,6 +42,12 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
         public frmAddUpdateDebt()
         {
+            if (!_CheckPermissions())
+            {
+                this.Dispose();
+                return;
+            }
+
             InitializeComponent();
             this._DebtMode = enDebtMode.AddNew;
             this._DebtID = null;
@@ -51,14 +57,27 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
         public frmAddUpdateDebt(int voucherID)
         {
+            if (!_CheckPermissions())
+            {
+                this.Dispose();
+                return;
+            }
+
             InitializeComponent();
             this._DebtMode = enDebtMode.Update;
             this._DebtID = voucherID;
         }
 
+        bool _CheckPermissions()
+        {
+            return clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.AddUpdateDebt_Payments,
+                "ليس لديك صلاحية إضافة/تعديل (سندات - معاملات سداد) الديون.");
+        }
+
         bool _IsHeaderCreated = false;
         bool _searchByPageNumber = false;
         short _pageNumber = 1;
+        bool _LockingChangingEvent = false;
 
         bool _CheckValidationChildren()
         {
@@ -104,10 +123,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             if (!_CheckValidationChildren())
                 return;
 
-
-            int currentUserID = Convert.ToInt32(clsGlobal_UI.CurrentUser.UserID);
-
-            var result = await _Debt.GetDebtPayments(currentUserID, _pageNumber);
+            var result = await _Debt.GetDebtPayments( _pageNumber);
 
 
             if (result == null)
@@ -142,22 +158,6 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             gibtnNextPage.Enabled = (_pageNumber < result.NumberOfPages);
             gibtnPreviousPage.Enabled = (_pageNumber > 1);
             //
-
-            //if (result.NumberOfPages < 2)
-            //{
-            //    _ChangeEnablithForPagingControls(false);
-            //}
-            //else
-            //{
-            //    _searchByPageNumber = false;
-            //    kgtxtPageNumber.Text = _pageNumber.ToString();
-            //    _searchByPageNumber = true;
-            //    kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValueOption = true;
-            //    kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValue = (result.NumberOfPages < 1) ? 1 : result.NumberOfPages;
-            //    lblCurrentPageRecordsCount.Text = gdgvDebtPaymentTransctions.Rows.Count.ToString();
-            //    lblCurrentPageOfNumberOfPages.Text = string.Concat(_pageNumber, "   من   ", result.NumberOfPages, "  صفحات");
-            //    _ChangeEnablithForPagingControls(true);
-            //}
 
             if (!_IsHeaderCreated && gdgvDebtPaymentTransctions.Rows.Count > 0)
             {
@@ -285,9 +285,8 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
         async Task _UpdateMode()
         {
-            int currentUserID = Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID);
 
-            var searchedDebt = await clsDebt.FindDebtByDebtID(Convert.ToInt32(_DebtID), currentUserID);
+            var searchedDebt = await clsDebt.FindDebtByDebtID(Convert.ToInt32(_DebtID));
 
             if (searchedDebt == null)
             {
@@ -311,7 +310,9 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             kgtxtCreatedByUserName.Text = _Debt.CreatedByUserInfo?.UserName;
             kgtxtDebtID.Text = _Debt.DebtID?.ToString();
             gcbDebtType.SelectedIndex = (_Debt.IsLending) ? (int)enDebtType.إقراض : (int)enDebtType.إقتراض;
+            _LockingChangingEvent = false;
             gchkIsLocked.Checked = _Debt.IsLocked;
+            _LockingChangingEvent = true;
 
             await _LoadDataAtDataGridView();
         }
@@ -369,7 +370,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             DateTime debtDate = Convert.ToDateTime(kgtxtDebtDate.ValidatedText);
             int currentUserID = Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID);
 
-            if (await _Debt.Save(amount,notes,debtDate,currentUserID))
+            if (await _Debt.Save(amount,notes,debtDate))
             {
                 if (_DebtMode == enDebtMode.AddNew)
                 {
@@ -463,7 +464,6 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             _SetReadOnlyAtTextBox(kgtxtCreatedByUserName);
             _SetReadOnlyAtTextBox(kgtxtDebtID);
 
-            //_ChangeEnablithForPagingControls(false);
             _IsHeaderCreated = false;
             _searchByPageNumber = false;
             kgtxtPageNumber.Text = "1";
@@ -483,8 +483,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                     }
             }
 
-
-            
+            _LockingChangingEvent = true;
         }
 
         private async void gibtnNextPage_Click(object sender, EventArgs e)
@@ -561,16 +560,17 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
         private async void gchkIsLocked_CheckedChanged(object sender, EventArgs e)
         {
-            if(this._DebtMode == enDebtMode.Update)
+            if(this._DebtMode == enDebtMode.Update && _LockingChangingEvent)
             {
-                if (await _Debt.ChangeLocking(gchkIsLocked.Checked, Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID)))
+                if (await _Debt.ChangeLocking(gchkIsLocked.Checked))
                 {
                     LockAndUnLockMode(_Debt.IsLocked);
                 }
                 else
                 {
-                    clsGlobalMessageBoxs.ShowErrorMessage("فشل تغيير قفل المستند !");
+                    _LockingChangingEvent = false;
                     gchkIsLocked.Checked = _Debt.IsLocked;
+                    _LockingChangingEvent = true;
                 }
             }
         }
@@ -584,7 +584,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
             {
                 int transactionID = Convert.ToInt32(gdgvDebtPaymentTransctions.SelectedRows[0].Cells[0].Value);
-                if(await clsDebtPayment.DeleteDebtPaymentByID(transactionID, Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID)))
+                if(await clsDebtPayment.DeleteDebtPaymentByID(transactionID))
                 {
                     _pageNumber = 1;
                     _isSaved = true;
@@ -613,7 +613,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             if (clsGlobalMessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف السند ؟ ", "طلب مواقفقة", MessageBoxButtons.OKCancel,
                MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
             {
-                if (await clsDebt.DeleteDebtByDebtID(Convert.ToInt32(_DebtID), Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID)))
+                if (await clsDebt.DeleteDebtByDebtID(Convert.ToInt32(_DebtID)))
                 {
                     _isSaved = true;
                     gbtnClose.PerformClick();
@@ -691,7 +691,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             int currentUserID = Convert.ToInt32(clsGlobal_UI.CurrentUser.UserID);
 
-            var dt = await _Debt.GetDebtPaymentsWithoutPaging(currentUserID);
+            var dt = await _Debt.GetDebtPaymentsWithoutPaging();
 
 
             if (dt == null)

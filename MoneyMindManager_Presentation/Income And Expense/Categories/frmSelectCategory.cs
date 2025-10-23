@@ -108,18 +108,16 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                 return;
 
 
-            int currentUserID = Convert.ToInt32(clsGlobal_UI.CurrentUser.UserID);
-
             clsGetAllCategories result = null;
 
             if (string.IsNullOrEmpty(kgtxtFilterValue.ValidatedText))
             {
-                result = await clsIncomeAndExpenseCategory.GetAllCategoriesForSelectOne(_isIncome, currentUserID,_pageNumber);
+                result = await clsIncomeAndExpenseCategory.GetAllCategoriesForSelectOne(_isIncome,_pageNumber);
             }
             else 
             {
                 string categoryName = kgtxtFilterValue.ValidatedText;
-                result = await clsIncomeAndExpenseCategory.GetAllCategoriesForSelectOne(categoryName, _isIncome, currentUserID,_pageNumber);
+                result = await clsIncomeAndExpenseCategory.GetAllCategoriesForSelectOne(categoryName, _isIncome,_pageNumber);
             }
 
 

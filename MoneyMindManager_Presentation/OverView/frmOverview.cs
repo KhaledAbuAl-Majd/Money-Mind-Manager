@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MoneyMindManager_Business;
 
 namespace MoneyMindManager_Presentation.OverView
 {
@@ -14,6 +15,13 @@ namespace MoneyMindManager_Presentation.OverView
     {
         public frmOverView()
         {
+            if (!clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.OverView,
+                "ليس لديك صلاحية شاشة لمحة عامة."))
+            {
+                this.Dispose();
+                return;
+            }
+
             InitializeComponent();
         }
 
@@ -25,12 +33,12 @@ namespace MoneyMindManager_Presentation.OverView
             frm.TopLevel = false;
             frm.FormBorderStyle = FormBorderStyle.None;
 
-             gpnlFormContainer.Controls.Clear();
-            
-            gpnlFormContainer.Controls.Add(frm);
 
             if (!frm.IsDisposed)
             {
+                gpnlFormContainer.Controls.Clear();
+
+                gpnlFormContainer.Controls.Add(frm);
                 frm.Show();
                 frm.BringToFront();
             } 

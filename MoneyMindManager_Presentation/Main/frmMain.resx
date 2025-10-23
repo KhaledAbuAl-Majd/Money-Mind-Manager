@@ -127,7 +127,7 @@
   <data name="gbtnAboutProgramm.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DwAACw8BkvkDpQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAGDKSURBVHhe7d0J
+        DAAACwwBP0AiyAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAGDKSURBVHhe7d0J
         tBXFtTfw/71wmZRJUUBlUAQEFQVRUVFEVEzAGTU4IqKi0aDgDIgoigqiTOE5xegnUYkm+kQTRxxxikm+
         Z2JiEockxgGHDJrvvcQ861v7eEzI3sXl3q7qc7r7/HutX5ape++p6qrdtZs+3dVwzoGIsg9ABwBbAdgV
         wBgAJwCYBmAugBsBrABwH4AfAlgF4FkAPwLwCoBfAfgtgPcAfAzgrwD+USb/LWXyM/kd+V35G/nb1eXP
@@ -970,7 +970,7 @@
   <data name="gbtnAccount.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        gQAADoEBR7AuhAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAE/RSURBVHhe7d0H
+        fwAADn8B4hea3gAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAE/RSURBVHhe7d0H
         tF1Vncfx/3vpvRNCCqFD6CX0ktBDDz0QaYoiKCOCoqMjYAFmGEF0xgFBR9TBAbswKk0FFOk1CU2qhBZq
         6KTsWf+XlxD++yR5555999nn3O9d67OWbt69Z+9z9j3/X967d29xzgmA1iAim4jIt0XkXhF5rZP+b23b
         xP48gPryGgDUj4hsKiLXioj+n+XRn9nUPh9A/XgNAOpDRFYTkf8RkYUZxX5Z9Gf1OavZ1wNQH14DgOoT
@@ -4282,12 +4282,6 @@
         TI85PPZUkoMSSA7/B4TYLke5LJloAAAAAElFTkSuQmCC
 </value>
   </data>
-  <metadata name="guna2ControlBox2.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="gcbClose.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <metadata name="gbtnLogout.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>

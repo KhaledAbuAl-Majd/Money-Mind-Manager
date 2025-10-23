@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="clsDataColumns.cs" />
     <Compile Include="clsGlobalEvents.cs" />
+    <Compile Include="clsGlobalSession.cs" />
     <Compile Include="clsHashing.cs" />
     <Compile Include="clsLogger.cs" />
     <Compile Include="clsSymmetricEncryption.cs" />

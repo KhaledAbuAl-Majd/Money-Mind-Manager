@@ -25,7 +25,7 @@ namespace MoneyMindManager_Presentation.Transactions
 
         private async void frmMainTransactionInfo_Load(object sender, EventArgs e)
         {
-            _IAETransactionInfo = await clsIncomeAndExpenseTransaction.FindTransactionByTransactionID(_transactionID, Convert.ToInt32(clsGlobal_UI.CurrentUser.UserID));
+            _IAETransactionInfo = await clsIncomeAndExpenseTransaction.FindTransactionByTransactionID(_transactionID);
 
             if (_IAETransactionInfo == null)
                 this.Close();

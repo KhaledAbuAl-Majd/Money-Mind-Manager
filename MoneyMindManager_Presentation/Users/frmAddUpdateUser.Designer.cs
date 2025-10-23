@@ -41,14 +41,16 @@ namespace MoneyMindManager_Presentation.Users
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             this.gbtnClose = new Guna.UI2.WinForms.Guna2Button();
             this.gpnlUserPart = new Guna.UI2.WinForms.Guna2Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
+            this.chklbUserPermissions = new System.Windows.Forms.CheckedListBox();
+            this.kgtxtConfirmPassword = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.kgtxtpassword = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.lbluserMessage = new System.Windows.Forms.Label();
             this.kgtxtUserName = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.kgtxtNotes = new KhaledControlLibrary1.KhaledGuna2TextBox();
-            this.gpnlPasswordPart = new Guna.UI2.WinForms.Guna2Panel();
-            this.kgtxtConfirmPassword = new KhaledControlLibrary1.KhaledGuna2TextBox();
-            this.kgtxtpassword = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.gbtnSave = new Guna.UI2.WinForms.Guna2Button();
             this.ctrlPersonCardWithFilter1 = new MoneyMindManager_Presentation.People.Controls.ctrlPersonCardWithFilter();
             this.lblHeader = new System.Windows.Forms.Label();
@@ -56,7 +58,7 @@ namespace MoneyMindManager_Presentation.Users
             this.guna2Panel1.SuspendLayout();
             this.guna2Panel2.SuspendLayout();
             this.gpnlUserPart.SuspendLayout();
-            this.gpnlPasswordPart.SuspendLayout();
+            this.guna2Panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // errorProvider1
@@ -95,9 +97,9 @@ namespace MoneyMindManager_Presentation.Users
             this.guna2Panel1.Controls.Add(this.label2);
             this.guna2Panel1.CustomizableEdges.BottomRight = false;
             this.guna2Panel1.CustomizableEdges.TopRight = false;
-            this.guna2Panel1.Location = new System.Drawing.Point(64, 53);
+            this.guna2Panel1.Location = new System.Drawing.Point(39, 41);
             this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(337, 41);
+            this.guna2Panel1.Size = new System.Drawing.Size(382, 41);
             this.guna2Panel1.TabIndex = 98;
             // 
             // label1
@@ -142,13 +144,13 @@ namespace MoneyMindManager_Presentation.Users
             this.guna2Panel2.Controls.Add(this.gbtnSave);
             this.guna2Panel2.Controls.Add(this.ctrlPersonCardWithFilter1);
             this.guna2Panel2.FillColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.guna2Panel2.Location = new System.Drawing.Point(90, 83);
+            this.guna2Panel2.Location = new System.Drawing.Point(84, 89);
             this.guna2Panel2.Name = "guna2Panel2";
             this.guna2Panel2.ShadowDecoration.BorderRadius = 20;
             this.guna2Panel2.ShadowDecoration.Color = System.Drawing.Color.DarkGray;
             this.guna2Panel2.ShadowDecoration.Depth = 20;
             this.guna2Panel2.ShadowDecoration.Enabled = true;
-            this.guna2Panel2.Size = new System.Drawing.Size(1046, 556);
+            this.guna2Panel2.Size = new System.Drawing.Size(1046, 679);
             this.guna2Panel2.TabIndex = 11;
             // 
             // gbtnClose
@@ -159,6 +161,7 @@ namespace MoneyMindManager_Presentation.Users
             this.gbtnClose.BorderColor = System.Drawing.Color.DimGray;
             this.gbtnClose.BorderThickness = 1;
             this.gbtnClose.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gbtnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.gbtnClose.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.gbtnClose.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.gbtnClose.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -174,46 +177,259 @@ namespace MoneyMindManager_Presentation.Users
             this.gbtnClose.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnClose.ImageSize = new System.Drawing.Size(25, 25);
             this.gbtnClose.IndicateFocus = true;
-            this.gbtnClose.Location = new System.Drawing.Point(73, 484);
+            this.gbtnClose.Location = new System.Drawing.Point(48, 615);
             this.gbtnClose.Name = "gbtnClose";
             this.gbtnClose.PressedColor = System.Drawing.Color.White;
-            this.gbtnClose.Size = new System.Drawing.Size(337, 41);
+            this.gbtnClose.Size = new System.Drawing.Size(180, 41);
             this.gbtnClose.TabIndex = 120;
             this.gbtnClose.Text = "غلق";
             this.gbtnClose.Click += new System.EventHandler(this.gbtnClose_Click);
             // 
             // gpnlUserPart
             // 
+            this.gpnlUserPart.Controls.Add(this.label4);
+            this.gpnlUserPart.Controls.Add(this.guna2Panel3);
+            this.gpnlUserPart.Controls.Add(this.kgtxtConfirmPassword);
             this.gpnlUserPart.Controls.Add(this.label5);
+            this.gpnlUserPart.Controls.Add(this.kgtxtpassword);
             this.gpnlUserPart.Controls.Add(this.label3);
             this.gpnlUserPart.Controls.Add(this.lbluserMessage);
             this.gpnlUserPart.Controls.Add(this.guna2Panel1);
             this.gpnlUserPart.Controls.Add(this.kgtxtUserName);
             this.gpnlUserPart.Controls.Add(this.kgtxtNotes);
-            this.gpnlUserPart.Controls.Add(this.gpnlPasswordPart);
             this.gpnlUserPart.Location = new System.Drawing.Point(9, 16);
             this.gpnlUserPart.Name = "gpnlUserPart";
-            this.gpnlUserPart.Size = new System.Drawing.Size(456, 413);
+            this.gpnlUserPart.Size = new System.Drawing.Size(456, 593);
             this.gpnlUserPart.TabIndex = 14;
-            this.gpnlUserPart.Paint += new System.Windows.Forms.PaintEventHandler(this.gpnlUserPart_Paint);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(309, 366);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(112, 17);
+            this.label4.TabIndex = 138;
+            this.label4.Text = "صلاحيات المستخدم";
+            // 
+            // guna2Panel3
+            // 
+            this.guna2Panel3.BackColor = System.Drawing.Color.Transparent;
+            this.guna2Panel3.BorderColor = System.Drawing.Color.Silver;
+            this.guna2Panel3.BorderRadius = 10;
+            this.guna2Panel3.BorderThickness = 1;
+            this.guna2Panel3.Controls.Add(this.chklbUserPermissions);
+            this.guna2Panel3.Location = new System.Drawing.Point(39, 377);
+            this.guna2Panel3.Name = "guna2Panel3";
+            this.guna2Panel3.Size = new System.Drawing.Size(377, 213);
+            this.guna2Panel3.TabIndex = 137;
+            // 
+            // chklbUserPermissions
+            // 
+            this.chklbUserPermissions.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.chklbUserPermissions.CheckOnClick = true;
+            this.chklbUserPermissions.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chklbUserPermissions.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chklbUserPermissions.FormattingEnabled = true;
+            this.chklbUserPermissions.HorizontalScrollbar = true;
+            this.chklbUserPermissions.Location = new System.Drawing.Point(3, 6);
+            this.chklbUserPermissions.Name = "chklbUserPermissions";
+            this.chklbUserPermissions.Size = new System.Drawing.Size(371, 198);
+            this.chklbUserPermissions.TabIndex = 134;
+            this.chklbUserPermissions.Leave += new System.EventHandler(this.chklbUserPermissions_Leave);
+            // 
+            // kgtxtConfirmPassword
+            // 
+            this.kgtxtConfirmPassword.AllowWhiteSpace = true;
+            this.kgtxtConfirmPassword.ApplyTrimAtTextBoxValue = false;
+            this.kgtxtConfirmPassword.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.kgtxtConfirmPassword.BackColor = System.Drawing.Color.Transparent;
+            this.kgtxtConfirmPassword.BorderColor = System.Drawing.Color.DimGray;
+            this.kgtxtConfirmPassword.BorderRadius = 10;
+            this.kgtxtConfirmPassword.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.kgtxtConfirmPassword.DefaultText = "";
+            this.kgtxtConfirmPassword.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.kgtxtConfirmPassword.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.kgtxtConfirmPassword.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.kgtxtConfirmPassword.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.kgtxtConfirmPassword.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.kgtxtConfirmPassword.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kgtxtConfirmPassword.ForeColor = System.Drawing.Color.Black;
+            this.kgtxtConfirmPassword.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.kgtxtConfirmPassword.IconLeft = ((System.Drawing.Image)(resources.GetObject("kgtxtConfirmPassword.IconLeft")));
+            this.kgtxtConfirmPassword.IconRight = global::MoneyMindManager_Presentation.Properties.Resources.crossed_eye_icon_256370;
+            this.kgtxtConfirmPassword.IconRightCursor = System.Windows.Forms.Cursors.Hand;
+            this.kgtxtConfirmPassword.IconRightOffset = new System.Drawing.Point(10, 0);
+            this.kgtxtConfirmPassword.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Text;
+            this.kgtxtConfirmPassword.IsRequired = true;
+            this.kgtxtConfirmPassword.Location = new System.Drawing.Point(39, 319);
+            this.kgtxtConfirmPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.kgtxtConfirmPassword.MaxLength = 200;
+            this.kgtxtConfirmPassword.Name = "kgtxtConfirmPassword";
+            this.kgtxtConfirmPassword.NumberProperties.DecimalNumberProperties.AllowNegative = true;
+            this.kgtxtConfirmPassword.NumberProperties.DecimalNumberProperties.MaxValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.kgtxtConfirmPassword.NumberProperties.DecimalNumberProperties.MaxValueIncluded = true;
+            this.kgtxtConfirmPassword.NumberProperties.DecimalNumberProperties.MaxValueOption = false;
+            this.kgtxtConfirmPassword.NumberProperties.DecimalNumberProperties.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.kgtxtConfirmPassword.NumberProperties.DecimalNumberProperties.MinValueIncluded = true;
+            this.kgtxtConfirmPassword.NumberProperties.DecimalNumberProperties.MinValueOption = false;
+            this.kgtxtConfirmPassword.NumberProperties.FloatNumberProperties.AllowNegative = true;
+            this.kgtxtConfirmPassword.NumberProperties.FloatNumberProperties.MaxValue = 0F;
+            this.kgtxtConfirmPassword.NumberProperties.FloatNumberProperties.MaxValueIncluded = true;
+            this.kgtxtConfirmPassword.NumberProperties.FloatNumberProperties.MaxValueOption = false;
+            this.kgtxtConfirmPassword.NumberProperties.FloatNumberProperties.MinValue = 0F;
+            this.kgtxtConfirmPassword.NumberProperties.FloatNumberProperties.MinValueIncluded = true;
+            this.kgtxtConfirmPassword.NumberProperties.FloatNumberProperties.MinValueOption = false;
+            this.kgtxtConfirmPassword.NumberProperties.IntegerNumberProperties.AllowNegative = true;
+            this.kgtxtConfirmPassword.NumberProperties.IntegerNumberProperties.MaxValue = 0;
+            this.kgtxtConfirmPassword.NumberProperties.IntegerNumberProperties.MaxValueIncluded = true;
+            this.kgtxtConfirmPassword.NumberProperties.IntegerNumberProperties.MaxValueOption = false;
+            this.kgtxtConfirmPassword.NumberProperties.IntegerNumberProperties.MinValue = 0;
+            this.kgtxtConfirmPassword.NumberProperties.IntegerNumberProperties.MinValueIncluded = true;
+            this.kgtxtConfirmPassword.NumberProperties.IntegerNumberProperties.MinValueOption = false;
+            this.kgtxtConfirmPassword.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
+            this.kgtxtConfirmPassword.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
+            this.kgtxtConfirmPassword.PlaceholderForeColor = System.Drawing.Color.Gray;
+            this.kgtxtConfirmPassword.PlaceholderText = "تأكيد كلمة السر (مطلوب)";
+            this.kgtxtConfirmPassword.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
+            this.kgtxtConfirmPassword.SelectedText = "";
+            this.kgtxtConfirmPassword.ShadowDecoration.BorderRadius = 2;
+            this.kgtxtConfirmPassword.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.kgtxtConfirmPassword.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(2);
+            this.kgtxtConfirmPassword.Size = new System.Drawing.Size(382, 41);
+            this.kgtxtConfirmPassword.TabIndex = 3;
+            this.kgtxtConfirmPassword.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.kgtxtConfirmPassword.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
+            this.kgtxtConfirmPassword.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.kgtxtConfirmPassword.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
+            this.kgtxtConfirmPassword.TextProperties.DateTimeProperties.TimeFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enTimeFormate.None;
+            this.kgtxtConfirmPassword.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
+            this.kgtxtConfirmPassword.TextProperties.MinLength = ((short)(4));
+            this.kgtxtConfirmPassword.TextProperties.MinLengthOption = false;
+            this.kgtxtConfirmPassword.TextProperties.PhoneProperties.AllowPlusSign = true;
+            this.kgtxtConfirmPassword.TextProperties.PhoneProperties.MaxPhoneLength = ((byte)(15));
+            this.kgtxtConfirmPassword.TextProperties.TextFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.enTextFormat.None;
+            this.kgtxtConfirmPassword.TrimEnd = false;
+            this.kgtxtConfirmPassword.TrimStart = false;
+            this.kgtxtConfirmPassword.UseSystemPasswordChar = true;
+            this.kgtxtConfirmPassword.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxt_OnValidationError);
+            this.kgtxtConfirmPassword.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxt_OnValidationSuccess);
+            this.kgtxtConfirmPassword.After_kgtxt_Validating += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.AfterMyValidatingEventArgs>(this.kgtxtConfirmPassword_After_kgtxt_Validating);
+            this.kgtxtConfirmPassword.IconRightClick += new System.EventHandler(this.kgtxtpassword_IconRightClick);
+            this.kgtxtConfirmPassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.kgtxt_KeyPress);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(314, 94);
+            this.label5.Location = new System.Drawing.Point(334, 82);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(87, 17);
             this.label5.TabIndex = 122;
             this.label5.Text = "اسم المستخدم";
+            // 
+            // kgtxtpassword
+            // 
+            this.kgtxtpassword.AllowWhiteSpace = true;
+            this.kgtxtpassword.ApplyTrimAtTextBoxValue = false;
+            this.kgtxtpassword.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.kgtxtpassword.BackColor = System.Drawing.Color.Transparent;
+            this.kgtxtpassword.BorderColor = System.Drawing.Color.DimGray;
+            this.kgtxtpassword.BorderRadius = 10;
+            this.kgtxtpassword.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.kgtxtpassword.DefaultText = "";
+            this.kgtxtpassword.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.kgtxtpassword.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.kgtxtpassword.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.kgtxtpassword.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.kgtxtpassword.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.kgtxtpassword.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kgtxtpassword.ForeColor = System.Drawing.Color.Black;
+            this.kgtxtpassword.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.kgtxtpassword.IconLeft = ((System.Drawing.Image)(resources.GetObject("kgtxtpassword.IconLeft")));
+            this.kgtxtpassword.IconRight = global::MoneyMindManager_Presentation.Properties.Resources.crossed_eye_icon_256370;
+            this.kgtxtpassword.IconRightCursor = System.Windows.Forms.Cursors.Hand;
+            this.kgtxtpassword.IconRightOffset = new System.Drawing.Point(10, 0);
+            this.kgtxtpassword.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Text;
+            this.kgtxtpassword.IsRequired = true;
+            this.kgtxtpassword.Location = new System.Drawing.Point(39, 266);
+            this.kgtxtpassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.kgtxtpassword.MaxLength = 200;
+            this.kgtxtpassword.Name = "kgtxtpassword";
+            this.kgtxtpassword.NumberProperties.DecimalNumberProperties.AllowNegative = true;
+            this.kgtxtpassword.NumberProperties.DecimalNumberProperties.MaxValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.kgtxtpassword.NumberProperties.DecimalNumberProperties.MaxValueIncluded = true;
+            this.kgtxtpassword.NumberProperties.DecimalNumberProperties.MaxValueOption = false;
+            this.kgtxtpassword.NumberProperties.DecimalNumberProperties.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.kgtxtpassword.NumberProperties.DecimalNumberProperties.MinValueIncluded = true;
+            this.kgtxtpassword.NumberProperties.DecimalNumberProperties.MinValueOption = false;
+            this.kgtxtpassword.NumberProperties.FloatNumberProperties.AllowNegative = true;
+            this.kgtxtpassword.NumberProperties.FloatNumberProperties.MaxValue = 0F;
+            this.kgtxtpassword.NumberProperties.FloatNumberProperties.MaxValueIncluded = true;
+            this.kgtxtpassword.NumberProperties.FloatNumberProperties.MaxValueOption = false;
+            this.kgtxtpassword.NumberProperties.FloatNumberProperties.MinValue = 0F;
+            this.kgtxtpassword.NumberProperties.FloatNumberProperties.MinValueIncluded = true;
+            this.kgtxtpassword.NumberProperties.FloatNumberProperties.MinValueOption = false;
+            this.kgtxtpassword.NumberProperties.IntegerNumberProperties.AllowNegative = true;
+            this.kgtxtpassword.NumberProperties.IntegerNumberProperties.MaxValue = 0;
+            this.kgtxtpassword.NumberProperties.IntegerNumberProperties.MaxValueIncluded = true;
+            this.kgtxtpassword.NumberProperties.IntegerNumberProperties.MaxValueOption = false;
+            this.kgtxtpassword.NumberProperties.IntegerNumberProperties.MinValue = 0;
+            this.kgtxtpassword.NumberProperties.IntegerNumberProperties.MinValueIncluded = true;
+            this.kgtxtpassword.NumberProperties.IntegerNumberProperties.MinValueOption = false;
+            this.kgtxtpassword.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
+            this.kgtxtpassword.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
+            this.kgtxtpassword.PlaceholderForeColor = System.Drawing.Color.Gray;
+            this.kgtxtpassword.PlaceholderText = "كلمة السر (مطلوب)";
+            this.kgtxtpassword.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
+            this.kgtxtpassword.SelectedText = "";
+            this.kgtxtpassword.ShadowDecoration.BorderRadius = 2;
+            this.kgtxtpassword.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.kgtxtpassword.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(2);
+            this.kgtxtpassword.Size = new System.Drawing.Size(382, 41);
+            this.kgtxtpassword.TabIndex = 2;
+            this.kgtxtpassword.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.kgtxtpassword.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
+            this.kgtxtpassword.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.kgtxtpassword.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
+            this.kgtxtpassword.TextProperties.DateTimeProperties.TimeFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enTimeFormate.None;
+            this.kgtxtpassword.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
+            this.kgtxtpassword.TextProperties.MinLength = ((short)(4));
+            this.kgtxtpassword.TextProperties.MinLengthOption = true;
+            this.kgtxtpassword.TextProperties.PhoneProperties.AllowPlusSign = true;
+            this.kgtxtpassword.TextProperties.PhoneProperties.MaxPhoneLength = ((byte)(15));
+            this.kgtxtpassword.TextProperties.TextFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.enTextFormat.None;
+            this.kgtxtpassword.TrimEnd = false;
+            this.kgtxtpassword.TrimStart = false;
+            this.kgtxtpassword.UseSystemPasswordChar = true;
+            this.kgtxtpassword.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxt_OnValidationError);
+            this.kgtxtpassword.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxt_OnValidationSuccess);
+            this.kgtxtpassword.IconRightClick += new System.EventHandler(this.kgtxtpassword_IconRightClick);
+            this.kgtxtpassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.kgtxt_KeyPress);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(344, 148);
+            this.label3.Location = new System.Drawing.Point(364, 136);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(57, 17);
             this.label3.TabIndex = 123;
@@ -250,7 +466,7 @@ namespace MoneyMindManager_Presentation.Users
             this.kgtxtUserName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtUserName.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
             this.kgtxtUserName.IsRequired = true;
-            this.kgtxtUserName.Location = new System.Drawing.Point(64, 106);
+            this.kgtxtUserName.Location = new System.Drawing.Point(39, 94);
             this.kgtxtUserName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtUserName.MaxLength = 30;
             this.kgtxtUserName.Name = "kgtxtUserName";
@@ -292,7 +508,7 @@ namespace MoneyMindManager_Presentation.Users
             this.kgtxtUserName.ShadowDecoration.BorderRadius = 2;
             this.kgtxtUserName.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.kgtxtUserName.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(2);
-            this.kgtxtUserName.Size = new System.Drawing.Size(337, 41);
+            this.kgtxtUserName.Size = new System.Drawing.Size(382, 41);
             this.kgtxtUserName.TabIndex = 0;
             this.kgtxtUserName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.kgtxtUserName.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
@@ -332,7 +548,7 @@ namespace MoneyMindManager_Presentation.Users
             this.kgtxtNotes.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtNotes.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
             this.kgtxtNotes.IsRequired = false;
-            this.kgtxtNotes.Location = new System.Drawing.Point(64, 158);
+            this.kgtxtNotes.Location = new System.Drawing.Point(39, 146);
             this.kgtxtNotes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtNotes.MaxLength = 200;
             this.kgtxtNotes.Multiline = true;
@@ -375,7 +591,7 @@ namespace MoneyMindManager_Presentation.Users
             this.kgtxtNotes.ShadowDecoration.BorderRadius = 2;
             this.kgtxtNotes.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.kgtxtNotes.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(2);
-            this.kgtxtNotes.Size = new System.Drawing.Size(337, 107);
+            this.kgtxtNotes.Size = new System.Drawing.Size(382, 107);
             this.kgtxtNotes.TabIndex = 1;
             this.kgtxtNotes.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.kgtxtNotes.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
@@ -393,188 +609,6 @@ namespace MoneyMindManager_Presentation.Users
             this.kgtxtNotes.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxt_OnValidationError);
             this.kgtxtNotes.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxt_OnValidationSuccess);
             this.kgtxtNotes.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.kgtxt_KeyPress);
-            // 
-            // gpnlPasswordPart
-            // 
-            this.gpnlPasswordPart.Controls.Add(this.kgtxtConfirmPassword);
-            this.gpnlPasswordPart.Controls.Add(this.kgtxtpassword);
-            this.gpnlPasswordPart.Location = new System.Drawing.Point(53, 271);
-            this.gpnlPasswordPart.Name = "gpnlPasswordPart";
-            this.gpnlPasswordPart.Size = new System.Drawing.Size(363, 113);
-            this.gpnlPasswordPart.TabIndex = 102;
-            // 
-            // kgtxtConfirmPassword
-            // 
-            this.kgtxtConfirmPassword.AllowWhiteSpace = true;
-            this.kgtxtConfirmPassword.ApplyTrimAtTextBoxValue = false;
-            this.kgtxtConfirmPassword.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.kgtxtConfirmPassword.BackColor = System.Drawing.Color.Transparent;
-            this.kgtxtConfirmPassword.BorderColor = System.Drawing.Color.DimGray;
-            this.kgtxtConfirmPassword.BorderRadius = 10;
-            this.kgtxtConfirmPassword.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.kgtxtConfirmPassword.DefaultText = "";
-            this.kgtxtConfirmPassword.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.kgtxtConfirmPassword.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.kgtxtConfirmPassword.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.kgtxtConfirmPassword.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.kgtxtConfirmPassword.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.kgtxtConfirmPassword.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kgtxtConfirmPassword.ForeColor = System.Drawing.Color.Black;
-            this.kgtxtConfirmPassword.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.kgtxtConfirmPassword.IconRight = global::MoneyMindManager_Presentation.Properties.Resources.crossed_eye_icon_256370;
-            this.kgtxtConfirmPassword.IconRightOffset = new System.Drawing.Point(10, 0);
-            this.kgtxtConfirmPassword.IconRightSize = new System.Drawing.Size(25, 25);
-            this.kgtxtConfirmPassword.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Text;
-            this.kgtxtConfirmPassword.IsRequired = true;
-            this.kgtxtConfirmPassword.Location = new System.Drawing.Point(11, 63);
-            this.kgtxtConfirmPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.kgtxtConfirmPassword.MaxLength = 200;
-            this.kgtxtConfirmPassword.Name = "kgtxtConfirmPassword";
-            this.kgtxtConfirmPassword.NumberProperties.DecimalNumberProperties.AllowNegative = true;
-            this.kgtxtConfirmPassword.NumberProperties.DecimalNumberProperties.MaxValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.kgtxtConfirmPassword.NumberProperties.DecimalNumberProperties.MaxValueIncluded = true;
-            this.kgtxtConfirmPassword.NumberProperties.DecimalNumberProperties.MaxValueOption = false;
-            this.kgtxtConfirmPassword.NumberProperties.DecimalNumberProperties.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.kgtxtConfirmPassword.NumberProperties.DecimalNumberProperties.MinValueIncluded = true;
-            this.kgtxtConfirmPassword.NumberProperties.DecimalNumberProperties.MinValueOption = false;
-            this.kgtxtConfirmPassword.NumberProperties.FloatNumberProperties.AllowNegative = true;
-            this.kgtxtConfirmPassword.NumberProperties.FloatNumberProperties.MaxValue = 0F;
-            this.kgtxtConfirmPassword.NumberProperties.FloatNumberProperties.MaxValueIncluded = true;
-            this.kgtxtConfirmPassword.NumberProperties.FloatNumberProperties.MaxValueOption = false;
-            this.kgtxtConfirmPassword.NumberProperties.FloatNumberProperties.MinValue = 0F;
-            this.kgtxtConfirmPassword.NumberProperties.FloatNumberProperties.MinValueIncluded = true;
-            this.kgtxtConfirmPassword.NumberProperties.FloatNumberProperties.MinValueOption = false;
-            this.kgtxtConfirmPassword.NumberProperties.IntegerNumberProperties.AllowNegative = true;
-            this.kgtxtConfirmPassword.NumberProperties.IntegerNumberProperties.MaxValue = 0;
-            this.kgtxtConfirmPassword.NumberProperties.IntegerNumberProperties.MaxValueIncluded = true;
-            this.kgtxtConfirmPassword.NumberProperties.IntegerNumberProperties.MaxValueOption = false;
-            this.kgtxtConfirmPassword.NumberProperties.IntegerNumberProperties.MinValue = 0;
-            this.kgtxtConfirmPassword.NumberProperties.IntegerNumberProperties.MinValueIncluded = true;
-            this.kgtxtConfirmPassword.NumberProperties.IntegerNumberProperties.MinValueOption = false;
-            this.kgtxtConfirmPassword.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
-            this.kgtxtConfirmPassword.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
-            this.kgtxtConfirmPassword.PlaceholderForeColor = System.Drawing.Color.Gray;
-            this.kgtxtConfirmPassword.PlaceholderText = "تأكيد كلمة السر (مطلوب)";
-            this.kgtxtConfirmPassword.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.kgtxtConfirmPassword.SelectedText = "";
-            this.kgtxtConfirmPassword.ShadowDecoration.BorderRadius = 2;
-            this.kgtxtConfirmPassword.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.kgtxtConfirmPassword.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(2);
-            this.kgtxtConfirmPassword.Size = new System.Drawing.Size(337, 41);
-            this.kgtxtConfirmPassword.TabIndex = 3;
-            this.kgtxtConfirmPassword.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.kgtxtConfirmPassword.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
-            this.kgtxtConfirmPassword.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
-            this.kgtxtConfirmPassword.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
-            this.kgtxtConfirmPassword.TextProperties.DateTimeProperties.TimeFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enTimeFormate.None;
-            this.kgtxtConfirmPassword.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
-            this.kgtxtConfirmPassword.TextProperties.MinLength = ((short)(4));
-            this.kgtxtConfirmPassword.TextProperties.MinLengthOption = false;
-            this.kgtxtConfirmPassword.TextProperties.PhoneProperties.AllowPlusSign = true;
-            this.kgtxtConfirmPassword.TextProperties.PhoneProperties.MaxPhoneLength = ((byte)(15));
-            this.kgtxtConfirmPassword.TextProperties.TextFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.enTextFormat.None;
-            this.kgtxtConfirmPassword.TrimEnd = false;
-            this.kgtxtConfirmPassword.TrimStart = false;
-            this.kgtxtConfirmPassword.UseSystemPasswordChar = true;
-            this.kgtxtConfirmPassword.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxt_OnValidationError);
-            this.kgtxtConfirmPassword.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxt_OnValidationSuccess);
-            this.kgtxtConfirmPassword.After_kgtxt_Validating += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.AfterMyValidatingEventArgs>(this.kgtxtConfirmPassword_After_kgtxt_Validating);
-            this.kgtxtConfirmPassword.IconRightClick += new System.EventHandler(this.kgtxtpassword_IconRightClick);
-            this.kgtxtConfirmPassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.kgtxt_KeyPress);
-            // 
-            // kgtxtpassword
-            // 
-            this.kgtxtpassword.AllowWhiteSpace = true;
-            this.kgtxtpassword.ApplyTrimAtTextBoxValue = false;
-            this.kgtxtpassword.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.kgtxtpassword.BackColor = System.Drawing.Color.Transparent;
-            this.kgtxtpassword.BorderColor = System.Drawing.Color.DimGray;
-            this.kgtxtpassword.BorderRadius = 10;
-            this.kgtxtpassword.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.kgtxtpassword.DefaultText = "";
-            this.kgtxtpassword.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.kgtxtpassword.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.kgtxtpassword.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.kgtxtpassword.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.kgtxtpassword.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.kgtxtpassword.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kgtxtpassword.ForeColor = System.Drawing.Color.Black;
-            this.kgtxtpassword.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.kgtxtpassword.IconRight = global::MoneyMindManager_Presentation.Properties.Resources.crossed_eye_icon_256370;
-            this.kgtxtpassword.IconRightOffset = new System.Drawing.Point(10, 0);
-            this.kgtxtpassword.IconRightSize = new System.Drawing.Size(25, 25);
-            this.kgtxtpassword.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Text;
-            this.kgtxtpassword.IsRequired = true;
-            this.kgtxtpassword.Location = new System.Drawing.Point(11, 10);
-            this.kgtxtpassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.kgtxtpassword.MaxLength = 200;
-            this.kgtxtpassword.Name = "kgtxtpassword";
-            this.kgtxtpassword.NumberProperties.DecimalNumberProperties.AllowNegative = true;
-            this.kgtxtpassword.NumberProperties.DecimalNumberProperties.MaxValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.kgtxtpassword.NumberProperties.DecimalNumberProperties.MaxValueIncluded = true;
-            this.kgtxtpassword.NumberProperties.DecimalNumberProperties.MaxValueOption = false;
-            this.kgtxtpassword.NumberProperties.DecimalNumberProperties.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.kgtxtpassword.NumberProperties.DecimalNumberProperties.MinValueIncluded = true;
-            this.kgtxtpassword.NumberProperties.DecimalNumberProperties.MinValueOption = false;
-            this.kgtxtpassword.NumberProperties.FloatNumberProperties.AllowNegative = true;
-            this.kgtxtpassword.NumberProperties.FloatNumberProperties.MaxValue = 0F;
-            this.kgtxtpassword.NumberProperties.FloatNumberProperties.MaxValueIncluded = true;
-            this.kgtxtpassword.NumberProperties.FloatNumberProperties.MaxValueOption = false;
-            this.kgtxtpassword.NumberProperties.FloatNumberProperties.MinValue = 0F;
-            this.kgtxtpassword.NumberProperties.FloatNumberProperties.MinValueIncluded = true;
-            this.kgtxtpassword.NumberProperties.FloatNumberProperties.MinValueOption = false;
-            this.kgtxtpassword.NumberProperties.IntegerNumberProperties.AllowNegative = true;
-            this.kgtxtpassword.NumberProperties.IntegerNumberProperties.MaxValue = 0;
-            this.kgtxtpassword.NumberProperties.IntegerNumberProperties.MaxValueIncluded = true;
-            this.kgtxtpassword.NumberProperties.IntegerNumberProperties.MaxValueOption = false;
-            this.kgtxtpassword.NumberProperties.IntegerNumberProperties.MinValue = 0;
-            this.kgtxtpassword.NumberProperties.IntegerNumberProperties.MinValueIncluded = true;
-            this.kgtxtpassword.NumberProperties.IntegerNumberProperties.MinValueOption = false;
-            this.kgtxtpassword.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
-            this.kgtxtpassword.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
-            this.kgtxtpassword.PlaceholderForeColor = System.Drawing.Color.Gray;
-            this.kgtxtpassword.PlaceholderText = "كلمة السر (مطلوب)";
-            this.kgtxtpassword.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.kgtxtpassword.SelectedText = "";
-            this.kgtxtpassword.ShadowDecoration.BorderRadius = 2;
-            this.kgtxtpassword.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.kgtxtpassword.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(2);
-            this.kgtxtpassword.Size = new System.Drawing.Size(337, 41);
-            this.kgtxtpassword.TabIndex = 2;
-            this.kgtxtpassword.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.kgtxtpassword.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
-            this.kgtxtpassword.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
-            this.kgtxtpassword.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
-            this.kgtxtpassword.TextProperties.DateTimeProperties.TimeFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enTimeFormate.None;
-            this.kgtxtpassword.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
-            this.kgtxtpassword.TextProperties.MinLength = ((short)(4));
-            this.kgtxtpassword.TextProperties.MinLengthOption = true;
-            this.kgtxtpassword.TextProperties.PhoneProperties.AllowPlusSign = true;
-            this.kgtxtpassword.TextProperties.PhoneProperties.MaxPhoneLength = ((byte)(15));
-            this.kgtxtpassword.TextProperties.TextFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.enTextFormat.None;
-            this.kgtxtpassword.TrimEnd = false;
-            this.kgtxtpassword.TrimStart = false;
-            this.kgtxtpassword.UseSystemPasswordChar = true;
-            this.kgtxtpassword.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxt_OnValidationError);
-            this.kgtxtpassword.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxt_OnValidationSuccess);
-            this.kgtxtpassword.IconRightClick += new System.EventHandler(this.kgtxtpassword_IconRightClick);
-            this.kgtxtpassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.kgtxt_KeyPress);
             // 
             // gbtnSave
             // 
@@ -599,10 +633,10 @@ namespace MoneyMindManager_Presentation.Users
             this.gbtnSave.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnSave.ImageSize = new System.Drawing.Size(25, 25);
             this.gbtnSave.IndicateFocus = true;
-            this.gbtnSave.Location = new System.Drawing.Point(73, 435);
+            this.gbtnSave.Location = new System.Drawing.Point(237, 615);
             this.gbtnSave.Name = "gbtnSave";
             this.gbtnSave.PressedColor = System.Drawing.Color.White;
-            this.gbtnSave.Size = new System.Drawing.Size(337, 41);
+            this.gbtnSave.Size = new System.Drawing.Size(193, 41);
             this.gbtnSave.TabIndex = 119;
             this.gbtnSave.Text = "حفظ";
             this.gbtnSave.Click += new System.EventHandler(this.gbtnSave_Click);
@@ -613,7 +647,7 @@ namespace MoneyMindManager_Presentation.Users
             this.ctrlPersonCardWithFilter1.EnablityOfSearchPart = true;
             this.ctrlPersonCardWithFilter1.Location = new System.Drawing.Point(468, 16);
             this.ctrlPersonCardWithFilter1.Name = "ctrlPersonCardWithFilter1";
-            this.ctrlPersonCardWithFilter1.Size = new System.Drawing.Size(575, 529);
+            this.ctrlPersonCardWithFilter1.Size = new System.Drawing.Size(575, 640);
             this.ctrlPersonCardWithFilter1.TabIndex = 13;
             this.ctrlPersonCardWithFilter1.OnSuccess += new System.Action(this.ctrlPersonCardWithFilter1_OnSuccess);
             this.ctrlPersonCardWithFilter1.OnFailed += new System.Action(this.ctrlPersonCardWithFilter1_OnFailed);
@@ -626,17 +660,18 @@ namespace MoneyMindManager_Presentation.Users
             this.lblHeader.ForeColor = System.Drawing.Color.Black;
             this.lblHeader.Location = new System.Drawing.Point(0, 0);
             this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(1210, 50);
+            this.lblHeader.Size = new System.Drawing.Size(1210, 60);
             this.lblHeader.TabIndex = 37;
             this.lblHeader.Text = "إضافة مستخدم";
-            this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblHeader.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // frmAddUpdateUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1210, 737);
+            this.CancelButton = this.gbtnClose;
+            this.ClientSize = new System.Drawing.Size(1210, 809);
             this.Controls.Add(this.lblHeader);
             this.Controls.Add(this.guna2Panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -649,7 +684,7 @@ namespace MoneyMindManager_Presentation.Users
             this.guna2Panel2.ResumeLayout(false);
             this.gpnlUserPart.ResumeLayout(false);
             this.gpnlUserPart.PerformLayout();
-            this.gpnlPasswordPart.ResumeLayout(false);
+            this.guna2Panel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -669,12 +704,14 @@ namespace MoneyMindManager_Presentation.Users
         private KhaledControlLibrary1.KhaledGuna2TextBox kgtxtpassword;
         private KhaledControlLibrary1.KhaledGuna2TextBox kgtxtConfirmPassword;
         private Guna.UI2.WinForms.Guna2Panel gpnlUserPart;
-        private Guna.UI2.WinForms.Guna2Panel gpnlPasswordPart;
         private System.Windows.Forms.Label lbluserMessage;
         private System.Windows.Forms.Label lblHeader;
         private Guna.UI2.WinForms.Guna2Button gbtnClose;
         private Guna.UI2.WinForms.Guna2Button gbtnSave;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private Guna.UI2.WinForms.Guna2Panel guna2Panel3;
+        private System.Windows.Forms.CheckedListBox chklbUserPermissions;
     }
 }

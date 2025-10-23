@@ -20,8 +20,20 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
     {
         public frmCategoriesList(bool isIncome)
         {
+            if (!_CheckPermissions())
+            {
+                this.Dispose();
+                return;
+            }
+
             InitializeComponent();
             this._IsIncome = isIncome;
+        }
+
+        bool _CheckPermissions()
+        {
+            return clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.CategoriesList,
+                "ليس لديك صلاحية قائمة الفئات.");
         }
 
         bool _IsIncome;
@@ -78,36 +90,35 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
             bool includeMainCategories = gchkIncludeMainCategory.Checked;
             bool includeSubCategories = gchkIncludeSubCategories.Checked;
-            int currentUserID = Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID);
 
             if (filterBy == enFilterBy.All || string.IsNullOrEmpty(kgtxtFilterValue.ValidatedText))
             {
                 result = await clsIncomeAndExpenseCategory.GetAllCategories(_IsIncome, isActive, includeMainCategories,
-                    includeSubCategories, currentUserID, _pageNumber);
+                    includeSubCategories, _pageNumber);
             }
             else if (filterBy == enFilterBy.CategoryID)
             {
                 int categoryID = Convert.ToInt32(kgtxtFilterValue.ValidatedText);
                 result = await clsIncomeAndExpenseCategory.GetAllCategoriesByCategoryID(categoryID, _IsIncome, isActive,
-                    includeMainCategories, includeSubCategories, currentUserID, _pageNumber);
+                    includeMainCategories, includeSubCategories, _pageNumber);
             }
             else if (filterBy == enFilterBy.CategoryName)
             {
                 string categoryName = kgtxtFilterValue.ValidatedText;
                 result = await clsIncomeAndExpenseCategory.GetAllCategoriesByCategoryName(categoryName, _IsIncome, isActive,
-                     includeMainCategories, includeSubCategories, currentUserID, _pageNumber);
+                     includeMainCategories, includeSubCategories, _pageNumber);
             }
             else if (filterBy == enFilterBy.ParentCategoryName)
             {
                 string parentCategoryName = kgtxtFilterValue.ValidatedText;
                 result = await clsIncomeAndExpenseCategory.GetAllCategoriesByParentCategoryName(parentCategoryName, _IsIncome, isActive,
-                     includeMainCategories, includeSubCategories, currentUserID, _pageNumber);
+                     includeMainCategories, includeSubCategories, _pageNumber);
             }
             else if (filterBy == enFilterBy.MainCategoryName)
             {
                 string mainCategoryName = kgtxtFilterValue.ValidatedText;
                 result = await clsIncomeAndExpenseCategory.GetAllCategoriesByMainCategoryName(mainCategoryName, _IsIncome, isActive,
-                     includeMainCategories, includeSubCategories, currentUserID, _pageNumber);
+                     includeMainCategories, includeSubCategories, _pageNumber);
             }
             else
                 return;
@@ -388,25 +399,12 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                 e.CellStyle.SelectionForeColor = Color.Orange;
             }
         }
-
-        private void lblCurrentPageRecordsCount_Click(object sender, EventArgs e)
+        private void gtsmShowCategoryMonthlyFlow_Click(object sender, EventArgs e)
         {
+            int categoryID = Convert.ToInt32(gdgvCategories.SelectedRows[0].Cells[0].Value);
 
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblCurrentPageOfNumberOfPages_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblTotalRecordsNumber_Click(object sender, EventArgs e)
-        {
-
+            var frm = new frmCategoryMonthlyFlow(categoryID);
+            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
         }
     }
 }

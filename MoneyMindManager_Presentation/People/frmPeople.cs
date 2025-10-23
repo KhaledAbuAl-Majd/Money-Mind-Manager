@@ -19,6 +19,13 @@ namespace MoneyMindManager_Presentation.People
     {
         public frmPeople()
         {
+            if (!clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.PeopleList,
+                "ليس لديك صلاحية قائمة الأشخاص."))
+            {
+                this.Dispose();
+                return;
+            }
+
             InitializeComponent();
         }
 

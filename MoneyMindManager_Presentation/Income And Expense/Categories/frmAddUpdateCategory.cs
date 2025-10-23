@@ -31,6 +31,12 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
         public frmAddUpdateCategory()
         {
+            if (!_CheckPermissions())
+            {
+                this.Dispose();
+                return;
+            }
+
             InitializeComponent();
             Mode = enMode.AddNew;
             _CategoryID = null;
@@ -44,6 +50,12 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
         /// <param name="isIncome">Category Type</param>
         public frmAddUpdateCategory(bool isIncome)
         {
+            if (!_CheckPermissions())
+            {
+                this.Dispose();
+                return;
+            }
+
             InitializeComponent();
             Mode = enMode.AddNew;
             _CategoryID = null;
@@ -53,10 +65,22 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
         public frmAddUpdateCategory(int categoryID)
         {
+            if (!_CheckPermissions())
+            {
+                this.Dispose();
+                return;
+            }
+
             InitializeComponent();
             Mode = enMode.AddNew;
             Mode = enMode.Update;
             this._CategoryID = categoryID;
+        }
+
+        bool _CheckPermissions()
+        {
+            return clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.AddUpdateCategory,
+                "ليس لديك صلاحية إضافة/تعديل فئة.");
         }
 
         private int? _CategoryID { get; set; }
@@ -110,9 +134,8 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
         async Task _UpdateMode()
         {
             ChangeHeaderValue("تعديل بيانات الفئة");
-            int currentUserID = Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID);
 
-            var searchedCategory = await clsIncomeAndExpenseCategory.FindCategoryByCategoryID(Convert.ToInt32(_CategoryID),currentUserID );
+            var searchedCategory = await clsIncomeAndExpenseCategory.FindCategoryByCategoryID(Convert.ToInt32(_CategoryID) );
 
             if (searchedCategory == null)
             {
@@ -133,7 +156,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             if (!(_Category.ParentCategoryID == null && _Category.IsIncome == false))
                 _SetReadOnlyAtTextBox(kgtxtMonthlyBudget);
 
-            kgtxtParentCategoryName.Text = (await _Category.GetParentCategoryInfo(currentUserID))?.CategoryName;
+            kgtxtParentCategoryName.Text = (await _Category.GetParentCategoryInfo())?.CategoryName;
             _SetReadOnlyAtTextBox(kgtxtParentCategoryName);
             kgtxtNotes.Text = _Category.Notes;
             gcbIsIncome_CategroyType.SelectedIndex = Convert.ToInt32((Convert.ToBoolean(_isIncome)) ? en_gcbIsInocmeItems.واردات : en_gcbIsInocmeItems.مصروفات);
@@ -176,7 +199,6 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             }
 
             _Category.CategoryName = kgtxtCategoryName.ValidatedText;
-            _Category.IsActive = gtswIsActive.Checked;
 
 
             if (Mode == enMode.AddNew)
@@ -212,7 +234,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
             _Category.Notes = kgtxtNotes.ValidatedText;
 
-            if (await _Category.Save(Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID)))
+            if (await _Category.Save(gtswIsActive.Checked))
             {
                 if (Mode == enMode.AddNew)
                 {
@@ -359,7 +381,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
             if ((Mode == enMode.AddNew) || (Mode == enMode.Update && _Category.CategoryName != categoryName))
             {
-                if (clsIncomeAndExpenseCategory.IsCategoryExistByCategoryName(categoryName,Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID)))
+                if (clsIncomeAndExpenseCategory.IsCategoryExistByCategoryName(categoryName))
                 {
                     e.Cancel = true;
                     errorProvider1.SetError(kgtxtCategoryName, "اسم الفئة مستخدم, قم بتجربة اسم آخر");
@@ -380,7 +402,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             if (clsGlobalMessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف الفئة ؟ ", "طلب مواقفقة", MessageBoxButtons.OKCancel,
                MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
             {
-                if (await clsIncomeAndExpenseCategory.DeleteCategoryByCategoryID(Convert.ToInt32(_CategoryID), Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID)))
+                if (await clsIncomeAndExpenseCategory.DeleteCategoryByCategoryID(Convert.ToInt32(_CategoryID)))
                 {
                     _isSaved = true;
                     gbtnClose.PerformClick();

@@ -35,8 +35,18 @@ namespace MoneyMindManagerGlobal
                 /// </summary>
                 public DateTime CreatedDate { get; protected set; }
 
+                /// <summary>
+                /// lending
+                /// </summary>
+                public decimal Receivable { get; protected set; } // مستحقات لك
+
+                /// <summary>
+                /// borrwing
+                /// </summary>
+                public decimal Payable { get; protected set; }    // مستحقات عليك
+
                 public clsPersonColumns(int? personID, string personName, string address, string email, string phone,
-                    short? accountID, string notes, int? createdByUserID, DateTime createdDate)
+                    short? accountID, string notes, int? createdByUserID, DateTime createdDate,decimal receivable,decimal payable)
                 {
                     this.PersonID = personID;
                     this.PersonName = personName;
@@ -47,6 +57,8 @@ namespace MoneyMindManagerGlobal
                     this.Notes = notes;
                     this.CreatedByUserID = createdByUserID;
                     this.CreatedDate = createdDate;
+                    this.Receivable = receivable;
+                    this.Payable = payable;
                 }
 
                 public clsPersonColumns()
@@ -60,6 +72,8 @@ namespace MoneyMindManagerGlobal
                     this.Notes = null;
                     this.CreatedByUserID = null;
                     this.CreatedDate = DateTime.Now;
+                    this.Receivable = 0;
+                    this.Payable = 0;
                 }
             }
 
@@ -95,7 +109,7 @@ namespace MoneyMindManagerGlobal
                 /// At Add Mode Only, Unique
                 /// </summary>
                 public Nullable<int> PersonID { get;protected set; }
-                public Nullable<int> Permissions { get; set; }
+                public int Permissions { get; set; }
 
                 /// <summary>
                 /// Hashed Password [Hash(Password + Salt) ]
@@ -121,7 +135,7 @@ namespace MoneyMindManagerGlobal
                 /// </summary>
                 public DateTime CreatedDate { get; protected set; }
 
-                public clsUserColumns(int? userID, string userName, int? personID, int? permissions, string password, string salt
+                public clsUserColumns(int? userID, string userName, int? personID, int permissions, string password, string salt
                     , bool isActive, string notes, short? accountID, bool isDeleted, int? createdByUserID, DateTime createdDate)
                 {
                     this.UserID = userID;
@@ -143,7 +157,7 @@ namespace MoneyMindManagerGlobal
                     this.UserID = null;
                     this.UserName = null;
                     this.PersonID = null;
-                    this.Permissions = null;
+                    this.Permissions = 0;
                     this.Password = null;
                     this.Salt = null;
                     this.IsActive = true;
@@ -390,7 +404,7 @@ namespace MoneyMindManagerGlobal
                 /// at add mode only
                 /// </summary>
                 public int? CreatedByUserID { get; protected set; }
-                public bool IsActive { get; set; }
+                public bool IsActive { get;protected set; }
                 public string CategoryHierarchical { get; protected set; }
                 public string Notes { get; set; }
                 public string MainCategoryName { get; protected set; }

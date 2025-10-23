@@ -36,9 +36,9 @@ namespace MoneyMindManager_Business
 
             return true;
         }
-        public async Task<clsUser> GetCreatedbyUserInfo(int currentUserID)
+        public async Task<clsUser> GetCreatedbyUserInfo()
         {
-          return  await clsUser.FindUserByUserID(Convert.ToInt32(CreatedByUserID),currentUserID);
+          return  await clsUser.FindUserByUserID(Convert.ToInt32(CreatedByUserID));
         }
 
         public clsPerson() : base()
@@ -48,12 +48,11 @@ namespace MoneyMindManager_Business
         }
 
         private clsPerson(int? personID, string personName, string address, string email, string phone, short accountID,
-            string notes, clsAccount accountInfo, int? createdByUserID, DateTime createdDate) :
-            base(personID, personName, address, email, phone, accountID, notes,createdByUserID,createdDate)
+            string notes, clsAccount accountInfo, int? createdByUserID, DateTime createdDate, decimal receivable, decimal payable) :
+            base(personID, personName, address, email, phone, accountID, notes,createdByUserID,createdDate,receivable,payable)
         {
             Mode = enMode.Update;
             this.AccountInfo = accountInfo;
-            //this.CreatedByUserInfo = createdByUserInfo;
         }
 
         private async Task<bool> _AddNewPerson()
@@ -68,7 +67,8 @@ namespace MoneyMindManager_Business
 
         private async Task<bool> _UpdatePerson()
         {
-            return await clsPersonData.UpdatePerson(Convert.ToInt32(PersonID), PersonName, Address, Email, Phone, Notes);
+            return await clsPersonData.UpdatePerson(Convert.ToInt32(PersonID), PersonName, Address, Email, Phone, Notes,
+                Convert.ToInt32(clsGlobalSession.CurrentUserID));
         }
 
         async Task<bool> _RefeshCompositionObjects()
@@ -81,7 +81,11 @@ namespace MoneyMindManager_Business
 
         public async Task<bool> Save()
         {
-            switch (Mode)
+            if (!clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.AddUpdatePerson,
+                "ليس لديك صلاحية إضافة/تعديل شخص."))
+                return false;
+
+                switch (Mode)
             {
                 case enMode.AddNew:
                     {
@@ -102,6 +106,11 @@ namespace MoneyMindManager_Business
         }
 
         /// <returns>Object of clsUserColumns, if person is not found it will return null</returns>
+        public static async Task<clsPerson> FindPersonByID(int personID)
+        {
+            return await FindPersonByID(personID, Convert.ToInt32(clsGlobalSession.CurrentUserID));
+        }
+
         public static async Task<clsPerson> FindPersonByID(int personID,int currentUserID)
         {
             clsPersonColumns personColumns = await clsPersonData.GetPersonInfoByID(personID,currentUserID);
@@ -112,17 +121,21 @@ namespace MoneyMindManager_Business
             clsAccount accountInfo = await clsAccount.FindAccountByAccountID(Convert.ToInt16(personColumns.AccountID));
 
 
-            if (accountInfo == null )
+            if (accountInfo == null)
                 return null;
 
             return new clsPerson(personColumns.PersonID, personColumns.PersonName, personColumns.Address, personColumns.Email,
                 personColumns.Phone, Convert.ToInt16(personColumns.AccountID), personColumns.Notes, accountInfo,
-                personColumns.CreatedByUserID, personColumns.CreatedDate);
+                personColumns.CreatedByUserID, personColumns.CreatedDate, personColumns.Receivable, personColumns.Payable);
         }
 
         public static async Task<bool> DeletePersonByID(int personID)
         {
-            return await clsPersonData.DeletePersonByID(personID);
+            if (!clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.DeletePerson,
+               "ليس لديك صلاحية حذف شخص."))
+                return false;
+
+            return await clsPersonData.DeletePersonByID(personID, Convert.ToInt32(clsGlobalSession.CurrentUserID));
         }
 
         public static async Task<bool> IsPersonExistByID(int personID)
@@ -195,9 +208,9 @@ namespace MoneyMindManager_Business
             return await clsPersonData.GetAllPeopleForSelectOne(personName, pageNumber, currentUserID);
         }
 
-        public async Task<bool> RefreshData(int currentUserID)
+        public async Task<bool> RefreshData()
         {
-            clsPerson freshPerson = await clsPerson.FindPersonByID(Convert.ToInt32(PersonID),currentUserID);
+            clsPerson freshPerson = await clsPerson.FindPersonByID(Convert.ToInt32(PersonID));
 
             if (freshPerson == null)
                 return false;
@@ -210,6 +223,8 @@ namespace MoneyMindManager_Business
             this.Notes = freshPerson.Notes;
             this.CreatedByUserID = freshPerson.CreatedByUserID;
             this.CreatedDate = freshPerson.CreatedDate;
+            this.Receivable = freshPerson.Receivable;
+            this.Payable = freshPerson.Payable;
 
             this.AccountInfo = freshPerson.AccountInfo;
 

@@ -300,11 +300,12 @@ namespace MoneyMindManager_Presentation.People.Controls
             // 
             // ctrlPersonCard1
             // 
+            this.ctrlPersonCard1.AllowEditingPerson = false;
             this.ctrlPersonCard1.BackColor = System.Drawing.Color.White;
             this.ctrlPersonCard1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ctrlPersonCard1.Location = new System.Drawing.Point(11, 74);
             this.ctrlPersonCard1.Name = "ctrlPersonCard1";
-            this.ctrlPersonCard1.Size = new System.Drawing.Size(536, 450);
+            this.ctrlPersonCard1.Size = new System.Drawing.Size(536, 556);
             this.ctrlPersonCard1.TabIndex = 0;
             this.ctrlPersonCard1.OnEditingPerson += new System.Action(this.ctrlPersonCard1_OnEditingPerson);
             // 
@@ -316,7 +317,7 @@ namespace MoneyMindManager_Presentation.People.Controls
             this.Controls.Add(this.pnlSearchPart);
             this.Controls.Add(this.ctrlPersonCard1);
             this.Name = "ctrlPersonCardWithFilter";
-            this.Size = new System.Drawing.Size(575, 529);
+            this.Size = new System.Drawing.Size(575, 640);
             this.Load += new System.EventHandler(this.ctrlPersonCardWithFilter_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.pnlSearchPart.ResumeLayout(false);

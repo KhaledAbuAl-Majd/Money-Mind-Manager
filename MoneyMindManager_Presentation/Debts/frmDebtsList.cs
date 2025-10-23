@@ -20,8 +20,20 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
     public partial class frmDebtsList : Form
     {
         public frmDebtsList()
-        { 
+        {
+            if (!_CheckPermissions())
+            {
+                this.Dispose();
+                return;
+            }
+
             InitializeComponent();
+        }
+
+        bool _CheckPermissions()
+        {
+            return clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.DebtsList,
+                "ليس لديك صلاحية قائمة سندات الديون.");
         }
         enum enFilterBy { All, DebtID, PersonName,UserName };
 
@@ -90,30 +102,28 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             else
                 isPaid = null;
 
-            int currentUserID = Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID);
-
             if (filterBy == enFilterBy.All || string.IsNullOrEmpty(kgtxtFilterValue.ValidatedText))
             {
                 result = await clsDebt.GetAllDebts(isLending, filterByCreatedDate, kgtxtFromData.ValidatedText, kgtxtToDate.ValidatedText,
-                    isPaid, currentUserID, _pageNumber);
+                    isPaid, _pageNumber);
             }
             else if (filterBy == enFilterBy.DebtID)
             {
                 int debtID = Convert.ToInt32(kgtxtFilterValue.ValidatedText);
                 result = await clsDebt.GetAllDebts(debtID,isLending, filterByCreatedDate, kgtxtFromData.ValidatedText, kgtxtToDate.ValidatedText,
-                      isPaid, currentUserID, _pageNumber);
+                      isPaid, _pageNumber);
             }
             else if (filterBy == enFilterBy.PersonName)
             {
                 string personName = kgtxtFilterValue.ValidatedText;
                 result = await clsDebt.GetAllDebts(personName,isLending, filterByCreatedDate, kgtxtFromData.ValidatedText, kgtxtToDate.ValidatedText,
-                    isPaid, currentUserID, _pageNumber);
+                    isPaid, _pageNumber);
             }
             else if (filterBy == enFilterBy.UserName)
             {
                 string userName = kgtxtFilterValue.ValidatedText;
                 result = await clsDebt.GetAllDebtsByUserName(userName,isLending, filterByCreatedDate, kgtxtFromData.ValidatedText, kgtxtToDate.ValidatedText,
-                    isPaid, currentUserID, _pageNumber);
+                    isPaid, _pageNumber);
             }
             else
                 return;
@@ -452,30 +462,28 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             else
                 isPaid = null;
 
-            int currentUserID = Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID);
-
             if (_filterBy == enFilterBy.All || string.IsNullOrEmpty(kgtxtFilterValue.ValidatedText))
             {
                 dtDebts = await clsDebt.GetAllDebtsWithoutPaging(isLending, filterByCreatedDate, kgtxtFromData.ValidatedText, kgtxtToDate.ValidatedText,
-                    isPaid, currentUserID);
+                    isPaid);
             }
             else if (_filterBy == enFilterBy.DebtID)
             {
                 int debtID = Convert.ToInt32(kgtxtFilterValue.ValidatedText);
                 dtDebts = await clsDebt.GetAllDebtsWithoutPaging(debtID, isLending, filterByCreatedDate, kgtxtFromData.ValidatedText, kgtxtToDate.ValidatedText,
-                      isPaid, currentUserID);
+                      isPaid);
             }
             else if (_filterBy == enFilterBy.PersonName)
             {
                 string personName = kgtxtFilterValue.ValidatedText;
                 dtDebts = await clsDebt.GetAllDebtsWithoutPaging(personName, isLending, filterByCreatedDate, kgtxtFromData.ValidatedText, kgtxtToDate.ValidatedText,
-                    isPaid, currentUserID);
+                    isPaid);
             }
             else if (_filterBy == enFilterBy.UserName)
             {
                 string userName = kgtxtFilterValue.ValidatedText;
                 dtDebts = await clsDebt.GetAllDebtsByUserNameWithoutPaging(userName, isLending, filterByCreatedDate, kgtxtFromData.ValidatedText, kgtxtToDate.ValidatedText,
-                    isPaid, currentUserID);
+                    isPaid);
             }
             else
                 return;

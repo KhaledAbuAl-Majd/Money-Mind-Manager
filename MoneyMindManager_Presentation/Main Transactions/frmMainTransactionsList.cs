@@ -20,8 +20,20 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
     public partial class frmMainTransactionsList : Form
     {
         public frmMainTransactionsList()
-        { 
+        {
+            if (!_CheckPermissions())
+            {
+                this.Dispose();
+                return;
+            }
+
             InitializeComponent();
+        }
+
+        bool _CheckPermissions()
+        {
+            return clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.MainTransactionsList,
+                "ليس لديك صلاحية قائمة المعاملات.");
         }
         enum enFilterBy { All, TransactionID,UserName};
 
@@ -109,27 +121,25 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             else
                 return;
 
-            int currentUserID = Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID);
-
             var transactionTypes = _GetCheckedTransactionTypes();
 
             if (filterBy == enFilterBy.All || string.IsNullOrEmpty(kgtxtFilterValue.ValidatedText))
             {
                 result = await clsMainTransaction.GetAllTransactions(transactionTypes, filterByCreatedDate, kgtxtFromDate.ValidatedText,
-                    kgtxtToDate.ValidatedText , currentUserID, _pageNumber);
+                    kgtxtToDate.ValidatedText , _pageNumber);
             }
             else if (filterBy == enFilterBy.TransactionID)
             {
                 int transactionID = Convert.ToInt32(kgtxtFilterValue.ValidatedText);
 
                 result = await clsMainTransaction.GetAllTransactions(transactionID,transactionTypes, filterByCreatedDate, kgtxtFromDate.ValidatedText,
-                    kgtxtToDate.ValidatedText, currentUserID, _pageNumber);
+                    kgtxtToDate.ValidatedText, _pageNumber);
             }
             else if (filterBy == enFilterBy.UserName)
             {
                 string userName = kgtxtFilterValue.ValidatedText;
                 result = await clsMainTransaction.GetAllTransactions(userName,transactionTypes, filterByCreatedDate, kgtxtFromDate.ValidatedText,
-                    kgtxtToDate.ValidatedText, currentUserID, _pageNumber);
+                    kgtxtToDate.ValidatedText, _pageNumber);
             }
             else
                 return;
@@ -447,27 +457,25 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             else
                 return;
 
-            int currentUserID = Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID);
-
             var transactionTypes = _GetCheckedTransactionTypes();
 
             if (_filterBy == enFilterBy.All || string.IsNullOrEmpty(kgtxtFilterValue.ValidatedText))
             {
                 dtTransactions = await clsMainTransaction.GetAllTransactionsWithoutPaging(transactionTypes, filterByCreatedDate, kgtxtFromDate.ValidatedText,
-                    kgtxtToDate.ValidatedText, currentUserID);
+                    kgtxtToDate.ValidatedText);
             }
             else if (_filterBy == enFilterBy.TransactionID)
             {
                 int transactionID = Convert.ToInt32(kgtxtFilterValue.ValidatedText);
 
                 dtTransactions = await clsMainTransaction.GetAllTransactionsWithoutPaging(transactionID, transactionTypes, filterByCreatedDate, kgtxtFromDate.ValidatedText,
-                    kgtxtToDate.ValidatedText, currentUserID);
+                    kgtxtToDate.ValidatedText);
             }
             else if (_filterBy == enFilterBy.UserName)
             {
                 string userName = kgtxtFilterValue.ValidatedText;
                 dtTransactions = await clsMainTransaction.GetAllTransactionsWithoutPaging(userName, transactionTypes, filterByCreatedDate, kgtxtFromDate.ValidatedText,
-                    kgtxtToDate.ValidatedText, currentUserID);
+                    kgtxtToDate.ValidatedText);
             }
             else
                 return;

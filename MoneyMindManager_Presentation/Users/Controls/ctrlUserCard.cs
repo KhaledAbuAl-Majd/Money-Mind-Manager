@@ -34,7 +34,7 @@ namespace MoneyMindManager_Presentation.Users
         {
             gbtnEditUser.Enabled = false;
 
-            User = await clsUser.FindUserByUserID(userID, Convert.ToInt32(clsGlobal_UI.CurrentUser.UserID));
+            User = await clsUser.FindUserByUserID(userID);
 
             if (User == null)
             {
@@ -61,7 +61,7 @@ namespace MoneyMindManager_Presentation.Users
             lblIsActive.Text = (User.IsActive) ? "فعال" : "موقوف";
             klblCreatedDate.Text =User.CreatedDate.ToString();
             kgtxtUserName.Text = User.UserName;
-            clsUser creatingUser = await User.GetCreatedbyUserInfo(Convert.ToInt32(clsGlobal_UI.CurrentUser.UserID));
+            clsUser creatingUser = await User.GetCreatedbyUserInfo();
             kgtxtUserNameOfCreatedUser.Text = creatingUser.UserName;
             kgtxtNotes.Text = User.Notes;
         }

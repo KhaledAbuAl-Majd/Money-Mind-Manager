@@ -40,7 +40,7 @@ namespace MoneyMindManager_Presentation.People.Controls
         {
             gbtnEditPerson.Enabled = false;
 
-            Person = await clsPerson.FindPersonByID(personID, Convert.ToInt32(clsGlobal_UI.CurrentUser.UserID));
+            Person = await clsPerson.FindPersonByID(personID);
 
             if (Person == null)
             {
@@ -61,11 +61,13 @@ namespace MoneyMindManager_Presentation.People.Controls
             klblCreatedDate.Text = Person.CreatedDate.ToString();
             kgtxtPersonName.Text = Person.PersonName;
             kgtxtPhoneNumber.Text = Person.Phone;
-            clsUser CreatedUser = await Person.GetCreatedbyUserInfo(Convert.ToInt32(clsGlobal_UI.CurrentUser.UserID));
+            clsUser CreatedUser = await Person.GetCreatedbyUserInfo();
             kgtxtUserNameOfCreatedUser.Text = CreatedUser.UserName;
             kgtxtEmail.Text = Person.Email;
             kgtxtNotes.Text = Person.Notes;
             kgtxtAddress.Text = Person.Address;
+            kgtxtReceivable.RefreshNumber_DateTimeFormattedText(Person.Receivable.ToString());
+            kgtxtPayable.RefreshNumber_DateTimeFormattedText(Person.Payable.ToString());
         }
 
         private void gbtnEditPerson_Click(object sender, EventArgs e)
@@ -91,6 +93,8 @@ namespace MoneyMindManager_Presentation.People.Controls
             kgtxtEmail.ReadOnly = true;
             kgtxtNotes.ReadOnly = true;
             kgtxtAddress.ReadOnly = true;
+            kgtxtReceivable.ReadOnly = true;
+            kgtxtPayable.ReadOnly = true;
         }
 
         /// <summary>
@@ -110,6 +114,8 @@ namespace MoneyMindManager_Presentation.People.Controls
             kgtxtEmail.Text = null;
             kgtxtNotes.Text = null;
             kgtxtAddress.Text = null;
+            kgtxtReceivable.Text = null;
+            kgtxtPayable.Text = null;
         }
     }
 }

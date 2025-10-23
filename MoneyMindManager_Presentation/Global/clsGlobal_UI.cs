@@ -45,7 +45,9 @@ namespace MoneyMindManager_Presentation
         {
             _refreshTimer.Stop();
 
-            CurrentUser = await clsUser.FindUserByUserID(Convert.ToInt32(CurrentUser?.UserID), Convert.ToInt32(CurrentUser?.UserID));
+            string oldUserName = CurrentUser.UserName;
+
+            CurrentUser = await clsUser.FindUserByUserID(Convert.ToInt32(CurrentUser?.UserID));
 
             if (CurrentUser == null)
             {
@@ -61,6 +63,11 @@ namespace MoneyMindManager_Presentation
                 return false;
             }
 
+            clsGlobalSession.Login(Convert.ToInt32(CurrentUser.UserID), Convert.ToInt32(CurrentUser.Permissions));
+
+            if (oldUserName != CurrentUser.UserName)
+                MainForm.LoadMainFormLabels();
+
             _refreshTimer.Start();
 
             return true;
@@ -68,7 +75,7 @@ namespace MoneyMindManager_Presentation
 
         public static async Task Login(int userID,frmMain frmmain)
         {
-            clsUser user = await clsUser.FindUserByUserID(userID, userID);
+            clsUser user = await clsUser.FindUserByUserID(userID);
 
             if (user == null)
             {
@@ -79,6 +86,24 @@ namespace MoneyMindManager_Presentation
             CurrentUser = user;
             MainForm = frmmain;
             ActiveForm = frmmain;
+            clsGlobalSession.Login(Convert.ToInt32(CurrentUser.UserID), Convert.ToInt32(CurrentUser.Permissions));
+
+            _StartTimer();
+        }
+
+        public static  void Login(clsUser user, frmMain frmmain)
+        {
+            if (user == null)
+            {
+                Logout();
+                return;
+            }
+
+            CurrentUser = user;
+            MainForm = frmmain;
+            ActiveForm = frmmain;
+            clsGlobalSession.Login(Convert.ToInt32(CurrentUser.UserID), Convert.ToInt32(CurrentUser.Permissions));
+
             _StartTimer();
         }
 
@@ -97,6 +122,8 @@ namespace MoneyMindManager_Presentation
                 }
                 ));
             }
+
+            clsGlobalSession.Logout();
         }
         public static void SubscribeToErrorOcrruedEvent()
         {

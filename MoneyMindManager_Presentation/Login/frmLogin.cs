@@ -256,9 +256,9 @@ namespace MoneyMindManager_Presentation.Login
 #pragma warning restore CS4014
 
 
-
             this.Hide();
-            frmMain frm = new frmMain(Convert.ToInt32(user.UserID));
+            frmMain frm = new frmMain();
+            clsGlobal_UI.Login(user, frm);
             frm.OnCloseProgramm += frmMain_OnCloseProgramm;
             frm.ShowDialog();
 

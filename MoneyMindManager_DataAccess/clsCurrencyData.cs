@@ -22,7 +22,7 @@ namespace MoneyMindManager_DataAccess
             {
                 using(SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
                 {
-                    using(SqlCommand command = new SqlCommand("[dbo].[SP_GetCurrencyByCurrencyID]", connection))
+                    using(SqlCommand command = new SqlCommand("SP_Currency_GetByCurrencyID", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.AddWithValue("@CurrencyID", currencyID);
@@ -67,7 +67,7 @@ namespace MoneyMindManager_DataAccess
             {
                 using(SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
                 {
-                    using(SqlCommand command = new SqlCommand("[dbo].[SP_GetCurrencyByCurrencyName]", connection))
+                    using(SqlCommand command = new SqlCommand("SP_Currency_GetByCurrencyName", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.AddWithValue("@CurrencyName", currencyName);
@@ -111,7 +111,7 @@ namespace MoneyMindManager_DataAccess
             {
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("SP_GetAllCurrencies", connection))
+                    using (SqlCommand command = new SqlCommand("SP_Currencies_GetAll", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
 
