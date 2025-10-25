@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Guna.UI2.WinForms;
+using MoneyMindManager_Business;
 using MoneyMindManager_Presentation.Global;
 using MoneyMindManager_Presentation.Income_And_Expense.Categories;
 using MoneyMindManager_Presentation.Income_And_Expense.Vouchers;
@@ -25,11 +27,58 @@ namespace MoneyMindManager_Presentation.Income_And_Expense
                 return;
             }
 
-            InitializeComponent();
             _voucherType = voucherType;
+            InitializeComponent();
+
+            if (!_CheckPermissions())
+            {
+                this.Dispose();
+                return;
+            }
+        }
+        bool _CheckPermissions()
+        {
+            string errorMessage = "";
+            clsUser.enPermissions permission;
+
+            switch (_voucherType)
+            {
+                case enVoucherType.Incomes:
+                    errorMessage = "ليس لديك صلاحية قائمة مستندات الواردات";
+                    permission = clsUser.enPermissions.IncomeVouchersList;
+                    break;
+
+                case enVoucherType.Expenses:
+                    errorMessage = "ليس لديك صلاحية قائمة مستندات المصروفات";
+                    permission = clsUser.enPermissions.ExpenseVouchersList;
+                    break;
+
+                case enVoucherType.ExpensesReturn:
+                    errorMessage = "ليس لديك صلاحية قائمة مستندات مرتجعات المصروفات";
+                    permission = clsUser.enPermissions.ExpenseReturnVouchersList;
+                    break;
+
+                default:
+                    return false;
+            }
+
+            if (clsUser.CheckLogedInUserPermissions(permission))
+            {
+                prevButton = gbtnVouchers;
+                return true;
+            }
+
+            if (clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.CategoriesList,
+                errorMessage + "/قائمة الفئات"))
+            {
+                prevButton = gbtnCategories;
+                return true;
+            }
+
+            return false;
         }
 
-
+        Guna2Button prevButton;
 
         enVoucherType _voucherType;
 
@@ -39,10 +88,10 @@ namespace MoneyMindManager_Presentation.Income_And_Expense
             lblHeader.Text = txt;
         }
 
-        void _LoadFormAtPanelContainer(Form frm)
+        bool _LoadFormAtPanelContainer(Form frm)
         {
             if (frm == null)
-                return;
+                return false;
 
             frm.TopLevel = false;
             frm.FormBorderStyle = FormBorderStyle.None;
@@ -57,61 +106,82 @@ namespace MoneyMindManager_Presentation.Income_And_Expense
                 frm.Show();
                 frm.BringToFront();
             }
+            else
+            {
+                if (prevButton != null)
+                {
+                    prevButton.Checked = true;
+                    prevButton.Focus();
+                }
+
+                return false;
+            }
+
+            return true;
         }
 
         private void frmIncomeAndExpense_Load(object sender, EventArgs e)
         {
-            gbtnVouchers.PerformClick();
+            prevButton.PerformClick();
         }
 
         private void gbtnVouchers_Click(object sender, EventArgs e)
         {
-            ciiExepnsesReturn.Visible = false;
-
-            switch (_voucherType)
+            if (_LoadFormAtPanelContainer(new frmVouhcersList(_voucherType)))
             {
-                case enVoucherType.Incomes:
-                    ChangeHeaderValue("مستندات الإيرادات");
-                    break;
+                prevButton = gbtnVouchers;
 
-                case enVoucherType.Expenses:
-                    ChangeHeaderValue("مستندات المصروفات");
-                    break;
+                ciiExepnsesReturn.Visible = false;
 
-                case enVoucherType.ExpensesReturn:
-                    ChangeHeaderValue("مستندات مرتجعات المصروفات");
-                    break;
+                switch (_voucherType)
+                {
+                    case enVoucherType.Incomes:
+                        ChangeHeaderValue("مستندات الإيرادات");
+                        break;
+
+                    case enVoucherType.Expenses:
+                        ChangeHeaderValue("مستندات المصروفات");
+                        break;
+
+                    case enVoucherType.ExpensesReturn:
+                        ChangeHeaderValue("مستندات مرتجعات المصروفات");
+                        break;
+                }
+
             }
-
-            _LoadFormAtPanelContainer(new frmVouhcersList(_voucherType));
         }
 
         private void gbtnCategories_Click(object sender, EventArgs e)
         {
             bool isIncome = false;
+            string headerText = "";
 
             switch (_voucherType)
             {
                 case enVoucherType.Incomes:
                     ciiExepnsesReturn.Visible = false;
-                    ChangeHeaderValue("فئات الإيرادات");
+                    headerText= "فئات الإيرادات";
                     isIncome = true;
                     break;
 
                 case enVoucherType.Expenses:
                     ciiExepnsesReturn.Visible = false;
-                    ChangeHeaderValue("فئات المصروفات");
+                    headerText="فئات المصروفات";
                     isIncome = false;
                     break;
                 case enVoucherType.ExpensesReturn:
                     ciiExepnsesReturn.Visible = true;
-                    ChangeHeaderValue("فئات المصروفات");
+                    headerText = "فئات المصروفات";
                     isIncome = false;
                     break;
 
             }
 
-            _LoadFormAtPanelContainer(new frmCategoriesList(isIncome));
+            if (_LoadFormAtPanelContainer(new frmCategoriesList(isIncome)))
+            {
+                prevButton = gbtnCategories;
+                ChangeHeaderValue(headerText);
+            }
         }
     }
 }

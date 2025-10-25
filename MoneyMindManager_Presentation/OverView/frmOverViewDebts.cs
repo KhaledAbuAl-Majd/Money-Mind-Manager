@@ -22,7 +22,8 @@ namespace MoneyMindManager_Presentation.OverView
             this.UpdateStyles();
         }
 
-        private async void frmOverViewDebts_Load(object sender, EventArgs e)
+
+        private async void frmOverViewDebts_Shown(object sender, EventArgs e)
         {
             guna2WinProgressIndicator1.BringToFront();
             guna2WinProgressIndicator1.Start();
@@ -37,11 +38,6 @@ namespace MoneyMindManager_Presentation.OverView
             this.UseWaitCursor = false;
             guna2WinProgressIndicator1.Stop();
             guna2WinProgressIndicator1.Hide();
-        }
-
-        private void guna2Panel3_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }

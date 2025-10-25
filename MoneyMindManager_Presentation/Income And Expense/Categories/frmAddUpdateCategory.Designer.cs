@@ -63,6 +63,7 @@
             this.lblHeader = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.lblUserMessage = new System.Windows.Forms.Label();
             this.guna2Panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ctrlInfoIcon3.PictureBoxControl)).BeginInit();
             this.guna2Panel3.SuspendLayout();
@@ -105,7 +106,7 @@
             this.guna2Panel2.Controls.Add(this.kgtxtParentCategoryName);
             this.guna2Panel2.Controls.Add(this.kgtxtCategoryName);
             this.guna2Panel2.FillColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.guna2Panel2.Location = new System.Drawing.Point(279, 78);
+            this.guna2Panel2.Location = new System.Drawing.Point(279, 98);
             this.guna2Panel2.Name = "guna2Panel2";
             this.guna2Panel2.ShadowDecoration.BorderRadius = 20;
             this.guna2Panel2.ShadowDecoration.Color = System.Drawing.Color.DarkGray;
@@ -213,6 +214,9 @@
             this.kgtxtCreatedByUserName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.kgtxtCreatedByUserName.ForeColor = System.Drawing.Color.Black;
             this.kgtxtCreatedByUserName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.kgtxtCreatedByUserName.IconLeft = ((System.Drawing.Image)(resources.GetObject("kgtxtCreatedByUserName.IconLeft")));
+            this.kgtxtCreatedByUserName.IconRight = ((System.Drawing.Image)(resources.GetObject("kgtxtCreatedByUserName.IconRight")));
+            this.kgtxtCreatedByUserName.IconRightCursor = System.Windows.Forms.Cursors.Hand;
             this.kgtxtCreatedByUserName.Location = new System.Drawing.Point(345, 339);
             this.kgtxtCreatedByUserName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtCreatedByUserName.Name = "kgtxtCreatedByUserName";
@@ -224,6 +228,8 @@
             this.kgtxtCreatedByUserName.Size = new System.Drawing.Size(283, 41);
             this.kgtxtCreatedByUserName.TabIndex = 8;
             this.kgtxtCreatedByUserName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.kgtxtCreatedByUserName, "اضغط على الأيقونة اليمنى لرؤية بيانات المستخدم المنشئ");
+            this.kgtxtCreatedByUserName.IconRightClick += new System.EventHandler(this.kgtxtCreatedByUserName_IconRightClick);
             // 
             // ctrlInfoIcon3
             // 
@@ -970,6 +976,19 @@
             // 
             this.toolTip1.IsBalloon = true;
             // 
+            // lblUserMessage
+            // 
+            this.lblUserMessage.Font = new System.Drawing.Font("Segoe Script", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUserMessage.ForeColor = System.Drawing.Color.Red;
+            this.lblUserMessage.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.lblUserMessage.Location = new System.Drawing.Point(12, 60);
+            this.lblUserMessage.Name = "lblUserMessage";
+            this.lblUserMessage.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.lblUserMessage.Size = new System.Drawing.Size(1186, 30);
+            this.lblUserMessage.TabIndex = 40;
+            this.lblUserMessage.Text = "\"تم العثور على حقول غير صالحة. ضع المؤشر على العلامات الحمراء لعرض سبب الخطأ.\"";
+            this.lblUserMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // frmAddUpdateCategory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -978,6 +997,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.CancelButton = this.gbtnClose;
             this.ClientSize = new System.Drawing.Size(1210, 737);
+            this.Controls.Add(this.lblUserMessage);
             this.Controls.Add(this.lblHeader);
             this.Controls.Add(this.guna2Panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -1031,5 +1051,6 @@
         private System.Windows.Forms.Label label11;
         private Guna.UI2.WinForms.Guna2TextBox kgtxtCreatedByUserName;
         private KhaledControlLibrary1.KhaledGuna2TextBox kgtxtCreatedDate;
+        private System.Windows.Forms.Label lblUserMessage;
     }
 }

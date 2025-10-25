@@ -21,13 +21,13 @@ namespace MoneyMindManager_Presentation.OverView
             this.UpdateStyles();
         }
 
-        private async void frmOverViewCategories_Load(object sender, EventArgs e)
+        private async void frmOverViewCategories_Shown(object sender, EventArgs e)
         {
             guna2WinProgressIndicator1.BringToFront();
             guna2WinProgressIndicator1.Start();
             guna2WinProgressIndicator1.Show();
             this.UseWaitCursor = true;
- 
+
             await ctrlTopCategories_Income.LoadData();
             await ctrlTopCategories_NetExpense.LoadData();
 

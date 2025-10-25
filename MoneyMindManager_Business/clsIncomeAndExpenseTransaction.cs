@@ -76,11 +76,17 @@ namespace MoneyMindManager_Business
             return (VouhcerInfo != null && CategoryInfo != null && await base.RefreshData());
         }
 
-        public async Task<bool> Save()
+        public async Task<bool> Save(bool isExceededBudget)
         {
             if (!clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.AddUpdateIETVoucher_Transactions,
-            "ليس لديك صلاحية (إضافة/تعديل مستندات - معاملات (واردات,مصروفات,مرتجعات المصروفات."))
+            "ليس لديك صلاحية إضافة/تعديل مستندات - معاملات (واردات - مصروفات - مرتجعات مصروفات)"))
                 return false;
+
+            if (isExceededBudget && !clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.ExceedsCategoryBudget,
+           "ليس لديك صلاحية تخطي الميزانية الشهرية لفئات المصروفات."))
+                return false;
+
+          
 
             switch (Mode)
             {
@@ -124,7 +130,7 @@ namespace MoneyMindManager_Business
         public static async Task<bool> DeleteIncomeAndExpenseTransactionByID(int transactionID)
         {
             if (!clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.DeleteIETVoucher_Transactions,
-            "ليس لديك صلاحية (حذف مستندات - معاملات (واردات,مصروفات,مرتجعات المصروفات."))
+            "ليس لديك صلاحية حذف مستندات - معاملات (واردات - مصروفات - مرتجعات مصروفات)"))
                 return false;
 
             return await clsIncomeAndExpenseTransactionData.DeleteIncomeAndExpenseTransactoinByID(transactionID, Convert.ToInt32(clsGlobalSession.CurrentUserID));
@@ -138,6 +144,12 @@ namespace MoneyMindManager_Business
         public static async Task<DataTable> GetAllIncomeAndExpensTransactionsWithoutPaging(int voucherID)
         {
             return await clsIncomeAndExpenseTransactionData.GetAllIncomeAndExpensTransactionsWithoutPaging(voucherID, Convert.ToInt32(clsGlobalSession.CurrentUserID));
+        }
+
+        public async Task<bool> IsExceedCategoryMonthlyBudget(bool isReturn)
+        {
+            return await clsIncomeAndExpenseCategoryData.IsExceedMonthlyBudget(Convert.ToInt32(this.CategoryID), MainTransactionID,
+                Convert.ToDecimal(Amount),TransactionDate, isReturn, Convert.ToInt32(clsGlobalSession.CurrentUserID));
         }
     }
 }

@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAddUpdateVoucher));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblUserMessage = new System.Windows.Forms.Label();
             this.lblCurrentPageRecordsCount = new System.Windows.Forms.Label();
             this.lblDescriptionOfCurrentPageNumOfRcords = new System.Windows.Forms.Label();
@@ -102,7 +102,7 @@
             this.lblCurrentPageRecordsCount.Size = new System.Drawing.Size(114, 24);
             this.lblCurrentPageRecordsCount.TabIndex = 38;
             this.lblCurrentPageRecordsCount.Text = "N/A";
-            this.lblCurrentPageRecordsCount.Click += new System.EventHandler(this.lblCurrentPageRecordsCount_Click);
+          
             // 
             // lblDescriptionOfCurrentPageNumOfRcords
             // 
@@ -114,7 +114,7 @@
             this.lblDescriptionOfCurrentPageNumOfRcords.Size = new System.Drawing.Size(205, 24);
             this.lblDescriptionOfCurrentPageNumOfRcords.TabIndex = 37;
             this.lblDescriptionOfCurrentPageNumOfRcords.Text = "# عدد صفوف الصفحة الحالية : ";
-            this.lblDescriptionOfCurrentPageNumOfRcords.Click += new System.EventHandler(this.lblDescriptionOfCurrentPageNumOfRcords_Click);
+         
             // 
             // gibtnPreviousPage
             // 
@@ -164,7 +164,7 @@
             this.lblCurrentPageOfNumberOfPages.TabIndex = 33;
             this.lblCurrentPageOfNumberOfPages.Text = "0 من  0  صفحات";
             this.lblCurrentPageOfNumberOfPages.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblCurrentPageOfNumberOfPages.Click += new System.EventHandler(this.lblCurrentPageOfNumberOfPages_Click);
+
             // 
             // lblTotalRecordsNumber
             // 
@@ -175,7 +175,7 @@
             this.lblTotalRecordsNumber.Size = new System.Drawing.Size(114, 24);
             this.lblTotalRecordsNumber.TabIndex = 32;
             this.lblTotalRecordsNumber.Text = "N/A";
-            this.lblTotalRecordsNumber.Click += new System.EventHandler(this.lblTotalRecordsNumber_Click);
+
             // 
             // label1
             // 
@@ -194,35 +194,35 @@
             this.gdgvTransactions.AllowUserToDeleteRows = false;
             this.gdgvTransactions.AllowUserToResizeColumns = false;
             this.gdgvTransactions.AllowUserToResizeRows = false;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White;
-            this.gdgvTransactions.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
+            this.gdgvTransactions.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.gdgvTransactions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
             this.gdgvTransactions.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.gdgvTransactions.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Raised;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Menu;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gdgvTransactions.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Menu;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gdgvTransactions.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.gdgvTransactions.ColumnHeadersHeight = 35;
             this.gdgvTransactions.ContextMenuStrip = this.guna2ContextMenuStrip1;
             this.gdgvTransactions.Cursor = System.Windows.Forms.Cursors.Hand;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle7.NullValue = "N/A";
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gdgvTransactions.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.NullValue = "N/A";
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gdgvTransactions.DefaultCellStyle = dataGridViewCellStyle3;
             this.gdgvTransactions.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.gdgvTransactions.GridColor = System.Drawing.Color.White;
             this.gdgvTransactions.Location = new System.Drawing.Point(19, 258);
@@ -230,14 +230,14 @@
             this.gdgvTransactions.Name = "gdgvTransactions";
             this.gdgvTransactions.ReadOnly = true;
             this.gdgvTransactions.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gdgvTransactions.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gdgvTransactions.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.gdgvTransactions.RowHeadersVisible = false;
             this.gdgvTransactions.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gdgvTransactions.RowTemplate.Height = 40;
@@ -369,7 +369,7 @@
             this.lblNoTransactionsFoundMessage.TabIndex = 42;
             this.lblNoTransactionsFoundMessage.Text = "لا يوجد معاملات لهذا المستند !";
             this.lblNoTransactionsFoundMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblNoTransactionsFoundMessage.Click += new System.EventHandler(this.lblNoTransactionsFoundMessage_Click);
+
             // 
             // errorProvider1
             // 
@@ -453,7 +453,7 @@
             this.kgtxtNotes.TextProperties.TextFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.enTextFormat.Phone;
             this.kgtxtNotes.TrimEnd = false;
             this.kgtxtNotes.TrimStart = false;
-            this.kgtxtNotes.TextChanged += new System.EventHandler(this.kgtxtNotes_TextChanged);
+
             // 
             // kgtxtVoucherDate
             // 
@@ -535,7 +535,7 @@
             this.kgtxtVoucherDate.TrimStart = true;
             this.kgtxtVoucherDate.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxtPageNumber_OnValidationError);
             this.kgtxtVoucherDate.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxtPageNumber_OnValidationSuccess);
-            this.kgtxtVoucherDate.TextChanged += new System.EventHandler(this.kgtxtVoucherDate_TextChanged);
+
             // 
             // kgtxtVoucherName
             // 
@@ -616,7 +616,7 @@
             this.kgtxtVoucherName.TrimStart = true;
             this.kgtxtVoucherName.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxtPageNumber_OnValidationError);
             this.kgtxtVoucherName.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxtPageNumber_OnValidationSuccess);
-            this.kgtxtVoucherName.TextChanged += new System.EventHandler(this.kgtxtVoucherName_TextChanged);
+           
             // 
             // kgtxtPageNumber
             // 
@@ -711,7 +711,7 @@
             this.label3.Size = new System.Drawing.Size(75, 17);
             this.label3.TabIndex = 105;
             this.label3.Text = "اسم المستند";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
+
             // 
             // label4
             // 
@@ -723,7 +723,7 @@
             this.label4.Size = new System.Drawing.Size(78, 17);
             this.label4.TabIndex = 106;
             this.label4.Text = "تاريخ المستند";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
+
             // 
             // label5
             // 
@@ -735,7 +735,7 @@
             this.label5.Size = new System.Drawing.Size(57, 17);
             this.label5.TabIndex = 107;
             this.label5.Text = "ملاحظات";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
+
             // 
             // gchkIsLocked
             // 
@@ -771,7 +771,7 @@
             this.label2.Size = new System.Drawing.Size(70, 17);
             this.label2.TabIndex = 110;
             this.label2.Text = "تاريخ الإنشاء";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+
             // 
             // kgtxtCreatedDate
             // 
@@ -854,7 +854,7 @@
             this.kgtxtCreatedDate.TrimStart = true;
             this.kgtxtCreatedDate.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxtPageNumber_OnValidationError);
             this.kgtxtCreatedDate.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxtPageNumber_OnValidationSuccess);
-            this.kgtxtCreatedDate.TextChanged += new System.EventHandler(this.kgtxtCreatedDate_TextChanged);
+
             // 
             // label6
             // 
@@ -866,7 +866,7 @@
             this.label6.Size = new System.Drawing.Size(79, 17);
             this.label6.TabIndex = 112;
             this.label6.Text = "قيمة المستند";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
+
             // 
             // kgtxtVoucherValue
             // 
@@ -946,7 +946,7 @@
             this.kgtxtVoucherValue.TextProperties.TextFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.enTextFormat.None;
             this.kgtxtVoucherValue.TrimEnd = true;
             this.kgtxtVoucherValue.TrimStart = true;
-            this.kgtxtVoucherValue.TextChanged += new System.EventHandler(this.kgtxtVoucherValue_TextChanged);
+
             // 
             // kgtxtCreatedByUserName
             // 
@@ -967,6 +967,9 @@
             this.kgtxtCreatedByUserName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.kgtxtCreatedByUserName.ForeColor = System.Drawing.Color.Black;
             this.kgtxtCreatedByUserName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.kgtxtCreatedByUserName.IconLeft = ((System.Drawing.Image)(resources.GetObject("kgtxtCreatedByUserName.IconLeft")));
+            this.kgtxtCreatedByUserName.IconRight = ((System.Drawing.Image)(resources.GetObject("kgtxtCreatedByUserName.IconRight")));
+            this.kgtxtCreatedByUserName.IconRightCursor = System.Windows.Forms.Cursors.Hand;
             this.kgtxtCreatedByUserName.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
             this.kgtxtCreatedByUserName.IsRequired = false;
             this.kgtxtCreatedByUserName.Location = new System.Drawing.Point(608, 198);
@@ -1025,9 +1028,11 @@
             this.kgtxtCreatedByUserName.TextProperties.PhoneProperties.AllowPlusSign = true;
             this.kgtxtCreatedByUserName.TextProperties.PhoneProperties.MaxPhoneLength = ((byte)(15));
             this.kgtxtCreatedByUserName.TextProperties.TextFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.enTextFormat.Date;
+            this.toolTip1.SetToolTip(this.kgtxtCreatedByUserName, "اضغط على الأيقونة اليمنى لرؤية بيانات المستخدم المنشئ");
             this.kgtxtCreatedByUserName.TrimEnd = true;
             this.kgtxtCreatedByUserName.TrimStart = true;
-            this.kgtxtCreatedByUserName.TextChanged += new System.EventHandler(this.kgtxtCreatedByUserName_TextChanged);
+            this.kgtxtCreatedByUserName.IconRightClick += new System.EventHandler(this.kgtxtCreatedByUserName_IconRightClick);
+
             // 
             // label7
             // 
@@ -1039,7 +1044,7 @@
             this.label7.Size = new System.Drawing.Size(134, 17);
             this.label7.TabIndex = 114;
             this.label7.Text = "اسم المستخدم للمنشئ ";
-            this.label7.Click += new System.EventHandler(this.label7_Click);
+
             // 
             // gbtnSave
             // 
@@ -1147,7 +1152,7 @@
             this.label8.Size = new System.Drawing.Size(86, 17);
             this.label8.TabIndex = 116;
             this.label8.Text = "معرف المستند";
-            this.label8.Click += new System.EventHandler(this.label8_Click);
+
             // 
             // kgtxtVoucherID
             // 
@@ -1227,7 +1232,7 @@
             this.kgtxtVoucherID.TextProperties.TextFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.enTextFormat.None;
             this.kgtxtVoucherID.TrimEnd = true;
             this.kgtxtVoucherID.TrimStart = true;
-            this.kgtxtVoucherID.TextChanged += new System.EventHandler(this.kgtxtVoucherID_TextChanged);
+
             // 
             // label9
             // 
@@ -1239,7 +1244,7 @@
             this.label9.Size = new System.Drawing.Size(99, 17);
             this.label9.TabIndex = 117;
             this.label9.Text = "معاملات المستند";
-            this.label9.Click += new System.EventHandler(this.label9_Click);
+
             // 
             // gibtnDeleteVoucher
             // 

@@ -183,7 +183,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmOverViewCategories";
             this.Text = "frmOverViewCategories";
-            this.Load += new System.EventHandler(this.frmOverViewCategories_Load);
+            this.Shown += new System.EventHandler(this.frmOverViewCategories_Shown);
             this.guna2Panel2.ResumeLayout(false);
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel3.ResumeLayout(false);

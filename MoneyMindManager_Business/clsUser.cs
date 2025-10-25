@@ -92,7 +92,7 @@ namespace MoneyMindManager_Business
             ChangeCategoryActivation = 131072,
 
             [Description("تخطي الميزانية الشهرية لفئات المصروفات")]
-            ExceedsCategoryBudget = 262144,
+            ExceedsCategoryBudget = 262144,//done
 
             [Description("قائمة المعاملات")]
             MainTransactionsList = 524288,//done
@@ -274,8 +274,16 @@ namespace MoneyMindManager_Business
 
         private async Task<bool> _UpdateUser()
         {
+            if (IsDeleted)
+            {
+                clsGlobalEvents.RaiseEvent("هذا الشخص محذوف لا يمكن التعديل عليه !"
+                    + $"\n معرف المستخدم الحالي [{clsGlobalSession.CurrentUserID}]", true);
+
+                return false;
+            }
+
             return await clsUserData.UpdateUser(Convert.ToInt32(UserID), UserName, Convert.ToInt32(PersonID),
-                Permissions, IsActive, Notes, Convert.ToInt32(clsGlobalSession.CurrentUserID));
+            Permissions, IsActive, Notes, Convert.ToInt32(clsGlobalSession.CurrentUserID));
         }
 
         async Task<bool> _RefeshCompositionObjects()
@@ -289,6 +297,10 @@ namespace MoneyMindManager_Business
 
         public async Task<bool> Save()
         {
+            if (!clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.Admin,
+                "ليس لديك صلاحية إضافة/تعديل مستخدم."))
+                return false;
+
             switch (Mode)
             {
                 case enMode.AddNew:
@@ -434,8 +446,23 @@ namespace MoneyMindManager_Business
                 userColumns.IsDeleted, personInfo, accountInfo, userColumns.CreatedByUserID, userColumns.CreatedDate);
         }
 
+        public async Task<bool> DeleteUserByUserID()
+        {
+            if (IsDeleted)
+            {
+                clsGlobalEvents.RaiseEvent("هذا الشخص محذوف بالفعل لا يمكن حذفه مجددا !"
+                    + $"\n معرف المستخدم الحالي [{clsGlobalSession.CurrentUserID}]", true);
+
+                return false;
+            }
+            return await DeleteUserByUserID(Convert.ToInt32(UserID));
+        }
         public static async Task<bool> DeleteUserByUserID(int userID)
         {
+            if (!clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.Admin,
+                "ليس لديك صلاحية حذف مستخدم."))
+                return false;
+
             return await clsUserData.DeleteUserByUserID(userID);
         }
 
@@ -520,30 +547,30 @@ namespace MoneyMindManager_Business
 
         /// <param name="userID">UserID of user you want to find</param>
         /// <returns>true if user exist, false if user not exist</returns>
-        public static async Task<bool> IsUserExistByUserIDAsync(int userID)
+        public static async Task<bool> IsUserExistByUserIDAsync(int userID, bool includeDeleted = true)
         {
-            return await clsUserData.IsUserExistByUserID(userID);
+            return await clsUserData.IsUserExistByUserID(userID,includeDeleted);
         }
 
         /// <param name="personID">PersonID of user you want to find</param>
         /// <returns>true if user exist, false if user not exist</returns>
-        public static async Task<bool> IsUserExistByPersonIDAsync(int personID)
+        public static async Task<bool> IsUserExistByPersonIDAsync(int personID, bool includeDeleted = true)
         {
-            return await clsUserData.IsUserExistByPersonID(personID);
+            return await clsUserData.IsUserExistByPersonID(personID,includeDeleted);
         }
 
         /// <param name="userName">personName of user you want to find</param>
         /// <returns>true if user exist, false if user not exist</returns>
-        public static async Task<bool> IsUserExistByUserNameAsync(string userName)
+        public static async Task<bool> IsUserExistByUserNameAsync(string userName, bool includeDeleted = true)
         {
-            return await clsUserData.IsUserExistByUserNameAsync(userName);
+            return await clsUserData.IsUserExistByUserNameAsync(userName,includeDeleted);
         }
 
         /// <param name="userName">personName of user you want to find</param>
         /// <returns>true if user exist, false if user not exist</returns>
-        public static bool IsUserExistByUserName(string userName)
+        public static bool IsUserExistByUserName(string userName, bool includeDeleted = true)
         {
-            return clsUserData.IsUserExistByUserName(userName);
+            return clsUserData.IsUserExistByUserName(userName,includeDeleted);
         }
     }
 }

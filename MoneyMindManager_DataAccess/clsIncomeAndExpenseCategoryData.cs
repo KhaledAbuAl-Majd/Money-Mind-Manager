@@ -7,8 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MoneyMindManagerGlobal;
 using static MoneyMindManagerGlobal.clsDataColumns.clsIncomeAndExpenseCategoriesClasses;
-using static MoneyMindManagerGlobal.clsDataColumns.clsIncomeAndExpenseVoucherClasses;
-using static MoneyMindManagerGlobal.clsDataColumns.PersonClasses;
+
 
 namespace MoneyMindManager_DataAccess
 {
@@ -471,5 +470,58 @@ namespace MoneyMindManager_DataAccess
 
             return allCategories;
         }
+
+        /// <summary>
+        /// check if category exceed monthly budget for main expense category
+        /// </summary>
+        /// <param name="transactionID">null => if add transaction or check for category generally </param>
+        /// <param name="amount">null if check for category generally</param>
+        /// <param name="currentUserID"></param>
+        /// <returns>is excceded or not</returns>
+        public async static Task<bool> IsExceedMonthlyBudget(int categoryID, int? transactionID, decimal? amount, 
+            DateTime transactionDate,bool? isReturn, int currentUserID, bool RaiseEventOnErrorOccured = true)
+        {
+            bool isExcced = false;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("SP_IncomeAndExpenseCategory_IsExceedMonthlyBudget", connection))
+                    {
+                        command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("@CategoryID", categoryID);
+                        command.Parameters.AddWithValue("@TransationID", (object)transactionID ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@Amount", (object)amount ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@TransactionDate", transactionDate);
+                        command.Parameters.AddWithValue("@IsReturn", (object)isReturn ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@CurrentUserID", currentUserID); 
+
+                        SqlParameter retunValue = new SqlParameter("@ReturnVal", SqlDbType.Int)
+                        {
+                            Direction = System.Data.ParameterDirection.ReturnValue
+                        };
+
+                        command.Parameters.Add(retunValue);
+
+                        await connection.OpenAsync();
+                        await command.ExecuteNonQueryAsync();
+
+                        isExcced = (retunValue.Value != DBNull.Value) && (Convert.ToInt32(retunValue.Value) == 1);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                isExcced = false;
+
+                if (RaiseEventOnErrorOccured)
+                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+            }
+
+            return isExcced;
+        }
+
     }
 }

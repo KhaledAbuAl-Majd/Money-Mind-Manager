@@ -51,8 +51,9 @@
             this.gbtnEditUser = new Guna.UI2.WinForms.Guna2Button();
             this.klblCreatedDate = new KhaledControlLibrary1.KhaledLabel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.ctrlPersonCard1 = new MoneyMindManager_Presentation.People.Controls.ctrlPersonCard();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.lbluserMessage = new System.Windows.Forms.Label();
+            this.ctrlPersonCard1 = new MoneyMindManager_Presentation.People.Controls.ctrlPersonCard();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox6)).BeginInit();
@@ -204,6 +205,9 @@
             this.kgtxtUserNameOfCreatedUser.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.kgtxtUserNameOfCreatedUser.ForeColor = System.Drawing.Color.Black;
             this.kgtxtUserNameOfCreatedUser.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.kgtxtUserNameOfCreatedUser.IconLeft = ((System.Drawing.Image)(resources.GetObject("kgtxtUserNameOfCreatedUser.IconLeft")));
+            this.kgtxtUserNameOfCreatedUser.IconRight = ((System.Drawing.Image)(resources.GetObject("kgtxtUserNameOfCreatedUser.IconRight")));
+            this.kgtxtUserNameOfCreatedUser.IconRightCursor = System.Windows.Forms.Cursors.Hand;
             this.kgtxtUserNameOfCreatedUser.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
             this.kgtxtUserNameOfCreatedUser.IsRequired = false;
             this.kgtxtUserNameOfCreatedUser.Location = new System.Drawing.Point(11, 193);
@@ -262,8 +266,10 @@
             this.kgtxtUserNameOfCreatedUser.TextProperties.PhoneProperties.AllowPlusSign = true;
             this.kgtxtUserNameOfCreatedUser.TextProperties.PhoneProperties.MaxPhoneLength = ((byte)(15));
             this.kgtxtUserNameOfCreatedUser.TextProperties.TextFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.enTextFormat.None;
+            this.toolTip1.SetToolTip(this.kgtxtUserNameOfCreatedUser, "اضغط على الأيقونة اليمنى لرؤية بيانات المستخدم المنشئ");
             this.kgtxtUserNameOfCreatedUser.TrimEnd = false;
             this.kgtxtUserNameOfCreatedUser.TrimStart = false;
+            this.kgtxtUserNameOfCreatedUser.IconRightClick += new System.EventHandler(this.kgtxtUserNameOfCreatedUser_IconRightClick);
             // 
             // kgtxtUserName
             // 
@@ -468,6 +474,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lbluserMessage);
             this.groupBox1.Controls.Add(this.gbtnEditUser);
             this.groupBox1.Controls.Add(this.klblCreatedDate);
             this.groupBox1.Controls.Add(this.lblIsActive);
@@ -553,6 +560,21 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "معلومات الشخص";
             // 
+            // toolTip1
+            // 
+            this.toolTip1.IsBalloon = true;
+            // 
+            // lbluserMessage
+            // 
+            this.lbluserMessage.Font = new System.Drawing.Font("Segoe UI Semibold", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbluserMessage.ForeColor = System.Drawing.Color.Red;
+            this.lbluserMessage.Location = new System.Drawing.Point(6, 340);
+            this.lbluserMessage.Name = "lbluserMessage";
+            this.lbluserMessage.Size = new System.Drawing.Size(528, 71);
+            this.lbluserMessage.TabIndex = 122;
+            this.lbluserMessage.Text = "إضافة مستخدم";
+            this.lbluserMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // ctrlPersonCard1
             // 
             this.ctrlPersonCard1.AllowEditingPerson = false;
@@ -561,10 +583,6 @@
             this.ctrlPersonCard1.Name = "ctrlPersonCard1";
             this.ctrlPersonCard1.Size = new System.Drawing.Size(532, 553);
             this.ctrlPersonCard1.TabIndex = 0;
-            // 
-            // toolTip1
-            // 
-            this.toolTip1.IsBalloon = true;
             // 
             // ctrlUserCard
             // 
@@ -614,5 +632,6 @@
         private KhaledControlLibrary1.KhaledLabel klblCreatedDate;
         private Guna.UI2.WinForms.Guna2Button gbtnEditUser;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Label lbluserMessage;
     }
 }

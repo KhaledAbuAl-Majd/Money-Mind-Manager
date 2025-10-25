@@ -74,13 +74,13 @@
             this.guna2Panel2.Controls.Add(this.gbtnClose);
             this.guna2Panel2.Controls.Add(this.ctrlUserCard1);
             this.guna2Panel2.FillColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.guna2Panel2.Location = new System.Drawing.Point(20, 103);
+            this.guna2Panel2.Location = new System.Drawing.Point(20, 79);
             this.guna2Panel2.Name = "guna2Panel2";
             this.guna2Panel2.ShadowDecoration.BorderRadius = 20;
             this.guna2Panel2.ShadowDecoration.Color = System.Drawing.Color.DarkGray;
             this.guna2Panel2.ShadowDecoration.Depth = 20;
             this.guna2Panel2.ShadowDecoration.Enabled = true;
-            this.guna2Panel2.Size = new System.Drawing.Size(1178, 632);
+            this.guna2Panel2.Size = new System.Drawing.Size(1178, 718);
             this.guna2Panel2.TabIndex = 40;
             // 
             // label2
@@ -88,7 +88,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(268, 503);
+            this.label2.Location = new System.Drawing.Point(268, 605);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(133, 17);
             this.label2.TabIndex = 128;
@@ -99,7 +99,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(658, 503);
+            this.label1.Location = new System.Drawing.Point(658, 605);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(104, 17);
             this.label1.TabIndex = 127;
@@ -110,7 +110,7 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(1016, 503);
+            this.label3.Location = new System.Drawing.Point(1016, 605);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(104, 17);
             this.label3.TabIndex = 126;
@@ -139,7 +139,7 @@
             this.gbtnSave.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnSave.ImageSize = new System.Drawing.Size(25, 25);
             this.gbtnSave.IndicateFocus = true;
-            this.gbtnSave.Location = new System.Drawing.Point(594, 576);
+            this.gbtnSave.Location = new System.Drawing.Point(594, 671);
             this.gbtnSave.Name = "gbtnSave";
             this.gbtnSave.PressedColor = System.Drawing.Color.White;
             this.gbtnSave.Size = new System.Drawing.Size(229, 41);
@@ -171,7 +171,7 @@
             this.kgtxtOldPassword.IconRightOffset = new System.Drawing.Point(10, 0);
             this.kgtxtOldPassword.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Text;
             this.kgtxtOldPassword.IsRequired = true;
-            this.kgtxtOldPassword.Location = new System.Drawing.Point(780, 514);
+            this.kgtxtOldPassword.Location = new System.Drawing.Point(780, 616);
             this.kgtxtOldPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtOldPassword.MaxLength = 200;
             this.kgtxtOldPassword.Name = "kgtxtOldPassword";
@@ -257,7 +257,7 @@
             this.kgtxtConfirmNewPassword.IconRightOffset = new System.Drawing.Point(10, 0);
             this.kgtxtConfirmNewPassword.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Text;
             this.kgtxtConfirmNewPassword.IsRequired = true;
-            this.kgtxtConfirmNewPassword.Location = new System.Drawing.Point(64, 514);
+            this.kgtxtConfirmNewPassword.Location = new System.Drawing.Point(64, 616);
             this.kgtxtConfirmNewPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtConfirmNewPassword.MaxLength = 200;
             this.kgtxtConfirmNewPassword.Name = "kgtxtConfirmNewPassword";
@@ -343,7 +343,7 @@
             this.kgtxtNewpassword.IconRightOffset = new System.Drawing.Point(10, 0);
             this.kgtxtNewpassword.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Text;
             this.kgtxtNewpassword.IsRequired = true;
-            this.kgtxtNewpassword.Location = new System.Drawing.Point(422, 514);
+            this.kgtxtNewpassword.Location = new System.Drawing.Point(422, 616);
             this.kgtxtNewpassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtNewpassword.MaxLength = 200;
             this.kgtxtNewpassword.Name = "kgtxtNewpassword";
@@ -429,7 +429,7 @@
             this.gbtnClose.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnClose.ImageSize = new System.Drawing.Size(25, 25);
             this.gbtnClose.IndicateFocus = true;
-            this.gbtnClose.Location = new System.Drawing.Point(358, 576);
+            this.gbtnClose.Location = new System.Drawing.Point(358, 671);
             this.gbtnClose.Name = "gbtnClose";
             this.gbtnClose.PressedColor = System.Drawing.Color.White;
             this.gbtnClose.Size = new System.Drawing.Size(229, 41);
@@ -440,9 +440,9 @@
             // ctrlUserCard1
             // 
             this.ctrlUserCard1.BackColor = System.Drawing.Color.White;
-            this.ctrlUserCard1.Location = new System.Drawing.Point(30, 17);
+            this.ctrlUserCard1.Location = new System.Drawing.Point(30, 10);
             this.ctrlUserCard1.Name = "ctrlUserCard1";
-            this.ctrlUserCard1.Size = new System.Drawing.Size(1125, 487);
+            this.ctrlUserCard1.Size = new System.Drawing.Size(1125, 603);
             this.ctrlUserCard1.TabIndex = 0;
             // 
             // errorProvider1

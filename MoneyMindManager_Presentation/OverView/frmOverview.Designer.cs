@@ -160,7 +160,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmOverView";
             this.Text = "frmOverView";
-            this.Load += new System.EventHandler(this.frmOverView_Load);
+            this.Shown += new System.EventHandler(this.frmOverView_Shown);
             this.guna2Panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 

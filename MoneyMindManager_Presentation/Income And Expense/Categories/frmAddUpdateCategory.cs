@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using KhaledControlLibrary1;
 using MoneyMindManager_Business;
 using MoneyMindManager_Presentation.Global;
+using MoneyMindManager_Presentation.Users;
 
 namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 {
@@ -198,6 +199,8 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                 return;
             }
 
+            lblUserMessage.Visible = false;
+
             _Category.CategoryName = kgtxtCategoryName.ValidatedText;
 
 
@@ -266,6 +269,8 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
         private async void frmAddUpdateCategory_Load(object sender, EventArgs e)
         {
+            lblUserMessage.Visible = false;
+
             switch (Mode)
             {
                 case enMode.AddNew:
@@ -418,5 +423,19 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             }
         }
 
+        private void kgtxtCreatedByUserName_IconRightClick(object sender, EventArgs e)
+        {
+            if (_CategoryID == null || Mode == enMode.AddNew)
+            {
+                lblUserMessage.Text = "قم بإضافة فئة أولا";
+                lblUserMessage.Visible = true;
+                return;
+            }
+
+            lblUserMessage.Visible = false;
+
+            frmUserInfo frm = new frmUserInfo(Convert.ToInt32(_Category?.CreatedByUserID));
+            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
+        }
     }
 }

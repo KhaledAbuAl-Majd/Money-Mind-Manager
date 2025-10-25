@@ -22,17 +22,18 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
         /// </summary>
         public event Action<int> OnCloseAndSaved;
 
-        int _VoucherID { get; }
+        //int _VoucherID { get; }
 
         bool _isSaved = false;
-
-        bool _isIncome;
-
         bool _isLocked;
+
+        //bool _isIncome;
+        //bool _isReturn;
+        clsIncomeAndExpenseVoucher _Voucher;
         enum enMode { AddNew, Update };
         enMode Mode { get; set; }
 
-        public frmAddUpdateIncomeAndExpeseTransction(bool isIncome,int voucherID)
+        public frmAddUpdateIncomeAndExpeseTransction(clsIncomeAndExpenseVoucher voucher)
         {
             if (!_CheckPermissions())
             {
@@ -40,10 +41,16 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                 return;
             }
 
+            if(voucher == null)
+            {
+                clsGlobalMessageBoxs.ShowErrorMessage("المستند لا يمكن ان يكون بدون قيمة");
+                this.Dispose();
+                return;
+            }
+
             InitializeComponent();
             Mode = enMode.AddNew;
-            this._VoucherID = voucherID;
-            _isIncome = isIncome;
+            this._Voucher = voucher;
             _TransactionID = null;
             _Transaction = new clsIncomeAndExpenseTransaction();
         }
@@ -64,7 +71,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
         bool _CheckPermissions()
         {
             return clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.AddUpdateIETVoucher_Transactions,
-                "ليس لديك صلاحية (إضافة/تعديل مستندات - معاملات (واردات,مصروفات,مرتجعات المصروفات.");
+                "ليس لديك صلاحية إضافة/تعديل مستندات - معاملات (واردات - مصروفات - مرتجعات مصروفات)");
         }
 
         private int? _TransactionID { get; set; }
@@ -143,9 +150,10 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                 return;
             }
 
-            //this._TransactionID = searchedTransaction.MainTransactionID;
             this._Transaction = searchedTransaction;
-            this._isIncome = searchedTransaction.VouhcerInfo.IsIncome;
+
+            this._Voucher = _Transaction.VouhcerInfo;
+
             lblTransactionID.Text = _Transaction.MainTransactionID.ToString();
             kgtxtCategoryName.Text = _Transaction.CategoryInfo?.CategoryName;
             kgtxtCategoryName.Tag = _Transaction.CategoryID;
@@ -174,7 +182,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             if (_isLocked)
                 return;
 
-            var frm = new frmSelectCategory(Convert.ToBoolean(_isIncome));
+            var frm = new frmSelectCategory(Convert.ToBoolean(_Voucher.IsIncome));
             frm.OnCategorySelected += Frm_OnCategorySelected;
             //frm.ShowDialog(clsGlobal_UI.MainForm);
             clsGlobal_UI.MainForm.AddNewFormAsDialog(frm);
@@ -214,9 +222,11 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             _Transaction.Purpose = kgtxtPurpose.ValidatedText;
             _Transaction.Amount = Convert.ToDecimal(kgtxtAmount.ValidatedText);
 
+
+
             if (Mode == enMode.AddNew)
             {
-                if (!_Transaction.AssignVoucherIDAtAddMode(_VoucherID))
+                if (!_Transaction.AssignVoucherIDAtAddMode(Convert.ToInt32(_Voucher.VoucherID)))
                 {
                     clsGlobalMessageBoxs.ShowErrorMessage("فشل تسجيل معرف المستند !");
                     _ResteObject();
@@ -224,8 +234,24 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                 }
             }
 
+            _Transaction.TransactionDate = _Voucher.VoucherDate;
 
-            if (await _Transaction.Save())
+            bool isExceededBudget = false;
+
+            if (!_Voucher.IsIncome)
+            {
+                if (await _Transaction.IsExceedCategoryMonthlyBudget(_Voucher.IsReturn))
+                {
+                    isExceededBudget = true;
+
+                    if (clsGlobalMessageBoxs.ShowMessage("بهذا المبلغ ستتخطى الميزانية الشهرية!. هل تود الإستمرار ؟",
+                        "تحذير", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
+                        return;
+                }
+            }
+
+
+            if (await _Transaction.Save(isExceededBudget))
             {
                 if (Mode == enMode.AddNew)
                 {

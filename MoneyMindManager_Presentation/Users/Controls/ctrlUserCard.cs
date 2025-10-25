@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DocumentFormat.OpenXml.Spreadsheet;
 using MoneyMindManager_Business;
 
 namespace MoneyMindManager_Presentation.Users
@@ -50,6 +51,12 @@ namespace MoneyMindManager_Presentation.Users
 
             gbtnEditUser.Enabled = true;
 
+            if (User.IsDeleted)
+            {
+                lbluserMessage.Text = "هذا المستخدم محذوف !";
+                lbluserMessage.Visible = true;
+            }
+
             await _ShowData();
 
             return true;
@@ -73,6 +80,7 @@ namespace MoneyMindManager_Presentation.Users
         }
         private void ctrlUserCard_Load(object sender, EventArgs e)
         {
+            lbluserMessage.Visible = false;
             gbtnEditUser.Enabled = false;
 
             kgtxtUserName.ReadOnly = true;
@@ -105,5 +113,13 @@ namespace MoneyMindManager_Presentation.Users
             kgtxtNotes.Text = null;
         }
 
+        private void kgtxtUserNameOfCreatedUser_IconRightClick(object sender, EventArgs e)
+        {
+            if (User == null)
+                return;
+
+            frmUserInfo frm = new frmUserInfo(Convert.ToInt32(User?.CreatedByUserID));
+            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
+        }
     }
 }

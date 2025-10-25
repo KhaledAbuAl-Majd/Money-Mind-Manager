@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Guna.UI2.WinForms;
 using MoneyMindManager_Business;
 using MoneyMindManager_Presentation.Income_And_Expense;
 using MoneyMindManager_Presentation.Income_And_Expense.Categories;
@@ -28,6 +29,7 @@ namespace MoneyMindManager_Presentation.Main
             InitializeComponent();
         }
 
+        Guna2Button prevButton;
         public void LoadMainFormLabels()
         {
             lblCurrentUserName.Text = clsGlobal_UI.CurrentUser?.UserName;
@@ -37,14 +39,6 @@ namespace MoneyMindManager_Presentation.Main
             if (frm == null || frm.IsDisposed)
                 return;
 
-            //frm.Move += (sender, e) =>
-            //{
-            //    if (frm.Left < this.Left) frm.Left = this.Left;
-            //    if (frm.Top < this.Top) frm.Top = this.Top;
-            //    if (frm.Right > this.Right) frm.Left = this.Right - frm.Width;
-            //    if (frm.Bottom > this.Bottom) frm.Top = this.Bottom - frm.Height;
-            //};
-
             frm.ShowDialog(this);
         }
         public void AddNewFormAtContainer(Form frm)
@@ -52,10 +46,10 @@ namespace MoneyMindManager_Presentation.Main
             _LoadFormAtPanelContainer(frm, false);
         }
 
-        void _LoadFormAtPanelContainer(Form frm,bool clearOldControls)
+        bool _LoadFormAtPanelContainer(Form frm, bool clearOldControls)
         {
             if (frm == null)
-                return;
+                return false;
 
             frm.TopLevel = false;
             frm.FormBorderStyle = FormBorderStyle.None;
@@ -72,63 +66,82 @@ namespace MoneyMindManager_Presentation.Main
                 frm.Show();
                 frm.BringToFront();
             }
+            else
+            {
+                if (prevButton != null)
+                {
+                    prevButton.Checked = true;
+                    prevButton.Focus();
+                }
+
+                return false;
+            }
+
+            return true;
+        }
+
+        private void frmMain_Shown(object sender, EventArgs e)
+        {
+            LoadMainFormLabels();
+
+            prevButton = null;
+            if (clsUser.CheckLogedInUserPermissions(clsUser.enPermissions.OverView))
+            {
+                prevButton = gbtnOverOview;
+                gbtnOverOview.PerformClick();
+            }
+            else
+            {
+                prevButton = gbtnAccount;
+                gbtnAccount.PerformClick();
+            }
         }
 
         private void gbtnOverOview_Click(object sender, EventArgs e)
         {
-            _LoadFormAtPanelContainer(new frmOverView(), true);
+            if (_LoadFormAtPanelContainer(new frmOverView(), true))
+                prevButton = gbtnOverOview;
         }
-
-        private void frmMain_Load(object sender, EventArgs e)
-        {
-            this.UseWaitCursor = true;
-            this.Enabled = false;
-
-            LoadMainFormLabels();
-
-            if (clsUser.CheckLogedInUserPermissions(clsUser.enPermissions.OverView))
-                gbtnOverOview.PerformClick();
-            else
-                gbtnAccount.PerformClick();
-
-                this.Enabled = true;
-            this.UseWaitCursor = false;
-            this.Cursor = Cursors.Default;
-        }
-
         private void gbtnPeople_Click(object sender, EventArgs e)
         {
-            _LoadFormAtPanelContainer(new frmPeople(),true);
+            if (_LoadFormAtPanelContainer(new frmPeople(), true))
+                prevButton = gbtnPeople;
         }
 
         private void gbtnUsers_Click(object sender, EventArgs e)
         {
-            _LoadFormAtPanelContainer(new FrmUsers(), true);
+            if (_LoadFormAtPanelContainer(new FrmUsers(), true))
+                prevButton = gbtnUsers;
         }
 
 
         private void gbtnIncome_Click(object sender, EventArgs e)
         {
-            _LoadFormAtPanelContainer(new frmIncomeAndExpense(clsIncomeAndExpenseVoucher.enVoucherType.Incomes),true);
+            if (_LoadFormAtPanelContainer(new frmIncomeAndExpense(clsIncomeAndExpenseVoucher.enVoucherType.Incomes), true))
+                prevButton = gbtnIncome;
         }
 
         private void gbtnExpense_Click(object sender, EventArgs e)
         {
-            _LoadFormAtPanelContainer(new frmIncomeAndExpense(clsIncomeAndExpenseVoucher.enVoucherType.Expenses), true);
+            if (_LoadFormAtPanelContainer(new frmIncomeAndExpense(clsIncomeAndExpenseVoucher.enVoucherType.Expenses), true))
+                prevButton = gbtnExpense;
         }
 
         private void gbtnExpensesReturn_Click(object sender, EventArgs e)
         {
-            _LoadFormAtPanelContainer(new frmIncomeAndExpense(clsIncomeAndExpenseVoucher.enVoucherType.ExpensesReturn), true);
+            if (_LoadFormAtPanelContainer(new frmIncomeAndExpense(clsIncomeAndExpenseVoucher.enVoucherType.ExpensesReturn), true))
+                prevButton = gbtnExpensesReturn;
         }
 
         private void gbtnDebts_Click(object sender, EventArgs e)
         {
-            _LoadFormAtPanelContainer(new frmDebtsList(), true);
+            if (_LoadFormAtPanelContainer(new frmDebtsList(), true))
+                prevButton = gbtnDebts;
         }
         private void gbtnTransactions_Click(object sender, EventArgs e)
         {
-            _LoadFormAtPanelContainer(new frmMainTransactionsList(), true);
+            if (_LoadFormAtPanelContainer(new frmMainTransactionsList(), true))
+                prevButton = gbtnTransactions;
         }
         private void gbtnLogout_Click(object sender, EventArgs e)
         {
@@ -147,7 +160,8 @@ namespace MoneyMindManager_Presentation.Main
 
         private void gbtnAccount_Click(object sender, EventArgs e)
         {
-            _LoadFormAtPanelContainer(new frmCurrentAccount(), true);
+            if (_LoadFormAtPanelContainer(new frmCurrentAccount(), true))
+                prevButton = gbtnAccount;
         }
 
         private void llblCurrentUserInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -161,5 +175,6 @@ namespace MoneyMindManager_Presentation.Main
             var frm = new frmChangePassword(Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID));
             AddNewFormAtContainer(frm);
         }
+
     }
 }

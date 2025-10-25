@@ -132,7 +132,7 @@
             this.guna2Panel3.ShadowDecoration.Enabled = true;
             this.guna2Panel3.Size = new System.Drawing.Size(401, 466);
             this.guna2Panel3.TabIndex = 21;
-            this.guna2Panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2Panel3_Paint);
+
             // 
             // ctrlTopPersonDebtsSumRanking1
             // 
@@ -229,7 +229,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmOverViewDebts";
             this.Text = "frmOverViewDebts";
-            this.Load += new System.EventHandler(this.frmOverViewDebts_Load);
+            this.Shown += new System.EventHandler(this.frmOverViewDebts_Shown);
             this.guna2Panel2.ResumeLayout(false);
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel3.ResumeLayout(false);

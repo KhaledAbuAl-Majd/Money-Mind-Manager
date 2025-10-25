@@ -444,7 +444,7 @@ namespace MoneyMindManager_DataAccess
         /// <param name="userID">UserID of user you want to find</param>
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>true if user exist, false if user not exist</returns>
-        public static async Task<bool> IsUserExistByUserID(int userID, bool RaiseEventOnErrorOccured = true)
+        public static async Task<bool> IsUserExistByUserID(int userID, bool includeDeleted, bool RaiseEventOnErrorOccured = true)
         {
             bool isExist = false;
 
@@ -457,6 +457,7 @@ namespace MoneyMindManager_DataAccess
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
                         command.Parameters.AddWithValue("@UserID", userID);
+                        command.Parameters.AddWithValue("@IncludeDeleted", includeDeleted);
 
                         SqlParameter retunValue = new SqlParameter("@ReturnVal", SqlDbType.Int)
                         {
@@ -486,7 +487,7 @@ namespace MoneyMindManager_DataAccess
         /// <param name="personID">PersonID of user you want to find</param>
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>true if user exist, false if user not exist</returns>
-        public static async Task<bool> IsUserExistByPersonID(int personID, bool RaiseEventOnErrorOccured = true)
+        public static async Task<bool> IsUserExistByPersonID(int personID, bool includeDeleted, bool RaiseEventOnErrorOccured = true)
         {
             bool isExist = false;
 
@@ -499,6 +500,7 @@ namespace MoneyMindManager_DataAccess
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
                         command.Parameters.AddWithValue("@PersonID", personID);
+                        command.Parameters.AddWithValue("@IncludeDeleted", includeDeleted);
 
                         SqlParameter retunValue = new SqlParameter("@ReturnVal", SqlDbType.Int)
                         {
@@ -528,7 +530,7 @@ namespace MoneyMindManager_DataAccess
         /// <param name="userName">userName of user you want to find</param>
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>true if user exist, false if user not exist</returns>
-        public static async Task<bool> IsUserExistByUserNameAsync(string userName, bool RaiseEventOnErrorOccured = true)
+        public static async Task<bool> IsUserExistByUserNameAsync(string userName,bool includeDeleted, bool RaiseEventOnErrorOccured = true)
         {
             bool isExist = false;
 
@@ -541,6 +543,7 @@ namespace MoneyMindManager_DataAccess
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
                         command.Parameters.AddWithValue("@UserName", userName);
+                        command.Parameters.AddWithValue("@IncludeDeleted", includeDeleted);
 
                         SqlParameter retunValue = new SqlParameter("@ReturnVal", SqlDbType.Int)
                         {
@@ -570,7 +573,7 @@ namespace MoneyMindManager_DataAccess
         /// <param name="userName">userName of user you want to find</param>
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>true if user exist, false if user not exist</returns>
-        public static bool IsUserExistByUserName(string userName, bool RaiseEventOnErrorOccured = true)
+        public static bool IsUserExistByUserName(string userName,bool includeDeleted, bool RaiseEventOnErrorOccured = true)
         {
             bool isExist = false;
 
@@ -583,6 +586,7 @@ namespace MoneyMindManager_DataAccess
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
                         command.Parameters.AddWithValue("@UserName", userName);
+                        command.Parameters.AddWithValue("@IncludeDeleted", includeDeleted);
 
                         SqlParameter retunValue = new SqlParameter("@ReturnVal", SqlDbType.Int)
                         {

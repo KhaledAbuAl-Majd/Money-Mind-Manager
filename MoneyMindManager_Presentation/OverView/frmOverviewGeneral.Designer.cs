@@ -506,7 +506,7 @@
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(252, 21);
             this.label16.TabIndex = 4;
-            this.label16.Text = "ديون مستحقة منك (30 يوم)";
+            this.label16.Text = "ديون مستحقة عليك (30 يوم)";
             this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.toolTip1.SetToolTip(this.label16, " إجمالي الديون (المستحقات عليك) المتأخرة، بالإضافة إلى الديون المستحقة خلال الـ 3" +
         "0 يومًا القادمة  (للديون التي لديها تاريخ إستحقاق فقط).");
@@ -554,7 +554,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmOverviewGeneral";
             this.Text = "frmOverview";
-            this.Load += new System.EventHandler(this.frmOverview_Load);
+            this.Shown += new System.EventHandler(this.frmOverviewGeneral_Shown);
             this.guna2Panel2.ResumeLayout(false);
             this.guna2Panel5.ResumeLayout(false);
             this.guna2Panel6.ResumeLayout(false);
@@ -570,8 +570,6 @@
         }
 
         #endregion
-
-        private Controls.ctrlMonthlyFlow ctrlTest1;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel5;
         private System.Windows.Forms.Label label6;
@@ -600,5 +598,6 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private Guna.UI2.WinForms.Guna2WinProgressIndicator guna2WinProgressIndicator1;
         private System.Windows.Forms.Label label1;
+        private Controls.ctrlMonthlyFlow ctrlTest1;
     }
 }

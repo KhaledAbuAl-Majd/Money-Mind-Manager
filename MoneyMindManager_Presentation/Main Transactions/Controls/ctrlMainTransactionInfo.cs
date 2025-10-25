@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MoneyMindManager_Business;
+using MoneyMindManager_Presentation.Users;
 
 namespace MoneyMindManager_Presentation.Transactions.Controls
 {
@@ -75,6 +76,15 @@ namespace MoneyMindManager_Presentation.Transactions.Controls
             kgtxtCreatedByUserName.Text = null;
             kgtxtTransactionType.Text = null;
             kgtxtPurpose.Text = null;
+        }
+
+        private void kgtxtCreatedByUserName_IconRightClick(object sender, EventArgs e)
+        {
+            if (MainTransaction == null)
+                return;
+
+            frmUserInfo frm = new frmUserInfo(Convert.ToInt32(MainTransaction?.CreatedByUserID));
+            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
         }
     }
 }

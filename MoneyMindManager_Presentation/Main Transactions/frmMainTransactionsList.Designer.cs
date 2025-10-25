@@ -911,7 +911,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmMainTransactionsList";
             this.Text = "VouhcersList";
-            this.Load += new System.EventHandler(this.VouhcersList_Load);
+            this.Shown += new System.EventHandler(this.frmMainTransactionsList_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTransactions)).EndInit();
             this.guna2ContextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();

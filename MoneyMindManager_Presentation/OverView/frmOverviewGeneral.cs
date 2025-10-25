@@ -37,7 +37,7 @@ namespace MoneyMindManager_Presentation.OverView
             klblAvgNetProfitLast6Months.Text = KPIS.AvgNetProfitLast6Months.ToString();
         }
 
-        private async void frmOverview_Load(object sender, EventArgs e)
+        private async void frmOverviewGeneral_Shown(object sender, EventArgs e)
         {
             guna2WinProgressIndicator1.BringToFront();
             guna2WinProgressIndicator1.Start();

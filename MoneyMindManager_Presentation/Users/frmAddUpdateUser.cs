@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DocumentFormat.OpenXml.Spreadsheet;
 using KhaledControlLibrary1;
 using MoneyMindManager_Business;
 using MoneyMindManager_Presentation.Global;
@@ -20,7 +21,7 @@ namespace MoneyMindManager_Presentation.Users
     {
         public frmAddUpdateUser()
         {
-            if(!_CheckUserPermissions())
+            if (!_CheckUserPermissions())
             {
                 this.Dispose();
                 return;
@@ -99,11 +100,14 @@ namespace MoneyMindManager_Presentation.Users
         {
             gbtnSave.Enabled = value;
             gtswIsActive.Enabled = value;
+            gibtnDeleteUser.Enabled = value;
             kgtxtUserName.Enabled = value;
             kgtxtNotes.Enabled = value;
 
             kgtxtpassword.Enabled = (Mode == enMode.AddNew) ? value : false;
             kgtxtConfirmPassword.Enabled = kgtxtpassword.Enabled;
+
+            chklbUserPermissions.Enabled = value;
         }
 
         void _AddNewMode()
@@ -147,12 +151,20 @@ namespace MoneyMindManager_Presentation.Users
             kgtxtUserName.Text = _User.UserName;
             kgtxtNotes.Text = _User.Notes;
 
-            _ChangeEnablityOfUserControls(true);
+            _ChangeEnablityOfUserControls(!_User.IsDeleted);
             kgtxtpassword.IsRequired = false;
             kgtxtConfirmPassword.IsRequired = false;
+            kgtxtpassword.PlaceholderText = "غير متاح تغيير كلمة السر";
+            kgtxtConfirmPassword.PlaceholderText = "غير متاح تغيير كلمة السر";
 
             if (_User.IsAdmin)
                 chklbUserPermissions.SelectionMode = SelectionMode.None;
+
+            if (_User.IsDeleted)
+            {
+                lbluserMessage.Text = "هذا المستخدم محذوف لا يمكن التعديل عليه !";
+                lbluserMessage.Visible = true;
+            }
         }
 
         void _ResteObject()
@@ -164,7 +176,7 @@ namespace MoneyMindManager_Presentation.Users
         {
             List<int> items = new List<int>();
 
-            foreach(var item in chklbUserPermissions.CheckedItems)
+            foreach (var item in chklbUserPermissions.CheckedItems)
             {
                 var permissionItem = item as clsUser.clsPermissionItems;
 
@@ -216,7 +228,6 @@ namespace MoneyMindManager_Presentation.Users
                 {
                     lbluserMessage.Text = "لا يمكنك إلغاء نشاط المستخدم الحالي";
                     lbluserMessage.Visible = true;
-                    _ResteObject();
                     return;
                 }
             }
@@ -260,7 +271,7 @@ namespace MoneyMindManager_Presentation.Users
             chklbUserPermissions.ValueMember = "ItemValue";
 
             byte index = 0;
-            foreach(var item in items)
+            foreach (var item in items)
             {
                 chklbUserPermissions.SetItemChecked(index, item.Checked);
                 index++;
@@ -368,17 +379,6 @@ namespace MoneyMindManager_Presentation.Users
 
         private void ctrlPersonCardWithFilter1_OnSuccess()
         {
-            // Creat With DataBase When Adding New User 
-
-            //if(_ChangeMode == enMode.AddNew && await clsUser.IsUserExistByPersonIDAsync(Convert.ToInt32(ctrlPersonCardWithFilter1.Person.PersonID)))
-            //{
-            //    clsGlobalMessageBoxs.ShowErrorMessage("هذا الشخص مرتبط بمستخدم بالفعل");
-            //    _ChangeEnablityOfUserControls(false);
-            //    _ResetUserControls();
-            //    ctrlPersonCardWithFilter1.ResetControls();
-            //    return;
-            //}
-
             _ChangeEnablityOfUserControls(true);
         }
 
@@ -389,7 +389,7 @@ namespace MoneyMindManager_Presentation.Users
 
         private void kgtxt_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if(e.KeyChar == (char)Keys.Enter)
+            if (e.KeyChar == (char)Keys.Enter)
             {
                 gbtnSave.PerformClick();
             }
@@ -398,6 +398,34 @@ namespace MoneyMindManager_Presentation.Users
         private void chklbUserPermissions_Leave(object sender, EventArgs e)
         {
             chklbUserPermissions.ClearSelected();
+        }
+
+        private async void gibtnDeleteUser_Click(object sender, EventArgs e)
+        {
+            if (_UserID == null || Mode == enMode.AddNew)
+            {
+                lbluserMessage.Text = "لا يمكن حذف مستخدم لم يضف بعد !";
+                lbluserMessage.Visible = true;
+                return;
+            }
+
+            lbluserMessage.Visible = false;
+
+            if (clsGlobalMessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف هذا المستخدم", "طلب مواقفقة", MessageBoxButtons.OKCancel,
+              MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
+            {
+                if (Convert.ToInt32(_UserID) == clsGlobalSession.CurrentUserID)
+                {
+                    clsGlobalMessageBoxs.ShowErrorMessage("لا يمكنك حذف المستخدم الحالي");
+                    return;
+                }
+
+                if (await _User.DeleteUserByUserID())
+                {
+                    _isSaved = true;
+                    gbtnClose.PerformClick();
+                }
+            }
         }
     }
 }

@@ -16,6 +16,7 @@ using MoneyMindManager_Presentation.Income_And_Expense.Categories;
 using MoneyMindManager_Presentation.Main;
 using MoneyMindManager_Presentation.Properties;
 using MoneyMindManager_Presentation.Transactions;
+using MoneyMindManager_Presentation.Users;
 using MoneyMindManagerGlobal;
 using static Guna.UI2.Native.WinApi;
 using static MoneyMindManager_Business.clsIncomeAndExpenseVoucher;
@@ -76,7 +77,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
         bool _CheckPermissions()
         {
             return clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.AddUpdateIETVoucher_Transactions,
-                "ليس لديك صلاحية (إضافة/تعديل مستندات - معاملات (واردات,مصروفات,مرتجعات المصروفات.");
+                "ليس لديك صلاحية إضافة/تعديل مستندات - معاملات (واردات - مصروفات - مرتجعات مصروفات)");
         }
 
         bool _IsHeaderCreated = false;
@@ -427,7 +428,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             lblUserMessage.Visible = false;
 
-            var frm = new frmAddUpdateIncomeAndExpeseTransction(_Voucher.IsIncome, Convert.ToInt32(_VoucherID));
+            var frm = new frmAddUpdateIncomeAndExpeseTransction(_Voucher);
             frm.OnCloseAndSaved += FrmAddUpdateTransactions_OnCloseAndSaved;
             clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
         }
@@ -712,104 +713,19 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             _ShowTransactionInfo();
         }
 
-        private void label7_Click(object sender, EventArgs e)
+        private void kgtxtCreatedByUserName_IconRightClick(object sender, EventArgs e)
         {
+            if (_VoucherID == null || _voucherMode == enVoucherMode.AddNew)
+            {
+                lblUserMessage.Text = "قم بإضافة مستند أولا";
+                lblUserMessage.Visible = true;
+                return;
+            }
 
-        }
+            lblUserMessage.Visible = false;
 
-        private void label8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void kgtxtVoucherID_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void kgtxtCreatedByUserName_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void kgtxtVoucherValue_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void kgtxtCreatedDate_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void kgtxtNotes_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void kgtxtVoucherDate_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void kgtxtVoucherName_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label9_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblNoTransactionsFoundMessage_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblCurrentPageRecordsCount_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblDescriptionOfCurrentPageNumOfRcords_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblCurrentPageOfNumberOfPages_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblTotalRecordsNumber_Click(object sender, EventArgs e)
-        {
-
+            frmUserInfo frm = new frmUserInfo(Convert.ToInt32(_Voucher?.CreatedByUserID));
+            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
         }
     }
 }

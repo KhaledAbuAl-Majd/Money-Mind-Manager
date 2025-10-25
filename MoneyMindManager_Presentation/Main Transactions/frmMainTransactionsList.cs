@@ -247,8 +247,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 chklbTransactionTypes.SetItemChecked(i, true);
             }
         }
-
-        private async void VouhcersList_Load(object sender, EventArgs e)
+        private async void frmMainTransactionsList_Shown(object sender, EventArgs e)
         {
             await _LoadTransactionTypes();
             chklbTransactionTypes.ClearSelected();
@@ -536,5 +535,6 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
         {
 
         }
+
     }
 }

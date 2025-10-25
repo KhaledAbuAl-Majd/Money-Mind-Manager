@@ -41,6 +41,7 @@ namespace MoneyMindManager_Presentation.Users
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             this.gbtnClose = new Guna.UI2.WinForms.Guna2Button();
             this.gpnlUserPart = new Guna.UI2.WinForms.Guna2Panel();
+            this.gibtnDeleteUser = new Guna.UI2.WinForms.Guna2ImageButton();
             this.label4 = new System.Windows.Forms.Label();
             this.guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
             this.chklbUserPermissions = new System.Windows.Forms.CheckedListBox();
@@ -54,6 +55,7 @@ namespace MoneyMindManager_Presentation.Users
             this.gbtnSave = new Guna.UI2.WinForms.Guna2Button();
             this.ctrlPersonCardWithFilter1 = new MoneyMindManager_Presentation.People.Controls.ctrlPersonCardWithFilter();
             this.lblHeader = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.guna2Panel1.SuspendLayout();
             this.guna2Panel2.SuspendLayout();
@@ -68,10 +70,10 @@ namespace MoneyMindManager_Presentation.Users
             // lblUserID
             // 
             this.lblUserID.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUserID.Location = new System.Drawing.Point(111, 10);
+            this.lblUserID.Location = new System.Drawing.Point(112, 10);
             this.lblUserID.Name = "lblUserID";
             this.lblUserID.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.lblUserID.Size = new System.Drawing.Size(120, 23);
+            this.lblUserID.Size = new System.Drawing.Size(151, 23);
             this.lblUserID.TabIndex = 96;
             this.lblUserID.Text = "N/A";
             // 
@@ -79,12 +81,12 @@ namespace MoneyMindManager_Presentation.Users
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(231, 8);
+            this.label2.Location = new System.Drawing.Point(267, 10);
             this.label2.Name = "label2";
             this.label2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.label2.Size = new System.Drawing.Size(105, 24);
+            this.label2.Size = new System.Drawing.Size(115, 24);
             this.label2.TabIndex = 97;
-            this.label2.Text = "معرف المستخدم";
+            this.label2.Text = "معرف المستخدم :";
             // 
             // guna2Panel1
             // 
@@ -181,12 +183,13 @@ namespace MoneyMindManager_Presentation.Users
             this.gbtnClose.Name = "gbtnClose";
             this.gbtnClose.PressedColor = System.Drawing.Color.White;
             this.gbtnClose.Size = new System.Drawing.Size(180, 41);
-            this.gbtnClose.TabIndex = 120;
+            this.gbtnClose.TabIndex = 6;
             this.gbtnClose.Text = "غلق";
             this.gbtnClose.Click += new System.EventHandler(this.gbtnClose_Click);
             // 
             // gpnlUserPart
             // 
+            this.gpnlUserPart.Controls.Add(this.gibtnDeleteUser);
             this.gpnlUserPart.Controls.Add(this.label4);
             this.gpnlUserPart.Controls.Add(this.guna2Panel3);
             this.gpnlUserPart.Controls.Add(this.kgtxtConfirmPassword);
@@ -201,6 +204,25 @@ namespace MoneyMindManager_Presentation.Users
             this.gpnlUserPart.Name = "gpnlUserPart";
             this.gpnlUserPart.Size = new System.Drawing.Size(456, 593);
             this.gpnlUserPart.TabIndex = 14;
+            // 
+            // gibtnDeleteUser
+            // 
+            this.gibtnDeleteUser.BackColor = System.Drawing.Color.Transparent;
+            this.gibtnDeleteUser.CheckedState.ImageSize = new System.Drawing.Size(64, 64);
+            this.gibtnDeleteUser.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gibtnDeleteUser.HoverState.ImageSize = new System.Drawing.Size(35, 35);
+            this.gibtnDeleteUser.Image = ((System.Drawing.Image)(resources.GetObject("gibtnDeleteUser.Image")));
+            this.gibtnDeleteUser.ImageOffset = new System.Drawing.Point(0, 0);
+            this.gibtnDeleteUser.ImageRotate = 0F;
+            this.gibtnDeleteUser.ImageSize = new System.Drawing.Size(28, 28);
+            this.gibtnDeleteUser.Location = new System.Drawing.Point(3, 41);
+            this.gibtnDeleteUser.Name = "gibtnDeleteUser";
+            this.gibtnDeleteUser.PressedState.ImageSize = new System.Drawing.Size(64, 64);
+            this.gibtnDeleteUser.Size = new System.Drawing.Size(33, 42);
+            this.gibtnDeleteUser.TabIndex = 139;
+            this.toolTip1.SetToolTip(this.gibtnDeleteUser, "حذف المستخدم نهائيا");
+            this.gibtnDeleteUser.UseTransparentBackground = true;
+            this.gibtnDeleteUser.Click += new System.EventHandler(this.gibtnDeleteUser_Click);
             // 
             // label4
             // 
@@ -235,7 +257,7 @@ namespace MoneyMindManager_Presentation.Users
             this.chklbUserPermissions.Location = new System.Drawing.Point(3, 6);
             this.chklbUserPermissions.Name = "chklbUserPermissions";
             this.chklbUserPermissions.Size = new System.Drawing.Size(371, 198);
-            this.chklbUserPermissions.TabIndex = 134;
+            this.chklbUserPermissions.TabIndex = 4;
             this.chklbUserPermissions.Leave += new System.EventHandler(this.chklbUserPermissions_Leave);
             // 
             // kgtxtConfirmPassword
@@ -637,7 +659,7 @@ namespace MoneyMindManager_Presentation.Users
             this.gbtnSave.Name = "gbtnSave";
             this.gbtnSave.PressedColor = System.Drawing.Color.White;
             this.gbtnSave.Size = new System.Drawing.Size(193, 41);
-            this.gbtnSave.TabIndex = 119;
+            this.gbtnSave.TabIndex = 5;
             this.gbtnSave.Text = "حفظ";
             this.gbtnSave.Click += new System.EventHandler(this.gbtnSave_Click);
             // 
@@ -664,6 +686,10 @@ namespace MoneyMindManager_Presentation.Users
             this.lblHeader.TabIndex = 37;
             this.lblHeader.Text = "إضافة مستخدم";
             this.lblHeader.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // toolTip1
+            // 
+            this.toolTip1.IsBalloon = true;
             // 
             // frmAddUpdateUser
             // 
@@ -713,5 +739,7 @@ namespace MoneyMindManager_Presentation.Users
         private System.Windows.Forms.Label label4;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel3;
         private System.Windows.Forms.CheckedListBox chklbUserPermissions;
+        private Guna.UI2.WinForms.Guna2ImageButton gibtnDeleteUser;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

@@ -302,5 +302,24 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             }
         }
 
+        private void guna2Panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void lblUserMessage_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gtswNewTransactionAfterAdd_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

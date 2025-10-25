@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MoneyMindManager_Business;
+using MoneyMindManager_Presentation.Users;
 
 namespace MoneyMindManager_Presentation.People.Controls
 {
@@ -116,6 +117,15 @@ namespace MoneyMindManager_Presentation.People.Controls
             kgtxtAddress.Text = null;
             kgtxtReceivable.Text = null;
             kgtxtPayable.Text = null;
+        }
+
+        private void kgtxtUserNameOfCreatedUser_IconRightClick(object sender, EventArgs e)
+        {
+            if (Person == null)
+                return;
+
+            frmUserInfo frm = new frmUserInfo(Convert.ToInt32(Person?.CreatedByUserID));
+            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
         }
     }
 }

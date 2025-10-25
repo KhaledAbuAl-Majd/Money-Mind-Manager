@@ -124,7 +124,7 @@ namespace MoneyMindManager_Business
                 return false;
 
             if (!clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.AddUpdateIETVoucher_Transactions,
-             "ليس لديك صلاحية (إضافة/تعديل مستندات - معاملات (واردات,مصروفات,مرتجعات المصروفات."))
+             "ليس لديك صلاحية إضافة/تعديل مستندات - معاملات (واردات - مصروفات - مرتجعات مصروفات)"))
                 return false;
 
             switch (Mode)
@@ -154,7 +154,7 @@ namespace MoneyMindManager_Business
                 return false;
 
             if (!clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.ChangeIETVoucherLocking,
-                "ليس لديك صلاحية (غلق/فتح المستندات (واردات,مصروفات,مرتجعات المصروفات."))
+                "ليس لديك صلاحية غلق/فتح مستندات - معاملات (واردات - مصروفات - مرتجعات مصروفات)"))
                 return false;
 
                 bool result = await clsIncomeAndExpenseVoucherData.ChangeVoucherLockingByID(Convert.ToInt32(VoucherID), isLocked,
@@ -190,7 +190,7 @@ namespace MoneyMindManager_Business
         public static async Task<bool> DeleteVoucherByVoucherID(int voucherID)
         {
             if (!clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.DeleteIETVoucher_Transactions,
-            "ليس لديك صلاحية (حذف مستندات - معاملات (واردات,مصروفات,مرتجعات المصروفات."))
+            "ليس لديك صلاحية حذف مستندات - معاملات (واردات - مصروفات - مرتجعات مصروفات)"))
                 return false;
 
             return await clsIncomeAndExpenseVoucherData.DeleteVoucherByID(voucherID, Convert.ToInt32(clsGlobalSession.CurrentUserID));

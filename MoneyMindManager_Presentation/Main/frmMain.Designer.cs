@@ -32,7 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.guna2DragControl1 = new Guna.UI2.WinForms.Guna2DragControl(this.components);
             this.guna2ShadowForm1 = new Guna.UI2.WinForms.Guna2ShadowForm(this.components);
-            this.guna2AnimateWindow1 = new Guna.UI2.WinForms.Guna2AnimateWindow(this.components);
             this.gpnlRightBar = new Guna.UI2.WinForms.Guna2Panel();
             this.llblChangePassword = new System.Windows.Forms.LinkLabel();
             this.llblCurrentUserInfo = new System.Windows.Forms.LinkLabel();
@@ -72,12 +71,6 @@
             // 
             this.guna2ShadowForm1.BorderRadius = 15;
             this.guna2ShadowForm1.TargetForm = this;
-            // 
-            // guna2AnimateWindow1
-            // 
-            this.guna2AnimateWindow1.AnimationType = Guna.UI2.WinForms.Guna2AnimateWindow.AnimateWindowType.AW_HIDE;
-            this.guna2AnimateWindow1.Interval = 250;
-            this.guna2AnimateWindow1.TargetForm = this;
             // 
             // gpnlRightBar
             // 
@@ -650,12 +643,11 @@
             this.ClientSize = new System.Drawing.Size(1473, 809);
             this.Controls.Add(this.gpnlFormContainer);
             this.Controls.Add(this.gpnlRightBar);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Money Mind Manager";
-            this.Load += new System.EventHandler(this.frmMain_Load);
+            this.Shown += new System.EventHandler(this.frmMain_Shown);
             this.gpnlRightBar.ResumeLayout(false);
             this.gpnlRightBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
@@ -667,7 +659,6 @@
 
         private Guna.UI2.WinForms.Guna2DragControl guna2DragControl1;
         private Guna.UI2.WinForms.Guna2ShadowForm guna2ShadowForm1;
-        private Guna.UI2.WinForms.Guna2AnimateWindow guna2AnimateWindow1;
         private Guna.UI2.WinForms.Guna2Button gbtnOverOview;
         private Guna.UI2.WinForms.Guna2Button gbtnPeople;
         private Guna.UI2.WinForms.Guna2Panel gpnlRightBar;

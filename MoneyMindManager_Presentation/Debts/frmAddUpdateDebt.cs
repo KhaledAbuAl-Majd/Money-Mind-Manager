@@ -17,6 +17,7 @@ using MoneyMindManager_Presentation.Main;
 using MoneyMindManager_Presentation.People;
 using MoneyMindManager_Presentation.Properties;
 using MoneyMindManager_Presentation.Transactions;
+using MoneyMindManager_Presentation.Users;
 using MoneyMindManagerGlobal;
 using static Guna.UI2.Native.WinApi;
 using static MoneyMindManager_Business.clsIncomeAndExpenseVoucher;
@@ -715,143 +716,19 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             await clsExportHelper.ExportToExcelWithDialog(dt, $"تقرير معاملات سداد سند الدين [ {_DebtID?.ToString()} ]");
         }
 
-        private void lblCurrentPageRecordsCount_Click(object sender, EventArgs e)
+        private void kgtxtCreatedByUserName_IconRightClick(object sender, EventArgs e)
         {
+            if (_DebtID == null || _DebtMode == enDebtMode.AddNew)
+            {
+                lblUserMessage.Text = "قم بإضافة سند أولا";
+                lblUserMessage.Visible = true;
+                return;
+            }
 
-        }
+            lblUserMessage.Visible = false;
 
-        private void lblDescriptionOfCurrentPageNumOfRcords_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblCurrentPageOfNumberOfPages_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblTotalRecordsNumber_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblHeader_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblUserMessage_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label12_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void kgtxtDebtValue_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label10_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void kgtxtPaymentDueDate_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label11_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void gcbDebtType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void kgtxtPersonName_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label9_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void kgtxtDebtID_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void kgtxtCreatedByUserName_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void kgtxtRemainingAmount_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void kgtxtCreatedDate_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void kgtxtNotes_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void kgtxtDebtDate_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblNoTransactionsFoundMessage_Click(object sender, EventArgs e)
-        {
+            frmUserInfo frm = new frmUserInfo(Convert.ToInt32(_Debt?.CreatedByUserID));
+            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
 
         }
     }

@@ -361,12 +361,12 @@ namespace MoneyMindManager_Presentation
 
         private async void gtsmDeleteUser_Click(object sender, EventArgs e)
         {
-            if (clsGlobalMessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف هذا الشخص", "طلب مواقفقة", MessageBoxButtons.OKCancel,
+            if (clsGlobalMessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف هذا المستخدم", "طلب مواقفقة", MessageBoxButtons.OKCancel,
                MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
             {
                 int userID = Convert.ToInt32(gdgvUser.CurrentRow.Cells[0].Value);
 
-                if(userID == clsGlobal_UI.CurrentUser.UserID)
+                if(userID == clsGlobalSession.CurrentUserID)
                 {
                     clsGlobalMessageBoxs.ShowErrorMessage("لا يمكنك حذف المستخدم الحالي");
                     return;

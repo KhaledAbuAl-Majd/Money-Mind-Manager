@@ -350,6 +350,9 @@
             this.kgtxtUserNameOfCreatedUser.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.kgtxtUserNameOfCreatedUser.ForeColor = System.Drawing.Color.Black;
             this.kgtxtUserNameOfCreatedUser.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.kgtxtUserNameOfCreatedUser.IconLeft = ((System.Drawing.Image)(resources.GetObject("kgtxtUserNameOfCreatedUser.IconLeft")));
+            this.kgtxtUserNameOfCreatedUser.IconRight = ((System.Drawing.Image)(resources.GetObject("kgtxtUserNameOfCreatedUser.IconRight")));
+            this.kgtxtUserNameOfCreatedUser.IconRightCursor = System.Windows.Forms.Cursors.Hand;
             this.kgtxtUserNameOfCreatedUser.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
             this.kgtxtUserNameOfCreatedUser.IsRequired = false;
             this.kgtxtUserNameOfCreatedUser.Location = new System.Drawing.Point(7, 197);
@@ -408,8 +411,10 @@
             this.kgtxtUserNameOfCreatedUser.TextProperties.PhoneProperties.AllowPlusSign = true;
             this.kgtxtUserNameOfCreatedUser.TextProperties.PhoneProperties.MaxPhoneLength = ((byte)(15));
             this.kgtxtUserNameOfCreatedUser.TextProperties.TextFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.enTextFormat.None;
+            this.toolTip1.SetToolTip(this.kgtxtUserNameOfCreatedUser, "اضغط على الأيقونة اليمنى لرؤية بيانات المستخدم المنشئ");
             this.kgtxtUserNameOfCreatedUser.TrimEnd = false;
             this.kgtxtUserNameOfCreatedUser.TrimStart = false;
+            this.kgtxtUserNameOfCreatedUser.IconRightClick += new System.EventHandler(this.kgtxtUserNameOfCreatedUser_IconRightClick);
             // 
             // kgtxtEmail
             // 

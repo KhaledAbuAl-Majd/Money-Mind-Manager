@@ -98,7 +98,6 @@
             this.lblUserMessage.TabIndex = 39;
             this.lblUserMessage.Text = "\"تم العثور على حقول غير صالحة. ضع المؤشر على العلامات الحمراء لعرض سبب الخطأ.\"";
             this.lblUserMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblUserMessage.Click += new System.EventHandler(this.lblUserMessage_Click);
             // 
             // lblCurrentPageRecordsCount
             // 
@@ -109,7 +108,6 @@
             this.lblCurrentPageRecordsCount.Size = new System.Drawing.Size(114, 24);
             this.lblCurrentPageRecordsCount.TabIndex = 38;
             this.lblCurrentPageRecordsCount.Text = "N/A";
-            this.lblCurrentPageRecordsCount.Click += new System.EventHandler(this.lblCurrentPageRecordsCount_Click);
             // 
             // lblDescriptionOfCurrentPageNumOfRcords
             // 
@@ -121,7 +119,6 @@
             this.lblDescriptionOfCurrentPageNumOfRcords.Size = new System.Drawing.Size(205, 24);
             this.lblDescriptionOfCurrentPageNumOfRcords.TabIndex = 37;
             this.lblDescriptionOfCurrentPageNumOfRcords.Text = "# عدد صفوف الصفحة الحالية : ";
-            this.lblDescriptionOfCurrentPageNumOfRcords.Click += new System.EventHandler(this.lblDescriptionOfCurrentPageNumOfRcords_Click);
             // 
             // gibtnPreviousPage
             // 
@@ -171,7 +168,6 @@
             this.lblCurrentPageOfNumberOfPages.TabIndex = 33;
             this.lblCurrentPageOfNumberOfPages.Text = "0 من  0  صفحات";
             this.lblCurrentPageOfNumberOfPages.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblCurrentPageOfNumberOfPages.Click += new System.EventHandler(this.lblCurrentPageOfNumberOfPages_Click);
             // 
             // lblTotalRecordsNumber
             // 
@@ -182,7 +178,6 @@
             this.lblTotalRecordsNumber.Size = new System.Drawing.Size(114, 24);
             this.lblTotalRecordsNumber.TabIndex = 32;
             this.lblTotalRecordsNumber.Text = "N/A";
-            this.lblTotalRecordsNumber.Click += new System.EventHandler(this.lblTotalRecordsNumber_Click);
             // 
             // label1
             // 
@@ -363,7 +358,6 @@
             this.lblHeader.TabIndex = 41;
             this.lblHeader.Text = "إضافة شخص";
             this.lblHeader.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.lblHeader.Click += new System.EventHandler(this.lblHeader_Click);
             // 
             // lblNoTransactionsFoundMessage
             // 
@@ -377,7 +371,6 @@
             this.lblNoTransactionsFoundMessage.TabIndex = 42;
             this.lblNoTransactionsFoundMessage.Text = "لا يوجد معاملات سداد لسند الدين هذا !";
             this.lblNoTransactionsFoundMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblNoTransactionsFoundMessage.Click += new System.EventHandler(this.lblNoTransactionsFoundMessage_Click);
             // 
             // errorProvider1
             // 
@@ -461,7 +454,6 @@
             this.kgtxtNotes.TextProperties.TextFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.enTextFormat.Phone;
             this.kgtxtNotes.TrimEnd = false;
             this.kgtxtNotes.TrimStart = false;
-            this.kgtxtNotes.TextChanged += new System.EventHandler(this.kgtxtNotes_TextChanged);
             // 
             // kgtxtDebtDate
             // 
@@ -543,7 +535,6 @@
             this.kgtxtDebtDate.TrimStart = true;
             this.kgtxtDebtDate.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxt_OnValidationError);
             this.kgtxtDebtDate.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxt_OnValidationSuccess);
-            this.kgtxtDebtDate.TextChanged += new System.EventHandler(this.kgtxtDebtDate_TextChanged);
             // 
             // kgtxtPageNumber
             // 
@@ -638,7 +629,6 @@
             this.label4.Size = new System.Drawing.Size(66, 17);
             this.label4.TabIndex = 106;
             this.label4.Text = "تاريخ السند";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label5
             // 
@@ -650,7 +640,6 @@
             this.label5.Size = new System.Drawing.Size(57, 17);
             this.label5.TabIndex = 107;
             this.label5.Text = "ملاحظات";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // gchkIsLocked
             // 
@@ -686,7 +675,6 @@
             this.label2.Size = new System.Drawing.Size(70, 17);
             this.label2.TabIndex = 110;
             this.label2.Text = "تاريخ الإنشاء";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // kgtxtCreatedDate
             // 
@@ -769,7 +757,6 @@
             this.kgtxtCreatedDate.TrimStart = true;
             this.kgtxtCreatedDate.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxt_OnValidationError);
             this.kgtxtCreatedDate.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxt_OnValidationSuccess);
-            this.kgtxtCreatedDate.TextChanged += new System.EventHandler(this.kgtxtCreatedDate_TextChanged);
             // 
             // label6
             // 
@@ -781,7 +768,6 @@
             this.label6.Size = new System.Drawing.Size(126, 17);
             this.label6.TabIndex = 112;
             this.label6.Text = "القيمة المتبقية للسداد";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // kgtxtRemainingAmount
             // 
@@ -861,7 +847,6 @@
             this.kgtxtRemainingAmount.TextProperties.TextFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.enTextFormat.None;
             this.kgtxtRemainingAmount.TrimEnd = true;
             this.kgtxtRemainingAmount.TrimStart = true;
-            this.kgtxtRemainingAmount.TextChanged += new System.EventHandler(this.kgtxtRemainingAmount_TextChanged);
             // 
             // kgtxtCreatedByUserName
             // 
@@ -882,6 +867,9 @@
             this.kgtxtCreatedByUserName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.kgtxtCreatedByUserName.ForeColor = System.Drawing.Color.Black;
             this.kgtxtCreatedByUserName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.kgtxtCreatedByUserName.IconLeft = ((System.Drawing.Image)(resources.GetObject("kgtxtCreatedByUserName.IconLeft")));
+            this.kgtxtCreatedByUserName.IconRight = ((System.Drawing.Image)(resources.GetObject("kgtxtCreatedByUserName.IconRight")));
+            this.kgtxtCreatedByUserName.IconRightCursor = System.Windows.Forms.Cursors.Hand;
             this.kgtxtCreatedByUserName.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
             this.kgtxtCreatedByUserName.IsRequired = false;
             this.kgtxtCreatedByUserName.Location = new System.Drawing.Point(362, 204);
@@ -940,9 +928,10 @@
             this.kgtxtCreatedByUserName.TextProperties.PhoneProperties.AllowPlusSign = true;
             this.kgtxtCreatedByUserName.TextProperties.PhoneProperties.MaxPhoneLength = ((byte)(15));
             this.kgtxtCreatedByUserName.TextProperties.TextFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.enTextFormat.Date;
+            this.toolTip1.SetToolTip(this.kgtxtCreatedByUserName, "اضغط على الأيقونة اليمنى لرؤية بيانات المستخدم المنشئ");
             this.kgtxtCreatedByUserName.TrimEnd = true;
             this.kgtxtCreatedByUserName.TrimStart = true;
-            this.kgtxtCreatedByUserName.TextChanged += new System.EventHandler(this.kgtxtCreatedByUserName_TextChanged);
+            this.kgtxtCreatedByUserName.IconRightClick += new System.EventHandler(this.kgtxtCreatedByUserName_IconRightClick);
             // 
             // label7
             // 
@@ -954,7 +943,6 @@
             this.label7.Size = new System.Drawing.Size(134, 17);
             this.label7.TabIndex = 114;
             this.label7.Text = "اسم المستخدم للمنشئ ";
-            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // gbtnSave
             // 
@@ -1062,7 +1050,6 @@
             this.label8.Size = new System.Drawing.Size(74, 17);
             this.label8.TabIndex = 116;
             this.label8.Text = "معرف السند";
-            this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
             // kgtxtDebtID
             // 
@@ -1142,7 +1129,6 @@
             this.kgtxtDebtID.TextProperties.TextFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.enTextFormat.None;
             this.kgtxtDebtID.TrimEnd = true;
             this.kgtxtDebtID.TrimStart = true;
-            this.kgtxtDebtID.TextChanged += new System.EventHandler(this.kgtxtDebtID_TextChanged);
             // 
             // label9
             // 
@@ -1154,7 +1140,6 @@
             this.label9.Size = new System.Drawing.Size(143, 17);
             this.label9.TabIndex = 117;
             this.label9.Text = "معاملات سداد سند الدين";
-            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // gibtnDeleteDebt
             // 
@@ -1268,7 +1253,6 @@
             this.kgtxtPersonName.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxt_OnValidationSuccess);
             this.kgtxtPersonName.IconLeftClick += new System.EventHandler(this.kgtxtPersonName_SelectPerson_IconLeftClick);
             this.kgtxtPersonName.IconRightClick += new System.EventHandler(this.kgtxtPersonName_PersonInfo_IconRightClick);
-            this.kgtxtPersonName.TextChanged += new System.EventHandler(this.kgtxtPersonName_TextChanged);
             // 
             // label3
             // 
@@ -1280,7 +1264,6 @@
             this.label3.Size = new System.Drawing.Size(77, 17);
             this.label3.TabIndex = 130;
             this.label3.Text = "اسم الشخص";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label11
             // 
@@ -1291,7 +1274,6 @@
             this.label11.Size = new System.Drawing.Size(58, 17);
             this.label11.TabIndex = 134;
             this.label11.Text = "نوع الدين";
-            this.label11.Click += new System.EventHandler(this.label11_Click);
             // 
             // gcbDebtType
             // 
@@ -1319,7 +1301,6 @@
             this.gcbDebtType.StartIndex = 0;
             this.gcbDebtType.TabIndex = 8;
             this.gcbDebtType.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.gcbDebtType.SelectedIndexChanged += new System.EventHandler(this.gcbDebtType_SelectedIndexChanged);
             // 
             // label10
             // 
@@ -1331,7 +1312,6 @@
             this.label10.Size = new System.Drawing.Size(132, 17);
             this.label10.TabIndex = 136;
             this.label10.Text = "التاريخ المستحق للسداد";
-            this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
             // kgtxtPaymentDueDate
             // 
@@ -1413,7 +1393,6 @@
             this.kgtxtPaymentDueDate.TrimStart = true;
             this.kgtxtPaymentDueDate.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxt_OnValidationError);
             this.kgtxtPaymentDueDate.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxt_OnValidationSuccess);
-            this.kgtxtPaymentDueDate.TextChanged += new System.EventHandler(this.kgtxtPaymentDueDate_TextChanged);
             // 
             // label12
             // 
@@ -1425,7 +1404,6 @@
             this.label12.Size = new System.Drawing.Size(65, 17);
             this.label12.TabIndex = 138;
             this.label12.Text = "قيمة الدين";
-            this.label12.Click += new System.EventHandler(this.label12_Click);
             // 
             // kgtxtDebtValue
             // 
@@ -1506,7 +1484,6 @@
             this.kgtxtDebtValue.TrimStart = true;
             this.kgtxtDebtValue.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxt_OnValidationError);
             this.kgtxtDebtValue.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxt_OnValidationSuccess);
-            this.kgtxtDebtValue.TextChanged += new System.EventHandler(this.kgtxtDebtValue_TextChanged);
             // 
             // frmAddUpdateDebt
             // 

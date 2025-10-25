@@ -43,10 +43,11 @@ namespace MoneyMindManager_Presentation.OverView
                 frm.BringToFront();
             } 
         }
-        private void frmOverView_Load(object sender, EventArgs e)
+        private void frmOverView_Shown(object sender, EventArgs e)
         {
             gbtnGeneral.PerformClick();
         }
+
         private void gbtnGeneral_Click(object sender, EventArgs e)
         {
             _LoadFormAtPanelContainer(new frmOverviewGeneral());
@@ -62,5 +63,6 @@ namespace MoneyMindManager_Presentation.OverView
         {
             _LoadFormAtPanelContainer(new frmOverViewCategories());
         }
+
     }
 }
