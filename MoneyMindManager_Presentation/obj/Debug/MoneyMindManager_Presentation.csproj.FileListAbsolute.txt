@@ -95,3 +95,5 @@ E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\Mo
 E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\obj\Debug\MoneyMindManager_Presentation.OverView.Controls.ctrlCategoryMonthlyFlow.resources
 E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\obj\Debug\MoneyMindManager_Presentation.Users.frmChangePassword.resources
 E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\obj\Debug\MoneyMindManager_Presentation.Income_And_Expense.Categories.frmCategoryMonthlyFlow.resources
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\bin\Debug\Newtonsoft.Json.dll
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_Presentation\bin\Debug\Newtonsoft.Json.xml

@@ -75,7 +75,7 @@ namespace MoneyMindManager_Presentation.People.Controls
         {
             frmAddUpdatePerson frm = new frmAddUpdatePerson(Convert.ToInt32(Person.PersonID));
             frm.OnCloseAndSaved += FrmAddEditPerson_OnCloseAndSaved;
-            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
+            clsPL_Global.MainForm.AddNewFormAtContainer(frm);
         }
 
         private async void FrmAddEditPerson_OnCloseAndSaved(int personID)
@@ -125,7 +125,7 @@ namespace MoneyMindManager_Presentation.People.Controls
                 return;
 
             frmUserInfo frm = new frmUserInfo(Convert.ToInt32(Person?.CreatedByUserID));
-            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
+            clsPL_Global.MainForm.AddNewFormAtContainer(frm);
         }
     }
 }

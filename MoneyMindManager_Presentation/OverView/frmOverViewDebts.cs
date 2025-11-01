@@ -30,10 +30,12 @@ namespace MoneyMindManager_Presentation.OverView
             guna2WinProgressIndicator1.Show();
             this.UseWaitCursor = true;
 
-            await ctlDebtsRepaymentSchedule2.LoadData();
-            await ctrlTopDebtorsRanking2.LoadData();
-            await ctrlTopPersonDebtsSumRanking1.LoadData();
-            await ctrlDebtsMonthlyFlow1.LoadData();
+            Task task1 = ctlDebtsRepaymentSchedule2.LoadData();
+            Task task2 = ctrlTopDebtorsRanking2.LoadData();
+            Task task3 = ctrlTopPersonDebtsSumRanking1.LoadData();
+            Task task4 = ctrlDebtsMonthlyFlow1.LoadData();
+
+            await Task.WhenAll(task1, task2, task3, task4);
 
             this.UseWaitCursor = false;
             guna2WinProgressIndicator1.Stop();

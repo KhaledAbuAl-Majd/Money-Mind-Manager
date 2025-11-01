@@ -55,7 +55,7 @@ namespace MoneyMindManager_DataAccess
                 newVoucherID = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return newVoucherID;
@@ -99,7 +99,7 @@ namespace MoneyMindManager_DataAccess
                 result = false;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return result;
@@ -140,7 +140,7 @@ namespace MoneyMindManager_DataAccess
                 result = false;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return result;
@@ -180,7 +180,7 @@ namespace MoneyMindManager_DataAccess
                 result = false;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return result;
@@ -233,7 +233,7 @@ namespace MoneyMindManager_DataAccess
                 voucherData = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return voucherData;
@@ -277,7 +277,7 @@ namespace MoneyMindManager_DataAccess
                 voucherValue = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return voucherValue;
@@ -288,7 +288,7 @@ namespace MoneyMindManager_DataAccess
         /// </summary>
         public static async Task<clsGetAllVouchers> GetAllVouchers(int? voucherID,bool? isIncome,bool? isReturn,string voucherName,
             string userName,DateTime? fromCreatedDate,DateTime? toCreatedDate,DateTime? fromVoucherDate,DateTime? toVoucherDate,
-            int currentUserID, short pageNumber, bool RaiseEventOnErrorOccured = true)
+            int currentUserID, byte textSearchMode, short pageNumber, byte rowsPerPage, bool RaiseEventOnErrorOccured = true)
         {
             clsGetAllVouchers allVouchers = null;
 
@@ -309,8 +309,10 @@ namespace MoneyMindManager_DataAccess
                         command.Parameters.AddWithValue("@ToCreatedDate", (object)toCreatedDate ?? DBNull.Value);
                         command.Parameters.AddWithValue("@FromVoucherDate", (object)fromVoucherDate ?? DBNull.Value);
                         command.Parameters.AddWithValue("@ToVoucherDate", (object)toVoucherDate ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@TextSearchMode", textSearchMode);
                         command.Parameters.AddWithValue("@CurrentUserID", currentUserID);
                         command.Parameters.AddWithValue("@PageNumber", pageNumber);
+                        command.Parameters.AddWithValue("@RowsPerPage", rowsPerPage);
 
                         SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.SmallInt)
                         {
@@ -364,7 +366,7 @@ namespace MoneyMindManager_DataAccess
                 allVouchers = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return allVouchers;
@@ -375,7 +377,7 @@ namespace MoneyMindManager_DataAccess
         /// </summary>
         public static async Task<DataTable> GetAllVouchersWithoutPaging(int? voucherID,bool? isIncome,bool? isReturn,string voucherName,
             string userName,DateTime? fromCreatedDate,DateTime? toCreatedDate,DateTime? fromVoucherDate,DateTime? toVoucherDate,
-            int currentUserID, bool RaiseEventOnErrorOccured = true)
+            int currentUserID, byte textSearchMode, bool RaiseEventOnErrorOccured = true)
         {
             DataTable dtVouchers = null;
 
@@ -396,6 +398,7 @@ namespace MoneyMindManager_DataAccess
                         command.Parameters.AddWithValue("@ToCreatedDate", (object)toCreatedDate ?? DBNull.Value);
                         command.Parameters.AddWithValue("@FromVoucherDate", (object)fromVoucherDate ?? DBNull.Value);
                         command.Parameters.AddWithValue("@ToVoucherDate", (object)toVoucherDate ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@TextSearchMode", textSearchMode);
                         command.Parameters.AddWithValue("@CurrentUserID", currentUserID);
 
                         await connection.OpenAsync();
@@ -416,7 +419,7 @@ namespace MoneyMindManager_DataAccess
                 dtVouchers = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return dtVouchers;

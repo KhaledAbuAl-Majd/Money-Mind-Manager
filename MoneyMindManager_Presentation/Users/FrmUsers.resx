@@ -129,6 +129,9 @@
   <metadata name="errorProvider1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>238, 10</value>
   </metadata>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>384, 10</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="gibtnRefreshData.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -723,13 +726,10 @@
         Fe84QsW7NlPJziVUunMeleyaRaW7g6h093gq39GLFIeM77LNqNP9Pz+dZ222cXmqAAAAAElFTkSuQmCC
 </value>
   </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>384, 10</value>
-  </metadata>
   <data name="gbtnAddVoucher.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAN
-        0wAADdMBvdUcagAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAFHhSURBVHhe7d0H
+        0AAADdABEGw9BwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAFHhSURBVHhe7d0H
         mFTXeTfwT5KL3GPHPUrsxE5cktgpdnriHMmSi2y5RbJ1uOwuCwvLHspQJCSQBKghCdQbqCFZCPWCZIHo
         nV2Wtpcueq/LtqMuxPmeM8zi1fuehZnZOzO3/PM8vyfoNczembnn/Z+95dz/Z4z5fwAQPkKqM4RUXxZS
         fV9I9SshVT8h1Rgh1f1CqklCqmeFVFOFVPOEVEuFVKuFVJuFVHuEVEeEVG8Iqd4TUr0ppGoSUu0VUm0R

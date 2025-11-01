@@ -82,7 +82,7 @@ namespace MoneyMindManager_Presentation.People
 
             if (searchedPerson == null)
             {
-                clsGlobalMessageBoxs.ShowErrorMessage("فشل تحميل بيانات الشخص");
+                clsPL_MessageBoxs.ShowErrorMessage("فشل تحميل بيانات الشخص");
                 this.Close();
                 return;
             }
@@ -111,7 +111,7 @@ namespace MoneyMindManager_Presentation.People
 
             if (!ValidateChildren())
             {
-                clsGlobalMessageBoxs.ShowValidateChildrenFailedMessage();
+                clsPL_MessageBoxs.ShowValidateChildrenFailedMessage();
                 return;
             }
 
@@ -121,16 +121,16 @@ namespace MoneyMindManager_Presentation.People
 
             if (Mode == enMode.AddNew)
             {
-                if (!_Person.EnterAccountIDAtAddMode(Convert.ToInt16(clsGlobal_UI.CurrentUser.AccountID)))
+                if (!_Person.EnterAccountIDAtAddMode(Convert.ToInt16(clsPL_Global.CurrentUser.AccountID)))
                 {
-                    clsGlobalMessageBoxs.ShowErrorMessage("فشل تسجيل معرف الحساب للمستخدم");
+                    clsPL_MessageBoxs.ShowErrorMessage("فشل تسجيل معرف الحساب للمستخدم");
                     _ResteObject();
                     return;
                 }
 
-                if (!_Person.EnterCreatedByUserIDAtAddMode(Convert.ToInt32(clsGlobal_UI.CurrentUser.UserID)))
+                if (!_Person.EnterCreatedByUserIDAtAddMode(Convert.ToInt32(clsPL_Global.CurrentUser.UserID)))
                 {
-                    clsGlobalMessageBoxs.ShowErrorMessage("فشل تسجيل معرف منشئ الحساب");
+                    clsPL_MessageBoxs.ShowErrorMessage("فشل تسجيل معرف منشئ الحساب");
                     _ResteObject();
                     return;
                 }
@@ -143,7 +143,7 @@ namespace MoneyMindManager_Presentation.People
             {
                 if (Mode == enMode.AddNew)
                 {
-                    clsGlobalMessageBoxs.ShowMessage($"تم إضافة الشخص بنجاج بمعرف [{_Person.PersonID}]", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    clsPL_MessageBoxs.ShowMessage($"تم إضافة الشخص بنجاج بمعرف [{_Person.PersonID}]", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     Mode = enMode.Update;
                     _PersonID = _Person.PersonID;
@@ -152,7 +152,7 @@ namespace MoneyMindManager_Presentation.People
                 }
                 else if (Mode == enMode.Update)
                 {
-                    clsGlobalMessageBoxs.ShowMessage("تم تعديل بيانات الشخص بنجاح", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    clsPL_MessageBoxs.ShowMessage("تم تعديل بيانات الشخص بنجاح", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
                 _isSaved = true;
@@ -182,7 +182,7 @@ namespace MoneyMindManager_Presentation.People
         {
             KhaledGuna2TextBox kgtxtBox = (KhaledGuna2TextBox)sender;
             e.CancelEventArgs.Cancel = true;
-            string errorMessage = clsUtils.GetValidationErrorTypeString(e.validationErrorType, kgtxtBox);
+            string errorMessage = clsPL_Utils.GetValidationErrorTypeString(e.validationErrorType, kgtxtBox);
 
             errorProvider1.SetError(kgtxtBox, errorMessage);
         }

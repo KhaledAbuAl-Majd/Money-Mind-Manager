@@ -56,7 +56,7 @@ namespace MoneyMindManager_DataAccess
                 newCategoryID = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return newCategoryID;
@@ -101,7 +101,7 @@ namespace MoneyMindManager_DataAccess
                 result = false;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return result;
@@ -141,7 +141,7 @@ namespace MoneyMindManager_DataAccess
                 result = false;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return result;
@@ -179,10 +179,13 @@ namespace MoneyMindManager_DataAccess
                                 string categoryHierarchical = reader["CategoryHierarchical"] as string;
                                 string notes = reader["Notes"] as string;
                                 string mainCategoryName = reader["MainCategoryName"] as string;
+                                string parentCategoryName = reader["ParentCategoryName"] as string;
+                                int? mainCategoryID = reader["MainCategoryID"] as int?;
+
 
                                 categoryData = new clsIncomeAndExpenseCategoriesColumns(categoryID, categoryName, createdDate,
                                     monthlyBudget, isIncome, parentCategoryID, accountID, createdByUseID, isActive, categoryHierarchical,
-                                    notes, mainCategoryName);
+                                    notes, mainCategoryName,parentCategoryName,mainCategoryID);
                             }
                         }
                     }
@@ -196,7 +199,7 @@ namespace MoneyMindManager_DataAccess
                 categoryData = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return categoryData;
@@ -233,10 +236,12 @@ namespace MoneyMindManager_DataAccess
                                 string categoryHierarchical = reader["CategoryHierarchical"] as string;
                                 string notes = reader["Notes"] as string;
                                 string mainCategoryName = reader["MainCategoryName"] as string;
+                                string parentCategoryName = reader["ParentCategoryName"] as string;
+                                int? mainCategoryID = reader["MainCategoryID"] as int?;
 
                                 categoryData = new clsIncomeAndExpenseCategoriesColumns(categoryID, categoryName, createdDate,
                                     monthlyBudget, isIncome, parentCategoryID, accountID, createdByUseID, isActive, categoryHierarchical,
-                                    notes, mainCategoryName);
+                                    notes, mainCategoryName, parentCategoryName, mainCategoryID);
                             }
                         }
                     }
@@ -250,7 +255,7 @@ namespace MoneyMindManager_DataAccess
                 categoryData = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return categoryData;
@@ -290,7 +295,7 @@ namespace MoneyMindManager_DataAccess
                 isExist = false;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return isExist;
@@ -330,7 +335,7 @@ namespace MoneyMindManager_DataAccess
                 isExist = false;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return isExist;
@@ -344,7 +349,7 @@ namespace MoneyMindManager_DataAccess
         /// <param name="isIncome">if null => don't search by it, else => search by it</param>
         /// <returns></returns>
         public static async Task<clsGetAllCategories> GetAllCategoriesForSelectOne(string categoryName, bool? isIncome, int currentUserID,
-            short pageNumber, bool RaiseEventOnErrorOccured = true)
+            byte textSearchMode, short pageNumber, byte rowsPerPage, bool RaiseEventOnErrorOccured = true)
         {
             clsGetAllCategories allCategories = null;
 
@@ -358,8 +363,10 @@ namespace MoneyMindManager_DataAccess
 
                         command.Parameters.AddWithValue("@CategoryName", (string.IsNullOrEmpty(categoryName) ? DBNull.Value : (object)categoryName));
                         command.Parameters.AddWithValue("@IsIncome", (object)isIncome ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@TextSearchMode", textSearchMode);
                         command.Parameters.AddWithValue("@CurrentUserID", currentUserID);
                         command.Parameters.AddWithValue("@PageNumber", pageNumber);
+                        command.Parameters.AddWithValue("@RowsPerPage", rowsPerPage);
 
                         SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.SmallInt)
                         {
@@ -396,7 +403,7 @@ namespace MoneyMindManager_DataAccess
                 allCategories = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return allCategories;
@@ -407,7 +414,7 @@ namespace MoneyMindManager_DataAccess
         /// </summary>
         public static async Task<clsGetAllCategories> GetAllCategories(int? categoryID, string categoryName,string parentCategoryName,
             string mainCategoryName, bool? isIncome, bool? isActive,bool includeMainCategories,bool includeSubCategories,
-            int currentUserID, short pageNumber, bool RaiseEventOnErrorOccured = true)
+            int currentUserID, byte textSearchMode, short pageNumber, byte rowsPerPage, bool RaiseEventOnErrorOccured = true)
         {
             clsGetAllCategories allCategories = null;
 
@@ -427,8 +434,10 @@ namespace MoneyMindManager_DataAccess
                         command.Parameters.AddWithValue("@IsActive", (object)isActive ?? DBNull.Value);
                         command.Parameters.AddWithValue("@IncludeMainCategories", includeMainCategories);
                         command.Parameters.AddWithValue("@IncludeSubCategories", includeSubCategories);
+                        command.Parameters.AddWithValue("@TextSearchMode", textSearchMode);
                         command.Parameters.AddWithValue("@CurrentUserID", currentUserID);
                         command.Parameters.AddWithValue("@PageNumber", pageNumber);
+                        command.Parameters.AddWithValue("@RowsPerPage", rowsPerPage);
 
                         SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.SmallInt)
                         {
@@ -465,7 +474,7 @@ namespace MoneyMindManager_DataAccess
                 allCategories = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return allCategories;
@@ -517,7 +526,7 @@ namespace MoneyMindManager_DataAccess
                 isExcced = false;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return isExcced;

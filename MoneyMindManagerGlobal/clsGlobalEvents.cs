@@ -15,7 +15,7 @@ namespace MoneyMindManagerGlobal
         /// </summary>
         /// <param name="message">the error message</param>
         /// <param name="logIt">log it at logger class</param>
-        public static void RaiseEvent(string message,bool logIt)
+        public static void RaiseErrorEvent(string message,bool logIt)
         {
             if (logIt)
             {

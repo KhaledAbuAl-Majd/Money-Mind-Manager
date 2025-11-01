@@ -11,6 +11,7 @@ using KhaledControlLibrary1;
 using MoneyMindManager_Business;
 using MoneyMindManager_Presentation.Global;
 using MoneyMindManagerGlobal;
+using static MoneyMindManager_Business.clsBLLGlobal;
 using static MoneyMindManagerGlobal.clsDataColumns.clsIncomeAndExpenseCategoriesClasses;
 
 namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
@@ -100,20 +101,17 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                 return;
 
 
-            int currentUserID = Convert.ToInt32(clsGlobal_UI.CurrentUser.UserID);
-
             clsDataColumns.PersonClasses.clsGetAllPeople result = null;
 
-            if (string.IsNullOrEmpty(kgtxtFilterValue.ValidatedText))
-            {
-                result = await clsPerson.GetAllPeopleForSelectOne(_pageNumber, currentUserID);
-            }
-            else 
-            {
-                string personName = kgtxtFilterValue.ValidatedText;
-                result = await clsPerson.GetAllPeopleForSelectOne(personName,_pageNumber, currentUserID);
-            }
+            enTextSearchMode textSearchMode = enTextSearchMode.WordsPrefix_Fast;
 
+            if (grbTextSearchMode_WordsPrefix.Checked)
+                textSearchMode = enTextSearchMode.WordsPrefix_Fast;
+            else if (grbTextSearchMode_SubString.Checked)
+                textSearchMode = enTextSearchMode.Substring_Slow;
+
+            string personName = kgtxtFilterValue.ValidatedText;
+            result = await clsPerson.GetAllPeopleForSelectOne(personName, textSearchMode, _pageNumber);           
 
             if (result == null)
                 return;
@@ -121,7 +119,6 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             if (result.dtPeople.Rows.Count == 0)
             {
                 lblNoRecordsFoundMessage.Visible = true;
-                //lblUserMessage.Visible = true;
                 gdgvPeople.DataSource = null;
                 _IsHeaderCreated = false;
                 kgtxtFilterValue.Focus();
@@ -173,16 +170,23 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             kgtxtFilterValue.Focus();
         }
 
-        private async void kgtxtFilterValue_TextChanged(object sender, EventArgs e)
+        private void kgtxtFilterValue_TextChanged(object sender, EventArgs e)
         {
-           await _LoadDataAtDataGridView();
+            _pageNumber = 1;
+            SearchAfterTimerFinish.Stop();
+            SearchAfterTimerFinish.Start();
+        }
+
+        private async void SearchAfterTimerFinish_Tick(object sender, EventArgs e)
+        {
+            await _LoadDataAtDataGridView();
         }
 
         private void kgtxt_OnValidationError(object sender, KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs e)
         {
             KhaledGuna2TextBox kgtxt = (KhaledGuna2TextBox)sender;
             e.CancelEventArgs.Cancel = true;
-            errorProvider1.SetError(kgtxt, clsUtils.GetValidationErrorTypeString(e.validationErrorType, kgtxt));
+            errorProvider1.SetError(kgtxt, clsPL_Utils.GetValidationErrorTypeString(e.validationErrorType, kgtxt));
         }
 
         private void kgtxt_OnValidationSuccess(object arg1, CancelEventArgs arg2)

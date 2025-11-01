@@ -256,6 +256,7 @@ namespace MoneyMindManager_Presentation.Users
             this.chklbUserPermissions.HorizontalScrollbar = true;
             this.chklbUserPermissions.Location = new System.Drawing.Point(3, 6);
             this.chklbUserPermissions.Name = "chklbUserPermissions";
+            this.chklbUserPermissions.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chklbUserPermissions.Size = new System.Drawing.Size(371, 198);
             this.chklbUserPermissions.TabIndex = 4;
             this.chklbUserPermissions.Leave += new System.EventHandler(this.chklbUserPermissions_Leave);

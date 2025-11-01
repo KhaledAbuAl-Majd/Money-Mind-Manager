@@ -37,7 +37,7 @@ namespace MoneyMindManager_Presentation.Global
                 }
                 catch (Exception ex)
                 {
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
                     return false;
                 }
             });
@@ -61,7 +61,7 @@ namespace MoneyMindManager_Presentation.Global
 
                     if(result == true)
                     {
-                        clsGlobalMessageBoxs.ShowMessage("تم تصدير الملف بنجاح", "نجاح العملية", MessageBoxButtons.OK,
+                        clsPL_MessageBoxs.ShowMessage("تم تصدير الملف بنجاح", "نجاح العملية", MessageBoxButtons.OK,
                             MessageBoxIcon.Information);
                     }
                 }

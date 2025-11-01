@@ -48,7 +48,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
         public async Task LoadData()
         {
 
-            _chartData = await clsReport.GetDebtsRepaymentSchedule(Convert.ToInt16(clsGlobal_UI.CurrentUser.AccountID));
+            _chartData = await clsReport.GetDebtsRepaymentSchedule(Convert.ToInt16(clsPL_Global.CurrentUser.AccountID));
 
             LoadChart();
         }
@@ -109,7 +109,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
             });
 
 
-            string currency = clsGlobal_UI.CurrentUser?.AccountInfo?.DefaultCurrencyInfo?.CurrencySymbol;
+            string currency = clsPL_Global.CurrentUser?.AccountInfo?.DefaultCurrencyInfo?.CurrencySymbol;
 
             CartesianChart1.AxisY.Add(new LiveCharts.Wpf.Axis
             {
@@ -191,7 +191,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
 
             };
 
-            string currency = clsGlobal_UI.CurrentUser?.AccountInfo?.DefaultCurrencyInfo?.CurrencySymbol;
+            string currency = clsPL_Global.CurrentUser?.AccountInfo?.DefaultCurrencyInfo?.CurrencySymbol;
 
             CartesianChart1.AxisX.Add(new LiveCharts.Wpf.Axis
             {

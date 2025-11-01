@@ -76,7 +76,7 @@ namespace MoneyMindManager_Presentation.Users
         {
             frmAddUpdateUser frm = new frmAddUpdateUser(Convert.ToInt32(User.UserID));
             frm.OnCloseAndSavedOrEditing += FrmAddUpdateUser_OnCloseAndSaved;
-            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
+            clsPL_Global.MainForm.AddNewFormAtContainer(frm);
         }
         private void ctrlUserCard_Load(object sender, EventArgs e)
         {
@@ -119,7 +119,7 @@ namespace MoneyMindManager_Presentation.Users
                 return;
 
             frmUserInfo frm = new frmUserInfo(Convert.ToInt32(User?.CreatedByUserID));
-            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
+            clsPL_Global.MainForm.AddNewFormAtContainer(frm);
         }
     }
 }

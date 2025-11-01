@@ -78,7 +78,7 @@
             this.guna2ControlBox1.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(17)))), ((int)(((byte)(35)))));
             this.guna2ControlBox1.HoverState.IconColor = System.Drawing.Color.White;
             this.guna2ControlBox1.IconColor = System.Drawing.Color.White;
-            this.guna2ControlBox1.Location = new System.Drawing.Point(1021, 0);
+            this.guna2ControlBox1.Location = new System.Drawing.Point(1034, 0);
             this.guna2ControlBox1.Name = "guna2ControlBox1";
             this.guna2ControlBox1.Size = new System.Drawing.Size(38, 29);
             this.guna2ControlBox1.TabIndex = 0;
@@ -988,7 +988,7 @@
             this.guna2ControlBox2.HoverState.FillColor = System.Drawing.Color.White;
             this.guna2ControlBox2.HoverState.IconColor = System.Drawing.Color.Black;
             this.guna2ControlBox2.IconColor = System.Drawing.Color.White;
-            this.guna2ControlBox2.Location = new System.Drawing.Point(983, 0);
+            this.guna2ControlBox2.Location = new System.Drawing.Point(996, 0);
             this.guna2ControlBox2.Name = "guna2ControlBox2";
             this.guna2ControlBox2.Size = new System.Drawing.Size(38, 29);
             this.guna2ControlBox2.TabIndex = 10;
@@ -1028,7 +1028,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1060, 642);
+            this.ClientSize = new System.Drawing.Size(1076, 681);
             this.Controls.Add(this.lblHeader);
             this.Controls.Add(this.guna2ControlBox2);
             this.Controls.Add(this.gbtnMode);
@@ -1036,6 +1036,7 @@
             this.Controls.Add(this.gpnlLogin);
             this.Controls.Add(this.gpnlCreateAccount);
             this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(1076, 681);
             this.MinimumSize = new System.Drawing.Size(1076, 681);

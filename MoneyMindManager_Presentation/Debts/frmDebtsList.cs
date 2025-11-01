@@ -13,6 +13,7 @@ using MoneyMindManager_Business;
 using MoneyMindManager_Presentation.Global;
 using MoneyMindManager_Presentation.People;
 using MoneyMindManagerGlobal;
+using static MoneyMindManager_Business.clsBLLGlobal;
 using static MoneyMindManager_Business.clsIncomeAndExpenseVoucher;
 
 namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
@@ -55,6 +56,10 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 lblUserMessage.Visible = true;
                 lblCurrentPageRecordsCount.Text = "0";
                 lblTotalRecordsNumber.Text = "0";
+                klblAllDebtsValue.Text = "0";
+                klblCurrentPageDebtsValue.Text = "0";
+                klblTotalRemainingAmount.Text = "0";
+                klblCurrentPageRemainingAmount.Text = "0";
                 lblCurrentPageOfNumberOfPages.Text = string.Concat("1", "   من   ", "0", "  صفحات");
                 _pageNumber = 1;
                 gibtnNextPage.Enabled = false;
@@ -71,7 +76,14 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             if (!_CheckValidationChildren())
                 return;
-  
+
+
+            enTextSearchMode textSearchMode = enTextSearchMode.WordsPrefix_Fast;
+
+            if (grbTextSearchMode_WordsPrefix.Checked)
+                textSearchMode = enTextSearchMode.WordsPrefix_Fast;
+            else if (grbTextSearchMode_SubString.Checked)
+                textSearchMode = enTextSearchMode.Substring_Slow;
 
             clsDataColumns.clsDebtsClasses.clsGetAllDebts result = null;
 
@@ -105,25 +117,25 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             if (filterBy == enFilterBy.All || string.IsNullOrEmpty(kgtxtFilterValue.ValidatedText))
             {
                 result = await clsDebt.GetAllDebts(isLending, filterByCreatedDate, kgtxtFromData.ValidatedText, kgtxtToDate.ValidatedText,
-                    isPaid, _pageNumber);
+                    isPaid,textSearchMode, _pageNumber);
             }
             else if (filterBy == enFilterBy.DebtID)
             {
                 int debtID = Convert.ToInt32(kgtxtFilterValue.ValidatedText);
                 result = await clsDebt.GetAllDebts(debtID,isLending, filterByCreatedDate, kgtxtFromData.ValidatedText, kgtxtToDate.ValidatedText,
-                      isPaid, _pageNumber);
+                      isPaid, textSearchMode, _pageNumber);
             }
             else if (filterBy == enFilterBy.PersonName)
             {
                 string personName = kgtxtFilterValue.ValidatedText;
                 result = await clsDebt.GetAllDebts(personName,isLending, filterByCreatedDate, kgtxtFromData.ValidatedText, kgtxtToDate.ValidatedText,
-                    isPaid, _pageNumber);
+                    isPaid, textSearchMode, _pageNumber);
             }
             else if (filterBy == enFilterBy.UserName)
             {
                 string userName = kgtxtFilterValue.ValidatedText;
                 result = await clsDebt.GetAllDebtsByUserName(userName,isLending, filterByCreatedDate, kgtxtFromData.ValidatedText, kgtxtToDate.ValidatedText,
-                    isPaid, _pageNumber);
+                    isPaid, textSearchMode, _pageNumber);
             }
             else
                 return;
@@ -203,7 +215,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
         {
             frmAddUpdateDebt frm = new frmAddUpdateDebt();
             frm.OnCloseAndSaved += _RefreshFilter;
-            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
+            clsPL_Global.MainForm.AddNewFormAtContainer(frm);
         }
 
         void _UpdateDebt()
@@ -215,7 +227,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             frmAddUpdateDebt frm = new frmAddUpdateDebt(debtID);
             frm.OnCloseAndSaved += _RefreshFilter;
-            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
+            clsPL_Global.MainForm.AddNewFormAtContainer(frm);
         }
 
         async void _RefreshFilter()
@@ -241,7 +253,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
         }
 
 
-        private void VouhcersList_Load(object sender, EventArgs e)
+        private void DebtsList_Load(object sender, EventArgs e)
         {
             _IsHeaderCreated = false;
             _searchByPageNumber = false;
@@ -251,11 +263,15 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             gcbFilterBy.SelectedIndex = 0;
         }
 
+        private async void frmDebtsList_Shown(object sender, EventArgs e)
+        {
+            await _LoadDataAtDataGridView(enFilterBy.All);
+        }
         private void kgtxt_OnValidationError(object sender, KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs e)
         {
             KhaledGuna2TextBox kgtxt = (KhaledGuna2TextBox)sender;
             e.CancelEventArgs.Cancel = true;
-            errorProvider1.SetError(kgtxt, clsUtils.GetValidationErrorTypeString(e.validationErrorType, kgtxt));
+            errorProvider1.SetError(kgtxt, clsPL_Utils.GetValidationErrorTypeString(e.validationErrorType, kgtxt));
         }
 
         private void kgtxt_OnValidationSuccess(object arg1, CancelEventArgs arg2)
@@ -279,6 +295,8 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
         private async void gcbFilterBy_SelectedIndexChanged(object sender, EventArgs e)
         {
+            string oldText = kgtxtFilterValue.Text;
+
             _pageNumber = 1;
 
             _searchByPageNumber = false;
@@ -289,7 +307,8 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             {
                 _SetReadOnlyAtTextBox(kgtxtFilterValue);
                 _filterBy = enFilterBy.All;
-                await _LoadDataAtDataGridView(_filterBy);
+                if (!string.IsNullOrWhiteSpace(oldText))
+                    await _LoadDataAtDataGridView(_filterBy);
                 return;
             }
 
@@ -323,11 +342,13 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 kgtxtFilterValue.AllowWhiteSpace = false;
             }
 
-            await _LoadDataAtDataGridView(_filterBy);
+            if (!string.IsNullOrWhiteSpace(oldText))
+                await _LoadDataAtDataGridView(_filterBy);
         }
 
         private void kgtxtFilterValue_TextChanged(object sender, EventArgs e)
         {
+            _pageNumber = 1;
             SearchAfterTimerFinish.Stop();
             SearchAfterTimerFinish.Start();
         }
@@ -344,8 +365,6 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             _pageNumber = Convert.ToInt16(kgtxtPageNumber.ValidatedText);
 
-            //await _LoadDataAtDataGridView();
-
             SearchAfterTimerFinish.Stop();
             SearchAfterTimerFinish.Start();
         }
@@ -355,6 +374,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             if (e.KeyChar == (char)Keys.Enter)
             {
                 SearchAfterTimerFinish.Stop();
+                _pageNumber = 1;
                 await _LoadDataAtDataGridView(_filterBy);
             }
         }
@@ -366,11 +386,13 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
         private async void gcbFilterByDate_SelectedIndexChanged(object sender, EventArgs e)
         {
+            _pageNumber = 1;
             await _LoadDataAtDataGridView(_filterBy);
         }
 
         private async void gibtnRefreshData_Click(object sender, EventArgs e)
         {
+            _pageNumber = 1;
             await _LoadDataAtDataGridView(_filterBy);
         }
 
@@ -407,11 +429,13 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
         private async void gcbFilterByDebtType_SelectedIndexChanged(object sender, EventArgs e)
         {
+            _pageNumber = 1;
             await _LoadDataAtDataGridView(_filterBy);
         }
 
         private async void gcbFilterbyPaymentStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
+            _pageNumber = 1;
             await _LoadDataAtDataGridView(_filterBy);
         }
 
@@ -432,6 +456,12 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             lblUserMessage.Visible = false;
 
+            enTextSearchMode textSearchMode = enTextSearchMode.WordsPrefix_Fast;
+
+            if (grbTextSearchMode_WordsPrefix.Checked)
+                textSearchMode = enTextSearchMode.WordsPrefix_Fast;
+            else if (grbTextSearchMode_SubString.Checked)
+                textSearchMode = enTextSearchMode.Substring_Slow;
 
             DataTable dtDebts = null;
 
@@ -465,25 +495,25 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             if (_filterBy == enFilterBy.All || string.IsNullOrEmpty(kgtxtFilterValue.ValidatedText))
             {
                 dtDebts = await clsDebt.GetAllDebtsWithoutPaging(isLending, filterByCreatedDate, kgtxtFromData.ValidatedText, kgtxtToDate.ValidatedText,
-                    isPaid);
+                    isPaid, textSearchMode);
             }
             else if (_filterBy == enFilterBy.DebtID)
             {
                 int debtID = Convert.ToInt32(kgtxtFilterValue.ValidatedText);
                 dtDebts = await clsDebt.GetAllDebtsWithoutPaging(debtID, isLending, filterByCreatedDate, kgtxtFromData.ValidatedText, kgtxtToDate.ValidatedText,
-                      isPaid);
+                      isPaid, textSearchMode);
             }
             else if (_filterBy == enFilterBy.PersonName)
             {
                 string personName = kgtxtFilterValue.ValidatedText;
                 dtDebts = await clsDebt.GetAllDebtsWithoutPaging(personName, isLending, filterByCreatedDate, kgtxtFromData.ValidatedText, kgtxtToDate.ValidatedText,
-                    isPaid);
+                    isPaid, textSearchMode);
             }
             else if (_filterBy == enFilterBy.UserName)
             {
                 string userName = kgtxtFilterValue.ValidatedText;
                 dtDebts = await clsDebt.GetAllDebtsByUserNameWithoutPaging(userName, isLending, filterByCreatedDate, kgtxtFromData.ValidatedText, kgtxtToDate.ValidatedText,
-                    isPaid);
+                    isPaid, textSearchMode);
             }
             else
                 return;
@@ -493,7 +523,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             if (dtDebts == null)
             {
-                clsGlobalMessageBoxs.ShowErrorMessage("فشل تصدير البيانات !");
+                clsPL_MessageBoxs.ShowErrorMessage("فشل تصدير البيانات !");
                 return;
             }
 

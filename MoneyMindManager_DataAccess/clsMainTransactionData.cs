@@ -61,15 +61,15 @@ namespace MoneyMindManager_DataAccess
                 transactionTypeData = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return transactionTypeData;
         }
 
-        public static async Task<clsGetAllMainTransactions> GetAllMainTransactions(int? transactionID, string userName,
+        public static async Task<clsGetAllMainTransactions> GetAllMainTransactions(int? transactionID, string userName,string purpose,
             string transactionTypes, DateTime? fromCreatedDate, DateTime? toCreatedDate, DateTime? fromTransactionDate,
-           DateTime? toTransactionDate, int currentUserID, short pageNumber, bool RaiseEventOnErrorOccured = true)
+           DateTime? toTransactionDate, int currentUserID, byte textSearchMode, short pageNumber, byte rowsPerPage, bool RaiseEventOnErrorOccured = true)
         {
             clsGetAllMainTransactions allTransactions = null;
 
@@ -83,13 +83,16 @@ namespace MoneyMindManager_DataAccess
 
                         command.Parameters.AddWithValue("@TransactionID", (object)transactionID ?? DBNull.Value);
                         command.Parameters.AddWithValue("@UserName", string.IsNullOrWhiteSpace(userName) ? DBNull.Value : (object)userName);
+                        command.Parameters.AddWithValue("@Purpose", string.IsNullOrWhiteSpace(purpose) ? DBNull.Value : (object)purpose);
                         command.Parameters.AddWithValue("@TransactionTypes", string.IsNullOrWhiteSpace(transactionTypes) ? DBNull.Value : (object)transactionTypes);
                         command.Parameters.AddWithValue("@FromCreatedDate", (object)fromCreatedDate ?? DBNull.Value);
                         command.Parameters.AddWithValue("@ToCreatedDate", (object)toCreatedDate ?? DBNull.Value);
                         command.Parameters.AddWithValue("@FromTransactionDate", (object)fromTransactionDate ?? DBNull.Value);
                         command.Parameters.AddWithValue("@ToTransactionDate", (object)toTransactionDate ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@TextSearchMode", textSearchMode);
                         command.Parameters.AddWithValue("@CurrentUserID", currentUserID);
                         command.Parameters.AddWithValue("@PageNumber", pageNumber);
+                        command.Parameters.AddWithValue("@RowsPerPage", rowsPerPage);
 
                         SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.SmallInt)
                         {
@@ -143,15 +146,15 @@ namespace MoneyMindManager_DataAccess
                 allTransactions = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return allTransactions;
         }
 
-        public static async Task<DataTable> GetAllMainTransactionsWithoutPaging(int? transactionID, string userName,
+        public static async Task<DataTable> GetAllMainTransactionsWithoutPaging(int? transactionID, string userName, string purpose,
             string transactionTypes, DateTime? fromCreatedDate, DateTime? toCreatedDate, DateTime? fromTransactionDate,
-           DateTime? toTransactionDate, int currentUserID, bool RaiseEventOnErrorOccured = true)
+           DateTime? toTransactionDate, int currentUserID, byte textSearchMode, bool RaiseEventOnErrorOccured = true)
         {
             DataTable dtTransactions = null;
 
@@ -165,11 +168,13 @@ namespace MoneyMindManager_DataAccess
 
                         command.Parameters.AddWithValue("@TransactionID", (object)transactionID ?? DBNull.Value);
                         command.Parameters.AddWithValue("@UserName", string.IsNullOrWhiteSpace(userName) ? DBNull.Value : (object)userName);
+                        command.Parameters.AddWithValue("@Purpose", string.IsNullOrWhiteSpace(purpose) ? DBNull.Value : (object)purpose);
                         command.Parameters.AddWithValue("@TransactionTypes", string.IsNullOrWhiteSpace(transactionTypes) ? DBNull.Value : (object)transactionTypes);
                         command.Parameters.AddWithValue("@FromCreatedDate", (object)fromCreatedDate ?? DBNull.Value);
                         command.Parameters.AddWithValue("@ToCreatedDate", (object)toCreatedDate ?? DBNull.Value);
                         command.Parameters.AddWithValue("@FromTransactionDate", (object)fromTransactionDate ?? DBNull.Value);
                         command.Parameters.AddWithValue("@ToTransactionDate", (object)toTransactionDate ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@TextSearchMode", textSearchMode);
                         command.Parameters.AddWithValue("@CurrentUserID", currentUserID);
 
 
@@ -191,7 +196,7 @@ namespace MoneyMindManager_DataAccess
                 dtTransactions = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return dtTransactions;

@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace MoneyMindManager_Presentation.Global
 {
-    public static class clsGlobalMessageBoxs
+    public static class clsPL_MessageBoxs
     {
         public static void ShowErrorMessage(string message)
         {
@@ -29,7 +29,7 @@ namespace MoneyMindManager_Presentation.Global
 
             DialogResult d = DialogResult.Cancel;
 
-            clsGlobal_UI.ActiveForm.Invoke(new Action(() =>
+            clsPL_Global.ActiveForm.Invoke(new Action(() =>
               {
                   d = MessageBox.Show(message, caption, buttons, icon, defaultButton, options);
               }));

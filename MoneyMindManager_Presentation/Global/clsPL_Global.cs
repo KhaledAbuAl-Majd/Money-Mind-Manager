@@ -16,7 +16,7 @@ using MoneyMindManagerGlobal;
 
 namespace MoneyMindManager_Presentation
 {
-    public static class clsGlobal_UI
+    public static class clsPL_Global
     {
         private static System.Timers.Timer _refreshTimer;
         public static clsUser CurrentUser { get;private set; }
@@ -51,14 +51,14 @@ namespace MoneyMindManager_Presentation
 
             if (CurrentUser == null)
             {
-                clsGlobalMessageBoxs.ShowErrorMessage("المستخدم الحالي غير موجود سيتم تسجيل خروجك !");
+                clsPL_MessageBoxs.ShowErrorMessage("المستخدم الحالي غير موجود سيتم تسجيل خروجك !");
                 Logout();
                 return false;
             }
 
             if (CurrentUser?.IsActive == false)
             {
-                clsGlobalMessageBoxs.ShowErrorMessage("المستخدم الحالي موقوف, سيتم تسجيل خروجك !");
+                clsPL_MessageBoxs.ShowErrorMessage("المستخدم الحالي موقوف, سيتم تسجيل خروجك !");
                 Logout();
                 return false;
             }
@@ -127,7 +127,7 @@ namespace MoneyMindManager_Presentation
         }
         public static void SubscribeToErrorOcrruedEvent()
         {
-            clsGlobalEvents.OnErrorOccured +=  clsGlobalMessageBoxs.ShowErrorMessage;
+            clsGlobalEvents.OnErrorOccured +=  clsPL_MessageBoxs.ShowErrorMessage;
         }
 
         private static class clsRegisteryConstants
@@ -145,78 +145,92 @@ namespace MoneyMindManager_Presentation
         /// If UserName Or Password = null, it will remove the old value from registery
         /// </summary>
         /// <returns>Success Value</returns>
-        public static bool RememberUsernameAndPassword(string Username, string Password)
+        public static async Task<bool> RememberUsernameAndPassword(string Username, string Password)
         {
-            try
-            {
-                using (RegistryKey baseKey = RegistryKey.OpenBaseKey(RegistryHive.CurrentUser, RegistryView.Registry64))
-                {
-                    using (RegistryKey key = baseKey.CreateSubKey(clsRegisteryConstants.SubKeyName,true))
-                    {
-                        if (key != null)
-                        {
-                            if (Username == null || Password == null)
-                            {
-                                if (key.GetValue(clsRegisteryConstants.UserNameValueName) != null)
-                                    key.DeleteValue(clsRegisteryConstants.UserNameValueName);
+            return await Task<bool>.Run(() =>
+             {
+                 try
+                 {
+                     using (RegistryKey baseKey = RegistryKey.OpenBaseKey(RegistryHive.CurrentUser, RegistryView.Registry64))
+                     {
+                         using (RegistryKey key = baseKey.CreateSubKey(clsRegisteryConstants.SubKeyName, true))
+                         {
+                             if (key != null)
+                             {
+                                 if (Username == null || Password == null)
+                                 {
+                                     if (key.GetValue(clsRegisteryConstants.UserNameValueName) != null)
+                                         key.DeleteValue(clsRegisteryConstants.UserNameValueName);
 
-                                if (key.GetValue(clsRegisteryConstants.PasswordValueName) != null)
-                                    key.DeleteValue(clsRegisteryConstants.PasswordValueName);
-                            }
-                            else
-                            {
-                                string EncryptedUserName = clsSymmetricEncryption.Encrypt(Username);
-                                string EncryptedPassword = clsSymmetricEncryption.Encrypt(Password);
+                                     if (key.GetValue(clsRegisteryConstants.PasswordValueName) != null)
+                                         key.DeleteValue(clsRegisteryConstants.PasswordValueName);
+                                 }
+                                 else
+                                 {
+                                     string EncryptedUserName = clsSymmetricEncryption.Encrypt(Username);
+                                     string EncryptedPassword = clsSymmetricEncryption.Encrypt(Password);
 
-                                key.SetValue(clsRegisteryConstants.UserNameValueName, EncryptedUserName, RegistryValueKind.String);
+                                     key.SetValue(clsRegisteryConstants.UserNameValueName, EncryptedUserName, RegistryValueKind.String);
 
-                                key.SetValue(clsRegisteryConstants.PasswordValueName, EncryptedPassword, RegistryValueKind.String);
-                            }
-                        }
-                        else
-                            return false;
-                    }
-                }
+                                     key.SetValue(clsRegisteryConstants.PasswordValueName, EncryptedPassword, RegistryValueKind.String);
+                                 }
+                             }
+                             else
+                                 return false;
+                         }
+                     }
 
-                return true;
-            }
-            catch (Exception ex)
-            {
-                clsGlobalEvents.RaiseEvent(ex.Message, true);
-                return false;
-            }
+                     return true;
+                 }
+                 catch (Exception ex)
+                 {
+                     clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
+                     return false;
+                 }
+
+             });
         }
 
-        public static bool GetStoredCredential(ref string Username, ref string Password)
+        public static async Task<(bool Result, string UserName, string Password)> GetStoredCredential()
         {
-            try
+            string userName = null, password = null;
+            bool result = false;
+
+            result = await Task<bool>.Run(() =>
             {
-                using (RegistryKey baseKey = RegistryKey.OpenBaseKey(RegistryHive.CurrentUser, RegistryView.Registry64))
+                try
                 {
-                    using (RegistryKey key = baseKey.OpenSubKey(clsRegisteryConstants.SubKeyName, true))
+                    using (RegistryKey baseKey = RegistryKey.OpenBaseKey(RegistryHive.CurrentUser, RegistryView.Registry64))
                     {
-                        if (key != null)
+                        using (RegistryKey key = baseKey.OpenSubKey(clsRegisteryConstants.SubKeyName, true))
                         {
-                            string EncryptedUsername = key.GetValue(clsRegisteryConstants.UserNameValueName) as string;
+                            if (key != null)
+                            {
+                                string EncryptedUsername = key.GetValue(clsRegisteryConstants.UserNameValueName) as string;
 
-                            string EncryptedPassword = key.GetValue(clsRegisteryConstants.PasswordValueName) as string;
+                                string EncryptedPassword = key.GetValue(clsRegisteryConstants.PasswordValueName) as string;
 
-                            if (EncryptedUsername == null || EncryptedPassword == null)
-                                return false;
+                                if (EncryptedUsername == null || EncryptedPassword == null)
+                                    return false;
 
-                            Username = clsSymmetricEncryption.Decrypt(EncryptedUsername);
-                            Password = clsSymmetricEncryption.Decrypt(EncryptedPassword);
+                                userName = clsSymmetricEncryption.Decrypt(EncryptedUsername);
+                                password = clsSymmetricEncryption.Decrypt(EncryptedPassword);
+                            }
                         }
-                    }
 
-                    return true;
+                        return true;
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                clsGlobalEvents.RaiseEvent(ex.Message, true);
-                return false;
-            }
+                catch (Exception ex)
+                {
+                    userName = null;
+                    password = null;
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
+                    return false;
+                }
+            });
+
+            return (result, userName, password);
         }
     }
 }

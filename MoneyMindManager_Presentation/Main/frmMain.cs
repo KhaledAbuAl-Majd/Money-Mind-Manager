@@ -17,7 +17,7 @@ using MoneyMindManager_Presentation.Login;
 using MoneyMindManager_Presentation.OverView;
 using MoneyMindManager_Presentation.People;
 using MoneyMindManager_Presentation.Users;
-using static System.Net.Mime.MediaTypeNames;
+
 
 namespace MoneyMindManager_Presentation.Main
 {
@@ -32,7 +32,7 @@ namespace MoneyMindManager_Presentation.Main
         Guna2Button prevButton;
         public void LoadMainFormLabels()
         {
-            lblCurrentUserName.Text = clsGlobal_UI.CurrentUser?.UserName;
+            lblCurrentUserName.Text = clsPL_Global.CurrentUser?.UserName;
         }
         public void AddNewFormAsDialog(Form frm)
         {
@@ -145,7 +145,7 @@ namespace MoneyMindManager_Presentation.Main
         }
         private void gbtnLogout_Click(object sender, EventArgs e)
         {
-            clsGlobal_UI.Logout();
+            clsPL_Global.Logout();
         }
 
         private void gcbClose_Click(object sender, EventArgs e)
@@ -166,13 +166,17 @@ namespace MoneyMindManager_Presentation.Main
 
         private void llblCurrentUserInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var frm = new frmUserInfo(Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID));
+            llblCurrentUserInfo.Enabled = false;
+            var frm = new frmUserInfo(Convert.ToInt32(clsPL_Global.CurrentUser?.UserID));
+            frm.FormClosed += (x,y) => llblCurrentUserInfo.Enabled = true;
             AddNewFormAtContainer(frm);
         }
 
         private void llblChangePassword_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var frm = new frmChangePassword(Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID));
+            llblChangePassword.Enabled = false;
+            var frm = new frmChangePassword(Convert.ToInt32(clsPL_Global.CurrentUser?.UserID));
+            frm.FormClosed += (x, y) => llblChangePassword.Enabled = true;
             AddNewFormAtContainer(frm);
         }
 

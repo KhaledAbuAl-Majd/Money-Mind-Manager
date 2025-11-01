@@ -50,6 +50,8 @@ namespace MoneyMindManager_Presentation
             this.gibtnNextPage = new Guna.UI2.WinForms.Guna2ImageButton();
             this.gibtnPreviousPage = new Guna.UI2.WinForms.Guna2ImageButton();
             this.gibtnRefreshData = new Guna.UI2.WinForms.Guna2ImageButton();
+            this.grbTextSearchMode_WordsPrefix = new Guna.UI2.WinForms.Guna2RadioButton();
+            this.grbTextSearchMode_SubString = new Guna.UI2.WinForms.Guna2RadioButton();
             this.lblCurrentPageOfNumberOfPages = new System.Windows.Forms.Label();
             this.lblTotalRecordsNumber = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -63,9 +65,12 @@ namespace MoneyMindManager_Presentation
             this.lblHeader = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.gbtnAddVoucher = new Guna.UI2.WinForms.Guna2Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.guna2ContextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gdgvUser)).BeginInit();
+            this.guna2Panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblUserMessage
@@ -380,6 +385,57 @@ namespace MoneyMindManager_Presentation
             this.gibtnRefreshData.UseTransparentBackground = true;
             this.gibtnRefreshData.Click += new System.EventHandler(this.gibtnRefreshData_Click);
             // 
+            // grbTextSearchMode_WordsPrefix
+            // 
+            this.grbTextSearchMode_WordsPrefix.Animated = true;
+            this.grbTextSearchMode_WordsPrefix.AutoSize = true;
+            this.grbTextSearchMode_WordsPrefix.Checked = true;
+            this.grbTextSearchMode_WordsPrefix.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.grbTextSearchMode_WordsPrefix.CheckedState.BorderThickness = 0;
+            this.grbTextSearchMode_WordsPrefix.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.grbTextSearchMode_WordsPrefix.CheckedState.InnerColor = System.Drawing.Color.White;
+            this.grbTextSearchMode_WordsPrefix.CheckedState.InnerOffset = -4;
+            this.grbTextSearchMode_WordsPrefix.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.grbTextSearchMode_WordsPrefix.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grbTextSearchMode_WordsPrefix.Location = new System.Drawing.Point(11, 8);
+            this.grbTextSearchMode_WordsPrefix.Name = "grbTextSearchMode_WordsPrefix";
+            this.grbTextSearchMode_WordsPrefix.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.grbTextSearchMode_WordsPrefix.Size = new System.Drawing.Size(271, 21);
+            this.grbTextSearchMode_WordsPrefix.TabIndex = 137;
+            this.grbTextSearchMode_WordsPrefix.TabStop = true;
+            this.grbTextSearchMode_WordsPrefix.Text = "مطابقة بداية الكلمات (سريع، لا يشترط الترتيب)";
+            this.toolTip1.SetToolTip(this.grbTextSearchMode_WordsPrefix, "بحث فائق السرعة، مصمم لإيجاد المصطلحات الرئيسية بناءً على بدايات كلماتها، بصرف ال" +
+        "نظر عن ترتيبها في النص. مثال: البحث بـ «سد فات» يجد جملة «تم سداد فاتورة الكهربا" +
+        "ء».");
+            this.grbTextSearchMode_WordsPrefix.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.grbTextSearchMode_WordsPrefix.UncheckedState.BorderThickness = 2;
+            this.grbTextSearchMode_WordsPrefix.UncheckedState.FillColor = System.Drawing.Color.Transparent;
+            this.grbTextSearchMode_WordsPrefix.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            // 
+            // grbTextSearchMode_SubString
+            // 
+            this.grbTextSearchMode_SubString.Animated = true;
+            this.grbTextSearchMode_SubString.AutoSize = true;
+            this.grbTextSearchMode_SubString.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.grbTextSearchMode_SubString.CheckedState.BorderThickness = 0;
+            this.grbTextSearchMode_SubString.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.grbTextSearchMode_SubString.CheckedState.InnerColor = System.Drawing.Color.White;
+            this.grbTextSearchMode_SubString.CheckedState.InnerOffset = -4;
+            this.grbTextSearchMode_SubString.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.grbTextSearchMode_SubString.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grbTextSearchMode_SubString.Location = new System.Drawing.Point(26, 31);
+            this.grbTextSearchMode_SubString.Name = "grbTextSearchMode_SubString";
+            this.grbTextSearchMode_SubString.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.grbTextSearchMode_SubString.Size = new System.Drawing.Size(256, 21);
+            this.grbTextSearchMode_SubString.TabIndex = 138;
+            this.grbTextSearchMode_SubString.Text = "مطابقة جزء من النص (شامل،قد يكون أبطأ)";
+            this.toolTip1.SetToolTip(this.grbTextSearchMode_SubString, "بحث شامل وعميق، مصمم لإيجاد تطابق حرفي دقيق للنص المُدخل في أي موضع، حتى لو كان ف" +
+        "ي منتصف الكلمات. مثال: البحث بـ «داد فات» يجد جملة «تم سـداد فاتـورة الكهرباء».");
+            this.grbTextSearchMode_SubString.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.grbTextSearchMode_SubString.UncheckedState.BorderThickness = 2;
+            this.grbTextSearchMode_SubString.UncheckedState.FillColor = System.Drawing.Color.Transparent;
+            this.grbTextSearchMode_SubString.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            // 
             // lblCurrentPageOfNumberOfPages
             // 
             this.lblCurrentPageOfNumberOfPages.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -628,12 +684,37 @@ namespace MoneyMindManager_Presentation
             this.gbtnAddVoucher.Text = "إضافة مستخدم";
             this.gbtnAddVoucher.Click += new System.EventHandler(this.gbtnAddUser_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(1074, 62);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(122, 17);
+            this.label5.TabIndex = 136;
+            this.label5.Text = "خيارات بحث النصوص";
+            // 
+            // guna2Panel2
+            // 
+            this.guna2Panel2.BackColor = System.Drawing.Color.Transparent;
+            this.guna2Panel2.BorderColor = System.Drawing.Color.Silver;
+            this.guna2Panel2.BorderRadius = 10;
+            this.guna2Panel2.BorderThickness = 1;
+            this.guna2Panel2.Controls.Add(this.grbTextSearchMode_SubString);
+            this.guna2Panel2.Controls.Add(this.grbTextSearchMode_WordsPrefix);
+            this.guna2Panel2.Location = new System.Drawing.Point(908, 74);
+            this.guna2Panel2.Name = "guna2Panel2";
+            this.guna2Panel2.Size = new System.Drawing.Size(288, 61);
+            this.guna2Panel2.TabIndex = 135;
+            // 
             // FrmUsers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1210, 809);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.guna2Panel2);
             this.Controls.Add(this.gibtnRefreshData);
             this.Controls.Add(this.gbtnAddVoucher);
             this.Controls.Add(this.label4);
@@ -657,9 +738,12 @@ namespace MoneyMindManager_Presentation
             this.Name = "FrmUsers";
             this.Text = "FrmUsers";
             this.Load += new System.EventHandler(this.frmUsers_Load);
+            this.Shown += new System.EventHandler(this.FrmUsers_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.guna2ContextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gdgvUser)).EndInit();
+            this.guna2Panel2.ResumeLayout(false);
+            this.guna2Panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -693,5 +777,9 @@ namespace MoneyMindManager_Presentation
         private System.Windows.Forms.Label label4;
         private Guna.UI2.WinForms.Guna2Button gbtnAddVoucher;
         private Guna.UI2.WinForms.Guna2ImageButton gibtnRefreshData;
+        private System.Windows.Forms.Label label5;
+        private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
+        private Guna.UI2.WinForms.Guna2RadioButton grbTextSearchMode_WordsPrefix;
+        private Guna.UI2.WinForms.Guna2RadioButton grbTextSearchMode_SubString;
     }
 }

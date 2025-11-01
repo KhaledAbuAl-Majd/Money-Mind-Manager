@@ -13,6 +13,7 @@ using MoneyMindManager_Presentation.Global;
 using MoneyMindManager_Presentation.People;
 using MoneyMindManager_Presentation.Transactions;
 using MoneyMindManagerGlobal;
+using static MoneyMindManager_Business.clsBLLGlobal;
 using static MoneyMindManager_Business.clsIncomeAndExpenseVoucher;
 
 namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
@@ -35,7 +36,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             return clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.MainTransactionsList,
                 "ليس لديك صلاحية قائمة المعاملات.");
         }
-        enum enFilterBy { All, TransactionID,UserName};
+        enum enFilterBy { All, TransactionID,UserName,Purpose};
 
         enFilterBy _filterBy = enFilterBy.All;
 
@@ -109,6 +110,12 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             if (!_CheckValidationChildren())
                 return;
 
+            enTextSearchMode textSearchMode = enTextSearchMode.WordsPrefix_Fast;
+
+            if (grbTextSearchMode_WordsPrefix.Checked)
+                textSearchMode = enTextSearchMode.WordsPrefix_Fast;
+            else if (grbTextSearchMode_SubString.Checked)
+                textSearchMode = enTextSearchMode.Substring_Slow;
 
             clsDataColumns.clsMainTransactionClasses.clsGetAllMainTransactions result = null;
 
@@ -126,20 +133,26 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             if (filterBy == enFilterBy.All || string.IsNullOrEmpty(kgtxtFilterValue.ValidatedText))
             {
                 result = await clsMainTransaction.GetAllTransactions(transactionTypes, filterByCreatedDate, kgtxtFromDate.ValidatedText,
-                    kgtxtToDate.ValidatedText , _pageNumber);
+                    kgtxtToDate.ValidatedText ,textSearchMode, _pageNumber);
             }
             else if (filterBy == enFilterBy.TransactionID)
             {
                 int transactionID = Convert.ToInt32(kgtxtFilterValue.ValidatedText);
 
-                result = await clsMainTransaction.GetAllTransactions(transactionID,transactionTypes, filterByCreatedDate, kgtxtFromDate.ValidatedText,
-                    kgtxtToDate.ValidatedText, _pageNumber);
+                result = await clsMainTransaction.GetAllTransactionsByTransactionID(transactionID,transactionTypes, filterByCreatedDate, kgtxtFromDate.ValidatedText,
+                    kgtxtToDate.ValidatedText, textSearchMode, _pageNumber);
             }
             else if (filterBy == enFilterBy.UserName)
             {
                 string userName = kgtxtFilterValue.ValidatedText;
-                result = await clsMainTransaction.GetAllTransactions(userName,transactionTypes, filterByCreatedDate, kgtxtFromDate.ValidatedText,
-                    kgtxtToDate.ValidatedText, _pageNumber);
+                result = await clsMainTransaction.GetAllTransactionsByUserName(userName,transactionTypes, filterByCreatedDate, kgtxtFromDate.ValidatedText,
+                    kgtxtToDate.ValidatedText, textSearchMode, _pageNumber);
+            }
+            else if (filterBy == enFilterBy.Purpose)
+            {
+                string purpose = kgtxtFilterValue.ValidatedText;
+                result = await clsMainTransaction.GetAllTransactionsByPurpose(purpose, transactionTypes, filterByCreatedDate, kgtxtFromDate.ValidatedText,
+                    kgtxtToDate.ValidatedText, textSearchMode, _pageNumber);
             }
             else
                 return;
@@ -219,7 +232,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             int transactionID = Convert.ToInt32(dgvTransactions.SelectedRows[0].Cells[0].Value);
 
             var frm = new frmMainTransactionInfo(transactionID);
-            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
+            clsPL_Global.MainForm.AddNewFormAtContainer(frm);
         }
 
         void _SetReadOnlyAtTextBox(KhaledGuna2TextBox kgtxt)
@@ -247,11 +260,8 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 chklbTransactionTypes.SetItemChecked(i, true);
             }
         }
-        private async void frmMainTransactionsList_Shown(object sender, EventArgs e)
-        {
-            await _LoadTransactionTypes();
-            chklbTransactionTypes.ClearSelected();
-
+        private void frmMainTransactionsList_Load(object sender, EventArgs e)
+        {    
             _IsHeaderCreated = false;
             _searchByPageNumber = false;
             kgtxtPageNumber.Text = "1";
@@ -260,11 +270,18 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             gcbFilterBy.SelectedIndex = 0;
         }
 
+        private async void frmMainTransactionsList_Shown(object sender, EventArgs e)
+        {
+            await _LoadTransactionTypes();
+            chklbTransactionTypes.ClearSelected();
+            await  _LoadDataAtDataGridView(enFilterBy.All);
+        }
+
         private void kgtxt_OnValidationError(object sender, KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs e)
         {
             KhaledGuna2TextBox kgtxt = (KhaledGuna2TextBox)sender;
             e.CancelEventArgs.Cancel = true;
-            errorProvider1.SetError(kgtxt, clsUtils.GetValidationErrorTypeString(e.validationErrorType, kgtxt));
+            errorProvider1.SetError(kgtxt, clsPL_Utils.GetValidationErrorTypeString(e.validationErrorType, kgtxt));
         }
 
         private void kgtxt_OnValidationSuccess(object arg1, CancelEventArgs arg2)
@@ -288,6 +305,8 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
         private async void gcbFilterBy_SelectedIndexChanged(object sender, EventArgs e)
         {
+            string oldText = kgtxtFilterValue.Text;
+
             _pageNumber = 1;
 
             _searchByPageNumber = false;
@@ -298,7 +317,8 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             {
                 _SetReadOnlyAtTextBox(kgtxtFilterValue);
                 _filterBy = enFilterBy.All;
-                await _LoadDataAtDataGridView(_filterBy);
+                if (!string.IsNullOrWhiteSpace(oldText))
+                    await _LoadDataAtDataGridView(_filterBy);
                 return;
             }
 
@@ -325,11 +345,21 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 kgtxtFilterValue.AllowWhiteSpace = false;
             }
 
-            await _LoadDataAtDataGridView(_filterBy);
+            else if (gcbFilterBy.Text == "البيان")
+            {
+                _filterBy = enFilterBy.Purpose;
+
+                kgtxtFilterValue.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
+                kgtxtFilterValue.AllowWhiteSpace = true;
+            }
+
+            if (!string.IsNullOrWhiteSpace(oldText))
+                await _LoadDataAtDataGridView(_filterBy);
         }
 
         private void kgtxtFilterValue_TextChanged(object sender, EventArgs e)
         {
+            _pageNumber = 1;
             SearchAfterTimerFinish.Stop();
             SearchAfterTimerFinish.Start();
         }
@@ -355,17 +385,20 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             if (e.KeyChar == (char)Keys.Enter)
             {
                 SearchAfterTimerFinish.Stop();
+                _pageNumber = 1;
                 await _LoadDataAtDataGridView(_filterBy);
             }
         }
 
         private async void gcbFilterByDate_SelectedIndexChanged(object sender, EventArgs e)
         {
+            _pageNumber = 1;
             await _LoadDataAtDataGridView(_filterBy);
         }
 
         private async void gibtnRefreshData_Click(object sender, EventArgs e)
         {
+            _pageNumber = 1;
             await _LoadDataAtDataGridView(_filterBy);
         }
 
@@ -413,17 +446,16 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
         {
             if (e.KeyCode == Keys.Space)
             {
+                _pageNumber = 1;
                 SearchAfterTimerFinish.Stop();
                 SearchAfterTimerFinish.Start();
             }
-                //await _LoadDataAtDataGridView(_filterBy);
         }
 
 
         private void chklbTransactionTypes_MouseUp(object sender, MouseEventArgs e)
         {
-            //await _LoadDataAtDataGridView(_filterBy);
-
+            _pageNumber = 1;
             SearchAfterTimerFinish.Stop();
             SearchAfterTimerFinish.Start();
         }
@@ -444,6 +476,12 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             lblUserMessage.Visible = false;
 
+            enTextSearchMode textSearchMode = enTextSearchMode.WordsPrefix_Fast;
+
+            if (grbTextSearchMode_WordsPrefix.Checked)
+                textSearchMode = enTextSearchMode.WordsPrefix_Fast;
+            else if (grbTextSearchMode_SubString.Checked)
+                textSearchMode = enTextSearchMode.Substring_Slow;
 
             DataTable dtTransactions = null;
 
@@ -461,27 +499,33 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             if (_filterBy == enFilterBy.All || string.IsNullOrEmpty(kgtxtFilterValue.ValidatedText))
             {
                 dtTransactions = await clsMainTransaction.GetAllTransactionsWithoutPaging(transactionTypes, filterByCreatedDate, kgtxtFromDate.ValidatedText,
-                    kgtxtToDate.ValidatedText);
+                    kgtxtToDate.ValidatedText,textSearchMode);
             }
             else if (_filterBy == enFilterBy.TransactionID)
             {
                 int transactionID = Convert.ToInt32(kgtxtFilterValue.ValidatedText);
 
-                dtTransactions = await clsMainTransaction.GetAllTransactionsWithoutPaging(transactionID, transactionTypes, filterByCreatedDate, kgtxtFromDate.ValidatedText,
-                    kgtxtToDate.ValidatedText);
+                dtTransactions = await clsMainTransaction.GetAllTransactionsWithoutPagingByTransactionID(transactionID, transactionTypes, filterByCreatedDate, kgtxtFromDate.ValidatedText,
+                    kgtxtToDate.ValidatedText, textSearchMode);
             }
             else if (_filterBy == enFilterBy.UserName)
             {
                 string userName = kgtxtFilterValue.ValidatedText;
-                dtTransactions = await clsMainTransaction.GetAllTransactionsWithoutPaging(userName, transactionTypes, filterByCreatedDate, kgtxtFromDate.ValidatedText,
-                    kgtxtToDate.ValidatedText);
+                dtTransactions = await clsMainTransaction.GetAllTransactionsWithoutPagingByUserName(userName, transactionTypes, filterByCreatedDate, kgtxtFromDate.ValidatedText,
+                    kgtxtToDate.ValidatedText, textSearchMode);
+            }
+            else if (_filterBy == enFilterBy.Purpose)
+            {
+                string purpose = kgtxtFilterValue.ValidatedText;
+                dtTransactions = await clsMainTransaction.GetAllTransactionsWithoutPagingByPurpose(purpose, transactionTypes, filterByCreatedDate, kgtxtFromDate.ValidatedText,
+                    kgtxtToDate.ValidatedText, textSearchMode);
             }
             else
                 return;
 
             if (dtTransactions == null)
             {
-                clsGlobalMessageBoxs.ShowErrorMessage("فشل تصدير البيانات !");
+                clsPL_MessageBoxs.ShowErrorMessage("فشل تصدير البيانات !");
                 return;
             }
 
@@ -505,36 +549,5 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             if (e.KeyCode == Keys.Enter)
                 gibtnRefreshData.PerformClick();
         }
-
-        private void ctrlInfoIcon1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void guna2Panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void kgtxtToDate_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void kgtxtFromDate_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
     }
 }

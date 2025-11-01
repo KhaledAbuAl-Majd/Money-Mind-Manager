@@ -42,6 +42,10 @@ namespace MoneyMindManager_Business
 
         public async Task<bool> Save()
         {
+            if (!clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.Admin,
+              "ليس لديك صلاحية تعديل بيانات الحساب."))
+                return false;
+
             switch (Mode)
             {
                 case enMode.Update:

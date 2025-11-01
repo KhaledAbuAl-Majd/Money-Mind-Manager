@@ -42,7 +42,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
         {
             if (voucherType == enVoucherType.UnKnown)
             {
-                clsGlobalMessageBoxs.ShowErrorMessage("نوع المستند غير معروف !");
+                clsPL_MessageBoxs.ShowErrorMessage("نوع المستند غير معروف !");
                 this.Dispose();
                 return;
             }
@@ -315,7 +315,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             if (searchedVoucher == null)
             {
-                clsGlobalMessageBoxs.ShowErrorMessage("فشل تحميل بيانات المستند");
+                clsPL_MessageBoxs.ShowErrorMessage("فشل تحميل بيانات المستند");
                 this.Close();
                 return;
             }
@@ -354,7 +354,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             if (!ValidateChildren())
             {
-                clsGlobalMessageBoxs.ShowValidateChildrenFailedMessage();
+                clsPL_MessageBoxs.ShowValidateChildrenFailedMessage();
                 return;
             }
 
@@ -367,14 +367,14 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             {
                 if (!_Voucher.AssingVoucherTypeAtAddMode(_voucherType))
                 {
-                    clsGlobalMessageBoxs.ShowErrorMessage("فشل تسجيل نوع المستند !");
+                    clsPL_MessageBoxs.ShowErrorMessage("فشل تسجيل نوع المستند !");
                     _ResetVoucherObject();
                     return;
                 }
 
                 if (!_Voucher.AssingIsLockingAddMode(gchkIsLocked.Checked))
                 {
-                    clsGlobalMessageBoxs.ShowErrorMessage("فشل تسجيل قفل المستند !");
+                    clsPL_MessageBoxs.ShowErrorMessage("فشل تسجيل قفل المستند !");
                     _ResetVoucherObject();
                     return;
                 }
@@ -385,7 +385,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             {
                 if (_voucherMode == enVoucherMode.AddNew)
                 {
-                    clsGlobalMessageBoxs.ShowMessage($"تم إضافة المستند بنجاج بمعرف [{_Voucher.VoucherID}]", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    clsPL_MessageBoxs.ShowMessage($"تم إضافة المستند بنجاج بمعرف [{_Voucher.VoucherID}]", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     _voucherMode = enVoucherMode.Update;
                     _VoucherID = _Voucher.VoucherID;
@@ -402,7 +402,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 }
                 else if (_voucherMode == enVoucherMode.Update)
                 {
-                    clsGlobalMessageBoxs.ShowMessage("تم تعديل بيانات المستند بنجاح", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    clsPL_MessageBoxs.ShowMessage("تم تعديل بيانات المستند بنجاح", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
                 _isSaved = true;
@@ -430,7 +430,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             var frm = new frmAddUpdateIncomeAndExpeseTransction(_Voucher);
             frm.OnCloseAndSaved += FrmAddUpdateTransactions_OnCloseAndSaved;
-            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
+            clsPL_Global.MainForm.AddNewFormAtContainer(frm);
         }
 
         void _EditTransaction()
@@ -448,7 +448,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             var frm = new frmAddUpdateIncomeAndExpeseTransction(transactionID);
             frm.OnCloseAndSaved += FrmAddUpdateTransactions_OnCloseAndSaved;
-            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
+            clsPL_Global.MainForm.AddNewFormAtContainer(frm);
         }
 
         void _ShowTransactionInfo()
@@ -465,7 +465,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             int transactionID = Convert.ToInt32(gdgvTransactions.SelectedRows[0].Cells[0].Value);
 
             var frm = new frmIncomeAndExpenseTransactionInfo(transactionID);
-            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
+            clsPL_Global.MainForm.AddNewFormAtContainer(frm);
         }
 
         private async void frmAddUpdateVoucher_Load(object sender, EventArgs e)
@@ -523,7 +523,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
         {
             KhaledGuna2TextBox kgtxt = (KhaledGuna2TextBox)sender;
             e.CancelEventArgs.Cancel = true;
-            errorProvider1.SetError(kgtxt, clsUtils.GetValidationErrorTypeString(e.validationErrorType, kgtxt));
+            errorProvider1.SetError(kgtxt, clsPL_Utils.GetValidationErrorTypeString(e.validationErrorType, kgtxt));
         }
 
         private void kgtxtPageNumber_OnValidationSuccess(object sender, CancelEventArgs e)
@@ -591,7 +591,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             if (gdgvTransactions.SelectedRows.Count < 1 || _VoucherID == null || _Voucher.IsLocked)
                 return;
 
-            if (clsGlobalMessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف هذه المعاملة ؟ ", "طلب مواقفقة", MessageBoxButtons.OKCancel,
+            if (clsPL_MessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف هذه المعاملة ؟ ", "طلب مواقفقة", MessageBoxButtons.OKCancel,
                MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
             {
                 int transactionID = Convert.ToInt32(gdgvTransactions.SelectedRows[0].Cells[0].Value);
@@ -618,7 +618,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             lblUserMessage.Visible = false;
 
 
-            if (clsGlobalMessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف المستند ؟ ", "طلب مواقفقة", MessageBoxButtons.OKCancel,
+            if (clsPL_MessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف المستند ؟ ", "طلب مواقفقة", MessageBoxButtons.OKCancel,
                MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
             {
                 if (await clsIncomeAndExpenseVoucher.DeleteVoucherByVoucherID(Convert.ToInt32(_VoucherID)))
@@ -667,7 +667,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             if (dt == null)
             {
-                clsGlobalMessageBoxs.ShowErrorMessage("فشل تصدير البيانات !");
+                clsPL_MessageBoxs.ShowErrorMessage("فشل تصدير البيانات !");
                 return;
             }
 
@@ -725,7 +725,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             lblUserMessage.Visible = false;
 
             frmUserInfo frm = new frmUserInfo(Convert.ToInt32(_Voucher?.CreatedByUserID));
-            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
+            clsPL_Global.MainForm.AddNewFormAtContainer(frm);
         }
     }
 }

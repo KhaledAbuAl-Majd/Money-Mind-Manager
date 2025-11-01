@@ -43,7 +43,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
             if(voucher == null)
             {
-                clsGlobalMessageBoxs.ShowErrorMessage("المستند لا يمكن ان يكون بدون قيمة");
+                clsPL_MessageBoxs.ShowErrorMessage("المستند لا يمكن ان يكون بدون قيمة");
                 this.Dispose();
                 return;
             }
@@ -145,7 +145,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
             if (searchedTransaction == null)
             {
-                clsGlobalMessageBoxs.ShowErrorMessage("فشل تحميل بيانات المعاملة");
+                clsPL_MessageBoxs.ShowErrorMessage("فشل تحميل بيانات المعاملة");
                 this.Close();
                 return;
             }
@@ -185,7 +185,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             var frm = new frmSelectCategory(Convert.ToBoolean(_Voucher.IsIncome));
             frm.OnCategorySelected += Frm_OnCategorySelected;
             //frm.ShowDialog(clsGlobal_UI.MainForm);
-            clsGlobal_UI.MainForm.AddNewFormAsDialog(frm);
+            clsPL_Global.MainForm.AddNewFormAsDialog(frm);
         }
         async Task _Save()
         {
@@ -200,7 +200,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
             if (!ValidateChildren())
             {
-                clsGlobalMessageBoxs.ShowValidateChildrenFailedMessage();
+                clsPL_MessageBoxs.ShowValidateChildrenFailedMessage();
                 lblUserMessage.Text = "تم العثور على حقول غير صالحة. ضع المؤشر على العلامات الحمراء لعرض سبب الخطأ.";
                 lblUserMessage.Visible = true;
                 return;
@@ -214,7 +214,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             }
             else
             {
-                clsGlobalMessageBoxs.ShowErrorMessage("فشل تحويل معرف الفئة, برجاء التواصل مع منشئ البرنامج");
+                clsPL_MessageBoxs.ShowErrorMessage("فشل تحويل معرف الفئة, برجاء التواصل مع منشئ البرنامج");
                 _ResteObject();
                 return;
             }
@@ -228,7 +228,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             {
                 if (!_Transaction.AssignVoucherIDAtAddMode(Convert.ToInt32(_Voucher.VoucherID)))
                 {
-                    clsGlobalMessageBoxs.ShowErrorMessage("فشل تسجيل معرف المستند !");
+                    clsPL_MessageBoxs.ShowErrorMessage("فشل تسجيل معرف المستند !");
                     _ResteObject();
                     return;
                 }
@@ -244,7 +244,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                 {
                     isExceededBudget = true;
 
-                    if (clsGlobalMessageBoxs.ShowMessage("بهذا المبلغ ستتخطى الميزانية الشهرية!. هل تود الإستمرار ؟",
+                    if (clsPL_MessageBoxs.ShowMessage("بهذا المبلغ ستتخطى الميزانية الشهرية!. هل تود الإستمرار ؟",
                         "تحذير", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
                         return;
                 }
@@ -255,7 +255,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             {
                 if (Mode == enMode.AddNew)
                 {
-                    clsGlobalMessageBoxs.ShowMessage($"تم إضافة المعاملة بنجاج بمعرف [{_Transaction.MainTransactionID}]", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    clsPL_MessageBoxs.ShowMessage($"تم إضافة المعاملة بنجاج بمعرف [{_Transaction.MainTransactionID}]", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     if (gtswNewTransactionAfterAdd.Checked)
                     {
@@ -272,7 +272,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                 }
                 else if (Mode == enMode.Update)
                 {
-                    clsGlobalMessageBoxs.ShowMessage("تم تعديل بيانات المعاملة بنجاح", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    clsPL_MessageBoxs.ShowMessage("تم تعديل بيانات المعاملة بنجاح", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
                 _isSaved = true;
@@ -304,7 +304,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
         {
             KhaledGuna2TextBox kgtxtBox = (KhaledGuna2TextBox)sender;
             e.CancelEventArgs.Cancel = true;
-            string errorMessage = clsUtils.GetValidationErrorTypeString(e.validationErrorType, kgtxtBox);
+            string errorMessage = clsPL_Utils.GetValidationErrorTypeString(e.validationErrorType, kgtxtBox);
 
             errorProvider1.SetError(kgtxtBox, errorMessage);
         }
@@ -354,7 +354,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             if (Mode == enMode.AddNew || _TransactionID == null)
                 return;
 
-            if (clsGlobalMessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف المعاملة ؟ ", "طلب مواقفقة", MessageBoxButtons.OKCancel,
+            if (clsPL_MessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف المعاملة ؟ ", "طلب مواقفقة", MessageBoxButtons.OKCancel,
                MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
             {
                 if (await clsIncomeAndExpenseTransaction.DeleteIncomeAndExpenseTransactionByID(Convert.ToInt32(_TransactionID)))

@@ -45,11 +45,11 @@ namespace MoneyMindManager_Presentation.OverView.Controls
                 isLending = true;
             else
             {
-                clsGlobalMessageBoxs.ShowErrorMessage("خطأ في تحديد نوع الدين !");
+                clsPL_MessageBoxs.ShowErrorMessage("خطأ في تحديد نوع الدين !");
                 return;
             }
 
-           var chartData = await clsReport.GetTopPeopleDebtsSumRanking(isLending, Convert.ToInt16(clsGlobal_UI.CurrentUser.AccountID));
+           var chartData = await clsReport.GetTopPeopleDebtsSumRanking(isLending, Convert.ToInt16(clsPL_Global.CurrentUser.AccountID));
 
             //LoadChart();
             _EmptyChart();
@@ -87,7 +87,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
             });
 
 
-            string currency = clsGlobal_UI.CurrentUser?.AccountInfo?.DefaultCurrencyInfo?.CurrencySymbol;
+            string currency = clsPL_Global.CurrentUser?.AccountInfo?.DefaultCurrencyInfo?.CurrencySymbol;
 
             CartesianChart1.AxisY.Add(new LiveCharts.Wpf.Axis
             {

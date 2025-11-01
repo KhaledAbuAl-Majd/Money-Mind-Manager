@@ -136,7 +136,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
             if (searchedDebtPayment == null)
             {
-                clsGlobalMessageBoxs.ShowErrorMessage("فشل تحميل بيانات معاملة سداد الدين");
+                clsPL_MessageBoxs.ShowErrorMessage("فشل تحميل بيانات معاملة سداد الدين");
                 this.Close();
                 return;
             }
@@ -177,7 +177,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
             if (!ValidateChildren())
             {
-                clsGlobalMessageBoxs.ShowValidateChildrenFailedMessage();
+                clsPL_MessageBoxs.ShowValidateChildrenFailedMessage();
                 lblUserMessage.Text = "تم العثور على حقول غير صالحة. ضع المؤشر على العلامات الحمراء لعرض سبب الخطأ.";
                 lblUserMessage.Visible = true;
                 return;
@@ -195,7 +195,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             {
                 if (!_DebtPayment.AssignDebtIDAtAddMode(_DebtID))
                 {
-                    clsGlobalMessageBoxs.ShowErrorMessage("فشل تسجيل معرف سند الدين !");
+                    clsPL_MessageBoxs.ShowErrorMessage("فشل تسجيل معرف سند الدين !");
                     _ResteObject();
                     return;
                 }
@@ -206,7 +206,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             {
                 if (Mode == enMode.AddNew)
                 {
-                    clsGlobalMessageBoxs.ShowMessage($"تم إضافة معاملة السداد بنجاج بمعرف [{_DebtPayment.MainTransactionID}]", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    clsPL_MessageBoxs.ShowMessage($"تم إضافة معاملة السداد بنجاج بمعرف [{_DebtPayment.MainTransactionID}]", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     if (gtswNewTransactionAfterAdd.Checked)
                     {
@@ -223,7 +223,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                 }
                 else if (Mode == enMode.Update)
                 {
-                    clsGlobalMessageBoxs.ShowMessage("تم تعديل بيانات معاملة السداد بنجاح", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    clsPL_MessageBoxs.ShowMessage("تم تعديل بيانات معاملة السداد بنجاح", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
                 _isSaved = true;
@@ -255,7 +255,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
         {
             KhaledGuna2TextBox kgtxtBox = (KhaledGuna2TextBox)sender;
             e.CancelEventArgs.Cancel = true;
-            string errorMessage = clsUtils.GetValidationErrorTypeString(e.validationErrorType, kgtxtBox);
+            string errorMessage = clsPL_Utils.GetValidationErrorTypeString(e.validationErrorType, kgtxtBox);
 
             errorProvider1.SetError(kgtxtBox, errorMessage);
         }
@@ -291,7 +291,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             if (Mode == enMode.AddNew || _TransactionID == null)
                 return;
 
-            if (clsGlobalMessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف المعاملة ؟ ", "طلب مواقفقة", MessageBoxButtons.OKCancel,
+            if (clsPL_MessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف المعاملة ؟ ", "طلب مواقفقة", MessageBoxButtons.OKCancel,
                MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
             {
                 if (await clsDebtPayment.DeleteDebtPaymentByID(Convert.ToInt32(_TransactionID)))

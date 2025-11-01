@@ -68,7 +68,7 @@ namespace MoneyMindManager_DataAccess
                 newUserID = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return newUserID;
@@ -116,7 +116,7 @@ namespace MoneyMindManager_DataAccess
                 result = false;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return result;
@@ -165,7 +165,7 @@ namespace MoneyMindManager_DataAccess
                 result = false;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return result;
@@ -206,7 +206,7 @@ namespace MoneyMindManager_DataAccess
                 result = false;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return result;
@@ -264,7 +264,7 @@ namespace MoneyMindManager_DataAccess
                 userData = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return userData;
@@ -321,7 +321,7 @@ namespace MoneyMindManager_DataAccess
                 userData = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return userData;
@@ -378,7 +378,7 @@ namespace MoneyMindManager_DataAccess
                 userData = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return userData;
@@ -435,7 +435,7 @@ namespace MoneyMindManager_DataAccess
                 userData = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return userData;
@@ -478,7 +478,7 @@ namespace MoneyMindManager_DataAccess
                 isExist = false;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return isExist;
@@ -521,7 +521,7 @@ namespace MoneyMindManager_DataAccess
                 isExist = false;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return isExist;
@@ -564,7 +564,7 @@ namespace MoneyMindManager_DataAccess
                 isExist = false;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return isExist;
@@ -607,7 +607,7 @@ namespace MoneyMindManager_DataAccess
                 isExist = false;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return isExist;
@@ -649,18 +649,18 @@ namespace MoneyMindManager_DataAccess
                 salt = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return salt;
         }
 
         /// <summary>
-        /// Get All Users For Account Using Paging [10 rows per page], if variable is null will not filter by it
+        /// Get All Users For Account Using Paging , if variable is null will not filter by it
         /// </summary>
         /// <returns>object of clsGetAllUsers : if error happend, return null</returns>
-        public static async Task<clsGetAllUsers> GetAllUsers(int? userID,string userName,string personName,
-            bool? isActive, short pageNumber,int currentUserID, bool RaiseEventOnErrorOccured = true)
+        public static async Task<clsGetAllUsers> GetAllUsers(int? userID,string userName,string personName,  bool? isActive, 
+            byte textSearchMode, short pageNumber, byte rowsPerPage, int currentUserID, bool RaiseEventOnErrorOccured = true)
         {
             clsGetAllUsers allUsers = null;
 
@@ -676,8 +676,10 @@ namespace MoneyMindManager_DataAccess
                         command.Parameters.AddWithValue("@UserName", string.IsNullOrWhiteSpace(userName) ? DBNull.Value : (object)userName);
                         command.Parameters.AddWithValue("@PersonName", string.IsNullOrWhiteSpace(personName) ? DBNull.Value : (object)personName);
                         command.Parameters.AddWithValue("@IsActive", (object)isActive ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@TextSearchMode", textSearchMode);
                         command.Parameters.AddWithValue("@CurrentUserID", currentUserID); 
-                        command.Parameters.AddWithValue("@PageNumber", pageNumber);  
+                        command.Parameters.AddWithValue("@PageNumber", pageNumber);
+                        command.Parameters.AddWithValue("@RowsPerPage", rowsPerPage);
 
                         SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.SmallInt)
                         {
@@ -714,7 +716,7 @@ namespace MoneyMindManager_DataAccess
                 allUsers = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return allUsers;

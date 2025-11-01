@@ -21,7 +21,7 @@ namespace MoneyMindManager_Presentation.OverView
 
         async Task _LoadKPIS()
         {
-            var KPIS = await clsReport.GetMainKPIS(Convert.ToInt16(clsGlobal_UI.CurrentUser?.AccountID));
+            var KPIS = await clsReport.GetMainKPIS(Convert.ToInt16(clsPL_Global.CurrentUser?.AccountID));
 
             if (KPIS == null)
                 this.Close();
@@ -44,8 +44,10 @@ namespace MoneyMindManager_Presentation.OverView
             guna2WinProgressIndicator1.Show();
             this.UseWaitCursor = true;
 
-            await _LoadKPIS();
-            await ctrlTest1.LoadData();
+            Task task1 =  _LoadKPIS();
+            Task task2 = ctrlTest1.LoadData();
+
+           await Task.WhenAll(task1, task2);
 
             this.UseWaitCursor = false;
             guna2WinProgressIndicator1.Stop();

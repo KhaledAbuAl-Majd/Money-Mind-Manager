@@ -49,6 +49,7 @@
             this.kgtxtCreatedDate = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.kgtxtAccountName = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.guna2Panel2.SuspendLayout();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -384,6 +385,9 @@
             this.kgtxtCreatedByUserName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.kgtxtCreatedByUserName.ForeColor = System.Drawing.Color.Black;
             this.kgtxtCreatedByUserName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.kgtxtCreatedByUserName.IconLeft = ((System.Drawing.Image)(resources.GetObject("kgtxtCreatedByUserName.IconLeft")));
+            this.kgtxtCreatedByUserName.IconRight = ((System.Drawing.Image)(resources.GetObject("kgtxtCreatedByUserName.IconRight")));
+            this.kgtxtCreatedByUserName.IconRightCursor = System.Windows.Forms.Cursors.Hand;
             this.kgtxtCreatedByUserName.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
             this.kgtxtCreatedByUserName.IsRequired = false;
             this.kgtxtCreatedByUserName.Location = new System.Drawing.Point(29, 155);
@@ -441,8 +445,10 @@
             this.kgtxtCreatedByUserName.TextProperties.PhoneProperties.AllowPlusSign = true;
             this.kgtxtCreatedByUserName.TextProperties.PhoneProperties.MaxPhoneLength = ((byte)(15));
             this.kgtxtCreatedByUserName.TextProperties.TextFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.enTextFormat.None;
+            this.toolTip1.SetToolTip(this.kgtxtCreatedByUserName, "اضغط على الأيقونة اليمنى لرؤية بيانات المستخدم المنشئ");
             this.kgtxtCreatedByUserName.TrimEnd = true;
             this.kgtxtCreatedByUserName.TrimStart = true;
+            this.kgtxtCreatedByUserName.IconRightClick += new System.EventHandler(this.kgtxtCreatedByUserName_IconRightClick);
             // 
             // label4
             // 
@@ -706,6 +712,10 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // toolTip1
+            // 
+            this.toolTip1.IsBalloon = true;
+            // 
             // frmCurrentAccount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -749,5 +759,6 @@
         private System.Windows.Forms.Label label6;
         private KhaledControlLibrary1.KhaledGuna2TextBox kgtxtCreatedByUserName;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

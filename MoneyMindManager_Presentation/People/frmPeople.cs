@@ -12,6 +12,7 @@ using MoneyMindManager_Business;
 using MoneyMindManager_Presentation.Global;
 using MoneyMindManagerGlobal;
 using static Guna.UI2.Native.WinApi;
+using static MoneyMindManager_Business.clsBLLGlobal;
 
 namespace MoneyMindManager_Presentation.People
 {
@@ -47,7 +48,6 @@ namespace MoneyMindManager_Presentation.People
                 lblNoRecordsFoundMessage.Visible = true;
                 lblUserMessage.Text = "تم العثور على حقول غير صالحة. ضع المؤشر على العلامات الحمراء لعرض سبب الخطأ.";
                 lblUserMessage.Visible = true;
-                //clsGlobal_Presentation.ShowMessage("تم العثور على حقول غير صالحة. ضع المؤشر على العلامات الحمراء لعرض سبب الخطأ.", "خطأ في التحقق", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 lblCurrentPageRecordsCount.Text = "0";
                 lblTotalRecordsNumber.Text = "0";
                 lblCurrentPageOfNumberOfPages.Text = string.Concat("1", "   من   ", "0", "  صفحات");
@@ -66,35 +66,39 @@ namespace MoneyMindManager_Presentation.People
             if (!_CheckValidationChildren())
                 return;
 
-            //_pageNumber = Convert.ToInt16(kgtxtPageNumber.ValidatedText);
+            enTextSearchMode textSearchMode = enTextSearchMode.WordsPrefix_Fast;
+
+            if (grbTextSearchMode_WordsPrefix.Checked)
+                textSearchMode = enTextSearchMode.WordsPrefix_Fast;
+            else if (grbTextSearchMode_SubString.Checked)
+                textSearchMode = enTextSearchMode.Substring_Slow;
 
             clsDataColumns.PersonClasses.clsGetAllPeople result = null;
 
-            int currentUserID = Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID);
 
             if (filterBy == enFilterBy.All || string.IsNullOrEmpty(kgtxtFilterValue.ValidatedText))
             {
-                result = await clsPerson.GetAllPeople(_pageNumber, currentUserID);
+                result = await clsPerson.GetAllPeople(textSearchMode,_pageNumber);
             }
             else if (filterBy == enFilterBy.PersonID)
             {
                 int personID = Convert.ToInt32(kgtxtFilterValue.ValidatedText);
-                result = await clsPerson.GetAllPeopleByPersonID(personID,_pageNumber,currentUserID);
+                result = await clsPerson.GetAllPeopleByPersonID(personID,textSearchMode, _pageNumber);
             }
             else if (filterBy == enFilterBy.PersonName)
             {
                 string personName = kgtxtFilterValue.ValidatedText;
-                result = await clsPerson.GetAllPeopleByPersonName(personName,_pageNumber,currentUserID);
+                result = await clsPerson.GetAllPeopleByPersonName(personName, textSearchMode, _pageNumber);
             }
             else if (filterBy == enFilterBy.Email)
             {
                 string email = kgtxtFilterValue.ValidatedText;
-                result = await clsPerson.GetAllPeopleByEmail(email, _pageNumber, currentUserID);
+                result = await clsPerson.GetAllPeopleByEmail(email, textSearchMode, _pageNumber);
             }
             else if (filterBy == enFilterBy.Phone)
             {
                 string phone = kgtxtFilterValue.ValidatedText;
-                result = await clsPerson.GetAllPeopleByPhone(phone,_pageNumber,currentUserID);
+                result = await clsPerson.GetAllPeopleByPhone(phone, textSearchMode, _pageNumber);
             }
             else
                 return;
@@ -105,7 +109,6 @@ namespace MoneyMindManager_Presentation.People
             if (result.dtPeople.Rows.Count == 0)
             {
                 lblNoRecordsFoundMessage.Visible = true;
-                //lblUserMessage.Visible = true;
                 gdgvPeople.DataSource = null;
                 _IsHeaderCreated = false;
                 _pageNumber = 1;
@@ -156,7 +159,7 @@ namespace MoneyMindManager_Presentation.People
         {
             frmAddUpdatePerson frm = new frmAddUpdatePerson();
             frm.OnCloseAndSaved += x => _RefreshFilter();
-            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
+            clsPL_Global.MainForm.AddNewFormAtContainer(frm);
         }
 
         async void _RefreshFilter()
@@ -173,7 +176,7 @@ namespace MoneyMindManager_Presentation.People
 
             frmPersonInfo frm = new frmPersonInfo(personID);
             frm.OnEditingPersonAndFormClosed += _RefreshFilter;
-            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
+            clsPL_Global.MainForm.AddNewFormAtContainer(frm);
         }
 
         void _SetReadOnlyAtTextBox(KhaledGuna2TextBox kgtxt)
@@ -195,13 +198,18 @@ namespace MoneyMindManager_Presentation.People
             lblNoRecordsFoundMessage.Visible = false;
             lblUserMessage.Visible = false;
             gcbFilterBy.SelectedIndex = 0;
+            
+        }
+        private async void frmPeople_Shown(object sender, EventArgs e)
+        {
+            await _LoadDataAtDataGridView(enFilterBy.All);
         }
 
         private void kgtxt_OnValidationError(object sender, KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs e)
         {
             KhaledGuna2TextBox kgtxt = (KhaledGuna2TextBox)sender;
             e.CancelEventArgs.Cancel = true;
-            errorProvider1.SetError(kgtxt, clsUtils.GetValidationErrorTypeString(e.validationErrorType, kgtxt));
+            errorProvider1.SetError(kgtxt, clsPL_Utils.GetValidationErrorTypeString(e.validationErrorType, kgtxt));
         }
 
         private void kgtxt_OnValidationSuccess(object arg1, CancelEventArgs arg2)
@@ -235,6 +243,8 @@ namespace MoneyMindManager_Presentation.People
 
         private async void gcbFilterBy_SelectedIndexChanged(object sender, EventArgs e)
         {
+            string oldText = kgtxtFilterValue.Text;
+
             _pageNumber = 1;
             _searchByPageNumber = false;
             kgtxtFilterValue.Text = "";
@@ -242,15 +252,13 @@ namespace MoneyMindManager_Presentation.People
 
             if (gcbFilterBy.Text == "بدون")
             {
-                //kgtxtFilterValue.Visible = false;
                 _SetReadOnlyAtTextBox(kgtxtFilterValue);
                 _filterBy = enFilterBy.All;
-                await _LoadDataAtDataGridView(_filterBy);
-                return;
+                if (!string.IsNullOrWhiteSpace(oldText))
+                    await _LoadDataAtDataGridView(_filterBy);
+                 return;
             }
 
-
-            //kgtxtFilterValue.Visible = true;
             _CancelReadOnlyAtTextBox(kgtxtFilterValue);
             kgtxtFilterValue.IsRequired = false;
             kgtxtFilterValue.TrimStart = false;
@@ -279,7 +287,7 @@ namespace MoneyMindManager_Presentation.People
                 _filterBy = enFilterBy.Email;
 
                 kgtxtFilterValue.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
-                kgtxtFilterValue.AllowWhiteSpace = true;
+                kgtxtFilterValue.AllowWhiteSpace = false;
                 kgtxtFilterValue.TrimEnd = true;
             }
             else if (gcbFilterBy.Text == "رقم الهاتف")
@@ -294,11 +302,13 @@ namespace MoneyMindManager_Presentation.People
                 kgtxtFilterValue.TrimEnd = true;
             }
 
-            await _LoadDataAtDataGridView(_filterBy);
+            if (!string.IsNullOrWhiteSpace(oldText))
+                await _LoadDataAtDataGridView(_filterBy);
         }
 
         private void kgtxtFilterValue_TextChanged(object sender, EventArgs e)
         {
+            _pageNumber = 1;
             SearchAfterTimerFinish.Stop();
             SearchAfterTimerFinish.Start();
         }
@@ -314,8 +324,7 @@ namespace MoneyMindManager_Presentation.People
                 return;
 
             _pageNumber = Convert.ToInt16(kgtxtPageNumber.ValidatedText);
-
-            //await _LoadDataAtDataGridView();
+;
 
             SearchAfterTimerFinish.Stop();
             SearchAfterTimerFinish.Start();
@@ -326,6 +335,7 @@ namespace MoneyMindManager_Presentation.People
             if (e.KeyChar == (char)Keys.Enter)
             {
                 SearchAfterTimerFinish.Stop();
+                _pageNumber = 1;
                 await _LoadDataAtDataGridView(_filterBy);
             }
         }
@@ -346,12 +356,12 @@ namespace MoneyMindManager_Presentation.People
 
             frmAddUpdatePerson frm = new frmAddUpdatePerson(personID);
             frm.OnCloseAndSaved += x => _RefreshFilter();
-            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
+            clsPL_Global.MainForm.AddNewFormAtContainer(frm);
         }
 
         private async void gtsmDeletePerson_Click(object sender, EventArgs e)
         {
-            if (clsGlobalMessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف هذا الشخص", "طلب مواقفقة", MessageBoxButtons.OKCancel,
+            if (clsPL_MessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف هذا الشخص", "طلب مواقفقة", MessageBoxButtons.OKCancel,
                 MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
             {
                 int personID = Convert.ToInt32(gdgvPeople.CurrentRow.Cells[0].Value);
@@ -379,5 +389,6 @@ namespace MoneyMindManager_Presentation.People
             _pageNumber = 1;
             await _LoadDataAtDataGridView(_filterBy);
         }
+
     }
 }

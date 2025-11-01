@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MoneyMindManager_DataAccess;
 using MoneyMindManagerGlobal;
+using static MoneyMindManager_Business.clsBLLGlobal;
 using static MoneyMindManagerGlobal.clsDataColumns.clsIncomeAndExpenseCategoriesClasses;
 
 namespace MoneyMindManager_Business
@@ -23,6 +24,14 @@ namespace MoneyMindManager_Business
                 return null;
 
             return await clsIncomeAndExpenseCategory.FindCategoryByCategoryID(Convert.ToInt32(this.ParentCategoryID));
+        }
+
+        public async Task<clsIncomeAndExpenseCategory> GetMainCategoryInfo()
+        {
+            if (this.MainCategoryID == null)
+                return null;
+
+            return await clsIncomeAndExpenseCategory.FindCategoryByCategoryID(Convert.ToInt32(this.MainCategoryID));
         }
 
         /// <summary>
@@ -61,9 +70,9 @@ namespace MoneyMindManager_Business
 
         private clsIncomeAndExpenseCategory(int categoryID, string categoryName, DateTime createdDate, decimal? monthlyBudget,
             bool isIncome,int? parentCategoryID, short accountID, int createdByUserID, bool isActive, string categoryHierarchical,
-            string notes,string mainCategoryName,clsAccount accountInfo,clsUser createdByUserInfo) 
+            string notes,string mainCategoryName,string parentCategoryName,int? mainCategoryID,clsAccount accountInfo,clsUser createdByUserInfo) 
             : base(categoryID, categoryName, createdDate, monthlyBudget, isIncome, parentCategoryID, accountID,
-                  createdByUserID, isActive,categoryHierarchical,notes,mainCategoryName)
+                  createdByUserID, isActive,categoryHierarchical,notes,mainCategoryName,parentCategoryName,mainCategoryID)
         {
             this.Mode = enMode.Update;
             this.AccountInfo = accountInfo;
@@ -111,6 +120,8 @@ namespace MoneyMindManager_Business
             this.CategoryHierarchical = fresh.CategoryHierarchical;
             this.Notes = fresh.Notes;
             this.MainCategoryName = fresh.MainCategoryName;
+            this.ParentCategoryName = fresh.ParentCategoryName;
+            this.MainCategoryID = fresh.MainCategoryID;
             this.AccountInfo = fresh.AccountInfo;
             this.CreatedByUserInfo = fresh.CreatedByUserInfo;
 
@@ -169,7 +180,7 @@ namespace MoneyMindManager_Business
             return new clsIncomeAndExpenseCategory(Convert.ToInt32(result.CategoryID), result.CategoryName, result.CreatedDate,
                 result.MonthlyBudget, result.IsIncome, result.ParentCategoryID,Convert.ToInt16(result.AccountID),
                 Convert.ToInt32(result.CreatedByUserID), result.IsActive,result.CategoryHierarchical,result.Notes,
-                result.MainCategoryName,accountInfo, createdByUserInfo);
+                result.MainCategoryName,result.ParentCategoryName,result.MainCategoryID,accountInfo, createdByUserInfo);
         }
         
         public static async Task<clsIncomeAndExpenseCategory> FindCategoryByCategoryName(string categoryName)
@@ -186,9 +197,9 @@ namespace MoneyMindManager_Business
                 return null;
 
             return new clsIncomeAndExpenseCategory(Convert.ToInt32(result.CategoryID), result.CategoryName, result.CreatedDate,
-               result.MonthlyBudget, result.IsIncome, result.ParentCategoryID, Convert.ToInt16(result.AccountID),
-               Convert.ToInt32(result.CreatedByUserID), result.IsActive, result.CategoryHierarchical, result.Notes,
-               result.MainCategoryName, accountInfo, createdByUserInfo);
+                result.MonthlyBudget, result.IsIncome, result.ParentCategoryID, Convert.ToInt16(result.AccountID),
+                Convert.ToInt32(result.CreatedByUserID), result.IsActive, result.CategoryHierarchical, result.Notes,
+                result.MainCategoryName, result.ParentCategoryName, result.MainCategoryID, accountInfo, createdByUserInfo);
         }
 
         public static async Task<bool> DeleteCategoryByCategoryID(int categoryID)
@@ -211,69 +222,73 @@ namespace MoneyMindManager_Business
         }
 
         /// <summary>
-        /// Filter by CategoryType - isIncome, if vairable is null will not filter by it
-        /// </summary>
-        public static async Task<clsGetAllCategories> GetAllCategoriesForSelectOne(bool? isIncome,short pageNumber)
-        {
-         return  await clsIncomeAndExpenseCategoryData.GetAllCategoriesForSelectOne(null, isIncome, Convert.ToInt32(clsGlobalSession.CurrentUserID), pageNumber);
-        }
-
-        /// <summary>
         /// Filter by CategoryName AND CategoryType - isIncome, if vairable is null will not filter by it
         /// </summary>
-        public static async Task<clsGetAllCategories> GetAllCategoriesForSelectOne(string categoryName ,bool? isIncome,short pageNumber)
+        public static async Task<clsGetAllCategories> GetAllCategoriesForSelectOne(string categoryName ,bool? isIncome, enTextSearchMode textSearchMode, short pageNumber)
         {
-         return  await clsIncomeAndExpenseCategoryData.GetAllCategoriesForSelectOne(categoryName, isIncome, Convert.ToInt32(clsGlobalSession.CurrentUserID), pageNumber);
+            byte rowsPerPage = 15;
+            return await clsIncomeAndExpenseCategoryData.GetAllCategoriesForSelectOne(categoryName, isIncome, Convert.ToInt32(clsGlobalSession.CurrentUserID),
+                (byte)textSearchMode, pageNumber, rowsPerPage);
         }
 
+        private static async Task<clsGetAllCategories> _GetAllCategories(int? categoryID, string categoryName,
+            string parentCategoryName, string mainCategoryName, bool? isIncome, bool? isActive, bool includeMainCategories,
+            bool includeSubCategories, enTextSearchMode textSearchMode, short pageNumber)
+        {
+            byte rowsPerPage = 15;
+
+            return await clsIncomeAndExpenseCategoryData.GetAllCategories(categoryID,categoryName,parentCategoryName,
+                mainCategoryName,isIncome,isActive,includeMainCategories,includeSubCategories,
+                Convert.ToInt32(clsGlobalSession.CurrentUserID),   (byte)textSearchMode,pageNumber,rowsPerPage);
+        }
         /// <summary>
         /// if variable is null will not filter by it
         /// </summary>
         public static async Task<clsGetAllCategories> GetAllCategories(bool isIncome, bool? isActive, bool includeMainCategories, bool includeSubCategories,
-             short pageNumber)
+             enTextSearchMode textSearchMode,short pageNumber)
         {
-            return await clsIncomeAndExpenseCategoryData.GetAllCategories(null, null, null, null, isIncome, isActive, includeMainCategories,
-                includeSubCategories, Convert.ToInt32(clsGlobalSession.CurrentUserID), pageNumber);
+            return await _GetAllCategories(null, null, null, null, isIncome, isActive, includeMainCategories,
+                includeSubCategories, textSearchMode, pageNumber);
         }
 
         /// <summary>
         /// if variable is null will not filter by it
         /// </summary>
         public static async Task<clsGetAllCategories> GetAllCategoriesByCategoryID(int categoryID,bool isIncome, bool? isActive, bool includeMainCategories, bool includeSubCategories,
-             short pageNumber)
+             enTextSearchMode textSearchMode,short pageNumber)
         {
-            return await clsIncomeAndExpenseCategoryData.GetAllCategories(categoryID, null, null, null, isIncome, isActive, includeMainCategories,
-                includeSubCategories, Convert.ToInt32(clsGlobalSession.CurrentUserID), pageNumber);
+            return await _GetAllCategories(categoryID, null, null, null, isIncome, isActive, includeMainCategories,
+                includeSubCategories,textSearchMode, pageNumber);
         }
 
         /// <summary>
         /// if variable is null will not filter by it
         /// </summary>
         public static async Task<clsGetAllCategories> GetAllCategoriesByCategoryName(string categoryName,bool isIncome, bool? isActive, bool includeMainCategories, bool includeSubCategories,
-             short pageNumber)
+             enTextSearchMode textSearchMode,short pageNumber)
         {
-            return await clsIncomeAndExpenseCategoryData.GetAllCategories(null, categoryName, null, null, isIncome, isActive, includeMainCategories,
-                includeSubCategories, Convert.ToInt32(clsGlobalSession.CurrentUserID), pageNumber);
+            return await _GetAllCategories(null, categoryName, null, null, isIncome, isActive, includeMainCategories,
+                includeSubCategories, textSearchMode, pageNumber);
         }
 
         /// <summary>
         /// if variable is null will not filter by it
         /// </summary>
         public static async Task<clsGetAllCategories> GetAllCategoriesByParentCategoryName(string parentCategoryName,bool isIncome, bool? isActive, bool includeMainCategories, bool includeSubCategories,
-             short pageNumber)
+             enTextSearchMode textSearchMode,short pageNumber)
         {
-            return await clsIncomeAndExpenseCategoryData.GetAllCategories(null, null, parentCategoryName, null, isIncome, isActive, includeMainCategories,
-                includeSubCategories, Convert.ToInt32(clsGlobalSession.CurrentUserID), pageNumber);
+            return await _GetAllCategories(null, null, parentCategoryName, null, isIncome, isActive, includeMainCategories,
+                includeSubCategories, textSearchMode, pageNumber);
         }
 
         /// <summary>
         /// if variable is null will not filter by it
         /// </summary>
         public static async Task<clsGetAllCategories> GetAllCategoriesByMainCategoryName(string mainCategoryName,bool isIncome, bool? isActive, bool includeMainCategories, bool includeSubCategories,
-             short pageNumber)
+             enTextSearchMode textSearchMode,short pageNumber)
         {
-            return await clsIncomeAndExpenseCategoryData.GetAllCategories(null, null, null, mainCategoryName, isIncome, isActive, includeMainCategories,
-                includeSubCategories, Convert.ToInt32(clsGlobalSession.CurrentUserID), pageNumber);
+            return await _GetAllCategories(null, null, null, mainCategoryName, isIncome, isActive, includeMainCategories,
+                includeSubCategories,textSearchMode, pageNumber);
         }
     }
 }

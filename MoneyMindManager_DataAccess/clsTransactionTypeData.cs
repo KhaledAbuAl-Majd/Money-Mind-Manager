@@ -51,7 +51,7 @@ namespace MoneyMindManager_DataAccess
                 TransactionTypeData = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return TransactionTypeData;
@@ -95,7 +95,7 @@ namespace MoneyMindManager_DataAccess
                 TransactionTypeData = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return TransactionTypeData;
@@ -130,7 +130,7 @@ namespace MoneyMindManager_DataAccess
                 dtTypes = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return dtTypes;

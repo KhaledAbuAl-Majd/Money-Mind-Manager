@@ -136,14 +136,16 @@ namespace MoneyMindManager_Business
             return await clsIncomeAndExpenseTransactionData.DeleteIncomeAndExpenseTransactoinByID(transactionID, Convert.ToInt32(clsGlobalSession.CurrentUserID));
         }
 
-        public static async Task<clsGetAllIncomeAndExpenseTransactions> GetAllIncomeAndExpensTransactions(int voucherID, short pageNumber)
+        public static async Task<clsGetAllIncomeAndExpenseTransactions> GetAllIncomeAndExpensTransactionsForVoucher(int voucherID, short pageNumber)
         {
-            return await clsIncomeAndExpenseTransactionData.GetAllIncomeAndExpensTransactions(voucherID, Convert.ToInt32(clsGlobalSession.CurrentUserID), pageNumber);
+            byte rowsPerPage = 30;
+            return await clsIncomeAndExpenseTransactionData.GetAllIncomeAndExpensTransactionsForVoucher(voucherID,
+                Convert.ToInt32(clsGlobalSession.CurrentUserID), pageNumber,rowsPerPage);
         }
 
-        public static async Task<DataTable> GetAllIncomeAndExpensTransactionsWithoutPaging(int voucherID)
+        public static async Task<DataTable> GetAllIncomeAndExpensTransactionsForVoucherWithoutPaging(int voucherID)
         {
-            return await clsIncomeAndExpenseTransactionData.GetAllIncomeAndExpensTransactionsWithoutPaging(voucherID, Convert.ToInt32(clsGlobalSession.CurrentUserID));
+            return await clsIncomeAndExpenseTransactionData.GetAllIncomeAndExpensTransactionsForVoucherWithoutPaging(voucherID, Convert.ToInt32(clsGlobalSession.CurrentUserID));
         }
 
         public async Task<bool> IsExceedCategoryMonthlyBudget(bool isReturn)

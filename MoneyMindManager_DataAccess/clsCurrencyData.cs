@@ -52,7 +52,7 @@ namespace MoneyMindManager_DataAccess
                 currencyData = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return currencyData;
@@ -97,7 +97,7 @@ namespace MoneyMindManager_DataAccess
                 currencyData = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return currencyData;
@@ -132,7 +132,7 @@ namespace MoneyMindManager_DataAccess
                 dtCurrencies = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return dtCurrencies;

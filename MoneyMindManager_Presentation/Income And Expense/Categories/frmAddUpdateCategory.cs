@@ -140,7 +140,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
             if (searchedCategory == null)
             {
-                clsGlobalMessageBoxs.ShowErrorMessage("فشل تحميل بيانات الفئة");
+                clsPL_MessageBoxs.ShowErrorMessage("فشل تحميل بيانات الفئة");
                 this.Close();
                 return;
             }
@@ -157,7 +157,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             if (!(_Category.ParentCategoryID == null && _Category.IsIncome == false))
                 _SetReadOnlyAtTextBox(kgtxtMonthlyBudget);
 
-            kgtxtParentCategoryName.Text = (await _Category.GetParentCategoryInfo())?.CategoryName;
+            kgtxtParentCategoryName.Text = _Category.ParentCategoryName;
             _SetReadOnlyAtTextBox(kgtxtParentCategoryName);
             kgtxtNotes.Text = _Category.Notes;
             gcbIsIncome_CategroyType.SelectedIndex = Convert.ToInt32((Convert.ToBoolean(_isIncome)) ? en_gcbIsInocmeItems.واردات : en_gcbIsInocmeItems.مصروفات);
@@ -184,7 +184,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             var frm = new frmSelectCategory(Convert.ToBoolean(_isIncome));
             frm.OnCategorySelected += Frm_OnCategorySelected;
             //frm.ShowDialog(clsGlobal_UI.MainForm);
-            clsGlobal_UI.MainForm.AddNewFormAsDialog(frm);
+            clsPL_Global.MainForm.AddNewFormAsDialog(frm);
         }
         async Task _Save()
         {
@@ -195,7 +195,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
             if (!ValidateChildren())
             {
-                clsGlobalMessageBoxs.ShowValidateChildrenFailedMessage();
+                clsPL_MessageBoxs.ShowValidateChildrenFailedMessage();
                 return;
             }
 
@@ -210,7 +210,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                 {
                     if (!string.IsNullOrWhiteSpace(kgtxtParentCategoryName.ValidatedText) && !_Category.AssignParentCateoryIDAtAddMode(Convert.ToInt32(parentCategoryID)))
                     {
-                        clsGlobalMessageBoxs.ShowErrorMessage("فشل تسجيل معرف الفئة التابعة لها");
+                        clsPL_MessageBoxs.ShowErrorMessage("فشل تسجيل معرف الفئة التابعة لها");
                         _ResteObject();
                         return;
                     }
@@ -218,7 +218,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
                 if (!_Category.AssignIsIncome_CategoryType_AtAddMode(Convert.ToBoolean(_isIncome)))
                 {
-                    clsGlobalMessageBoxs.ShowErrorMessage("فشل تسجيل نوع الفئة");
+                    clsPL_MessageBoxs.ShowErrorMessage("فشل تسجيل نوع الفئة");
                     _ResteObject();
                     return;
                 }
@@ -241,7 +241,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             {
                 if (Mode == enMode.AddNew)
                 {
-                    clsGlobalMessageBoxs.ShowMessage($"تم إضافة الفئة بنجاج بمعرف [{_Category.CategoryID}]", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    clsPL_MessageBoxs.ShowMessage($"تم إضافة الفئة بنجاج بمعرف [{_Category.CategoryID}]", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     Mode = enMode.Update;
                     _CategoryID = _Category.CategoryID;
@@ -258,7 +258,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                 }
                 else if (Mode == enMode.Update)
                 {
-                    clsGlobalMessageBoxs.ShowMessage("تم تعديل بيانات الفئة بنجاح", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    clsPL_MessageBoxs.ShowMessage("تم تعديل بيانات الفئة بنجاح", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
                 _isSaved = true;
@@ -290,7 +290,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
         {
             KhaledGuna2TextBox kgtxtBox = (KhaledGuna2TextBox)sender;
             e.CancelEventArgs.Cancel = true;
-            string errorMessage = clsUtils.GetValidationErrorTypeString(e.validationErrorType, kgtxtBox);
+            string errorMessage = clsPL_Utils.GetValidationErrorTypeString(e.validationErrorType, kgtxtBox);
 
             errorProvider1.SetError(kgtxtBox, errorMessage);
         }
@@ -404,7 +404,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             if (_CategoryID == null || Mode == enMode.AddNew)
                 return;
 
-            if (clsGlobalMessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف الفئة ؟ ", "طلب مواقفقة", MessageBoxButtons.OKCancel,
+            if (clsPL_MessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف الفئة ؟ ", "طلب مواقفقة", MessageBoxButtons.OKCancel,
                MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
             {
                 if (await clsIncomeAndExpenseCategory.DeleteCategoryByCategoryID(Convert.ToInt32(_CategoryID)))
@@ -435,7 +435,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             lblUserMessage.Visible = false;
 
             frmUserInfo frm = new frmUserInfo(Convert.ToInt32(_Category?.CreatedByUserID));
-            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
+            clsPL_Global.MainForm.AddNewFormAtContainer(frm);
         }
     }
 }

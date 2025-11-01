@@ -12,6 +12,7 @@ using MoneyMindManager_Business;
 using MoneyMindManager_Presentation.Global;
 using MoneyMindManager_Presentation.Income_And_Expense.Vouchers;
 using MoneyMindManagerGlobal;
+using static MoneyMindManager_Business.clsBLLGlobal;
 using static MoneyMindManager_Business.clsIncomeAndExpenseVoucher;
 
 namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
@@ -55,7 +56,6 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                 lblNoRecordsFoundMessage.Visible = true;
                 lblUserMessage.Text = "تم العثور على حقول غير صالحة. ضع المؤشر على العلامات الحمراء لعرض سبب الخطأ.";
                 lblUserMessage.Visible = true;
-                //clsGlobal_Presentation.ShowMessage("تم العثور على حقول غير صالحة. ضع المؤشر على العلامات الحمراء لعرض سبب الخطأ.", "خطأ في التحقق", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 lblCurrentPageRecordsCount.Text = "0";
                 lblTotalRecordsNumber.Text = "0";
                 lblCurrentPageOfNumberOfPages.Text = string.Concat("1", "   من   ", "0", "  صفحات");
@@ -75,7 +75,12 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             if (!_CheckValidationChildren())
                 return;
 
-            //_pageNumber = Convert.ToInt16(kgtxtPageNumber.ValidatedText);
+            enTextSearchMode textSearchMode = enTextSearchMode.WordsPrefix_Fast;
+
+            if (grbTextSearchMode_WordsPrefix.Checked)
+                textSearchMode = enTextSearchMode.WordsPrefix_Fast;
+            else if (grbTextSearchMode_SubString.Checked)
+                textSearchMode = enTextSearchMode.Substring_Slow;
 
             clsDataColumns.clsIncomeAndExpenseCategoriesClasses.clsGetAllCategories result = null;
 
@@ -94,31 +99,31 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             if (filterBy == enFilterBy.All || string.IsNullOrEmpty(kgtxtFilterValue.ValidatedText))
             {
                 result = await clsIncomeAndExpenseCategory.GetAllCategories(_IsIncome, isActive, includeMainCategories,
-                    includeSubCategories, _pageNumber);
+                    includeSubCategories,textSearchMode, _pageNumber);
             }
             else if (filterBy == enFilterBy.CategoryID)
             {
                 int categoryID = Convert.ToInt32(kgtxtFilterValue.ValidatedText);
                 result = await clsIncomeAndExpenseCategory.GetAllCategoriesByCategoryID(categoryID, _IsIncome, isActive,
-                    includeMainCategories, includeSubCategories, _pageNumber);
+                    includeMainCategories, includeSubCategories, textSearchMode, _pageNumber);
             }
             else if (filterBy == enFilterBy.CategoryName)
             {
                 string categoryName = kgtxtFilterValue.ValidatedText;
                 result = await clsIncomeAndExpenseCategory.GetAllCategoriesByCategoryName(categoryName, _IsIncome, isActive,
-                     includeMainCategories, includeSubCategories, _pageNumber);
+                     includeMainCategories, includeSubCategories, textSearchMode, _pageNumber);
             }
             else if (filterBy == enFilterBy.ParentCategoryName)
             {
                 string parentCategoryName = kgtxtFilterValue.ValidatedText;
                 result = await clsIncomeAndExpenseCategory.GetAllCategoriesByParentCategoryName(parentCategoryName, _IsIncome, isActive,
-                     includeMainCategories, includeSubCategories, _pageNumber);
+                     includeMainCategories, includeSubCategories, textSearchMode, _pageNumber);
             }
             else if (filterBy == enFilterBy.MainCategoryName)
             {
                 string mainCategoryName = kgtxtFilterValue.ValidatedText;
                 result = await clsIncomeAndExpenseCategory.GetAllCategoriesByMainCategoryName(mainCategoryName, _IsIncome, isActive,
-                     includeMainCategories, includeSubCategories, _pageNumber);
+                     includeMainCategories, includeSubCategories, textSearchMode, _pageNumber);
             }
             else
                 return;
@@ -129,7 +134,6 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             if (result.dtCategories.Rows.Count == 0)
             {
                 lblNoRecordsFoundMessage.Visible = true;
-                //lblUserMessage.Visible = true;
                 gdgvCategories.DataSource = null;
                 _IsHeaderCreated = false;
                 _pageNumber = 1;
@@ -186,7 +190,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
         {
             frmAddUpdateCategory frm = new frmAddUpdateCategory(_IsIncome);
             frm.OnCloseAndSaved += x => _RefreshFilter();
-            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
+            clsPL_Global.MainForm.AddNewFormAtContainer(frm);
         }
 
         void _UpdateCategory()
@@ -198,7 +202,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
             frmAddUpdateCategory frm = new frmAddUpdateCategory(categoryID);
             frm.OnCloseAndSaved += x => _RefreshFilter();
-            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
+            clsPL_Global.MainForm.AddNewFormAtContainer(frm);
         }
 
         async void _RefreshFilter()
@@ -233,11 +237,15 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             gcbFilterBy.SelectedIndex = 0;
         }
 
+        private async void frmCategoriesList_Shown(object sender, EventArgs e)
+        {
+            await _LoadDataAtDataGridView(enFilterBy.All);
+        }
         private void kgtxt_OnValidationError(object sender, KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs e)
         {
             KhaledGuna2TextBox kgtxt = (KhaledGuna2TextBox)sender;
             e.CancelEventArgs.Cancel = true;
-            errorProvider1.SetError(kgtxt, clsUtils.GetValidationErrorTypeString(e.validationErrorType, kgtxt));
+            errorProvider1.SetError(kgtxt, clsPL_Utils.GetValidationErrorTypeString(e.validationErrorType, kgtxt));
         }
 
         private void kgtxt_OnValidationSuccess(object arg1, CancelEventArgs arg2)
@@ -261,6 +269,8 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
         private async void gcbFilterBy_SelectedIndexChanged(object sender, EventArgs e)
         {
+            string oldText = kgtxtFilterValue.Text;
+
             _pageNumber = 1;
 
             _searchByPageNumber = false;
@@ -269,15 +279,14 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
             if (gcbFilterBy.Text == "بدون")
             {
-                /*kgtxtFilterValue.Visible = false*/;
                 _SetReadOnlyAtTextBox(kgtxtFilterValue);
                 _filterBy = enFilterBy.All;
-                await _LoadDataAtDataGridView(_filterBy);
+                if (!string.IsNullOrWhiteSpace(oldText))
+                    await _LoadDataAtDataGridView(_filterBy);
                 return;
             }
 
 
-            //kgtxtFilterValue.Visible = true;
             _CancelReadOnlyAtTextBox(kgtxtFilterValue);
             kgtxtFilterValue.IsRequired = false;
             kgtxtFilterValue.TrimStart = false;
@@ -318,11 +327,13 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                 kgtxtFilterValue.TrimEnd = false;
             }
 
-            await _LoadDataAtDataGridView(_filterBy);
+            if (!string.IsNullOrWhiteSpace(oldText))
+                await _LoadDataAtDataGridView(_filterBy);
         }
 
         private void kgtxtFilterValue_TextChanged(object sender, EventArgs e)
         {
+            _pageNumber = 1;
             SearchAfterTimerFinish.Stop();
             SearchAfterTimerFinish.Start();
         }
@@ -339,7 +350,6 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
             _pageNumber = Convert.ToInt16(kgtxtPageNumber.ValidatedText);
 
-            //await _LoadDataAtDataGridView();
 
             SearchAfterTimerFinish.Stop();
             SearchAfterTimerFinish.Start();
@@ -350,6 +360,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             if (e.KeyChar == (char)Keys.Enter)
             {
                 SearchAfterTimerFinish.Stop();
+                _pageNumber = 1;
                 await _LoadDataAtDataGridView(_filterBy);
             }
         }
@@ -372,6 +383,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
         private async void gibtnRefreshData_Click(object sender, EventArgs e)
         {
+            _pageNumber = 1;
             await _LoadDataAtDataGridView(_filterBy);
         }
 
@@ -394,7 +406,6 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
         {
             if (e.Value == null || e.Value == DBNull.Value)
             {
-                //e.CellStyle.BackColor = Color.LightYellow; // خلفية
                 e.CellStyle.ForeColor = Color.Red;
                 e.CellStyle.SelectionForeColor = Color.Orange;
             }
@@ -404,7 +415,8 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             int categoryID = Convert.ToInt32(gdgvCategories.SelectedRows[0].Cells[0].Value);
 
             var frm = new frmCategoryMonthlyFlow(categoryID);
-            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
+            clsPL_Global.MainForm.AddNewFormAtContainer(frm);
         }
+
     }
 }

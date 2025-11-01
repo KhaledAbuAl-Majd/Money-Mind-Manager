@@ -59,7 +59,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
             DateTime? startDate = clsFormat.TryConvertToDateTime(kgtxtFromData.ValidatedText);
             DateTime? endDate = clsFormat.TryConvertToDateTime(kgtxtToDate.ValidatedText);
 
-            var _chartData = await clsReport.GetTopCategories(startDate, endDate,_IsIncome, Convert.ToInt16(clsGlobal_UI.CurrentUser.AccountID));
+            var _chartData = await clsReport.GetTopCategories(startDate, endDate,_IsIncome, Convert.ToInt16(clsPL_Global.CurrentUser.AccountID));
 
             LoadTopCategoriesPieChart(_chartData);
         }
@@ -126,7 +126,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
         {
             KhaledGuna2TextBox kgtxt = (KhaledGuna2TextBox)sender;
             e.CancelEventArgs.Cancel = true;
-            errorProvider1.SetError(kgtxt, clsUtils.GetValidationErrorTypeString(e.validationErrorType, kgtxt));
+            errorProvider1.SetError(kgtxt, clsPL_Utils.GetValidationErrorTypeString(e.validationErrorType, kgtxt));
         }
 
         private void kgtxt_OnValidationSuccess(object sender, CancelEventArgs e)

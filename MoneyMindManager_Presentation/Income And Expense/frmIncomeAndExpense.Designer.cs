@@ -42,9 +42,9 @@
             // gpnlFormContainer
             // 
             this.gpnlFormContainer.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.gpnlFormContainer.Location = new System.Drawing.Point(0, 122);
+            this.gpnlFormContainer.Location = new System.Drawing.Point(0, 74);
             this.gpnlFormContainer.Name = "gpnlFormContainer";
-            this.gpnlFormContainer.Size = new System.Drawing.Size(1210, 687);
+            this.gpnlFormContainer.Size = new System.Drawing.Size(1210, 735);
             this.gpnlFormContainer.TabIndex = 6;
             // 
             // lblHeader
@@ -67,7 +67,7 @@
             this.guna2Panel1.BorderThickness = 1;
             this.guna2Panel1.Controls.Add(this.gbtnCategories);
             this.guna2Panel1.Controls.Add(this.gbtnVouchers);
-            this.guna2Panel1.Location = new System.Drawing.Point(942, 57);
+            this.guna2Panel1.Location = new System.Drawing.Point(942, 11);
             this.guna2Panel1.Name = "guna2Panel1";
             this.guna2Panel1.Size = new System.Drawing.Size(258, 59);
             this.guna2Panel1.TabIndex = 20;
@@ -141,7 +141,7 @@
             // 
             this.ciiExepnsesReturn.BackColor = System.Drawing.Color.Transparent;
             this.ciiExepnsesReturn.IconImage = ((System.Drawing.Image)(resources.GetObject("ciiExepnsesReturn.IconImage")));
-            this.ciiExepnsesReturn.Location = new System.Drawing.Point(914, 78);
+            this.ciiExepnsesReturn.Location = new System.Drawing.Point(914, 32);
             this.ciiExepnsesReturn.Name = "ciiExepnsesReturn";
             // 
             // 

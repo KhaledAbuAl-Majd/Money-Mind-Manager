@@ -291,7 +291,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             if (searchedDebt == null)
             {
-                clsGlobalMessageBoxs.ShowErrorMessage("فشل تحميل بيانات السند");
+                clsPL_MessageBoxs.ShowErrorMessage("فشل تحميل بيانات السند");
                 this.Close();
                 return;
             }
@@ -333,7 +333,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             if (!ValidateChildren())
             {
-                clsGlobalMessageBoxs.ShowValidateChildrenFailedMessage();
+                clsPL_MessageBoxs.ShowValidateChildrenFailedMessage();
                 return;
             }
 
@@ -341,7 +341,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             {
                 if (_PersonID == null || !_Debt.AssingPersonIDAtAddMode(Convert.ToInt32(_PersonID)))
                 {
-                    clsGlobalMessageBoxs.ShowErrorMessage("فشل تسجيل معرف الشخص !");
+                    clsPL_MessageBoxs.ShowErrorMessage("فشل تسجيل معرف الشخص !");
                     _ResetDebtObject();
                     return;
                 }
@@ -350,14 +350,14 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
                 if (!_Debt.AssingIsLendingAddMode(isLending))
                 {
-                    clsGlobalMessageBoxs.ShowErrorMessage("فشل تسجيل نوع الدين !");
+                    clsPL_MessageBoxs.ShowErrorMessage("فشل تسجيل نوع الدين !");
                     _ResetDebtObject();
                     return;
                 }
 
                 if (!_Debt.AssingIsLockingAddMode(gchkIsLocked.Checked))
                 {
-                    clsGlobalMessageBoxs.ShowErrorMessage("فشل تسجيل قفل المستند !");
+                    clsPL_MessageBoxs.ShowErrorMessage("فشل تسجيل قفل المستند !");
                     _ResetDebtObject();
                     return;
                 }
@@ -369,13 +369,13 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             decimal amount = Convert.ToDecimal(kgtxtDebtValue.ValidatedText);
             string notes = kgtxtNotes.ValidatedText;
             DateTime debtDate = Convert.ToDateTime(kgtxtDebtDate.ValidatedText);
-            int currentUserID = Convert.ToInt32(clsGlobal_UI.CurrentUser?.UserID);
+            int currentUserID = Convert.ToInt32(clsPL_Global.CurrentUser?.UserID);
 
             if (await _Debt.Save(amount,notes,debtDate))
             {
                 if (_DebtMode == enDebtMode.AddNew)
                 {
-                    clsGlobalMessageBoxs.ShowMessage($"تم إضافة سند الدين بنجاج بمعرف [{_Debt.DebtID}]", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    clsPL_MessageBoxs.ShowMessage($"تم إضافة سند الدين بنجاج بمعرف [{_Debt.DebtID}]", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     _DebtMode = enDebtMode.Update;
                     _DebtID = _Debt.DebtID;
@@ -391,7 +391,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 }
                 else if (_DebtMode == enDebtMode.Update)
                 {
-                    clsGlobalMessageBoxs.ShowMessage("تم تعديل بيانات سند الدين بنجاح", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    clsPL_MessageBoxs.ShowMessage("تم تعديل بيانات سند الدين بنجاح", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
                 kgtxtRemainingAmount.RefreshNumber_DateTimeFormattedText(_Debt.RemainingAmount.ToString());
@@ -419,7 +419,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             var frm = new frmAddUpdateDebtPayment(Convert.ToBoolean(_Debt.IsLending), Convert.ToInt32(_DebtID));
             frm.OnCloseAndSaved += FrmAddUpdateDebtPayment_OnCloseAndSaved;
-            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
+            clsPL_Global.MainForm.AddNewFormAtContainer(frm);
         }
 
         void _EditTransaction()
@@ -437,7 +437,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             var frm = new frmAddUpdateDebtPayment(transactionID);
             frm.OnCloseAndSaved += FrmAddUpdateDebtPayment_OnCloseAndSaved;
-            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
+            clsPL_Global.MainForm.AddNewFormAtContainer(frm);
         }
 
         void _ShowTransactionInfo()
@@ -454,7 +454,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             int transactionID = Convert.ToInt32(gdgvDebtPaymentTransctions.SelectedRows[0].Cells[0].Value);
 
             var frm = new frmMainTransactionInfo(transactionID);
-            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
+            clsPL_Global.MainForm.AddNewFormAtContainer(frm);
         }
 
         private async void frmAddUpdateVoucher_Load(object sender, EventArgs e)
@@ -513,7 +513,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
         {
             KhaledGuna2TextBox kgtxt = (KhaledGuna2TextBox)sender;
             e.CancelEventArgs.Cancel = true;
-            errorProvider1.SetError(kgtxt, clsUtils.GetValidationErrorTypeString(e.validationErrorType, kgtxt));
+            errorProvider1.SetError(kgtxt, clsPL_Utils.GetValidationErrorTypeString(e.validationErrorType, kgtxt));
         }
 
         private void kgtxt_OnValidationSuccess(object sender, CancelEventArgs e)
@@ -581,7 +581,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             if (gdgvDebtPaymentTransctions.SelectedRows.Count < 1 || _DebtID == null || _Debt.IsLocked)
                 return;
 
-            if (clsGlobalMessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف معاملة السداد هذه ؟ ", "طلب مواقفقة", MessageBoxButtons.OKCancel,
+            if (clsPL_MessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف معاملة السداد هذه ؟ ", "طلب مواقفقة", MessageBoxButtons.OKCancel,
                MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
             {
                 int transactionID = Convert.ToInt32(gdgvDebtPaymentTransctions.SelectedRows[0].Cells[0].Value);
@@ -611,7 +611,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             lblUserMessage.Visible = false;
 
-            if (clsGlobalMessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف السند ؟ ", "طلب مواقفقة", MessageBoxButtons.OKCancel,
+            if (clsPL_MessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف السند ؟ ", "طلب مواقفقة", MessageBoxButtons.OKCancel,
                MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
             {
                 if (await clsDebt.DeleteDebtByDebtID(Convert.ToInt32(_DebtID)))
@@ -651,7 +651,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             var frm = new frmSelectPerson();
             frm.OnPersonSelected += FrmSelectPerson_OnPersonSelected;
-            clsGlobal_UI.MainForm.AddNewFormAsDialog(frm);
+            clsPL_Global.MainForm.AddNewFormAsDialog(frm);
         }
 
         private void FrmSelectPerson_OnPersonSelected(object sender, frmSelectPerson.SelectPersonEventArgs e)
@@ -672,7 +672,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             lblUserMessage.Visible = false;
 
             frmPersonInfo frm = new frmPersonInfo(Convert.ToInt32(_PersonID),false);
-            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
+            clsPL_Global.MainForm.AddNewFormAtContainer(frm);
         }
 
         private async void gtsmExportExcel_Click(object sender, EventArgs e)
@@ -690,7 +690,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             lblUserMessage.Visible = false;
 
 
-            int currentUserID = Convert.ToInt32(clsGlobal_UI.CurrentUser.UserID);
+            int currentUserID = Convert.ToInt32(clsPL_Global.CurrentUser.UserID);
 
             var dt = await _Debt.GetDebtPaymentsWithoutPaging();
 
@@ -700,7 +700,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             if (dt == null)
             {
-                clsGlobalMessageBoxs.ShowErrorMessage("فشل تصدير البيانات !");
+                clsPL_MessageBoxs.ShowErrorMessage("فشل تصدير البيانات !");
                 return;
             }
 
@@ -728,7 +728,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             lblUserMessage.Visible = false;
 
             frmUserInfo frm = new frmUserInfo(Convert.ToInt32(_Debt?.CreatedByUserID));
-            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
+            clsPL_Global.MainForm.AddNewFormAtContainer(frm);
 
         }
     }

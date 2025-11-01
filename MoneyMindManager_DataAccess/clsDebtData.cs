@@ -65,7 +65,7 @@ namespace MoneyMindManager_DataAccess
                 newDebtTransactionID = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return (newDebtID, newDebtTransactionID);
@@ -121,7 +121,7 @@ namespace MoneyMindManager_DataAccess
                 remainingAmount = -99999999;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return (result,remainingAmount);
@@ -162,7 +162,7 @@ namespace MoneyMindManager_DataAccess
                 result = false;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return result;
@@ -202,7 +202,7 @@ namespace MoneyMindManager_DataAccess
                 result = false;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return result;
@@ -254,7 +254,7 @@ namespace MoneyMindManager_DataAccess
                 voucherData = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return voucherData;
@@ -264,8 +264,8 @@ namespace MoneyMindManager_DataAccess
         /// if variable is null will not filter by it
         /// </summary>
         public static async Task<clsGetAllDebts> GetAllDebts(int? debtID, bool? isLending, string personName,string userName,
-            DateTime? fromCreatedDate, DateTime? toCreatedDate, DateTime? fromDebtDate, DateTime? toDebtDate,
-            bool? isPaid,int currentUserID, short pageNumber, bool RaiseEventOnErrorOccured = true)
+            DateTime? fromCreatedDate, DateTime? toCreatedDate, DateTime? fromDebtDate, DateTime? toDebtDate,  bool? isPaid,
+            int currentUserID, byte textSearchMode, short pageNumber, byte rowsPerPage, bool RaiseEventOnErrorOccured = true)
         {
             clsGetAllDebts allDebts = null;
 
@@ -286,8 +286,10 @@ namespace MoneyMindManager_DataAccess
                         command.Parameters.AddWithValue("@FromDebtDate", (object)fromDebtDate ?? DBNull.Value);
                         command.Parameters.AddWithValue("@ToDebtDate", (object)toDebtDate ?? DBNull.Value);
                         command.Parameters.AddWithValue("@IsPaid", (object)isPaid ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@TextSearchMode", textSearchMode);
                         command.Parameters.AddWithValue("@CurrentUserID", currentUserID);
                         command.Parameters.AddWithValue("@PageNumber", pageNumber);
+                        command.Parameters.AddWithValue("@RowsPerPage", rowsPerPage);
 
                         SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.SmallInt)
                         {
@@ -360,7 +362,7 @@ namespace MoneyMindManager_DataAccess
                 allDebts = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return allDebts;
@@ -368,7 +370,7 @@ namespace MoneyMindManager_DataAccess
 
         public static async Task<DataTable> GetAllDebtsWithoutPaging(int? debtID, bool? isLending, string personName, string userName,
             DateTime? fromCreatedDate, DateTime? toCreatedDate, DateTime? fromDebtDate, DateTime? toDebtDate,
-            bool? isPaid, int currentUserID, bool RaiseEventOnErrorOccured = true)
+            bool? isPaid, int currentUserID, byte textSearchMode, bool RaiseEventOnErrorOccured = true)
         {
             DataTable dtDebts = null;
 
@@ -389,6 +391,7 @@ namespace MoneyMindManager_DataAccess
                         command.Parameters.AddWithValue("@FromDebtDate", (object)fromDebtDate ?? DBNull.Value);
                         command.Parameters.AddWithValue("@ToDebtDate", (object)toDebtDate ?? DBNull.Value);
                         command.Parameters.AddWithValue("@IsPaid", (object)isPaid ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@TextSearchMode", textSearchMode);
                         command.Parameters.AddWithValue("@CurrentUserID", currentUserID);
 
                         await connection.OpenAsync();
@@ -409,7 +412,7 @@ namespace MoneyMindManager_DataAccess
                 dtDebts = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return dtDebts;

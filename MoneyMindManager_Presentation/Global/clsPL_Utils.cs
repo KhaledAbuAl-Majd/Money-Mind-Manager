@@ -7,7 +7,7 @@ using KhaledControlLibrary1;
 
 namespace MoneyMindManager_Presentation.Global
 {
-    public static class clsUtils
+    public static class clsPL_Utils
     {
         /// <summary>
         /// Get validation Error Type String of KhaledGuna2TextBox.ValidatingErrorEventArgs.enValidationErrorType

@@ -408,9 +408,12 @@ namespace MoneyMindManagerGlobal
                 public string CategoryHierarchical { get; protected set; }
                 public string Notes { get; set; }
                 public string MainCategoryName { get; protected set; }
+                public string ParentCategoryName { get; protected set; }
+                public int? MainCategoryID { get; protected set; }
 
-                public clsIncomeAndExpenseCategoriesColumns(int categoryID, string categoryName, DateTime createdDate, decimal? monthlyBudget, bool isIncome,
-                    int? parentCategoryID, short accountID, int createdByUserID, bool isActive,string categoryHierarchical,string notes,string mainCategoryName)
+                public clsIncomeAndExpenseCategoriesColumns(int categoryID, string categoryName, DateTime createdDate, decimal? monthlyBudget,
+                    bool isIncome,  int? parentCategoryID, short accountID, int createdByUserID, bool isActive,
+                    string categoryHierarchical,string notes,string mainCategoryName,string parentCategoryName, int? mainCategoryID)
                 {
                     this.CategoryID = categoryID;
                     this.CategoryName = categoryName;
@@ -424,6 +427,8 @@ namespace MoneyMindManagerGlobal
                     this.CategoryHierarchical = categoryHierarchical;
                     this.Notes = notes;
                     this.MainCategoryName = mainCategoryName;
+                    this.ParentCategoryName = parentCategoryName;
+                    this.MainCategoryID = mainCategoryID;
                 }
 
                 public clsIncomeAndExpenseCategoriesColumns()
@@ -440,6 +445,8 @@ namespace MoneyMindManagerGlobal
                     this.CategoryHierarchical = null;
                     this.Notes = null;
                     this.MainCategoryName = null;
+                    this.ParentCategoryName = null;
+                    this.MainCategoryID = null; 
                 }
 
             }

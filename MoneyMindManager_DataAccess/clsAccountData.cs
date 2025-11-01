@@ -67,7 +67,7 @@ namespace MoneyMindManager_DataAccess
                 newAccountID = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return newAccountID;
@@ -111,7 +111,7 @@ namespace MoneyMindManager_DataAccess
                 result = false;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return result;
@@ -164,7 +164,7 @@ namespace MoneyMindManager_DataAccess
                 accountColumns = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return accountColumns;
@@ -205,7 +205,7 @@ namespace MoneyMindManager_DataAccess
                 isExist = false;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return isExist;
@@ -246,7 +246,7 @@ namespace MoneyMindManager_DataAccess
                 isExist = false;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return isExist;

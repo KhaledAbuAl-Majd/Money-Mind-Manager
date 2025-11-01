@@ -84,7 +84,7 @@ namespace MoneyMindManager_Presentation.Transactions.Controls
                 return;
 
             frmUserInfo frm = new frmUserInfo(Convert.ToInt32(MainTransaction?.CreatedByUserID));
-            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
+            clsPL_Global.MainForm.AddNewFormAtContainer(frm);
         }
     }
 }

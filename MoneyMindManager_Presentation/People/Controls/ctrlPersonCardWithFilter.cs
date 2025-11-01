@@ -64,7 +64,7 @@ namespace MoneyMindManager_Presentation.People.Controls
         {
             var frm = new frmSelectPerson();
             frm.OnPersonSelected += FrmSelectPerson_OnPersonSelected;
-            clsGlobal_UI.MainForm.AddNewFormAsDialog(frm);
+            clsPL_Global.MainForm.AddNewFormAsDialog(frm);
         }
 
         async Task _FindPerson(int personID)
@@ -100,7 +100,7 @@ namespace MoneyMindManager_Presentation.People.Controls
 
             frmAddUpdatePerson frm = new frmAddUpdatePerson();
             frm.OnCloseAndSaved += FrmAddUpdatePerson_OnCloseAndSaved;
-            clsGlobal_UI.MainForm.AddNewFormAtContainer(frm);
+            clsPL_Global.MainForm.AddNewFormAtContainer(frm);
         }
 
         private async void FrmAddUpdatePerson_OnCloseAndSaved(int personID)
@@ -112,7 +112,7 @@ namespace MoneyMindManager_Presentation.People.Controls
         private void kgtxtPersonID_OnValidationError(object sender, KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs e)
         {
             e.CancelEventArgs.Cancel = true;
-            string errorMessage = clsUtils.GetValidationErrorTypeString(e.validationErrorType, kgtxtPersonID);
+            string errorMessage = clsPL_Utils.GetValidationErrorTypeString(e.validationErrorType, kgtxtPersonID);
             errorProvider1.SetError(kgtxtPersonID, errorMessage);
         }
 

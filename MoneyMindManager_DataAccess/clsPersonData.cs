@@ -64,7 +64,7 @@ namespace MoneyMindManager_DataAccess
                 newPersonID = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return newPersonID;
@@ -112,7 +112,7 @@ namespace MoneyMindManager_DataAccess
                 result = false;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return result;
@@ -154,7 +154,7 @@ namespace MoneyMindManager_DataAccess
                 result = false;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return result;
@@ -213,7 +213,7 @@ namespace MoneyMindManager_DataAccess
                 personData = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return personData;
@@ -255,18 +255,18 @@ namespace MoneyMindManager_DataAccess
                 isExist = false;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return isExist;
         }
 
         /// <summary>
-        /// Get All People For Account Using Paging [10 rows per page], if variable null will not filter by it.
+        /// Get All People For Account Using Paging , if variable null will not filter by it.
         /// </summary>
         /// <returns>object of clsGetAllPeople : if error happend, return null</returns>
         public static async Task<clsGetAllPeople> GetAllPeople(int? personID, string personName, string email,
-             string phone, short pageNumber, int currentUserID, bool RaiseEventOnErrorOccured = true)
+             string phone,byte textSearchMode, short pageNumber,byte rowsPerPage, int currentUserID, bool RaiseEventOnErrorOccured = true)
         {
             clsGetAllPeople allPeople = null;
 
@@ -282,8 +282,10 @@ namespace MoneyMindManager_DataAccess
                         command.Parameters.AddWithValue("@PersonName", string.IsNullOrWhiteSpace(personName) ? DBNull.Value : (object)personName);
                         command.Parameters.AddWithValue("@Email", string.IsNullOrWhiteSpace(email) ? DBNull.Value : (object)email);
                         command.Parameters.AddWithValue("@Phone", string.IsNullOrWhiteSpace(phone) ? DBNull.Value : (object)phone);
+                        command.Parameters.AddWithValue("@TextSearchMode", textSearchMode);
                         command.Parameters.AddWithValue("@CurrentUserID", currentUserID);
                         command.Parameters.AddWithValue("@PageNumber", pageNumber);
+                        command.Parameters.AddWithValue("@RowsPerPage", rowsPerPage);
 
                         SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.SmallInt)
                         {
@@ -320,13 +322,14 @@ namespace MoneyMindManager_DataAccess
                 allPeople = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return allPeople;
         }
 
-        public static async Task<clsGetAllPeople> GetAllPeopleForSelectOne(string personName, short pageNumber, int currentUserID, bool RaiseEventOnErrorOccured = true)
+        public static async Task<clsGetAllPeople> GetAllPeopleForSelectOne(string personName, byte textSearchMode,
+            short pageNumber, byte rowsPerPage, int currentUserID, bool RaiseEventOnErrorOccured = true)
         {
             clsGetAllPeople allPeople = null;
 
@@ -339,8 +342,10 @@ namespace MoneyMindManager_DataAccess
                         command.CommandType = CommandType.StoredProcedure;
 
                         command.Parameters.AddWithValue("@PersonName", string.IsNullOrWhiteSpace(personName) ? DBNull.Value : (object)personName);
+                        command.Parameters.AddWithValue("@TextSearchMode", textSearchMode);
                         command.Parameters.AddWithValue("@CurrentUserID", currentUserID);
                         command.Parameters.AddWithValue("@PageNumber", pageNumber);
+                        command.Parameters.AddWithValue("@RowsPerPage", rowsPerPage);
 
                         SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.SmallInt)
                         {
@@ -377,7 +382,7 @@ namespace MoneyMindManager_DataAccess
                 allPeople = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return allPeople;

@@ -104,9 +104,11 @@ namespace MoneyMindManager_Presentation.Login
 
             string userName = null, password = null;
 
-            bool result = await Task.Run(() => clsGlobal_UI.GetStoredCredential(ref userName, ref password));
+            var funResult = await  clsPL_Global.GetStoredCredential();
+            userName = funResult.UserName;
+            password = funResult.Password;
 
-            if (result && userName != null && password != null)
+            if (funResult.Result && userName != null && password != null)
             {
                 kgtxtLoginUserName.Text = userName;
                 kgtxtLogin_password.Text = password;
@@ -131,7 +133,7 @@ namespace MoneyMindManager_Presentation.Login
 
         private async void frmLogin_Load(object sender, EventArgs e)
         {
-            clsGlobal_UI.ActiveForm = this;
+            clsPL_Global.ActiveForm = this;
             _enableShowPasswordAfterBeEmpty = false;
             _loadCredentials = true;
             await _ChangeMode(enMode.Login);
@@ -150,7 +152,7 @@ namespace MoneyMindManager_Presentation.Login
             {
 
                 e.CancelEventArgs.Cancel = true;
-                string errorMessage = clsUtils.GetValidationErrorTypeString(e.validationErrorType, kgtxtBox);
+                string errorMessage = clsPL_Utils.GetValidationErrorTypeString(e.validationErrorType, kgtxtBox);
 
                 errorProvider1.SetError(kgtxtBox, errorMessage);
                 return;
@@ -224,7 +226,7 @@ namespace MoneyMindManager_Presentation.Login
 
             if (!ValidateChildren())
             {
-                clsGlobalMessageBoxs.ShowValidateChildrenFailedMessage();
+                clsPL_MessageBoxs.ShowValidateChildrenFailedMessage();
                 return;
             }
             string userName = kgtxtLoginUserName.ValidatedText;
@@ -245,11 +247,11 @@ namespace MoneyMindManager_Presentation.Login
 
             if (gchkLogin_RemeberMe.Checked)
             {
-                Task.Run(() => clsGlobal_UI.RememberUsernameAndPassword(userName, password));
+                clsPL_Global.RememberUsernameAndPassword(userName, password);
             }
             else
             {
-                Task.Run(() => clsGlobal_UI.RememberUsernameAndPassword(null, null));
+                clsPL_Global.RememberUsernameAndPassword(null, null);
             }
 
             Task.Run(() => clsLogger.LogAtEventLog($"clsLogger.LogAtEventLog($\"[LOGIN SUCCESS] User ID = {user.UserID}, Username = {user.UserName}, Login Time = {DateTime.Now}\",EventLogEntryType.Information);",System.Diagnostics.EventLogEntryType.Information));
@@ -258,13 +260,13 @@ namespace MoneyMindManager_Presentation.Login
 
             this.Hide();
             frmMain frm = new frmMain();
-            clsGlobal_UI.Login(user, frm);
+            clsPL_Global.Login(user, frm);
             frm.OnCloseProgramm += frmMain_OnCloseProgramm;
             frm.ShowDialog();
 
             if (!this.IsDisposed)
             {
-                clsGlobal_UI.ActiveForm = this;
+                clsPL_Global.ActiveForm = this;
                 this.Show();
                 await _ChangeMode(enMode.Login);
             }
@@ -282,7 +284,7 @@ namespace MoneyMindManager_Presentation.Login
 
             if (!ValidateChildren())
             {
-                clsGlobalMessageBoxs.ShowValidateChildrenFailedMessage();
+                clsPL_MessageBoxs.ShowValidateChildrenFailedMessage();
                 return;
             }
 
@@ -305,7 +307,7 @@ namespace MoneyMindManager_Presentation.Login
                 Task.Run(() => clsLogger.LogAtEventLog($"New Account created with ID {newAccountID} at {DateTime.Now}"));
 #pragma warning restore CS4014
 
-                clsGlobalMessageBoxs.ShowMessage($"تم إنشاء الحساب بنجاح مع معرف حساب  [ {newAccountID} ]  , قم بتسجيل الدخول", "نجاح", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                clsPL_MessageBoxs.ShowMessage($"تم إنشاء الحساب بنجاح مع معرف حساب  [ {newAccountID} ]  , قم بتسجيل الدخول", "نجاح", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 _loadCredentials = false;
                 await _ChangeMode(enMode.Login);

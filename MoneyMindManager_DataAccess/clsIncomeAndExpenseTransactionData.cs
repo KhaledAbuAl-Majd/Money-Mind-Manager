@@ -54,7 +54,7 @@ namespace MoneyMindManager_DataAccess
                 newTransactionID = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return newTransactionID;
@@ -99,7 +99,7 @@ namespace MoneyMindManager_DataAccess
                 result = false;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return result;
@@ -140,7 +140,7 @@ namespace MoneyMindManager_DataAccess
                 result = false;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return result;
@@ -188,13 +188,14 @@ namespace MoneyMindManager_DataAccess
                 categoryID = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return (Convert.ToInt32(voucherID), Convert.ToInt32(categoryID));
         }
 
-        public static async Task<clsGetAllIncomeAndExpenseTransactions> GetAllIncomeAndExpensTransactions(int voucherID,int currentUserID, short pageNumber, bool RaiseEventOnErrorOccured = true)
+        public static async Task<clsGetAllIncomeAndExpenseTransactions> GetAllIncomeAndExpensTransactionsForVoucher(int voucherID,
+            int currentUserID, short pageNumber,byte rowsPerPage, bool RaiseEventOnErrorOccured = true)
         {
             clsGetAllIncomeAndExpenseTransactions allTransactions = null;
 
@@ -202,13 +203,14 @@ namespace MoneyMindManager_DataAccess
             {
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_IncomeAndExpenseTransactionGetAllByVoucherID]", connection))
+                    using (SqlCommand command = new SqlCommand("SP_IncomeAndExpenseTransactionGetAllForVoucher", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
 
                         command.Parameters.AddWithValue("@VoucherID", voucherID);
                         command.Parameters.AddWithValue("@CurrentUserID", currentUserID);
                         command.Parameters.AddWithValue("@PageNumber", pageNumber);
+                        command.Parameters.AddWithValue("@RowsPerPage", rowsPerPage);
 
                         SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.SmallInt)
                         {
@@ -254,13 +256,13 @@ namespace MoneyMindManager_DataAccess
                 allTransactions = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return allTransactions;
         }
 
-        public static async Task<DataTable> GetAllIncomeAndExpensTransactionsWithoutPaging(int voucherID, int currentUserID, bool RaiseEventOnErrorOccured = true)
+        public static async Task<DataTable> GetAllIncomeAndExpensTransactionsForVoucherWithoutPaging(int voucherID, int currentUserID, bool RaiseEventOnErrorOccured = true)
         {
             DataTable dtTransactions = null;
 
@@ -268,7 +270,7 @@ namespace MoneyMindManager_DataAccess
             {
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_IncomeAndExpenseTransactionGetAllByVoucherIDWithoutPaging]", connection))
+                    using (SqlCommand command = new SqlCommand("SP_IncomeAndExpenseTransactionGetAllForVoucherWithoutPaging", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
 
@@ -293,7 +295,7 @@ namespace MoneyMindManager_DataAccess
                 dtTransactions = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return dtTransactions;

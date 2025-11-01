@@ -28,8 +28,10 @@ namespace MoneyMindManager_Presentation.OverView
             guna2WinProgressIndicator1.Show();
             this.UseWaitCursor = true;
 
-            await ctrlTopCategories_Income.LoadData();
-            await ctrlTopCategories_NetExpense.LoadData();
+            Task task1 =  ctrlTopCategories_Income.LoadData();
+            Task task2 = ctrlTopCategories_NetExpense.LoadData();
+
+            await Task.WhenAll(task1, task2);
 
             this.UseWaitCursor = false;
             guna2WinProgressIndicator1.Stop();

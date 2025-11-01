@@ -131,7 +131,7 @@ namespace MoneyMindManager_Presentation.Users
 
             if (searchedUser == null)
             {
-                clsGlobalMessageBoxs.ShowErrorMessage("فشل تحميل بيانات المستخدم");
+                clsPL_MessageBoxs.ShowErrorMessage("فشل تحميل بيانات المستخدم");
                 this.Close();
                 return;
             }
@@ -141,7 +141,7 @@ namespace MoneyMindManager_Presentation.Users
 
             if (!await this.ctrlPersonCardWithFilter1.LoadPerson(Convert.ToInt32(_User.PersonID)))
             {
-                clsGlobalMessageBoxs.ShowErrorMessage("فشل تحميل بيانات الشخص");
+                clsPL_MessageBoxs.ShowErrorMessage("فشل تحميل بيانات الشخص");
                 this.Close();
                 return;
             }
@@ -198,7 +198,7 @@ namespace MoneyMindManager_Presentation.Users
 
             if (!ValidateChildren())
             {
-                clsGlobalMessageBoxs.ShowValidateChildrenFailedMessage();
+                clsPL_MessageBoxs.ShowValidateChildrenFailedMessage();
                 return;
             }
 
@@ -210,14 +210,14 @@ namespace MoneyMindManager_Presentation.Users
             {
                 if (!_User.EnterPasswordAtAddMode(kgtxtpassword.ValidatedText))
                 {
-                    clsGlobalMessageBoxs.ShowErrorMessage("فشل تكوين كلمة المرور");
+                    clsPL_MessageBoxs.ShowErrorMessage("فشل تكوين كلمة المرور");
                     _ResteObject();
                     return;
                 }
 
                 if (!_User.EnterPersonIDAtAddMode(Convert.ToInt32(ctrlPersonCardWithFilter1.Person.PersonID)))
                 {
-                    clsGlobalMessageBoxs.ShowErrorMessage("فشل تسجيل معرف الشخص للمستخدم");
+                    clsPL_MessageBoxs.ShowErrorMessage("فشل تسجيل معرف الشخص للمستخدم");
                     _ResteObject();
                     return;
                 }
@@ -241,7 +241,7 @@ namespace MoneyMindManager_Presentation.Users
             {
                 if (Mode == enMode.AddNew)
                 {
-                    clsGlobalMessageBoxs.ShowMessage($"تم إضافة المستخدم بنجاج بمعرف [{_User.UserID}]", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    clsPL_MessageBoxs.ShowMessage($"تم إضافة المستخدم بنجاج بمعرف [{_User.UserID}]", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     Mode = enMode.Update;
                     _UserID = _User.PersonID;
@@ -253,7 +253,7 @@ namespace MoneyMindManager_Presentation.Users
                 }
                 else if (Mode == enMode.Update)
                 {
-                    clsGlobalMessageBoxs.ShowMessage("تم تعديل بيانات المستخدم بنجاح", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    clsPL_MessageBoxs.ShowMessage("تم تعديل بيانات المستخدم بنجاح", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
                 _isSaved = true;
@@ -302,7 +302,7 @@ namespace MoneyMindManager_Presentation.Users
         {
             KhaledGuna2TextBox kgtxtBox = (KhaledGuna2TextBox)sender;
             e.CancelEventArgs.Cancel = true;
-            string errorMessage = clsUtils.GetValidationErrorTypeString(e.validationErrorType, kgtxtBox);
+            string errorMessage = clsPL_Utils.GetValidationErrorTypeString(e.validationErrorType, kgtxtBox);
 
             errorProvider1.SetError(kgtxtBox, errorMessage);
         }
@@ -326,7 +326,7 @@ namespace MoneyMindManager_Presentation.Users
                 OnCloseAndSavedOrEditing?.Invoke(userID);
 
             if (userID == clsGlobalSession.CurrentUserID)
-                await clsGlobal_UI.RefreshCurrentUser();
+                await clsPL_Global.RefreshCurrentUser();
 
             this.Close();
         }
@@ -411,12 +411,12 @@ namespace MoneyMindManager_Presentation.Users
 
             lbluserMessage.Visible = false;
 
-            if (clsGlobalMessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف هذا المستخدم", "طلب مواقفقة", MessageBoxButtons.OKCancel,
+            if (clsPL_MessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف هذا المستخدم", "طلب مواقفقة", MessageBoxButtons.OKCancel,
               MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
             {
                 if (Convert.ToInt32(_UserID) == clsGlobalSession.CurrentUserID)
                 {
-                    clsGlobalMessageBoxs.ShowErrorMessage("لا يمكنك حذف المستخدم الحالي");
+                    clsPL_MessageBoxs.ShowErrorMessage("لا يمكنك حذف المستخدم الحالي");
                     return;
                 }
 

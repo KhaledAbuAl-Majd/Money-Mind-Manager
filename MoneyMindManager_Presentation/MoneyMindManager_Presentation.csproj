@@ -73,6 +73,9 @@
     <Reference Include="Microsoft.Bcl.HashCode, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Bcl.HashCode.1.1.1\lib\net461\Microsoft.Bcl.HashCode.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.13.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="RBush, Version=4.0.0.0, Culture=neutral, PublicKeyToken=c77e27b81f4d0187, processorArchitecture=MSIL">
@@ -132,6 +135,7 @@
     <Compile Include="Debts\frmDebtsList.Designer.cs">
       <DependentUpon>frmDebtsList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Global\clsUserSettings.cs" />
     <Compile Include="Global\frmCurrentAccount.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -325,9 +329,9 @@
     <Compile Include="Users\FrmUsers.Designer.cs">
       <DependentUpon>FrmUsers.cs</DependentUpon>
     </Compile>
-    <Compile Include="Global\clsGlobalMessageBoxs.cs" />
-    <Compile Include="Global\clsGlobal_UI.cs" />
-    <Compile Include="Global\clsUtils.cs" />
+    <Compile Include="Global\clsPL_MessageBoxs.cs" />
+    <Compile Include="Global\clsPL_Global.cs" />
+    <Compile Include="Global\clsPL_Utils.cs" />
     <Compile Include="Main\frmMain.cs">
       <SubType>Form</SubType>
     </Compile>

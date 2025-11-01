@@ -53,7 +53,7 @@ namespace MoneyMindManager_DataAccess
                 newTransactionID = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return newTransactionID;
@@ -98,7 +98,7 @@ namespace MoneyMindManager_DataAccess
                 result = false;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return result;
@@ -139,7 +139,7 @@ namespace MoneyMindManager_DataAccess
                 result = false;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return result;
@@ -185,13 +185,14 @@ namespace MoneyMindManager_DataAccess
                 debtID = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return (Convert.ToInt32(debtID));
         }
 
-        public static async Task<clsGetAllDebtPayments> GetAllDebtPaymentsForDebtID(int debtID, int currentUserID, short pageNumber, bool RaiseEventOnErrorOccured = true)
+        public static async Task<clsGetAllDebtPayments> GetAllDebtPaymentsForDebt(int debtID, int currentUserID,
+            short pageNumber, byte rowsPerPage, bool RaiseEventOnErrorOccured = true)
         {
             clsGetAllDebtPayments allTransactions = null;
 
@@ -199,13 +200,14 @@ namespace MoneyMindManager_DataAccess
             {
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_DebtPayment_GetAllByDebtID]", connection))
+                    using (SqlCommand command = new SqlCommand("SP_DebtPayment_GetAllForDebt", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
 
                         command.Parameters.AddWithValue("@DebtID", debtID);
                         command.Parameters.AddWithValue("@CurrentUserID", currentUserID);
                         command.Parameters.AddWithValue("@PageNumber", pageNumber);
+                        command.Parameters.AddWithValue("@RowsPerPage", rowsPerPage);
 
                         SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.SmallInt)
                         {
@@ -251,13 +253,13 @@ namespace MoneyMindManager_DataAccess
                 allTransactions = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return allTransactions;
         }
 
-        public static async Task<DataTable> GetAllDebtPaymentsForDebtIDWithoutPaging(int debtID, int currentUserID, bool RaiseEventOnErrorOccured = true)
+        public static async Task<DataTable> GetAllDebtPaymentsForDebtWithoutPaging(int debtID, int currentUserID, bool RaiseEventOnErrorOccured = true)
         {
             DataTable dtTransactions = null;
 
@@ -265,7 +267,7 @@ namespace MoneyMindManager_DataAccess
             {
                 using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_DebtPayment_GetAllByDebtIDWihtoutPaging]", connection))
+                    using (SqlCommand command = new SqlCommand("SP_DebtPayment_GetAllForDebtWihtoutPaging", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
 
@@ -290,7 +292,7 @@ namespace MoneyMindManager_DataAccess
                 dtTransactions = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return dtTransactions;

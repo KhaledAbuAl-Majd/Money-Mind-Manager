@@ -52,7 +52,7 @@ namespace MoneyMindManager_DataAccess
                 Data = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return Data;
@@ -104,7 +104,7 @@ namespace MoneyMindManager_DataAccess
                 Data = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return Data;
@@ -149,7 +149,7 @@ namespace MoneyMindManager_DataAccess
                 Data = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return Data;
@@ -194,7 +194,7 @@ namespace MoneyMindManager_DataAccess
                 Data = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return Data;
@@ -239,7 +239,7 @@ namespace MoneyMindManager_DataAccess
                 Data = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return Data;
@@ -287,7 +287,7 @@ namespace MoneyMindManager_DataAccess
                 Data = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return Data;
@@ -334,7 +334,7 @@ namespace MoneyMindManager_DataAccess
                 Data = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return Data;
@@ -382,7 +382,7 @@ namespace MoneyMindManager_DataAccess
                 Data = null;
 
                 if (RaiseEventOnErrorOccured)
-                    clsGlobalEvents.RaiseEvent(ex.Message, true);
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
             }
 
             return Data;

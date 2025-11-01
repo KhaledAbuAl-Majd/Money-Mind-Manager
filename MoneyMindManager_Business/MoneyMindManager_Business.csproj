@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clsAccount.cs" />
+    <Compile Include="clsBLLGlobal.cs" />
     <Compile Include="clsDebt.cs" />
     <Compile Include="clsDebtPayment.cs" />
     <Compile Include="clsIncomeAndExpenseTransaction.cs" />

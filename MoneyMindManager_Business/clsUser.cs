@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MoneyMindManager_DataAccess;
 using MoneyMindManagerGlobal;
+using static MoneyMindManager_Business.clsBLLGlobal;
 using static MoneyMindManagerGlobal.clsDataColumns.clsUserClasses;
 
 namespace MoneyMindManager_Business
@@ -58,13 +59,13 @@ namespace MoneyMindManager_Business
             [Description("قائمة مستندات مرتجعات المصروفات")]
             ExpenseReturnVouchersList = 64,//done
 
-            [Description("(غلق/فتح المستندات (واردات,مصروفات,مرتجعات المصروفات")]
+            [Description("غلق/فتح المستندات (واردات - مصروفات - مرتجعات مصروفات)")]
             ChangeIETVoucherLocking = 128,//done
 
-            [Description("(إضافة/تعديل مستندات - معاملات (واردات,مصروفات,مرتجعات المصروفات")]
+            [Description("إضافة/تعديل مستندات - معاملات (واردات - مصروفات - مرتجعات مصروفات)")]
             AddUpdateIETVoucher_Transactions = 256,//done
 
-            [Description("(حذف مستندات - معاملات (واردات,مصروفات,مرتجعات المصروفات")]
+            [Description("حذف مستندات - معاملات (واردات - مصروفات - مرتجعات مصروفات)")]
             DeleteIETVoucher_Transactions = 512,//done
 
             [Description("قائمة سندات الديون")]
@@ -127,7 +128,7 @@ namespace MoneyMindManager_Business
             if (!result)
             {
                 errorMessage += $"\n معرف المستخدم الحالي [{clsGlobalSession.CurrentUserID}]";
-                clsGlobalEvents.RaiseEvent(errorMessage, true);
+                clsGlobalEvents.RaiseErrorEvent(errorMessage, true);
             }
 
             return result;
@@ -276,7 +277,7 @@ namespace MoneyMindManager_Business
         {
             if (IsDeleted)
             {
-                clsGlobalEvents.RaiseEvent("هذا الشخص محذوف لا يمكن التعديل عليه !"
+                clsGlobalEvents.RaiseErrorEvent("هذا الشخص محذوف لا يمكن التعديل عليه !"
                     + $"\n معرف المستخدم الحالي [{clsGlobalSession.CurrentUserID}]", true);
 
                 return false;
@@ -450,7 +451,7 @@ namespace MoneyMindManager_Business
         {
             if (IsDeleted)
             {
-                clsGlobalEvents.RaiseEvent("هذا الشخص محذوف بالفعل لا يمكن حذفه مجددا !"
+                clsGlobalEvents.RaiseErrorEvent("هذا الشخص محذوف بالفعل لا يمكن حذفه مجددا !"
                     + $"\n معرف المستخدم الحالي [{clsGlobalSession.CurrentUserID}]", true);
 
                 return false;
@@ -509,40 +510,49 @@ namespace MoneyMindManager_Business
             return clsHashing.ComputeHash(clsHashing.GetSaltedPassword(enteredPassword, salt));
         }
 
+        private static async Task<clsGetAllUsers> _GetAllUsers(int? userID, string userName, string personName, bool? isActive,
+            enTextSearchMode textSearchMode, short pageNumber)
+        {
+            byte rowsPerPage = 15;
+            return await clsUserData.GetAllUsers(userID,userName,personName,isActive,(byte)textSearchMode,pageNumber,
+                rowsPerPage, Convert.ToInt32(clsGlobalSession.CurrentUserID));
+        }
+
+
         /// <summary>
-        /// Get All Users For Account Using Paging [10 rows per page] , if variable is null will not filter by it
+        /// Get All Users For Account Using Paging , if variable is null will not filter by it
         /// </summary>
         /// <returns>object of clsGetAllUsers : if error happend, return null</returns>
-        public static async Task<clsGetAllUsers> GetAllUsers(bool? isActive, short pageNumber)
+        public static async Task<clsGetAllUsers> GetAllUsers(bool? isActive, enTextSearchMode textSearchMode, short pageNumber)
         {
-            return await clsUserData.GetAllUsers(null,null,null,isActive,pageNumber, Convert.ToInt32(clsGlobalSession.CurrentUserID));
+            return await _GetAllUsers(null, null, null, isActive, textSearchMode, pageNumber);
         }
 
         /// <summary>
         /// Get All Users By UserID For Account Using Paging [10 rows per page] , if variable is null will not filter by it
         /// </summary>
         /// <returns>object of clsGetAllUsers : if error happend, return null</returns>
-        public static async Task<clsGetAllUsers> GetAllUsersByUserID(int userID,bool? isActive, short pageNumber)
+        public static async Task<clsGetAllUsers> GetAllUsersByUserID(int userID,  bool? isActive, enTextSearchMode textSearchMode, short pageNumber)
         {
-            return await clsUserData.GetAllUsers(userID, null, null, isActive, pageNumber, Convert.ToInt32(clsGlobalSession.CurrentUserID));
+            return await _GetAllUsers(userID, null, null, isActive, textSearchMode, pageNumber);
         }
 
         /// <summary>
         /// Get All Users By UserName For Account Using Paging [10 rows per page], if variable is null will not filter by it
         /// </summary>
         /// <returns>object of clsGetAllUsers : if error happend, return null</returns>
-        public static async Task<clsGetAllUsers> GetAllUsersByUserName(string userName, bool? isActive, short pageNumber)
+        public static async Task<clsGetAllUsers> GetAllUsersByUserName(string userName, bool? isActive, enTextSearchMode textSearchMode, short pageNumber)
         {
-            return await clsUserData.GetAllUsers(null, userName, null, isActive, pageNumber, Convert.ToInt32(clsGlobalSession.CurrentUserID));
+            return await _GetAllUsers(null, userName, null, isActive, textSearchMode, pageNumber);
         }
 
         /// <summary>
         /// Get All Users By personName For Account Using Paging [10 rows per page], if variable is null will not filter by it
         /// </summary>
         /// <returns>object of clsGetAllUsers : if error happend, return null</returns>
-        public static async Task<clsGetAllUsers> GetAllUsersByPersonName(string personName, bool? isActive, short pageNumber)
+        public static async Task<clsGetAllUsers> GetAllUsersByPersonName(string personName, bool? isActive, enTextSearchMode textSearchMode, short pageNumber)
         {
-            return await clsUserData.GetAllUsers(null, null,personName, isActive, pageNumber, Convert.ToInt32(clsGlobalSession.CurrentUserID));
+            return await _GetAllUsers(null, null, personName, isActive, textSearchMode, pageNumber);
         }
 
         /// <param name="userID">UserID of user you want to find</param>

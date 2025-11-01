@@ -62,13 +62,18 @@
             this.klblCurrentPageVouchersValue = new KhaledControlLibrary1.KhaledLabel();
             this.label5 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.grbTextSearchMode_SubString = new Guna.UI2.WinForms.Guna2RadioButton();
+            this.grbTextSearchMode_WordsPrefix = new Guna.UI2.WinForms.Guna2RadioButton();
             this.SearchAfterTimerFinish = new System.Windows.Forms.Timer(this.components);
             this.gbtnAddVoucher = new Guna.UI2.WinForms.Guna2Button();
             this.gcbFilterByDate = new Guna.UI2.WinForms.Guna2ComboBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             ((System.ComponentModel.ISupportInitialize)(this.gdgvVouchers)).BeginInit();
             this.guna2ContextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            this.guna2Panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblUserMessage
@@ -76,13 +81,14 @@
             this.lblUserMessage.Font = new System.Drawing.Font("Segoe Script", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUserMessage.ForeColor = System.Drawing.Color.Red;
             this.lblUserMessage.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.lblUserMessage.Location = new System.Drawing.Point(25, 256);
+            this.lblUserMessage.Location = new System.Drawing.Point(25, 306);
             this.lblUserMessage.Name = "lblUserMessage";
             this.lblUserMessage.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblUserMessage.Size = new System.Drawing.Size(1159, 42);
             this.lblUserMessage.TabIndex = 31;
             this.lblUserMessage.Text = "\"تم العثور على حقول غير صالحة. ضع المؤشر على العلامات الحمراء لعرض سبب الخطأ.\"";
             this.lblUserMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+       
             // 
             // kgtxtFilterValue
             // 
@@ -102,7 +108,7 @@
             this.kgtxtFilterValue.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtFilterValue.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
             this.kgtxtFilterValue.IsRequired = false;
-            this.kgtxtFilterValue.Location = new System.Drawing.Point(763, 10);
+            this.kgtxtFilterValue.Location = new System.Drawing.Point(763, 70);
             this.kgtxtFilterValue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtFilterValue.Name = "kgtxtFilterValue";
             this.kgtxtFilterValue.NumberProperties.DecimalNumberProperties.AllowNegative = true;
@@ -163,24 +169,26 @@
             this.lblNoRecordsFoundMessage.Font = new System.Drawing.Font("Segoe Script", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNoRecordsFoundMessage.ForeColor = System.Drawing.Color.Red;
             this.lblNoRecordsFoundMessage.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.lblNoRecordsFoundMessage.Location = new System.Drawing.Point(25, 214);
+            this.lblNoRecordsFoundMessage.Location = new System.Drawing.Point(25, 264);
             this.lblNoRecordsFoundMessage.Name = "lblNoRecordsFoundMessage";
             this.lblNoRecordsFoundMessage.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblNoRecordsFoundMessage.Size = new System.Drawing.Size(1159, 42);
             this.lblNoRecordsFoundMessage.TabIndex = 29;
             this.lblNoRecordsFoundMessage.Text = "لا يوجد نتائج مطابقة لبحثك !";
             this.lblNoRecordsFoundMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(1105, 15);
+            this.label2.Location = new System.Drawing.Point(1105, 75);
             this.label2.Name = "label2";
             this.label2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label2.Size = new System.Drawing.Size(97, 24);
             this.label2.TabIndex = 28;
             this.label2.Text = "تصفية حسب :";
+
             // 
             // gcbFilterBy
             // 
@@ -203,7 +211,7 @@
             "معرف المستند",
             "اسم المستند",
             "اسم المستخدم"});
-            this.gcbFilterBy.Location = new System.Drawing.Point(935, 10);
+            this.gcbFilterBy.Location = new System.Drawing.Point(935, 70);
             this.gcbFilterBy.Name = "gcbFilterBy";
             this.gcbFilterBy.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.gcbFilterBy.Size = new System.Drawing.Size(157, 36);
@@ -214,25 +222,25 @@
             // lblCurrentPageRecordsCount
             // 
             this.lblCurrentPageRecordsCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCurrentPageRecordsCount.Location = new System.Drawing.Point(888, 656);
+            this.lblCurrentPageRecordsCount.Location = new System.Drawing.Point(888, 706);
             this.lblCurrentPageRecordsCount.Name = "lblCurrentPageRecordsCount";
             this.lblCurrentPageRecordsCount.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblCurrentPageRecordsCount.Size = new System.Drawing.Size(114, 24);
             this.lblCurrentPageRecordsCount.TabIndex = 26;
             this.lblCurrentPageRecordsCount.Text = "N/A";
-            this.lblCurrentPageRecordsCount.Click += new System.EventHandler(this.lblCurrentPageRecordsCount_Click);
+
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(998, 656);
+            this.label3.Location = new System.Drawing.Point(998, 706);
             this.label3.Name = "label3";
             this.label3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label3.Size = new System.Drawing.Size(205, 24);
             this.label3.TabIndex = 25;
             this.label3.Text = "# عدد صفوف الصفحة الحالية : ";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
+
             // 
             // kgtxtPageNumber
             // 
@@ -255,7 +263,7 @@
             this.kgtxtPageNumber.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtPageNumber.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Number;
             this.kgtxtPageNumber.IsRequired = true;
-            this.kgtxtPageNumber.Location = new System.Drawing.Point(768, 634);
+            this.kgtxtPageNumber.Location = new System.Drawing.Point(768, 684);
             this.kgtxtPageNumber.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtPageNumber.MaxLength = 150;
             this.kgtxtPageNumber.Name = "kgtxtPageNumber";
@@ -327,7 +335,7 @@
             this.gibtnPreviousPage.ImageOffset = new System.Drawing.Point(0, 0);
             this.gibtnPreviousPage.ImageRotate = 0F;
             this.gibtnPreviousPage.ImageSize = new System.Drawing.Size(25, 25);
-            this.gibtnPreviousPage.Location = new System.Drawing.Point(443, 630);
+            this.gibtnPreviousPage.Location = new System.Drawing.Point(443, 680);
             this.gibtnPreviousPage.Name = "gibtnPreviousPage";
             this.gibtnPreviousPage.PressedState.ImageSize = new System.Drawing.Size(64, 64);
             this.gibtnPreviousPage.Size = new System.Drawing.Size(40, 42);
@@ -346,7 +354,7 @@
             this.gibtnNextPage.ImageOffset = new System.Drawing.Point(0, 0);
             this.gibtnNextPage.ImageRotate = 0F;
             this.gibtnNextPage.ImageSize = new System.Drawing.Size(25, 25);
-            this.gibtnNextPage.Location = new System.Drawing.Point(721, 630);
+            this.gibtnNextPage.Location = new System.Drawing.Point(721, 680);
             this.gibtnNextPage.Name = "gibtnNextPage";
             this.gibtnNextPage.PressedState.ImageSize = new System.Drawing.Size(64, 64);
             this.gibtnNextPage.Size = new System.Drawing.Size(40, 42);
@@ -358,36 +366,37 @@
             // lblCurrentPageOfNumberOfPages
             // 
             this.lblCurrentPageOfNumberOfPages.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCurrentPageOfNumberOfPages.Location = new System.Drawing.Point(478, 634);
+            this.lblCurrentPageOfNumberOfPages.Location = new System.Drawing.Point(478, 684);
             this.lblCurrentPageOfNumberOfPages.Name = "lblCurrentPageOfNumberOfPages";
             this.lblCurrentPageOfNumberOfPages.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblCurrentPageOfNumberOfPages.Size = new System.Drawing.Size(249, 30);
             this.lblCurrentPageOfNumberOfPages.TabIndex = 21;
             this.lblCurrentPageOfNumberOfPages.Text = "0 من  0  صفحات";
             this.lblCurrentPageOfNumberOfPages.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblCurrentPageOfNumberOfPages.Click += new System.EventHandler(this.lblCurrentPageOfNumberOfPages_Click);
+
             // 
             // lblTotalRecordsNumber
             // 
             this.lblTotalRecordsNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalRecordsNumber.Location = new System.Drawing.Point(938, 627);
+            this.lblTotalRecordsNumber.Location = new System.Drawing.Point(938, 678);
             this.lblTotalRecordsNumber.Name = "lblTotalRecordsNumber";
             this.lblTotalRecordsNumber.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblTotalRecordsNumber.Size = new System.Drawing.Size(114, 24);
             this.lblTotalRecordsNumber.TabIndex = 20;
             this.lblTotalRecordsNumber.Text = "N/A";
-            this.lblTotalRecordsNumber.Click += new System.EventHandler(this.lblTotalRecordsNumber_Click);
+
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(1048, 627);
+            this.label1.Location = new System.Drawing.Point(1048, 678);
             this.label1.Name = "label1";
             this.label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label1.Size = new System.Drawing.Size(155, 24);
             this.label1.TabIndex = 19;
             this.label1.Text = "# عدد الصفوف الكلية : ";
+
             // 
             // gdgvVouchers
             // 
@@ -425,7 +434,7 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.gdgvVouchers.DefaultCellStyle = dataGridViewCellStyle3;
             this.gdgvVouchers.GridColor = System.Drawing.Color.White;
-            this.gdgvVouchers.Location = new System.Drawing.Point(12, 59);
+            this.gdgvVouchers.Location = new System.Drawing.Point(12, 111);
             this.gdgvVouchers.MultiSelect = false;
             this.gdgvVouchers.Name = "gdgvVouchers";
             this.gdgvVouchers.ReadOnly = true;
@@ -464,6 +473,7 @@
             this.gdgvVouchers.ThemeStyle.RowsStyle.Height = 40;
             this.gdgvVouchers.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.gdgvVouchers.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+         
             this.gdgvVouchers.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.gdgvVouchers_CellFormatting);
             this.gdgvVouchers.DoubleClick += new System.EventHandler(this.gdgvVouchers_DoubleClick);
             // 
@@ -553,7 +563,7 @@
             this.kgtxtFromData.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtFromData.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Text;
             this.kgtxtFromData.IsRequired = false;
-            this.kgtxtFromData.Location = new System.Drawing.Point(473, 10);
+            this.kgtxtFromData.Location = new System.Drawing.Point(473, 70);
             this.kgtxtFromData.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtFromData.Name = "kgtxtFromData";
             this.kgtxtFromData.NumberProperties.DecimalNumberProperties.AllowNegative = true;
@@ -607,6 +617,7 @@
             this.kgtxtFromData.TrimStart = true;
             this.kgtxtFromData.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxt_OnValidationError);
             this.kgtxtFromData.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxt_OnValidationSuccess);
+
             this.kgtxtFromData.KeyDown += new System.Windows.Forms.KeyEventHandler(this.kgtxtDate_KeyDown);
             // 
             // kgtxtToDate
@@ -627,7 +638,7 @@
             this.kgtxtToDate.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtToDate.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Text;
             this.kgtxtToDate.IsRequired = false;
-            this.kgtxtToDate.Location = new System.Drawing.Point(334, 10);
+            this.kgtxtToDate.Location = new System.Drawing.Point(334, 70);
             this.kgtxtToDate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtToDate.Name = "kgtxtToDate";
             this.kgtxtToDate.NumberProperties.DecimalNumberProperties.AllowNegative = true;
@@ -681,6 +692,7 @@
             this.kgtxtToDate.TrimStart = true;
             this.kgtxtToDate.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxt_OnValidationError);
             this.kgtxtToDate.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxt_OnValidationSuccess);
+
             this.kgtxtToDate.KeyDown += new System.Windows.Forms.KeyEventHandler(this.kgtxtDate_KeyDown);
             // 
             // klblAllVouchersValue
@@ -692,7 +704,7 @@
             this.klblAllVouchersValue.DateProperties.YearFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enYearFormate.yyyy__2025;
             this.klblAllVouchersValue.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.klblAllVouchersValue.InputType = KhaledControlLibrary1.KhaledLabel.enInputType.Number;
-            this.klblAllVouchersValue.Location = new System.Drawing.Point(6, 625);
+            this.klblAllVouchersValue.Location = new System.Drawing.Point(6, 678);
             this.klblAllVouchersValue.Name = "klblAllVouchersValue";
             this.klblAllVouchersValue.NumberFormat = KhaledControlLibrary1.KhaledLabel.enNumberFormat.N4;
             this.klblAllVouchersValue.Size = new System.Drawing.Size(277, 28);
@@ -700,7 +712,7 @@
             this.klblAllVouchersValue.Text = "111,111,111,111,111.0000";
             this.klblAllVouchersValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.toolTip1.SetToolTip(this.klblAllVouchersValue, "قيمة المستندات الكلية لنتيجة البحث");
-            this.klblAllVouchersValue.Click += new System.EventHandler(this.klblAllVouchersValue_Click);
+
             // 
             // gibtnRefreshData
             // 
@@ -712,7 +724,7 @@
             this.gibtnRefreshData.ImageOffset = new System.Drawing.Point(0, 0);
             this.gibtnRefreshData.ImageRotate = 0F;
             this.gibtnRefreshData.ImageSize = new System.Drawing.Size(28, 28);
-            this.gibtnRefreshData.Location = new System.Drawing.Point(286, 4);
+            this.gibtnRefreshData.Location = new System.Drawing.Point(286, 64);
             this.gibtnRefreshData.Name = "gibtnRefreshData";
             this.gibtnRefreshData.PressedState.ImageSize = new System.Drawing.Size(64, 64);
             this.gibtnRefreshData.Size = new System.Drawing.Size(40, 42);
@@ -730,7 +742,7 @@
             this.klblCurrentPageVouchersValue.DateProperties.YearFormate = KhaledControlLibrary1.KhaledLabel.clsDateTimeProperties.enYearFormate.yyyy__2025;
             this.klblCurrentPageVouchersValue.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.klblCurrentPageVouchersValue.InputType = KhaledControlLibrary1.KhaledLabel.enInputType.Number;
-            this.klblCurrentPageVouchersValue.Location = new System.Drawing.Point(1, 653);
+            this.klblCurrentPageVouchersValue.Location = new System.Drawing.Point(1, 703);
             this.klblCurrentPageVouchersValue.Name = "klblCurrentPageVouchersValue";
             this.klblCurrentPageVouchersValue.NumberFormat = KhaledControlLibrary1.KhaledLabel.enNumberFormat.N4;
             this.klblCurrentPageVouchersValue.Size = new System.Drawing.Size(241, 28);
@@ -738,33 +750,84 @@
             this.klblCurrentPageVouchersValue.Text = "111,111,111,111,111.0000";
             this.klblCurrentPageVouchersValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.toolTip1.SetToolTip(this.klblCurrentPageVouchersValue, "قيمة المستندات الكلية لنتيجة البحث للصفحة الحالية");
-            this.klblCurrentPageVouchersValue.Click += new System.EventHandler(this.klblCurrentPageVouchersValue_Click);
+
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(231, 657);
+            this.label5.Location = new System.Drawing.Point(231, 707);
             this.label5.Name = "label5";
             this.label5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label5.Size = new System.Drawing.Size(214, 24);
             this.label5.TabIndex = 39;
             this.label5.Text = "# قيمة مستندات الصفحة الحالية : ";
             this.toolTip1.SetToolTip(this.label5, "قيمة المستندات الكلية لنتيجة البحث للصفحة الحالية");
-            this.label5.Click += new System.EventHandler(this.label5_Click);
+
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(286, 628);
+            this.label7.Location = new System.Drawing.Point(286, 679);
             this.label7.Name = "label7";
             this.label7.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label7.Size = new System.Drawing.Size(159, 24);
             this.label7.TabIndex = 37;
             this.label7.Text = "# قيمة المستندات الكلية :";
             this.toolTip1.SetToolTip(this.label7, "قيمة المستندات الكلية لنتيجة البحث");
-            this.label7.Click += new System.EventHandler(this.label7_Click);
+
+            // 
+            // grbTextSearchMode_SubString
+            // 
+            this.grbTextSearchMode_SubString.Animated = true;
+            this.grbTextSearchMode_SubString.AutoSize = true;
+            this.grbTextSearchMode_SubString.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.grbTextSearchMode_SubString.CheckedState.BorderThickness = 0;
+            this.grbTextSearchMode_SubString.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.grbTextSearchMode_SubString.CheckedState.InnerColor = System.Drawing.Color.White;
+            this.grbTextSearchMode_SubString.CheckedState.InnerOffset = -4;
+            this.grbTextSearchMode_SubString.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.grbTextSearchMode_SubString.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grbTextSearchMode_SubString.Location = new System.Drawing.Point(26, 28);
+            this.grbTextSearchMode_SubString.Name = "grbTextSearchMode_SubString";
+            this.grbTextSearchMode_SubString.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.grbTextSearchMode_SubString.Size = new System.Drawing.Size(256, 21);
+            this.grbTextSearchMode_SubString.TabIndex = 138;
+            this.grbTextSearchMode_SubString.Text = "مطابقة جزء من النص (شامل،قد يكون أبطأ)";
+            this.toolTip1.SetToolTip(this.grbTextSearchMode_SubString, "بحث شامل وعميق، مصمم لإيجاد تطابق حرفي دقيق للنص المُدخل في أي موضع، حتى لو كان ف" +
+        "ي منتصف الكلمات. مثال: البحث بـ «داد فات» يجد جملة «تم سـداد فاتـورة الكهرباء».");
+            this.grbTextSearchMode_SubString.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.grbTextSearchMode_SubString.UncheckedState.BorderThickness = 2;
+            this.grbTextSearchMode_SubString.UncheckedState.FillColor = System.Drawing.Color.Transparent;
+            this.grbTextSearchMode_SubString.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
+            // 
+            // grbTextSearchMode_WordsPrefix
+            // 
+            this.grbTextSearchMode_WordsPrefix.Animated = true;
+            this.grbTextSearchMode_WordsPrefix.AutoSize = true;
+            this.grbTextSearchMode_WordsPrefix.Checked = true;
+            this.grbTextSearchMode_WordsPrefix.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.grbTextSearchMode_WordsPrefix.CheckedState.BorderThickness = 0;
+            this.grbTextSearchMode_WordsPrefix.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.grbTextSearchMode_WordsPrefix.CheckedState.InnerColor = System.Drawing.Color.White;
+            this.grbTextSearchMode_WordsPrefix.CheckedState.InnerOffset = -4;
+            this.grbTextSearchMode_WordsPrefix.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.grbTextSearchMode_WordsPrefix.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grbTextSearchMode_WordsPrefix.Location = new System.Drawing.Point(11, 6);
+            this.grbTextSearchMode_WordsPrefix.Name = "grbTextSearchMode_WordsPrefix";
+            this.grbTextSearchMode_WordsPrefix.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.grbTextSearchMode_WordsPrefix.Size = new System.Drawing.Size(271, 21);
+            this.grbTextSearchMode_WordsPrefix.TabIndex = 137;
+            this.grbTextSearchMode_WordsPrefix.TabStop = true;
+            this.grbTextSearchMode_WordsPrefix.Text = "مطابقة بداية الكلمات (سريع، لا يشترط الترتيب)";
+            this.toolTip1.SetToolTip(this.grbTextSearchMode_WordsPrefix, "بحث فائق السرعة، مصمم لإيجاد المصطلحات الرئيسية بناءً على بدايات كلماتها، بصرف ال" +
+        "نظر عن ترتيبها في النص. مثال: البحث بـ «سد فات» يجد جملة «تم سداد فاتورة الكهربا" +
+        "ء».");
+            this.grbTextSearchMode_WordsPrefix.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.grbTextSearchMode_WordsPrefix.UncheckedState.BorderThickness = 2;
+            this.grbTextSearchMode_WordsPrefix.UncheckedState.FillColor = System.Drawing.Color.Transparent;
+            this.grbTextSearchMode_WordsPrefix.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
             // 
             // SearchAfterTimerFinish
             // 
@@ -794,7 +857,7 @@
             this.gbtnAddVoucher.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnAddVoucher.ImageSize = new System.Drawing.Size(25, 25);
             this.gbtnAddVoucher.IndicateFocus = true;
-            this.gbtnAddVoucher.Location = new System.Drawing.Point(12, 10);
+            this.gbtnAddVoucher.Location = new System.Drawing.Point(12, 65);
             this.gbtnAddVoucher.Name = "gbtnAddVoucher";
             this.gbtnAddVoucher.PressedColor = System.Drawing.Color.White;
             this.gbtnAddVoucher.Size = new System.Drawing.Size(180, 41);
@@ -821,7 +884,7 @@
             this.gcbFilterByDate.Items.AddRange(new object[] {
             "تاريخ المستند",
             "تاريخ الإنشاء"});
-            this.gcbFilterByDate.Location = new System.Drawing.Point(612, 10);
+            this.gcbFilterByDate.Location = new System.Drawing.Point(612, 70);
             this.gcbFilterByDate.Name = "gcbFilterByDate";
             this.gcbFilterByDate.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.gcbFilterByDate.Size = new System.Drawing.Size(136, 36);
@@ -834,11 +897,34 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(685, -3);
+            this.label6.Location = new System.Drawing.Point(685, 58);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(63, 17);
             this.label6.TabIndex = 134;
             this.label6.Text = "نوع التاريخ";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(1078, -2);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(122, 17);
+            this.label4.TabIndex = 140;
+            this.label4.Text = "خيارات بحث النصوص";
+            // 
+            // guna2Panel2
+            // 
+            this.guna2Panel2.BackColor = System.Drawing.Color.Transparent;
+            this.guna2Panel2.BorderColor = System.Drawing.Color.Silver;
+            this.guna2Panel2.BorderRadius = 10;
+            this.guna2Panel2.BorderThickness = 1;
+            this.guna2Panel2.Controls.Add(this.grbTextSearchMode_SubString);
+            this.guna2Panel2.Controls.Add(this.grbTextSearchMode_WordsPrefix);
+            this.guna2Panel2.Location = new System.Drawing.Point(910, 10);
+            this.guna2Panel2.Name = "guna2Panel2";
+            this.guna2Panel2.Size = new System.Drawing.Size(288, 55);
+            this.guna2Panel2.TabIndex = 139;
             // 
             // frmVouhcersList
             // 
@@ -846,7 +932,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1210, 687);
+            this.ClientSize = new System.Drawing.Size(1210, 735);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.guna2Panel2);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.gibtnRefreshData);
             this.Controls.Add(this.klblCurrentPageVouchersValue);
@@ -875,9 +963,12 @@
             this.Name = "frmVouhcersList";
             this.Text = "VouhcersList";
             this.Load += new System.EventHandler(this.VouhcersList_Load);
+            this.Shown += new System.EventHandler(this.frmVoucherList_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.gdgvVouchers)).EndInit();
             this.guna2ContextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            this.guna2Panel2.ResumeLayout(false);
+            this.guna2Panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -916,5 +1007,9 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ToolStripMenuItem gtsmExport;
         private System.Windows.Forms.ToolStripMenuItem gtsmExportExcel;
+        private System.Windows.Forms.Label label4;
+        private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
+        private Guna.UI2.WinForms.Guna2RadioButton grbTextSearchMode_SubString;
+        private Guna.UI2.WinForms.Guna2RadioButton grbTextSearchMode_WordsPrefix;
     }
 }

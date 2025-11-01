@@ -22,7 +22,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense
         {
             if (voucherType == enVoucherType.UnKnown)
             {
-                clsGlobalMessageBoxs.ShowErrorMessage("نوع المستند غير معروف !");
+                clsPL_MessageBoxs.ShowErrorMessage("نوع المستند غير معروف !");
                 this.Dispose();
                 return;
             }

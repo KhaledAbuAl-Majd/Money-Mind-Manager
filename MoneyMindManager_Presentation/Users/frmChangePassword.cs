@@ -42,7 +42,7 @@ namespace MoneyMindManager_Presentation.Users
 
             if (!ValidateChildren())
             {
-                clsGlobalMessageBoxs.ShowValidateChildrenFailedMessage();
+                clsPL_MessageBoxs.ShowValidateChildrenFailedMessage();
                 return;
             }
 
@@ -51,7 +51,7 @@ namespace MoneyMindManager_Presentation.Users
 
             if (await _User.ChangePassword(oldPassword,newPassword))
             {
-                clsGlobalMessageBoxs.ShowMessage($"تم تغيير كلمة السر بنجاح", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                clsPL_MessageBoxs.ShowMessage($"تم تغيير كلمة السر بنجاح", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 kgtxtOldPassword.Text = null;
                 kgtxtNewpassword.Text = null;
@@ -68,7 +68,7 @@ namespace MoneyMindManager_Presentation.Users
         {
             KhaledGuna2TextBox kgtxtBox = (KhaledGuna2TextBox)sender;
             e.CancelEventArgs.Cancel = true;
-            string errorMessage = clsUtils.GetValidationErrorTypeString(e.validationErrorType, kgtxtBox);
+            string errorMessage = clsPL_Utils.GetValidationErrorTypeString(e.validationErrorType, kgtxtBox);
 
             errorProvider1.SetError(kgtxtBox, errorMessage);
         }
