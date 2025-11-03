@@ -122,7 +122,6 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
         void _AddNewMode()
         {
-            ChangeHeaderValue("إضافة معاملة");
             _TransactionID = null;
             _Transaction = new clsIncomeAndExpenseTransaction();
             lblTransactionID.Text = "N/A";
@@ -139,8 +138,6 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
         async Task _UpdateMode()
         {
-            ChangeHeaderValue("تعديل بيانات المعاملة");
-
             var searchedTransaction = await clsIncomeAndExpenseTransaction.FindTransactionByTransactionID(Convert.ToInt32(_TransactionID));
 
             if (searchedTransaction == null)
@@ -153,6 +150,21 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             this._Transaction = searchedTransaction;
 
             this._Voucher = _Transaction.VouhcerInfo;
+
+            switch (_Voucher.VoucherType)
+            {
+                case enVoucherType.Incomes:
+                    ChangeHeaderValue("تعديل بيانات معاملة واردات");
+                    break;
+
+                case enVoucherType.Expenses:
+                    ChangeHeaderValue("تعديل بيانات معاملة مصروفات");
+                    break;
+
+                case enVoucherType.ExpensesReturn:
+                    ChangeHeaderValue("تعديل بيانات معاملة مرتجعات مصروفات");
+                    break;
+            }
 
             lblTransactionID.Text = _Transaction.MainTransactionID.ToString();
             kgtxtCategoryName.Text = _Transaction.CategoryInfo?.CategoryName;
@@ -257,7 +269,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                 {
                     clsPL_MessageBoxs.ShowMessage($"تم إضافة المعاملة بنجاج بمعرف [{_Transaction.MainTransactionID}]", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    if (gtswNewTransactionAfterAdd.Checked)
+                    if (gtswNewTransactionAfterAdd.Checked && gtswNewTransactionAfterAdd.Enabled)
                     {
                         gbtnNewTransaction.PerformClick();
                     }
@@ -289,6 +301,28 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             {
                 case enMode.AddNew:
                     {
+                        bool result = false;
+
+                        switch (_Voucher.VoucherType)
+                        {
+                            case enVoucherType.Incomes:
+                                result = clsPL_Global.CurrentUserSettings.IncomeTransaction_AutoAddNewDefault;
+                                ChangeHeaderValue("إضافة معاملة واردات");
+                                break;
+
+                            case enVoucherType.Expenses:
+                                result = clsPL_Global.CurrentUserSettings.ExpenseTransaction_AutoAddNewDefault;
+                                ChangeHeaderValue("إضافة معاملة مصروفات");
+                                break;
+
+                            case enVoucherType.ExpensesReturn:
+                                result = clsPL_Global.CurrentUserSettings.ExpenseReturnTransaction_AutoAddNewDefault;
+                                ChangeHeaderValue("إضافة معاملة مرتجعات مصروفات");
+                                break;
+                        }
+
+                        gtswNewTransactionAfterAdd.Checked = result;
+
                         _AddNewMode();
                         break;
                     }
@@ -340,6 +374,9 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
         private void gbtnNewTransaction_Click(object sender, EventArgs e)
         {
+            if (!gbtnNewTransaction.Enabled)
+                return;
+
             Mode = enMode.AddNew;
             _AddNewMode();
         }
@@ -354,14 +391,32 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             if (Mode == enMode.AddNew || _TransactionID == null)
                 return;
 
-            if (clsPL_MessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف المعاملة ؟ ", "طلب مواقفقة", MessageBoxButtons.OKCancel,
-               MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
+            bool asking = true;
+
+            switch (_Voucher.VoucherType)
             {
-                if (await clsIncomeAndExpenseTransaction.DeleteIncomeAndExpenseTransactionByID(Convert.ToInt32(_TransactionID)))
-                {
-                    _isSaved = true;
-                    gbtnClose.PerformClick();
-                }
+                case enVoucherType.Incomes:
+                    asking = clsPL_Global.CurrentUserSettings.AskBeforeDeleteIncomeTransactions;
+                    break;
+
+                case enVoucherType.Expenses:
+                    asking = clsPL_Global.CurrentUserSettings.AskBeforeDeleteExpenseTransactions;
+                    break;
+
+                case enVoucherType.ExpensesReturn:
+                    asking = clsPL_Global.CurrentUserSettings.AskBeforeDeleteExpenseReturnTransactions;
+                    break;
+            }
+
+            if (asking)
+                if (clsPL_MessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف المعاملة ؟ ", "طلب موافقة", MessageBoxButtons.OKCancel,
+                   MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.OK)
+                    return;
+
+            if (await clsIncomeAndExpenseTransaction.DeleteIncomeAndExpenseTransactionByID(Convert.ToInt32(_TransactionID)))
+            {
+                _isSaved = true;
+                gbtnClose.PerformClick();
             }
         }
 
@@ -372,26 +427,6 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             {
                 _ShowChooseCategoryForm();
             }
-        }
-
-        private void guna2Panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void lblUserMessage_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void gtswNewTransactionAfterAdd_CheckedChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

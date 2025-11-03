@@ -137,6 +137,8 @@ namespace MoneyMindManager_Presentation.Login
             _enableShowPasswordAfterBeEmpty = false;
             _loadCredentials = true;
             await _ChangeMode(enMode.Login);
+
+            _ = clsBLLGlobal.RoutineMaintenance();
         }
 
         private void gtswLogin_ShowPassword_CheckedChanged(object sender, EventArgs e)
@@ -243,24 +245,29 @@ namespace MoneyMindManager_Presentation.Login
             if (user == null)
                 return;
 
-#pragma warning disable CS4014
 
             if (gchkLogin_RemeberMe.Checked)
             {
-                clsPL_Global.RememberUsernameAndPassword(userName, password);
+               _= clsPL_Global.RememberUsernameAndPassword(userName, password);
             }
             else
             {
-                clsPL_Global.RememberUsernameAndPassword(null, null);
+               _= clsPL_Global.RememberUsernameAndPassword(null, null);
             }
 
-            Task.Run(() => clsLogger.LogAtEventLog($"clsLogger.LogAtEventLog($\"[LOGIN SUCCESS] User ID = {user.UserID}, Username = {user.UserName}, Login Time = {DateTime.Now}\",EventLogEntryType.Information);",System.Diagnostics.EventLogEntryType.Information));
-#pragma warning restore CS4014
+            _ = Task.Run(() => clsLogger.LogAtEventLog($"[LOGIN SUCCESS] User ID = {user.UserID}, Username = {user.UserName}, Login Time = {DateTime.Now}",System.Diagnostics.EventLogEntryType.Information));
 
+            frmMain frm = new frmMain();
+
+            if (!await clsPL_Global.Login(user, frm))
+            {
+                clsPL_Global.ActiveForm = this;
+                clsPL_MessageBoxs.ShowErrorMessage("فشل تسجيل الدخول !");
+                return;
+            }
 
             this.Hide();
-            frmMain frm = new frmMain();
-            clsPL_Global.Login(user, frm);
+
             frm.OnCloseProgramm += frmMain_OnCloseProgramm;
             frm.ShowDialog();
 
@@ -274,6 +281,7 @@ namespace MoneyMindManager_Presentation.Login
 
         private void frmMain_OnCloseProgramm()
         {
+            clsPL_Global.ActiveForm = this;
             this.Close();
         }
 

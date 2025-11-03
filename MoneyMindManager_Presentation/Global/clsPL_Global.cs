@@ -20,9 +20,8 @@ namespace MoneyMindManager_Presentation
     {
         private static System.Timers.Timer _refreshTimer;
         public static clsUser CurrentUser { get;private set; }
-
+        public static clsUserSettings CurrentUserSettings { get;private set; }
         public static frmMain MainForm { get; private set; }
-
         public static Form ActiveForm { get; set; }
 
         private static void _StartTimer()
@@ -73,44 +72,68 @@ namespace MoneyMindManager_Presentation
             return true;
         }
 
-        public static async Task Login(int userID,frmMain frmmain)
+        public static async Task<bool> Login(int userID,frmMain frmMain)
         {
             clsUser user = await clsUser.FindUserByUserID(userID);
 
             if (user == null)
             {
                 Logout();
-                return;
+                return false;
             }
 
+
             CurrentUser = user;
-            MainForm = frmmain;
-            ActiveForm = frmmain;
+
             clsGlobalSession.Login(Convert.ToInt32(CurrentUser.UserID), Convert.ToInt32(CurrentUser.Permissions));
 
+            CurrentUserSettings = await clsUserSettings.GetUserSettings(Convert.ToInt32(user.UserID), true);
+
+            if (CurrentUserSettings == null)
+            {
+                Logout();
+                return false;
+            }
+
+            MainForm = frmMain;
+            ActiveForm = frmMain;
             _StartTimer();
+
+            return true;
         }
 
-        public static  void Login(clsUser user, frmMain frmmain)
+        public static async Task<bool> Login(clsUser user, frmMain frmMain)
         {
             if (user == null)
             {
                 Logout();
-                return;
+                return false;
             }
 
             CurrentUser = user;
-            MainForm = frmmain;
-            ActiveForm = frmmain;
+
             clsGlobalSession.Login(Convert.ToInt32(CurrentUser.UserID), Convert.ToInt32(CurrentUser.Permissions));
 
+            CurrentUserSettings = await clsUserSettings.GetUserSettings(Convert.ToInt32(user.UserID), true);
+
+            if (CurrentUserSettings == null)
+            {
+                Logout();
+                return false;
+            }
+
+            MainForm = frmMain;
+            ActiveForm = frmMain;
             _StartTimer();
+
+            return true;
         }
 
         public static void Logout()
         {
             _StopTimer();
             CurrentUser = null;
+            CurrentUserSettings = null;
 
             if(MainForm !=null && !MainForm.IsDisposed)
             {

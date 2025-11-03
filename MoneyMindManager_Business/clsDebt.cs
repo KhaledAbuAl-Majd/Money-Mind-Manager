@@ -222,7 +222,7 @@ namespace MoneyMindManager_Business
             return await clsDebtData.DeleteDebtByID(debtID, Convert.ToInt32(clsGlobalSession.CurrentUserID));
         }
 
-        public async Task<clsGetAllDebtPayments> GetDebtPayments( short pageNumber)
+        public async Task<clsGetAllDebtPayments> GetDebtPayments( int pageNumber)
         {
             var result = await GetDebtPayments(Convert.ToInt32(DebtID), pageNumber);
 
@@ -232,7 +232,7 @@ namespace MoneyMindManager_Business
             return result;
         }
 
-        public static async Task<clsGetAllDebtPayments> GetDebtPayments(int debtID, short pageNumber)
+        public static async Task<clsGetAllDebtPayments> GetDebtPayments(int debtID, int pageNumber)
         {
             return await clsDebtPayment.GetAllDebtPyamentsForDebt(debtID, pageNumber);
         }
@@ -248,7 +248,7 @@ namespace MoneyMindManager_Business
         }
 
         private static async Task<clsGetAllDebts> _GetAllDebts(int? debtID,bool? isLending,string personName,string userName, bool byCreatedDate,
-            string fromDateString, string toDateString,bool? isPaid, enTextSearchMode textSearchMode, short pageNumber)
+            string fromDateString, string toDateString,bool? isPaid, enTextSearchMode textSearchMode, int pageNumber)
         {
 
             DateTime? fromCreatedDate = null, toCreatedDate = null,
@@ -283,7 +283,7 @@ namespace MoneyMindManager_Business
         /// <param name="byCreatedDate">filter by createdDate or not (DebtData)</param>
         /// <returns>Object of all debts if exists, if not returns null</returns>
         public static async Task<clsGetAllDebts> GetAllDebts( bool? isLending, bool byCreatedDate,
-           string fromDateString, string toDateString, bool? isPaid, enTextSearchMode textSearchMode, short pageNumber)
+           string fromDateString, string toDateString, bool? isPaid, enTextSearchMode textSearchMode, int pageNumber)
         {
 
             return await _GetAllDebts(null, isLending, null,null, byCreatedDate, fromDateString, toDateString, 
@@ -296,7 +296,7 @@ namespace MoneyMindManager_Business
         /// <param name="byCreatedDate">filter by createdDate or not (DebtData)</param>
         /// <returns>Object of all debts if exists, if not returns null</returns>
         public static async Task<clsGetAllDebts> GetAllDebts(int debtID,bool? isLending, bool byCreatedDate,
-           string fromDateString, string toDateString, bool? isPaid, enTextSearchMode textSearchMode, short pageNumber)
+           string fromDateString, string toDateString, bool? isPaid, enTextSearchMode textSearchMode, int pageNumber)
         {
 
             return await _GetAllDebts(debtID, isLending, null,null, byCreatedDate, fromDateString, toDateString,
@@ -309,7 +309,7 @@ namespace MoneyMindManager_Business
         /// <param name="byCreatedDate">filter by createdDate or not (DebtData)</param>
         /// <returns>Object of all debts if exists, if not returns null</returns>
         public static async Task<clsGetAllDebts> GetAllDebts(string personName, bool? isLending, bool byCreatedDate,
-           string fromDateString, string toDateString, bool? isPaid, enTextSearchMode textSearchMode, short pageNumber)
+           string fromDateString, string toDateString, bool? isPaid, enTextSearchMode textSearchMode, int pageNumber)
         {
 
             return await _GetAllDebts(null, isLending, personName,null, byCreatedDate, fromDateString, toDateString,
@@ -322,7 +322,7 @@ namespace MoneyMindManager_Business
         /// <param name="byCreatedDate">filter by createdDate or not (DebtData)</param>
         /// <returns>Object of all debts if exists, if not returns null</returns>
         public static async Task<clsGetAllDebts> GetAllDebtsByUserName(string userName, bool? isLending, bool byCreatedDate,
-           string fromDateString, string toDateString, bool? isPaid, enTextSearchMode textSearchMode, short pageNumber)
+           string fromDateString, string toDateString, bool? isPaid, enTextSearchMode textSearchMode, int pageNumber)
         {
 
             return await _GetAllDebts(null, isLending, null,userName, byCreatedDate, fromDateString,

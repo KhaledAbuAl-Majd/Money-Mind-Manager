@@ -224,7 +224,7 @@ namespace MoneyMindManager_Business
         /// <summary>
         /// Filter by CategoryName AND CategoryType - isIncome, if vairable is null will not filter by it
         /// </summary>
-        public static async Task<clsGetAllCategories> GetAllCategoriesForSelectOne(string categoryName ,bool? isIncome, enTextSearchMode textSearchMode, short pageNumber)
+        public static async Task<clsGetAllCategories> GetAllCategoriesForSelectOne(string categoryName ,bool? isIncome, enTextSearchMode textSearchMode, int pageNumber)
         {
             byte rowsPerPage = 15;
             return await clsIncomeAndExpenseCategoryData.GetAllCategoriesForSelectOne(categoryName, isIncome, Convert.ToInt32(clsGlobalSession.CurrentUserID),
@@ -233,7 +233,7 @@ namespace MoneyMindManager_Business
 
         private static async Task<clsGetAllCategories> _GetAllCategories(int? categoryID, string categoryName,
             string parentCategoryName, string mainCategoryName, bool? isIncome, bool? isActive, bool includeMainCategories,
-            bool includeSubCategories, enTextSearchMode textSearchMode, short pageNumber)
+            bool includeSubCategories, enTextSearchMode textSearchMode, int pageNumber)
         {
             byte rowsPerPage = 15;
 
@@ -245,7 +245,7 @@ namespace MoneyMindManager_Business
         /// if variable is null will not filter by it
         /// </summary>
         public static async Task<clsGetAllCategories> GetAllCategories(bool isIncome, bool? isActive, bool includeMainCategories, bool includeSubCategories,
-             enTextSearchMode textSearchMode,short pageNumber)
+             enTextSearchMode textSearchMode,int pageNumber)
         {
             return await _GetAllCategories(null, null, null, null, isIncome, isActive, includeMainCategories,
                 includeSubCategories, textSearchMode, pageNumber);
@@ -255,7 +255,7 @@ namespace MoneyMindManager_Business
         /// if variable is null will not filter by it
         /// </summary>
         public static async Task<clsGetAllCategories> GetAllCategoriesByCategoryID(int categoryID,bool isIncome, bool? isActive, bool includeMainCategories, bool includeSubCategories,
-             enTextSearchMode textSearchMode,short pageNumber)
+             enTextSearchMode textSearchMode,int pageNumber)
         {
             return await _GetAllCategories(categoryID, null, null, null, isIncome, isActive, includeMainCategories,
                 includeSubCategories,textSearchMode, pageNumber);
@@ -265,7 +265,7 @@ namespace MoneyMindManager_Business
         /// if variable is null will not filter by it
         /// </summary>
         public static async Task<clsGetAllCategories> GetAllCategoriesByCategoryName(string categoryName,bool isIncome, bool? isActive, bool includeMainCategories, bool includeSubCategories,
-             enTextSearchMode textSearchMode,short pageNumber)
+             enTextSearchMode textSearchMode,int pageNumber)
         {
             return await _GetAllCategories(null, categoryName, null, null, isIncome, isActive, includeMainCategories,
                 includeSubCategories, textSearchMode, pageNumber);
@@ -275,7 +275,7 @@ namespace MoneyMindManager_Business
         /// if variable is null will not filter by it
         /// </summary>
         public static async Task<clsGetAllCategories> GetAllCategoriesByParentCategoryName(string parentCategoryName,bool isIncome, bool? isActive, bool includeMainCategories, bool includeSubCategories,
-             enTextSearchMode textSearchMode,short pageNumber)
+             enTextSearchMode textSearchMode,int pageNumber)
         {
             return await _GetAllCategories(null, null, parentCategoryName, null, isIncome, isActive, includeMainCategories,
                 includeSubCategories, textSearchMode, pageNumber);
@@ -285,7 +285,7 @@ namespace MoneyMindManager_Business
         /// if variable is null will not filter by it
         /// </summary>
         public static async Task<clsGetAllCategories> GetAllCategoriesByMainCategoryName(string mainCategoryName,bool isIncome, bool? isActive, bool includeMainCategories, bool includeSubCategories,
-             enTextSearchMode textSearchMode,short pageNumber)
+             enTextSearchMode textSearchMode,int pageNumber)
         {
             return await _GetAllCategories(null, null, null, mainCategoryName, isIncome, isActive, includeMainCategories,
                 includeSubCategories,textSearchMode, pageNumber);

@@ -77,7 +77,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
         bool _IsHeaderCreated = false;
         bool _searchByPageNumber = false;
-        short _pageNumber = 1;
+        int _pageNumber = 1;
         bool _LockingChangingEvent = false;
 
         bool _CheckValidationChildren()
@@ -253,7 +253,8 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             kgtxtPersonName.Text = null;
             kgtxtNotes.Text = null;
 
-            kgtxtDebtDate.Text = null;
+            kgtxtDebtDate.RefreshNumber_DateTimeFormattedText((clsPL_Global.CurrentUserSettings.Debts_TodayAsDefaultDate) ? DateTime.Today.ToString() : null);
+
             kgtxtPaymentDueDate.Text = null;
             kgtxtCreatedDate.Text = null;
 
@@ -499,14 +500,20 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             await _LoadDataAtDataGridView();
         }
 
-        private async void kgtxtPageNumber_TextChanged(object sender, EventArgs e)
+        private void kgtxtPageNumber_TextChanged(object sender, EventArgs e)
         {
-            if (!_searchByPageNumber || !_CheckValidationChildren())
+            if (!_searchByPageNumber)
                 return;
 
-            _pageNumber = Convert.ToInt16(kgtxtPageNumber.ValidatedText);
+            if (int.TryParse(kgtxtPageNumber.Text, out int result))
+            {
+                _pageNumber = result;
+            }
+            else
+                _pageNumber = 0;
 
-            await _LoadDataAtDataGridView();
+            SearchAfterTimerFinish.Stop();
+            SearchAfterTimerFinish.Start();
         }
 
         private void kgtxt_OnValidationError(object sender, KhaledGuna2TextBox.ValidatingErrorEventArgs e)
@@ -581,19 +588,18 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             if (gdgvDebtPaymentTransctions.SelectedRows.Count < 1 || _DebtID == null || _Debt.IsLocked)
                 return;
 
-            if (clsPL_MessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف معاملة السداد هذه ؟ ", "طلب مواقفقة", MessageBoxButtons.OKCancel,
-               MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
+            if (clsPL_Global.CurrentUserSettings.AskBeforeDeleteDebtPayments)
+                if (clsPL_MessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف معاملة السداد هذه ؟ ", "طلب موافقة", MessageBoxButtons.OKCancel,
+               MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.OK)
+                    return;
+
+            int transactionID = Convert.ToInt32(gdgvDebtPaymentTransctions.SelectedRows[0].Cells[0].Value);
+            if (await clsDebtPayment.DeleteDebtPaymentByID(transactionID))
             {
-                int transactionID = Convert.ToInt32(gdgvDebtPaymentTransctions.SelectedRows[0].Cells[0].Value);
-                if(await clsDebtPayment.DeleteDebtPaymentByID(transactionID))
-                {
-                    _pageNumber = 1;
-                    _isSaved = true;
-                    await _LoadDataAtDataGridView();
-                }
-
+                _pageNumber = 1;
+                _isSaved = true;
+                await _LoadDataAtDataGridView();
             }
-
         }
         private void gtsmTransactionInfo_Click(object sender, EventArgs e)
         {
@@ -611,14 +617,15 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             lblUserMessage.Visible = false;
 
-            if (clsPL_MessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف السند ؟ ", "طلب مواقفقة", MessageBoxButtons.OKCancel,
-               MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
+            if (clsPL_Global.CurrentUserSettings.AskBeforeDeleteDebts)
+                if (clsPL_MessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف السند ؟ ", "طلب موافقة", MessageBoxButtons.OKCancel,
+               MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.OK)
+                    return;
+
+            if (await clsDebt.DeleteDebtByDebtID(Convert.ToInt32(_DebtID)))
             {
-                if (await clsDebt.DeleteDebtByDebtID(Convert.ToInt32(_DebtID)))
-                {
-                    _isSaved = true;
-                    gbtnClose.PerformClick();
-                }
+                _isSaved = true;
+                gbtnClose.PerformClick();
             }
 
         }

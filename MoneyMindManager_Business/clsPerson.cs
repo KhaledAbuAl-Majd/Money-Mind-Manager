@@ -146,7 +146,7 @@ namespace MoneyMindManager_Business
         }
 
         private static async Task<clsGetAllPeople> _GetAllPeople(int? personID, string personName, string email,
-             string phone,enTextSearchMode textSearchMode, short pageNumber)
+             string phone,enTextSearchMode textSearchMode, int pageNumber)
         {
             byte rowsPerPage = 15;
             return await clsPersonData.GetAllPeople(personID, personName, email, phone, (byte)textSearchMode, pageNumber,
@@ -157,7 +157,7 @@ namespace MoneyMindManager_Business
         /// Get All People For Account Using Paging,  if variable null will not filter by it.
         /// </summary>
         /// <returns>object of clsGetAllPeople : if error happend, return null</returns>
-        public static async Task<clsGetAllPeople> GetAllPeople(enTextSearchMode textSearchMode, short pageNumber)
+        public static async Task<clsGetAllPeople> GetAllPeople(enTextSearchMode textSearchMode, int pageNumber)
         {
             return await _GetAllPeople(null, null, null, null,textSearchMode, pageNumber);
         }
@@ -166,7 +166,7 @@ namespace MoneyMindManager_Business
         /// Get All People For Account Using Paging [10 rows per page], if variable null will not filter by it.
         /// </summary>
         /// <returns>object of clsGetAllPeople : if error happend, return null</returns>
-        public static async Task<clsGetAllPeople> GetAllPeopleByPersonID(int personID, enTextSearchMode textSearchMode, short pageNumber)
+        public static async Task<clsGetAllPeople> GetAllPeopleByPersonID(int personID, enTextSearchMode textSearchMode, int pageNumber)
         {
             return await _GetAllPeople(personID, null, null, null, textSearchMode, pageNumber);
         }
@@ -175,7 +175,7 @@ namespace MoneyMindManager_Business
         /// Get All People By Person Name For Account Using Paging [10 rows per page],  if variable null will not filter by it.
         /// </summary>
         /// <returns>object of clsGetAllPeople : if error happend, return null</returns>
-        public static async Task<clsGetAllPeople> GetAllPeopleByPersonName(string personName, enTextSearchMode textSearchMode, short pageNumber)
+        public static async Task<clsGetAllPeople> GetAllPeopleByPersonName(string personName, enTextSearchMode textSearchMode, int pageNumber)
         {
             return await _GetAllPeople(null, personName, null, null, textSearchMode, pageNumber);
         }
@@ -184,7 +184,7 @@ namespace MoneyMindManager_Business
         /// Get All People By phone For Account Using Paging [10 rows per page],  if variable null will not filter by it.
         /// </summary>
         /// <returns>object of clsGetAllPeople : if error happend, return null</returns>
-        public static async Task<clsGetAllPeople> GetAllPeopleByEmail(string email, enTextSearchMode textSearchMode, short pageNumber)
+        public static async Task<clsGetAllPeople> GetAllPeopleByEmail(string email, enTextSearchMode textSearchMode, int pageNumber)
         {
             return await _GetAllPeople(null, null, email, null, textSearchMode, pageNumber);
         }
@@ -193,7 +193,7 @@ namespace MoneyMindManager_Business
         /// Get All People By phone For Account Using Paging [10 rows per page],  if variable null will not filter by it.
         /// </summary>
         /// <returns>object of clsGetAllPeople : if error happend, return null</returns>
-        public static async Task<clsGetAllPeople> GetAllPeopleByPhone(string phone, enTextSearchMode textSearchMode, short pageNumber)
+        public static async Task<clsGetAllPeople> GetAllPeopleByPhone(string phone, enTextSearchMode textSearchMode, int pageNumber)
         {
             return await _GetAllPeople(null, null, null, phone, textSearchMode, pageNumber);
         }
@@ -205,7 +205,7 @@ namespace MoneyMindManager_Business
         /// For Select One - display personID - Name
         /// </summary>
         /// <returns>object of clsGetAllPeople : if error happend, return null</returns>
-        public static async Task<clsGetAllPeople> GetAllPeopleForSelectOne(string personName, enTextSearchMode textSearchMode, short pageNumber)
+        public static async Task<clsGetAllPeople> GetAllPeopleForSelectOne(string personName, enTextSearchMode textSearchMode, int pageNumber)
         {
             byte rowsPerPage = 15;
             return await clsPersonData.GetAllPeopleForSelectOne(personName,(byte)textSearchMode, pageNumber,

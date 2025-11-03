@@ -46,7 +46,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
         bool? _isIncome;
 
         bool _searchByPageNumber = false;
-        short _pageNumber = 1;
+        int _pageNumber = 1;
         bool _IsHeaderCreated = false;
         void _RaiseOnCategorySelectedEvnet()
         {
@@ -292,14 +292,20 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             --_pageNumber;
             await _LoadDataAtDataGridView();
         }
-        private async void kgtxtPageNumber_TextChanged(object sender, EventArgs e)
+        private void kgtxtPageNumber_TextChanged(object sender, EventArgs e)
         {
-            if (!_searchByPageNumber || !_CheckValidationChildren())
+            if (!_searchByPageNumber)
                 return;
 
-            _pageNumber = Convert.ToInt16(kgtxtPageNumber.ValidatedText);
+            if (int.TryParse(kgtxtPageNumber.Text, out int result))
+            {
+                _pageNumber = result;
+            }
+            else
+                _pageNumber = 0;
 
-            await _LoadDataAtDataGridView();
+            SearchAfterTimerFinish.Stop();
+            SearchAfterTimerFinish.Start();
         }
     }
 }

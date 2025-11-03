@@ -11,7 +11,6 @@ using KhaledControlLibrary1;
 using MoneyMindManager_Business;
 using MoneyMindManager_Presentation.Global;
 using MoneyMindManagerGlobal;
-using static Guna.UI2.Native.WinApi;
 using static MoneyMindManager_Business.clsBLLGlobal;
 
 namespace MoneyMindManager_Presentation.People
@@ -37,7 +36,7 @@ namespace MoneyMindManager_Presentation.People
         bool _IsHeaderCreated = false;
         bool _searchByPageNumber = false;
 
-        short _pageNumber = 1;
+        int _pageNumber = 1;
 
         bool _CheckValidationChildren()
         {
@@ -158,16 +157,18 @@ namespace MoneyMindManager_Presentation.People
         void _AddNewPerson()
         {
             frmAddUpdatePerson frm = new frmAddUpdatePerson();
-            frm.OnCloseAndSaved += x => _RefreshFilter();
+            frm.OnCloseAndSaved += x => _Refresh();
             clsPL_Global.MainForm.AddNewFormAtContainer(frm);
         }
 
-        async void _RefreshFilter()
+        async void _Refresh()
         {
-            if (gcbFilterBy.SelectedIndex == 0)
-                await _LoadDataAtDataGridView(enFilterBy.All);
-            else
-                gcbFilterBy.SelectedIndex = 0;
+            _pageNumber = 1;
+            _searchByPageNumber = false;
+            kgtxtFilterValue.Text = "";
+            _searchByPageNumber = true;
+
+            await _LoadDataAtDataGridView(_filterBy);
         }
 
         void _ShowPersonInfo()
@@ -175,7 +176,7 @@ namespace MoneyMindManager_Presentation.People
             int personID = Convert.ToInt32(gdgvPeople.CurrentRow.Cells[0].Value);
 
             frmPersonInfo frm = new frmPersonInfo(personID);
-            frm.OnEditingPersonAndFormClosed += _RefreshFilter;
+            frm.OnEditingPersonAndFormClosed += _Refresh;
             clsPL_Global.MainForm.AddNewFormAtContainer(frm);
         }
 
@@ -320,11 +321,17 @@ namespace MoneyMindManager_Presentation.People
 
         private void kgtxtPageNumber_TextChanged(object sender, EventArgs e)
         {
-            if (!_searchByPageNumber || !_CheckValidationChildren())
+            if (!_searchByPageNumber)
                 return;
 
-            _pageNumber = Convert.ToInt16(kgtxtPageNumber.ValidatedText);
-;
+            if (int.TryParse(kgtxtPageNumber.Text, out int result))
+            {
+                _pageNumber = result;
+            }
+            else
+                _pageNumber = 0;
+
+            
 
             SearchAfterTimerFinish.Stop();
             SearchAfterTimerFinish.Start();
@@ -355,23 +362,23 @@ namespace MoneyMindManager_Presentation.People
             int personID = Convert.ToInt32(gdgvPeople.CurrentRow.Cells[0].Value);
 
             frmAddUpdatePerson frm = new frmAddUpdatePerson(personID);
-            frm.OnCloseAndSaved += x => _RefreshFilter();
+            frm.OnCloseAndSaved += x => _Refresh();
             clsPL_Global.MainForm.AddNewFormAtContainer(frm);
         }
 
         private async void gtsmDeletePerson_Click(object sender, EventArgs e)
         {
-            if (clsPL_MessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف هذا الشخص", "طلب مواقفقة", MessageBoxButtons.OKCancel,
-                MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
+            if (clsPL_Global.CurrentUserSettings.AskBeforeDeletePerson)
+                if (clsPL_MessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف هذا الشخص", "طلب موافقة", MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.OK)
+                    return;
+
+            int personID = Convert.ToInt32(gdgvPeople.CurrentRow.Cells[0].Value);
+
+            if (await clsPerson.DeletePersonByID(personID))
             {
-                int personID = Convert.ToInt32(gdgvPeople.CurrentRow.Cells[0].Value);
-
-                if (await clsPerson.DeletePersonByID(personID))
-                {
-                    _RefreshFilter();
-                }
+                _Refresh();
             }
-
         }
 
         private void gtsmPersonData_Click(object sender, EventArgs e)

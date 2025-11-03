@@ -197,7 +197,7 @@ namespace MoneyMindManager_Business
             return await clsIncomeAndExpenseVoucherData.DeleteVoucherByID(voucherID, Convert.ToInt32(clsGlobalSession.CurrentUserID));
         }
 
-        public async Task<clsGetAllIncomeAndExpenseTransactions> GetVoucheTransactions( short pageNumber)
+        public async Task<clsGetAllIncomeAndExpenseTransactions> GetVoucheTransactions( int pageNumber)
         {
           var result =  await GetVoucheTransactions(Convert.ToInt32(VoucherID), pageNumber);
 
@@ -207,7 +207,7 @@ namespace MoneyMindManager_Business
             return result;
         }
 
-        public static async Task<clsGetAllIncomeAndExpenseTransactions> GetVoucheTransactions(int voucherID, short pageNumber)
+        public static async Task<clsGetAllIncomeAndExpenseTransactions> GetVoucheTransactions(int voucherID, int pageNumber)
         {
            return await clsIncomeAndExpenseTransaction.GetAllIncomeAndExpensTransactionsForVoucher(voucherID, pageNumber);
         }
@@ -245,7 +245,7 @@ namespace MoneyMindManager_Business
         }
 
         private static async Task<clsGetAllVouchers> _GetAllVouchers(int? voucherID,string voucherName,string userName ,bool byCreatedDate, 
-            string fromDateString, string toDateString, enVoucherType voucherType, enTextSearchMode textSearchMode, short pageNumber)
+            string fromDateString, string toDateString, enVoucherType voucherType, enTextSearchMode textSearchMode, int pageNumber)
         {
             bool isIncome = false, isReturn = false;
 
@@ -303,7 +303,7 @@ namespace MoneyMindManager_Business
         /// <param name="byCreatedDate">filter by createdDate or not (voucherDate)</param>
         /// <returns>Object of all vouchers if exists, if not returns null</returns>
         public static async Task<clsGetAllVouchers> GetAllVouchers(bool byCreatedDate, string fromDateString, string toDateString,
-            enVoucherType voucherType, enTextSearchMode textSearchMode, short pageNumber)
+            enVoucherType voucherType, enTextSearchMode textSearchMode, int pageNumber)
         {
             return await _GetAllVouchers(null, null,null, byCreatedDate, fromDateString, toDateString, voucherType,textSearchMode, pageNumber);
         }
@@ -314,7 +314,7 @@ namespace MoneyMindManager_Business
         /// <param name="byCreatedDate">filter by createdDate or not (voucherDate)</param>
         /// <returns>Object of all vouchers if exists, if not returns null</returns>
         public static async Task<clsGetAllVouchers> GetAllVouchersByVoucherID(int voucherID,bool byCreatedDate, string fromDateString, string toDateString,
-            enVoucherType voucherType, enTextSearchMode textSearchMode, short pageNumber)
+            enVoucherType voucherType, enTextSearchMode textSearchMode, int pageNumber)
         {
             return await _GetAllVouchers(voucherID, null,null, byCreatedDate, fromDateString, toDateString, voucherType,textSearchMode, pageNumber);
         }
@@ -325,7 +325,7 @@ namespace MoneyMindManager_Business
         /// <param name="byCreatedDate">filter by createdDate or not (voucherDate)</param>
         /// <returns>Object of all vouchers if exists, if not returns null</returns>
         public static async Task<clsGetAllVouchers> GetAllVouchersByVoucherName(string voucherName,bool byCreatedDate, string fromDateString, string toDateString,
-            enVoucherType voucherType, enTextSearchMode textSearchMode, short pageNumber)
+            enVoucherType voucherType, enTextSearchMode textSearchMode, int pageNumber)
         {
             return await _GetAllVouchers(null, voucherName,null, byCreatedDate, fromDateString, toDateString, voucherType,textSearchMode, pageNumber);
         }
@@ -336,7 +336,7 @@ namespace MoneyMindManager_Business
         /// <param name="byCreatedDate">filter by createdDate or not (voucherDate)</param>
         /// <returns>Object of all vouchers if exists, if not returns null</returns>
         public static async Task<clsGetAllVouchers> GetAllVouchersByUserName(string userName,bool byCreatedDate, string fromDateString, string toDateString,
-            enVoucherType voucherType, enTextSearchMode textSearchMode, short pageNumber)
+            enVoucherType voucherType, enTextSearchMode textSearchMode, int pageNumber)
         {
             return await _GetAllVouchers(null,null,userName, byCreatedDate, fromDateString, toDateString, voucherType,textSearchMode, pageNumber);
         }

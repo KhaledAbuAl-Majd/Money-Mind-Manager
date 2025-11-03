@@ -69,7 +69,7 @@ namespace MoneyMindManager_DataAccess
 
         public static async Task<clsGetAllMainTransactions> GetAllMainTransactions(int? transactionID, string userName,string purpose,
             string transactionTypes, DateTime? fromCreatedDate, DateTime? toCreatedDate, DateTime? fromTransactionDate,
-           DateTime? toTransactionDate, int currentUserID, byte textSearchMode, short pageNumber, byte rowsPerPage, bool RaiseEventOnErrorOccured = true)
+           DateTime? toTransactionDate, int currentUserID, byte textSearchMode, int pageNumber, byte rowsPerPage, bool RaiseEventOnErrorOccured = true)
         {
             clsGetAllMainTransactions allTransactions = null;
 
@@ -94,7 +94,7 @@ namespace MoneyMindManager_DataAccess
                         command.Parameters.AddWithValue("@PageNumber", pageNumber);
                         command.Parameters.AddWithValue("@RowsPerPage", rowsPerPage);
 
-                        SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.SmallInt)
+                        SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.Int)
                         {
                             Direction = ParameterDirection.Output
                         };
@@ -129,7 +129,7 @@ namespace MoneyMindManager_DataAccess
                         {
                             DataTable dtTransactions = new DataTable();
                             dtTransactions.Load(reader);
-                            short numberOfPages = Convert.ToInt16(outputNumberOfPages.Value);
+                           int numberOfPages = Convert.ToInt32(outputNumberOfPages.Value);
                             int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
 
                             allTransactions = new clsGetAllMainTransactions(dtTransactions, numberOfPages, recordsCount,

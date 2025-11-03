@@ -511,7 +511,7 @@ namespace MoneyMindManager_Business
         }
 
         private static async Task<clsGetAllUsers> _GetAllUsers(int? userID, string userName, string personName, bool? isActive,
-            enTextSearchMode textSearchMode, short pageNumber)
+            enTextSearchMode textSearchMode, int pageNumber)
         {
             byte rowsPerPage = 15;
             return await clsUserData.GetAllUsers(userID,userName,personName,isActive,(byte)textSearchMode,pageNumber,
@@ -523,7 +523,7 @@ namespace MoneyMindManager_Business
         /// Get All Users For Account Using Paging , if variable is null will not filter by it
         /// </summary>
         /// <returns>object of clsGetAllUsers : if error happend, return null</returns>
-        public static async Task<clsGetAllUsers> GetAllUsers(bool? isActive, enTextSearchMode textSearchMode, short pageNumber)
+        public static async Task<clsGetAllUsers> GetAllUsers(bool? isActive, enTextSearchMode textSearchMode, int pageNumber)
         {
             return await _GetAllUsers(null, null, null, isActive, textSearchMode, pageNumber);
         }
@@ -532,7 +532,7 @@ namespace MoneyMindManager_Business
         /// Get All Users By UserID For Account Using Paging [10 rows per page] , if variable is null will not filter by it
         /// </summary>
         /// <returns>object of clsGetAllUsers : if error happend, return null</returns>
-        public static async Task<clsGetAllUsers> GetAllUsersByUserID(int userID,  bool? isActive, enTextSearchMode textSearchMode, short pageNumber)
+        public static async Task<clsGetAllUsers> GetAllUsersByUserID(int userID,  bool? isActive, enTextSearchMode textSearchMode, int pageNumber)
         {
             return await _GetAllUsers(userID, null, null, isActive, textSearchMode, pageNumber);
         }
@@ -541,7 +541,7 @@ namespace MoneyMindManager_Business
         /// Get All Users By UserName For Account Using Paging [10 rows per page], if variable is null will not filter by it
         /// </summary>
         /// <returns>object of clsGetAllUsers : if error happend, return null</returns>
-        public static async Task<clsGetAllUsers> GetAllUsersByUserName(string userName, bool? isActive, enTextSearchMode textSearchMode, short pageNumber)
+        public static async Task<clsGetAllUsers> GetAllUsersByUserName(string userName, bool? isActive, enTextSearchMode textSearchMode, int pageNumber)
         {
             return await _GetAllUsers(null, userName, null, isActive, textSearchMode, pageNumber);
         }
@@ -550,7 +550,7 @@ namespace MoneyMindManager_Business
         /// Get All Users By personName For Account Using Paging [10 rows per page], if variable is null will not filter by it
         /// </summary>
         /// <returns>object of clsGetAllUsers : if error happend, return null</returns>
-        public static async Task<clsGetAllUsers> GetAllUsersByPersonName(string personName, bool? isActive, enTextSearchMode textSearchMode, short pageNumber)
+        public static async Task<clsGetAllUsers> GetAllUsersByPersonName(string personName, bool? isActive, enTextSearchMode textSearchMode, int pageNumber)
         {
             return await _GetAllUsers(null, null, personName, isActive, textSearchMode, pageNumber);
         }

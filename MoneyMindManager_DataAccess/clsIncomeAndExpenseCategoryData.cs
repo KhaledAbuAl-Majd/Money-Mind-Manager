@@ -349,7 +349,7 @@ namespace MoneyMindManager_DataAccess
         /// <param name="isIncome">if null => don't search by it, else => search by it</param>
         /// <returns></returns>
         public static async Task<clsGetAllCategories> GetAllCategoriesForSelectOne(string categoryName, bool? isIncome, int currentUserID,
-            byte textSearchMode, short pageNumber, byte rowsPerPage, bool RaiseEventOnErrorOccured = true)
+            byte textSearchMode, int pageNumber, byte rowsPerPage, bool RaiseEventOnErrorOccured = true)
         {
             clsGetAllCategories allCategories = null;
 
@@ -368,7 +368,7 @@ namespace MoneyMindManager_DataAccess
                         command.Parameters.AddWithValue("@PageNumber", pageNumber);
                         command.Parameters.AddWithValue("@RowsPerPage", rowsPerPage);
 
-                        SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.SmallInt)
+                        SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.Int)
                         {
                             Direction = ParameterDirection.Output
                         };
@@ -387,7 +387,7 @@ namespace MoneyMindManager_DataAccess
                         {
                             DataTable dtCategories = new DataTable();
                             dtCategories.Load(reader);
-                            short numberOfPages = Convert.ToInt16(outputNumberOfPages.Value);
+                           int numberOfPages = Convert.ToInt32(outputNumberOfPages.Value);
                             int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
 
                             allCategories = new clsGetAllCategories(dtCategories, numberOfPages, recordsCount);
@@ -414,7 +414,7 @@ namespace MoneyMindManager_DataAccess
         /// </summary>
         public static async Task<clsGetAllCategories> GetAllCategories(int? categoryID, string categoryName,string parentCategoryName,
             string mainCategoryName, bool? isIncome, bool? isActive,bool includeMainCategories,bool includeSubCategories,
-            int currentUserID, byte textSearchMode, short pageNumber, byte rowsPerPage, bool RaiseEventOnErrorOccured = true)
+            int currentUserID, byte textSearchMode, int pageNumber, byte rowsPerPage, bool RaiseEventOnErrorOccured = true)
         {
             clsGetAllCategories allCategories = null;
 
@@ -439,7 +439,7 @@ namespace MoneyMindManager_DataAccess
                         command.Parameters.AddWithValue("@PageNumber", pageNumber);
                         command.Parameters.AddWithValue("@RowsPerPage", rowsPerPage);
 
-                        SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.SmallInt)
+                        SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.Int)
                         {
                             Direction = ParameterDirection.Output
                         };
@@ -458,7 +458,7 @@ namespace MoneyMindManager_DataAccess
                         {
                             DataTable dtCategories = new DataTable();
                             dtCategories.Load(reader);
-                            short numberOfPages = Convert.ToInt16(outputNumberOfPages.Value);
+                           int numberOfPages = Convert.ToInt32(outputNumberOfPages.Value);
                             int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
 
                             allCategories = new clsGetAllCategories(dtCategories, numberOfPages, recordsCount);

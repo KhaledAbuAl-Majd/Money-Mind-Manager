@@ -265,7 +265,7 @@ namespace MoneyMindManager_DataAccess
         /// </summary>
         public static async Task<clsGetAllDebts> GetAllDebts(int? debtID, bool? isLending, string personName,string userName,
             DateTime? fromCreatedDate, DateTime? toCreatedDate, DateTime? fromDebtDate, DateTime? toDebtDate,  bool? isPaid,
-            int currentUserID, byte textSearchMode, short pageNumber, byte rowsPerPage, bool RaiseEventOnErrorOccured = true)
+            int currentUserID, byte textSearchMode, int pageNumber, byte rowsPerPage, bool RaiseEventOnErrorOccured = true)
         {
             clsGetAllDebts allDebts = null;
 
@@ -291,7 +291,7 @@ namespace MoneyMindManager_DataAccess
                         command.Parameters.AddWithValue("@PageNumber", pageNumber);
                         command.Parameters.AddWithValue("@RowsPerPage", rowsPerPage);
 
-                        SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.SmallInt)
+                        SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.Int)
                         {
                             Direction = ParameterDirection.Output
                         };
@@ -341,7 +341,7 @@ namespace MoneyMindManager_DataAccess
                         {
                             DataTable dtDebts = new DataTable();
                             dtDebts.Load(reader);
-                            short numberOfPages = Convert.ToInt16(outputNumberOfPages.Value);
+                           int numberOfPages = Convert.ToInt32(outputNumberOfPages.Value);
                             int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
                             decimal totalDebtsValue = Convert.ToDecimal(outputTotalDebtsValue.Value);
                             decimal currentPageDebtsValue = Convert.ToDecimal(outputCurrentPageDebtsValue.Value);

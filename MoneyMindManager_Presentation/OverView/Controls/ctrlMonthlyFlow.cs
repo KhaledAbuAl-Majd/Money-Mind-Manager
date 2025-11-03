@@ -58,6 +58,10 @@ namespace MoneyMindManager_Presentation.OverView.Controls
 
             _chartData = await clsReport.GetMonthlyFlow(startDate, endDate, Convert.ToInt16(clsPL_Global.CurrentUser.AccountID));
 
+            kgtxtTotalIncome.RefreshNumber_DateTimeFormattedText(_chartData[0].TotalIncome.ToString());
+            kgtxtTotalNetExpense.RefreshNumber_DateTimeFormattedText(_chartData[0].TotalNetExpense.ToString());
+            kgtxtTotalNetCashFlow.RefreshNumber_DateTimeFormattedText(_chartData[0].TotalNetCashFlow.ToString());
+
             LoadMonthlyChart();
         }
 

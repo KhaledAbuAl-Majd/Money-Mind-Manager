@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Guna.UI2.WinForms;
 using MoneyMindManager_Business;
+using MoneyMindManager_Presentation.Global;
 using MoneyMindManager_Presentation.Income_And_Expense;
 using MoneyMindManager_Presentation.Income_And_Expense.Categories;
 using MoneyMindManager_Presentation.Income_And_Expense.Vouchers;
@@ -97,6 +98,22 @@ namespace MoneyMindManager_Presentation.Main
             }
         }
 
+        private void llblCurrentUserInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            llblCurrentUserInfo.Enabled = false;
+            var frm = new frmUserInfo(Convert.ToInt32(clsPL_Global.CurrentUser?.UserID));
+            frm.FormClosed += (x,y) => llblCurrentUserInfo.Enabled = true;
+            AddNewFormAtContainer(frm);
+        }
+
+        private void llblChangePassword_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            llblChangePassword.Enabled = false;
+            var frm = new frmChangePassword(Convert.ToInt32(clsPL_Global.CurrentUser?.UserID));
+            frm.FormClosed += (x, y) => llblChangePassword.Enabled = true;
+            AddNewFormAtContainer(frm);
+        }
+
         private void gbtnOverOview_Click(object sender, EventArgs e)
         {
             if (_LoadFormAtPanelContainer(new frmOverView(), true))
@@ -153,32 +170,22 @@ namespace MoneyMindManager_Presentation.Main
             OnCloseProgramm?.Invoke();
         }
 
-        private void gbtnSettings_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void gbtnAccount_Click(object sender, EventArgs e)
         {
             if (_LoadFormAtPanelContainer(new frmCurrentAccount(), true))
                 prevButton = gbtnAccount;
         }
 
-        private void llblCurrentUserInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void gbtnSettings_Click(object sender, EventArgs e)
         {
-            llblCurrentUserInfo.Enabled = false;
-            var frm = new frmUserInfo(Convert.ToInt32(clsPL_Global.CurrentUser?.UserID));
-            frm.FormClosed += (x,y) => llblCurrentUserInfo.Enabled = true;
-            AddNewFormAtContainer(frm);
+            if (_LoadFormAtPanelContainer(new frmSettings(), true))
+                prevButton = gbtnSettings;
         }
 
-        private void llblChangePassword_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void gbtnAboutProgramm_Click(object sender, EventArgs e)
         {
-            llblChangePassword.Enabled = false;
-            var frm = new frmChangePassword(Convert.ToInt32(clsPL_Global.CurrentUser?.UserID));
-            frm.FormClosed += (x, y) => llblChangePassword.Enabled = true;
-            AddNewFormAtContainer(frm);
+            if (_LoadFormAtPanelContainer(new frmAboutProgramm(), true))
+                prevButton = gbtnAboutProgramm;
         }
-
     }
 }

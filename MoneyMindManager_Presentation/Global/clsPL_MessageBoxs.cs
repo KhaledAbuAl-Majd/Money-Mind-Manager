@@ -19,6 +19,9 @@ namespace MoneyMindManager_Presentation.Global
         /// </summary>
         public static DialogResult ShowMessage(string message, string caption, MessageBoxButtons buttons, MessageBoxIcon icon, MessageBoxDefaultButton defaultButton = MessageBoxDefaultButton.Button1)
         {
+            if (clsPL_Global.ActiveForm == null)
+                return DialogResult.Cancel;
+
             MessageBoxOptions options = 0;
 
             // التشييك لو الرسالة فيها حروف عربية

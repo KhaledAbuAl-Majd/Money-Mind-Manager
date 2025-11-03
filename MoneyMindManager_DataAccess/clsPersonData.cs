@@ -266,7 +266,7 @@ namespace MoneyMindManager_DataAccess
         /// </summary>
         /// <returns>object of clsGetAllPeople : if error happend, return null</returns>
         public static async Task<clsGetAllPeople> GetAllPeople(int? personID, string personName, string email,
-             string phone,byte textSearchMode, short pageNumber,byte rowsPerPage, int currentUserID, bool RaiseEventOnErrorOccured = true)
+             string phone,byte textSearchMode, int pageNumber,byte rowsPerPage, int currentUserID, bool RaiseEventOnErrorOccured = true)
         {
             clsGetAllPeople allPeople = null;
 
@@ -287,7 +287,7 @@ namespace MoneyMindManager_DataAccess
                         command.Parameters.AddWithValue("@PageNumber", pageNumber);
                         command.Parameters.AddWithValue("@RowsPerPage", rowsPerPage);
 
-                        SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.SmallInt)
+                        SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.Int)
                         {
                             Direction = ParameterDirection.Output
                         };
@@ -306,7 +306,7 @@ namespace MoneyMindManager_DataAccess
                         {
                             DataTable dtPeople = new DataTable();
                             dtPeople.Load(reader);
-                            short numberOfPages = Convert.ToInt16(outputNumberOfPages.Value);
+                           int numberOfPages = Convert.ToInt32(outputNumberOfPages.Value);
                             int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
 
                             allPeople = new clsGetAllPeople(dtPeople, numberOfPages, recordsCount);
@@ -329,7 +329,7 @@ namespace MoneyMindManager_DataAccess
         }
 
         public static async Task<clsGetAllPeople> GetAllPeopleForSelectOne(string personName, byte textSearchMode,
-            short pageNumber, byte rowsPerPage, int currentUserID, bool RaiseEventOnErrorOccured = true)
+            int pageNumber, byte rowsPerPage, int currentUserID, bool RaiseEventOnErrorOccured = true)
         {
             clsGetAllPeople allPeople = null;
 
@@ -347,7 +347,7 @@ namespace MoneyMindManager_DataAccess
                         command.Parameters.AddWithValue("@PageNumber", pageNumber);
                         command.Parameters.AddWithValue("@RowsPerPage", rowsPerPage);
 
-                        SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.SmallInt)
+                        SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.Int)
                         {
                             Direction = ParameterDirection.Output
                         };
@@ -366,7 +366,7 @@ namespace MoneyMindManager_DataAccess
                         {
                             DataTable dtPeople = new DataTable();
                             dtPeople.Load(reader);
-                            short numberOfPages = Convert.ToInt16(outputNumberOfPages.Value);
+                           int numberOfPages = Convert.ToInt32(outputNumberOfPages.Value);
                             int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
 
                             allPeople = new clsGetAllPeople(dtPeople, numberOfPages, recordsCount);

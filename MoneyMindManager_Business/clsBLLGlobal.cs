@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MoneyMindManager_DataAccess;
 
 namespace MoneyMindManager_Business
 {
@@ -19,6 +20,11 @@ namespace MoneyMindManager_Business
             /// search using Like Statement - any part of text "Like" - slower
             /// </summary>
             Substring_Slow = 2
+        }
+
+        public static async Task RoutineMaintenance()
+        {
+            await clsDALGlobal.RoutineMaintenance();
         }
     }
 }

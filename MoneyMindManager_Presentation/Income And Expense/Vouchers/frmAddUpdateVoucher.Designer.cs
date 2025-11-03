@@ -75,6 +75,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.gibtnDeleteVoucher = new Guna.UI2.WinForms.Guna2ImageButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.SearchAfterTimerFinish = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.gdgvTransactions)).BeginInit();
             this.guna2ContextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -102,7 +103,6 @@
             this.lblCurrentPageRecordsCount.Size = new System.Drawing.Size(114, 24);
             this.lblCurrentPageRecordsCount.TabIndex = 38;
             this.lblCurrentPageRecordsCount.Text = "N/A";
-          
             // 
             // lblDescriptionOfCurrentPageNumOfRcords
             // 
@@ -114,7 +114,6 @@
             this.lblDescriptionOfCurrentPageNumOfRcords.Size = new System.Drawing.Size(205, 24);
             this.lblDescriptionOfCurrentPageNumOfRcords.TabIndex = 37;
             this.lblDescriptionOfCurrentPageNumOfRcords.Text = "# عدد صفوف الصفحة الحالية : ";
-         
             // 
             // gibtnPreviousPage
             // 
@@ -164,7 +163,6 @@
             this.lblCurrentPageOfNumberOfPages.TabIndex = 33;
             this.lblCurrentPageOfNumberOfPages.Text = "0 من  0  صفحات";
             this.lblCurrentPageOfNumberOfPages.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-
             // 
             // lblTotalRecordsNumber
             // 
@@ -175,7 +173,6 @@
             this.lblTotalRecordsNumber.Size = new System.Drawing.Size(114, 24);
             this.lblTotalRecordsNumber.TabIndex = 32;
             this.lblTotalRecordsNumber.Text = "N/A";
-
             // 
             // label1
             // 
@@ -369,7 +366,6 @@
             this.lblNoTransactionsFoundMessage.TabIndex = 42;
             this.lblNoTransactionsFoundMessage.Text = "لا يوجد معاملات لهذا المستند !";
             this.lblNoTransactionsFoundMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-
             // 
             // errorProvider1
             // 
@@ -453,7 +449,6 @@
             this.kgtxtNotes.TextProperties.TextFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.enTextFormat.Phone;
             this.kgtxtNotes.TrimEnd = false;
             this.kgtxtNotes.TrimStart = false;
-
             // 
             // kgtxtVoucherDate
             // 
@@ -535,7 +530,6 @@
             this.kgtxtVoucherDate.TrimStart = true;
             this.kgtxtVoucherDate.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxtPageNumber_OnValidationError);
             this.kgtxtVoucherDate.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxtPageNumber_OnValidationSuccess);
-
             // 
             // kgtxtVoucherName
             // 
@@ -616,7 +610,6 @@
             this.kgtxtVoucherName.TrimStart = true;
             this.kgtxtVoucherName.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxtPageNumber_OnValidationError);
             this.kgtxtVoucherName.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxtPageNumber_OnValidationSuccess);
-           
             // 
             // kgtxtPageNumber
             // 
@@ -711,7 +704,6 @@
             this.label3.Size = new System.Drawing.Size(75, 17);
             this.label3.TabIndex = 105;
             this.label3.Text = "اسم المستند";
-
             // 
             // label4
             // 
@@ -723,7 +715,6 @@
             this.label4.Size = new System.Drawing.Size(78, 17);
             this.label4.TabIndex = 106;
             this.label4.Text = "تاريخ المستند";
-
             // 
             // label5
             // 
@@ -735,7 +726,6 @@
             this.label5.Size = new System.Drawing.Size(57, 17);
             this.label5.TabIndex = 107;
             this.label5.Text = "ملاحظات";
-
             // 
             // gchkIsLocked
             // 
@@ -771,7 +761,6 @@
             this.label2.Size = new System.Drawing.Size(70, 17);
             this.label2.TabIndex = 110;
             this.label2.Text = "تاريخ الإنشاء";
-
             // 
             // kgtxtCreatedDate
             // 
@@ -854,7 +843,6 @@
             this.kgtxtCreatedDate.TrimStart = true;
             this.kgtxtCreatedDate.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxtPageNumber_OnValidationError);
             this.kgtxtCreatedDate.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxtPageNumber_OnValidationSuccess);
-
             // 
             // label6
             // 
@@ -866,7 +854,6 @@
             this.label6.Size = new System.Drawing.Size(79, 17);
             this.label6.TabIndex = 112;
             this.label6.Text = "قيمة المستند";
-
             // 
             // kgtxtVoucherValue
             // 
@@ -946,7 +933,6 @@
             this.kgtxtVoucherValue.TextProperties.TextFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.enTextFormat.None;
             this.kgtxtVoucherValue.TrimEnd = true;
             this.kgtxtVoucherValue.TrimStart = true;
-
             // 
             // kgtxtCreatedByUserName
             // 
@@ -1032,7 +1018,6 @@
             this.kgtxtCreatedByUserName.TrimEnd = true;
             this.kgtxtCreatedByUserName.TrimStart = true;
             this.kgtxtCreatedByUserName.IconRightClick += new System.EventHandler(this.kgtxtCreatedByUserName_IconRightClick);
-
             // 
             // label7
             // 
@@ -1044,7 +1029,6 @@
             this.label7.Size = new System.Drawing.Size(134, 17);
             this.label7.TabIndex = 114;
             this.label7.Text = "اسم المستخدم للمنشئ ";
-
             // 
             // gbtnSave
             // 
@@ -1152,7 +1136,6 @@
             this.label8.Size = new System.Drawing.Size(86, 17);
             this.label8.TabIndex = 116;
             this.label8.Text = "معرف المستند";
-
             // 
             // kgtxtVoucherID
             // 
@@ -1232,7 +1215,6 @@
             this.kgtxtVoucherID.TextProperties.TextFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.enTextFormat.None;
             this.kgtxtVoucherID.TrimEnd = true;
             this.kgtxtVoucherID.TrimStart = true;
-
             // 
             // label9
             // 
@@ -1244,7 +1226,6 @@
             this.label9.Size = new System.Drawing.Size(99, 17);
             this.label9.TabIndex = 117;
             this.label9.Text = "معاملات المستند";
-
             // 
             // gibtnDeleteVoucher
             // 
@@ -1268,6 +1249,10 @@
             // toolTip1
             // 
             this.toolTip1.IsBalloon = true;
+            // 
+            // SearchAfterTimerFinish
+            // 
+            this.SearchAfterTimerFinish.Interval = 400;
             // 
             // frmAddUpdateVoucher
             // 
@@ -1363,5 +1348,6 @@
         private System.Windows.Forms.ToolStripMenuItem gtsmTransactionInfo;
         private System.Windows.Forms.ToolStripMenuItem gtsmExport;
         private System.Windows.Forms.ToolStripMenuItem gtsmExportExcel;
+        private System.Windows.Forms.Timer SearchAfterTimerFinish;
     }
 }

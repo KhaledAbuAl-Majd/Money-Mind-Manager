@@ -113,12 +113,10 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
         void _AddNewMode()
         {
-            ChangeHeaderValue("إضافة معاملة سداد دين");
             _TransactionID = null;
             _DebtPayment = new clsDebtPayment();
             lblTransactionID.Text = "N/A";
-            kgtxtPaymentDate.Text = null;
-            kgtxtPaymentDate.Tag = null;
+            kgtxtPaymentDate.RefreshNumber_DateTimeFormattedText((clsPL_Global.CurrentUserSettings.DebtPayments_TodayAsDefaultDate) ? DateTime.Today.ToString() : null);
             kgtxtPurpose.Text = null;
             kgtxtAmount.Text = null;
             _isLocked = false;
@@ -208,7 +206,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                 {
                     clsPL_MessageBoxs.ShowMessage($"تم إضافة معاملة السداد بنجاج بمعرف [{_DebtPayment.MainTransactionID}]", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    if (gtswNewTransactionAfterAdd.Checked)
+                    if (gtswNewTransactionAfterAdd.Checked && gtswNewTransactionAfterAdd.Enabled)
                     {
                         gbtnNewTransaction.PerformClick();
                     }
@@ -240,6 +238,9 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             {
                 case enMode.AddNew:
                     {
+                        ChangeHeaderValue("إضافة معاملة سداد دين");
+                        gtswNewTransactionAfterAdd.Checked = clsPL_Global.CurrentUserSettings.DebtPayment_AutoAddNewDefault;
+
                         _AddNewMode();
                         break;
                     }
@@ -282,6 +283,9 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
         private void gbtnNewTransaction_Click(object sender, EventArgs e)
         {
+            if (!gbtnNewTransaction.Enabled)
+                return;
+
             Mode = enMode.AddNew;
             _AddNewMode();
         }
@@ -291,14 +295,15 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             if (Mode == enMode.AddNew || _TransactionID == null)
                 return;
 
-            if (clsPL_MessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف المعاملة ؟ ", "طلب مواقفقة", MessageBoxButtons.OKCancel,
-               MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
+            if (clsPL_Global.CurrentUserSettings.AskBeforeDeleteDebtPayments)
+                if (clsPL_MessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف معاملة السداد هذه ؟ ", "طلب موافقة", MessageBoxButtons.OKCancel,
+               MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.OK)
+                    return;
+
+            if (await clsDebtPayment.DeleteDebtPaymentByID(Convert.ToInt32(_TransactionID)))
             {
-                if (await clsDebtPayment.DeleteDebtPaymentByID(Convert.ToInt32(_TransactionID)))
-                {
-                    _isSaved = true;
-                    gbtnClose.PerformClick();
-                }
+                _isSaved = true;
+                gbtnClose.PerformClick();
             }
         }
 

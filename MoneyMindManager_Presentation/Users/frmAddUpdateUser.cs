@@ -411,21 +411,23 @@ namespace MoneyMindManager_Presentation.Users
 
             lbluserMessage.Visible = false;
 
-            if (clsPL_MessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف هذا المستخدم", "طلب مواقفقة", MessageBoxButtons.OKCancel,
-              MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
-            {
-                if (Convert.ToInt32(_UserID) == clsGlobalSession.CurrentUserID)
-                {
-                    clsPL_MessageBoxs.ShowErrorMessage("لا يمكنك حذف المستخدم الحالي");
+            if (clsPL_Global.CurrentUserSettings.AskBeforeDeleteUser)
+                if (clsPL_MessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف هذا المستخدم", "طلب موافقة", MessageBoxButtons.OKCancel,
+               MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.OK)
                     return;
-                }
 
-                if (await _User.DeleteUserByUserID())
-                {
-                    _isSaved = true;
-                    gbtnClose.PerformClick();
-                }
+            if (Convert.ToInt32(_UserID) == clsGlobalSession.CurrentUserID)
+            {
+                clsPL_MessageBoxs.ShowErrorMessage("لا يمكنك حذف المستخدم الحالي");
+                return;
             }
+
+            if (await _User.DeleteUserByUserID())
+            {
+                _isSaved = true;
+                gbtnClose.PerformClick();
+            }
+
         }
     }
 }

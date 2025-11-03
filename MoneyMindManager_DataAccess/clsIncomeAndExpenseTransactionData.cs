@@ -195,7 +195,7 @@ namespace MoneyMindManager_DataAccess
         }
 
         public static async Task<clsGetAllIncomeAndExpenseTransactions> GetAllIncomeAndExpensTransactionsForVoucher(int voucherID,
-            int currentUserID, short pageNumber,byte rowsPerPage, bool RaiseEventOnErrorOccured = true)
+            int currentUserID, int pageNumber,byte rowsPerPage, bool RaiseEventOnErrorOccured = true)
         {
             clsGetAllIncomeAndExpenseTransactions allTransactions = null;
 
@@ -212,7 +212,7 @@ namespace MoneyMindManager_DataAccess
                         command.Parameters.AddWithValue("@PageNumber", pageNumber);
                         command.Parameters.AddWithValue("@RowsPerPage", rowsPerPage);
 
-                        SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.SmallInt)
+                        SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.Int)
                         {
                             Direction = ParameterDirection.Output
                         };
@@ -239,7 +239,7 @@ namespace MoneyMindManager_DataAccess
                         {
                             DataTable dtTransactions = new DataTable();
                             dtTransactions.Load(reader);
-                            short numberOfPages = Convert.ToInt16(outputNumberOfPages.Value);
+                           int numberOfPages = Convert.ToInt32(outputNumberOfPages.Value);
                             int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
                             decimal voucherValue = Convert.ToDecimal(outputVoucherValue.Value);
 

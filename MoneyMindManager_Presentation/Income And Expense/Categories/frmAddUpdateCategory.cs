@@ -404,14 +404,15 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             if (_CategoryID == null || Mode == enMode.AddNew)
                 return;
 
-            if (clsPL_MessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف الفئة ؟ ", "طلب مواقفقة", MessageBoxButtons.OKCancel,
-               MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
+            if (clsPL_Global.CurrentUserSettings.AskBeforeDeleteCategory)
+                if (clsPL_MessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف الفئة ؟ ", "طلب موافقة", MessageBoxButtons.OKCancel,
+               MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.OK)
+                    return;
+
+            if (await clsIncomeAndExpenseCategory.DeleteCategoryByCategoryID(Convert.ToInt32(_CategoryID)))
             {
-                if (await clsIncomeAndExpenseCategory.DeleteCategoryByCategoryID(Convert.ToInt32(_CategoryID)))
-                {
-                    _isSaved = true;
-                    gbtnClose.PerformClick();
-                }
+                _isSaved = true;
+                gbtnClose.PerformClick();
             }
         }
 

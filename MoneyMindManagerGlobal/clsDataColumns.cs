@@ -80,11 +80,11 @@ namespace MoneyMindManagerGlobal
             public class clsGetAllPeople
             {
                 public DataTable dtPeople;
-                public short NumberOfPages = 0;
+                public  int NumberOfPages = 0;
                 //public short CurrentPageNumber = 0;
                 public int RecordsCount = 0;
 
-                public clsGetAllPeople(DataTable dtPeople,short numberOfPages,int recordsCount)
+                public clsGetAllPeople(DataTable dtPeople, int numberOfPages,int recordsCount)
                 {
                     this.dtPeople = dtPeople;
                     this.NumberOfPages = numberOfPages;
@@ -172,15 +172,13 @@ namespace MoneyMindManagerGlobal
             public class clsGetAllUsers
             {
                 public DataTable dtUsers;
-                public short NumberOfPages = 0;
-                //public short CurrentPageNumber = 0;
+                public  int NumberOfPages = 0;
                 public int RecordsCount = 0;
 
-                public clsGetAllUsers(DataTable dtUsers, short numberOfPages, int recordsCount)
+                public clsGetAllUsers(DataTable dtUsers,  int numberOfPages, int recordsCount)
                 {
                     this.dtUsers = dtUsers;
                     this.NumberOfPages = numberOfPages;
-                    //this.CurrentPageNumber = currentPageNumber;
                     this.RecordsCount = recordsCount;
                 }
             }
@@ -346,7 +344,7 @@ namespace MoneyMindManagerGlobal
             {
                 public DataTable dtTransactions;
 
-                public short NumberOfPages = 0;
+                public  int NumberOfPages = 0;
 
                 public int RecordsCount = 0;
 
@@ -354,7 +352,7 @@ namespace MoneyMindManagerGlobal
 
                 public decimal CurrentPageAmount;
 
-                public clsGetAllMainTransactions(DataTable dtTransactions, short numberOfPages, int recordsCount, decimal totalAmount,
+                public clsGetAllMainTransactions(DataTable dtTransactions,  int numberOfPages, int recordsCount, decimal totalAmount,
                     decimal currentPageAmount)
                 {
                     this.dtTransactions = dtTransactions;
@@ -455,12 +453,12 @@ namespace MoneyMindManagerGlobal
             {
                 public DataTable dtCategories;
 
-                public short NumberOfPages = 0;
+                public  int NumberOfPages = 0;
 
                 public int RecordsCount = 0;
 
 
-                public clsGetAllCategories(DataTable dtCategories, short numberOfPages, int recordsCount)
+                public clsGetAllCategories(DataTable dtCategories,  int numberOfPages, int recordsCount)
                 {
                     this.dtCategories = dtCategories;
                     this.NumberOfPages = numberOfPages;
@@ -555,7 +553,7 @@ namespace MoneyMindManagerGlobal
             {
                 public DataTable dtVouchers;
 
-                public short NumberOfPages = 0;
+                public  int NumberOfPages = 0;
 
                 public int RecordsCount = 0;
 
@@ -563,7 +561,7 @@ namespace MoneyMindManagerGlobal
 
                 public decimal CurrentPageVouchersValue;
 
-                public clsGetAllVouchers(DataTable dtVouchers, short numberOfPages, int recordsCount,decimal totalVouchersValue,decimal currentPageVouchersValue)
+                public clsGetAllVouchers(DataTable dtVouchers,  int numberOfPages, int recordsCount,decimal totalVouchersValue,decimal currentPageVouchersValue)
                 {
                     this.dtVouchers = dtVouchers;
                     this.NumberOfPages = numberOfPages;
@@ -579,10 +577,10 @@ namespace MoneyMindManagerGlobal
             public class clsGetAllIncomeAndExpenseTransactions
             {
                 public DataTable dtTransactions;
-                public short NumberOfPages = 0;
+                public  int NumberOfPages = 0;
                 public int RecordsCount = 0;
                 public decimal VoucherValue;
-                public clsGetAllIncomeAndExpenseTransactions(DataTable dtTransactions, short numberOfPages, int recordsCount,decimal voucherValue)
+                public clsGetAllIncomeAndExpenseTransactions(DataTable dtTransactions,  int numberOfPages, int recordsCount,decimal voucherValue)
                 {
                     this.dtTransactions = dtTransactions;
                     this.NumberOfPages = numberOfPages;
@@ -647,7 +645,7 @@ namespace MoneyMindManagerGlobal
             {
                 public DataTable dtDebts;
 
-                public short NumberOfPages = 0;
+                public  int NumberOfPages = 0;
 
                 public int RecordsCount = 0;
 
@@ -659,7 +657,7 @@ namespace MoneyMindManagerGlobal
 
                 public decimal CurrentPageRemainingAmount;
 
-                public clsGetAllDebts(DataTable dtDebts, short numberOfPages, int recordsCount, decimal totalDebtsValue,
+                public clsGetAllDebts(DataTable dtDebts,  int numberOfPages, int recordsCount, decimal totalDebtsValue,
                     decimal currentPageDebtsValue, decimal totalRemainingAmount, decimal currentPageRemainingAmount)
                 {
                     this.dtDebts = dtDebts;
@@ -678,10 +676,10 @@ namespace MoneyMindManagerGlobal
             public class clsGetAllDebtPayments
             {
                 public DataTable dtDebtPayment;
-                public short NumberOfPages = 0;
+                public  int NumberOfPages = 0;
                 public int RecordsCount = 0;
                 public decimal RemainingAmount;
-                public clsGetAllDebtPayments(DataTable dtTransactions, short numberOfPages, int recordsCount, decimal remainingAmount)
+                public clsGetAllDebtPayments(DataTable dtTransactions,  int numberOfPages, int recordsCount, decimal remainingAmount)
                 {
                     this.dtDebtPayment = dtTransactions;
                     this.NumberOfPages = numberOfPages;
@@ -702,15 +700,22 @@ namespace MoneyMindManagerGlobal
                 public decimal Income { get; set; }
                 public decimal NetExpense { get; set; }
                 public decimal NetCashFlow { get; set; }
+                public decimal TotalIncome { get; set; }
+                public decimal TotalNetExpense { get; set; }
+                public decimal TotalNetCashFlow { get; set; }
 
 
-                public clsMonthlyFlow(byte month, short year, decimal income, decimal netExpense, decimal netCashFlow)
+                public clsMonthlyFlow(byte month, short year, decimal income, decimal netExpense, decimal netCashFlow,
+                    decimal totalIncome, decimal totalNetExpense, decimal totalNetCashFlow)
                 {
                     this.mon = month;
                     this.Year = year;
                     this.Income = income;
                     this.NetExpense = netExpense;
                     this.NetCashFlow = netCashFlow;
+                    this.TotalIncome = totalIncome;
+                    this.TotalNetExpense = totalNetExpense;
+                    this.TotalNetCashFlow = totalNetCashFlow;
                 }
 
             }

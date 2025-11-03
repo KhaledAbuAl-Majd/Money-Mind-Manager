@@ -81,6 +81,7 @@
             this.kgtxtPaymentDueDate = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.kgtxtDebtValue = new KhaledControlLibrary1.KhaledGuna2TextBox();
+            this.SearchAfterTimerFinish = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.gdgvDebtPaymentTransctions)).BeginInit();
             this.guna2ContextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -1485,6 +1486,10 @@
             this.kgtxtDebtValue.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxt_OnValidationError);
             this.kgtxtDebtValue.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxt_OnValidationSuccess);
             // 
+            // SearchAfterTimerFinish
+            // 
+            this.SearchAfterTimerFinish.Interval = 400;
+            // 
             // frmAddUpdateDebt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1591,5 +1596,6 @@
         private System.Windows.Forms.ToolStripMenuItem gtsmExport;
         private System.Windows.Forms.ToolStripMenuItem gtsmExportExcel;
         private System.Windows.Forms.ToolStripMenuItem gtsmTransactionInfo;
+        private System.Windows.Forms.Timer SearchAfterTimerFinish;
     }
 }

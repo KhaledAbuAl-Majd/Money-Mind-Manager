@@ -207,6 +207,7 @@
             this.gbtnAboutProgramm.Size = new System.Drawing.Size(254, 48);
             this.gbtnAboutProgramm.TabIndex = 10;
             this.gbtnAboutProgramm.Text = "عن البرنامج";
+            this.gbtnAboutProgramm.Click += new System.EventHandler(this.gbtnAboutProgramm_Click);
             // 
             // gbtnSettings
             // 
@@ -643,6 +644,7 @@
             this.ClientSize = new System.Drawing.Size(1473, 809);
             this.Controls.Add(this.gpnlFormContainer);
             this.Controls.Add(this.gpnlRightBar);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

@@ -135,7 +135,6 @@ namespace MoneyMindManager_Presentation.People
             this.kgtxtNotes.TrimStart = false;
             this.kgtxtNotes.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxtPersonName_OnValidationError);
             this.kgtxtNotes.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxtPersonName_OnValidationSuccess);
-            this.kgtxtNotes.TextChanged += new System.EventHandler(this.kgtxtNotes_TextChanged);
             // 
             // kgtxtPhone
             // 
@@ -216,7 +215,6 @@ namespace MoneyMindManager_Presentation.People
             this.kgtxtPhone.TrimStart = false;
             this.kgtxtPhone.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxtPersonName_OnValidationError);
             this.kgtxtPhone.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxtPersonName_OnValidationSuccess);
-            this.kgtxtPhone.TextChanged += new System.EventHandler(this.kgtxtPhone_TextChanged);
             // 
             // kgtxtEmail
             // 
@@ -458,7 +456,6 @@ namespace MoneyMindManager_Presentation.People
             this.kgtxtPersonName.TrimStart = true;
             this.kgtxtPersonName.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxtPersonName_OnValidationError);
             this.kgtxtPersonName.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxtPersonName_OnValidationSuccess);
-            this.kgtxtPersonName.TextChanged += new System.EventHandler(this.kgtxtPersonName_TextChanged);
             // 
             // errorProvider1
             // 

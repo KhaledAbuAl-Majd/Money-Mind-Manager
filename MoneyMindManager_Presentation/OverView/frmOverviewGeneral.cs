@@ -17,6 +17,11 @@ namespace MoneyMindManager_Presentation.OverView
         public frmOverviewGeneral()
         {
             InitializeComponent();
+
+            this.SetStyle(ControlStyles.UserPaint |
+               ControlStyles.AllPaintingInWmPaint |
+               ControlStyles.OptimizedDoubleBuffer, true);
+            this.UpdateStyles();
         }
 
         async Task _LoadKPIS()

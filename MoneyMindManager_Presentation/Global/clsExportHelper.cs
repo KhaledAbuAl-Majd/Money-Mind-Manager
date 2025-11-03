@@ -1,18 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Forms;
 using ClosedXML.Excel;
 using DocumentFormat.OpenXml.Drawing;
+using Microsoft.WindowsAPICodePack.Taskbar;
 using MoneyMindManagerGlobal;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace MoneyMindManager_Presentation.Global
 {
     public static class clsExportHelper
     {
+        private static void UpdateProgress(int percentage)
+        {
+            if (clsPL_Global.ActiveForm == null)
+                return;
+
+            TaskbarManager.Instance.SetProgressValue(percentage, 100);
+        }
+
         private static async Task<bool> _ExportToExcel(DataTable dt, string filePath, string sheetName = "Data")
         {
             bool result = await Task.Run(() =>
@@ -21,7 +34,11 @@ namespace MoneyMindManager_Presentation.Global
                 {
                     using (var workbook = new XLWorkbook())
                     {
+                        UpdateProgress(5);
+
                         var worksheet = workbook.Worksheets.Add(dt, sheetName);
+
+                        UpdateProgress(60);
 
                         // تنسيقات إضافية اختيارية:
                         worksheet.Columns().AdjustToContents(); // يضبط عرض الأعمدة تلقائيًا
@@ -30,7 +47,11 @@ namespace MoneyMindManager_Presentation.Global
                         worksheet.Row(1).CellsUsed().Style.Font.FontColor = XLColor.White; // خلفية رمادية للرؤوس
                         worksheet.CellsUsed().Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
 
+                        UpdateProgress(90);
+
                         workbook.SaveAs(filePath);
+
+                        UpdateProgress(100);
                     }
 
                     return true;
@@ -38,6 +59,7 @@ namespace MoneyMindManager_Presentation.Global
                 catch (Exception ex)
                 {
                     clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
+                    UpdateProgress(100);
                     return false;
                 }
             });
@@ -55,19 +77,48 @@ namespace MoneyMindManager_Presentation.Global
                 saveFile.FileName = defaultFileName;
                 saveFile.Filter = "Excel Files (*.xlsx)|*.xlsx|All Files (*.*)|*.*";
 
-                if(saveFile.ShowDialog() == DialogResult.OK)
+
+                if (saveFile.ShowDialog() == DialogResult.OK)
                 {
+                    TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.Normal);
+
                     result = await _ExportToExcel(dt, saveFile.FileName, sheetName);
 
-                    if(result == true)
+                    TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.NoProgress);
+
+                    if (result == true)
                     {
-                        clsPL_MessageBoxs.ShowMessage("تم تصدير الملف بنجاح", "نجاح العملية", MessageBoxButtons.OK,
-                            MessageBoxIcon.Information);
+                        //clsPL_MessageBoxs.ShowMessage("تم تصدير الملف بنجاح", "نجاح العملية", MessageBoxButtons.OK,
+                        //    MessageBoxIcon.Information);
+
+                        _ShowNotification(System.IO.Path.GetDirectoryName(saveFile.FileName));
                     }
                 }
             }
 
             return result;
+        }
+
+        private static void _ShowNotification(string folderPath)
+        {
+            if (clsPL_Global.ActiveForm == null)
+                return;
+
+            clsPL_Global.ActiveForm.Invoke(new Action(() =>
+            {
+                NotifyIcon notify = new NotifyIcon();
+                notify.Icon = SystemIcons.Information;
+                notify.Visible = true;
+                notify.BalloonTipTitle = "نجاح العملية";
+                notify.BalloonTipText = "تم تصدير الملف بنجاح ✅";
+                notify.ShowBalloonTip(10000);
+
+                notify.BalloonTipClicked += (x, y) =>
+                {
+                    clsFileSystemHelper.OpenFolder(folderPath);
+                    notify.Dispose();
+                };
+            }));
         }
     }
 }

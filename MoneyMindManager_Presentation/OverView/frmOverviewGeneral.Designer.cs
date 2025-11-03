@@ -50,6 +50,7 @@
             this.klblMonthPerformace = new KhaledControlLibrary1.KhaledLabel();
             this.label12 = new System.Windows.Forms.Label();
             this.guna2Panel8 = new Guna.UI2.WinForms.Guna2Panel();
+            this.label3 = new System.Windows.Forms.Label();
             this.klblAvgNetProfitLast6Months = new KhaledControlLibrary1.KhaledLabel();
             this.label14 = new System.Windows.Forms.Label();
             this.guna2Panel9 = new Guna.UI2.WinForms.Guna2Panel();
@@ -83,7 +84,7 @@
             this.guna2Panel2.ShadowDecoration.Color = System.Drawing.Color.DarkGray;
             this.guna2Panel2.ShadowDecoration.Depth = 20;
             this.guna2Panel2.ShadowDecoration.Enabled = true;
-            this.guna2Panel2.Size = new System.Drawing.Size(1186, 469);
+            this.guna2Panel2.Size = new System.Drawing.Size(1167, 582);
             this.guna2Panel2.TabIndex = 1;
             // 
             // guna2WinProgressIndicator1
@@ -108,7 +109,7 @@
             this.guna2Panel5.Controls.Add(this.klblTotalReceivables);
             this.guna2Panel5.Controls.Add(this.label6);
             this.guna2Panel5.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(233)))));
-            this.guna2Panel5.Location = new System.Drawing.Point(634, 7);
+            this.guna2Panel5.Location = new System.Drawing.Point(622, 7);
             this.guna2Panel5.Name = "guna2Panel5";
             this.guna2Panel5.ShadowDecoration.BorderRadius = 20;
             this.guna2Panel5.ShadowDecoration.Color = System.Drawing.Color.DarkGray;
@@ -157,7 +158,7 @@
             this.guna2Panel6.Controls.Add(this.klblTotalPayables);
             this.guna2Panel6.Controls.Add(this.label8);
             this.guna2Panel6.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(233)))));
-            this.guna2Panel6.Location = new System.Drawing.Point(323, 7);
+            this.guna2Panel6.Location = new System.Drawing.Point(317, 7);
             this.guna2Panel6.Name = "guna2Panel6";
             this.guna2Panel6.ShadowDecoration.BorderRadius = 20;
             this.guna2Panel6.ShadowDecoration.Color = System.Drawing.Color.DarkGray;
@@ -206,7 +207,7 @@
             this.guna2Panel1.Controls.Add(this.klblBalance);
             this.guna2Panel1.Controls.Add(this.label2);
             this.guna2Panel1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(233)))));
-            this.guna2Panel1.Location = new System.Drawing.Point(945, 7);
+            this.guna2Panel1.Location = new System.Drawing.Point(927, 7);
             this.guna2Panel1.Name = "guna2Panel1";
             this.guna2Panel1.ShadowDecoration.BorderRadius = 20;
             this.guna2Panel1.ShadowDecoration.Color = System.Drawing.Color.DarkGray;
@@ -255,7 +256,7 @@
             this.guna2Panel3.Controls.Add(this.klblYearPerformance);
             this.guna2Panel3.Controls.Add(this.label4);
             this.guna2Panel3.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(233)))));
-            this.guna2Panel3.Location = new System.Drawing.Point(323, 126);
+            this.guna2Panel3.Location = new System.Drawing.Point(317, 126);
             this.guna2Panel3.Name = "guna2Panel3";
             this.guna2Panel3.ShadowDecoration.BorderRadius = 20;
             this.guna2Panel3.ShadowDecoration.Color = System.Drawing.Color.DarkGray;
@@ -308,7 +309,7 @@
             this.guna2Panel4.Controls.Add(this.klblTodayPerformance);
             this.guna2Panel4.Controls.Add(this.label10);
             this.guna2Panel4.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(233)))));
-            this.guna2Panel4.Location = new System.Drawing.Point(945, 126);
+            this.guna2Panel4.Location = new System.Drawing.Point(927, 126);
             this.guna2Panel4.Name = "guna2Panel4";
             this.guna2Panel4.ShadowDecoration.BorderRadius = 20;
             this.guna2Panel4.ShadowDecoration.Color = System.Drawing.Color.DarkGray;
@@ -361,7 +362,7 @@
             this.guna2Panel7.Controls.Add(this.klblMonthPerformace);
             this.guna2Panel7.Controls.Add(this.label12);
             this.guna2Panel7.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(233)))));
-            this.guna2Panel7.Location = new System.Drawing.Point(634, 126);
+            this.guna2Panel7.Location = new System.Drawing.Point(622, 126);
             this.guna2Panel7.Name = "guna2Panel7";
             this.guna2Panel7.ShadowDecoration.BorderRadius = 20;
             this.guna2Panel7.ShadowDecoration.Color = System.Drawing.Color.DarkGray;
@@ -411,6 +412,7 @@
             this.guna2Panel8.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.guna2Panel8.BorderRadius = 20;
             this.guna2Panel8.BorderThickness = 2;
+            this.guna2Panel8.Controls.Add(this.label3);
             this.guna2Panel8.Controls.Add(this.klblAvgNetProfitLast6Months);
             this.guna2Panel8.Controls.Add(this.label14);
             this.guna2Panel8.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(233)))));
@@ -422,6 +424,21 @@
             this.guna2Panel8.ShadowDecoration.Enabled = true;
             this.guna2Panel8.Size = new System.Drawing.Size(252, 100);
             this.guna2Panel8.TabIndex = 8;
+            // 
+            // label3
+            // 
+            this.label3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
+            this.label3.Location = new System.Drawing.Point(0, 21);
+            this.label3.Name = "label3";
+            this.label3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.label3.Size = new System.Drawing.Size(252, 21);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "6 أشهر";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.label3, "المعدل الشهري لصافي التدفق النقدي المحقق خلال 6 أشهر كاملة سابقة.\" لا يشمل الديون" +
+        "\".");
             // 
             // klblAvgNetProfitLast6Months
             // 
@@ -453,7 +470,7 @@
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(252, 21);
             this.label14.TabIndex = 4;
-            this.label14.Text = "متوسط صافي التدفق النقدي لآخر 6 أشهر";
+            this.label14.Text = "متوسط صافي التدفق النقدي لآخر ";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.toolTip1.SetToolTip(this.label14, "المعدل الشهري لصافي التدفق النقدي المحقق خلال 6 أشهر كاملة سابقة.\" لا يشمل الديون" +
         "\".");
@@ -520,7 +537,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(1087, 234);
+            this.label1.Location = new System.Drawing.Point(1068, 234);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(103, 17);
             this.label1.TabIndex = 112;
@@ -531,7 +548,7 @@
             this.ctrlTest1.BackColor = System.Drawing.Color.White;
             this.ctrlTest1.Location = new System.Drawing.Point(13, 10);
             this.ctrlTest1.Name = "ctrlTest1";
-            this.ctrlTest1.Size = new System.Drawing.Size(1165, 446);
+            this.ctrlTest1.Size = new System.Drawing.Size(1143, 560);
             this.ctrlTest1.TabIndex = 0;
             // 
             // frmOverviewGeneral
@@ -539,7 +556,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1210, 738);
+            this.ClientSize = new System.Drawing.Size(1193, 847);
             this.Controls.Add(this.guna2WinProgressIndicator1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.guna2Panel9);
@@ -551,6 +568,7 @@
             this.Controls.Add(this.guna2Panel6);
             this.Controls.Add(this.guna2Panel5);
             this.Controls.Add(this.guna2Panel2);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmOverviewGeneral";
             this.Text = "frmOverview";
@@ -599,5 +617,6 @@
         private Guna.UI2.WinForms.Guna2WinProgressIndicator guna2WinProgressIndicator1;
         private System.Windows.Forms.Label label1;
         private Controls.ctrlMonthlyFlow ctrlTest1;
+        private System.Windows.Forms.Label label3;
     }
 }

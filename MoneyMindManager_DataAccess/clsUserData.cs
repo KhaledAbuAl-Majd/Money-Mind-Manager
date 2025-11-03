@@ -660,7 +660,7 @@ namespace MoneyMindManager_DataAccess
         /// </summary>
         /// <returns>object of clsGetAllUsers : if error happend, return null</returns>
         public static async Task<clsGetAllUsers> GetAllUsers(int? userID,string userName,string personName,  bool? isActive, 
-            byte textSearchMode, short pageNumber, byte rowsPerPage, int currentUserID, bool RaiseEventOnErrorOccured = true)
+            byte textSearchMode, int pageNumber, byte rowsPerPage, int currentUserID, bool RaiseEventOnErrorOccured = true)
         {
             clsGetAllUsers allUsers = null;
 
@@ -681,7 +681,7 @@ namespace MoneyMindManager_DataAccess
                         command.Parameters.AddWithValue("@PageNumber", pageNumber);
                         command.Parameters.AddWithValue("@RowsPerPage", rowsPerPage);
 
-                        SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.SmallInt)
+                        SqlParameter outputNumberOfPages = new SqlParameter("@NumberOfPages", SqlDbType.Int)
                         {
                             Direction = ParameterDirection.Output
                         };
@@ -700,7 +700,7 @@ namespace MoneyMindManager_DataAccess
                         {
                             DataTable dtUsers = new DataTable();
                             dtUsers.Load(reader);
-                            short numberOfPages = Convert.ToInt16(outputNumberOfPages.Value);
+                           int numberOfPages = Convert.ToInt32(outputNumberOfPages.Value);
                             int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
 
                             allUsers = new clsGetAllUsers(dtUsers, numberOfPages, recordsCount);

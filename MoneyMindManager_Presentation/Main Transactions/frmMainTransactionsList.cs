@@ -43,7 +43,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
         bool _IsHeaderCreated = false;
         bool _searchByPageNumber = false;
 
-        short _pageNumber = 1;
+        int _pageNumber = 1;
 
         void _SetForColorForLabels(KhaledLabel klbl,decimal amount)
         {
@@ -371,10 +371,15 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
         private void kgtxtPageNumber_TextChanged(object sender, EventArgs e)
         {
-            if (!_searchByPageNumber || !_CheckValidationChildren())
+            if (!_searchByPageNumber)
                 return;
 
-            _pageNumber = Convert.ToInt16(kgtxtPageNumber.ValidatedText);
+            if (int.TryParse(kgtxtPageNumber.Text, out int result))
+            {
+                _pageNumber = result;
+            }
+            else
+                _pageNumber = 0;
 
             SearchAfterTimerFinish.Stop();
             SearchAfterTimerFinish.Start();

@@ -207,20 +207,5 @@ namespace MoneyMindManager_Presentation.People
 
             this.Close();
         }
-
-        private void kgtxtNotes_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void kgtxtPhone_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void kgtxtPersonName_TextChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }

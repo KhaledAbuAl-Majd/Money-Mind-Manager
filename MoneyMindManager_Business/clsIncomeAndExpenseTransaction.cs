@@ -136,7 +136,7 @@ namespace MoneyMindManager_Business
             return await clsIncomeAndExpenseTransactionData.DeleteIncomeAndExpenseTransactoinByID(transactionID, Convert.ToInt32(clsGlobalSession.CurrentUserID));
         }
 
-        public static async Task<clsGetAllIncomeAndExpenseTransactions> GetAllIncomeAndExpensTransactionsForVoucher(int voucherID, short pageNumber)
+        public static async Task<clsGetAllIncomeAndExpenseTransactions> GetAllIncomeAndExpensTransactionsForVoucher(int voucherID, int pageNumber)
         {
             byte rowsPerPage = 30;
             return await clsIncomeAndExpenseTransactionData.GetAllIncomeAndExpensTransactionsForVoucher(voucherID,

@@ -82,7 +82,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
         bool _IsHeaderCreated = false;
         bool _searchByPageNumber = false;
-        short _pageNumber = 1;
+        int _pageNumber = 1;
         bool _LockingChangingEvent = false;
 
         bool _CheckValidationChildren()
@@ -91,7 +91,6 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             {
                 gdgvTransactions.DataSource = null;
                 _IsHeaderCreated = false;
-                //lblNoTransactionsFoundMessage.Visible = true;
                 lblUserMessage.Text = "تم العثور على حقول غير صالحة. ضع المؤشر على العلامات الحمراء لعرض سبب الخطأ.";
                 lblUserMessage.Visible = true;
                 lblCurrentPageRecordsCount.Text = "0";
@@ -249,26 +248,32 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
         }
         void _AddNewMode()
         {
+            bool result = true;
+
             switch (_voucherType)
             {
                 case enVoucherType.Incomes:
                     ChangeHeaderValue("إضافة مستند واردات");
+                    result = clsPL_Global.CurrentUserSettings.Income_TodayAsDefaultDate;
                     break;
 
                 case enVoucherType.Expenses:
                     ChangeHeaderValue("إضافة مستند مصروفات");
+                    result = clsPL_Global.CurrentUserSettings.Expense_TodayAsDefaultDate;
                     break;
 
                 case enVoucherType.ExpensesReturn:
                     ChangeHeaderValue("إضافة مستند مرتجع مصروفات");
+                    result = clsPL_Global.CurrentUserSettings.ExpenseReturn_TodayAsDefaultDate;
                     break;
             }
+
 
             _VoucherID = null;
             _ResetVoucherObject();
             kgtxtVoucherName.Text = null;
             kgtxtNotes.Text = null;
-            kgtxtVoucherDate.Text = null;
+            kgtxtVoucherDate.RefreshNumber_DateTimeFormattedText((result) ? DateTime.Today.ToString() : null);
 
             kgtxtVoucherValue.Text = null;
             kgtxtCreatedByUserName.Text = null;
@@ -283,7 +288,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             gibtnNextPage.Enabled = false;
             gibtnPreviousPage.Enabled = false;
             kgtxtPageNumber.Enabled = false;
-           
+
             lblNoTransactionsFoundMessage.Visible = true;
             gibtnDeleteVoucher.Enabled = false;
         }
@@ -509,14 +514,20 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             --_pageNumber;
             await _LoadDataAtDataGridView();
         }
-        private async void kgtxtPageNumber_TextChanged(object sender, EventArgs e)
+        private void kgtxtPageNumber_TextChanged(object sender, EventArgs e)
         {
-            if (!_searchByPageNumber || !_CheckValidationChildren())
+            if (!_searchByPageNumber)
                 return;
 
-            _pageNumber = Convert.ToInt16(kgtxtPageNumber.ValidatedText);
+            if (int.TryParse(kgtxtPageNumber.Text, out int result))
+            {
+                _pageNumber = result;
+            }
+            else
+                _pageNumber = 0;
 
-            await _LoadDataAtDataGridView();
+            SearchAfterTimerFinish.Stop();
+            SearchAfterTimerFinish.Start();
         }
 
         private void kgtxtPageNumber_OnValidationError(object sender, KhaledGuna2TextBox.ValidatingErrorEventArgs e)
@@ -591,19 +602,35 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             if (gdgvTransactions.SelectedRows.Count < 1 || _VoucherID == null || _Voucher.IsLocked)
                 return;
 
-            if (clsPL_MessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف هذه المعاملة ؟ ", "طلب مواقفقة", MessageBoxButtons.OKCancel,
-               MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
-            {
-                int transactionID = Convert.ToInt32(gdgvTransactions.SelectedRows[0].Cells[0].Value);
-                if(await clsIncomeAndExpenseTransaction.DeleteIncomeAndExpenseTransactionByID(transactionID))
-                {
-                    _isSaved = true;
-                    _pageNumber = 1;
-                    await _LoadDataAtDataGridView();
-                }
+            bool asking = true;
 
+            switch (_voucherType)
+            {
+                case enVoucherType.Incomes:
+                    asking = clsPL_Global.CurrentUserSettings.AskBeforeDeleteIncomeTransactions;
+                    break;
+
+                case enVoucherType.Expenses:
+                    asking = clsPL_Global.CurrentUserSettings.AskBeforeDeleteExpenseTransactions;
+                    break;
+
+                case enVoucherType.ExpensesReturn:
+                    asking = clsPL_Global.CurrentUserSettings.AskBeforeDeleteExpenseReturnTransactions;
+                    break;
             }
 
+            if (asking)
+                if (clsPL_MessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف هذه المعاملة ؟ ", "طلب موافقة", MessageBoxButtons.OKCancel,
+                   MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.OK)
+                    return;
+
+            int transactionID = Convert.ToInt32(gdgvTransactions.SelectedRows[0].Cells[0].Value);
+            if (await clsIncomeAndExpenseTransaction.DeleteIncomeAndExpenseTransactionByID(transactionID))
+            {
+                _isSaved = true;
+                _pageNumber = 1;
+                await _LoadDataAtDataGridView();
+            }
         }
 
         private async void gibtnDeleteVoucher_Click(object sender, EventArgs e)
@@ -617,17 +644,34 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             lblUserMessage.Visible = false;
 
+            bool asking = true;
 
-            if (clsPL_MessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف المستند ؟ ", "طلب مواقفقة", MessageBoxButtons.OKCancel,
-               MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
+            switch (_voucherType)
             {
-                if (await clsIncomeAndExpenseVoucher.DeleteVoucherByVoucherID(Convert.ToInt32(_VoucherID)))
-                {
-                    _isSaved = true;
-                    gbtnClose.PerformClick();
-                }
+                case enVoucherType.Incomes:
+                    asking = clsPL_Global.CurrentUserSettings.AskBeforeDeleteIncomeVoucher;
+                    break;
+
+                case enVoucherType.Expenses:
+                    asking = clsPL_Global.CurrentUserSettings.AskBeforeDeleteExpenseVoucher;
+                    break;
+
+                case enVoucherType.ExpensesReturn:
+                    asking = clsPL_Global.CurrentUserSettings.AskBeforeDeleteExpenseReturnVoucher;
+                    break;
             }
 
+
+            if (asking)
+                if (clsPL_MessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف المستند ؟ ", "طلب موافقة", MessageBoxButtons.OKCancel,
+                   MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.OK)
+                    return;
+
+            if (await clsIncomeAndExpenseVoucher.DeleteVoucherByVoucherID(Convert.ToInt32(_VoucherID)))
+            {
+                _isSaved = true;
+                gbtnClose.PerformClick();
+            }
         }
 
         private void gdgvTransactions_DoubleClick(object sender, EventArgs e)

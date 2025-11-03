@@ -39,7 +39,10 @@ namespace MoneyMindManager_DataAccess
                                     year: Convert.ToInt16(reader["Year"]),
                                     income: Convert.ToDecimal(reader["Income"]),
                                     netExpense: Convert.ToDecimal(reader["NetExpense"]),
-                                    netCashFlow: Convert.ToDecimal(reader["NetCashFlow"])
+                                    netCashFlow: Convert.ToDecimal(reader["NetCashFlow"]),
+                                    totalIncome: Convert.ToDecimal(reader["TotalIncome"]),
+                                    totalNetExpense: Convert.ToDecimal(reader["TotalNetExpense"]),
+                                    totalNetCashFlow: Convert.ToDecimal(reader["TotalNetCashFlow"])
                                 ));
                             }
                         }

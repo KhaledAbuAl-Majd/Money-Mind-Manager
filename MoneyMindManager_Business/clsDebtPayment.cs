@@ -120,7 +120,7 @@ namespace MoneyMindManager_Business
             return await clsDebtPaymentData.DeleteDebtPaymentByID(transactionID, Convert.ToInt32(clsGlobalSession.CurrentUserID));
         }
 
-        public static async Task<clsGetAllDebtPayments> GetAllDebtPyamentsForDebt(int debtID, short pageNumber)
+        public static async Task<clsGetAllDebtPayments> GetAllDebtPyamentsForDebt(int debtID, int pageNumber)
         {
             byte rowsPerPage = 15;
             return await clsDebtPaymentData.GetAllDebtPaymentsForDebt(debtID, Convert.ToInt32(clsGlobalSession.CurrentUserID)

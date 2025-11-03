@@ -43,7 +43,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
         bool _IsHeaderCreated = false;
         bool _searchByPageNumber = false;
 
-        short _pageNumber = 1;
+        int _pageNumber = 1;
 
         bool _CheckValidationChildren()
         {
@@ -214,7 +214,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
         void _AddNewDebt()
         {
             frmAddUpdateDebt frm = new frmAddUpdateDebt();
-            frm.OnCloseAndSaved += _RefreshFilter;
+            frm.OnCloseAndSaved += _Refresh;
             clsPL_Global.MainForm.AddNewFormAtContainer(frm);
         }
 
@@ -226,18 +226,18 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             int debtID = Convert.ToInt32(gdgvDebts.SelectedRows[0].Cells[0].Value);
 
             frmAddUpdateDebt frm = new frmAddUpdateDebt(debtID);
-            frm.OnCloseAndSaved += _RefreshFilter;
+            frm.OnCloseAndSaved += _Refresh;
             clsPL_Global.MainForm.AddNewFormAtContainer(frm);
         }
 
-        async void _RefreshFilter()
+        async void _Refresh()
         {
             _pageNumber = 1;
+            _searchByPageNumber = false;
+            kgtxtFilterValue.Text = "";
+            _searchByPageNumber = true;
 
-            if (gcbFilterBy.SelectedIndex == 0)
-                await _LoadDataAtDataGridView(enFilterBy.All);
-            else
-                gcbFilterBy.SelectedIndex = 0;
+            await _LoadDataAtDataGridView(_filterBy);
         }
 
         void _SetReadOnlyAtTextBox(KhaledGuna2TextBox kgtxt)
@@ -360,10 +360,15 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
         private void kgtxtPageNumber_TextChanged(object sender, EventArgs e)
         {
-            if (!_searchByPageNumber || !_CheckValidationChildren())
+            if (!_searchByPageNumber)
                 return;
 
-            _pageNumber = Convert.ToInt16(kgtxtPageNumber.ValidatedText);
+            if (int.TryParse(kgtxtPageNumber.Text, out int result))
+            {
+                _pageNumber = result;
+            }
+            else
+                _pageNumber = 0;
 
             SearchAfterTimerFinish.Stop();
             SearchAfterTimerFinish.Start();

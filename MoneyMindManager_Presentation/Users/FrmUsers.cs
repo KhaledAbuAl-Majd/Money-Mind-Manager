@@ -40,7 +40,7 @@ namespace MoneyMindManager_Presentation
         bool _IsHeaderCreated = false;
         bool _searchByPageNumber = false;
 
-        short _pageNumber = 1;
+        int _pageNumber = 1;
 
         bool _CheckValidationChildren()
         {
@@ -171,16 +171,18 @@ namespace MoneyMindManager_Presentation
         void _AddNewUser()
         {
             frmAddUpdateUser frm = new frmAddUpdateUser();
-            frm.OnCloseAndSavedOrEditing += x => _RefreshFilter();
+            frm.OnCloseAndSavedOrEditing += x => _Refresh();
             clsPL_Global.MainForm.AddNewFormAtContainer(frm);
         }
 
-        async void _RefreshFilter()
+        async void _Refresh()
         {
-            if (gcbFilterBy.SelectedIndex == 0)
-                await _LoadDataAtDataGridView(enFilterBy.All);
-            else
-                gcbFilterBy.SelectedIndex = 0;
+            _pageNumber = 1;
+            _searchByPageNumber = false;
+            kgtxtFilterValue.Text = "";
+            _searchByPageNumber = true;
+
+            await _LoadDataAtDataGridView(_filterBy);
         }
 
         void _SetReadOnlyAtTextBox(KhaledGuna2TextBox kgtxt)
@@ -201,7 +203,7 @@ namespace MoneyMindManager_Presentation
             int userID = Convert.ToInt32(gdgvUser.CurrentRow.Cells[0].Value);
 
             frmUserInfo frm = new frmUserInfo(userID);
-            frm.OnEditingUserAndFormClosed += _RefreshFilter;
+            frm.OnEditingUserAndFormClosed += _Refresh;
             clsPL_Global.MainForm.AddNewFormAtContainer(frm);
         }
 
@@ -331,12 +333,15 @@ namespace MoneyMindManager_Presentation
 
         private void kgtxtPageNumber_TextChanged(object sender, EventArgs e)
         {
-            if (!_searchByPageNumber || !_CheckValidationChildren())
+            if (!_searchByPageNumber)
                 return;
 
-            _pageNumber = Convert.ToInt16(kgtxtPageNumber.ValidatedText);
-
-            //await _LoadDataAtDataGridView();
+            if (int.TryParse(kgtxtPageNumber.Text, out int result))
+            {
+                _pageNumber = result;
+            }
+            else
+                _pageNumber = 0;
 
             SearchAfterTimerFinish.Stop();
             SearchAfterTimerFinish.Start();
@@ -372,28 +377,30 @@ namespace MoneyMindManager_Presentation
             int userID = Convert.ToInt32(gdgvUser.CurrentRow.Cells[0].Value);
 
             frmAddUpdateUser frm = new frmAddUpdateUser(userID);
-            frm.OnCloseAndSavedOrEditing += x => _RefreshFilter();
+            frm.OnCloseAndSavedOrEditing += x => _Refresh();
             clsPL_Global.MainForm.AddNewFormAtContainer(frm);
         }
 
         private async void gtsmDeleteUser_Click(object sender, EventArgs e)
         {
-            if (clsPL_MessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف هذا المستخدم", "طلب مواقفقة", MessageBoxButtons.OKCancel,
-               MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
-            {
-                int userID = Convert.ToInt32(gdgvUser.CurrentRow.Cells[0].Value);
-
-                if(userID == clsGlobalSession.CurrentUserID)
-                {
-                    clsPL_MessageBoxs.ShowErrorMessage("لا يمكنك حذف المستخدم الحالي");
+            if (clsPL_Global.CurrentUserSettings.AskBeforeDeleteUser)
+                if (clsPL_MessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف هذا المستخدم", "طلب موافقة", MessageBoxButtons.OKCancel,
+               MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.OK)
                     return;
-                }
 
-                if (await clsUser.DeleteUserByUserID(userID))
-                {
-                    _RefreshFilter();
-                }
+            int userID = Convert.ToInt32(gdgvUser.CurrentRow.Cells[0].Value);
+
+            if (userID == clsGlobalSession.CurrentUserID)
+            {
+                clsPL_MessageBoxs.ShowErrorMessage("لا يمكنك حذف المستخدم الحالي");
+                return;
             }
+
+            if (await clsUser.DeleteUserByUserID(userID))
+            {
+                _Refresh();
+            }
+
         }
 
         private void gdgvUser_DoubleClick(object sender, EventArgs e)
