@@ -7,7 +7,7 @@
     <ProjectGuid>{F453BF16-D51A-4E57-BCC5-DEA98DBE47DF}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>MoneyMindManager_Presentation</RootNamespace>
-    <AssemblyName>MoneyMindManager_Presentation</AssemblyName>
+    <AssemblyName>MoneyMindManager</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -48,11 +48,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup />
   <PropertyGroup>
-    <ApplicationManifest>app1.manifest</ApplicationManifest>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>project-management.ico</ApplicationIcon>
+    <ApplicationIcon>Money Mind manager.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>false</SignManifests>
@@ -178,22 +176,22 @@
     </Compile>
     <Compile Include="Global\clsFileSystemHelper.cs" />
     <Compile Include="Global\clsUserSettings.cs" />
-    <Compile Include="Global\frmAboutProgramm.cs">
+    <Compile Include="About Programm\frmAboutProgramm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Global\frmAboutProgramm.Designer.cs">
+    <Compile Include="About Programm\frmAboutProgramm.Designer.cs">
       <DependentUpon>frmAboutProgramm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Global\frmSettings.cs">
+    <Compile Include="Settings\frmSettings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Global\frmSettings.Designer.cs">
+    <Compile Include="Settings\frmSettings.Designer.cs">
       <DependentUpon>frmSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="Global\frmCurrentAccount.cs">
+    <Compile Include="Current Account\frmCurrentAccount.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Global\frmCurrentAccount.Designer.cs">
+    <Compile Include="Current Account\frmCurrentAccount.Designer.cs">
       <DependentUpon>frmCurrentAccount.cs</DependentUpon>
     </Compile>
     <Compile Include="Global\clsExportHelper.cs" />
@@ -427,13 +425,13 @@
     <EmbeddedResource Include="Debts\frmDebtsList.resx">
       <DependentUpon>frmDebtsList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Global\frmAboutProgramm.resx">
+    <EmbeddedResource Include="About Programm\frmAboutProgramm.resx">
       <DependentUpon>frmAboutProgramm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Global\frmSettings.resx">
+    <EmbeddedResource Include="Settings\frmSettings.resx">
       <DependentUpon>frmSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Global\frmCurrentAccount.resx">
+    <EmbeddedResource Include="Current Account\frmCurrentAccount.resx">
       <DependentUpon>frmCurrentAccount.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Income And Expense\Categories\frmAddUpdateCategory.resx">
@@ -558,7 +556,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="app1.manifest" />
     <None Include="MoneyMindManager_Presentation_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -591,8 +588,7 @@
     <None Include="Resources\eye_icon_256043.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="icons8-money-management-100.ico" />
-    <Content Include="project-management.ico" />
+    <Content Include="Money Mind manager.ico" />
     <None Include="Resources\unlocked %281%29.png" />
     <None Include="Resources\lock %281%29.png" />
   </ItemGroup>

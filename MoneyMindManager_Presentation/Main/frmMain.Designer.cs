@@ -33,6 +33,7 @@
             this.guna2DragControl1 = new Guna.UI2.WinForms.Guna2DragControl(this.components);
             this.guna2ShadowForm1 = new Guna.UI2.WinForms.Guna2ShadowForm(this.components);
             this.gpnlRightBar = new Guna.UI2.WinForms.Guna2Panel();
+            this.label7 = new System.Windows.Forms.Label();
             this.llblChangePassword = new System.Windows.Forms.LinkLabel();
             this.llblCurrentUserInfo = new System.Windows.Forms.LinkLabel();
             this.guna2Separator1 = new Guna.UI2.WinForms.Guna2Separator();
@@ -57,6 +58,7 @@
             this.guna2DragControl3 = new Guna.UI2.WinForms.Guna2DragControl(this.components);
             this.gpnlFormContainer = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
+            this.guna2ResizeForm1 = new Guna.UI2.WinForms.Guna2ResizeForm(this.components);
             this.gpnlRightBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -76,6 +78,7 @@
             // 
             this.gpnlRightBar.BackColor = System.Drawing.Color.Transparent;
             this.gpnlRightBar.BorderRadius = 15;
+            this.gpnlRightBar.Controls.Add(this.label7);
             this.gpnlRightBar.Controls.Add(this.llblChangePassword);
             this.gpnlRightBar.Controls.Add(this.llblCurrentUserInfo);
             this.gpnlRightBar.Controls.Add(this.guna2Separator1);
@@ -108,6 +111,19 @@
             this.gpnlRightBar.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(10, 5, 0, 5);
             this.gpnlRightBar.Size = new System.Drawing.Size(263, 809);
             this.gpnlRightBar.TabIndex = 3;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.label7.Font = new System.Drawing.Font("Segoe Print", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.Black;
+            this.label7.Location = new System.Drawing.Point(3, -1);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(147, 46);
+            this.label7.TabIndex = 16;
+            this.label7.Text = "Developed By\r\nKhaled Abu Al-Majd";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // llblChangePassword
             // 
@@ -157,7 +173,7 @@
             // 
             this.lblCurrentUserName.BackColor = System.Drawing.Color.Transparent;
             this.lblCurrentUserName.Font = new System.Drawing.Font("Segoe UI Semibold", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCurrentUserName.Location = new System.Drawing.Point(3, 45);
+            this.lblCurrentUserName.Location = new System.Drawing.Point(3, 48);
             this.lblCurrentUserName.Name = "lblCurrentUserName";
             this.lblCurrentUserName.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblCurrentUserName.Size = new System.Drawing.Size(248, 27);
@@ -170,7 +186,7 @@
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label5.Location = new System.Drawing.Point(222, 29);
+            this.label5.Location = new System.Drawing.Point(222, 32);
             this.label5.Name = "label5";
             this.label5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label5.Size = new System.Drawing.Size(39, 17);
@@ -635,6 +651,10 @@
             this.guna2Elipse1.BorderRadius = 20;
             this.guna2Elipse1.TargetControl = this;
             // 
+            // guna2ResizeForm1
+            // 
+            this.guna2ResizeForm1.TargetForm = this;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -686,5 +706,7 @@
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
         private System.Windows.Forms.LinkLabel llblChangePassword;
         private System.Windows.Forms.LinkLabel llblCurrentUserInfo;
+        private System.Windows.Forms.Label label7;
+        private Guna.UI2.WinForms.Guna2ResizeForm guna2ResizeForm1;
     }
 }

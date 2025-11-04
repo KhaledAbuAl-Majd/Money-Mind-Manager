@@ -9,10 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using ClosedXML.Excel;
-using DocumentFormat.OpenXml.Drawing;
 using Microsoft.WindowsAPICodePack.Taskbar;
+using MoneyMindManager_Presentation.Properties;
 using MoneyMindManagerGlobal;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace MoneyMindManager_Presentation.Global
 {
@@ -107,7 +106,8 @@ namespace MoneyMindManager_Presentation.Global
             clsPL_Global.ActiveForm.Invoke(new Action(() =>
             {
                 NotifyIcon notify = new NotifyIcon();
-                notify.Icon = SystemIcons.Information;
+                notify.Icon = clsPL_Global.ActiveForm.Icon;
+                notify.BalloonTipIcon = ToolTipIcon.Info;
                 notify.Visible = true;
                 notify.BalloonTipTitle = "نجاح العملية";
                 notify.BalloonTipText = "تم تصدير الملف بنجاح ✅";

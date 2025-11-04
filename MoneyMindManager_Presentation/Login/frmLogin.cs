@@ -375,5 +375,20 @@ namespace MoneyMindManager_Presentation.Login
         {
 
         }
+
+        private void lblHeader_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gpnlLogin_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void gpnlCreateAccount_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

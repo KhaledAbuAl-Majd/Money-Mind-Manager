@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Money Mind Manager")]
-[assembly: AssemblyCopyright("Copyright ©Code Nestix  2025")]
+[assembly: AssemblyCopyright("Copyright ©Khaled Abu Al-Majd 2025")]
 [assembly: AssemblyTrademark("Code Nestix")]
 [assembly: AssemblyCulture("")]
 

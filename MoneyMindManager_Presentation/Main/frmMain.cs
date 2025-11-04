@@ -86,16 +86,19 @@ namespace MoneyMindManager_Presentation.Main
             LoadMainFormLabels();
 
             prevButton = null;
-            if (clsUser.CheckLogedInUserPermissions(clsUser.enPermissions.OverView))
-            {
-                prevButton = gbtnOverOview;
-                gbtnOverOview.PerformClick();
-            }
-            else
-            {
-                prevButton = gbtnAccount;
-                gbtnAccount.PerformClick();
-            }
+            //if (clsUser.CheckLogedInUserPermissions(clsUser.enPermissions.OverView))
+            //{
+            //    prevButton = gbtnOverOview;
+            //    gbtnOverOview.PerformClick();
+            //}
+            //else
+            //{
+            //    prevButton = gbtnAccount;
+            //    gbtnAccount.PerformClick();
+            //}
+
+            prevButton = gbtnAccount;
+            gbtnAccount.PerformClick();
         }
 
         private void llblCurrentUserInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -116,17 +119,20 @@ namespace MoneyMindManager_Presentation.Main
 
         private void gbtnOverOview_Click(object sender, EventArgs e)
         {
+            ((Guna2Button)sender).Focus();
             if (_LoadFormAtPanelContainer(new frmOverView(), true))
                 prevButton = gbtnOverOview;
         }
         private void gbtnPeople_Click(object sender, EventArgs e)
         {
+            ((Guna2Button)sender).Focus();
             if (_LoadFormAtPanelContainer(new frmPeople(), true))
                 prevButton = gbtnPeople;
         }
 
         private void gbtnUsers_Click(object sender, EventArgs e)
         {
+            ((Guna2Button)sender).Focus();
             if (_LoadFormAtPanelContainer(new FrmUsers(), true))
                 prevButton = gbtnUsers;
         }
@@ -134,32 +140,60 @@ namespace MoneyMindManager_Presentation.Main
 
         private void gbtnIncome_Click(object sender, EventArgs e)
         {
+            ((Guna2Button)sender).Focus();
             if (_LoadFormAtPanelContainer(new frmIncomeAndExpense(clsIncomeAndExpenseVoucher.enVoucherType.Incomes), true))
                 prevButton = gbtnIncome;
         }
 
         private void gbtnExpense_Click(object sender, EventArgs e)
         {
+            ((Guna2Button)sender).Focus();
             if (_LoadFormAtPanelContainer(new frmIncomeAndExpense(clsIncomeAndExpenseVoucher.enVoucherType.Expenses), true))
                 prevButton = gbtnExpense;
         }
 
         private void gbtnExpensesReturn_Click(object sender, EventArgs e)
         {
+            ((Guna2Button)sender).Focus();
             if (_LoadFormAtPanelContainer(new frmIncomeAndExpense(clsIncomeAndExpenseVoucher.enVoucherType.ExpensesReturn), true))
                 prevButton = gbtnExpensesReturn;
         }
 
         private void gbtnDebts_Click(object sender, EventArgs e)
         {
+            ((Guna2Button)sender).Focus();
             if (_LoadFormAtPanelContainer(new frmDebtsList(), true))
                 prevButton = gbtnDebts;
         }
+
         private void gbtnTransactions_Click(object sender, EventArgs e)
         {
+            ((Guna2Button)sender).Focus();
             if (_LoadFormAtPanelContainer(new frmMainTransactionsList(), true))
                 prevButton = gbtnTransactions;
         }
+
+        private void gbtnAccount_Click(object sender, EventArgs e)
+        {
+            ((Guna2Button)sender).Focus();
+            if (_LoadFormAtPanelContainer(new frmCurrentAccount(), true))
+                prevButton = gbtnAccount;
+        }
+
+        private void gbtnSettings_Click(object sender, EventArgs e)
+        {
+            ((Guna2Button)sender).Focus();
+            if (_LoadFormAtPanelContainer(new frmSettings(), true))
+                prevButton = gbtnSettings;
+        }
+
+        private void gbtnAboutProgramm_Click(object sender, EventArgs e)
+        {
+            ((Guna2Button)sender).Focus();
+            if (_LoadFormAtPanelContainer(new frmAboutProgramm(), true))
+                prevButton = gbtnAboutProgramm;
+        }
+
         private void gbtnLogout_Click(object sender, EventArgs e)
         {
             clsPL_Global.Logout();
@@ -168,24 +202,6 @@ namespace MoneyMindManager_Presentation.Main
         private void gcbClose_Click(object sender, EventArgs e)
         {
             OnCloseProgramm?.Invoke();
-        }
-
-        private void gbtnAccount_Click(object sender, EventArgs e)
-        {
-            if (_LoadFormAtPanelContainer(new frmCurrentAccount(), true))
-                prevButton = gbtnAccount;
-        }
-
-        private void gbtnSettings_Click(object sender, EventArgs e)
-        {
-            if (_LoadFormAtPanelContainer(new frmSettings(), true))
-                prevButton = gbtnSettings;
-        }
-
-        private void gbtnAboutProgramm_Click(object sender, EventArgs e)
-        {
-            if (_LoadFormAtPanelContainer(new frmAboutProgramm(), true))
-                prevButton = gbtnAboutProgramm;
         }
     }
 }

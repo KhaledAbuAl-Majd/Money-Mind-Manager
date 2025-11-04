@@ -9,8 +9,8 @@ namespace MoneyMindManagerGlobal
 {
     public static class clsLogger
     {
-        private static string _sourceName = "MonyMindManager";
-        private static string _logName = "Application";
+        public static string SourceName = "MonyMindManager";
+        public static string LogName = "Application";
 
         /// <summary>
         /// Logs a message to the Windows Event Viewer.
@@ -19,7 +19,17 @@ namespace MoneyMindManagerGlobal
         /// <param name="entryType">The type of entry. Default is Error.</param>
         /// <returns>Result of Logging Operation [true if it succeeded, false if it failed]</returns>
         public static bool LogAtEventLog(string message, EventLogEntryType entryType = EventLogEntryType.Error)
-            => KhaledUtils.clsLogger.LogAtEventLog(_sourceName, _logName, message, entryType);
+        {
+            try
+            {
+                EventLog.WriteEntry(SourceName, message, entryType);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
        
     }
 }
