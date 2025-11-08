@@ -1,0 +1,11 @@
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_DataAccess\bin\Release\MoneyMindManager_DataAccess.dll
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_DataAccess\bin\Release\MoneyMindManager_DataAccess.pdb
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_DataAccess\bin\Release\MoneyMindManagerGlobal.dll
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_DataAccess\bin\Release\KhaledUtils.dll
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_DataAccess\bin\Release\MoneyMindManagerGlobal.pdb
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_DataAccess\bin\Release\KhaledUtils.pdb
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_DataAccess\obj\Release\MoneyMindManager_DataAccess.csproj.AssemblyReference.cache
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_DataAccess\obj\Release\MoneyMindManager_DataAccess.csproj.CoreCompileInputs.cache
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_DataAccess\obj\Release\MoneyMin.469100BB.Up2Date
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_DataAccess\obj\Release\MoneyMindManager_DataAccess.dll
+E:\Visual Studio\source\Projects\External Projects\Money Mind Manager\Project\MonyeMindManager\MoneyMindManager_DataAccess\obj\Release\MoneyMindManager_DataAccess.pdb

@@ -54,7 +54,6 @@
             this.gbtnOverOview = new Guna.UI2.WinForms.Guna2Button();
             this.gbtnPeople = new Guna.UI2.WinForms.Guna2Button();
             this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
-            this.guna2DragControl2 = new Guna.UI2.WinForms.Guna2DragControl(this.components);
             this.guna2DragControl3 = new Guna.UI2.WinForms.Guna2DragControl(this.components);
             this.gpnlFormContainer = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
@@ -66,7 +65,7 @@
             // guna2DragControl1
             // 
             this.guna2DragControl1.DockIndicatorTransparencyValue = 0.6D;
-            this.guna2DragControl1.TargetControl = this;
+            this.guna2DragControl1.TargetControl = this.gpnlFormContainer;
             this.guna2DragControl1.UseTransparentDrag = true;
             // 
             // guna2ShadowForm1
@@ -116,14 +115,14 @@
             // 
             this.label7.AutoSize = true;
             this.label7.BackColor = System.Drawing.Color.Transparent;
-            this.label7.Font = new System.Drawing.Font("Segoe Print", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Font = new System.Drawing.Font("Segoe Print", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.Black;
             this.label7.Location = new System.Drawing.Point(3, -1);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(147, 46);
             this.label7.TabIndex = 16;
             this.label7.Text = "Developed By\r\nKhaled Abu Al-Majd";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // llblChangePassword
             // 
@@ -627,11 +626,6 @@
             this.guna2PictureBox1.TabStop = false;
             this.guna2PictureBox1.UseTransparentBackground = true;
             // 
-            // guna2DragControl2
-            // 
-            this.guna2DragControl2.DockIndicatorTransparencyValue = 0.6D;
-            this.guna2DragControl2.UseTransparentDrag = true;
-            // 
             // guna2DragControl3
             // 
             this.guna2DragControl3.DockIndicatorTransparencyValue = 0.6D;
@@ -640,10 +634,10 @@
             // 
             // gpnlFormContainer
             // 
-            this.gpnlFormContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gpnlFormContainer.Location = new System.Drawing.Point(0, 0);
+            this.gpnlFormContainer.Dock = System.Windows.Forms.DockStyle.Right;
+            this.gpnlFormContainer.Location = new System.Drawing.Point(1, 0);
             this.gpnlFormContainer.Name = "gpnlFormContainer";
-            this.gpnlFormContainer.Size = new System.Drawing.Size(1210, 809);
+            this.gpnlFormContainer.Size = new System.Drawing.Size(1209, 809);
             this.gpnlFormContainer.TabIndex = 5;
             // 
             // guna2Elipse1
@@ -666,6 +660,7 @@
             this.Controls.Add(this.gpnlRightBar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(1473, 809);
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Money Mind Manager";
@@ -684,7 +679,6 @@
         private Guna.UI2.WinForms.Guna2Button gbtnOverOview;
         private Guna.UI2.WinForms.Guna2Button gbtnPeople;
         private Guna.UI2.WinForms.Guna2Panel gpnlRightBar;
-        private Guna.UI2.WinForms.Guna2DragControl guna2DragControl2;
         private Guna.UI2.WinForms.Guna2DragControl guna2DragControl3;
         private Guna.UI2.WinForms.Guna2Panel gpnlFormContainer;
         private Guna.UI2.WinForms.Guna2Button gbtnUsers;

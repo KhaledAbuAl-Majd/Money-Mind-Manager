@@ -203,5 +203,6 @@ namespace MoneyMindManager_Presentation.Main
         {
             OnCloseProgramm?.Invoke();
         }
+
     }
 }
