@@ -59,6 +59,34 @@ namespace MoneyMindManager_Presentation
             }
         }
 
+        async Task _DeleteAccount()
+        {
+            if (!gbtnDeleteAccount.Enabled || _Mode == enMode.ReadOnly)
+                return;
+
+            this.UseWaitCursor = true;
+
+            gbtnDeleteAccount.Enabled = false;
+            gbtnSave.Enabled = false;
+            clsPL_Global.MainForm.Enabled = false;
+
+            if (clsPL_MessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف الحساب نهائيا !", "طلب موافقة", MessageBoxButtons.OKCancel,
+                MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.OK)
+            {
+                if (await _AccountInfo.DeleteAccount())
+                {
+                    clsPL_MessageBoxs.ShowMessage("تم حذف الحساب بنجاح, سيتم تسجيل خروجك", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    clsPL_Global.Logout();
+                    return;
+                }
+            }
+
+            this.UseWaitCursor = false;
+            gbtnDeleteAccount.Enabled = true;
+            gbtnSave.Enabled = true;
+            clsPL_Global.MainForm.Enabled = true;
+        }
+
         async Task _LoadData()
         {
             lblAccountID.Text = _AccountInfo.AccountID.ToString();
@@ -92,6 +120,7 @@ namespace MoneyMindManager_Presentation
                 _CancelReadOnlyAtTextBox(kgtxtAccountName);
                 _CancelReadOnlyAtTextBox(kgtxtDiscription);
                 gbtnSave.Enabled = true;
+                gbtnDeleteAccount.Enabled = true;
             }
             else
             {
@@ -99,6 +128,7 @@ namespace MoneyMindManager_Presentation
                 _SetReadOnlyAtTextBox(kgtxtAccountName);
                 _SetReadOnlyAtTextBox(kgtxtDiscription);
                 gbtnSave.Enabled = false;
+                gbtnDeleteAccount.Enabled = false;
             }
 
             kgtxtBalance.UseSystemPasswordChar = !clsPL_Global.CurrentUser.IsHasPermission(clsUser.enPermissions.AccountBalance);
@@ -135,5 +165,9 @@ namespace MoneyMindManager_Presentation
             clsPL_Global.MainForm.AddNewFormAtContainer(frm);
         }
 
+        private async void gbtnDeleteAccount_Click(object sender, EventArgs e)
+        {
+            await _DeleteAccount();
+        }
     }
 }

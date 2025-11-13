@@ -46,7 +46,10 @@ namespace MoneyMindManager_Presentation
 
             string oldUserName = CurrentUser.UserName;
 
-            CurrentUser = await clsUser.FindUserByUserID(Convert.ToInt32(CurrentUser?.UserID));
+            if (CurrentUser == null || CurrentUser?.UserID == null)
+                CurrentUser = null;
+            else
+                CurrentUser = await clsUser.FindUserByUserID(Convert.ToInt32(CurrentUser?.UserID));
 
             if (CurrentUser == null)
             {

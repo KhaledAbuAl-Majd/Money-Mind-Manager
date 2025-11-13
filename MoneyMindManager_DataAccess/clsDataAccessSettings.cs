@@ -11,6 +11,19 @@ namespace MoneyMindManager_DataAccess
 {
     public static class clsDataAccessSettings
     {
-        public static string connectionString = ConfigurationManager.ConnectionStrings["MoneyMindManagerConnectionString"].ConnectionString;
+        public static string connectionString = null;
+
+        static clsDataAccessSettings()
+        {
+            try
+            {
+                // محاولة قراءة سلسلة الاتصال من ملف .config
+                connectionString = ConfigurationManager.ConnectionStrings["MoneyMindManagerConnectionString"].ConnectionString;
+            }
+            catch (Exception ex)
+            {
+                clsGlobalEvents.RaiseErrorEvent(ex.InnerException?.ToString(), true);
+            }
+        }
     }
 }

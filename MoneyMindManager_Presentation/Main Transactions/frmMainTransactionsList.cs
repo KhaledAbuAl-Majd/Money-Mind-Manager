@@ -260,14 +260,14 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 chklbTransactionTypes.SetItemChecked(i, true);
             }
         }
-        private void frmMainTransactionsList_Load(object sender, EventArgs e)
+        private  void frmMainTransactionsList_Load(object sender, EventArgs e)
         {    
             _IsHeaderCreated = false;
             _searchByPageNumber = false;
             kgtxtPageNumber.Text = "1";
             lblNoRecordsFoundMessage.Visible = false;
             lblUserMessage.Visible = false;
-            gcbFilterBy.SelectedIndex = 0;
+            gcbFilterBy.SelectedIndex = 0;       
         }
 
         private async void frmMainTransactionsList_Shown(object sender, EventArgs e)

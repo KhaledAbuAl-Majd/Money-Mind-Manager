@@ -20,7 +20,10 @@ namespace MoneyMindManager_Presentation.Global
         public static DialogResult ShowMessage(string message, string caption, MessageBoxButtons buttons, MessageBoxIcon icon, MessageBoxDefaultButton defaultButton = MessageBoxDefaultButton.Button1)
         {
             if (clsPL_Global.ActiveForm == null)
-                return DialogResult.Cancel;
+            {
+              return  MessageBox.Show(message, caption, buttons, icon, defaultButton);
+                //return DialogResult.Cancel;
+            }
 
             MessageBoxOptions options = 0;
 

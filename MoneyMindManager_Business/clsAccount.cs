@@ -119,5 +119,14 @@ namespace MoneyMindManager_Business
         {
             return clsAccountData.IsAccountExistByAccountName(accountName);
         }
+
+        public async Task<bool> DeleteAccount()
+        {
+            if (!clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.Admin,
+             "ليس لديك صلاحية حذف الحساب."))
+                return false;
+
+            return await clsAccountData.DeleteAccountByID((this.AccountID));
+        }
     }
 }

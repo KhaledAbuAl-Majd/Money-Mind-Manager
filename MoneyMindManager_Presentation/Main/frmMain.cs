@@ -199,10 +199,11 @@ namespace MoneyMindManager_Presentation.Main
             clsPL_Global.Logout();
         }
 
-        private void gcbClose_Click(object sender, EventArgs e)
-        {
-            OnCloseProgramm?.Invoke();
-        }
 
+        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (clsPL_Global.CurrentUser != null)
+                OnCloseProgramm?.Invoke();
+        }
     }
 }

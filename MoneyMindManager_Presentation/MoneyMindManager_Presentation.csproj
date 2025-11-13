@@ -7,7 +7,7 @@
     <ProjectGuid>{F453BF16-D51A-4E57-BCC5-DEA98DBE47DF}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>MoneyMindManager_Presentation</RootNamespace>
-    <AssemblyName>MoneyMindManager</AssemblyName>
+    <AssemblyName>Money Mind Manager</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

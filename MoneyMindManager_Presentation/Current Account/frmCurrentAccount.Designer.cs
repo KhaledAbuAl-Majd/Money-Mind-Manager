@@ -50,6 +50,7 @@
             this.kgtxtAccountName = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.gbtnDeleteAccount = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel2.SuspendLayout();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -73,6 +74,7 @@
             this.guna2Panel2.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.guna2Panel2.BorderRadius = 20;
             this.guna2Panel2.BorderThickness = 2;
+            this.guna2Panel2.Controls.Add(this.gbtnDeleteAccount);
             this.guna2Panel2.Controls.Add(this.label7);
             this.guna2Panel2.Controls.Add(this.kgtxtDefaultCurrency);
             this.guna2Panel2.Controls.Add(this.kgtxtBalance);
@@ -507,7 +509,7 @@
             this.gbtnSave.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnSave.ImageSize = new System.Drawing.Size(25, 25);
             this.gbtnSave.IndicateFocus = true;
-            this.gbtnSave.Location = new System.Drawing.Point(185, 292);
+            this.gbtnSave.Location = new System.Drawing.Point(341, 287);
             this.gbtnSave.Name = "gbtnSave";
             this.gbtnSave.PressedColor = System.Drawing.Color.White;
             this.gbtnSave.Size = new System.Drawing.Size(283, 41);
@@ -716,6 +718,39 @@
             // 
             this.toolTip1.IsBalloon = true;
             // 
+            // gbtnDeleteAccount
+            // 
+            this.gbtnDeleteAccount.Animated = true;
+            this.gbtnDeleteAccount.AutoRoundedCorners = true;
+            this.gbtnDeleteAccount.BackColor = System.Drawing.Color.Transparent;
+            this.gbtnDeleteAccount.BorderColor = System.Drawing.Color.DimGray;
+            this.gbtnDeleteAccount.BorderThickness = 1;
+            this.gbtnDeleteAccount.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gbtnDeleteAccount.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.gbtnDeleteAccount.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnDeleteAccount.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.gbtnDeleteAccount.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.gbtnDeleteAccount.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.gbtnDeleteAccount.FillColor = System.Drawing.Color.White;
+            this.gbtnDeleteAccount.FocusedColor = System.Drawing.SystemColors.MenuHighlight;
+            this.gbtnDeleteAccount.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.gbtnDeleteAccount.ForeColor = System.Drawing.Color.Black;
+            this.gbtnDeleteAccount.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(102)))), ((int)(((byte)(194)))));
+            this.gbtnDeleteAccount.HoverState.Font = new System.Drawing.Font("Segoe UI", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbtnDeleteAccount.HoverState.ForeColor = System.Drawing.Color.White;
+            this.gbtnDeleteAccount.Image = ((System.Drawing.Image)(resources.GetObject("gbtnDeleteAccount.Image")));
+            this.gbtnDeleteAccount.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.gbtnDeleteAccount.ImageSize = new System.Drawing.Size(25, 25);
+            this.gbtnDeleteAccount.IndicateFocus = true;
+            this.gbtnDeleteAccount.Location = new System.Drawing.Point(29, 287);
+            this.gbtnDeleteAccount.Name = "gbtnDeleteAccount";
+            this.gbtnDeleteAccount.PressedColor = System.Drawing.Color.White;
+            this.gbtnDeleteAccount.Size = new System.Drawing.Size(283, 41);
+            this.gbtnDeleteAccount.TabIndex = 134;
+            this.gbtnDeleteAccount.Text = "حذف الحساب";
+            this.toolTip1.SetToolTip(this.gbtnDeleteAccount, "حذف الحساب نهائيا!");
+            this.gbtnDeleteAccount.Click += new System.EventHandler(this.gbtnDeleteAccount_Click);
+            // 
             // frmCurrentAccount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -760,5 +795,6 @@
         private KhaledControlLibrary1.KhaledGuna2TextBox kgtxtCreatedByUserName;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ToolTip toolTip1;
+        private Guna.UI2.WinForms.Guna2Button gbtnDeleteAccount;
     }
 }

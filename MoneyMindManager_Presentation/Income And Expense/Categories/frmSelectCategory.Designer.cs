@@ -48,11 +48,9 @@
             this.gibtnNextPage = new Guna.UI2.WinForms.Guna2ImageButton();
             this.grbTextSearchMode_SubString = new Guna.UI2.WinForms.Guna2RadioButton();
             this.grbTextSearchMode_WordsPrefix = new Guna.UI2.WinForms.Guna2RadioButton();
-            this.guna2BorderlessForm1 = new Guna.UI2.WinForms.Guna2BorderlessForm(this.components);
             this.lblCurrentPageRecordsCount = new System.Windows.Forms.Label();
             this.lblDescriptionOfCurrentPageNumOfRcords = new System.Windows.Forms.Label();
             this.lblCurrentPageOfNumberOfPages = new System.Windows.Forms.Label();
-            this.gcbClose = new Guna.UI2.WinForms.Guna2ControlBox();
             this.label5 = new System.Windows.Forms.Label();
             this.SearchAfterTimerFinish = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.gdgvCategories)).BeginInit();
@@ -207,7 +205,7 @@
             this.kgtxtFilterValue.PlaceholderForeColor = System.Drawing.Color.Gray;
             this.kgtxtFilterValue.PlaceholderText = "اسم الفئة";
             this.kgtxtFilterValue.SelectedText = "";
-            this.kgtxtFilterValue.Size = new System.Drawing.Size(824, 38);
+            this.kgtxtFilterValue.Size = new System.Drawing.Size(865, 38);
             this.kgtxtFilterValue.TabIndex = 33;
             this.kgtxtFilterValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.kgtxtFilterValue.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
@@ -426,7 +424,7 @@
             this.grbTextSearchMode_SubString.CheckedState.InnerOffset = -4;
             this.grbTextSearchMode_SubString.Cursor = System.Windows.Forms.Cursors.Hand;
             this.grbTextSearchMode_SubString.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grbTextSearchMode_SubString.Location = new System.Drawing.Point(143, 1);
+            this.grbTextSearchMode_SubString.Location = new System.Drawing.Point(161, 1);
             this.grbTextSearchMode_SubString.Name = "grbTextSearchMode_SubString";
             this.grbTextSearchMode_SubString.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.grbTextSearchMode_SubString.Size = new System.Drawing.Size(256, 21);
@@ -451,7 +449,7 @@
             this.grbTextSearchMode_WordsPrefix.CheckedState.InnerOffset = -4;
             this.grbTextSearchMode_WordsPrefix.Cursor = System.Windows.Forms.Cursors.Hand;
             this.grbTextSearchMode_WordsPrefix.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grbTextSearchMode_WordsPrefix.Location = new System.Drawing.Point(408, 1);
+            this.grbTextSearchMode_WordsPrefix.Location = new System.Drawing.Point(426, 1);
             this.grbTextSearchMode_WordsPrefix.Name = "grbTextSearchMode_WordsPrefix";
             this.grbTextSearchMode_WordsPrefix.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.grbTextSearchMode_WordsPrefix.Size = new System.Drawing.Size(271, 21);
@@ -465,14 +463,6 @@
             this.grbTextSearchMode_WordsPrefix.UncheckedState.BorderThickness = 2;
             this.grbTextSearchMode_WordsPrefix.UncheckedState.FillColor = System.Drawing.Color.Transparent;
             this.grbTextSearchMode_WordsPrefix.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
-            // 
-            // guna2BorderlessForm1
-            // 
-            this.guna2BorderlessForm1.BorderRadius = 20;
-            this.guna2BorderlessForm1.ContainerControl = this;
-            this.guna2BorderlessForm1.DockIndicatorTransparencyValue = 0.6D;
-            this.guna2BorderlessForm1.ResizeForm = false;
-            this.guna2BorderlessForm1.TransparentWhileDrag = true;
             // 
             // lblCurrentPageRecordsCount
             // 
@@ -506,32 +496,11 @@
             this.lblCurrentPageOfNumberOfPages.Text = "0 من  0  صفحات";
             this.lblCurrentPageOfNumberOfPages.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // gcbClose
-            // 
-            this.gcbClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.gcbClose.Animated = true;
-            this.gcbClose.BackColor = System.Drawing.Color.Transparent;
-            this.gcbClose.BorderRadius = 7;
-            this.gcbClose.ControlBoxStyle = Guna.UI2.WinForms.Enums.ControlBoxStyle.Custom;
-            this.gcbClose.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.gcbClose.CustomIconSize = 12F;
-            this.gcbClose.FillColor = System.Drawing.Color.Transparent;
-            this.gcbClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gcbClose.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(17)))), ((int)(((byte)(35)))));
-            this.gcbClose.HoverState.IconColor = System.Drawing.Color.White;
-            this.gcbClose.IconColor = System.Drawing.Color.DimGray;
-            this.gcbClose.Location = new System.Drawing.Point(898, 0);
-            this.gcbClose.Name = "gcbClose";
-            this.gcbClose.Size = new System.Drawing.Size(38, 29);
-            this.gcbClose.TabIndex = 127;
-            this.gcbClose.TabStop = false;
-            this.gcbClose.UseTransparentBackground = true;
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(685, 3);
+            this.label5.Location = new System.Drawing.Point(703, 3);
             this.label5.Name = "label5";
             this.label5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label5.Size = new System.Drawing.Size(129, 17);
@@ -553,7 +522,6 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.grbTextSearchMode_SubString);
             this.Controls.Add(this.grbTextSearchMode_WordsPrefix);
-            this.Controls.Add(this.gcbClose);
             this.Controls.Add(this.lblCurrentPageRecordsCount);
             this.Controls.Add(this.lblDescriptionOfCurrentPageNumOfRcords);
             this.Controls.Add(this.kgtxtPageNumber);
@@ -567,12 +535,11 @@
             this.Controls.Add(this.kgtxtFilterValue);
             this.Controls.Add(this.lblNoRecordsFoundMessage);
             this.Controls.Add(this.gdgvCategories);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
-            this.MaximumSize = new System.Drawing.Size(938, 601);
-            this.MinimumSize = new System.Drawing.Size(938, 583);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(954, 640);
             this.Name = "frmSelectCategory";
-            this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Select Category";
@@ -597,14 +564,12 @@
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private KhaledControlLibrary1.ctrlInfoIcon ctrlInfoIcon1;
         private System.Windows.Forms.ToolTip toolTip1;
-        private Guna.UI2.WinForms.Guna2BorderlessForm guna2BorderlessForm1;
         private System.Windows.Forms.Label lblCurrentPageRecordsCount;
         private System.Windows.Forms.Label lblDescriptionOfCurrentPageNumOfRcords;
         private KhaledControlLibrary1.KhaledGuna2TextBox kgtxtPageNumber;
         private Guna.UI2.WinForms.Guna2ImageButton gibtnPreviousPage;
         private Guna.UI2.WinForms.Guna2ImageButton gibtnNextPage;
         private System.Windows.Forms.Label lblCurrentPageOfNumberOfPages;
-        private Guna.UI2.WinForms.Guna2ControlBox gcbClose;
         private System.Windows.Forms.Label label5;
         private Guna.UI2.WinForms.Guna2RadioButton grbTextSearchMode_SubString;
         private Guna.UI2.WinForms.Guna2RadioButton grbTextSearchMode_WordsPrefix;

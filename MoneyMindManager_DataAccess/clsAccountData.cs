@@ -252,5 +252,36 @@ namespace MoneyMindManager_DataAccess
             return isExist;
         }
 
+        public static async Task<bool> DeleteAccountByID(short accountID, bool RaiseEventOnErrorOccured = true)
+        {
+            bool result = false;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("[dbo].[SP_Account_DeleteByID]", connection))
+                    {
+                        command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("@AccountID", accountID);
+
+                        await connection.OpenAsync();
+                        await command.ExecuteNonQueryAsync();
+                    }
+                }
+
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                result = false;
+
+                if (RaiseEventOnErrorOccured)
+                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
+            }
+
+            return result;
+        }
     }
 }
