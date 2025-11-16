@@ -266,6 +266,13 @@ namespace MoneyMindManager_Presentation.Users
         {
             var items = _User.GetUserPermissionItems();
 
+            // NOTE:
+            // Sometimes Windows Forms throws a non-critical internal exception when assigning
+            // a DataSource to checked list controls (like CheckedListBox).
+            // This happens inconsistently and does NOT affect the execution or data binding.
+            // The code continues to work normally, so this warning can be safely ignored.
+
+
             chklbUserPermissions.DataSource = items;
             chklbUserPermissions.DisplayMember = "ItemName";
             chklbUserPermissions.ValueMember = "ItemValue";
