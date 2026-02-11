@@ -267,7 +267,7 @@ namespace MoneyMindManager_Business
             this.CreatedByUserID = Convert.ToInt32(clsGlobalSession.CurrentUserID);
             this.CreatedDate = DateTime.Now;
 
-            UserID = await clsUserData.AddNewUser(UserName, Convert.ToInt32(PersonID), Permissions, Password, Salt,
+            UserID = await clsUserData.Add(UserName, Convert.ToInt32(PersonID), Permissions, Password, Salt,
                 IsActive, Notes,Convert.ToInt32(CreatedByUserID));
 
             return (UserID != null);
@@ -283,7 +283,7 @@ namespace MoneyMindManager_Business
                 return false;
             }
 
-            return await clsUserData.UpdateUser(Convert.ToInt32(UserID), UserName, Convert.ToInt32(PersonID),
+            return await clsUserData.Update(Convert.ToInt32(UserID), UserName, Convert.ToInt32(PersonID),
             Permissions, IsActive, Notes, Convert.ToInt32(clsGlobalSession.CurrentUserID));
         }
 
@@ -345,7 +345,7 @@ namespace MoneyMindManager_Business
             string newHashedPassword = newHashedPasswordWithSalt.HashedPassword;
             string newSalt = newHashedPasswordWithSalt.Salt;
 
-            bool result = await clsUserData.ChangeUserPassword(Convert.ToInt32(this.UserID), oldHashedPassword, 
+            bool result = await clsUserData.ChangePassword(Convert.ToInt32(this.UserID), oldHashedPassword, 
                 newHashedPassword, newSalt, Convert.ToInt32(clsGlobalSession.CurrentUserID));
 
             if (result)
@@ -373,7 +373,7 @@ namespace MoneyMindManager_Business
 
             string hashedPassword = HashingPassowrd(enteredpassword, salt);
 
-            clsUserColumns userColumns = await clsUserData.GetUserInfoByUserNameAndPassword_Login(userName, hashedPassword);
+            clsUserColumns userColumns = await clsUserData.GetByUserNameAndPassword_Login(userName, hashedPassword);
 
             if (userColumns == null)
                 return null;
@@ -392,7 +392,7 @@ namespace MoneyMindManager_Business
         /// <returns>Object of clsUserColumns, if user is not found it will return null</returns>
         public static async Task<clsUser> FindUserByUserID(int userID)
         {
-            var userColumns = await clsUserData.GetUserInfoByUserID(userID);
+            var userColumns = await clsUserData.GetByUserID(userID);
 
             if (userColumns == null)
                 return null;
@@ -412,7 +412,7 @@ namespace MoneyMindManager_Business
         /// <returns>Object of clsUserColumns, if user is not found it will return null</returns>
         public static async Task<clsUser> FindUserByUserName(string userName)
         {
-            clsUserColumns userColumns = await clsUserData.GetUserInfoByUserName(userName);
+            clsUserColumns userColumns = await clsUserData.GetByUserName(userName);
 
             if (userColumns == null)
                 return null;
@@ -431,7 +431,7 @@ namespace MoneyMindManager_Business
         /// <returns>Object of clsUserColumns, if user is not found it will return null</returns>
         public static async Task<clsUser> FindUserByPersonID(int personID)
         {
-            clsUserColumns userColumns = await clsUserData.GetUserInfoByPersonID(personID);
+            clsUserColumns userColumns = await clsUserData.GetByPersonID(personID);
 
             if (userColumns == null)
                 return null;
@@ -464,7 +464,7 @@ namespace MoneyMindManager_Business
                 "ليس لديك صلاحية حذف مستخدم."))
                 return false;
 
-            return await clsUserData.DeleteUserByUserID(userID);
+            return await clsUserData.DeleteByUserID(userID);
         }
 
         public async Task<bool> RefreshData()
@@ -559,14 +559,14 @@ namespace MoneyMindManager_Business
         /// <returns>true if user exist, false if user not exist</returns>
         public static async Task<bool> IsUserExistByUserIDAsync(int userID, bool includeDeleted = true)
         {
-            return await clsUserData.IsUserExistByUserID(userID,includeDeleted);
+            return await clsUserData.IsExistByUserID(userID,includeDeleted);
         }
 
         /// <param name="personID">PersonID of user you want to find</param>
         /// <returns>true if user exist, false if user not exist</returns>
         public static async Task<bool> IsUserExistByPersonIDAsync(int personID, bool includeDeleted = true)
         {
-            return await clsUserData.IsUserExistByPersonID(personID,includeDeleted);
+            return await clsUserData.IsExistByPersonID(personID,includeDeleted);
         }
 
         /// <param name="userName">personName of user you want to find</param>

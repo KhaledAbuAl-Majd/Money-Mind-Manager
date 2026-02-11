@@ -45,8 +45,17 @@
     <Compile Include="Paged Result DTOs\DebtsPagedResultDTO.cs" />
     <Compile Include="Paged Result DTOs\PagedResultDto.cs" />
     <Compile Include="Paged Result DTOs\PagedResultWithAmountDTO.cs" />
+    <Compile Include="Permissions\PermissionItemDTO.cs" />
     <Compile Include="PersonDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="User\LoginRequestDTO.cs" />
+    <Compile Include="User\UserDTO.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MoneyMindManager.Core\MoneyMindManager.Core.csproj">
+      <Project>{207acf87-b108-4ce1-ac9e-f7dd5273a7cc}</Project>
+      <Name>MoneyMindManager.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

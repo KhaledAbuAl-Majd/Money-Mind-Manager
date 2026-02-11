@@ -17,7 +17,7 @@ namespace MoneyMindManager_DataAccess
 
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>New UserID if Success, if failed return null</returns>
-        public static async Task<Nullable<int>> AddNewUser(string userName,int personID, int permissions, string password, string salt,
+        public static async Task<Nullable<int>> Add(string userName,int personID, int permissions, string password, string salt,
             bool isActive, string notes, int createdByUserID, bool RaiseEventOnErrorOccured = true)
         {
             int? newUserID = null;
@@ -76,7 +76,7 @@ namespace MoneyMindManager_DataAccess
 
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>Updating Result</returns>
-        public static async Task<bool> UpdateUser(int userID,string userName, int personID, int permissions, bool isActive,
+        public static async Task<bool> Update(int userID,string userName, int personID, int permissions, bool isActive,
             string notes,int currentUserID, bool RaiseEventOnErrorOccured = true)
         {
             bool result = false;
@@ -127,7 +127,7 @@ namespace MoneyMindManager_DataAccess
         /// <param name="newSalt">the new salt of the new hashed password</param>
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>Updating Result</returns>
-        public static async Task<bool> ChangeUserPassword(int userID,string oldPassword ,string newPassword,
+        public static async Task<bool> ChangePassword(int userID,string oldPassword ,string newPassword,
             string newSalt,int currentUserID, bool RaiseEventOnErrorOccured = true)
         {
             bool result = false;
@@ -173,7 +173,7 @@ namespace MoneyMindManager_DataAccess
 
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>Deleting Result</returns>
-        public static async Task<bool> DeleteUserByUserID(int userID, bool RaiseEventOnErrorOccured = true)
+        public static async Task<bool> DeleteByUserID(int userID, bool RaiseEventOnErrorOccured = true)
         {
             bool result = false;
 
@@ -214,7 +214,7 @@ namespace MoneyMindManager_DataAccess
 
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>Object of clsUserColumns, if user is not found it will return null</returns>
-        public static async Task<clsUserColumns> GetUserInfoByUserNameAndPassword_Login(string userName,string password, bool RaiseEventOnErrorOccured = true)
+        public static async Task<clsUserColumns> GetByUserNameAndPassword_Login(string userName,string password, bool RaiseEventOnErrorOccured = true)
         {
             clsUserColumns userData = null;
 
@@ -272,7 +272,7 @@ namespace MoneyMindManager_DataAccess
 
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>Object of clsUserColumns, if user is not found it will return null</returns>
-        public static async Task<clsUserColumns> GetUserInfoByUserID(int userID, bool RaiseEventOnErrorOccured = true)
+        public static async Task<clsUserColumns> GetByUserID(int userID, bool RaiseEventOnErrorOccured = true)
         {
             clsUserColumns userData = null;
 
@@ -329,7 +329,7 @@ namespace MoneyMindManager_DataAccess
 
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>Object of clsUserColumns, if user is not found it will return null</returns>
-        public static async Task<clsUserColumns> GetUserInfoByUserName(string userName, bool RaiseEventOnErrorOccured = true)
+        public static async Task<clsUserColumns> GetByUserName(string userName, bool RaiseEventOnErrorOccured = true)
         {
             clsUserColumns userData = null;
 
@@ -386,7 +386,7 @@ namespace MoneyMindManager_DataAccess
 
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>Object of clsUserColumns, if user is not found it will return null</returns>
-        public static async Task<clsUserColumns> GetUserInfoByPersonID(int personID, bool RaiseEventOnErrorOccured = true)
+        public static async Task<clsUserColumns> GetByPersonID(int personID, bool RaiseEventOnErrorOccured = true)
         {
             clsUserColumns userData = null;
 
@@ -444,7 +444,7 @@ namespace MoneyMindManager_DataAccess
         /// <param name="userID">UserID of user you want to find</param>
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>true if user exist, false if user not exist</returns>
-        public static async Task<bool> IsUserExistByUserID(int userID, bool includeDeleted, bool RaiseEventOnErrorOccured = true)
+        public static async Task<bool> IsExistByUserID(int userID, bool includeDeleted, bool RaiseEventOnErrorOccured = true)
         {
             bool isExist = false;
 
@@ -487,7 +487,7 @@ namespace MoneyMindManager_DataAccess
         /// <param name="personID">PersonID of user you want to find</param>
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>true if user exist, false if user not exist</returns>
-        public static async Task<bool> IsUserExistByPersonID(int personID, bool includeDeleted, bool RaiseEventOnErrorOccured = true)
+        public static async Task<bool> IsExistByPersonID(int personID, bool includeDeleted, bool RaiseEventOnErrorOccured = true)
         {
             bool isExist = false;
 

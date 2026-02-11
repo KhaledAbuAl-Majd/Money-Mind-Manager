@@ -41,8 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstractions\IPermissionService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\PersonService.cs" />
+    <Compile Include="Services\Permissions\PermissionService.cs" />
+    <Compile Include="Services\Person\PersonService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MoneyMindManager.Core\MoneyMindManager.Core.csproj">
@@ -57,6 +59,9 @@
       <Project>{e91f0830-3641-4e5e-8486-5c2878937c17}</Project>
       <Name>MoneyMindManager.Shared.DTOs</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\User\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
