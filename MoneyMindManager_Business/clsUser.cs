@@ -158,7 +158,7 @@ namespace MoneyMindManager_Business
             }
         }
 
-        public static List<clsPermissionItems>GetUserPermissionItems(int userPermission)
+        public static List<clsPermissionItems>GetPermissionMetadata(int userPermission)
         {
             List<clsPermissionItems> items = new List<clsPermissionItems>();
 
@@ -185,7 +185,7 @@ namespace MoneyMindManager_Business
 
         public  List<clsPermissionItems> GetUserPermissionItems()
         {
-            return GetUserPermissionItems(Permissions);
+            return GetPermissionMetadata(Permissions);
         }
 
         public void AssingUserPermissions(List<int> checkedItemsValue)
