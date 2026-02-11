@@ -15,7 +15,7 @@ namespace MoneyMindManager_DataAccess
     {
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>New PersonID if Success, if failed return null</returns>
-        public static async Task<Nullable<int>> AddNewPerson(string personName, string address, string email, string phone,
+        public static async Task<Nullable<int>> Add(string personName, string address, string email, string phone,
             short accountID, string notes,int createdByUserID, bool RaiseEventOnErrorOccured = true)
         {
             int? newPersonID = null;
@@ -72,7 +72,7 @@ namespace MoneyMindManager_DataAccess
 
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>Updating Result</returns>
-        public static async Task<bool> UpdatePerson(int personID, string personName, string address, string email, string phone,
+        public static async Task<bool> Update(int personID, string personName, string address, string email, string phone,
             string notes,int currentUserID, bool RaiseEventOnErrorOccured = true)
         {
             bool result = false;
@@ -120,7 +120,7 @@ namespace MoneyMindManager_DataAccess
 
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>Deleting Result</returns>
-        public static async Task<bool> DeletePersonByID(int personID,int currentUserID, bool RaiseEventOnErrorOccured = true)
+        public static async Task<bool> Delete(int personID,int currentUserID, bool RaiseEventOnErrorOccured = true)
         {
             bool result = false;
 
@@ -162,7 +162,7 @@ namespace MoneyMindManager_DataAccess
 
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>Object of clsUserColumns, if person is not found it will return null</returns>
-        public static async Task<clsPersonColumns> GetPersonInfoByID(int personID,int currentUserID, bool RaiseEventOnErrorOccured = true)
+        public static async Task<clsPersonColumns> Get(int personID,int currentUserID, bool RaiseEventOnErrorOccured = true)
         {
             clsPersonColumns personData = null;
 
@@ -222,7 +222,7 @@ namespace MoneyMindManager_DataAccess
         /// <param name="personID">PersonID of person you wnat to find</param>
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>true if person exist, false if person not exist</returns>
-        public static async Task<bool> IsPersonExistByID(int personID, bool RaiseEventOnErrorOccured = true)
+        public static async Task<bool> IsExist(int personID, bool RaiseEventOnErrorOccured = true)
         {
             bool isExist = false;
 
@@ -265,7 +265,7 @@ namespace MoneyMindManager_DataAccess
         /// Get All People For Account Using Paging , if variable null will not filter by it.
         /// </summary>
         /// <returns>object of clsGetAllPeople : if error happend, return null</returns>
-        public static async Task<clsGetAllPeople> GetAllPeople(int? personID, string personName, string email,
+        public static async Task<clsGetAllPeople> GetAll(int? personID, string personName, string email,
              string phone,byte textSearchMode, int pageNumber,byte rowsPerPage, int currentUserID, bool RaiseEventOnErrorOccured = true)
         {
             clsGetAllPeople allPeople = null;
@@ -328,7 +328,7 @@ namespace MoneyMindManager_DataAccess
             return allPeople;
         }
 
-        public static async Task<clsGetAllPeople> GetAllPeopleForSelectOne(string personName, byte textSearchMode,
+        public static async Task<clsGetAllPeople> GetAllForSelectOne(string personName, byte textSearchMode,
             int pageNumber, byte rowsPerPage, int currentUserID, bool RaiseEventOnErrorOccured = true)
         {
             clsGetAllPeople allPeople = null;

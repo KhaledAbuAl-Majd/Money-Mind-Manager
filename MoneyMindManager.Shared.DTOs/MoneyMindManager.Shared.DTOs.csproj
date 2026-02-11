@@ -41,6 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Paged Result DTOs\DebtPaymentsPagedResultDTO.cs" />
+    <Compile Include="Paged Result DTOs\DebtsPagedResultDTO.cs" />
+    <Compile Include="Paged Result DTOs\PagedResultDto.cs" />
+    <Compile Include="Paged Result DTOs\PagedResultWithAmountDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

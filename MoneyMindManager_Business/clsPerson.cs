@@ -61,7 +61,7 @@ namespace MoneyMindManager_Business
         {
             this.CreatedDate = DateTime.Now;
 
-            PersonID = await clsPersonData.AddNewPerson(PersonName, Address, Email, Phone,
+            PersonID = await clsPersonData.Add(PersonName, Address, Email, Phone,
                 Convert.ToInt16(AccountID), Notes, Convert.ToInt32(CreatedByUserID));
 
             return (PersonID != null);
@@ -69,7 +69,7 @@ namespace MoneyMindManager_Business
 
         private async Task<bool> _UpdatePerson()
         {
-            return await clsPersonData.UpdatePerson(Convert.ToInt32(PersonID), PersonName, Address, Email, Phone, Notes,
+            return await clsPersonData.Update(Convert.ToInt32(PersonID), PersonName, Address, Email, Phone, Notes,
                 Convert.ToInt32(clsGlobalSession.CurrentUserID));
         }
 
@@ -115,7 +115,7 @@ namespace MoneyMindManager_Business
 
         public static async Task<clsPerson> FindPersonByID(int personID,int currentUserID)
         {
-            clsPersonColumns personColumns = await clsPersonData.GetPersonInfoByID(personID,currentUserID);
+            clsPersonColumns personColumns = await clsPersonData.Get(personID,currentUserID);
 
             if (personColumns == null)
                 return null;
@@ -137,19 +137,19 @@ namespace MoneyMindManager_Business
                "ليس لديك صلاحية حذف شخص."))
                 return false;
 
-            return await clsPersonData.DeletePersonByID(personID, Convert.ToInt32(clsGlobalSession.CurrentUserID));
+            return await clsPersonData.Delete(personID, Convert.ToInt32(clsGlobalSession.CurrentUserID));
         }
 
         public static async Task<bool> IsPersonExistByID(int personID)
         {
-            return await clsPersonData.IsPersonExistByID(personID);
+            return await clsPersonData.IsExist(personID);
         }
 
         private static async Task<clsGetAllPeople> _GetAllPeople(int? personID, string personName, string email,
              string phone,enTextSearchMode textSearchMode, int pageNumber)
         {
             byte rowsPerPage = 15;
-            return await clsPersonData.GetAllPeople(personID, personName, email, phone, (byte)textSearchMode, pageNumber,
+            return await clsPersonData.GetAll(personID, personName, email, phone, (byte)textSearchMode, pageNumber,
                 rowsPerPage, Convert.ToInt32(clsGlobalSession.CurrentUserID));
         }
 
@@ -208,7 +208,7 @@ namespace MoneyMindManager_Business
         public static async Task<clsGetAllPeople> GetAllPeopleForSelectOne(string personName, enTextSearchMode textSearchMode, int pageNumber)
         {
             byte rowsPerPage = 15;
-            return await clsPersonData.GetAllPeopleForSelectOne(personName,(byte)textSearchMode, pageNumber,
+            return await clsPersonData.GetAllForSelectOne(personName,(byte)textSearchMode, pageNumber,
                 rowsPerPage, Convert.ToInt32(clsGlobalSession.CurrentUserID));
         }
 

@@ -43,5 +43,19 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MoneyMindManager.Core\MoneyMindManager.Core.csproj">
+      <Project>{207acf87-b108-4ce1-ac9e-f7dd5273a7cc}</Project>
+      <Name>MoneyMindManager.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MoneyMindManager.Domain\MoneyMindManager.Domain.csproj">
+      <Project>{c65bf29e-4bda-4b9a-906a-5c87b5b2a1e3}</Project>
+      <Name>MoneyMindManager.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MoneyMindManager.Shared.DTOs\MoneyMindManager.Shared.DTOs.csproj">
+      <Project>{e91f0830-3641-4e5e-8486-5c2878937c17}</Project>
+      <Name>MoneyMindManager.Shared.DTOs</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
