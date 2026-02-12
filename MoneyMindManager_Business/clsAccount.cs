@@ -37,7 +37,7 @@ namespace MoneyMindManager_Business
 
         private async Task<bool> _UpdateAccount()
         {
-            return await clsAccountData.UpdateAccount(AccountName, IsActive, Description,Convert.ToInt32(clsGlobalSession.CurrentUserID));
+            return await clsAccountData.Update(AccountName, IsActive, Description,Convert.ToInt32(clsGlobalSession.CurrentUserID));
         }
 
         public async Task<bool> Save()
@@ -77,7 +77,7 @@ namespace MoneyMindManager_Business
 
         public static async Task<clsAccount> FindAccountByAccountID(short accountID)
         {
-            clsAccountColumns accountColumns = await clsAccountData.GetAccountInfoByAccountID(accountID);
+            clsAccountColumns accountColumns = await clsAccountData.Get(accountID);
 
             if (accountColumns == null)
                 return null;
@@ -101,7 +101,7 @@ namespace MoneyMindManager_Business
             string hashedPassword = HashedPasswordAndSalat.HashedPassword;
             string salt = HashedPasswordAndSalat.Salt;
 
-            int? newAccountID = await clsAccountData.CreateAccount(accountName, defaultCurrencyID, description, personName, address, email,
+            int? newAccountID = await clsAccountData.Add(accountName, defaultCurrencyID, description, personName, address, email,
                 phone, notes, userName, hashedPassword, salt);
 
             return (newAccountID);
@@ -110,14 +110,14 @@ namespace MoneyMindManager_Business
         /// <returns>true if account exist, false if account not exist</returns>
         public static async Task<bool> IsAccountExistByAccountNameAsync(string accountName)
         {
-            return await clsAccountData.IsAccountExistByAccountNameAsync(accountName);
+            return await clsAccountData.IsExistByAccountNameAsync(accountName);
         }
 
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>true if account exist, false if account not exist</returns>
         public static bool IsAccountExistByAccountName(string accountName)
         {
-            return clsAccountData.IsAccountExistByAccountName(accountName);
+            return clsAccountData.IsExistByAccountName(accountName);
         }
 
         public async Task<bool> DeleteAccount()
@@ -126,7 +126,7 @@ namespace MoneyMindManager_Business
              "ليس لديك صلاحية حذف الحساب."))
                 return false;
 
-            return await clsAccountData.DeleteAccountByID((this.AccountID));
+            return await clsAccountData.Delete((this.AccountID));
         }
     }
 }

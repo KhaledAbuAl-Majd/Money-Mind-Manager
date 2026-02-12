@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using MoneyMindManager.Domain.Entities;
 using MoneyMindManager.Shared.DTOs;
+using MoneyMindManager.Shared.DTOs.Person;
 
 namespace MoneyMindManager.Domain.Abstractions
 {
@@ -24,10 +25,8 @@ namespace MoneyMindManager.Domain.Abstractions
         /// Get All People For Account Using Paging , if variable null will not filter by it.
         /// </summary>
         /// <returns>object of PagedResultDTO<Person> : if error happend, return null</returns>
-        Task<PagedResultDTO<Person>> GetAll(int? personID, string personName, string email,
-             string phone, byte textSearchMode, int pageNumber, byte rowsPerPage, int currentUserID);
+        Task<PagedResultDTO<Person>> GetAll(PersonFilterDTO personFilterDTO,byte rowsPerPage, int currentUserID);
 
-        Task<PagedResultDTO<Person>> GetAllForSelectOne(string personName, byte textSearchMode,
-            int pageNumber, byte rowsPerPage, int currentUserID);
+        Task<PagedResultDTO<Person>> GetAllForSelectOne(PersonFilterDTO personFilterDTO, byte rowsPerPage, int currentUserID);
     }
 }

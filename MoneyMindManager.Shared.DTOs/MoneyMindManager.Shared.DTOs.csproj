@@ -41,12 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account\AccountDTO.cs" />
     <Compile Include="Paged Result DTOs\DebtPaymentsPagedResultDTO.cs" />
     <Compile Include="Paged Result DTOs\DebtsPagedResultDTO.cs" />
     <Compile Include="Paged Result DTOs\PagedResultDto.cs" />
     <Compile Include="Paged Result DTOs\PagedResultWithAmountDTO.cs" />
     <Compile Include="Permissions\PermissionItemDTO.cs" />
-    <Compile Include="PersonDTO.cs" />
+    <Compile Include="Person\PersonDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User\LoginRequestDTO.cs" />
     <Compile Include="User\UserDTO.cs" />
@@ -57,5 +58,6 @@
       <Name>MoneyMindManager.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

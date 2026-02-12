@@ -17,7 +17,7 @@ namespace MoneyMindManager_DataAccess
 
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>New AccountID if Success, if failed return null</returns>
-        public static async Task<Nullable<int>> CreateAccount(string accountName, byte defaultCurrencyID, string description,
+        public static async Task<Nullable<int>> Add(string accountName, byte defaultCurrencyID, string description,
             string personName, string address, string email, string phone, string notes, string userName, 
             string password, string salt, bool RaiseEventOnErrorOccured = true)
         {
@@ -75,7 +75,7 @@ namespace MoneyMindManager_DataAccess
 
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>Updating Result</returns>
-        public static async Task<bool> UpdateAccount( string accountName, bool isActive, string description,int currentUserID, bool RaiseEventOnErrorOccured = true)
+        public static async Task<bool> Update( string accountName, bool isActive, string description,int currentUserID, bool RaiseEventOnErrorOccured = true)
         {
             bool result = false;
 
@@ -119,7 +119,7 @@ namespace MoneyMindManager_DataAccess
 
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>Object of clsAccountColumns, if Account is not found it will return null</returns>
-        public static async Task<clsAccountColumns> GetAccountInfoByAccountID(short accountID, bool RaiseEventOnErrorOccured = true)
+        public static async Task<clsAccountColumns> Get(short accountID, bool RaiseEventOnErrorOccured = true)
         {
             clsAccountColumns accountColumns = null;
 
@@ -172,7 +172,7 @@ namespace MoneyMindManager_DataAccess
 
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>true if account exist, false if account not exist</returns>
-        public static async Task<bool> IsAccountExistByAccountNameAsync(string accountName, bool RaiseEventOnErrorOccured = true)
+        public static async Task<bool> IsExistByAccountNameAsync(string accountName, bool RaiseEventOnErrorOccured = true)
         {
             bool isExist = false;
 
@@ -213,7 +213,7 @@ namespace MoneyMindManager_DataAccess
 
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
         /// <returns>true if account exist, false if account not exist</returns>
-        public static bool IsAccountExistByAccountName(string accountName, bool RaiseEventOnErrorOccured = true)
+        public static bool IsExistByAccountName(string accountName, bool RaiseEventOnErrorOccured = true)
         {
             bool isExist = false;
 
@@ -252,7 +252,7 @@ namespace MoneyMindManager_DataAccess
             return isExist;
         }
 
-        public static async Task<bool> DeleteAccountByID(short accountID, bool RaiseEventOnErrorOccured = true)
+        public static async Task<bool> Delete(short accountID, bool RaiseEventOnErrorOccured = true)
         {
             bool result = false;
 

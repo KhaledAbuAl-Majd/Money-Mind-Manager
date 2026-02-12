@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using MoneyMindManager.Domain.Entities;
 using MoneyMindManager.Shared.DTOs;
+using MoneyMindManager.Shared.DTOs.User;
 
 namespace MoneyMindManager.Domain.Abstractions
 {
@@ -47,11 +48,7 @@ namespace MoneyMindManager.Domain.Abstractions
 
         /// <param name="userName">userName of user you want to find</param>
         /// <returns>true if user exist, false if user not exist</returns>
-        Task<bool> IsExistByUserNameAsync(string userName, bool includeDeleted);
-
-        /// <param name="userName">userName of user you want to find</param>
-        /// <returns>true if user exist, false if user not exist</returns>
-        bool IsExistByUserName(string userName, bool includeDeleted);
+        Task<bool> IsExistByUserName(string userName, bool includeDeleted);
 
         /// <returns>UserSalt, if failed return null</returns>
         Task<string> GetUserSaltByUserName(string userName);
@@ -60,7 +57,6 @@ namespace MoneyMindManager.Domain.Abstractions
         /// Get All Users For Account Using Paging , if variable is null will not filter by it
         /// </summary>
         /// <returns>object of <PagedResultDTO<User> : if error happend, return null</returns>
-        Task<PagedResultDTO<User>> GetAll(int? userID, string userName, string personName, bool? isActive,
-            byte textSearchMode, int pageNumber, byte rowsPerPage, int currentUserID);
+        Task<PagedResultDTO<User>> GetAll(UserFilterDTO userFilterDTO, byte rowsPerPage, int currentUserID);
     }
 }
