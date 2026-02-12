@@ -14,7 +14,7 @@ namespace MoneyMindManager_DataAccess
     {
         
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
-        public static async Task<clsCurrencyColumns> GetCurrencyInfoByCurrencyID(byte currencyID, bool RaiseEventOnErrorOccured = true)
+        public static async Task<clsCurrencyColumns> GetByID(byte currencyID, bool RaiseEventOnErrorOccured = true)
         {
             clsCurrencyColumns currencyData = null;
 
@@ -59,7 +59,7 @@ namespace MoneyMindManager_DataAccess
         }
 
         /// <param name="RaiseEventOnErrorOccured">if error occured will raise event,log it, show message box of error</param>
-        public static async Task<clsCurrencyColumns> GetCurrencyInfoByCurrencyName(string currencyName, bool RaiseEventOnErrorOccured = true)
+        public static async Task<clsCurrencyColumns> GetByName(string currencyName, bool RaiseEventOnErrorOccured = true)
         {
             clsCurrencyColumns currencyData = null;
 
@@ -103,7 +103,7 @@ namespace MoneyMindManager_DataAccess
             return currencyData;
         }
 
-        public static async Task<DataTable> GetAllCurrencies(bool RaiseEventOnErrorOccured = true)
+        public static async Task<DataTable> GetAll(bool RaiseEventOnErrorOccured = true)
         {
             DataTable dtCurrencies = new DataTable();
 

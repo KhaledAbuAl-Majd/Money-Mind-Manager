@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MoneyMindManager.Core.Enums;
+using MoneyMindManager.Shared.DTOs.Account;
 
 namespace MoneyMindManager.Shared.DTOs.User
 {
@@ -53,10 +54,9 @@ namespace MoneyMindManager.Shared.DTOs.User
 
         // composition
         public PersonDTO PersonInfo { get; private set; }
-        //public clsAccount AccountInfo { get; private set; }
-
+        public AccountBaseDTO AccountInfo { get; set; }
         public UserDTO(int? userID, string userName, int? personID, int permissions
-            , bool isActive, string notes, short? accountID, bool isDeleted, int? createdByUserID, DateTime createdDate,PersonDTO personDTO)
+            , bool isActive, string notes, short? accountID, bool isDeleted, int? createdByUserID, DateTime createdDate,PersonDTO personDTO, AccountBaseDTO accountBaseDTO)
         {
             this.UserID = userID;
             this.UserName = userName;
@@ -69,6 +69,7 @@ namespace MoneyMindManager.Shared.DTOs.User
             this.CreatedByUserID = createdByUserID;
             this.CreatedDate = createdDate;
             this.PersonInfo = personDTO;
+            this.AccountInfo = accountBaseDTO;
         }
 
         public UserDTO()
@@ -84,6 +85,7 @@ namespace MoneyMindManager.Shared.DTOs.User
             this.CreatedByUserID = null;
             this.CreatedDate = DateTime.Now;
             this.PersonInfo = null;
+            this.AccountInfo = null;
         }
     }
 }

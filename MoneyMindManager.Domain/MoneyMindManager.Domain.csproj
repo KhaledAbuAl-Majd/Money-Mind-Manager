@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstractions\IAccountRepository.cs" />
     <Compile Include="Abstractions\IPersonRepository.cs" />
     <Compile Include="Abstractions\IUserRepository.cs" />
     <Compile Include="Entities\Account.cs" />

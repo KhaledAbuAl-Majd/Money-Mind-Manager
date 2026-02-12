@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MoneyMindManager.Shared.DTOs.Account;
 
 namespace MoneyMindManager.Shared.DTOs
 {
@@ -40,8 +41,10 @@ namespace MoneyMindManager.Shared.DTOs
         /// </summary>
         public decimal Payable { get; set; }    // مستحقات عليك
 
+        public AccountBaseDTO AccountInfo { get; set; }
+
         public PersonDTO(int? personID, string personName, string address, string email, string phone,
-            short? accountID, string notes, int? createdByUserID, DateTime createdDate, decimal receivable, decimal payable)
+            short? accountID, string notes, int? createdByUserID, DateTime createdDate, decimal receivable, decimal payable, AccountBaseDTO accountBaseDTO)
         {
             this.PersonID = personID;
             this.PersonName = personName;
@@ -54,6 +57,7 @@ namespace MoneyMindManager.Shared.DTOs
             this.CreatedDate = createdDate;
             this.Receivable = receivable;
             this.Payable = payable;
+            this.AccountInfo = accountBaseDTO;
         }
 
         public PersonDTO()
@@ -69,6 +73,7 @@ namespace MoneyMindManager.Shared.DTOs
             this.CreatedDate = DateTime.Now;
             this.Receivable = 0;
             this.Payable = 0;
+            this.AccountInfo = null;
         }
     }
 }

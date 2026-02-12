@@ -18,7 +18,7 @@ namespace MoneyMindManager_Business
 
         public static async Task<clsCurrency> FindCurrencyByCurrencyID(byte currencyID)
         {
-            clsCurrencyColumns currencyColumns = await clsCurrencyData.GetCurrencyInfoByCurrencyID(currencyID);
+            clsCurrencyColumns currencyColumns = await clsCurrencyData.GetByID(currencyID);
 
             if (currencyColumns == null)
                 return null;
@@ -28,7 +28,7 @@ namespace MoneyMindManager_Business
 
         public static async Task<clsCurrency> FindCurrencyByCurrencyName(string currencyName)
         {
-            clsCurrencyColumns currencyColumns = await clsCurrencyData.GetCurrencyInfoByCurrencyName(currencyName);
+            clsCurrencyColumns currencyColumns = await clsCurrencyData.GetByName(currencyName);
 
             if (currencyColumns == null)
                 return null;
@@ -38,7 +38,7 @@ namespace MoneyMindManager_Business
 
         public static async Task<DataTable> GetAllCurrencies()
         {
-            return await clsCurrencyData.GetAllCurrencies();
+            return await clsCurrencyData.GetAll();
         }
     }
 }

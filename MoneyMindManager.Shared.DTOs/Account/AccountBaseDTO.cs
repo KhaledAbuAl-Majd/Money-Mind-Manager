@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MoneyMindManager.Shared.DTOs.Currency;
 
 namespace MoneyMindManager.Shared.DTOs.Account
 {
@@ -22,8 +23,10 @@ namespace MoneyMindManager.Shared.DTOs.Account
 
         public int AccountOwnerUserID { get; protected set; }
 
+        public CurrencyDTO DefaultCurrencyInfo { get; private set; }
+
         public AccountBaseDTO(short accountID, string accountName, DateTime createdDate, byte defaultCurrencyID,
-            string description, decimal balance, int accountOwnerUserID)
+            string description, decimal balance, int accountOwnerUserID,CurrencyDTO currencyDTO)
         {
             this.AccountID = accountID;
             this.AccountName = accountName;
@@ -32,6 +35,7 @@ namespace MoneyMindManager.Shared.DTOs.Account
             this.Description = description;
             this.Balance = balance;
             this.AccountOwnerUserID = accountOwnerUserID;
+            this.DefaultCurrencyInfo = currencyDTO;
         }
     }
 }
