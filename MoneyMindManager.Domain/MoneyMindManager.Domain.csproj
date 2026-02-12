@@ -42,14 +42,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstractions\IAccountRepository.cs" />
+    <Compile Include="Abstractions\ICurrencyRepository.cs" />
     <Compile Include="Abstractions\IPersonRepository.cs" />
     <Compile Include="Abstractions\IUserRepository.cs" />
     <Compile Include="Entities\Account.cs" />
+    <Compile Include="Entities\Currency.cs" />
     <Compile Include="Entities\Person.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MoneyMindManager.Core\MoneyMindManager.Core.csproj">
+      <Project>{207acf87-b108-4ce1-ac9e-f7dd5273a7cc}</Project>
+      <Name>MoneyMindManager.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MoneyMindManager.Shared.DTOs\MoneyMindManager.Shared.DTOs.csproj">
       <Project>{e91f0830-3641-4e5e-8486-5c2878937c17}</Project>
       <Name>MoneyMindManager.Shared.DTOs</Name>
