@@ -56,7 +56,7 @@ namespace MoneyMindManager.Shared.DTOs.User
         public PersonDTO PersonInfo { get; private set; }
         public AccountBaseDTO AccountInfo { get; set; }
         public UserDTO(int? userID, string userName, int? personID, int permissions
-            , bool isActive, string notes, short? accountID, bool isDeleted, int? createdByUserID, DateTime createdDate,PersonDTO personDTO, AccountBaseDTO accountBaseDTO)
+            , bool isActive, string notes, short? accountID, bool isDeleted, int? createdByUserID, DateTime createdDate)
         {
             this.UserID = userID;
             this.UserName = userName;
@@ -68,8 +68,6 @@ namespace MoneyMindManager.Shared.DTOs.User
             this.IsDeleted = isDeleted;
             this.CreatedByUserID = createdByUserID;
             this.CreatedDate = createdDate;
-            this.PersonInfo = personDTO;
-            this.AccountInfo = accountBaseDTO;
         }
 
         public UserDTO()

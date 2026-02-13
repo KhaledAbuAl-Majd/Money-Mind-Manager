@@ -22,7 +22,7 @@ namespace MoneyMindManager.Domain.Entities
 
         public decimal Balance { get; set; }
 
-        public int AccountOwnerUserID { get; protected set; }
+        public int AccountOwnerUserID { get; set; }
 
         public Account(short accountID, string accountName, DateTime createdDate, bool isActive, byte defaultCurrencyID,
             string description, decimal balance, int accountOwnerUserID)
@@ -35,6 +35,11 @@ namespace MoneyMindManager.Domain.Entities
             this.Description = description;
             this.Balance = balance;
             this.AccountOwnerUserID = accountOwnerUserID;
+        }
+
+        public Account()
+        {
+
         }
     }
 }

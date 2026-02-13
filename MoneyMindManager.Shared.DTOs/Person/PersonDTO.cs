@@ -44,7 +44,7 @@ namespace MoneyMindManager.Shared.DTOs
         public AccountBaseDTO AccountInfo { get; set; }
 
         public PersonDTO(int? personID, string personName, string address, string email, string phone,
-            short? accountID, string notes, int? createdByUserID, DateTime createdDate, decimal receivable, decimal payable, AccountBaseDTO accountBaseDTO)
+            short? accountID, string notes, int? createdByUserID, DateTime createdDate, decimal receivable, decimal payable)
         {
             this.PersonID = personID;
             this.PersonName = personName;
@@ -57,7 +57,6 @@ namespace MoneyMindManager.Shared.DTOs
             this.CreatedDate = createdDate;
             this.Receivable = receivable;
             this.Payable = payable;
-            this.AccountInfo = accountBaseDTO;
         }
 
         public PersonDTO()

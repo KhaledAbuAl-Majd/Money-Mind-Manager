@@ -26,7 +26,7 @@ namespace MoneyMindManager.Shared.DTOs.Account
         public CurrencyDTO DefaultCurrencyInfo { get; private set; }
 
         public AccountBaseDTO(short accountID, string accountName, DateTime createdDate, byte defaultCurrencyID,
-            string description, decimal balance, int accountOwnerUserID,CurrencyDTO currencyDTO)
+            string description, decimal balance, int accountOwnerUserID)
         {
             this.AccountID = accountID;
             this.AccountName = accountName;
@@ -35,7 +35,6 @@ namespace MoneyMindManager.Shared.DTOs.Account
             this.Description = description;
             this.Balance = balance;
             this.AccountOwnerUserID = accountOwnerUserID;
-            this.DefaultCurrencyInfo = currencyDTO;
         }
     }
 }
