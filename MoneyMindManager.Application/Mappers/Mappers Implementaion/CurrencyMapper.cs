@@ -4,7 +4,7 @@ using MoneyMindManager.Shared.DTOs.Currency;
 
 namespace MoneyMindManager.Application.Mappers.Mappers_Implementaion
 {
-    public class CurrencyMapper : IMapper<Currency, CurrencyDTO>
+    public class CurrencyMapper : ICurrencyMapper
     {
         public Currency DTOToEntity(CurrencyDTO currencyDTO)
         {

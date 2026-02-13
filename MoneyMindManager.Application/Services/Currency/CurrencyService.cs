@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using MoneyMindManager.Application.Abstractions.Handlers;
+using MoneyMindManager.Application.Abstractions.Mappers;
 using MoneyMindManager.Application.Abstractions.Services;
 using MoneyMindManager.Core.Abstractions;
 using MoneyMindManager.Domain.Abstractions;
-using MoneyMindManager.Domain.Entities;
 using MoneyMindManager.Shared.DTOs.Currency;
 
 namespace MoneyMindManager.Application.Services.Currency
@@ -16,18 +14,13 @@ namespace MoneyMindManager.Application.Services.Currency
     {
         private readonly ICurrencyRepository _currencyRepository;
         private readonly IResultFactory _resultFactory;
-        private CurrencyDTO _getCurrencyDTOFromCurrency(MoneyMindManager.Domain.Entities.Currency currency)
-        {
-            return new CurrencyDTO(currency.CurrencyID, currency.CurrencyName, currency.CurrencySymbol);
-        }
-        private MoneyMindManager.Domain.Entities.Currency _getCurrencyFromCurrencyDTO(CurrencyDTO currencyDTO)
-        {
-            return new MoneyMindManager.Domain.Entities.Currency(currencyDTO.CurrencyID, currencyDTO.CurrencyName, currencyDTO.CurrencySymbol);
-        }
-        public CurrencyService(ICurrencyRepository currencyRepository, IResultFactory resultFactory)
+        private readonly ICurrencyMapper _currencyMapper;
+
+        public CurrencyService(ICurrencyRepository currencyRepository, IResultFactory resultFactory, ICurrencyMapper currencyMapper)
         {
             this._currencyRepository = currencyRepository;
             this._resultFactory = resultFactory;
+            this._currencyMapper = currencyMapper;
         }
         public async Task<IResult<CurrencyDTO>> GetByID(byte currencyID)
         {
@@ -43,7 +36,7 @@ namespace MoneyMindManager.Application.Services.Currency
             if (result.Data is null)
                 return handler.Failure("The Currency Data is null");
 
-            return handler.Success(_getCurrencyDTOFromCurrency(result.Data));
+            return handler.Success(_currencyMapper.EntityToDTO(result.Data));
         }
 
         public async Task<IResult<CurrencyDTO>> GetByName(string currencyName)
@@ -60,7 +53,7 @@ namespace MoneyMindManager.Application.Services.Currency
             if (result.Data is null)
                 return handler.Failure("The Currency Data is null");
 
-            return handler.Success(_getCurrencyDTOFromCurrency(result.Data));
+            return handler.Success(_currencyMapper.EntityToDTO(result.Data));
         }
 
         public async Task<IResult<IEnumerable<CurrencyDTO>>> GetAll()
@@ -77,7 +70,7 @@ namespace MoneyMindManager.Application.Services.Currency
             if (result.Data is null)
                 return handler.Failure("The Data Is null at get all currencies");
 
-            return handler.Success(result.Data.Select(entity => _getCurrencyDTOFromCurrency(entity)));
+            return handler.Success(result.Data.Select(entity => _currencyMapper.EntityToDTO(entity)));
         }
     }
 }
