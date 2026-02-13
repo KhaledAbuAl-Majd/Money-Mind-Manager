@@ -48,6 +48,11 @@ namespace MoneyMindManager.Infrastructure.Logging
             string errorMessage = $"An error happped with message: {message}, Exception: {ex.Message}";
             return _Log(errorMessage, EventLogEntryType.Error);
         }
+        public bool LogError(string message)
+        {
+            string errorMessage = $"An error happped with message: {message}";
+            return _Log(errorMessage, EventLogEntryType.Error);
+        }
 
         public bool LogSuccess(string message)
         {

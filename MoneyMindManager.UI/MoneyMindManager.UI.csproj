@@ -164,6 +164,7 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstractions\IFolderService.cs" />
     <Compile Include="Abstractions\IMessageService.cs" />
     <Compile Include="Abstractions\INotificationService.cs" />
     <Compile Include="Forms\Debts\DebtPayment\frmAddUpdateDebtPayment.cs">
@@ -193,6 +194,7 @@
     <Compile Include="Forms\About Programm\frmAboutProgramm.Designer.cs">
       <DependentUpon>frmAboutProgramm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Services\FolderService.cs" />
     <Compile Include="Services\MessageBoxService.cs" />
     <Compile Include="Services\NotificationService.cs" />
     <Compile Include="Forms\Settings\frmSettings.cs">

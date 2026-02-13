@@ -16,6 +16,8 @@ namespace MoneyMindManager.UI.DependencyInjection
                 return new MessageBoxService(() => clsPL_Global.ActiveForm);
             });
 
+            services.AddScoped<IFolderService, FolderService>();
+
             //forms
             services.AddTransient<frmLogin>();
             return services;

@@ -12,6 +12,8 @@ namespace MoneyMindManager.Core
 
         bool LogError(string message,Exception ex);
 
+        bool LogError(string message);
+
         bool LogSuccess(string message);
 
         bool LogWarning(string message);

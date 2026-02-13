@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using KhaledControlLibrary1;
 using MoneyMindManager.Client.Abstractions.ApiClient;
+using MoneyMindManager.Core;
 using MoneyMindManager.Shared.DTOs.Currency;
 using MoneyMindManager.UI.Abstractions;
 using MoneyMindManager_Business;
@@ -26,11 +27,15 @@ namespace MoneyMindManager_Presentation.Login
         private readonly ICurrencyApiClient _currencyApi;
 
         private readonly IMessageBoxService _messageBoxService;
-        public frmLogin(ICurrencyApiClient currencyApiClient,IMessageBoxService messageBoxService)
+
+        private readonly ILogger _logger;
+
+        public frmLogin(ICurrencyApiClient currencyApiClient,IMessageBoxService messageBoxService,ILogger logger)
         {
             InitializeComponent();
             this._currencyApi = currencyApiClient;
             this._messageBoxService = messageBoxService;
+            this._logger = logger;
 
             //to user doubled buffered and avoid flickers when change mode or Move form
 
@@ -278,14 +283,15 @@ namespace MoneyMindManager_Presentation.Login
                _= clsPL_Global.RememberUsernameAndPassword(null, null);
             }
 
-            _ = Task.Run(() => clsLogger.LogAtEventLog($"[LOGIN SUCCESS] User ID = {user.UserID}, Username = {user.UserName}, Login Time = {DateTime.Now}",System.Diagnostics.EventLogEntryType.Information));
+            _ = Task.Run(() => _logger.LogSuccess($"[LOGIN SUCCESS] User ID = {user.UserID}, Username = {user.UserName}, Login Time = {DateTime.Now}"));
 
             frmMain frm = new frmMain();
 
             if (!await clsPL_Global.Login(user, frm))
             {
                 clsPL_Global.ActiveForm = this;
-                clsPL_MessageBoxs.ShowErrorMessage("فشل تسجيل الدخول !");
+                _messageBoxService.DisplayError("فشل تسجيل الدخول !");
+                //clsPL_MessageBoxs.ShowErrorMessage("فشل تسجيل الدخول !");
                 return;
             }
 
@@ -338,7 +344,7 @@ namespace MoneyMindManager_Presentation.Login
                 Task.Run(() => clsLogger.LogAtEventLog($"New Account created with ID {newAccountID} at {DateTime.Now}"));
 #pragma warning restore CS4014
 
-                clsPL_MessageBoxs.ShowMessage($"تم إنشاء الحساب بنجاح مع معرف حساب  [ {newAccountID} ]  , قم بتسجيل الدخول", "نجاح", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                _messageBoxService.Display($"تم إنشاء الحساب بنجاح مع معرف حساب  [ {newAccountID} ]  , قم بتسجيل الدخول", "نجاح", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 _loadCredentials = false;
                 await _ChangeMode(enMode.Login);
