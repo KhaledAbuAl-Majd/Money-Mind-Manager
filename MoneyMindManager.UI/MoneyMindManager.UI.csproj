@@ -106,6 +106,8 @@
     <Reference Include="Microsoft.Bcl.HashCode, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Bcl.HashCode.1.1.1\lib\net461\Microsoft.Bcl.HashCode.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=9.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=9.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.5.0, Culture=neutral, PublicKeyToken=8985beaab7ea3f04, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft-WindowsAPICodePack-Core.1.1.5\lib\net472\Microsoft.WindowsAPICodePack.dll</HintPath>
     </Reference>
@@ -176,6 +178,7 @@
     <Compile Include="Debts\frmDebtsList.Designer.cs">
       <DependentUpon>frmDebtsList.cs</DependentUpon>
     </Compile>
+    <Compile Include="DependencyInjection\UIRegistrationDI.cs" />
     <Compile Include="Global\clsFileSystemHelper.cs" />
     <Compile Include="Global\clsUserSettings.cs" />
     <Compile Include="About Programm\frmAboutProgramm.cs">
@@ -576,6 +579,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MoneyMindManager.IoC\MoneyMindManager.IoC.csproj">
+      <Project>{dae18a20-d2d0-4c6c-aa4b-2b6b2a08d35e}</Project>
+      <Name>MoneyMindManager.IoC</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MoneyMindManagerGlobal\MoneyMindManagerGlobal.csproj">
       <Project>{a14d0a64-2290-4f9e-8bc5-0055dbb3d8c7}</Project>
       <Name>MoneyMindManagerGlobal</Name>

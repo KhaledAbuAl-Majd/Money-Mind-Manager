@@ -30,83 +30,83 @@ namespace MoneyMindManager.Application.Services
             return new Person(personDTO.PersonID, personDTO.PersonName, personDTO.Address, personDTO.Email, personDTO.Phone, personDTO.AccountID, personDTO.Notes,
                 personDTO.CreatedByUserID, personDTO.CreatedDate, personDTO.Receivable, personDTO.Payable);
         }
-        private PersonDTO _getPersonDTOFromPerson(Person person)
-        {
-            if (person is null)
-                return null;
+        //private PersonDTO _getPersonDTOFromPerson(Person person)
+        //{
+        //    if (person is null)
+        //        return null;
 
-            return new PersonDTO(person.PersonID, person.PersonName, person.Address, person.Email, person.Phone, person.AccountID, person.Notes,
-                person.CreatedByUserID, person.CreatedDate, person.Receivable, person.Payable);
-        }
-        public async Task<PersonDTO> Add(PersonDTO personDTO,int currentUserID)
-        {
-            if (personDTO is null)
-                return null;
+        //    return new PersonDTO(person.PersonID, person.PersonName, person.Address, person.Email, person.Phone, person.AccountID, person.Notes,
+        //        person.CreatedByUserID, person.CreatedDate, person.Receivable, person.Payable);
+        //}
+        //public async Task<PersonDTO> Add(PersonDTO personDTO,int currentUserID)
+        //{
+        //    if (personDTO is null)
+        //        return null;
 
-            var person = _getPersonFromDTO(personDTO);
+        //    var person = _getPersonFromDTO(personDTO);
 
-            person.CreatedByUserID = currentUserID;
-            person.CreatedDate = DateTime.Now;
+        //    person.CreatedByUserID = currentUserID;
+        //    person.CreatedDate = DateTime.Now;
 
             
-            int? id =  await _repo.Add(person);
+        //    int? id =  await _repo.Add(person);
 
-            if (id is null)
-                return null;
+        //    if (id is null)
+        //        return null;
 
-            person.PersonID = id;
+        //    person.PersonID = id;
 
-            return _getPersonDTOFromPerson(person);
+        //    return _getPersonDTOFromPerson(person);
 
-            //return (PersonID != null);
-        }
+        //    //return (PersonID != null);
+        //}
 
-        public async Task<bool> _Update(PersonDTO personDTO,int currentUserID)
-        {
-            if (personDTO is null)
-                return false;
+        //public async Task<bool> _Update(PersonDTO personDTO,int currentUserID)
+        //{
+        //    if (personDTO is null)
+        //        return false;
 
-            var person = _getPersonFromDTO(personDTO);
+        //    var person = _getPersonFromDTO(personDTO);
 
-            return await _repo.Update(person,currentUserID);
-        }
+        //    return await _repo.Update(person,currentUserID);
+        //}
 
-        public async Task<PersonDTO> Save(PersonDTO personDTO,int currentUserID)
-        {
-            if (personDTO is null)
-                return null;
+        //public async Task<PersonDTO> Save(PersonDTO personDTO,int currentUserID)
+        //{
+        //    if (personDTO is null)
+        //        return null;
 
-            var mode = personDTO.PersonID != null ? enMode.Update : enMode.AddNew;
+        //    var mode = personDTO.PersonID != null ? enMode.Update : enMode.AddNew;
 
-            //if (!clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.AddUpdatePerson,
-            //    "ليس لديك صلاحية إضافة/تعديل شخص."))
-            //    return false;
+        //    //if (!clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.AddUpdatePerson,
+        //    //    "ليس لديك صلاحية إضافة/تعديل شخص."))
+        //    //    return false;
 
-            switch (mode)
-            {
-                case enMode.AddNew:
-                    {
-                        //if (await _Add())
-                        //{
-                        //    Mode = enMode.Update;
-                        //    await _RefeshCompositionObjects();
-                        //    return true;
-                        //}
-                        //else
-                        //    return false;
+        //    switch (mode)
+        //    {
+        //        case enMode.AddNew:
+        //            {
+        //                //if (await _Add())
+        //                //{
+        //                //    Mode = enMode.Update;
+        //                //    await _RefeshCompositionObjects();
+        //                //    return true;
+        //                //}
+        //                //else
+        //                //    return false;
 
-                        return await Add(personDTO,currentUserID);
-                    }
-                case enMode.Update:
-                    if (await _Update(personDTO, currentUserID))
-                    {
-                        return personDTO;
-                    }
-                    else
-                        return null;
-            }
+        //                return await Add(personDTO,currentUserID);
+        //            }
+        //        case enMode.Update:
+        //            if (await _Update(personDTO, currentUserID))
+        //            {
+        //                return personDTO;
+        //            }
+        //            else
+        //                return null;
+        //    }
 
-            return null;
-        }
+        //    return null;
+        //}
     }
 }

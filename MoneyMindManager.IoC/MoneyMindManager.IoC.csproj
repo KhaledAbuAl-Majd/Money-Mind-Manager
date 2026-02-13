@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C65BF29E-4BDA-4B9A-906A-5C87B5B2A1E3}</ProjectGuid>
+    <ProjectGuid>{DAE18A20-D2D0-4C6C-AA4B-2B6B2A08D35E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MoneyMindManager.Domain</RootNamespace>
-    <AssemblyName>MoneyMindManager.Domain</AssemblyName>
+    <RootNamespace>MoneyMindManager.IoC</RootNamespace>
+    <AssemblyName>MoneyMindManager.IoC</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -31,6 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=9.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=9.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,25 +43,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstractions\IAccountRepository.cs" />
-    <Compile Include="Abstractions\ICurrencyRepository.cs" />
-    <Compile Include="Abstractions\IDatabaseSettings.cs" />
-    <Compile Include="Abstractions\IPersonRepository.cs" />
-    <Compile Include="Abstractions\IUserRepository.cs" />
-    <Compile Include="Entities\Account.cs" />
-    <Compile Include="Entities\Currency.cs" />
-    <Compile Include="Entities\Person.cs" />
-    <Compile Include="Entities\User.cs" />
+    <Compile Include="DependencyContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MoneyMindManager.Core\MoneyMindManager.Core.csproj">
-      <Project>{207acf87-b108-4ce1-ac9e-f7dd5273a7cc}</Project>
-      <Name>MoneyMindManager.Core</Name>
+    <ProjectReference Include="..\MoneyMindManager.APIClient\MoneyMindManager.APIClient.csproj">
+      <Project>{0babe5ca-52af-4906-b36e-6cd4ab1ca4fc}</Project>
+      <Name>MoneyMindManager.APIClient</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MoneyMindManager.Shared.DTOs\MoneyMindManager.Shared.DTOs.csproj">
-      <Project>{e91f0830-3641-4e5e-8486-5c2878937c17}</Project>
-      <Name>MoneyMindManager.Shared.DTOs</Name>
+    <ProjectReference Include="..\MoneyMindManager.Application\MoneyMindManager.Application.csproj">
+      <Project>{84682969-071d-4577-a41d-0df818096add}</Project>
+      <Name>MoneyMindManager.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MoneyMindManager.Infrastructure\MoneyMindManager.Infrastructure.csproj">
+      <Project>{cd00a8d1-6bfa-4e50-ac25-29c1edf84d45}</Project>
+      <Name>MoneyMindManager.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

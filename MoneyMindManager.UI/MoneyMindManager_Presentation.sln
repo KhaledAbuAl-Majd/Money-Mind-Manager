@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.2.11415.280 d18.0
+VisualStudioVersion = 18.2.11415.280
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyMindManager.UI", "MoneyMindManager.UI.csproj", "{F453BF16-D51A-4E57-BCC5-DEA98DBE47DF}"
 EndProject
@@ -26,6 +26,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyMindManager.Core", "..\MoneyMindManager.Core\MoneyMindManager.Core.csproj", "{207ACF87-B108-4CE1-AC9E-F7DD5273A7CC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KhaledUtils", "..\KhaledUtils\KhaledUtils.csproj", "{58E95FDE-4001-4EEF-B5C8-0970D0A00EF9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyMindManager.IoC", "..\MoneyMindManager.IoC\MoneyMindManager.IoC.csproj", "{DAE18A20-D2D0-4C6C-AA4B-2B6B2A08D35E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +83,10 @@ Global
 		{58E95FDE-4001-4EEF-B5C8-0970D0A00EF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58E95FDE-4001-4EEF-B5C8-0970D0A00EF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58E95FDE-4001-4EEF-B5C8-0970D0A00EF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAE18A20-D2D0-4C6C-AA4B-2B6B2A08D35E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAE18A20-D2D0-4C6C-AA4B-2B6B2A08D35E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAE18A20-D2D0-4C6C-AA4B-2B6B2A08D35E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAE18A20-D2D0-4C6C-AA4B-2B6B2A08D35E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

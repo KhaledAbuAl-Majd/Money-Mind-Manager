@@ -6,6 +6,9 @@ using System.Reflection;
 using System.Security.Principal;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Extensions.DependencyInjection;
+using MoneyMindManager.IoC;
+using MoneyMindManager.UI.DependencyInjection;
 using MoneyMindManager_Presentation.Income_And_Expense.Vouchers;
 using MoneyMindManager_Presentation.Login;
 using MoneyMindManager_Presentation.Main;
@@ -25,6 +28,10 @@ namespace MoneyMindManager_Presentation
             if (HandleEventSourceSetup())
             {
                 clsPL_Global.SubscribeToErrorOcrruedEvent();
+
+                var services = new ServiceCollection();
+                DependencyContainer.RegisterServices(services);
+                services.AddUI();//register Ui DI
 
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
