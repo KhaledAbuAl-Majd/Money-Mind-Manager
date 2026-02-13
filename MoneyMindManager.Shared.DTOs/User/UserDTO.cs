@@ -10,7 +10,7 @@ namespace MoneyMindManager.Shared.DTOs.User
 {
     public class UserDTO
     {
-        public Nullable<int> UserID { get; protected set; }
+        public int? UserID { get; set; }
 
         /// <Note>
         /// unqiue

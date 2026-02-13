@@ -59,5 +59,7 @@ namespace MoneyMindManager.Domain.Abstractions
         /// </summary>
         /// <returns>object of <PagedResultDTO<User> : if error happend, return null</returns>
         Task<IResult<PagedResultDTO<User>>> GetAll(UserFilterDTO userFilterDTO, byte rowsPerPage, int currentUserID);
+
+        Task<IResult<int>> GetPermissions(int userID);
     }
 }
