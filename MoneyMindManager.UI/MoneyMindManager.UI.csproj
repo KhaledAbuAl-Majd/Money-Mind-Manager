@@ -103,6 +103,9 @@
     <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
       <HintPath>packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=10.0.0.3, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.10.0.3\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.HashCode, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Bcl.HashCode.1.1.1\lib\net461\Microsoft.Bcl.HashCode.dll</HintPath>
     </Reference>
@@ -139,10 +142,13 @@
     <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
     </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.4.7.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.6.1.2\lib\net462\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Threading.Tasks.Extensions.4.6.3\lib\net462\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -579,9 +585,21 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MoneyMindManager.Client.Abstractions\MoneyMindManager.Client.Abstractions.csproj">
+      <Project>{869f3547-b42c-4e06-b177-41a654fdff63}</Project>
+      <Name>MoneyMindManager.Client.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MoneyMindManager.Core\MoneyMindManager.Core.csproj">
+      <Project>{207acf87-b108-4ce1-ac9e-f7dd5273a7cc}</Project>
+      <Name>MoneyMindManager.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MoneyMindManager.IoC\MoneyMindManager.IoC.csproj">
       <Project>{dae18a20-d2d0-4c6c-aa4b-2b6b2a08d35e}</Project>
       <Name>MoneyMindManager.IoC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MoneyMindManager.Shared.DTOs\MoneyMindManager.Shared.DTOs.csproj">
+      <Project>{e91f0830-3641-4e5e-8486-5c2878937c17}</Project>
+      <Name>MoneyMindManager.Shared.DTOs</Name>
     </ProjectReference>
     <ProjectReference Include="..\MoneyMindManagerGlobal\MoneyMindManagerGlobal.csproj">
       <Project>{a14d0a64-2290-4f9e-8bc5-0055dbb3d8c7}</Project>

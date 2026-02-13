@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MoneyMindManager.Application.Abstractions.Infrastructure;
 using MoneyMindManager.Core;
 
 namespace MoneyMindManager.Infrastructure.Logging
@@ -12,9 +13,9 @@ namespace MoneyMindManager.Infrastructure.Logging
     {
         private readonly string _sourceName;
 
-        public EventLogLogger(string sourceName)
+        public EventLogLogger(IEventLogLoggerSettings eventLogSettings)
         {
-            _sourceName = sourceName;
+            _sourceName = eventLogSettings.SourceName;
         }
 
         private bool _Log(string message, EventLogEntryType eventLogEntryType)

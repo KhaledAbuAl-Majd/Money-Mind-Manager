@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Reflection;
 using System.Security.Principal;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Extensions.DependencyInjection;
 using MoneyMindManager.IoC;
 using MoneyMindManager.UI.DependencyInjection;
-using MoneyMindManager_Presentation.Income_And_Expense.Vouchers;
 using MoneyMindManager_Presentation.Login;
-using MoneyMindManager_Presentation.Main;
-using MoneyMindManager_Presentation.People;
 using MoneyMindManagerGlobal;
 
 namespace MoneyMindManager_Presentation
@@ -33,17 +27,21 @@ namespace MoneyMindManager_Presentation
                 DependencyContainer.RegisterServices(services);
                 services.AddUI();//register Ui DI
 
+                var serviceProvider = services.BuildServiceProvider();
+
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new frmLogin());
+
+                var loginForm = serviceProvider.GetRequiredService<frmLogin>();
+                Application.Run(loginForm);
             }
         }
 
         private static bool HandleEventSourceSetup()
         {
-            if (clsLogger.LogAtEventLog("Test Logging",EventLogEntryType.Information))
+            if (clsLogger.LogAtEventLog("Test Logging", EventLogEntryType.Information))
             {
-                return true; 
+                return true;
             }
 
             WindowsIdentity identity = WindowsIdentity.GetCurrent();
@@ -56,7 +54,7 @@ namespace MoneyMindManager_Presentation
                 {
                     EventLog.CreateEventSource(clsLogger.SourceName, clsLogger.LogName);
                     MessageBox.Show($"تم إنشاء مصدر تسجيل الأحداث بنجاح. البرنامج سيغلق الآن ويُعاد تشغيله بشكل عادي.", "إعداد النظام",
-                        MessageBoxButtons.OK,MessageBoxIcon.Information);
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception)
                 {

@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
+using MoneyMindManager.UI.Abstractions;
+using MoneyMindManager.UI.Services;
+using MoneyMindManager_Presentation;
+using MoneyMindManager_Presentation.Login;
 
 namespace MoneyMindManager.UI.DependencyInjection
 {
@@ -11,6 +11,13 @@ namespace MoneyMindManager.UI.DependencyInjection
     {
         public static IServiceCollection AddUI(this IServiceCollection services)
         {
+            services.AddSingleton<IMessageBoxService, MessageBoxService>(provider =>
+            {
+                return new MessageBoxService(() => clsPL_Global.ActiveForm);
+            });
+
+            //forms
+            services.AddTransient<frmLogin>();
             return services;
         }
     }

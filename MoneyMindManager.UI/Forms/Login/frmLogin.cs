@@ -10,6 +10,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using KhaledControlLibrary1;
+using MoneyMindManager.Client.Abstractions.ApiClient;
+using MoneyMindManager.Shared.DTOs.Currency;
+using MoneyMindManager.UI.Abstractions;
 using MoneyMindManager_Business;
 using MoneyMindManager_Presentation.Global;
 using MoneyMindManager_Presentation.Main;
@@ -20,9 +23,14 @@ namespace MoneyMindManager_Presentation.Login
 {
     public partial class frmLogin : Form
     {
-        public frmLogin()
+        private readonly ICurrencyApiClient _currencyApi;
+
+        private readonly IMessageBoxService _messageBoxService;
+        public frmLogin(ICurrencyApiClient currencyApiClient,IMessageBoxService messageBoxService)
         {
             InitializeComponent();
+            this._currencyApi = currencyApiClient;
+            this._messageBoxService = messageBoxService;
 
             //to user doubled buffered and avoid flickers when change mode or Move form
 
@@ -123,12 +131,27 @@ namespace MoneyMindManager_Presentation.Login
 
         async Task _LoadCurrenciesAtComboBox()
         {
-            DataTable dtCurrencies = await clsCurrency.GetAllCurrencies();
+            //DataTable dtCurrencies = await clsCurrency.GetAllCurrencies();
 
-            gcbCreateAccount_DefaultCurrency.DataSource = dtCurrencies;
-            gcbCreateAccount_DefaultCurrency.DisplayMember = "CurrencyName";
-            gcbCreateAccount_DefaultCurrency.ValueMember = "CurrencyID";
-            gcbCreateAccount_DefaultCurrency.SelectedIndex = gcbCreateAccount_DefaultCurrency.FindStringExact("جنيه مصري");
+            //gcbCreateAccount_DefaultCurrency.DataSource = dtCurrencies;
+            //gcbCreateAccount_DefaultCurrency.DisplayMember = "CurrencyName";
+            //gcbCreateAccount_DefaultCurrency.ValueMember = "CurrencyID";
+            //gcbCreateAccount_DefaultCurrency.SelectedIndex = gcbCreateAccount_DefaultCurrency.FindStringExact("جنيه مصري");
+
+            var result = await _currencyApi.GetAll();
+
+            if (!result.IsSuccess)
+            {
+                _messageBoxService.DisplayError(result.ErrorMessage);
+            }
+            else
+            {
+                var currencies = result.Data;
+                gcbCreateAccount_DefaultCurrency.DataSource = currencies.ToList();
+                gcbCreateAccount_DefaultCurrency.DisplayMember = nameof(CurrencyDTO.CurrencyName);
+                gcbCreateAccount_DefaultCurrency.ValueMember = nameof(CurrencyDTO.CurrencyID);
+                gcbCreateAccount_DefaultCurrency.SelectedIndex = gcbCreateAccount_DefaultCurrency.FindStringExact("جنيه مصري");
+            }
         }
 
         private async void frmLogin_Load(object sender, EventArgs e)

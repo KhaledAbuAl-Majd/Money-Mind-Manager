@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Abstractions\Handlers\IResultFactory.cs" />
     <Compile Include="Abstractions\Handlers\IResultHandler.cs" />
+    <Compile Include="Abstractions\Infrastructure\IEventLogLoggerSettings.cs" />
     <Compile Include="Abstractions\Services\ICurrencyService.cs" />
     <Compile Include="Abstractions\Services\IPermissionService.cs" />
     <Compile Include="DependencyInjection\ApplicationRegistrationDI.cs" />
@@ -70,7 +71,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Abstractions\Infrastructure\" />
     <Folder Include="Services\User\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

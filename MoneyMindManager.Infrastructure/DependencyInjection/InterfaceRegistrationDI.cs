@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using MoneyMindManager.Application.Abstractions.Infrastructure;
 using MoneyMindManager.Core;
 using MoneyMindManager.Domain.Abstractions;
 using MoneyMindManager.Infrastructure.Logging;
@@ -12,6 +13,7 @@ namespace MoneyMindManager.Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
             services.AddSingleton<IDatabaseSettings, SQLDatabaseSettings>();
+            services.AddSingleton<IEventLogLoggerSettings, EventLogLoggerSettings>();
             services.AddScoped<ILogger, EventLogLogger>();
             services.AddScoped<ICurrencyRepository, SQLCurrencyRepository>();
             return services;
