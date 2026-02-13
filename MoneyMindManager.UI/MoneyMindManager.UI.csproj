@@ -160,397 +160,397 @@
   <ItemGroup>
     <Compile Include="Abstractions\IMessageService.cs" />
     <Compile Include="Abstractions\INotificationService.cs" />
-    <Compile Include="Debts\DebtPayment\frmAddUpdateDebtPayment.cs">
+    <Compile Include="Forms\Debts\DebtPayment\frmAddUpdateDebtPayment.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Debts\DebtPayment\frmAddUpdateDebtPayment.Designer.cs">
+    <Compile Include="Forms\Debts\DebtPayment\frmAddUpdateDebtPayment.Designer.cs">
       <DependentUpon>frmAddUpdateDebtPayment.cs</DependentUpon>
     </Compile>
-    <Compile Include="Debts\frmAddUpdateDebt.cs">
+    <Compile Include="Forms\Debts\frmAddUpdateDebt.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Debts\frmAddUpdateDebt.Designer.cs">
+    <Compile Include="Forms\Debts\frmAddUpdateDebt.Designer.cs">
       <DependentUpon>frmAddUpdateDebt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Debts\frmDebtsList.cs">
+    <Compile Include="Forms\Debts\frmDebtsList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Debts\frmDebtsList.Designer.cs">
+    <Compile Include="Forms\Debts\frmDebtsList.Designer.cs">
       <DependentUpon>frmDebtsList.cs</DependentUpon>
     </Compile>
     <Compile Include="DependencyInjection\UIRegistrationDI.cs" />
     <Compile Include="Global\clsFileSystemHelper.cs" />
     <Compile Include="Global\clsUserSettings.cs" />
-    <Compile Include="About Programm\frmAboutProgramm.cs">
+    <Compile Include="Forms\About Programm\frmAboutProgramm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="About Programm\frmAboutProgramm.Designer.cs">
+    <Compile Include="Forms\About Programm\frmAboutProgramm.Designer.cs">
       <DependentUpon>frmAboutProgramm.cs</DependentUpon>
     </Compile>
     <Compile Include="Services\MessageBoxService.cs" />
     <Compile Include="Services\NotificationService.cs" />
-    <Compile Include="Settings\frmSettings.cs">
+    <Compile Include="Forms\Settings\frmSettings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Settings\frmSettings.Designer.cs">
+    <Compile Include="Forms\Settings\frmSettings.Designer.cs">
       <DependentUpon>frmSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="Current Account\frmCurrentAccount.cs">
+    <Compile Include="Forms\Current Account\frmCurrentAccount.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Current Account\frmCurrentAccount.Designer.cs">
+    <Compile Include="Forms\Current Account\frmCurrentAccount.Designer.cs">
       <DependentUpon>frmCurrentAccount.cs</DependentUpon>
     </Compile>
     <Compile Include="Global\clsExportHelper.cs" />
-    <Compile Include="Income And Expense\Categories\frmAddUpdateCategory.cs">
+    <Compile Include="Forms\Income And Expense\Categories\frmAddUpdateCategory.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Income And Expense\Categories\frmAddUpdateCategory.Designer.cs">
+    <Compile Include="Forms\Income And Expense\Categories\frmAddUpdateCategory.Designer.cs">
       <DependentUpon>frmAddUpdateCategory.cs</DependentUpon>
     </Compile>
-    <Compile Include="Income And Expense\Categories\frmCategoriesList.cs">
+    <Compile Include="Forms\Income And Expense\Categories\frmCategoriesList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Income And Expense\Categories\frmCategoriesList.Designer.cs">
+    <Compile Include="Forms\Income And Expense\Categories\frmCategoriesList.Designer.cs">
       <DependentUpon>frmCategoriesList.cs</DependentUpon>
     </Compile>
-    <Compile Include="Income And Expense\Categories\frmCategoryMonthlyFlow.cs">
+    <Compile Include="Forms\Income And Expense\Categories\frmCategoryMonthlyFlow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Income And Expense\Categories\frmCategoryMonthlyFlow.Designer.cs">
+    <Compile Include="Forms\Income And Expense\Categories\frmCategoryMonthlyFlow.Designer.cs">
       <DependentUpon>frmCategoryMonthlyFlow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Income And Expense\Categories\frmSelectCategory.cs">
+    <Compile Include="Forms\Income And Expense\Categories\frmSelectCategory.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Income And Expense\Categories\frmSelectCategory.Designer.cs">
+    <Compile Include="Forms\Income And Expense\Categories\frmSelectCategory.Designer.cs">
       <DependentUpon>frmSelectCategory.cs</DependentUpon>
     </Compile>
-    <Compile Include="Income And Expense\frmIncomeAndExpense.cs">
+    <Compile Include="Forms\Income And Expense\frmIncomeAndExpense.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Income And Expense\frmIncomeAndExpense.Designer.cs">
+    <Compile Include="Forms\Income And Expense\frmIncomeAndExpense.Designer.cs">
       <DependentUpon>frmIncomeAndExpense.cs</DependentUpon>
     </Compile>
-    <Compile Include="Income And Expense\IAE_Transactions\frmAddUpdateIncomeAndExpeseTransaction.cs">
+    <Compile Include="Forms\Income And Expense\IAE_Transactions\frmAddUpdateIncomeAndExpeseTransaction.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Income And Expense\IAE_Transactions\frmAddUpdateIncomeAndExpeseTransaction.Designer.cs">
+    <Compile Include="Forms\Income And Expense\IAE_Transactions\frmAddUpdateIncomeAndExpeseTransaction.Designer.cs">
       <DependentUpon>frmAddUpdateIncomeAndExpeseTransaction.cs</DependentUpon>
     </Compile>
-    <Compile Include="Income And Expense\IAE_Transactions\frmIncomeAndExpenseTransactionInfo.cs">
+    <Compile Include="Forms\Income And Expense\IAE_Transactions\frmIncomeAndExpenseTransactionInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Income And Expense\IAE_Transactions\frmIncomeAndExpenseTransactionInfo.Designer.cs">
+    <Compile Include="Forms\Income And Expense\IAE_Transactions\frmIncomeAndExpenseTransactionInfo.Designer.cs">
       <DependentUpon>frmIncomeAndExpenseTransactionInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Income And Expense\Vouchers\frmAddUpdateVoucher.cs">
+    <Compile Include="Forms\Income And Expense\Vouchers\frmAddUpdateVoucher.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Income And Expense\Vouchers\frmAddUpdateVoucher.Designer.cs">
+    <Compile Include="Forms\Income And Expense\Vouchers\frmAddUpdateVoucher.Designer.cs">
       <DependentUpon>frmAddUpdateVoucher.cs</DependentUpon>
     </Compile>
-    <Compile Include="Income And Expense\Vouchers\frmVouhcersList.cs">
+    <Compile Include="Forms\Income And Expense\Vouchers\frmVouhcersList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Income And Expense\Vouchers\frmVouhcersList.Designer.cs">
+    <Compile Include="Forms\Income And Expense\Vouchers\frmVouhcersList.Designer.cs">
       <DependentUpon>frmVouhcersList.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login\frmLogin.cs">
+    <Compile Include="Forms\Login\frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login\frmLogin.Designer.cs">
+    <Compile Include="Forms\Login\frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="OverView\Controls\ctrlDebtsMonthlyFlow.cs">
+    <Compile Include="Forms\OverView\Controls\ctrlDebtsMonthlyFlow.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="OverView\Controls\ctrlDebtsMonthlyFlow.Designer.cs">
+    <Compile Include="Forms\OverView\Controls\ctrlDebtsMonthlyFlow.Designer.cs">
       <DependentUpon>ctrlDebtsMonthlyFlow.cs</DependentUpon>
     </Compile>
-    <Compile Include="OverView\Controls\ctrlCategoryMonthlyFlow.cs">
+    <Compile Include="Forms\OverView\Controls\ctrlCategoryMonthlyFlow.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="OverView\Controls\ctrlCategoryMonthlyFlow.Designer.cs">
+    <Compile Include="Forms\OverView\Controls\ctrlCategoryMonthlyFlow.Designer.cs">
       <DependentUpon>ctrlCategoryMonthlyFlow.cs</DependentUpon>
     </Compile>
-    <Compile Include="OverView\Controls\ctrlTopCategories.cs">
+    <Compile Include="Forms\OverView\Controls\ctrlTopCategories.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="OverView\Controls\ctrlTopCategories.Designer.cs">
+    <Compile Include="Forms\OverView\Controls\ctrlTopCategories.Designer.cs">
       <DependentUpon>ctrlTopCategories.cs</DependentUpon>
     </Compile>
-    <Compile Include="OverView\Controls\ctrlTopPersonDebtsSumRanking.cs">
+    <Compile Include="Forms\OverView\Controls\ctrlTopPersonDebtsSumRanking.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="OverView\Controls\ctrlTopPersonDebtsSumRanking.Designer.cs">
+    <Compile Include="Forms\OverView\Controls\ctrlTopPersonDebtsSumRanking.Designer.cs">
       <DependentUpon>ctrlTopPersonDebtsSumRanking.cs</DependentUpon>
     </Compile>
-    <Compile Include="OverView\Controls\ctrlTopDebtorsRanking.cs">
+    <Compile Include="Forms\OverView\Controls\ctrlTopDebtorsRanking.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="OverView\Controls\ctrlTopDebtorsRanking.Designer.cs">
+    <Compile Include="Forms\OverView\Controls\ctrlTopDebtorsRanking.Designer.cs">
       <DependentUpon>ctrlTopDebtorsRanking.cs</DependentUpon>
     </Compile>
-    <Compile Include="OverView\Controls\ctlDebtsRepaymentSchedule.cs">
+    <Compile Include="Forms\OverView\Controls\ctlDebtsRepaymentSchedule.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="OverView\Controls\ctlDebtsRepaymentSchedule.Designer.cs">
+    <Compile Include="Forms\OverView\Controls\ctlDebtsRepaymentSchedule.Designer.cs">
       <DependentUpon>ctlDebtsRepaymentSchedule.cs</DependentUpon>
     </Compile>
-    <Compile Include="OverView\Controls\ctrlMonthlyFlow.cs">
+    <Compile Include="Forms\OverView\Controls\ctrlMonthlyFlow.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="OverView\Controls\ctrlMonthlyFlow.Designer.cs">
+    <Compile Include="Forms\OverView\Controls\ctrlMonthlyFlow.Designer.cs">
       <DependentUpon>ctrlMonthlyFlow.cs</DependentUpon>
     </Compile>
-    <Compile Include="OverView\frmOverView.cs">
+    <Compile Include="Forms\OverView\frmOverView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="OverView\frmOverView.Designer.cs">
+    <Compile Include="Forms\OverView\frmOverView.Designer.cs">
       <DependentUpon>frmOverView.cs</DependentUpon>
     </Compile>
-    <Compile Include="OverView\frmOverViewCategories.cs">
+    <Compile Include="Forms\OverView\frmOverViewCategories.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="OverView\frmOverViewCategories.Designer.cs">
+    <Compile Include="Forms\OverView\frmOverViewCategories.Designer.cs">
       <DependentUpon>frmOverViewCategories.cs</DependentUpon>
     </Compile>
-    <Compile Include="OverView\frmOverViewDebts.cs">
+    <Compile Include="Forms\OverView\frmOverViewDebts.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="OverView\frmOverViewDebts.Designer.cs">
+    <Compile Include="Forms\OverView\frmOverViewDebts.Designer.cs">
       <DependentUpon>frmOverViewDebts.cs</DependentUpon>
     </Compile>
-    <Compile Include="OverView\frmOverviewGeneral.cs">
+    <Compile Include="Forms\OverView\frmOverviewGeneral.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="OverView\frmOverviewGeneral.Designer.cs">
+    <Compile Include="Forms\OverView\frmOverviewGeneral.Designer.cs">
       <DependentUpon>frmOverviewGeneral.cs</DependentUpon>
     </Compile>
-    <Compile Include="People\Controls\ctrlPersonCardWithFilter.cs">
+    <Compile Include="Forms\People\Controls\ctrlPersonCardWithFilter.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="People\Controls\ctrlPersonCardWithFilter.Designer.cs">
+    <Compile Include="Forms\People\Controls\ctrlPersonCardWithFilter.Designer.cs">
       <DependentUpon>ctrlPersonCardWithFilter.cs</DependentUpon>
     </Compile>
-    <Compile Include="People\frmSelectPerson.cs">
+    <Compile Include="Forms\People\frmSelectPerson.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="People\frmSelectPerson.Designer.cs">
+    <Compile Include="Forms\People\frmSelectPerson.Designer.cs">
       <DependentUpon>frmSelectPerson.cs</DependentUpon>
     </Compile>
-    <Compile Include="Main Transactions\Controls\ctrlMainTransactionInfo.cs">
+    <Compile Include="Forms\Main Transactions\Controls\ctrlMainTransactionInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Main Transactions\Controls\ctrlMainTransactionInfo.Designer.cs">
+    <Compile Include="Forms\Main Transactions\Controls\ctrlMainTransactionInfo.Designer.cs">
       <DependentUpon>ctrlMainTransactionInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Main Transactions\frmMainTransactionInfo.cs">
+    <Compile Include="Forms\Main Transactions\frmMainTransactionInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Main Transactions\frmMainTransactionInfo.Designer.cs">
+    <Compile Include="Forms\Main Transactions\frmMainTransactionInfo.Designer.cs">
       <DependentUpon>frmMainTransactionInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Main Transactions\frmMainTransactionsList.cs">
+    <Compile Include="Forms\Main Transactions\frmMainTransactionsList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Main Transactions\frmMainTransactionsList.Designer.cs">
+    <Compile Include="Forms\Main Transactions\frmMainTransactionsList.Designer.cs">
       <DependentUpon>frmMainTransactionsList.cs</DependentUpon>
     </Compile>
-    <Compile Include="Users\Controls\ctrlUserCard.cs">
+    <Compile Include="Forms\Users\Controls\ctrlUserCard.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Users\Controls\ctrlUserCard.Designer.cs">
+    <Compile Include="Forms\Users\Controls\ctrlUserCard.Designer.cs">
       <DependentUpon>ctrlUserCard.cs</DependentUpon>
     </Compile>
-    <Compile Include="Users\frmAddUpdateUser.cs">
+    <Compile Include="Forms\Users\frmAddUpdateUser.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Users\frmAddUpdateUser.Designer.cs">
+    <Compile Include="Forms\Users\frmAddUpdateUser.Designer.cs">
       <DependentUpon>frmAddUpdateUser.cs</DependentUpon>
     </Compile>
-    <Compile Include="Users\frmChangePassword.cs">
+    <Compile Include="Forms\Users\frmChangePassword.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Users\frmChangePassword.Designer.cs">
+    <Compile Include="Forms\Users\frmChangePassword.Designer.cs">
       <DependentUpon>frmChangePassword.cs</DependentUpon>
     </Compile>
-    <Compile Include="Users\frmUserInfo.cs">
+    <Compile Include="Forms\Users\frmUserInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Users\frmUserInfo.Designer.cs">
+    <Compile Include="Forms\Users\frmUserInfo.Designer.cs">
       <DependentUpon>frmUserInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Users\FrmUsers.cs">
+    <Compile Include="Forms\Users\FrmUsers.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Users\FrmUsers.Designer.cs">
+    <Compile Include="Forms\Users\FrmUsers.Designer.cs">
       <DependentUpon>FrmUsers.cs</DependentUpon>
     </Compile>
     <Compile Include="Global\clsPL_MessageBoxs.cs" />
     <Compile Include="Global\clsPL_Global.cs" />
     <Compile Include="Global\clsPL_Utils.cs" />
-    <Compile Include="Main\frmMain.cs">
+    <Compile Include="Forms\Main\frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Main\frmMain.Designer.cs">
+    <Compile Include="Forms\Main\frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="People\Controls\ctrlPersonCard.cs">
+    <Compile Include="Forms\People\Controls\ctrlPersonCard.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="People\Controls\ctrlPersonCard.Designer.cs">
+    <Compile Include="Forms\People\Controls\ctrlPersonCard.Designer.cs">
       <DependentUpon>ctrlPersonCard.cs</DependentUpon>
     </Compile>
-    <Compile Include="People\frmAddUpdatePerson.cs">
+    <Compile Include="Forms\People\frmAddUpdatePerson.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="People\frmAddUpdatePerson.Designer.cs">
+    <Compile Include="Forms\People\frmAddUpdatePerson.Designer.cs">
       <DependentUpon>frmAddUpdatePerson.cs</DependentUpon>
     </Compile>
-    <Compile Include="People\frmPeople.cs">
+    <Compile Include="Forms\People\frmPeople.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="People\frmPeople.Designer.cs">
+    <Compile Include="Forms\People\frmPeople.Designer.cs">
       <DependentUpon>frmPeople.cs</DependentUpon>
     </Compile>
-    <Compile Include="People\frmPersonInfo.cs">
+    <Compile Include="Forms\People\frmPersonInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="People\frmPersonInfo.Designer.cs">
+    <Compile Include="Forms\People\frmPersonInfo.Designer.cs">
       <DependentUpon>frmPersonInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Debts\DebtPayment\frmAddUpdateDebtPayment.resx">
+    <EmbeddedResource Include="Forms\Debts\DebtPayment\frmAddUpdateDebtPayment.resx">
       <DependentUpon>frmAddUpdateDebtPayment.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Debts\frmAddUpdateDebt.resx">
+    <EmbeddedResource Include="Forms\Debts\frmAddUpdateDebt.resx">
       <DependentUpon>frmAddUpdateDebt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Debts\frmDebtsList.resx">
+    <EmbeddedResource Include="Forms\Debts\frmDebtsList.resx">
       <DependentUpon>frmDebtsList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="About Programm\frmAboutProgramm.resx">
+    <EmbeddedResource Include="Forms\About Programm\frmAboutProgramm.resx">
       <DependentUpon>frmAboutProgramm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Settings\frmSettings.resx">
+    <EmbeddedResource Include="Forms\Settings\frmSettings.resx">
       <DependentUpon>frmSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Current Account\frmCurrentAccount.resx">
+    <EmbeddedResource Include="Forms\Current Account\frmCurrentAccount.resx">
       <DependentUpon>frmCurrentAccount.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Income And Expense\Categories\frmAddUpdateCategory.resx">
+    <EmbeddedResource Include="Forms\Income And Expense\Categories\frmAddUpdateCategory.resx">
       <DependentUpon>frmAddUpdateCategory.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Income And Expense\Categories\frmCategoriesList.resx">
+    <EmbeddedResource Include="Forms\Income And Expense\Categories\frmCategoriesList.resx">
       <DependentUpon>frmCategoriesList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Income And Expense\Categories\frmCategoryMonthlyFlow.resx">
+    <EmbeddedResource Include="Forms\Income And Expense\Categories\frmCategoryMonthlyFlow.resx">
       <DependentUpon>frmCategoryMonthlyFlow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Income And Expense\Categories\frmSelectCategory.resx">
+    <EmbeddedResource Include="Forms\Income And Expense\Categories\frmSelectCategory.resx">
       <DependentUpon>frmSelectCategory.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Income And Expense\frmIncomeAndExpense.resx">
+    <EmbeddedResource Include="Forms\Income And Expense\frmIncomeAndExpense.resx">
       <DependentUpon>frmIncomeAndExpense.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Income And Expense\IAE_Transactions\frmAddUpdateIncomeAndExpeseTransaction.resx">
+    <EmbeddedResource Include="Forms\Income And Expense\IAE_Transactions\frmAddUpdateIncomeAndExpeseTransaction.resx">
       <DependentUpon>frmAddUpdateIncomeAndExpeseTransaction.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Income And Expense\IAE_Transactions\frmIncomeAndExpenseTransactionInfo.resx">
+    <EmbeddedResource Include="Forms\Income And Expense\IAE_Transactions\frmIncomeAndExpenseTransactionInfo.resx">
       <DependentUpon>frmIncomeAndExpenseTransactionInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Income And Expense\Vouchers\frmAddUpdateVoucher.resx">
+    <EmbeddedResource Include="Forms\Income And Expense\Vouchers\frmAddUpdateVoucher.resx">
       <DependentUpon>frmAddUpdateVoucher.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Income And Expense\Vouchers\frmVouhcersList.resx">
+    <EmbeddedResource Include="Forms\Income And Expense\Vouchers\frmVouhcersList.resx">
       <DependentUpon>frmVouhcersList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login\frmLogin.ar.resx">
+    <EmbeddedResource Include="Forms\Login\frmLogin.ar.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login\frmLogin.resx">
+    <EmbeddedResource Include="Forms\Login\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OverView\Controls\ctrlDebtsMonthlyFlow.resx">
+    <EmbeddedResource Include="Forms\OverView\Controls\ctrlDebtsMonthlyFlow.resx">
       <DependentUpon>ctrlDebtsMonthlyFlow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OverView\Controls\ctrlCategoryMonthlyFlow.resx">
+    <EmbeddedResource Include="Forms\OverView\Controls\ctrlCategoryMonthlyFlow.resx">
       <DependentUpon>ctrlCategoryMonthlyFlow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OverView\Controls\ctrlTopCategories.resx">
+    <EmbeddedResource Include="Forms\OverView\Controls\ctrlTopCategories.resx">
       <DependentUpon>ctrlTopCategories.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OverView\Controls\ctrlTopPersonDebtsSumRanking.resx">
+    <EmbeddedResource Include="Forms\OverView\Controls\ctrlTopPersonDebtsSumRanking.resx">
       <DependentUpon>ctrlTopPersonDebtsSumRanking.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OverView\Controls\ctrlTopDebtorsRanking.resx">
+    <EmbeddedResource Include="Forms\OverView\Controls\ctrlTopDebtorsRanking.resx">
       <DependentUpon>ctrlTopDebtorsRanking.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OverView\Controls\ctlDebtsRepaymentSchedule.resx">
+    <EmbeddedResource Include="Forms\OverView\Controls\ctlDebtsRepaymentSchedule.resx">
       <DependentUpon>ctlDebtsRepaymentSchedule.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="OverView\Controls\ctrlMonthlyFlow.resx">
+    <EmbeddedResource Include="Forms\OverView\Controls\ctrlMonthlyFlow.resx">
       <DependentUpon>ctrlMonthlyFlow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OverView\frmOverView.resx">
+    <EmbeddedResource Include="Forms\OverView\frmOverView.resx">
       <DependentUpon>frmOverView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OverView\frmOverViewCategories.resx">
+    <EmbeddedResource Include="Forms\OverView\frmOverViewCategories.resx">
       <DependentUpon>frmOverViewCategories.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OverView\frmOverViewDebts.resx">
+    <EmbeddedResource Include="Forms\OverView\frmOverViewDebts.resx">
       <DependentUpon>frmOverViewDebts.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OverView\frmOverviewGeneral.resx">
+    <EmbeddedResource Include="Forms\OverView\frmOverviewGeneral.resx">
       <DependentUpon>frmOverviewGeneral.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="People\Controls\ctrlPersonCardWithFilter.resx">
+    <EmbeddedResource Include="Forms\People\Controls\ctrlPersonCardWithFilter.resx">
       <DependentUpon>ctrlPersonCardWithFilter.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="People\frmSelectPerson.resx">
+    <EmbeddedResource Include="Forms\People\frmSelectPerson.resx">
       <DependentUpon>frmSelectPerson.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Main Transactions\Controls\ctrlMainTransactionInfo.resx">
+    <EmbeddedResource Include="Forms\Main Transactions\Controls\ctrlMainTransactionInfo.resx">
       <DependentUpon>ctrlMainTransactionInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Main Transactions\frmMainTransactionInfo.resx">
+    <EmbeddedResource Include="Forms\Main Transactions\frmMainTransactionInfo.resx">
       <DependentUpon>frmMainTransactionInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Main Transactions\frmMainTransactionsList.resx">
+    <EmbeddedResource Include="Forms\Main Transactions\frmMainTransactionsList.resx">
       <DependentUpon>frmMainTransactionsList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Users\Controls\ctrlUserCard.resx">
+    <EmbeddedResource Include="Forms\Users\Controls\ctrlUserCard.resx">
       <DependentUpon>ctrlUserCard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Users\frmAddUpdateUser.resx">
+    <EmbeddedResource Include="Forms\Users\frmAddUpdateUser.resx">
       <DependentUpon>frmAddUpdateUser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Users\frmChangePassword.resx">
+    <EmbeddedResource Include="Forms\Users\frmChangePassword.resx">
       <DependentUpon>frmChangePassword.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Users\frmUserInfo.resx">
+    <EmbeddedResource Include="Forms\Users\frmUserInfo.resx">
       <DependentUpon>frmUserInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Users\FrmUsers.resx">
+    <EmbeddedResource Include="Forms\Users\FrmUsers.resx">
       <DependentUpon>FrmUsers.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Main\frmMain.resx">
+    <EmbeddedResource Include="Forms\Main\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="People\Controls\ctrlPersonCard.resx">
+    <EmbeddedResource Include="Forms\People\Controls\ctrlPersonCard.resx">
       <DependentUpon>ctrlPersonCard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="People\frmAddUpdatePerson.resx">
+    <EmbeddedResource Include="Forms\People\frmAddUpdatePerson.resx">
       <DependentUpon>frmAddUpdatePerson.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="People\frmPeople.resx">
+    <EmbeddedResource Include="Forms\People\frmPeople.resx">
       <DependentUpon>frmPeople.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="People\frmPersonInfo.resx">
+    <EmbeddedResource Include="Forms\People\frmPersonInfo.resx">
       <DependentUpon>frmPersonInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -604,7 +604,7 @@
     <None Include="Resources\lock %281%29.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Income And Expense\Vouchers\Controls\" />
+    <Folder Include="Forms\Income And Expense\Vouchers\Controls\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
