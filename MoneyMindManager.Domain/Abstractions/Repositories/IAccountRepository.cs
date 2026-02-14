@@ -7,7 +7,7 @@ namespace MoneyMindManager.Domain.Abstractions
     public interface IAccountRepository
     {
         /// <returns>New AccountID if Success, if failed return null</returns>
-        Task<IResult<int?>> Add(Person person, User user, Account account);
+        Task<IResult<short?>> Add(Person person, User user, Account account);
 
         /// <returns>Updating Result</returns>
         Task<IResult<bool>> Update(Account account, int currentUserID);

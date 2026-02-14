@@ -2,8 +2,8 @@
 {
     public interface IMapper<Entity, DTO>
     {
-        Entity DTOToEntity(DTO personDTO);
+        Entity DTOToEntity(DTO DTO);
 
-        DTO EntityToDTO(Entity person);
+        DTO EntityToDTO(Entity entity);
     }
 }

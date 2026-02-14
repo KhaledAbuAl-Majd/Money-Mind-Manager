@@ -1,67 +1,95 @@
-﻿using System.Net;
-using System.Security.Policy;
+﻿using System;
 using System.Threading.Tasks;
 using MoneyMindManager.Application.Abstractions.Handlers;
 using MoneyMindManager.Application.Abstractions.Mappers;
 using MoneyMindManager.Application.Abstractions.Services;
 using MoneyMindManager.Core.Abstractions;
+using MoneyMindManager.Core.Enums;
 using MoneyMindManager.Domain.Abstractions;
+using MoneyMindManager.Domain.Abstractions.Services;
 using MoneyMindManager.Shared.DTOs.Account;
 
 namespace MoneyMindManager.Application.Services.Account
 {
-    public class AccountService /*: IAccountService*/
+    public class AccountService : IAccountService
     {
         private readonly IAccountRepository _accountRepository;
         private readonly IAccountMapper _accountMapper;
         private readonly IAuthorizationService _authorizationService;
+        private readonly IPasswordHasher _passwordHasher;
         private readonly IResultFactory _resultFactory;
-        public AccountService(IAccountRepository accountRepository, IAccountMapper accountMapper, IAuthorizationService authorizationService,IResultFactory resultFactory)
+        public AccountService(IAccountRepository accountRepository, IAccountMapper accountMapper, IAuthorizationService authorizationService,
+            IPasswordHasher passwordHasher, IResultFactory resultFactory)
         {
             this._accountRepository = accountRepository;
             this._accountMapper = accountMapper;
             this._authorizationService = authorizationService;
+            this._passwordHasher = passwordHasher;
             this._resultFactory = resultFactory;
         }
 
-        //public Task<IResult<int?>> Add(CreateAccountDTO createAccountDTO)
-        //{
-        //    var HashedPasswordAndSalat = clsHashing.HashPasswordWithSalt(enteredpassword);
-        //    string hashedPassword = HashedPasswordAndSalat.HashedPassword;
-        //    string salt = HashedPasswordAndSalat.Salt;
+        public async Task<IResult<short?>> Add(CreateAccountDTO createAccountDTO)
+        {
+            var (person, user, account) = _accountMapper.CreateAccountDTOToEntities(createAccountDTO);
+            string salt;
+            var hashedPassword = _passwordHasher.HashPassword(user.Password, out salt);
+            user.Password = hashedPassword;
+            user.Salt = salt;
 
-        //    int? newAccountID = await clsAccountData.Add(accountName, defaultCurrencyID, description, personName, address, email,
-        //        phone, notes, userName, hashedPassword, salt);
+            return await _accountRepository.Add(person, user, account);
+        }
 
-        //    return (newAccountID);
+        public async Task<IResult<bool>> Update(AccountBaseDTO accountBaseDTO, int currentUserID)
+        {
+            var accessResult = await _authorizationService.CheckAccess(currentUserID, enPermissions.Admin);
 
-        //    var (person, user, account) = _accountMapper.CreateAccountDTOToEntities(createAccountDTO);
-        //    var result = _accountRepository.Add(person, user, account);
+            var handler = _resultFactory.Create<bool>();
+            if (!accessResult.IsSuccess)
+                return handler.Failure("ليس لديك صلاحية تعديل بيانات الحساب.");
 
-        //    if (result is null)
-        //        return result;
+            var account = _accountMapper.DTOToEntity(accountBaseDTO);
+            var updateResult = await _accountRepository.Update(account, currentUserID);
 
-        //    var handler = _resultFactory.Create<int>();
-        //}
+            if (updateResult is null)
+                return handler.Failure("error ocurred while updating account!");
 
-        //public Task<IResult<bool>> Update(AccountBaseDTO accountBaseDTO, int currentUserID)
-        //{
+            return updateResult;
 
-        //}
+        }
 
-        //public Task<IResult<AccountBaseDTO>> Get(short accountID)
-        //{
+        public async Task<IResult<AccountBaseDTO>> Get(short accountID)
+        {
+            var result = await _accountRepository.Get(accountID);
 
-        //}
+            var handler = _resultFactory.Create<AccountBaseDTO>();
 
-        //public Task<IResult<bool>> IsExistByAccountName(string accountName)
-        //{
+            if (result is null)
+                return handler.Failure("error ocurred while geting account!");
 
-        //}
+            if (result.Data is null && !result.IsSuccess)
+                return handler.Failure("error ocurred while geting account!");
 
-        //public Task<IResult<bool>> Delete(short accountID, int currentUserID)
-        //{
+            if (result.IsSuccess)
+                return handler.Success(_accountMapper.EntityToDTO(result.Data));
 
-        //}
+            return handler.Failure(result.ErrorMessage);
+        }
+
+        public async Task<IResult<bool>> IsExistByAccountName(string accountName)
+        {
+            return await _accountRepository.IsExistByAccountName(accountName);
+        }
+
+        public async Task<IResult<bool>> Delete(short accountID, int currentUserID)
+        {
+            var accessResult = await _authorizationService.CheckAccess(currentUserID, enPermissions.Admin);
+
+            var handler = _resultFactory.Create<bool>();
+
+            if (!accessResult.IsSuccess)
+                return handler.Failure("ليس لديك صلاحية حذف الحساب.");
+
+            return await _accountRepository.Delete(accountID);
+        }
     }
 }
