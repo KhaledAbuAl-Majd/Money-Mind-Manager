@@ -45,13 +45,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DependencyInjection\InterfaceRegistrationDI.cs" />
-    <Compile Include="Logging\EventLogLogger.cs" />
-    <Compile Include="Logging\EventLogLoggerSettings.cs" />
+    <Compile Include="General Services\Cryptography\HashingSettings.cs" />
+    <Compile Include="General Services\Cryptography\Sha256HashingService.cs" />
+    <Compile Include="General Services\Logging\EventLogLogger.cs" />
+    <Compile Include="General Services\Logging\EventLogLoggerSettings.cs" />
+    <Compile Include="General Services\Cryptography\RandomGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\SQLServer\SQLCurrencyRepository.cs" />
     <Compile Include="Repositories\SQLServer\SQLDatabaseSettings.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\KhaledUtils\KhaledUtils.csproj">
+      <Project>{58e95fde-4001-4eef-b5c8-0970d0a00ef9}</Project>
+      <Name>KhaledUtils</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MoneyMindManager.Application\MoneyMindManager.Application.csproj">
       <Project>{84682969-071d-4577-a41d-0df818096add}</Project>
       <Name>MoneyMindManager.Application</Name>

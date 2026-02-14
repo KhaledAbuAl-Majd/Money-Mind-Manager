@@ -46,7 +46,11 @@
     <Compile Include="Abstractions\Repositories\IDatabaseSettings.cs" />
     <Compile Include="Abstractions\Repositories\IPersonRepository.cs" />
     <Compile Include="Abstractions\Repositories\IUserRepository.cs" />
+    <Compile Include="Abstractions\Services\IHashingService.cs" />
+    <Compile Include="Abstractions\Services\IHashingSettings.cs" />
+    <Compile Include="Abstractions\Services\IPasswordHasher.cs" />
     <Compile Include="Abstractions\Services\IPermissionService.cs" />
+    <Compile Include="Abstractions\Services\IRandomGenerator.cs" />
     <Compile Include="Entities\Account.cs" />
     <Compile Include="Entities\Currency.cs" />
     <Compile Include="Entities\Person.cs" />

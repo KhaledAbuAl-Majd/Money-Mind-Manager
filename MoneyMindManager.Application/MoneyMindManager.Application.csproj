@@ -46,6 +46,7 @@
     <Compile Include="Abstractions\Handlers\IResultFactory.cs" />
     <Compile Include="Abstractions\Handlers\IResultHandler.cs" />
     <Compile Include="Abstractions\Infrastructure\IEventLogLoggerSettings.cs" />
+    <Compile Include="Abstractions\Services\IAccountService.cs" />
     <Compile Include="Mappers\Abstractions\IAccountMapper.cs" />
     <Compile Include="Mappers\Abstractions\ICurrencyMapper.cs" />
     <Compile Include="Mappers\Abstractions\IMapper.cs" />
@@ -59,12 +60,14 @@
     <Compile Include="Mappers\Mappers Implementaion\PersonMapper.cs" />
     <Compile Include="Mappers\Mappers Implementaion\UserMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\Authorization\AuthorizationService.cs" />
+    <Compile Include="Services\Account\AccountService.cs" />
+    <Compile Include="Services\Identity\AuthorizationService.cs" />
     <Compile Include="Services\Currency\CurrencyService.cs" />
+    <Compile Include="Services\Identity\PasswordHasher.cs" />
     <Compile Include="Services\Permissions\PermissionService.cs" />
     <Compile Include="Services\Person\PersonService.cs" />
-    <Compile Include="Services\ResultFactory.cs" />
-    <Compile Include="Services\ResultHandler.cs" />
+    <Compile Include="Common\ResultFactory.cs" />
+    <Compile Include="Common\ResultHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MoneyMindManager.Core\MoneyMindManager.Core.csproj">

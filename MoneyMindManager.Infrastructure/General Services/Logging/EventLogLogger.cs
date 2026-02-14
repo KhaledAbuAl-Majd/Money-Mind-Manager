@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MoneyMindManager.Application.Abstractions.Infrastructure;
 using MoneyMindManager.Core;
 
@@ -22,7 +18,7 @@ namespace MoneyMindManager.Infrastructure.Logging
         {
             try
             {
-                EventLog.WriteEntry(_sourceName, message,eventLogEntryType);
+                EventLog.WriteEntry(_sourceName, message, eventLogEntryType);
                 return true;
             }
             catch
