@@ -111,11 +111,6 @@ namespace MoneyMindManager.Infrastructure.Repositories.SQLServer
                         result = (retunValue.Value != DBNull.Value) && (Convert.ToInt32(retunValue.Value) == 1);
                     }
                 }
-
-                if (!result)
-                {
-                    throw new Exception("فشل تحديث الحساب");
-                }
             }
             catch (Exception ex)
             {

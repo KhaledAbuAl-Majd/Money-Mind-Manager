@@ -7,6 +7,7 @@ using MoneyMindManager.Domain.Abstractions.Services;
 using MoneyMindManager.Infrastructure.General_Services;
 using MoneyMindManager.Infrastructure.Logging;
 using MoneyMindManager.Infrastructure.Repositories;
+using MoneyMindManager.Infrastructure.Repositories.Database.SQLServer;
 using MoneyMindManager.Infrastructure.Repositories.SQLServer;
 
 namespace MoneyMindManager.Infrastructure
@@ -18,6 +19,7 @@ namespace MoneyMindManager.Infrastructure
             services.AddSingleton<IDatabaseSettings, SQLDatabaseSettings>();
             services.AddScoped<ICurrencyRepository, SQLCurrencyRepository>();
             services.AddScoped<IAccountRepository, SQLAccountRepository>();
+            services.AddScoped<IPersonRepository, SQLPersonRepository>();
 
             services.AddSingleton<IEventLogLoggerSettings, EventLogLoggerSettings>();
             services.AddSingleton<ILogger, EventLogLogger>();

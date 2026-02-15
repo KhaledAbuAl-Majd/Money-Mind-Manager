@@ -10,7 +10,7 @@ namespace MoneyMindManager.Domain.NewFolder1
         public string Phone { get; set; }
         public byte TextSearchMode { get; set; }
         public int PageNumber { get; set; }
-        public byte rowsPerPage { get; set; }
+        public byte RowsPerPage { get; set; }
 
         public PersonSearchCriteria(int pageNumber)
         {
@@ -19,13 +19,13 @@ namespace MoneyMindManager.Domain.NewFolder1
             this.Email = null;
             this.Phone = null;
             this.TextSearchMode = (byte)enTextSearchMode.WordsPrefix_Fast;
-            rowsPerPage = 15;
+            RowsPerPage = 15;
         }
 
         public PersonSearchCriteria()
         {
             this.PageNumber = 1;
-            rowsPerPage = 15;
+            RowsPerPage = 15;
             this.TextSearchMode = (byte)enTextSearchMode.WordsPrefix_Fast;
         }
     }

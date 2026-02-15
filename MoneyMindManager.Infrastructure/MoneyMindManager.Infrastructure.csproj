@@ -51,9 +51,10 @@
     <Compile Include="General Services\Logging\EventLogLoggerSettings.cs" />
     <Compile Include="General Services\Cryptography\RandomGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\SQLServer\SQLAccountRepository.cs" />
-    <Compile Include="Repositories\SQLServer\SQLCurrencyRepository.cs" />
-    <Compile Include="Repositories\SQLServer\SQLDatabaseSettings.cs" />
+    <Compile Include="Repositories\Database\SQLServer\SQLAccountRepository.cs" />
+    <Compile Include="Repositories\Database\SQLServer\SQLCurrencyRepository.cs" />
+    <Compile Include="Repositories\Database\SQLServer\SQLDatabaseSettings.cs" />
+    <Compile Include="Repositories\Database\SQLServer\SQLPersonRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KhaledUtils\KhaledUtils.csproj">

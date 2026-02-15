@@ -10,19 +10,19 @@ namespace MoneyMindManager.Domain.Criteria
 
         public int PageNumber { get; set; }
 
-        public byte rowsPerPage { get; set; }
+        public byte RowsPerPage { get; set; }
         public PersonSelectSearchCriteria(int pageNumber)
         {
             this.PageNumber = pageNumber;
             this.PersonName = null;
-            rowsPerPage = 15;
+            RowsPerPage = 15;
             this.TextSearchMode = (byte) enTextSearchMode.WordsPrefix_Fast;
         }
 
         public PersonSelectSearchCriteria()
         {
             this.PageNumber = 1;
-            rowsPerPage = 15;
+            RowsPerPage = 15;
             this.TextSearchMode = (byte) enTextSearchMode.WordsPrefix_Fast;
         }
     }

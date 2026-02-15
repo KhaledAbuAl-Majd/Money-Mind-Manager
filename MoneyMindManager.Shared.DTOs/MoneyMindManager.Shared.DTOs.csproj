@@ -44,10 +44,6 @@
     <Compile Include="Account\AccountBaseDTO.cs" />
     <Compile Include="Account\CreateAccountDTO.cs" />
     <Compile Include="Currency\CurrencyDTO.cs" />
-    <Compile Include="Paged Result DTOs\DebtPaymentsPagedResultDTO.cs" />
-    <Compile Include="Paged Result DTOs\DebtsPagedResultDTO.cs" />
-    <Compile Include="Paged Result DTOs\PagedResultDto.cs" />
-    <Compile Include="Paged Result DTOs\PagedResultWithAmountDTO.cs" />
     <Compile Include="Permissions\PermissionItemDTO.cs" />
     <Compile Include="Person\PersonDTO.cs" />
     <Compile Include="Person\PersonFilterDTO.cs" />
