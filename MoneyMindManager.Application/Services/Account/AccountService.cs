@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using MoneyMindManager.Application.Abstractions.Handlers;
 using MoneyMindManager.Application.Abstractions.Mappers;
 using MoneyMindManager.Application.Abstractions.Services;
@@ -44,7 +43,10 @@ namespace MoneyMindManager.Application.Services.Account
             var accessResult = await _authorizationService.CheckAccess(currentUserID, enPermissions.Admin);
 
             var handler = _resultFactory.Create<bool>();
-            if (!accessResult.IsSuccess)
+            if (accessResult is null || !accessResult.IsSuccess)
+                return accessResult;
+
+            if (!accessResult.Data)
                 return handler.Failure("ليس لديك صلاحية تعديل بيانات الحساب.");
 
             var account = _accountMapper.DTOToEntity(accountBaseDTO);
@@ -64,15 +66,15 @@ namespace MoneyMindManager.Application.Services.Account
             var handler = _resultFactory.Create<AccountBaseDTO>();
 
             if (result is null)
-                return handler.Failure("error ocurred while geting account!");
+                return handler.Failure("error ocurred while getting account!");
 
             if (result.Data is null && !result.IsSuccess)
-                return handler.Failure("error ocurred while geting account!");
+                return handler.Failure("error ocurred while getting account!");
 
-            if (result.IsSuccess)
-                return handler.Success(_accountMapper.EntityToDTO(result.Data));
+            if (!result.IsSuccess)
+                return handler.Failure(result.ErrorMessage);
 
-            return handler.Failure(result.ErrorMessage);
+            return handler.Success(_accountMapper.EntityToDTO(result.Data));
         }
 
         public async Task<IResult<bool>> IsExistByAccountName(string accountName)
@@ -86,10 +88,18 @@ namespace MoneyMindManager.Application.Services.Account
 
             var handler = _resultFactory.Create<bool>();
 
-            if (!accessResult.IsSuccess)
+            if (accessResult is null || !accessResult.IsSuccess)
+                return accessResult;
+
+            if (!accessResult.Data)
                 return handler.Failure("ليس لديك صلاحية حذف الحساب.");
 
-            return await _accountRepository.Delete(accountID);
+            var result= await _accountRepository.Delete(accountID);
+
+            if (result is null)
+                return handler.Failure("failed to delete account!");
+
+            return result;
         }
     }
 }

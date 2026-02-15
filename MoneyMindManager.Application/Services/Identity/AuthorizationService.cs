@@ -34,13 +34,11 @@ namespace MoneyMindManager.Application.Services.Authorization
             var handler = _resultFactory.Create<bool>();
 
             if (result is null || !result.IsSuccess)
-                return handler.Failure("failed to get permissions");
+                return handler.Failure("فشل الوصول لقاعدة البيانات للتحقق من الصلاحيات");
 
 
-            if (_permissionService.IsHasPermission(result.Data, permission))
-                return handler.Success(true);
-            else
-                return handler.Failure($"المستخدم صاحب معرف {userID} ليس لدية صلاحية");
+            bool hasPermission = _permissionService.IsHasPermission(result.Data, permission);
+            return handler.Success(hasPermission);
         }
     }
 }

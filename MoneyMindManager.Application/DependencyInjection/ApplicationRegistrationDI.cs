@@ -31,6 +31,7 @@ namespace MoneyMindManager.Application
 
             services.AddScoped<ICurrencyService, CurrencyService>();
             services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IPersonService, PersonService>();
         }
 
         static void _mappers(IServiceCollection services)

@@ -51,6 +51,7 @@
     <Compile Include="Permissions\PermissionItemDTO.cs" />
     <Compile Include="Person\PersonDTO.cs" />
     <Compile Include="Person\PersonFilterDTO.cs" />
+    <Compile Include="Person\PersonSelectFilterDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User\ChangeUserPasswordDTO.cs" />
     <Compile Include="User\LoginRequestDTO.cs" />

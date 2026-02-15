@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Abstractions\ILogger.cs" />
     <Compile Include="Abstractions\IResult.cs" />
+    <Compile Include="Enums\SearchModeEnum.cs" />
     <Compile Include="Enums\PermissionsEnum.cs" />
     <Compile Include="Extensions\PermissionsExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,30 +1,32 @@
 ﻿using MoneyMindManager.Core.Enums;
 
-namespace MoneyMindManager.Shared.DTOs.Person
+namespace MoneyMindManager.Domain.NewFolder1
 {
-    public class PersonFilterDTO
+    public class PersonSearchCriteria
     {
         public int? PersonID { get; set; }
         public string PersonName { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
-        public enTextSearchMode TextSearchMode { get; set; }
-
+        public byte TextSearchMode { get; set; }
         public int PageNumber { get; set; }
+        public byte rowsPerPage { get; set; }
 
-        public PersonFilterDTO(int pageNumber, enTextSearchMode textSearchMode)
+        public PersonSearchCriteria(int pageNumber)
         {
             this.PageNumber = pageNumber;
             this.PersonName = null;
             this.Email = null;
             this.Phone = null;
-            this.TextSearchMode = textSearchMode;
+            this.TextSearchMode = (byte)enTextSearchMode.WordsPrefix_Fast;
+            rowsPerPage = 15;
         }
 
-        public PersonFilterDTO()
+        public PersonSearchCriteria()
         {
             this.PageNumber = 1;
-            this.TextSearchMode = enTextSearchMode.WordsPrefix_Fast;
+            rowsPerPage = 15;
+            this.TextSearchMode = (byte)enTextSearchMode.WordsPrefix_Fast;
         }
     }
 }
