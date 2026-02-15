@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
-using MoneyMindManager.Application.Abstractions;
 using MoneyMindManager.Core.Enums;
 using MoneyMindManager.Core.Extensions;
+using MoneyMindManager.Domain.Abstractions.Services;
 using MoneyMindManager.Shared.DTOs.Permissions;
 
 namespace MoneyMindManager.Application.Services.Permissions
 {
     public class PermissionService : IPermissionService
     {
-        public List<PermissionItemDTO> GetPermissionMetadata(int userPermissions)
+        public List<PermissionInfo> GetPermissionMetadata(int userPermissions)
         {
-            List<PermissionItemDTO> items = new List<PermissionItemDTO>();
+            List<PermissionInfo> items = new List<PermissionInfo>();
 
             var fileds = typeof(enPermissions).GetFields(System.Reflection.BindingFlags.Public |
                 System.Reflection.BindingFlags.Static).Where(x => x.Name != nameof(enPermissions.Admin));
@@ -31,14 +31,17 @@ namespace MoneyMindManager.Application.Services.Permissions
 
                 name = (descriptionAttribute != null) ? descriptionAttribute.Description : field.Name;
 
-                items.Add(new PermissionItemDTO(name, val, isChecked));
+                items.Add(new PermissionInfo(name, val, isChecked));
             }
 
             return items;
         }
 
-        public int CalculatePermissions(List<int> checkedItemsValues)
+        public int CalculatePermissions(IEnumerable<int> checkedItemsValues)
         {
+            if (checkedItemsValues is null)
+                return 0;
+
             int permission = 0;
 
             foreach (var item in checkedItemsValues)

@@ -52,6 +52,7 @@
     <Compile Include="Abstractions\Services\IPermissionService.cs" />
     <Compile Include="Abstractions\Services\IRandomGenerator.cs" />
     <Compile Include="Criteria\PersonSelectSearchCriteria.cs" />
+    <Compile Include="Criteria\UserSearchCriteria.cs" />
     <Compile Include="Entities\Account.cs" />
     <Compile Include="Entities\Currency.cs" />
     <Compile Include="Entities\Person.cs" />

@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.AccessControl;
-using System.Text;
-using System.Threading.Tasks;
-using MoneyMindManager.Application.Abstractions;
+﻿using System.Threading.Tasks;
 using MoneyMindManager.Application.Abstractions.Handlers;
 using MoneyMindManager.Application.Abstractions.Services;
 using MoneyMindManager.Core.Abstractions;
 using MoneyMindManager.Core.Enums;
 using MoneyMindManager.Domain.Abstractions;
+using MoneyMindManager.Domain.Abstractions.Services;
 
 namespace MoneyMindManager.Application.Services.Authorization
 {
-    public class AuthorizationService:IAuthorizationService
+    public class AuthorizationService : IAuthorizationService
     {
         private readonly IPermissionService _permissionService;
 
@@ -21,7 +16,7 @@ namespace MoneyMindManager.Application.Services.Authorization
 
         private readonly IResultFactory _resultFactory;
 
-        public AuthorizationService(IPermissionService permissionService,IUserRepository userRepository,IResultFactory resultFactory)
+        public AuthorizationService(IPermissionService permissionService, IUserRepository userRepository, IResultFactory resultFactory)
         {
             this._permissionService = permissionService;
             this._userRepository = userRepository;
@@ -29,13 +24,15 @@ namespace MoneyMindManager.Application.Services.Authorization
         }
         public async Task<IResult<bool>> CheckAccess(int userID, enPermissions permission)
         {
-            var result =  await _userRepository.GetPermissions(userID);
+            var result = await _userRepository.GetPermissions(userID);
 
             var handler = _resultFactory.Create<bool>();
 
-            if (result is null || !result.IsSuccess)
+            if (result is null)
                 return handler.Failure("فشل الوصول لقاعدة البيانات للتحقق من الصلاحيات");
 
+            if (!result.IsSuccess)
+                return handler.Failure(result.ErrorMessage);
 
             bool hasPermission = _permissionService.IsHasPermission(result.Data, permission);
             return handler.Success(hasPermission);

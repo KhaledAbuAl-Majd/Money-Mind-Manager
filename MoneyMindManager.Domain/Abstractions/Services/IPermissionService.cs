@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using MoneyMindManager.Core.Enums;
 using MoneyMindManager.Shared.DTOs.Permissions;
 
-namespace MoneyMindManager.Application.Abstractions
+namespace MoneyMindManager.Domain.Abstractions.Services
 {
     public interface IPermissionService
     {
-        List<PermissionItemDTO> GetPermissionMetadata(int userPermissions);
+        List<PermissionInfo> GetPermissionMetadata(int userPermissions);
 
-        int CalculatePermissions(List<int> checkedItemsValues);
+        int CalculatePermissions(IEnumerable<int> checkedItemsValues);
 
         bool IsHasPermission(int userPermission, enPermissions checkedPermission);
     }

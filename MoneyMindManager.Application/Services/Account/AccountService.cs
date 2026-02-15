@@ -31,7 +31,7 @@ namespace MoneyMindManager.Application.Services.Account
         {
             var (person, user, account) = _accountMapper.CreateAccountDTOToEntities(createAccountDTO);
             string salt;
-            var hashedPassword = _passwordHasher.HashPassword(user.Password, out salt);
+            var hashedPassword = _passwordHasher.HashPasswordOutSalt(user.Password, out salt);
             user.Password = hashedPassword;
             user.Salt = salt;
 

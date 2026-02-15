@@ -42,24 +42,27 @@ namespace MoneyMindManager.Application.Services
             if (!accessResult.Data)
                 return handler.Failure("ليس لديك صلاحية إضافة/تعديل شخص.");
 
-            var person = _personMapper.DTOToEntity(personDTO);
+            personDTO.CreatedByUserID = currentUserID;
+            personDTO.CreatedDate = DateTime.Now;
 
-            person.CreatedByUserID = currentUserID;
-            person.CreatedDate = DateTime.Now;
+            var person = _personMapper.DTOToEntity(personDTO);
 
             var result = await _personRepository.Add(person);
 
-            if (result is null || result.Data is null)
+            if (result is null)
                 return handler.Failure("failed to add person!");
 
             if (!result.IsSuccess)
                 return handler.Failure(result.ErrorMessage);
 
+            if (result.Data is null)
+                return handler.Failure("failed to add person");
+
             int id = Convert.ToInt32(result.Data);
 
-            person.PersonID = id;
+            personDTO.PersonID = id;
 
-            return handler.Success(_personMapper.EntityToDTO(person));
+            return handler.Success(personDTO);
 
         }
 
@@ -97,11 +100,14 @@ namespace MoneyMindManager.Application.Services
             var handler = _resultFactory.Create<PersonDTO>();
 
 
-            if (result is null || result.Data is null)
+            if (result is null)
                 return handler.Failure("failed to get person!");
 
             if (!result.IsSuccess)
                 return handler.Failure(result.ErrorMessage);
+
+            if (result.Data is null)
+                return handler.Failure("failed to get person");
 
             var personDTO = _personMapper.EntityToDTO(result.Data);
             return handler.Success(personDTO);

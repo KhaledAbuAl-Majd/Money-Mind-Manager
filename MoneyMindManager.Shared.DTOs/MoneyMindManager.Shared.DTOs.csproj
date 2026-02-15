@@ -44,7 +44,6 @@
     <Compile Include="Account\AccountBaseDTO.cs" />
     <Compile Include="Account\CreateAccountDTO.cs" />
     <Compile Include="Currency\CurrencyDTO.cs" />
-    <Compile Include="Permissions\PermissionItemDTO.cs" />
     <Compile Include="Person\PersonDTO.cs" />
     <Compile Include="Person\PersonFilterDTO.cs" />
     <Compile Include="Person\PersonSelectFilterDTO.cs" />
@@ -60,6 +59,8 @@
       <Name>MoneyMindManager.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Permissions\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,30 +1,34 @@
 ﻿using MoneyMindManager.Core.Enums;
 
-namespace MoneyMindManager.Shared.DTOs.User
+namespace MoneyMindManager.Domain.Criteria
 {
-    public class UserFilterDTO
+    public class UserSearchCriteria
     {
         public int? UserID { get; set; }
         public string UserName { get; set; }
         public string PersonName { get; set; }
         public bool? IsActive { get; set; }
-        public enTextSearchMode TextSearchMode { get; set; }
+        public byte TextSearchMode { get; set; }
         public int PageNumber { get; set; }
 
-        public UserFilterDTO(int pageNumber )
+        public byte RowsPerPage { get; set; }
+
+        public UserSearchCriteria(int pageNumber)
         {
             this.PageNumber = pageNumber;
             this.UserID = null;
             this.UserName = null;
             this.PersonName = null;
             this.IsActive = null;
-            this.TextSearchMode = enTextSearchMode.WordsPrefix_Fast;
+            this.TextSearchMode = (byte)enTextSearchMode.WordsPrefix_Fast;
+            RowsPerPage = 15;
         }
 
-        public UserFilterDTO()
+        public UserSearchCriteria()
         {
             this.PageNumber = 1;
-            this.TextSearchMode = enTextSearchMode.WordsPrefix_Fast;
+            this.TextSearchMode = (byte)enTextSearchMode.WordsPrefix_Fast;
+            RowsPerPage = 15;
         }
     }
 }

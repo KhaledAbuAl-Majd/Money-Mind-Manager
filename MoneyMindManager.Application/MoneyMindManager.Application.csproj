@@ -48,6 +48,7 @@
     <Compile Include="Abstractions\Infrastructure\IEventLogLoggerSettings.cs" />
     <Compile Include="Abstractions\Services\IAccountService.cs" />
     <Compile Include="Abstractions\Services\IPersonService.cs" />
+    <Compile Include="Abstractions\Services\IUserService.cs" />
     <Compile Include="Mappers\Abstractions\IAccountMapper.cs" />
     <Compile Include="Mappers\Abstractions\ICurrencyMapper.cs" />
     <Compile Include="Mappers\Abstractions\IMapper.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Services\Person\PersonService.cs" />
     <Compile Include="Common\ResultFactory.cs" />
     <Compile Include="Common\ResultHandler.cs" />
+    <Compile Include="Services\User\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MoneyMindManager.Core\MoneyMindManager.Core.csproj">
@@ -84,8 +86,6 @@
       <Name>MoneyMindManager.Shared.DTOs</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\User\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

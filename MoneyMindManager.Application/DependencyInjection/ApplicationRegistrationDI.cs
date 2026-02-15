@@ -9,6 +9,7 @@ using MoneyMindManager.Application.Services.Account;
 using MoneyMindManager.Application.Services.Authorization;
 using MoneyMindManager.Application.Services.Currency;
 using MoneyMindManager.Application.Services.Permissions;
+using MoneyMindManager.Application.Services.User;
 using MoneyMindManager.Domain.Abstractions.Services;
 
 namespace MoneyMindManager.Application
@@ -32,6 +33,7 @@ namespace MoneyMindManager.Application
             services.AddScoped<ICurrencyService, CurrencyService>();
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IPersonService, PersonService>();
+            services.AddScoped<IUserService, UserService>();
         }
 
         static void _mappers(IServiceCollection services)

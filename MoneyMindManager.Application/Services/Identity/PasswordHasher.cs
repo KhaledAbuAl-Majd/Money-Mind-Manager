@@ -17,11 +17,15 @@ namespace MoneyMindManager.Application.Services
 
         private string _GetSaltedPassword(string Password, string Salt) => Password + Salt;
 
-        public string HashPassword(string password, out string salt)
+        public string HashPassword(string password, string salt)
         {
-            salt = _randomGenerator.GenerateRandomString(_hashingSettings.SaltSize);
             var saltedPassword = _GetSaltedPassword(password, salt);
             return _hashingService.ComputeHash(saltedPassword);
+        }
+        public string HashPasswordOutSalt(string password, out string salt)
+        {
+            salt = _randomGenerator.GenerateRandomString(_hashingSettings.SaltSize);
+            return HashPassword(password, salt);
         }
         public bool VerifyPassword(string password, string storedHash, string storedSalt)
         {

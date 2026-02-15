@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MoneyMindManager.Core.Enums;
 using MoneyMindManager.Shared.DTOs.Account;
+using MoneyMindManager.Shared.DTOs.Permissions;
 
 namespace MoneyMindManager.Shared.DTOs.User
 {
@@ -22,7 +20,9 @@ namespace MoneyMindManager.Shared.DTOs.User
         /// </summary>
         public Nullable<int> PersonID { get; set; }
 
-        public int Permissions { get; set; }
+        public IEnumerable<PermissionInfo> PermissionsList { get; set; }
+
+        public int Permissions { get; }
 
         public bool IsActive { get; set; }
 
@@ -55,12 +55,13 @@ namespace MoneyMindManager.Shared.DTOs.User
         // composition
         public PersonDTO PersonInfo { get; private set; }
         public AccountBaseDTO AccountInfo { get; set; }
-        public UserDTO(int? userID, string userName, int? personID, int permissions
+        public UserDTO(int? userID, string userName, int? personID, IEnumerable<PermissionInfo> permissionsList, int permissions
             , bool isActive, string notes, short? accountID, bool isDeleted, int? createdByUserID, DateTime createdDate)
         {
             this.UserID = userID;
             this.UserName = userName;
             this.PersonID = personID;
+            this.PermissionsList = permissionsList;
             this.Permissions = permissions;
             this.IsActive = isActive;
             this.Notes = notes;
@@ -75,6 +76,7 @@ namespace MoneyMindManager.Shared.DTOs.User
             this.UserID = null;
             this.UserName = null;
             this.PersonID = null;
+            this.PermissionsList = new List<PermissionInfo>();
             this.Permissions = 0;
             this.IsActive = true;
             this.Notes = null;
