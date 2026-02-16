@@ -44,6 +44,7 @@
     <Compile Include="ApiClient\IAccountApiClient.cs" />
     <Compile Include="ApiClient\ICurrencyApiClient.cs" />
     <Compile Include="ApiClient\IPersonApiClient.cs" />
+    <Compile Include="ApiClient\IUserApiClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

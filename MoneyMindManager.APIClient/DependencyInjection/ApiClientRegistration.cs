@@ -11,6 +11,7 @@ namespace MoneyMindManager.APIClient.DependencyInjection
             services.AddScoped<ICurrencyApiClient, CurrencyApiClient>();
             services.AddScoped<IAccountApiClient, AccountApiClient>();
             services.AddScoped<IPersonApiClient, PersonApiClient>();
+            services.AddScoped<IUserApiClient, UserApiClient>();
 
             return services;
         }

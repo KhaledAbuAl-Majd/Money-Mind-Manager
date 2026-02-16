@@ -46,6 +46,7 @@
     <Compile Include="Api Client Implementation\AccountApiClient.cs" />
     <Compile Include="Api Client Implementation\CurrencyApiClient.cs" />
     <Compile Include="Api Client Implementation\PersonApiClient.cs" />
+    <Compile Include="Api Client Implementation\UserApiClient.cs" />
     <Compile Include="DependencyInjection\ApiClientRegistration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
