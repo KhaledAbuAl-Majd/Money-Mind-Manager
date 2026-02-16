@@ -165,8 +165,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstractions\IFolderService.cs" />
+    <Compile Include="Abstractions\IFormDisplayer.cs" />
     <Compile Include="Abstractions\IMessageService.cs" />
     <Compile Include="Abstractions\INotificationService.cs" />
+    <Compile Include="Abstractions\IActiveFormTracker.cs" />
+    <Compile Include="Abstractions\IUserSession.cs" />
     <Compile Include="Forms\Debts\DebtPayment\frmAddUpdateDebtPayment.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -194,6 +197,7 @@
     <Compile Include="Forms\About Programm\frmAboutProgramm.Designer.cs">
       <DependentUpon>frmAboutProgramm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Services\ActiveFormTracker.cs" />
     <Compile Include="Services\FolderService.cs" />
     <Compile Include="Services\MessageBoxService.cs" />
     <Compile Include="Services\NotificationService.cs" />
@@ -431,6 +435,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\UserSession.cs" />
     <EmbeddedResource Include="Forms\Debts\DebtPayment\frmAddUpdateDebtPayment.resx">
       <DependentUpon>frmAddUpdateDebtPayment.cs</DependentUpon>
     </EmbeddedResource>

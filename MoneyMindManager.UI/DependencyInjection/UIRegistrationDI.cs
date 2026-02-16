@@ -2,8 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using MoneyMindManager.UI.Abstractions;
 using MoneyMindManager.UI.Services;
-using MoneyMindManager_Presentation;
 using MoneyMindManager_Presentation.Login;
+using MoneyMindManager_Presentation.Main;
 
 namespace MoneyMindManager.UI.DependencyInjection
 {
@@ -11,15 +11,19 @@ namespace MoneyMindManager.UI.DependencyInjection
     {
         public static IServiceCollection AddUI(this IServiceCollection services)
         {
-            services.AddSingleton<IMessageBoxService, MessageBoxService>(provider =>
-            {
-                return new MessageBoxService(() => clsPL_Global.ActiveForm);
-            });
+            services.AddScoped<frmMain>();
 
+            services.AddScoped<IFormDisplayer, frmMain>();
+            services.AddSingleton<IActiveFormTracker, ActiveFormTracker>();
+            services.AddSingleton<IMessageBoxService, MessageBoxService>();
+
+            services.AddScoped<IUserSession, UserSession>();
             services.AddScoped<IFolderService, FolderService>();
 
             //forms
-            services.AddTransient<frmLogin>();
+            services.AddSingleton<frmLogin>();
+
+
             return services;
         }
     }

@@ -11,11 +11,11 @@ namespace MoneyMindManager.UI.Services
 {
     public class MessageBoxService: IMessageBoxService
     {
-        private readonly Func<Form> _activeFormProvider;
+        private readonly IActiveFormTracker _activeFormTracker;
 
-        public MessageBoxService(Func<Form> activeFormProvider)
+        public MessageBoxService(IActiveFormTracker activeFormTracker)
         {
-            this._activeFormProvider = activeFormProvider;
+            this._activeFormTracker = activeFormTracker;
         }
         public void DisplayError(string message)
         {
@@ -27,7 +27,7 @@ namespace MoneyMindManager.UI.Services
         /// </summary>
         public DialogResult Display(string message, string caption, MessageBoxButtons buttons, MessageBoxIcon icon, MessageBoxDefaultButton defaultButton = MessageBoxDefaultButton.Button1)
         {
-            var activeForm = _activeFormProvider();
+            var activeForm = _activeFormTracker.ActiveForm;
 
             if (activeForm == null)
                 return DialogResult.Cancel;

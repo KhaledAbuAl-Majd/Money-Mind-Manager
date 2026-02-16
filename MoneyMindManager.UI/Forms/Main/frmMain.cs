@@ -1,20 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Guna.UI2.WinForms;
+using MoneyMindManager.UI.Abstractions;
 using MoneyMindManager_Business;
 using MoneyMindManager_Presentation.Global;
 using MoneyMindManager_Presentation.Income_And_Expense;
-using MoneyMindManager_Presentation.Income_And_Expense.Categories;
 using MoneyMindManager_Presentation.Income_And_Expense.Vouchers;
-using MoneyMindManager_Presentation.Login;
 using MoneyMindManager_Presentation.OverView;
 using MoneyMindManager_Presentation.People;
 using MoneyMindManager_Presentation.Users;
@@ -22,7 +13,7 @@ using MoneyMindManager_Presentation.Users;
 
 namespace MoneyMindManager_Presentation.Main
 {
-    public partial class frmMain : Form
+    public partial class frmMain : Form, IFormDisplayer
     {
         public event Action OnCloseProgramm;
         public frmMain()
@@ -105,7 +96,7 @@ namespace MoneyMindManager_Presentation.Main
         {
             llblCurrentUserInfo.Enabled = false;
             var frm = new frmUserInfo(Convert.ToInt32(clsPL_Global.CurrentUser?.UserID));
-            frm.FormClosed += (x,y) => llblCurrentUserInfo.Enabled = true;
+            frm.FormClosed += (x, y) => llblCurrentUserInfo.Enabled = true;
             AddNewFormAtContainer(frm);
         }
 

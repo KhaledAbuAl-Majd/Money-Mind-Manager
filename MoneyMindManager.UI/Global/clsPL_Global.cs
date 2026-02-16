@@ -151,6 +151,7 @@ namespace MoneyMindManager_Presentation
 
             clsGlobalSession.Logout();
         }
+
         public static void SubscribeToErrorOcrruedEvent()
         {
             clsGlobalEvents.OnErrorOccured +=  clsPL_MessageBoxs.ShowErrorMessage;
