@@ -5926,6 +5926,68 @@ BEGIN
 	END CATCH;
 END
 GO
+/****** Object:  StoredProcedure [dbo].[SP_User_GetPermissionsByUserID]    Script Date: 16/02/2026 8:48:07 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SP_User_GetPermissionsByUserID]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[SP_User_GetPermissionsByUserID] AS' 
+END
+GO
+
+ALTER PROCEDURE [dbo].[SP_User_GetPermissionsByUserID]
+	@UserID INT,
+	@Permissions INT OUT
+AS
+BEGIN
+	BEGIN TRY
+		IF NOT EXISTS(SELECT 1 FROM Users WHERE UserID = @UserID AND IsDeleted = 0)
+			DECLARE @ErrorMessage NVARCHAR(100) = 'المستخدم الذي يحمل معرف [' + @UserID + '] غير موجود';
+			THROW 51002,@ErrorMessage,1;
+
+	SELECT @Permissions = Permissions FROM Users where UserID = @UserID;
+
+	END TRY
+	BEGIN CATCH
+		EXEC SP_LogError;
+		THROW
+	END CATCH
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_User_GetSaltByUserID]    Script Date: 16/02/2026 8:48:07 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SP_User_GetSaltByUserID]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[SP_User_GetSaltByUserID] AS' 
+END
+GO
+
+ALTER PROCEDURE [dbo].[SP_User_GetSaltByUserID]
+	@UserID INT,
+	@Salt VARCHAR(24) OUTPUT
+AS
+BEGIN
+	BEGIN TRY
+		IF NOT EXISTS (SELECT 1 FROM Users WHERE UserID = @UserID AND IsDeleted = 0)
+		BEGIN
+			DECLARE @ErrorMessage NVARCHAR(100) = 'المستخدم الذي يحمل معرف [' + @UserID + '] غير موجود';
+			THROW 51002,@ErrorMessage,1;
+		END;
+
+		SELECT @Salt = Salt FROM Users WHERE UserID = @UserID;
+
+	END TRY
+	BEGIN CATCH
+		EXEC SP_LogError;
+		THROW;
+	END CATCH;
+END
+GO
 /****** Object:  StoredProcedure [dbo].[SP_User_GetSaltByUserName]    Script Date: 13/11/2025 7:33:48 PM ******/
 SET ANSI_NULLS ON
 GO
