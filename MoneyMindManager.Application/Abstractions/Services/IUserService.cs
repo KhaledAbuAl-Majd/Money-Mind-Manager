@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using MoneyMindManager.Core;
 using MoneyMindManager.Core.Abstractions;
 using MoneyMindManager.Core.Enums;
-using MoneyMindManager.Shared.DTOs;
+using MoneyMindManager.Core.Paged_Result_DTOs;
 using MoneyMindManager.Shared.DTOs.Permissions;
 using MoneyMindManager.Shared.DTOs.User;
 
@@ -18,7 +19,7 @@ namespace MoneyMindManager.Application.Abstractions.Services
         Task<IResult<UserDTO>> GetByPersonID(int personID);
         Task<IResult<bool>> Delete(int userID, int currentUserID);
         Task<IResult<bool>> ChangePassword(int userID, string oldPassword, string newPassword, int currentUserID);
-        Task<IResult<PagedResultDTO<UserDTO>>> GetAll(UserFilterDTO userFilterDTO, int currentUserID);
+        Task<IResult<PagedResultDTO<UserSummary>>> GetAll(UserFilterDTO userFilterDTO, int currentUserID);
         Task<IResult<bool>> IsExistByUserID(int userID, bool includeDeleted = true);
         Task<IResult<bool>> IsExistByUserName(string userName, bool includeDeleted = true);
         Task<IResult<bool>> IsExistByPersonID(int personID, bool includeDeleted = true);

@@ -55,6 +55,7 @@
     <Compile Include="Repositories\Database\SQLServer\SQLCurrencyRepository.cs" />
     <Compile Include="Repositories\Database\SQLServer\SQLDatabaseSettings.cs" />
     <Compile Include="Repositories\Database\SQLServer\SQLPersonRepository.cs" />
+    <Compile Include="Repositories\Database\SQLServer\SQLUserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KhaledUtils\KhaledUtils.csproj">

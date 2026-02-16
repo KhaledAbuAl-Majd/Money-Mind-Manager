@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
+using MoneyMindManager.Core;
 using MoneyMindManager.Core.Abstractions;
+using MoneyMindManager.Core.Paged_Result_DTOs;
 using MoneyMindManager.Domain.Criteria;
 using MoneyMindManager.Domain.Entities;
-using MoneyMindManager.Shared.DTOs;
-using MoneyMindManager.Shared.DTOs.User;
 
 namespace MoneyMindManager.Domain.Abstractions
 {
@@ -22,7 +22,7 @@ namespace MoneyMindManager.Domain.Abstractions
         Task<IResult<bool>> IsExistByUserName(string userName, bool includeDeleted);
         Task<IResult<string>> GetSaltByUserID(int userID);
         Task<IResult<string>> GetSaltByUserName(string userName);
-        Task<IResult<PagedResultDTO<User>>> GetAll(UserSearchCriteria userFilterDTO, int currentUserID);
+        Task<IResult<PagedResultDTO<UserSummary>>> GetAll(UserSearchCriteria userFilterDTO, int currentUserID);
         Task<IResult<int>> GetPermissions(int userID);
     }
 }

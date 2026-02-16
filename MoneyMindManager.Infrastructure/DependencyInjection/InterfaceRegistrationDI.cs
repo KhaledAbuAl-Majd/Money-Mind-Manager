@@ -20,6 +20,7 @@ namespace MoneyMindManager.Infrastructure
             services.AddScoped<ICurrencyRepository, SQLCurrencyRepository>();
             services.AddScoped<IAccountRepository, SQLAccountRepository>();
             services.AddScoped<IPersonRepository, SQLPersonRepository>();
+            services.AddScoped<IUserRepository, SQLUserRepository>();
 
             services.AddSingleton<IEventLogLoggerSettings, EventLogLoggerSettings>();
             services.AddSingleton<ILogger, EventLogLogger>();

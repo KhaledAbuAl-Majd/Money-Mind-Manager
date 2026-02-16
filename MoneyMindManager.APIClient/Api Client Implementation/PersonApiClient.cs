@@ -2,6 +2,7 @@
 using MoneyMindManager.Application.Abstractions.Services;
 using MoneyMindManager.Client.Abstractions.ApiClient;
 using MoneyMindManager.Core.Abstractions;
+using MoneyMindManager.Core.Paged_Result_DTOs;
 using MoneyMindManager.Shared.DTOs;
 using MoneyMindManager.Shared.DTOs.Person;
 

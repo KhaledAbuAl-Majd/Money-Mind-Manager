@@ -52,6 +52,7 @@
     <Compile Include="Paged Result DTOs\PagedResultWithAmountDTO.cs" />
     <Compile Include="PermissionInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserSummary.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

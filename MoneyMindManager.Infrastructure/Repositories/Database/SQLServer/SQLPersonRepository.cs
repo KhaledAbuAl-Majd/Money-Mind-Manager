@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using MoneyMindManager.Application.Abstractions.Handlers;
 using MoneyMindManager.Core;
 using MoneyMindManager.Core.Abstractions;
+using MoneyMindManager.Core.Paged_Result_DTOs;
 using MoneyMindManager.Domain.Abstractions;
 using MoneyMindManager.Domain.Criteria;
 using MoneyMindManager.Domain.Entities;
 using MoneyMindManager.Domain.NewFolder1;
-using MoneyMindManager.Shared.DTOs;
 
 namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
 {

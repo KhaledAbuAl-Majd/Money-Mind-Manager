@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using MoneyMindManager.Application.Abstractions.Handlers;
 using MoneyMindManager.Application.Abstractions.Mappers;
 using MoneyMindManager.Application.Abstractions.Services;
+using MoneyMindManager.Core;
 using MoneyMindManager.Core.Abstractions;
 using MoneyMindManager.Core.Enums;
+using MoneyMindManager.Core.Paged_Result_DTOs;
 using MoneyMindManager.Domain.Abstractions;
 using MoneyMindManager.Domain.Abstractions.Services;
-using MoneyMindManager.Shared.DTOs;
 using MoneyMindManager.Shared.DTOs.Permissions;
 using MoneyMindManager.Shared.DTOs.User;
 
@@ -247,13 +247,14 @@ namespace MoneyMindManager.Application.Services.User
             return handler.Success(result.Data);
         }
 
-        public async Task<IResult<PagedResultDTO<UserDTO>>> GetAll(UserFilterDTO userFilterDTO, int currentUserID)
+        public async Task<IResult<PagedResultDTO<UserSummary>>> GetAll(UserFilterDTO userFilterDTO, int currentUserID)
         {
-            var handler = _resultFactory.Create<PagedResultDTO<UserDTO>>();
+            var handler = _resultFactory.Create<PagedResultDTO<UserSummary>>();
             if (userFilterDTO is null)
                 return handler.Failure("البيانات المرسلة غير صالحة");
 
             var userSearchCriteria = _userMapper.UserFilterDTOTOUserSearchCriteria(userFilterDTO);
+            userSearchCriteria.RowsPerPage = 15;
             var result = await _userRepository.GetAll(userSearchCriteria, currentUserID);
 
             if (result is null)
@@ -265,10 +266,10 @@ namespace MoneyMindManager.Application.Services.User
             if (result is null)
                 return handler.Failure("failed to get all users");
 
-            var returnResult = new PagedResultDTO<UserDTO>(result.Data.Data.Select(entity => _userMapper.EntityToDTO(entity)),
-                result.Data.TotalPages, result.Data.TotalRecords);
+            //var returnResult = new PagedResultDTO<UserDTO>(result.Data.Data.Select(entity => _userMapper.EntityToDTO(entity)),
+            //    result.Data.TotalPages, result.Data.TotalRecords);
 
-            return handler.Success(returnResult);
+            return result;
         }
 
         public async Task<IResult<bool>> IsExistByUserID(int userID, bool includeDeleted = true)

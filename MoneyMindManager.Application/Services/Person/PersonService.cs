@@ -6,6 +6,7 @@ using MoneyMindManager.Application.Abstractions.Mappers;
 using MoneyMindManager.Application.Abstractions.Services;
 using MoneyMindManager.Core.Abstractions;
 using MoneyMindManager.Core.Enums;
+using MoneyMindManager.Core.Paged_Result_DTOs;
 using MoneyMindManager.Domain.Abstractions;
 using MoneyMindManager.Shared.DTOs;
 using MoneyMindManager.Shared.DTOs.Person;

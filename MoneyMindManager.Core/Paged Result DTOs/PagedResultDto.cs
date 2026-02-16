@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace MoneyMindManager.Shared.DTOs
+namespace MoneyMindManager.Core.Paged_Result_DTOs
 {
     public class PagedResultDTO<T>
     {
-        public IEnumerable<T> Data {get;set;}
+        public IEnumerable<T> Data { get; set; }
         public int TotalPages { get; set; }
         public int TotalRecords { get; set; }
 
