@@ -19,6 +19,8 @@ namespace MoneyMindManager.Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
             services.AddSingleton<IDatabaseSettings, SQLDatabaseSettings>();
+            services.AddScoped<IDatabaseMaintenanceService, SQLDatabaseMaintenanceService>();
+
             services.AddScoped<ICurrencyRepository, SQLCurrencyRepository>();
             services.AddScoped<IAccountRepository, SQLAccountRepository>();
             services.AddScoped<IPersonRepository, SQLPersonRepository>();

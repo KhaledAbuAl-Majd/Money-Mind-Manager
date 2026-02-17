@@ -8,6 +8,7 @@ using MoneyMindManager.Application.Services;
 using MoneyMindManager.Application.Services.Account;
 using MoneyMindManager.Application.Services.Authorization;
 using MoneyMindManager.Application.Services.Currency;
+using MoneyMindManager.Application.Services.Database;
 using MoneyMindManager.Application.Services.Permissions;
 using MoneyMindManager.Application.Services.User;
 using MoneyMindManager.Domain.Abstractions.Services;
@@ -30,6 +31,7 @@ namespace MoneyMindManager.Application
             services.AddSingleton<IPasswordHasher, PasswordHasher>();
             services.AddScoped<IAuthorizationService, AuthorizationService>();
 
+            services.AddScoped<IDatabaseAppService, DatabaseAppService>();
             services.AddScoped<ICurrencyService, CurrencyService>();
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IPersonService, PersonService>();

@@ -46,6 +46,7 @@
     <Compile Include="Abstractions\Repositories\IDatabaseSettings.cs" />
     <Compile Include="Abstractions\Repositories\IPersonRepository.cs" />
     <Compile Include="Abstractions\Repositories\IUserRepository.cs" />
+    <Compile Include="Abstractions\Services\IDatabaseMaintenanceService.cs" />
     <Compile Include="Abstractions\Services\IHashingService.cs" />
     <Compile Include="Abstractions\Services\IHashingSettings.cs" />
     <Compile Include="Abstractions\Services\IPasswordHasher.cs" />

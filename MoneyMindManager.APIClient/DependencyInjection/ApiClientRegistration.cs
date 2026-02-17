@@ -8,6 +8,7 @@ namespace MoneyMindManager.APIClient.DependencyInjection
     {
         public static IServiceCollection AddApiClient(this IServiceCollection services)
         {
+            services.AddScoped<IDatabaseAppApiClient, DatabaseAppClient>();
             services.AddScoped<ICurrencyApiClient, CurrencyApiClient>();
             services.AddScoped<IAccountApiClient, AccountApiClient>();
             services.AddScoped<IPersonApiClient, PersonApiClient>();

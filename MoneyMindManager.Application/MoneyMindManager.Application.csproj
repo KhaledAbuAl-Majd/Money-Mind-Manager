@@ -46,6 +46,7 @@
     <Compile Include="Abstractions\Handlers\IResultFactory.cs" />
     <Compile Include="Abstractions\Handlers\IResultHandler.cs" />
     <Compile Include="Abstractions\Infrastructure\IEventLogLoggerSettings.cs" />
+    <Compile Include="Abstractions\Services\IDatabaseAppService.cs" />
     <Compile Include="Abstractions\Services\IAccountService.cs" />
     <Compile Include="Abstractions\Services\IPersonService.cs" />
     <Compile Include="Abstractions\Services\IUserService.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Mappers\Mappers Implementaion\UserMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Account\AccountService.cs" />
+    <Compile Include="Services\Database\DatabaseAppService.cs" />
     <Compile Include="Services\Identity\AuthorizationService.cs" />
     <Compile Include="Services\Currency\CurrencyService.cs" />
     <Compile Include="Services\Identity\PasswordHasher.cs" />
