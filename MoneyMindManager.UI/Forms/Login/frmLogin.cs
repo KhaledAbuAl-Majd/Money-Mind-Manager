@@ -1,41 +1,49 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using KhaledControlLibrary1;
+using Microsoft.Extensions.DependencyInjection;
 using MoneyMindManager.Client.Abstractions.ApiClient;
 using MoneyMindManager.Core;
+using MoneyMindManager.Shared.DTOs.Account;
 using MoneyMindManager.Shared.DTOs.Currency;
+using MoneyMindManager.Shared.DTOs.User;
 using MoneyMindManager.UI.Abstractions;
-using MoneyMindManager_Business;
 using MoneyMindManager_Presentation.Global;
 using MoneyMindManager_Presentation.Main;
-using MoneyMindManagerGlobal;
-using static Guna.UI2.Native.WinApi;
 
 namespace MoneyMindManager_Presentation.Login
 {
     public partial class frmLogin : Form
     {
+        private readonly IServiceProvider _serviceProvider;
         private readonly ICurrencyApiClient _currencyApi;
-
+        private readonly IUserApiClient _userApiClient;
+        private readonly IAccountApiClient _accountApiClient;
         private readonly IMessageBoxService _messageBoxService;
-
         private readonly ILogger _logger;
+        private readonly IUserCredentialsService _userCredentailService;
+        private readonly IUserSession _userSession;
+        private readonly IActiveFormTracker _activeFormTracker;
+        private readonly IDatabaseAppApiClient _databaseAppApiClient;
 
-        public frmLogin(ICurrencyApiClient currencyApiClient,IMessageBoxService messageBoxService,ILogger logger)
+        public frmLogin(IServiceProvider serviceProvider, ICurrencyApiClient currencyApiClient, IMessageBoxService messageBoxService,
+            ILogger logger, IUserCredentialsService userCredentialsService, IUserApiClient userApiClient, IAccountApiClient accountApiClient,
+            IUserSession userSession, IActiveFormTracker activeFormTracker, IDatabaseAppApiClient databaseAppApiClient)
         {
             InitializeComponent();
+            this._serviceProvider = serviceProvider;
             this._currencyApi = currencyApiClient;
+            this._userApiClient = userApiClient;
+            this._accountApiClient = accountApiClient;
             this._messageBoxService = messageBoxService;
             this._logger = logger;
+            this._userCredentailService = userCredentialsService;
+            this._userSession = userSession;
+            this._activeFormTracker = activeFormTracker;
+            this._databaseAppApiClient = databaseAppApiClient;
 
             //to user doubled buffered and avoid flickers when change mode or Move form
 
@@ -117,7 +125,7 @@ namespace MoneyMindManager_Presentation.Login
 
             string userName = null, password = null;
 
-            var funResult = await  clsPL_Global.GetStoredCredential();
+            var funResult = await _userCredentailService.GetStoredCredential();
             userName = funResult.UserName;
             password = funResult.Password;
 
@@ -161,12 +169,15 @@ namespace MoneyMindManager_Presentation.Login
 
         private async void frmLogin_Load(object sender, EventArgs e)
         {
-            clsPL_Global.ActiveForm = this;
+            _activeFormTracker.ChangeActiveForm(this);
             _enableShowPasswordAfterBeEmpty = false;
             _loadCredentials = true;
             await _ChangeMode(enMode.Login);
 
-            _ = clsBLLGlobal.RoutineMaintenance();
+            var result = await _databaseAppApiClient.RoutineMaintenance();
+
+            if (!result.IsSuccess)
+                _messageBoxService.DisplayError(result.ErrorMessage);
         }
 
         private void gtswLogin_ShowPassword_CheckedChanged(object sender, EventArgs e)
@@ -213,7 +224,14 @@ namespace MoneyMindManager_Presentation.Login
 
                 if (_Mode == enMode.CreateAccount)
                 {
-                    if (clsUser.IsUserExistByUserName(userName))
+                    var result = _userApiClient.IsExistByUserName(userName).GetAwaiter().GetResult();
+                    if (!result.IsSuccess)
+                    {
+                        _messageBoxService.DisplayError($"{result.ErrorMessage}\nبرجاء إعادة تشغيل البرنامج!");
+                        return;
+                    }
+
+                    if (result.Data)
                     {
                         e.CancelEventArgs.Cancel = true;
                         errorProvider1.SetError(kgtxtCreateAccount_UserName, "اسم المستخدم مستخدم, قم بتجربة اسم آخر");
@@ -233,9 +251,16 @@ namespace MoneyMindManager_Presentation.Login
             {
                 string accountName = kgtxtCreateAccount_AccountName.ValidatedText;
 
+                var result = _accountApiClient.IsExistByAccountName(accountName).GetAwaiter().GetResult();
+                if (!result.IsSuccess)
+                {
+                    _messageBoxService.DisplayError($"{result.ErrorMessage}\nبرجاء إعادة تشغيل البرنامج!");
+                    return;
+                }
+
                 if (_Mode == enMode.CreateAccount)
                 {
-                    if (clsAccount.IsAccountExistByAccountName(accountName))
+                    if (result.Data)
                     {
                         e.CancelEventArgs.Cancel = true;
                         errorProvider1.SetError(kgtxtCreateAccount_AccountName, "اسم الحساب مستخدم, قم بتجربة اسم آخر");
@@ -256,7 +281,7 @@ namespace MoneyMindManager_Presentation.Login
 
             if (!ValidateChildren())
             {
-                clsPL_MessageBoxs.ShowValidateChildrenFailedMessage();
+                _messageBoxService.ShowValidateChildrenFailedMessage();
                 return;
             }
             string userName = kgtxtLoginUserName.ValidatedText;
@@ -265,10 +290,18 @@ namespace MoneyMindManager_Presentation.Login
 
             this.UseWaitCursor = true;
 
-            clsUser user = await clsUser.FindUserByUserNameAndPassword_Login(userName, password);
+            var userResult = await _userApiClient.Login(new LoginRequestDTO(userName, password));
 
             this.UseWaitCursor = false;
             this.Cursor = Cursors.Default;
+
+            if (!userResult.IsSuccess)
+            {
+                _messageBoxService.DisplayError(userResult.ErrorMessage);
+                return;
+            }
+
+            var user = userResult.Data;
 
             if (user == null)
                 return;
@@ -276,24 +309,33 @@ namespace MoneyMindManager_Presentation.Login
 
             if (gchkLogin_RemeberMe.Checked)
             {
-               _= clsPL_Global.RememberUsernameAndPassword(userName, password);
+                _ = _userCredentailService.RememberUsernameAndPassword(userName, password);
             }
             else
             {
-               _= clsPL_Global.RememberUsernameAndPassword(null, null);
+                _ = clsPL_Global.RememberUsernameAndPassword(null, null);
             }
 
             _ = Task.Run(() => _logger.LogSuccess($"[LOGIN SUCCESS] User ID = {user.UserID}, Username = {user.UserName}, Login Time = {DateTime.Now}"));
 
-            frmMain frm = new frmMain();
+            frmMain frm = _serviceProvider.GetRequiredService<frmMain>();
 
-            if (!await clsPL_Global.Login(user, frm))
+            if (!await _userSession.StartSession(user))
             {
-                clsPL_Global.ActiveForm = this;
+                _activeFormTracker.ChangeActiveForm(this);
                 _messageBoxService.DisplayError("فشل تسجيل الدخول !");
                 //clsPL_MessageBoxs.ShowErrorMessage("فشل تسجيل الدخول !");
                 return;
             }
+            _userSession.OnSessionExpired += async () =>
+            {
+                if (frm != null && !frm.IsDisposed)
+                {
+                    frm.Dispose();
+                    await OnLogout();
+                    return;
+                }
+            };
 
             this.Hide();
 
@@ -302,15 +344,20 @@ namespace MoneyMindManager_Presentation.Login
 
             if (!this.IsDisposed)
             {
-                clsPL_Global.ActiveForm = this;
-                this.Show();
-                await _ChangeMode(enMode.Login);
+                await OnLogout();
             }
+        }
+
+        private async Task OnLogout()
+        {
+            _activeFormTracker.ChangeActiveForm(this);
+            this.Show();
+            await _ChangeMode(enMode.Login);
         }
 
         private void frmMain_OnCloseProgramm()
         {
-            clsPL_Global.ActiveForm = this;
+            _activeFormTracker.ChangeActiveForm(this);
             this.Close();
         }
 
@@ -321,7 +368,7 @@ namespace MoneyMindManager_Presentation.Login
 
             if (!ValidateChildren())
             {
-                clsPL_MessageBoxs.ShowValidateChildrenFailedMessage();
+                _messageBoxService.ShowValidateChildrenFailedMessage();
                 return;
             }
 
@@ -333,17 +380,23 @@ namespace MoneyMindManager_Presentation.Login
 
             this.UseWaitCursor = true;
 
-            int? newAccountID = await clsAccount.CreateAccount(accountName, defaultCurrencyID, null, personName, null, null, null, null, userName, password);
+            var creatingResult = await _accountApiClient.Add(new CreateAccountDTO(accountName, defaultCurrencyID, null, personName, null, null, null, null, userName, password));
+
+            if (!creatingResult.IsSuccess)
+            {
+                _messageBoxService.DisplayError(creatingResult.ErrorMessage);
+                return;
+            }
+
+            short? newAccountID = creatingResult.Data;
+
+            _ = Task.Run(() => _logger.LogInfo($"New Account created with ID {newAccountID} at {DateTime.Now}"));
 
             this.UseWaitCursor = false;
             this.Cursor = Cursors.Default;
 
             if (newAccountID != null)
             {
-#pragma warning disable CS4014
-                Task.Run(() => clsLogger.LogAtEventLog($"New Account created with ID {newAccountID} at {DateTime.Now}"));
-#pragma warning restore CS4014
-
                 _messageBoxService.Display($"تم إنشاء الحساب بنجاح مع معرف حساب  [ {newAccountID} ]  , قم بتسجيل الدخول", "نجاح", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 _loadCredentials = false;
@@ -398,26 +451,6 @@ namespace MoneyMindManager_Presentation.Login
         {
             if (e.KeyChar == (char)Keys.Enter)
                 gbtnLogin.PerformClick();
-        }
-
-        private void guna2ControlBox2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblHeader_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void gpnlLogin_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void gpnlCreateAccount_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }

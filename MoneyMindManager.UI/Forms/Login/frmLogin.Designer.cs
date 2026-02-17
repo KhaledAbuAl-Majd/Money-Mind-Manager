@@ -106,7 +106,6 @@
             this.gpnlLogin.ShadowDecoration.Enabled = true;
             this.gpnlLogin.Size = new System.Drawing.Size(399, 462);
             this.gpnlLogin.TabIndex = 1;
-            this.gpnlLogin.Paint += new System.Windows.Forms.PaintEventHandler(this.gpnlLogin_Paint);
             // 
             // label3
             // 
@@ -436,7 +435,7 @@
             this.gpnlCreateAccount.Size = new System.Drawing.Size(399, 462);
             this.gpnlCreateAccount.TabIndex = 9;
             this.gpnlCreateAccount.UseTransparentBackground = true;
-            this.gpnlCreateAccount.Paint += new System.Windows.Forms.PaintEventHandler(this.gpnlCreateAccount_Paint);
+            
             // 
             // label4
             // 
@@ -998,7 +997,7 @@
             this.guna2ControlBox2.TabIndex = 10;
             this.guna2ControlBox2.TabStop = false;
             this.guna2ControlBox2.UseTransparentBackground = true;
-            this.guna2ControlBox2.Click += new System.EventHandler(this.guna2ControlBox2_Click);
+
             // 
             // lblHeader
             // 
@@ -1011,7 +1010,7 @@
             this.lblHeader.TabIndex = 11;
             this.lblHeader.Text = "Money Mind Manager";
             this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblHeader.Click += new System.EventHandler(this.lblHeader_Click);
+
             // 
             // guna2DragControl2
             // 
