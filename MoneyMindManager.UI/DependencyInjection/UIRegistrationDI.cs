@@ -4,6 +4,7 @@ using MoneyMindManager.UI.Abstractions;
 using MoneyMindManager.UI.Services;
 using MoneyMindManager_Presentation.Login;
 using MoneyMindManager_Presentation.Main;
+using MoneyMindManager_Presentation.Users;
 
 namespace MoneyMindManager.UI.DependencyInjection
 {
@@ -26,6 +27,7 @@ namespace MoneyMindManager.UI.DependencyInjection
 
             //forms
             services.AddSingleton<frmLogin>();
+            services.AddTransient<frmUserInfo>();
 
 
             return services;

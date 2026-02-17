@@ -658,7 +658,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             var frm = new frmSelectPerson();
             frm.OnPersonSelected += FrmSelectPerson_OnPersonSelected;
-            clsPL_Global.MainForm.AddNewFormAsDialog(frm);
+            clsPL_Global.MainForm.OpenDialog(frm);
         }
 
         private void FrmSelectPerson_OnPersonSelected(object sender, frmSelectPerson.SelectPersonEventArgs e)

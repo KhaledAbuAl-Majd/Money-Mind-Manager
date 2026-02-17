@@ -64,7 +64,7 @@ namespace MoneyMindManager_Presentation.People.Controls
         {
             var frm = new frmSelectPerson();
             frm.OnPersonSelected += FrmSelectPerson_OnPersonSelected;
-            clsPL_Global.MainForm.AddNewFormAsDialog(frm);
+            clsPL_Global.MainForm.OpenDialog(frm);
         }
 
         async Task _FindPerson(int personID)

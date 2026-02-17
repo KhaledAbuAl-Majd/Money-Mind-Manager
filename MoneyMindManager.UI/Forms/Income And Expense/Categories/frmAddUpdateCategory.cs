@@ -184,7 +184,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             var frm = new frmSelectCategory(Convert.ToBoolean(_isIncome));
             frm.OnCategorySelected += Frm_OnCategorySelected;
             //frm.ShowDialog(clsGlobal_UI.MainForm);
-            clsPL_Global.MainForm.AddNewFormAsDialog(frm);
+            clsPL_Global.MainForm.OpenDialog(frm);
         }
         async Task _Save()
         {

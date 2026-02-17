@@ -298,7 +298,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
         {
             var frm = new frmSelectCategory();
             frm.OnCategorySelected += Frm_OnCategorySelected;
-            clsPL_Global.MainForm.AddNewFormAsDialog(frm);
+            clsPL_Global.MainForm.OpenDialog(frm);
         }
 
         private async void Frm_OnCategorySelected(object sender, frmSelectCategory.SelecteCategoryEventArgs e)

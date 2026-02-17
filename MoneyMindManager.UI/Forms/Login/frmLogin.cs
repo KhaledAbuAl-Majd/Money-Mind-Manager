@@ -340,6 +340,7 @@ namespace MoneyMindManager_Presentation.Login
             this.Hide();
 
             frm.OnCloseProgramm += frmMain_OnCloseProgramm;
+            _activeFormTracker.ChangeActiveForm(frm);
             frm.ShowDialog();
 
             if (!this.IsDisposed)
