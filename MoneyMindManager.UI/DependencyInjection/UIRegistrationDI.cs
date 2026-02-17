@@ -20,6 +20,10 @@ namespace MoneyMindManager.UI.DependencyInjection
             services.AddScoped<IUserSession, UserSession>();
             services.AddScoped<IFolderService, FolderService>();
 
+
+            services.AddSingleton<IWindowsRegisterysettings, WindowsRegistrysettings>();
+            services.AddSingleton<IUserCredentialsService, WindowsRegistryUserCredentialsService>();
+
             //forms
             services.AddSingleton<frmLogin>();
 
