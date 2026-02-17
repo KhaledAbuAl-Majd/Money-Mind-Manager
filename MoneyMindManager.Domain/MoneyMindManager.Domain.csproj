@@ -51,6 +51,7 @@
     <Compile Include="Abstractions\Services\IPasswordHasher.cs" />
     <Compile Include="Abstractions\Services\IPermissionService.cs" />
     <Compile Include="Abstractions\Services\IRandomGenerator.cs" />
+    <Compile Include="Abstractions\Services\ISymmetricEncryptionSettings.cs" />
     <Compile Include="Criteria\PersonSelectSearchCriteria.cs" />
     <Compile Include="Criteria\UserSearchCriteria.cs" />
     <Compile Include="Entities\Account.cs" />

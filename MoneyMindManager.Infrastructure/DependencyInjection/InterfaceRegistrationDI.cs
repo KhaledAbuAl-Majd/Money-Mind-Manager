@@ -2,9 +2,11 @@
 using MoneyMindManager.Application.Abstractions.Infrastructure;
 using MoneyMindManager.Application.Services;
 using MoneyMindManager.Core;
+using MoneyMindManager.Core.Abstractions;
 using MoneyMindManager.Domain.Abstractions;
 using MoneyMindManager.Domain.Abstractions.Services;
 using MoneyMindManager.Infrastructure.General_Services;
+using MoneyMindManager.Infrastructure.General_Services.Cryptography;
 using MoneyMindManager.Infrastructure.Logging;
 using MoneyMindManager.Infrastructure.Repositories;
 using MoneyMindManager.Infrastructure.Repositories.Database.SQLServer;
@@ -28,6 +30,8 @@ namespace MoneyMindManager.Infrastructure
             services.AddSingleton<IRandomGenerator, RandomGenerator>();
             services.AddSingleton<IHashingSettings, HashingSettings>();
             services.AddSingleton<IHashingService, Sha256HashingService>();
+            services.AddSingleton<ISymmetricEncryptionSettings, SymmetricEncryptionSettings>();
+            services.AddSingleton<ISymmetricEncryption, SymmetricEncryption>();
 
             return services;
         }

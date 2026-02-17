@@ -46,7 +46,9 @@
   <ItemGroup>
     <Compile Include="DependencyInjection\InterfaceRegistrationDI.cs" />
     <Compile Include="General Services\Cryptography\HashingSettings.cs" />
+    <Compile Include="General Services\Cryptography\SymmetricEncryption.cs" />
     <Compile Include="General Services\Cryptography\Sha256HashingService.cs" />
+    <Compile Include="General Services\Cryptography\SymmetricEncryptionSettings.cs" />
     <Compile Include="General Services\Logging\EventLogLogger.cs" />
     <Compile Include="General Services\Logging\EventLogLoggerSettings.cs" />
     <Compile Include="General Services\Cryptography\RandomGenerator.cs" />
