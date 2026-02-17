@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using MoneyMindManager.UI.Abstractions;
-using MoneyMindManager_Presentation;
 
 namespace MoneyMindManager.UI.Services
 {
-    public class MessageBoxService: IMessageBoxService
+    public class MessageBoxService : IMessageBoxService
     {
         private readonly IActiveFormTracker _activeFormTracker;
 
@@ -48,6 +44,11 @@ namespace MoneyMindManager.UI.Services
             }));
 
             return d;
+        }
+
+        public void ShowValidateChildrenFailedMessage()
+        {
+            Display("تم العثور على حقول غير صالحة. ضع المؤشر على العلامات الحمراء لعرض سبب الخطأ.", "خطأ في التحقق", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }
