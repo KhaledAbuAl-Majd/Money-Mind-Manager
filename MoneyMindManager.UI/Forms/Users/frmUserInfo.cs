@@ -21,6 +21,16 @@ namespace MoneyMindManager_Presentation.Users
         public frmUserInfo(int userID)
         {
             InitializeComponent();
+            //this._userID = userID;
+        }
+        public frmUserInfo()
+        {
+            InitializeComponent();
+            //this._userID = userID;
+        }
+
+        public void Initialize(int userID)
+        {
             this._userID = userID;
         }
 

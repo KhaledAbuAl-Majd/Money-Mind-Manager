@@ -8,6 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using KhaledControlLibrary1;
+using MoneyMindManager.Client.Abstractions.ApiClient;
+using MoneyMindManager.Core.Enums;
+using MoneyMindManager.Shared.DTOs.Account;
+using MoneyMindManager.UI.Abstractions;
 using MoneyMindManager_Business;
 using MoneyMindManager_Presentation.Global;
 using MoneyMindManager_Presentation.Users;
@@ -16,14 +20,26 @@ namespace MoneyMindManager_Presentation
 {
     public partial class frmCurrentAccount : Form
     {
+        private readonly IAccountApiClient _accountApiClient;
+        private readonly IMessageBoxService _messageBoxService;
+        private readonly IUserSession _userSession;
+        private readonly IUserApiClient _userApiClient;
+        private readonly IFormDisplayer _formDisplayer;
+
         enum enMode { UpdatAble, ReadOnly };
         enMode _Mode = enMode.ReadOnly;
-        public frmCurrentAccount()
+        public frmCurrentAccount(IAccountApiClient accountApiClient,IMessageBoxService messageBoxService,
+            IUserSession userSession,IUserApiClient userApiClient,IFormDisplayer formDisplayer)
         {
             InitializeComponent();
+            this._accountApiClient = accountApiClient;
+            this._messageBoxService = messageBoxService;
+            this._userSession = userSession;
+            this._userApiClient = userApiClient;
+            this._formDisplayer = formDisplayer;
         }
 
-        clsAccount _AccountInfo;
+        AccountBaseDTO _AccountInfo;
 
         void _SetReadOnlyAtTextBox(KhaledGuna2TextBox kgtxt)
         {
@@ -46,16 +62,22 @@ namespace MoneyMindManager_Presentation
 
             if (!ValidateChildren())
             {
-                clsPL_MessageBoxs.ShowValidateChildrenFailedMessage();
+                _messageBoxService.ShowValidateChildrenFailedMessage();
                 return;
             }
 
             _AccountInfo.AccountName = kgtxtAccountName.ValidatedText;
             _AccountInfo.Description = kgtxtDiscription.ValidatedText;
 
-            if (await _AccountInfo.Save())
+            var updateResult = await _accountApiClient.Update(_AccountInfo, Convert.ToInt32(_userSession.UserID));
+
+            if (updateResult.IsSuccess)
             {
-                clsPL_MessageBoxs.ShowMessage("تم تعديل بيانات الحساب بنجاح", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                _messageBoxService.Display("تم تعديل بيانات الحساب بنجاح", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                _messageBoxService.DisplayError(updateResult.ErrorMessage);
             }
         }
 
@@ -68,23 +90,31 @@ namespace MoneyMindManager_Presentation
 
             gbtnDeleteAccount.Enabled = false;
             gbtnSave.Enabled = false;
-            clsPL_Global.MainForm.Enabled = false;
+            //clsPL_Global.MainForm.Enabled = false;
+            this.ParentForm.Enabled = false;
 
-            if (clsPL_MessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف الحساب نهائيا !", "طلب موافقة", MessageBoxButtons.OKCancel,
+            if (_messageBoxService.Display("هل أنت متأكد من رغبتك حذف الحساب نهائيا !", "طلب موافقة", MessageBoxButtons.OKCancel,
                 MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.OK)
             {
-                if (await _AccountInfo.DeleteAccount())
+
+                var deleteResult = await _accountApiClient.Delete(_AccountInfo.AccountID, Convert.ToInt32(_userSession.UserID));
+                if (deleteResult.IsSuccess)
                 {
-                    clsPL_MessageBoxs.ShowMessage("تم حذف الحساب بنجاح, سيتم تسجيل خروجك", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    clsPL_Global.Logout();
+                    _messageBoxService.Display("تم حذف الحساب بنجاح, سيتم تسجيل خروجك", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    _userSession.ClearSession();
                     return;
+                }
+                else
+                {
+                    _messageBoxService.DisplayError(deleteResult.ErrorMessage);
                 }
             }
 
             this.UseWaitCursor = false;
             gbtnDeleteAccount.Enabled = true;
             gbtnSave.Enabled = true;
-            clsPL_Global.MainForm.Enabled = true;
+            //clsPL_Global.MainForm.Enabled = true;
+            this.ParentForm.Enabled = false;
         }
 
         async Task _LoadData()
@@ -94,27 +124,33 @@ namespace MoneyMindManager_Presentation
             kgtxtDiscription.Text = _AccountInfo.Description;
             kgtxtBalance.RefreshNumber_DateTimeFormattedText(_AccountInfo.Balance.ToString());
             kgtxtCreatedDate.RefreshNumber_DateTimeFormattedText(_AccountInfo.CreatedDate.ToString());
-            var ownerUser = await _AccountInfo.GetCreatedbyUserInfo();
-            kgtxtCreatedByUserName.Text = ownerUser.UserName;
-            kgtxtDefaultCurrency.Text = _AccountInfo.DefaultCurrencyInfo?.CurrencyName;
+               var result = await _userApiClient.GetByUserID(_AccountInfo.AccountOwnerUserID);
+            if (result.IsSuccess)
+            {
+                var ownerUser = result.Data;
+                kgtxtCreatedByUserName.Text = ownerUser.UserName;
+                kgtxtDefaultCurrency.Text = _AccountInfo.DefaultCurrencyInfo?.CurrencyName;
+            }
+            else
+                _messageBoxService.DisplayError(result.ErrorMessage);
         }
 
         private async void frmCurrentAccount_Shown(object sender, EventArgs e)
         {
-            if (!await clsPL_Global.RefreshCurrentUser())
+            if (!await _userSession.Refresh())
             {
                 this.Close();
                 return;
             }
 
-            this._AccountInfo = clsPL_Global.CurrentUser?.AccountInfo;
+            this._AccountInfo = _userSession.CurrentUser?.AccountInfo;
 
             _SetReadOnlyAtTextBox(kgtxtBalance);
             _SetReadOnlyAtTextBox(kgtxtCreatedDate);
             _SetReadOnlyAtTextBox(kgtxtCreatedByUserName);
             _SetReadOnlyAtTextBox(kgtxtDefaultCurrency);
 
-            if (clsPL_Global.CurrentUser.IsAdmin)
+            if (_userSession.CurrentUser.IsAdmin)
             {
                 _Mode = enMode.UpdatAble;
                 _CancelReadOnlyAtTextBox(kgtxtAccountName);
@@ -131,7 +167,7 @@ namespace MoneyMindManager_Presentation
                 gbtnDeleteAccount.Enabled = false;
             }
 
-            kgtxtBalance.UseSystemPasswordChar = !clsPL_Global.CurrentUser.IsHasPermission(clsUser.enPermissions.AccountBalance);
+            kgtxtBalance.UseSystemPasswordChar = !_userSession.IsHasPermissions(enPermissions.AccountBalance);
 
             await _LoadData();
         }
@@ -161,8 +197,13 @@ namespace MoneyMindManager_Presentation
             if (_AccountInfo == null)
                 return;
 
-            frmUserInfo frm = new frmUserInfo(_AccountInfo.AccountOwnerUserID);
-            clsPL_Global.MainForm.AddNewFormAtContainer(frm);
+            //frmUserInfo frm = new frmUserInfo(_AccountInfo.AccountOwnerUserID);
+            //clsPL_Global.MainForm.AddNewFormAtContainer(frm);
+
+            _formDisplayer.OpenAtContainer<frmUserInfo>((frm) =>
+            {
+                frm.Initialize(_AccountInfo.AccountOwnerUserID);
+            });
         }
 
         private async void gbtnDeleteAccount_Click(object sender, EventArgs e)

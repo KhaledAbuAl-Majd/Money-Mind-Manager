@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using MoneyMindManager.Core;
 using MoneyMindManager.UI.Abstractions;
 using MoneyMindManager.UI.Models;
+using MoneyMindManagerGlobal;
 using Newtonsoft.Json;
 
 namespace MoneyMindManager.UI.Services
@@ -20,8 +21,38 @@ namespace MoneyMindManager.UI.Services
         }
         private string _GetUserSettingsFilePath(int userID)
         {
-            return _GetUserSettingsFilePath(userID);
+            string appData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+
+            // 2. دمج اسم الشركة واسم التطبيق (مهم جداً لتجنب التضارب)
+            string appFolder = Path.Combine(
+                appData,
+                "KhaledAbuAlMajd",         // اسم المطور أو الشركة
+                "MoneyMindManager"         // اسم التطبيق
+            );
+
+            string filePath = null;
+
+            try
+            {
+                if (!Directory.Exists(appFolder))
+                {
+                    Directory.CreateDirectory(appFolder);
+                }
+
+                string fileName = $"_User_{userID}_Settings.json";
+                filePath = Path.Combine(appFolder, fileName);
+            }
+            catch (Exception ex)
+            {
+                filePath = null;
+                _logger.LogError(ex.Message);
+                _messageBoxService.DisplayError(ex.Message);
+                return null;
+            }
+
+            return filePath;
         }
+
         public async Task<UserSettings> Get(int userID, bool defaultIfFailed = true)
         {
             UserSettings deserializedSettings = null;
