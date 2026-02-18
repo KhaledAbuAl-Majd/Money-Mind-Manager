@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using MoneyMindManager.Client.Abstractions.ApiClient;
+using MoneyMindManager.Core.Enums;
+using MoneyMindManager.Core.Extensions;
 using MoneyMindManager.Shared.DTOs.User;
 using MoneyMindManager.UI.Abstractions;
 using MoneyMindManager_Presentation.Global;
@@ -19,6 +21,8 @@ namespace MoneyMindManager.UI.Services
         }
 
         public UserDTO CurrentUser { get; private set; }
+
+        public int? UserID { get => CurrentUser?.UserID; }
         public clsUserSettings CurrentUserSettings { get; private set; }
 
         public event Action OnSessionExpired;
@@ -146,6 +150,14 @@ namespace MoneyMindManager.UI.Services
             _refreshTimer.Start();
 
             return true;
+        }
+
+        public bool IsHasPermissions(enPermissions permissions)
+        {
+            if (CurrentUser is null)
+                return false;
+
+            return CurrentUser.Permissions.IsHasPermission(permissions);
         }
     }
 }
