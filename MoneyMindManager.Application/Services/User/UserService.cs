@@ -23,9 +23,12 @@ namespace MoneyMindManager.Application.Services.User
         private readonly IAuthorizationService _authorizationService;
         private readonly IPermissionService _permissionService;
         private readonly IPasswordHasher _passwordHasher;
+        private readonly IPersonService _personService;
+        private readonly IAccountService _accountService;
 
         public UserService(IUserRepository userRepository, IResultFactory resultFactory, IUserMapper userMapper,
-            IAuthorizationService authorizationService, IPermissionService permissionService, IPasswordHasher passwordHasher)
+            IAuthorizationService authorizationService, IPermissionService permissionService, IPasswordHasher passwordHasher,
+            IPersonService personService, IAccountService accountService)
         {
             this._userRepository = userRepository;
             this._resultFactory = resultFactory;
@@ -33,6 +36,8 @@ namespace MoneyMindManager.Application.Services.User
             this._authorizationService = authorizationService;
             this._permissionService = permissionService;
             this._passwordHasher = passwordHasher;
+            this._personService = personService;
+            this._accountService = accountService;
         }
 
         public async Task<IResult<UserDTO>> Add(UserDTO userDTO, int currentUserID)
@@ -67,6 +72,19 @@ namespace MoneyMindManager.Application.Services.User
                 return handler.Failure("failed to add user");
 
             userDTO.UserID = result.Data;
+
+            var personDTOResult = await _personService.Get(Convert.ToInt32(userDTO?.PersonID), Convert.ToInt32(userDTO?.UserID));
+
+            //if (!personDTOResult.IsSuccess)
+            //    return handler.Failure(personDTOResult.ErrorMessage);
+
+            var accountDTOResult = await _accountService.Get(Convert.ToInt16(userDTO?.AccountID));
+
+            //if (!accountDTOResult.IsSuccess)
+            //    return handler.Failure(accountDTOResult.ErrorMessage);
+
+            userDTO.PersonInfo = personDTOResult?.Data;
+            userDTO.AccountInfo = accountDTOResult?.Data;
 
             return handler.Success(userDTO);
         }
@@ -126,7 +144,20 @@ namespace MoneyMindManager.Application.Services.User
             if (result.Data is null)
                 return handler.Failure("failed to login");
 
+            var personDTOResult = await _personService.Get(Convert.ToInt32(result.Data?.PersonID), Convert.ToInt32(result.Data?.UserID));
+
+            if (!personDTOResult.IsSuccess)
+                return handler.Failure(personDTOResult.ErrorMessage);
+
+            var accountDTOResult = await _accountService.Get(Convert.ToInt16(result.Data?.AccountID));
+
+            if (!accountDTOResult.IsSuccess)
+                return handler.Failure(accountDTOResult.ErrorMessage);
+
             var userDTO = _userMapper.EntityToDTO(result.Data);
+
+            userDTO.PersonInfo = personDTOResult?.Data;
+            userDTO.AccountInfo = accountDTOResult?.Data;
             return handler.Success(userDTO);
         }
 
@@ -145,7 +176,20 @@ namespace MoneyMindManager.Application.Services.User
             if (result.Data is null)
                 return handler.Failure("failed to get user");
 
+            var personDTOResult = await _personService.Get(Convert.ToInt32(result.Data?.PersonID), Convert.ToInt32(result.Data?.UserID));
+
+            if (!personDTOResult.IsSuccess)
+                return handler.Failure(personDTOResult.ErrorMessage);
+
+            var accountDTOResult = await _accountService.Get(Convert.ToInt16(result.Data?.AccountID));
+
+            if (!accountDTOResult.IsSuccess)
+                return handler.Failure(accountDTOResult.ErrorMessage);
+
             var userDTO = _userMapper.EntityToDTO(result.Data);
+
+            userDTO.PersonInfo = personDTOResult?.Data;
+            userDTO.AccountInfo = accountDTOResult?.Data;
             return handler.Success(userDTO);
         }
 
@@ -164,7 +208,20 @@ namespace MoneyMindManager.Application.Services.User
             if (result.Data is null)
                 return handler.Failure("failed to get user");
 
+            var personDTOResult = await _personService.Get(Convert.ToInt32(result.Data?.PersonID), Convert.ToInt32(result.Data?.UserID));
+
+            if (!personDTOResult.IsSuccess)
+                return handler.Failure(personDTOResult.ErrorMessage);
+
+            var accountDTOResult = await _accountService.Get(Convert.ToInt16(result.Data?.AccountID));
+
+            if (!accountDTOResult.IsSuccess)
+                return handler.Failure(accountDTOResult.ErrorMessage);
+
             var userDTO = _userMapper.EntityToDTO(result.Data);
+
+            userDTO.PersonInfo = personDTOResult?.Data;
+            userDTO.AccountInfo = accountDTOResult?.Data;
             return handler.Success(userDTO);
         }
 
@@ -183,7 +240,20 @@ namespace MoneyMindManager.Application.Services.User
             if (result.Data is null)
                 return handler.Failure("failed to get user");
 
+            var personDTOResult = await _personService.Get(Convert.ToInt32(result.Data?.PersonID), Convert.ToInt32(result.Data?.UserID));
+
+            if (!personDTOResult.IsSuccess)
+                return handler.Failure(personDTOResult.ErrorMessage);
+
+            var accountDTOResult = await _accountService.Get(Convert.ToInt16(result.Data?.AccountID));
+
+            if (!accountDTOResult.IsSuccess)
+                return handler.Failure(accountDTOResult.ErrorMessage);
+
             var userDTO = _userMapper.EntityToDTO(result.Data);
+
+            userDTO.PersonInfo = personDTOResult?.Data;
+            userDTO.AccountInfo = accountDTOResult?.Data;
             return handler.Success(userDTO);
         }
 

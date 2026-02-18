@@ -53,7 +53,7 @@ namespace MoneyMindManager.Shared.DTOs.User
         }
 
         // composition
-        public PersonDTO PersonInfo { get; private set; }
+        public PersonDTO PersonInfo { get; set; }
         public AccountBaseDTO AccountInfo { get; set; }
         public UserDTO(int? userID, string userName, int? personID, IEnumerable<PermissionInfo> permissionsList, int permissions
             , bool isActive, string notes, short? accountID, bool isDeleted, int? createdByUserID, DateTime createdDate)
