@@ -18,12 +18,15 @@ namespace MoneyMindManager.Application.Services
         private readonly IPersonMapper _personMapper;
         private readonly IResultFactory _resultFactory;
         private readonly IAuthorizationService _authorizationService;
-        public PersonService(IPersonRepository personRepository, IPersonMapper personMapper, IResultFactory resultFactory, IAuthorizationService authorizationService)
+        private readonly IAccountService _accountService;
+        public PersonService(IPersonRepository personRepository, IPersonMapper personMapper, IResultFactory resultFactory,
+            IAuthorizationService authorizationService,IAccountService accountService)
         {
             this._personRepository = personRepository;
             this._personMapper = personMapper;
             this._resultFactory = resultFactory;
             this._authorizationService = authorizationService;
+            this._accountService = accountService;
         }
 
         public async Task<IResult<PersonDTO>> Add(PersonDTO personDTO, int currentUserID)
@@ -62,6 +65,10 @@ namespace MoneyMindManager.Application.Services
             int id = Convert.ToInt32(result.Data);
 
             personDTO.PersonID = id;
+
+            var accountDTOResult = await _accountService.Get(Convert.ToInt16(personDTO?.AccountID));
+
+            personDTO.AccountInfo = accountDTOResult?.Data;
 
             return handler.Success(personDTO);
 
@@ -110,7 +117,13 @@ namespace MoneyMindManager.Application.Services
             if (result.Data is null)
                 return handler.Failure("failed to get person");
 
+            var accountDTOResult = await _accountService.Get(Convert.ToInt16(result.Data?.AccountID));
+
+            if (!accountDTOResult.IsSuccess)
+                return handler.Failure(accountDTOResult.ErrorMessage);
+
             var personDTO = _personMapper.EntityToDTO(result.Data);
+            personDTO.AccountInfo = accountDTOResult?.Data;
             return handler.Success(personDTO);
         }
 
