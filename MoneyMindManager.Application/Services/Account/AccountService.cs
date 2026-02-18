@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using MoneyMindManager.Application.Abstractions.Handlers;
 using MoneyMindManager.Application.Abstractions.Mappers;
 using MoneyMindManager.Application.Abstractions.Services;
@@ -17,14 +18,17 @@ namespace MoneyMindManager.Application.Services.Account
         private readonly IAuthorizationService _authorizationService;
         private readonly IPasswordHasher _passwordHasher;
         private readonly IResultFactory _resultFactory;
+        private readonly ICurrencyService _currencyService;
+
         public AccountService(IAccountRepository accountRepository, IAccountMapper accountMapper, IAuthorizationService authorizationService,
-            IPasswordHasher passwordHasher, IResultFactory resultFactory)
+            IPasswordHasher passwordHasher, IResultFactory resultFactory, ICurrencyService currencyService)
         {
             this._accountRepository = accountRepository;
             this._accountMapper = accountMapper;
             this._authorizationService = authorizationService;
             this._passwordHasher = passwordHasher;
             this._resultFactory = resultFactory;
+            this._currencyService = currencyService;
         }
 
         public async Task<IResult<short?>> Add(CreateAccountDTO createAccountDTO)
@@ -74,7 +78,15 @@ namespace MoneyMindManager.Application.Services.Account
             if (!result.IsSuccess)
                 return handler.Failure(result.ErrorMessage);
 
-            return handler.Success(_accountMapper.EntityToDTO(result.Data));
+            var currencyDTOResult = await _currencyService.GetByID(Convert.ToByte(result.Data?.DefaultCurrencyID));
+
+            if (!currencyDTOResult.IsSuccess)
+                return handler.Failure(currencyDTOResult.ErrorMessage);
+
+            var accountDTO = _accountMapper.EntityToDTO(result.Data);
+            accountDTO.DefaultCurrencyInfo = currencyDTOResult?.Data;
+
+            return handler.Success(accountDTO);
         }
 
         public async Task<IResult<bool>> IsExistByAccountName(string accountName)
@@ -94,7 +106,7 @@ namespace MoneyMindManager.Application.Services.Account
             if (!accessResult.Data)
                 return handler.Failure("ليس لديك صلاحية حذف الحساب.");
 
-            var result= await _accountRepository.Delete(accountID);
+            var result = await _accountRepository.Delete(accountID);
 
             if (result is null)
                 return handler.Failure("failed to delete account!");

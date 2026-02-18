@@ -23,7 +23,7 @@ namespace MoneyMindManager.Shared.DTOs.Account
 
         public int AccountOwnerUserID { get; protected set; }
 
-        public CurrencyDTO DefaultCurrencyInfo { get; private set; }
+        public CurrencyDTO DefaultCurrencyInfo { get; set; }
 
         public AccountBaseDTO(short accountID, string accountName, DateTime createdDate, byte defaultCurrencyID,
             string description, decimal balance, int accountOwnerUserID)
