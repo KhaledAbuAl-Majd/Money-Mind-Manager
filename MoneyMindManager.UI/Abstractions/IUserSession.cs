@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Threading.Tasks;
+using MoneyMindManager.Core.Enums;
 using MoneyMindManager.Shared.DTOs.User;
-using MoneyMindManager_Presentation.Global;
+using MoneyMindManager.UI.Models;
 
 namespace MoneyMindManager.UI.Abstractions
 {
     public interface IUserSession
     {
         UserDTO CurrentUser { get; }
-        clsUserSettings CurrentUserSettings { get; }
+
+        int? UserID { get; }
+        UserSettings CurrentUserSettings { get; }
 
         event Action OnSessionExpired;
         event Action OnUserRefreshed;
@@ -17,5 +20,6 @@ namespace MoneyMindManager.UI.Abstractions
         Task<bool> StartSession(UserDTO userDTO);
         void ClearSession();
         Task<bool> Refresh();
+        bool IsHasPermissions(enPermissions permissions);
     }
 }

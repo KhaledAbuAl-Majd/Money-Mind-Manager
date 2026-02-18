@@ -18,6 +18,7 @@ namespace MoneyMindManager.UI.DependencyInjection
             services.AddSingleton<IActiveFormTracker, ActiveFormTracker>();
             services.AddSingleton<IMessageBoxService, MessageBoxService>();
 
+            services.AddScoped<IUserSettingsService, JsonUserSettingsService>();
             services.AddScoped<IUserSession, UserSession>();
             services.AddScoped<IFolderService, FolderService>();
 

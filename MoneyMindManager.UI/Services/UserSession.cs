@@ -5,7 +5,7 @@ using MoneyMindManager.Core.Enums;
 using MoneyMindManager.Core.Extensions;
 using MoneyMindManager.Shared.DTOs.User;
 using MoneyMindManager.UI.Abstractions;
-using MoneyMindManager_Presentation.Global;
+using MoneyMindManager.UI.Models;
 
 namespace MoneyMindManager.UI.Services
 {
@@ -13,17 +13,20 @@ namespace MoneyMindManager.UI.Services
     {
         private readonly IMessageBoxService _messageBoxService;
         private readonly IUserApiClient _userApiClient;
+        private readonly IUserSettingsService _userSettingsService;
 
         private static System.Timers.Timer _refreshTimer;
-        public UserSession(IMessageBoxService messageBoxService, IUserApiClient userApiClient)
+        public UserSession(IMessageBoxService messageBoxService, IUserApiClient userApiClient, IUserSettingsService userSettingsService)
         {
             this._messageBoxService = messageBoxService;
+            this._userApiClient = userApiClient;
+            this._userSettingsService = userSettingsService;
         }
 
         public UserDTO CurrentUser { get; private set; }
 
         public int? UserID { get => CurrentUser?.UserID; }
-        public clsUserSettings CurrentUserSettings { get; private set; }
+        public UserSettings CurrentUserSettings { get; private set; }
 
         public event Action OnSessionExpired;
 
@@ -44,6 +47,7 @@ namespace MoneyMindManager.UI.Services
             _refreshTimer?.Dispose();
             _refreshTimer = null;
         }
+
         public async Task<bool> StartSession(int userID)
         {
             var userResult = await _userApiClient.GetByUserID(userID);
@@ -57,7 +61,7 @@ namespace MoneyMindManager.UI.Services
             CurrentUser = userResult.Data;
 
 
-            CurrentUserSettings = await clsUserSettings.GetUserSettings(Convert.ToInt32(CurrentUser.UserID), true);
+            CurrentUserSettings = await _userSettingsService.Get(Convert.ToInt32(CurrentUser.UserID), true);
 
             if (CurrentUserSettings == null)
             {
@@ -81,7 +85,7 @@ namespace MoneyMindManager.UI.Services
             CurrentUser = userDTO;
 
 
-            CurrentUserSettings = await clsUserSettings.GetUserSettings(Convert.ToInt32(CurrentUser.UserID), true);
+            CurrentUserSettings = await _userSettingsService.Get(Convert.ToInt32(CurrentUser.UserID), true);
 
             if (CurrentUserSettings == null)
             {
