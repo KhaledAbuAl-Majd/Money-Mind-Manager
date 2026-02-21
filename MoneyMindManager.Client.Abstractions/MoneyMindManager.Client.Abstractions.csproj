@@ -46,6 +46,7 @@
     <Compile Include="ApiClient\IDatabaseAppApiClient.cs" />
     <Compile Include="ApiClient\IPersonApiClient.cs" />
     <Compile Include="ApiClient\IReportApiClient.cs" />
+    <Compile Include="ApiClient\ITransactionTypeApiClient.cs" />
     <Compile Include="ApiClient\IUserApiClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
