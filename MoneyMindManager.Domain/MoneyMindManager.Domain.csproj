@@ -50,6 +50,7 @@
     <Compile Include="Abstractions\Repositories\Reports\ICategoriesReportRepository.cs" />
     <Compile Include="Abstractions\Repositories\Reports\IDebtsReportRepository.cs" />
     <Compile Include="Abstractions\Repositories\Reports\IGeneralReportRepository.cs" />
+    <Compile Include="Abstractions\Repositories\IMainTransactionRepository.cs" />
     <Compile Include="Abstractions\Services\IDatabaseMaintenanceService.cs" />
     <Compile Include="Abstractions\Services\IHashingService.cs" />
     <Compile Include="Abstractions\Services\IHashingSettings.cs" />
@@ -57,10 +58,13 @@
     <Compile Include="Abstractions\Services\IPermissionService.cs" />
     <Compile Include="Abstractions\Services\IRandomGenerator.cs" />
     <Compile Include="Abstractions\Services\ISymmetricEncryptionSettings.cs" />
+    <Compile Include="Criteria\MainTransactionPagedSearchCriteria.cs" />
+    <Compile Include="Criteria\MainTransactionSearchCriteria.cs" />
     <Compile Include="Criteria\PersonSelectSearchCriteria.cs" />
     <Compile Include="Criteria\UserSearchCriteria.cs" />
     <Compile Include="Entities\Account.cs" />
     <Compile Include="Entities\Currency.cs" />
+    <Compile Include="Entities\MainTransaction.cs" />
     <Compile Include="Entities\Person.cs" />
     <Compile Include="Entities\TransactionType.cs" />
     <Compile Include="Entities\User.cs" />
