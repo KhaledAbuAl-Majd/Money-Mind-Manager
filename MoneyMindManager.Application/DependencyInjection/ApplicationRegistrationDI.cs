@@ -1,7 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using MoneyMindManager.Application.Abstractions.Handlers;
 using MoneyMindManager.Application.Abstractions.Mappers;
 using MoneyMindManager.Application.Abstractions.Services;
+using MoneyMindManager.Application.Mappers.Abstractions;
 using MoneyMindManager.Application.Mappers.Mappers_Implementaion;
 using MoneyMindManager.Application.Services;
 using MoneyMindManager.Application.Services.Account;
@@ -10,6 +12,7 @@ using MoneyMindManager.Application.Services.Currency;
 using MoneyMindManager.Application.Services.Database;
 using MoneyMindManager.Application.Services.Permissions;
 using MoneyMindManager.Application.Services.Report;
+using MoneyMindManager.Application.Services.TransactionType;
 using MoneyMindManager.Application.Services.User;
 using MoneyMindManager.Domain.Abstractions.Services;
 
@@ -37,6 +40,7 @@ namespace MoneyMindManager.Application
             services.AddScoped<IPersonService, PersonService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IReportService, ReportService>();
+            services.AddScoped<ITransactionTypeService, TransactionTypeService>();
         }
 
         static void _mappers(IServiceCollection services)
@@ -45,6 +49,7 @@ namespace MoneyMindManager.Application
             services.AddSingleton<IPersonMapper, PersonMapper>();
             services.AddSingleton<IUserMapper, UserMapper>();
             services.AddSingleton<IAccountMapper, AccountMapper>();
+            services.TryAddSingleton<ITransactionTypeMapper, TransactionTypeMapper>();
         }
     }
 }
