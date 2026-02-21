@@ -46,6 +46,8 @@
     <Compile Include="Abstractions\Repositories\IDatabaseSettings.cs" />
     <Compile Include="Abstractions\Repositories\IPersonRepository.cs" />
     <Compile Include="Abstractions\Repositories\IUserRepository.cs" />
+    <Compile Include="Abstractions\Repositories\Reports\ICategoriesReportRepository.cs" />
+    <Compile Include="Abstractions\Repositories\Reports\IDebtsReportRepository.cs" />
     <Compile Include="Abstractions\Repositories\Reports\IGeneralReportRepository.cs" />
     <Compile Include="Abstractions\Services\IDatabaseMaintenanceService.cs" />
     <Compile Include="Abstractions\Services\IHashingService.cs" />

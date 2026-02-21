@@ -8,7 +8,7 @@ namespace MoneyMindManager.Domain.Abstractions.Repositories.Reports
 {
     public interface IGeneralReportRepository
     {
-        IResult<Task<List<MonthlyFlowReportModel>>> GetMonthlyFlow(DateTime startDate, DateTime EndDate, short accountID);
-        IResult<Task<MainKpisReportModel>> GetMainKPIS(short accountID);
+        Task<IResult<IEnumerable<MonthlyFlowReportModel>>> GetMonthlyFlow(DateTime startDate, DateTime EndDate, short accountID);
+        Task<IResult<MainKpisReportModel>> GetMainKPIS(short accountID);
     }
 }
