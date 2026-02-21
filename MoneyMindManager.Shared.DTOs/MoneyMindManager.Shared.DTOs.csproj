@@ -44,6 +44,9 @@
     <Compile Include="Account\AccountBaseDTO.cs" />
     <Compile Include="Account\CreateAccountDTO.cs" />
     <Compile Include="Currency\CurrencyDTO.cs" />
+    <Compile Include="MainTransaction\MainTransactionDTO.cs" />
+    <Compile Include="MainTransaction\MainTransactionFilterDTO.cs" />
+    <Compile Include="MainTransaction\MainTransactionPagedFilterDTO.cs" />
     <Compile Include="Person\PersonDTO.cs" />
     <Compile Include="Person\PersonFilterDTO.cs" />
     <Compile Include="Person\PersonSelectFilterDTO.cs" />
