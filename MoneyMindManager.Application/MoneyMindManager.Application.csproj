@@ -48,6 +48,7 @@
     <Compile Include="Abstractions\Infrastructure\IEventLogLoggerSettings.cs" />
     <Compile Include="Abstractions\Services\IDatabaseAppService.cs" />
     <Compile Include="Abstractions\Services\IAccountService.cs" />
+    <Compile Include="Abstractions\Services\IMainTransactionService.cs" />
     <Compile Include="Abstractions\Services\IPersonService.cs" />
     <Compile Include="Abstractions\Services\IReportService.cs" />
     <Compile Include="Abstractions\Services\ITransactionTypeService.cs" />
@@ -63,6 +64,8 @@
     <Compile Include="DependencyInjection\ApplicationRegistrationDI.cs" />
     <Compile Include="Mappers\Mappers Implementaion\AccountMapper.cs" />
     <Compile Include="Mappers\Mappers Implementaion\CurrencyMapper.cs" />
+    <Compile Include="Mappers\Mappers Implementaion\IMainTransactionMapper.cs" />
+    <Compile Include="Mappers\Mappers Implementaion\MainTransactionMapper.cs" />
     <Compile Include="Mappers\Mappers Implementaion\PersonMapper.cs" />
     <Compile Include="Mappers\Mappers Implementaion\TransactionTypeMapper.cs" />
     <Compile Include="Mappers\Mappers Implementaion\UserMapper.cs" />
@@ -72,6 +75,7 @@
     <Compile Include="Services\Identity\AuthorizationService.cs" />
     <Compile Include="Services\Currency\CurrencyService.cs" />
     <Compile Include="Services\Identity\PasswordHasher.cs" />
+    <Compile Include="Services\MainTransaction\MainTransactionService.cs" />
     <Compile Include="Services\Permissions\PermissionService.cs" />
     <Compile Include="Services\Person\PersonService.cs" />
     <Compile Include="Common\ResultFactory.cs" />

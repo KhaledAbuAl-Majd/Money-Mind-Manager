@@ -10,6 +10,7 @@ using MoneyMindManager.Application.Services.Account;
 using MoneyMindManager.Application.Services.Authorization;
 using MoneyMindManager.Application.Services.Currency;
 using MoneyMindManager.Application.Services.Database;
+using MoneyMindManager.Application.Services.MainTransaction;
 using MoneyMindManager.Application.Services.Permissions;
 using MoneyMindManager.Application.Services.Report;
 using MoneyMindManager.Application.Services.TransactionType;
@@ -41,6 +42,7 @@ namespace MoneyMindManager.Application
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IReportService, ReportService>();
             services.AddScoped<ITransactionTypeService, TransactionTypeService>();
+            services.AddScoped<IMainTransactionService, MainTransactionService>();
         }
 
         static void _mappers(IServiceCollection services)
@@ -49,7 +51,8 @@ namespace MoneyMindManager.Application
             services.AddSingleton<IPersonMapper, PersonMapper>();
             services.AddSingleton<IUserMapper, UserMapper>();
             services.AddSingleton<IAccountMapper, AccountMapper>();
-            services.TryAddSingleton<ITransactionTypeMapper, TransactionTypeMapper>();
+            services.AddSingleton<ITransactionTypeMapper, TransactionTypeMapper>();
+            services.AddSingleton<IMainTransactionMapper, MainTransactionMapper>();
         }
     }
 }
