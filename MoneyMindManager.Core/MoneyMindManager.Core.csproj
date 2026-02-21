@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstractions\IFormateHelper.cs" />
     <Compile Include="Abstractions\ILogger.cs" />
     <Compile Include="Abstractions\IResult.cs" />
     <Compile Include="Abstractions\ISymmetricEncryption.cs" />
