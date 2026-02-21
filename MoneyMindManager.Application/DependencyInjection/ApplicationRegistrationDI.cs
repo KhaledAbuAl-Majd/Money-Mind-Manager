@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using MoneyMindManager.Application.Abstractions;
 using MoneyMindManager.Application.Abstractions.Handlers;
 using MoneyMindManager.Application.Abstractions.Mappers;
 using MoneyMindManager.Application.Abstractions.Services;
@@ -10,6 +9,7 @@ using MoneyMindManager.Application.Services.Authorization;
 using MoneyMindManager.Application.Services.Currency;
 using MoneyMindManager.Application.Services.Database;
 using MoneyMindManager.Application.Services.Permissions;
+using MoneyMindManager.Application.Services.Report;
 using MoneyMindManager.Application.Services.User;
 using MoneyMindManager.Domain.Abstractions.Services;
 
@@ -36,6 +36,7 @@ namespace MoneyMindManager.Application
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IPersonService, PersonService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IReportService, ReportService>();
         }
 
         static void _mappers(IServiceCollection services)

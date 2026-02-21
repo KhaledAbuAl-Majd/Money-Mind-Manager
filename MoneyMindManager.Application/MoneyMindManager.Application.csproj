@@ -49,6 +49,7 @@
     <Compile Include="Abstractions\Services\IDatabaseAppService.cs" />
     <Compile Include="Abstractions\Services\IAccountService.cs" />
     <Compile Include="Abstractions\Services\IPersonService.cs" />
+    <Compile Include="Abstractions\Services\IReportService.cs" />
     <Compile Include="Abstractions\Services\IUserService.cs" />
     <Compile Include="Mappers\Abstractions\IAccountMapper.cs" />
     <Compile Include="Mappers\Abstractions\ICurrencyMapper.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Services\Person\PersonService.cs" />
     <Compile Include="Common\ResultFactory.cs" />
     <Compile Include="Common\ResultHandler.cs" />
+    <Compile Include="Services\Report\ReportService.cs" />
     <Compile Include="Services\User\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
