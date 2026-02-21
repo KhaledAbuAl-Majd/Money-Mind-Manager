@@ -4343,8 +4343,11 @@ BEGIN
 		IF NOT EXISTS (SELECT 1 FROM MainTransactions WHERE TransactionID = @MainTransactionID)
 			THROW 51010,N'المعاملة غير موجودة',2;
 
-		SELECT TransactionID,ABS(Amount) AS Amount,CreatedDate,AccountID,CreatedByUserID,TransactionTypeID,Purpose,IsLocked,TransactionDate
-		FROM MainTransactions WHERE TransactionID = @MainTransactionID;
+		SELECT TransactionID,ABS(Amount) AS Amount,mt.CreatedDate,mt.AccountID,mt.CreatedByUserID,mt.TransactionTypeID,Purpose,IsLocked,
+		TransactionDate,tt.TransactionName AS TransactionTypeName,u.UserName AS CreatedByUserName
+		FROM MainTransactions mt inner join TransactionTypes tt ON mt.TransactionTypeID = tt.TransactionTypeID
+		INNER JOIN Users u ON mt.CreatedByUserID = u.UserID
+		WHERE TransactionID = @MainTransactionID;
 
 	END TRY
 	BEGIN CATCH
