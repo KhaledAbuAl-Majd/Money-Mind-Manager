@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using Guna.UI2.WinForms;
+using Microsoft.Extensions.DependencyInjection;
 using MoneyMindManager.UI.Abstractions;
 using MoneyMindManager_Business;
 using MoneyMindManager_Presentation.Global;
@@ -16,9 +17,14 @@ namespace MoneyMindManager_Presentation.Main
     public partial class frmMain : Form, IFormDisplayer
     {
         public event Action OnCloseProgramm;
-        public frmMain()
+
+        private readonly IServiceProvider _serviceProvider;
+        private readonly IUserSession _userSession;
+        public frmMain(IServiceProvider serviceProvider,IUserSession userSession)
         {
             InitializeComponent();
+            this._serviceProvider = serviceProvider;
+            this._userSession = userSession;
         }
 
         Guna2Button prevButton;
@@ -26,7 +32,27 @@ namespace MoneyMindManager_Presentation.Main
         {
             lblCurrentUserName.Text = clsPL_Global.CurrentUser?.UserName;
         }
-        public void AddNewFormAsDialog(Form frm)
+
+        public void OpenDialog<T>(Action<T> initialize = null) where T : Form
+        {
+            var frm = _serviceProvider.GetRequiredService<T>();
+
+            initialize?.Invoke(frm);
+
+            frm.ShowDialog(this);
+        }
+
+        public bool OpenAtContainer<T>(Action<T> initialize = null) where T:Form
+        {
+            var frm = _serviceProvider.GetRequiredService<T>();
+
+            initialize?.Invoke(frm);
+
+           return _LoadFormAtPanelContainer(frm, false);
+        }
+
+        //Violation
+        public void OpenDialog(Form frm)
         {
             if (frm == null || frm.IsDisposed)
                 return;
@@ -95,15 +121,21 @@ namespace MoneyMindManager_Presentation.Main
         private void llblCurrentUserInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             llblCurrentUserInfo.Enabled = false;
-            var frm = new frmUserInfo(Convert.ToInt32(clsPL_Global.CurrentUser?.UserID));
-            frm.FormClosed += (x, y) => llblCurrentUserInfo.Enabled = true;
-            AddNewFormAtContainer(frm);
+            //var frm = new frmUserInfo(Convert.ToInt32(_userSession.CurrentUser?.UserID));
+            //frm.FormClosed += (x, y) => llblCurrentUserInfo.Enabled = true;
+            //AddNewFormAtContainer(frm);
+
+            OpenAtContainer<frmUserInfo>((frm) =>
+            {
+                frm.Initialize(Convert.ToInt32(_userSession.UserID));
+                frm.FormClosed += (x, y) => llblCurrentUserInfo.Enabled = true;
+            });
         }
 
         private void llblChangePassword_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             llblChangePassword.Enabled = false;
-            var frm = new frmChangePassword(Convert.ToInt32(clsPL_Global.CurrentUser?.UserID));
+            var frm = new frmChangePassword(Convert.ToInt32(_userSession.CurrentUser?.UserID));
             frm.FormClosed += (x, y) => llblChangePassword.Enabled = true;
             AddNewFormAtContainer(frm);
         }
@@ -167,7 +199,7 @@ namespace MoneyMindManager_Presentation.Main
         private void gbtnAccount_Click(object sender, EventArgs e)
         {
             ((Guna2Button)sender).Focus();
-            if (_LoadFormAtPanelContainer(new frmCurrentAccount(), true))
+            if (OpenAtContainer<frmCurrentAccount>(null))
                 prevButton = gbtnAccount;
         }
 
@@ -187,13 +219,13 @@ namespace MoneyMindManager_Presentation.Main
 
         private void gbtnLogout_Click(object sender, EventArgs e)
         {
-            clsPL_Global.Logout();
+            _userSession.ClearSession();
         }
 
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (clsPL_Global.CurrentUser != null)
+            if (_userSession.CurrentUser != null)
                 OnCloseProgramm?.Invoke();
         }
     }
