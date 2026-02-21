@@ -4,6 +4,7 @@ using MoneyMindManager.Application.Services;
 using MoneyMindManager.Core;
 using MoneyMindManager.Core.Abstractions;
 using MoneyMindManager.Domain.Abstractions;
+using MoneyMindManager.Domain.Abstractions.Repositories;
 using MoneyMindManager.Domain.Abstractions.Repositories.Reports;
 using MoneyMindManager.Domain.Abstractions.Services;
 using MoneyMindManager.Infrastructure.General_Services;
@@ -30,6 +31,7 @@ namespace MoneyMindManager.Infrastructure
             services.AddScoped<IGeneralReportRepository, SQLGeneralReportRepository>();
             services.AddScoped<IDebtsReportRepository, SQLDebtsReportRepository>();
             services.AddScoped<ICategoriesReportRepository, SQLCategoriesReportRepository>();
+            services.AddScoped<ITransactionTypeRepository, SQLTransactionTypeRepository>();
 
             services.AddSingleton<IEventLogLoggerSettings, EventLogLoggerSettings>();
             services.AddSingleton<ILogger, EventLogLogger>();

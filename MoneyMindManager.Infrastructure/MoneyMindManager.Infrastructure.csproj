@@ -61,6 +61,7 @@
     <Compile Include="Repositories\Database\SQLServer\SQLDatabaseMaintenanceService.cs" />
     <Compile Include="Repositories\Database\SQLServer\SQLDatabaseSettings.cs" />
     <Compile Include="Repositories\Database\SQLServer\SQLPersonRepository.cs" />
+    <Compile Include="Repositories\Database\SQLServer\SQLTransactionTypeRepository.cs" />
     <Compile Include="Repositories\Database\SQLServer\SQLUserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
