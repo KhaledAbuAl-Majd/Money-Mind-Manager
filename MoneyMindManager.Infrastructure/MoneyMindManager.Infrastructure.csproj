@@ -52,6 +52,7 @@
     <Compile Include="General Services\Logging\EventLogLogger.cs" />
     <Compile Include="General Services\Logging\EventLogLoggerSettings.cs" />
     <Compile Include="General Services\Cryptography\RandomGenerator.cs" />
+    <Compile Include="General Services\Utils\FormateHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Database\SQLServer\Reports\SQLCategoriesReportRepository.cs" />
     <Compile Include="Repositories\Database\SQLServer\Reports\SQLDebtsReportRepository.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="Repositories\Database\SQLServer\SQLCurrencyRepository.cs" />
     <Compile Include="Repositories\Database\SQLServer\SQLDatabaseMaintenanceService.cs" />
     <Compile Include="Repositories\Database\SQLServer\SQLDatabaseSettings.cs" />
+    <Compile Include="Repositories\Database\SQLServer\SQLMainTransactionRepository.cs" />
     <Compile Include="Repositories\Database\SQLServer\SQLPersonRepository.cs" />
     <Compile Include="Repositories\Database\SQLServer\SQLTransactionTypeRepository.cs" />
     <Compile Include="Repositories\Database\SQLServer\SQLUserRepository.cs" />

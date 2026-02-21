@@ -32,6 +32,7 @@ namespace MoneyMindManager.Infrastructure
             services.AddScoped<IDebtsReportRepository, SQLDebtsReportRepository>();
             services.AddScoped<ICategoriesReportRepository, SQLCategoriesReportRepository>();
             services.AddScoped<ITransactionTypeRepository, SQLTransactionTypeRepository>();
+            services.AddScoped<IMainTransactionRepository, SQLMainTransactionRepository>();
 
             services.AddSingleton<IEventLogLoggerSettings, EventLogLoggerSettings>();
             services.AddSingleton<ILogger, EventLogLogger>();
@@ -41,6 +42,7 @@ namespace MoneyMindManager.Infrastructure
             services.AddSingleton<IHashingService, Sha256HashingService>();
             services.AddSingleton<ISymmetricEncryptionSettings, SymmetricEncryptionSettings>();
             services.AddSingleton<ISymmetricEncryption, SymmetricEncryption>();
+            services.AddSingleton<IFormateHelper, IFormateHelper>();
 
             return services;
         }
