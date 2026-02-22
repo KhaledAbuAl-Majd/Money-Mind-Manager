@@ -45,6 +45,7 @@
     <Compile Include="ApiClient\ICurrencyApiClient.cs" />
     <Compile Include="ApiClient\IDatabaseAppApiClient.cs" />
     <Compile Include="ApiClient\IFinCategoryApiClient.cs" />
+    <Compile Include="ApiClient\IFinVoucherApiClient.cs" />
     <Compile Include="ApiClient\IMainTransactionApiClient.cs" />
     <Compile Include="ApiClient\IPersonApiClient.cs" />
     <Compile Include="ApiClient\IReportApiClient.cs" />
