@@ -49,6 +49,7 @@
     <Compile Include="Abstractions\Services\IDatabaseAppService.cs" />
     <Compile Include="Abstractions\Services\IAccountService.cs" />
     <Compile Include="Abstractions\Services\IFinCategoryService.cs" />
+    <Compile Include="Abstractions\Services\IFinVoucherService.cs" />
     <Compile Include="Abstractions\Services\IMainTransactionService.cs" />
     <Compile Include="Abstractions\Services\IPersonService.cs" />
     <Compile Include="Abstractions\Services\IReportService.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="Mappers\Abstractions\IAccountMapper.cs" />
     <Compile Include="Mappers\Abstractions\ICurrencyMapper.cs" />
     <Compile Include="Mappers\Abstractions\IFinCategoryMapper.cs" />
+    <Compile Include="Mappers\Abstractions\IFinVoucherMapper.cs" />
     <Compile Include="Mappers\Abstractions\IMapper.cs" />
     <Compile Include="Mappers\Abstractions\IPersonMapper.cs" />
     <Compile Include="Mappers\Abstractions\ITransactionTypeMapper.cs" />
@@ -68,6 +70,7 @@
     <Compile Include="Mappers\Mappers Implementaion\CurrencyMapper.cs" />
     <Compile Include="Mappers\Mappers Implementaion\FinCategoryMapper.cs" />
     <Compile Include="Mappers\Abstractions\IMainTransactionMapper.cs" />
+    <Compile Include="Mappers\Mappers Implementaion\FinVoucherMapper.cs" />
     <Compile Include="Mappers\Mappers Implementaion\MainTransactionMapper.cs" />
     <Compile Include="Mappers\Mappers Implementaion\PersonMapper.cs" />
     <Compile Include="Mappers\Mappers Implementaion\TransactionTypeMapper.cs" />
@@ -76,6 +79,7 @@
     <Compile Include="Services\Account\AccountService.cs" />
     <Compile Include="Services\Database\DatabaseAppService.cs" />
     <Compile Include="Services\FinCategory\FinCategoryService.cs" />
+    <Compile Include="Services\FinVoucher\FinVoucherService.cs" />
     <Compile Include="Services\Identity\AuthorizationService.cs" />
     <Compile Include="Services\Currency\CurrencyService.cs" />
     <Compile Include="Services\Identity\PasswordHasher.cs" />
