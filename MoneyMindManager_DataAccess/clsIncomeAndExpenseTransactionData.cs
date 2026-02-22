@@ -149,7 +149,7 @@ namespace MoneyMindManager_DataAccess
         public static async Task<(int VoucherID,int CategoryID)> GetIncomeAndExpenseTransactionInfoByID(int transactionID,
             int currentUserID,bool RaiseEventOnErrorOccured = true)
         {
-            int? voucherID = null, categoryID = null;
+            int? voucherID = null, categoryID = null; 
 
             try
             {

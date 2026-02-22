@@ -22,7 +22,7 @@ namespace MoneyMindManager.APIClient.Api_Client_Implementation
             return await _mainTransactionService.Get(transactionID, currentUserID);
         }
 
-        public async Task<IResult<PagedResultWithAmountDTO<MainTransactionDTO>>> GetAllPaged(MainTransactionPagedFilterDTO filterDTO, int currentUserID)
+        public async Task<IResult<PagedResultWithTotal_CurrentDTO<MainTransactionDTO>>> GetAllPaged(MainTransactionPagedFilterDTO filterDTO, int currentUserID)
         {
             return await _mainTransactionService.GetAllPaged(filterDTO, currentUserID);
         }

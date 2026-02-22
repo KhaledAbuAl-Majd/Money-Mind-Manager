@@ -41,7 +41,7 @@ namespace MoneyMindManager.APIClient.Api_Client_Implementation
         {
             return await _finVoucherService.GetVoucherValueByID(voucherID, currentUserID);
         }
-        public async Task<IResult<PagedResultWithAmountDTO<FinVoucherViewSummary>>> GetAllPaged(FinVoucherPagedFilterDTO DTO, int currentUserID)
+        public async Task<IResult<PagedResultWithTotal_CurrentDTO<FinVoucherViewSummary>>> GetAllPaged(FinVoucherPagedFilterDTO DTO, int currentUserID)
         {
             return await _finVoucherService.GetAllPaged(DTO, currentUserID);
         }
