@@ -295,10 +295,10 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
 
             return handler.Success(voucherValue);
         }
-        public async Task<IResult<PagedResultWithAmountDTO<FinVoucherViewSummary>>> GetAllPaged(FinVoucherPagedSearchCriteria criteria, int currentUserID)
+        public async Task<IResult<PagedResultWithTotal_CurrentDTO<FinVoucherViewSummary>>> GetAllPaged(FinVoucherPagedSearchCriteria criteria, int currentUserID)
         {
-            PagedResultWithAmountDTO<FinVoucherViewSummary> allVouchers = null;
-            var handler = _resultFactory.Create<PagedResultWithAmountDTO<FinVoucherViewSummary>>();
+            PagedResultWithTotal_CurrentDTO<FinVoucherViewSummary> allVouchers = null;
+            var handler = _resultFactory.Create<PagedResultWithTotal_CurrentDTO<FinVoucherViewSummary>>();
 
             try
             {
@@ -381,7 +381,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                             int numberOfPages = Convert.ToInt32(outputNumberOfPages.Value);
                             int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
 
-                            allVouchers = new PagedResultWithAmountDTO<FinVoucherViewSummary>(list, numberOfPages, recordsCount,
+                            allVouchers = new PagedResultWithTotal_CurrentDTO<FinVoucherViewSummary>(list, numberOfPages, recordsCount,
                                 Convert.ToDecimal(outputTotalVouchersValue.Value), Convert.ToDecimal(outputCurrentPageVouchersValue.Value));
                         }
                     }

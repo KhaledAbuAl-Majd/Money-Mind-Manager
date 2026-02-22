@@ -82,10 +82,10 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
             return handler.Success(data);
         }
 
-        public async Task<IResult<PagedResultWithAmountDTO<MainTransaction>>> GetAllPaged(MainTransactionPagedSearchCriteria searchCriteria, int currentUserID)
+        public async Task<IResult<PagedResultWithTotal_CurrentDTO<MainTransaction>>> GetAllPaged(MainTransactionPagedSearchCriteria searchCriteria, int currentUserID)
         {
-            PagedResultWithAmountDTO<MainTransaction> data = null;
-            var handler = _resultFactory.Create<PagedResultWithAmountDTO<MainTransaction>>();
+            PagedResultWithTotal_CurrentDTO<MainTransaction> data = null;
+            var handler = _resultFactory.Create<PagedResultWithTotal_CurrentDTO<MainTransaction>>();
 
             try
             {
@@ -176,7 +176,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                             int numberOfPages = Convert.ToInt32(outputNumberOfPages.Value);
                             int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
 
-                            data = new PagedResultWithAmountDTO<MainTransaction>(transactionsList, numberOfPages, recordsCount,
+                            data = new PagedResultWithTotal_CurrentDTO<MainTransaction>(transactionsList, numberOfPages, recordsCount,
                                 Convert.ToDecimal(outputTotalTransactionsValue.Value), Convert.ToDecimal(outputCurrentPageTransactionsValue.Value));
                         }
                     }

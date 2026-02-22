@@ -9,6 +9,7 @@ using MoneyMindManager.Domain.Abstractions.Repositories.Reports;
 using MoneyMindManager.Domain.Abstractions.Services;
 using MoneyMindManager.Infrastructure.General_Services;
 using MoneyMindManager.Infrastructure.General_Services.Cryptography;
+using MoneyMindManager.Infrastructure.General_Services.Utils;
 using MoneyMindManager.Infrastructure.Logging;
 using MoneyMindManager.Infrastructure.Repositories;
 using MoneyMindManager.Infrastructure.Repositories.Database.SQLServer;
@@ -36,6 +37,7 @@ namespace MoneyMindManager.Infrastructure
             services.AddScoped<IFinCategoryRepository, SQLFinCategoryRepository>();
             services.AddScoped<IFinVoucherRepository, SQLFinVoucherRepository>();
             services.AddScoped<IFinVoucherRepository, SQLFinVoucherRepository>();
+            services.AddScoped<IFinTransactionRepository, SQLFinTransactionRepository>();
 
             services.AddSingleton<IEventLogLoggerSettings, EventLogLoggerSettings>();
             services.AddSingleton<ILogger, EventLogLogger>();
@@ -45,7 +47,7 @@ namespace MoneyMindManager.Infrastructure
             services.AddSingleton<IHashingService, Sha256HashingService>();
             services.AddSingleton<ISymmetricEncryptionSettings, SymmetricEncryptionSettings>();
             services.AddSingleton<ISymmetricEncryption, SymmetricEncryption>();
-            services.AddSingleton<IFormateHelper, IFormateHelper>();
+            services.AddSingleton<IFormateHelper, FormateHelper>();
 
             return services;
         }
