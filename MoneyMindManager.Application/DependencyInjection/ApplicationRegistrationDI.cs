@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using MoneyMindManager.Application.Abstractions.Handlers;
 using MoneyMindManager.Application.Abstractions.Mappers;
 using MoneyMindManager.Application.Abstractions.Services;
@@ -43,6 +42,8 @@ namespace MoneyMindManager.Application
             services.AddScoped<IReportService, ReportService>();
             services.AddScoped<ITransactionTypeService, TransactionTypeService>();
             services.AddScoped<IMainTransactionService, MainTransactionService>();
+            services.AddScoped<IFinCategoryService, FinCategoryService>();
+            services.AddScoped<IFinCategoryService, FinCategoryService>();
         }
 
         static void _mappers(IServiceCollection services)
@@ -53,6 +54,8 @@ namespace MoneyMindManager.Application
             services.AddSingleton<IAccountMapper, AccountMapper>();
             services.AddSingleton<ITransactionTypeMapper, TransactionTypeMapper>();
             services.AddSingleton<IMainTransactionMapper, MainTransactionMapper>();
+            services.AddSingleton<IFinCategoryMapper, FinCategoryMapper>();
+            services.AddSingleton<IFinCategoryMapper, FinCategoryMapper>();
         }
     }
 }
