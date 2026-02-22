@@ -216,7 +216,9 @@ namespace MoneyMindManager.Application.Services
             if (DTO is null)
                 return handler.Failure("البيانات المرسلة غير صالحة");
 
-            var result = await _finCategoryRepository.GetAllForSelectOne(_finCategoryMapper.ToSelectPagedCriteria(DTO), currentUserID);
+            var criteria = _finCategoryMapper.ToSelectPagedCriteria(DTO);
+            criteria.RowsPerPage = 15;
+            var result = await _finCategoryRepository.GetAllForSelectOne(criteria, currentUserID);
 
             if (result is null)
                 return handler.Failure("failed to get categoies list!");
@@ -238,7 +240,9 @@ namespace MoneyMindManager.Application.Services
             if (DTO is null)
                 return handler.Failure("البيانات المرسلة غير صالحة");
 
-            var result = await _finCategoryRepository.GetAll(_finCategoryMapper.ToPagedCriteria(DTO), currentUserID);
+            var criteria = _finCategoryMapper.ToPagedCriteria(DTO);
+            criteria.RowsPerPage = 15;
+            var result = await _finCategoryRepository.GetAll(criteria, currentUserID);
 
             if (result is null)
                 return handler.Failure("failed to get categoies list!");

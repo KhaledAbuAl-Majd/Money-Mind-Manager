@@ -51,7 +51,7 @@ namespace MoneyMindManager.Application.Services.MainTransaction
                 return handler.Failure("البيانات المرسلة غير صالحة");
 
             var criteria = _mainTransactionMapper.MainTransactionPagedFilterDTOToMainTransactionPagedSearchCriteria(filterDTO);
-
+            criteria.RowsPerPage = 15;
             var result = await _mainTransactionRepository.GetAllPaged(criteria, currentUserID);
 
 
