@@ -44,6 +44,7 @@
     <Compile Include="Abstractions\Repositories\IAccountRepository.cs" />
     <Compile Include="Abstractions\Repositories\ICurrencyRepository.cs" />
     <Compile Include="Abstractions\Repositories\IDatabaseSettings.cs" />
+    <Compile Include="Abstractions\Repositories\IFinCategoryRepository.cs" />
     <Compile Include="Abstractions\Repositories\IPersonRepository.cs" />
     <Compile Include="Abstractions\Repositories\ITransactionTypeRepository.cs" />
     <Compile Include="Abstractions\Repositories\IUserRepository.cs" />
@@ -58,12 +59,16 @@
     <Compile Include="Abstractions\Services\IPermissionService.cs" />
     <Compile Include="Abstractions\Services\IRandomGenerator.cs" />
     <Compile Include="Abstractions\Services\ISymmetricEncryptionSettings.cs" />
+    <Compile Include="Criteria\IncomeAndExpenseCategory\BudgetCheckCriteria.cs" />
+    <Compile Include="Criteria\IncomeAndExpenseCategory\FinCategoryPagedSearchCriteria.cs" />
+    <Compile Include="Criteria\IncomeAndExpenseCategory\FinCategorySelectPagedSearchCriteria.cs" />
     <Compile Include="Criteria\MainTransactionPagedSearchCriteria.cs" />
     <Compile Include="Criteria\MainTransactionSearchCriteria.cs" />
     <Compile Include="Criteria\PersonSelectSearchCriteria.cs" />
     <Compile Include="Criteria\UserSearchCriteria.cs" />
     <Compile Include="Entities\Account.cs" />
     <Compile Include="Entities\Currency.cs" />
+    <Compile Include="Entities\FinCategory.cs" />
     <Compile Include="Entities\MainTransaction.cs" />
     <Compile Include="Entities\Person.cs" />
     <Compile Include="Entities\TransactionType.cs" />
