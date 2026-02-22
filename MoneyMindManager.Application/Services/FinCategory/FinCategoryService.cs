@@ -19,14 +19,16 @@ namespace MoneyMindManager.Application.Services
         private readonly IFinCategoryRepository _finCategoryRepository;
         private readonly IAuthorizationService _authorizationService;
         private readonly IFinCategoryMapper _finCategoryMapper;
+        private readonly IUserService _userService;
 
         public FinCategoryService(IResultFactory resultFactory, IFinCategoryRepository finCategoryRepository, IAuthorizationService authorizationService,
-            IFinCategoryMapper finCategoryMapper)
+            IFinCategoryMapper finCategoryMapper,IUserService userService)
         {
             this._resultFactory = resultFactory;
             this._finCategoryRepository = finCategoryRepository;
             this._authorizationService = authorizationService;
             this._finCategoryMapper = finCategoryMapper;
+            this._userService = userService;
         }
 
         public async Task<IResult<FinCategoryDTO>> Add(FinCategoryDTO categoryDTO, int currentUserID)
@@ -158,7 +160,15 @@ namespace MoneyMindManager.Application.Services
             if (result.Data is null)
                 return handler.Failure("failed to get category!");
 
-            return handler.Success(_finCategoryMapper.EntityToDTO(result.Data));
+            var userResult = await _userService.GetByUserID(Convert.ToInt32(result.Data.CreatedByUserID));
+
+            if (!userResult.IsSuccess)
+                return handler.Failure(result.ErrorMessage);
+
+            var DTO = _finCategoryMapper.EntityToDTO(result.Data);
+            DTO.UserInfo = userResult.Data;
+
+            return handler.Success(DTO);
         }
         public async Task<IResult<FinCategoryDTO>> GetByName(string categoryName, int currentUserID)
         {
@@ -176,7 +186,15 @@ namespace MoneyMindManager.Application.Services
             if (result.Data is null)
                 return handler.Failure("failed to get category!");
 
-            return handler.Success(_finCategoryMapper.EntityToDTO(result.Data));
+            var userResult = await _userService.GetByUserID(Convert.ToInt32(result.Data.CreatedByUserID));
+
+            if (!userResult.IsSuccess)
+                return handler.Failure(result.ErrorMessage);
+
+            var DTO = _finCategoryMapper.EntityToDTO(result.Data);
+            DTO.UserInfo = userResult.Data;
+
+            return handler.Success(DTO);
         }
         public async Task<IResult<bool>> IsExistByName(string categoryName, int currentUserID)
         {
