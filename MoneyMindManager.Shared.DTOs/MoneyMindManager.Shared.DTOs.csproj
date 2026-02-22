@@ -44,6 +44,9 @@
     <Compile Include="Account\AccountBaseDTO.cs" />
     <Compile Include="Account\CreateAccountDTO.cs" />
     <Compile Include="Currency\CurrencyDTO.cs" />
+    <Compile Include="FinVoucher\FinVoucherDTO.cs" />
+    <Compile Include="FinVoucher\FinVoucherFilterDTO.cs" />
+    <Compile Include="FinVoucher\FinVoucherPagedFilterDTO.cs" />
     <Compile Include="IncomeAndExpenseCategory\BudgetCheckDTO.cs" />
     <Compile Include="IncomeAndExpenseCategory\FinCategoryDTO.cs" />
     <Compile Include="IncomeAndExpenseCategory\FinCategoryPagedFilterDTO.cs" />
