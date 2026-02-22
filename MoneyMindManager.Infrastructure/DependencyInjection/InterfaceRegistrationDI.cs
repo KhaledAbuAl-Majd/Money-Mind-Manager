@@ -34,6 +34,8 @@ namespace MoneyMindManager.Infrastructure
             services.AddScoped<ITransactionTypeRepository, SQLTransactionTypeRepository>();
             services.AddScoped<IMainTransactionRepository, SQLMainTransactionRepository>();
             services.AddScoped<IFinCategoryRepository, SQLFinCategoryRepository>();
+            services.AddScoped<IFinVoucherRepository, SQLFinVoucherRepository>();
+            services.AddScoped<IFinVoucherRepository, SQLFinVoucherRepository>();
 
             services.AddSingleton<IEventLogLoggerSettings, EventLogLoggerSettings>();
             services.AddSingleton<ILogger, EventLogLogger>();

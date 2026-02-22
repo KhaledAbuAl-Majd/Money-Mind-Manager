@@ -62,6 +62,7 @@
     <Compile Include="Repositories\Database\SQLServer\SQLCurrencyRepository.cs" />
     <Compile Include="Repositories\Database\SQLServer\SQLDatabaseMaintenanceService.cs" />
     <Compile Include="Repositories\Database\SQLServer\SQLDatabaseSettings.cs" />
+    <Compile Include="Repositories\Database\SQLServer\SQLFinVoucherRepository.cs" />
     <Compile Include="Repositories\Database\SQLServer\SQLMainTransactionRepository.cs" />
     <Compile Include="Repositories\Database\SQLServer\SQLPersonRepository.cs" />
     <Compile Include="Repositories\Database\SQLServer\SQLTransactionTypeRepository.cs" />
