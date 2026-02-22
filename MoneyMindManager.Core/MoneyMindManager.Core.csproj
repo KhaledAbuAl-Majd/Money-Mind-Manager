@@ -45,9 +45,12 @@
     <Compile Include="Abstractions\ILogger.cs" />
     <Compile Include="Abstractions\IResult.cs" />
     <Compile Include="Abstractions\ISymmetricEncryption.cs" />
+    <Compile Include="Enums\FinVoucherEnum.cs" />
     <Compile Include="Enums\SearchModeEnum.cs" />
     <Compile Include="Enums\PermissionsEnum.cs" />
     <Compile Include="Extensions\PermissionsExtensions.cs" />
+    <Compile Include="Models\FinVoucher\FinVoucherExportSummary.cs" />
+    <Compile Include="Models\FinVoucher\FinVoucherViewSummary.cs" />
     <Compile Include="Models\Reports\Categories\CategoryMonthlyFlowReportModel.cs" />
     <Compile Include="Models\Reports\Categories\TopCategoriesReportModel.cs" />
     <Compile Include="Models\Reports\Debts\DebtRepaymentScheduleReportModel.cs" />
