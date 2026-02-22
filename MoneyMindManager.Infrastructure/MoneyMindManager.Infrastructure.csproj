@@ -57,6 +57,7 @@
     <Compile Include="Repositories\Database\SQLServer\Reports\SQLCategoriesReportRepository.cs" />
     <Compile Include="Repositories\Database\SQLServer\Reports\SQLDebtsReportRepository.cs" />
     <Compile Include="Repositories\Database\SQLServer\Reports\SQLGeneralReportRepository.cs" />
+    <Compile Include="Repositories\Database\SQLServer\SQLFinCategoryRepository.cs" />
     <Compile Include="Repositories\Database\SQLServer\SQLAccountRepository.cs" />
     <Compile Include="Repositories\Database\SQLServer\SQLCurrencyRepository.cs" />
     <Compile Include="Repositories\Database\SQLServer\SQLDatabaseMaintenanceService.cs" />
