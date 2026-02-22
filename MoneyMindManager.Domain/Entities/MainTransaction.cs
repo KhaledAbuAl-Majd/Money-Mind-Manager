@@ -16,8 +16,8 @@ namespace MoneyMindManager.Domain.Entities
         public bool IsLocked { get; set; }
         public DateTime TransactionDate { get; set; }
 
-        public MainTransaction(int transactionID, decimal amount, DateTime createdDate, short accountID,
-            int createdByUserID, byte tranasactionTypeID, string purpose, bool isLocked, DateTime transactionDate, string transactionTypeName, string createdByUserName)
+        public MainTransaction(int? transactionID, decimal amount, DateTime createdDate, short? accountID,
+            int? createdByUserID, byte? tranasactionTypeID, string purpose, bool isLocked, DateTime transactionDate, string transactionTypeName, string createdByUserName)
         {
             this.MainTransactionID = transactionID;
             this.Amount = amount;

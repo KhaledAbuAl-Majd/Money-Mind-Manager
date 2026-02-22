@@ -10,7 +10,7 @@ namespace MoneyMindManager.Domain.Abstractions.Repositories.Reports
     public interface IMainTransactionRepository
     {
         Task<IResult<MainTransaction>> Get(int transactionID, int currentUserID);
-        Task<IResult<PagedResultWithAmountDTO<MainTransaction>>> GetAllPaged(MainTransactionPagedSearchCriteria mainTransactionPagedSearchCriteria, int currentUserID);
+        Task<IResult<PagedResultWithTotal_CurrentDTO<MainTransaction>>> GetAllPaged(MainTransactionPagedSearchCriteria mainTransactionPagedSearchCriteria, int currentUserID);
         Task<IResult<IEnumerable<MainTransaction>>> GetAll(MainTransactionSearchCriteria mainTransactionSearchCriteria, int currentUserID);
     }
 }

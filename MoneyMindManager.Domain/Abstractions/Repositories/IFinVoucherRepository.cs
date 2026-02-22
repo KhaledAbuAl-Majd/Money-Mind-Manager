@@ -16,7 +16,7 @@ namespace MoneyMindManager.Domain.Abstractions.Repositories
         Task<IResult<bool>> Delete(int voucherID, int currentUserID);
         Task<IResult<FinVoucher>> Get(int voucherID, int currentUserID);
         Task<IResult<decimal?>> GetVoucherValueByID(int voucherID, int currentUserID);
-        Task<IResult<PagedResultWithAmountDTO<FinVoucherViewSummary>>> GetAllPaged(FinVoucherPagedSearchCriteria criteria, int currentUserID);
+        Task<IResult<PagedResultWithTotal_CurrentDTO<FinVoucherViewSummary>>> GetAllPaged(FinVoucherPagedSearchCriteria criteria, int currentUserID);
         Task<IResult<IEnumerable<FinVoucherExportSummary>>> GetAll(FinVoucherSearchCriteria criteria, int currentUserID);
     }
 }

@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstractions\Repositories\IFinTransactionRepository.cs" />
     <Compile Include="Abstractions\Repositories\IAccountRepository.cs" />
     <Compile Include="Abstractions\Repositories\ICurrencyRepository.cs" />
     <Compile Include="Abstractions\Repositories\IDatabaseSettings.cs" />
@@ -72,6 +73,8 @@
     <Compile Include="Entities\Account.cs" />
     <Compile Include="Entities\Currency.cs" />
     <Compile Include="Entities\FinCategory.cs" />
+    <Compile Include="Entities\FinTransaction\FinTransaction.cs" />
+    <Compile Include="Entities\FinTransaction\FinTransactionShort.cs" />
     <Compile Include="Entities\FinVoucher.cs" />
     <Compile Include="Entities\MainTransaction.cs" />
     <Compile Include="Entities\Person.cs" />
