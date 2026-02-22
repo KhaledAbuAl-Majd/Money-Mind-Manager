@@ -49,6 +49,8 @@
     <Compile Include="Enums\SearchModeEnum.cs" />
     <Compile Include="Enums\PermissionsEnum.cs" />
     <Compile Include="Extensions\PermissionsExtensions.cs" />
+    <Compile Include="Models\FinTransaction\FinTransactionExportSummary.cs" />
+    <Compile Include="Models\FinTransaction\FinTransactionViewSummary.cs" />
     <Compile Include="Models\FinVoucher\FinVoucherExportSummary.cs" />
     <Compile Include="Models\FinVoucher\FinVoucherViewSummary.cs" />
     <Compile Include="Models\Reports\Categories\CategoryMonthlyFlowReportModel.cs" />
@@ -62,8 +64,9 @@
     <Compile Include="Paged Result DTOs\DebtPaymentsPagedResultDTO.cs" />
     <Compile Include="Paged Result DTOs\DebtsPagedResultDTO.cs" />
     <Compile Include="Paged Result DTOs\PagedResultDto.cs" />
-    <Compile Include="Paged Result DTOs\PagedResultWithAmountDTO.cs" />
+    <Compile Include="Paged Result DTOs\PagedResultWithTotal_CurrentDTO.cs" />
     <Compile Include="Models\PermissionInfo.cs" />
+    <Compile Include="Paged Result DTOs\PagedResultWithValueDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\UserSummary.cs" />
   </ItemGroup>

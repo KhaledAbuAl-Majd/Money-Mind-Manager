@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MoneyMindManager.Shared.DTOs.Paged_Result_DTOs
 {
-    public class DebtsPagedResultDTO<T> : PagedResultWithAmountDTO<T>
+    public class DebtsPagedResultDTO<T> : PagedResultWithTotal_CurrentDTO<T>
     {
         public decimal TotalRemainingAmount { get; set; }
 
