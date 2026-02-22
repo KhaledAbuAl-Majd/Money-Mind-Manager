@@ -9,13 +9,13 @@ using MoneyMindManager.Application.Services.Account;
 using MoneyMindManager.Application.Services.Authorization;
 using MoneyMindManager.Application.Services.Currency;
 using MoneyMindManager.Application.Services.Database;
+using MoneyMindManager.Application.Services.FinTransaction;
 using MoneyMindManager.Application.Services.FinVoucher;
 using MoneyMindManager.Application.Services.MainTransaction;
 using MoneyMindManager.Application.Services.Permissions;
 using MoneyMindManager.Application.Services.Report;
 using MoneyMindManager.Application.Services.TransactionType;
 using MoneyMindManager.Application.Services.User;
-using MoneyMindManager.Domain.Abstractions.Repositories;
 using MoneyMindManager.Domain.Abstractions.Services;
 
 namespace MoneyMindManager.Application
@@ -47,6 +47,7 @@ namespace MoneyMindManager.Application
             services.AddScoped<IFinCategoryService, FinCategoryService>();
             services.AddScoped<IFinCategoryService, FinCategoryService>();
             services.AddScoped<IFinVoucherService, FinVoucherService>();
+            services.AddScoped<IFinTransactionService, FinTransactionService>();
         }
 
         static void _mappers(IServiceCollection services)
@@ -60,6 +61,7 @@ namespace MoneyMindManager.Application
             services.AddSingleton<IFinCategoryMapper, FinCategoryMapper>();
             services.AddSingleton<IFinCategoryMapper, FinCategoryMapper>();
             services.AddSingleton<IFinVoucherMapper, FinVoucherMapper>();
+            services.AddSingleton<IFinTransactionMapper, FinTransactionMapper>();
         }
     }
 }

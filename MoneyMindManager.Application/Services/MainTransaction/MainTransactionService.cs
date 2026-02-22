@@ -43,9 +43,9 @@ namespace MoneyMindManager.Application.Services.MainTransaction
             return handler.Success(dto);
         }
 
-        public async Task<IResult<PagedResultWithAmountDTO<MainTransactionDTO>>> GetAllPaged(MainTransactionPagedFilterDTO filterDTO, int currentUserID)
+        public async Task<IResult<PagedResultWithTotal_CurrentDTO<MainTransactionDTO>>> GetAllPaged(MainTransactionPagedFilterDTO filterDTO, int currentUserID)
         {
-            var handler = _resultFactory.Create<PagedResultWithAmountDTO<MainTransactionDTO>>();
+            var handler = _resultFactory.Create<PagedResultWithTotal_CurrentDTO<MainTransactionDTO>>();
 
             if (filterDTO is null)
                 return handler.Failure("البيانات المرسلة غير صالحة");
@@ -65,7 +65,7 @@ namespace MoneyMindManager.Application.Services.MainTransaction
                 return handler.Failure("failed to get main transactions list");
 
             var dtosList = result.Data.Data.Select(entity => _mainTransactionMapper.EntityToDTO(entity));
-            var returnData = new PagedResultWithAmountDTO<MainTransactionDTO>(dtosList, result.Data.TotalPages, result.Data.TotalRecords, result.Data.TotalValue,
+            var returnData = new PagedResultWithTotal_CurrentDTO<MainTransactionDTO>(dtosList, result.Data.TotalPages, result.Data.TotalRecords, result.Data.TotalValue,
                 result.Data.CurrentPageValue);
             return handler.Success(returnData);
         }

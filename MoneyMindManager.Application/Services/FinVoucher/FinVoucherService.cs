@@ -188,9 +188,9 @@ namespace MoneyMindManager.Application.Services.FinVoucher
 
             return result;
         }
-        public async Task<IResult<PagedResultWithAmountDTO<FinVoucherViewSummary>>> GetAllPaged(FinVoucherPagedFilterDTO DTO, int currentUserID)
+        public async Task<IResult<PagedResultWithTotal_CurrentDTO<FinVoucherViewSummary>>> GetAllPaged(FinVoucherPagedFilterDTO DTO, int currentUserID)
         {
-            var handler = _resultFactory.Create<PagedResultWithAmountDTO<FinVoucherViewSummary>>();
+            var handler = _resultFactory.Create<PagedResultWithTotal_CurrentDTO<FinVoucherViewSummary>>();
             if (DTO is null)
                 return handler.Failure("البيانات المرسلة غير صالحة");
 

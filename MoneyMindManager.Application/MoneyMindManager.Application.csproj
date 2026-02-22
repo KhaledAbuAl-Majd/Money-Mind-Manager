@@ -46,6 +46,7 @@
     <Compile Include="Abstractions\Handlers\IResultFactory.cs" />
     <Compile Include="Abstractions\Handlers\IResultHandler.cs" />
     <Compile Include="Abstractions\Infrastructure\IEventLogLoggerSettings.cs" />
+    <Compile Include="Abstractions\Services\IFinTransactionService.cs" />
     <Compile Include="Abstractions\Services\IDatabaseAppService.cs" />
     <Compile Include="Abstractions\Services\IAccountService.cs" />
     <Compile Include="Abstractions\Services\IFinCategoryService.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="Mappers\Abstractions\IAccountMapper.cs" />
     <Compile Include="Mappers\Abstractions\ICurrencyMapper.cs" />
     <Compile Include="Mappers\Abstractions\IFinCategoryMapper.cs" />
+    <Compile Include="Mappers\Abstractions\IFinTransactionMapper.cs" />
     <Compile Include="Mappers\Abstractions\IFinVoucherMapper.cs" />
     <Compile Include="Mappers\Abstractions\IMapper.cs" />
     <Compile Include="Mappers\Abstractions\IPersonMapper.cs" />
@@ -70,6 +72,7 @@
     <Compile Include="Mappers\Mappers Implementaion\CurrencyMapper.cs" />
     <Compile Include="Mappers\Mappers Implementaion\FinCategoryMapper.cs" />
     <Compile Include="Mappers\Abstractions\IMainTransactionMapper.cs" />
+    <Compile Include="Mappers\Mappers Implementaion\FinTransactionMapper.cs" />
     <Compile Include="Mappers\Mappers Implementaion\FinVoucherMapper.cs" />
     <Compile Include="Mappers\Mappers Implementaion\MainTransactionMapper.cs" />
     <Compile Include="Mappers\Mappers Implementaion\PersonMapper.cs" />
@@ -79,6 +82,7 @@
     <Compile Include="Services\Account\AccountService.cs" />
     <Compile Include="Services\Database\DatabaseAppService.cs" />
     <Compile Include="Services\FinCategory\FinCategoryService.cs" />
+    <Compile Include="Services\FinTransaction\FinTransactionService.cs" />
     <Compile Include="Services\FinVoucher\FinVoucherService.cs" />
     <Compile Include="Services\Identity\AuthorizationService.cs" />
     <Compile Include="Services\Currency\CurrencyService.cs" />
