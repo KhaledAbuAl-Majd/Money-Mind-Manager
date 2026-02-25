@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstractions\Repositories\IDebtRepository.cs" />
     <Compile Include="Abstractions\Repositories\IFinTransactionRepository.cs" />
     <Compile Include="Abstractions\Repositories\IAccountRepository.cs" />
     <Compile Include="Abstractions\Repositories\ICurrencyRepository.cs" />
@@ -61,6 +62,8 @@
     <Compile Include="Abstractions\Services\IPermissionService.cs" />
     <Compile Include="Abstractions\Services\IRandomGenerator.cs" />
     <Compile Include="Abstractions\Services\ISymmetricEncryptionSettings.cs" />
+    <Compile Include="Criteria\Debt\DebtPagedSearchCriteria.cs" />
+    <Compile Include="Criteria\Debt\DebtSearchCriteria.cs" />
     <Compile Include="Criteria\FinVoucher\FinVoucherPagedSearchCriteria.cs" />
     <Compile Include="Criteria\FinVoucher\FinVoucherSearchCriteria.cs" />
     <Compile Include="Criteria\IncomeAndExpenseCategory\BudgetCheckCriteria.cs" />
@@ -72,6 +75,7 @@
     <Compile Include="Criteria\UserSearchCriteria.cs" />
     <Compile Include="Entities\Account.cs" />
     <Compile Include="Entities\Currency.cs" />
+    <Compile Include="Entities\Debt.cs" />
     <Compile Include="Entities\FinCategory.cs" />
     <Compile Include="Entities\FinTransaction\FinTransaction.cs" />
     <Compile Include="Entities\FinTransaction\FinTransactionShort.cs" />
