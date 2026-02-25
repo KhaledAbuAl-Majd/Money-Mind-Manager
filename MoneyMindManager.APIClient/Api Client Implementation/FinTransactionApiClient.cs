@@ -34,13 +34,13 @@ namespace MoneyMindManager.APIClient.Api_Client_Implementation
         {
             return await _finTransactionService.Get(transactionID, currentUserID);
         }
-        public async Task<IResult<PagedResultWithValueDTO<FinTransactionViewSummary>>> GetAllPaged(int transactionID, int currentUserID, int pageNumber)
+        public async Task<IResult<PagedResultWithValueDTO<FinTransactionViewSummary>>> GetAllPagedForVoucher(int voucherID, int currentUserID, int pageNumber)
         {
-            return await _finTransactionService.GetAllPaged(transactionID, currentUserID, currentUserID);
+            return await _finTransactionService.GetAllPagedForVoucher(voucherID, currentUserID, currentUserID);
         }
-        public async Task<IResult<IEnumerable<FinTransactionExportSummary>>> GetAll(int transactionID, int currentUserID)
+        public async Task<IResult<IEnumerable<FinTransactionExportSummary>>> GetAllForVoucher(int voucherID, int currentUserID)
         {
-            return await _finTransactionService.GetAll(transactionID, currentUserID);
+            return await _finTransactionService.GetAllForVoucher(voucherID, currentUserID);
         }
     }
 }
