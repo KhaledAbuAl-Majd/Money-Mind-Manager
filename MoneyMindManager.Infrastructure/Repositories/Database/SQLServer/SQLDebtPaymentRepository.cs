@@ -6,26 +6,27 @@ using System.Threading.Tasks;
 using MoneyMindManager.Application.Abstractions.Handlers;
 using MoneyMindManager.Core;
 using MoneyMindManager.Core.Abstractions;
-using MoneyMindManager.Core.Models.FinTransaction;
+using MoneyMindManager.Core.Models.DebtPayment;
 using MoneyMindManager.Core.Paged_Result_DTOs;
 using MoneyMindManager.Domain.Abstractions;
-using MoneyMindManager.Domain.Entities.FinTransaction;
+using MoneyMindManager.Domain.Abstractions.Repositories;
+using MoneyMindManager.Domain.Entities.DebtPayment;
 
 namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
 {
-    public class SQLFinTransactionRepository : IFinTransactionRepository
+    internal class SQLDebtPaymentRepository : IDebtPaymentRepository
     {
         private readonly IDatabaseSettings _databaseSettings;
         private readonly IResultFactory _resultFactory;
         private readonly ILogger _logger;
 
-        public SQLFinTransactionRepository(IDatabaseSettings databaseSettings, IResultFactory resultFactory, ILogger logger)
+        public SQLDebtPaymentRepository(IDatabaseSettings databaseSettings, IResultFactory resultFactory, ILogger logger)
         {
             this._databaseSettings = databaseSettings;
             this._resultFactory = resultFactory;
             this._logger = logger;
         }
-        public async Task<IResult<int?>> Add(FinTransaction finTransaction)
+        public async Task<IResult<int?>> Add(DebtPayment debtPayment)
         {
             int? newTransactionID = null;
             var handler = _resultFactory.Create<int?>();
@@ -34,15 +35,15 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
             {
                 using (SqlConnection connection = new SqlConnection(_databaseSettings.ConnectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_IncomeAndExpenseTransaction_AddNew]", connection))
+                    using (SqlCommand command = new SqlCommand("[dbo].[SP_DebtPayment_AddNew]", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
-                        command.Parameters.AddWithValue("@VoucherID", finTransaction.VoucherID);
-                        command.Parameters.AddWithValue("@categoryID", finTransaction.CategoryID);
-                        command.Parameters.AddWithValue("@Amount", finTransaction.Amount);
-                        command.Parameters.AddWithValue("@Purpose", string.IsNullOrWhiteSpace(finTransaction.Purpose) ? DBNull.Value : (object)finTransaction.Purpose);
-                        command.Parameters.AddWithValue("@CreatedByUserID", finTransaction.CreatedByUserID);
+                        command.Parameters.AddWithValue("@DebtID", debtPayment.DebtID);
+                        command.Parameters.AddWithValue("@Amount", debtPayment.Amount);
+                        command.Parameters.AddWithValue("@PaymentDate", debtPayment.TransactionDate);
+                        command.Parameters.AddWithValue("@Purpose", string.IsNullOrWhiteSpace(debtPayment.Purpose) ? DBNull.Value : (object)debtPayment.Purpose);
+                        command.Parameters.AddWithValue("@CreatedByUserID", debtPayment.CreatedByUserID);
 
                         SqlParameter outParmNewCategory = new SqlParameter("@NewTransactionID", System.Data.SqlDbType.Int)
                         {
@@ -71,7 +72,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
 
             return handler.Success(newTransactionID);
         }
-        public async Task<IResult<bool>> Update(FinTransaction finTransaction, int currentUserID)
+        public async Task<IResult<bool>> Update(DebtPayment debtPayment, int currentUserID)
         {
             bool result = false;
             var handler = _resultFactory.Create<bool>();
@@ -80,14 +81,14 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
             {
                 using (SqlConnection connection = new SqlConnection(_databaseSettings.ConnectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_IncomeAndExpenseTransactions_UpdateByID]", connection))
+                    using (SqlCommand command = new SqlCommand("[dbo].[SP_DebtPayment_UpdateByID]", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
-                        command.Parameters.AddWithValue("@TransactionID", finTransaction.MainTransactionID);
-                        command.Parameters.AddWithValue("@Amount", finTransaction.Amount);
-                        command.Parameters.AddWithValue("@categoryID", finTransaction.CategoryID);
-                        command.Parameters.AddWithValue("@Purpose", string.IsNullOrWhiteSpace(finTransaction.Purpose) ? DBNull.Value : (object)finTransaction.Purpose);
+                        command.Parameters.AddWithValue("@TransactionID", debtPayment.MainTransactionID);
+                        command.Parameters.AddWithValue("@Amount", debtPayment.Amount);
+                        command.Parameters.AddWithValue("@Purpose", string.IsNullOrWhiteSpace(debtPayment.Purpose) ? DBNull.Value : (object)debtPayment.Purpose);
+                        command.Parameters.AddWithValue("@PaymentDate", debtPayment.TransactionDate);
                         command.Parameters.AddWithValue("@CurrentUserID", currentUserID);
 
 
@@ -124,7 +125,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
             {
                 using (SqlConnection connection = new SqlConnection(_databaseSettings.ConnectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_IncomeAndExpenseTransactions_DeleteByID]", connection))
+                    using (SqlCommand command = new SqlCommand("[dbo].[SP_DebtPayment_DeleteByID]", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
@@ -156,15 +157,16 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
 
             return handler.Success(result);
         }
-        public async Task<IResult<FinTransactionShort>> Get(int transactionID, int currentUserID)
+        public async Task<IResult<DebtPaymentShort>> Get(int transactionID, int currentUserID)
         {
-            FinTransactionShort result = null;
-            var handler = _resultFactory.Create<FinTransactionShort>();
+            DebtPaymentShort debtPayment = null;
+            var handler = _resultFactory.Create<DebtPaymentShort>();
+
             try
             {
                 using (SqlConnection connection = new SqlConnection(_databaseSettings.ConnectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_IncomeAndExpenseTransaction_GetByID]", connection))
+                    using (SqlCommand command = new SqlCommand("[dbo].[SP_DebtPayment_GetByID]", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.AddWithValue("@TransactionID", transactionID);
@@ -174,47 +176,42 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
 
                         using (SqlDataReader reader = await command.ExecuteReaderAsync())
                         {
-                            int voucherID = 0;
-                            int categoryID = 0;
-
                             if (await reader.ReadAsync())
                             {
-                                voucherID = Convert.ToInt32(reader["VoucherID"]);
-                                categoryID = Convert.ToInt32(reader["CategoryID"]);
+                                int debtID = Convert.ToInt32(reader["DebtID"]);
+                                debtPayment = new DebtPaymentShort(debtID);
                             }
-
-                            result = new FinTransactionShort(transactionID, voucherID, categoryID);
                         }
                     }
                 }
 
-                if (result == null)
+                if (debtPayment == null)
                     throw new Exception("فشلت العملية");
             }
             catch (Exception ex)
             {
-                result = null;
+                debtPayment = null;
 
                 _logger.LogError(ex.Message);
                 return handler.Failure(ex.Message);
             }
 
-            return handler.Success(result);
+            return handler.Success(debtPayment);
         }
-        public async Task<IResult<PagedResultWithValueDTO<FinTransactionViewSummary>>> GetAllPagedForVoucher(int voucherID, int currentUserID, int pageNumber, byte rowsPerPage)
+        public async Task<IResult<PagedResultWithValueDTO<DebtPaymentViewSummary>>> GetAllPagedForDebt(int debtID, int currentUserID, int pageNumber, byte rowsPerPage)
         {
-            PagedResultWithValueDTO<FinTransactionViewSummary> allTransactions = null;
-            var handler = _resultFactory.Create<PagedResultWithValueDTO<FinTransactionViewSummary>>();
+            PagedResultWithValueDTO<DebtPaymentViewSummary> allTransactions = null;
+            var handler = _resultFactory.Create<PagedResultWithValueDTO<DebtPaymentViewSummary>>();
 
             try
             {
                 using (SqlConnection connection = new SqlConnection(_databaseSettings.ConnectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("SP_IncomeAndExpenseTransactionGetAllForVoucher", connection))
+                    using (SqlCommand command = new SqlCommand("SP_DebtPayment_GetAllForDebt", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
 
-                        command.Parameters.AddWithValue("@VoucherID", voucherID);
+                        command.Parameters.AddWithValue("@DebtID", debtID);
                         command.Parameters.AddWithValue("@CurrentUserID", currentUserID);
                         command.Parameters.AddWithValue("@PageNumber", pageNumber);
                         command.Parameters.AddWithValue("@RowsPerPage", rowsPerPage);
@@ -229,7 +226,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                             Direction = ParameterDirection.Output
                         };
 
-                        SqlParameter outputVoucherValue = new SqlParameter("@VoucherValue", SqlDbType.Decimal)
+                        SqlParameter outputRemainingAmount = new SqlParameter("@RemainingAmount", SqlDbType.Decimal)
                         {
                             Direction = ParameterDirection.Output,
                             Precision = 19,
@@ -238,38 +235,40 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
 
                         command.Parameters.Add(outputNumberOfPages);
                         command.Parameters.Add(outputRecordsCount);
-                        command.Parameters.Add(outputVoucherValue);
+                        command.Parameters.Add(outputRemainingAmount);
 
                         await connection.OpenAsync();
 
                         using (SqlDataReader reader = await command.ExecuteReaderAsync())
                         {
+
                             int idOrdinal = reader.GetOrdinal("MainTransactionID");
-                            int categoryNameOrdinal = reader.GetOrdinal("CategoryName");
                             int amountOrdinal = reader.GetOrdinal("Amount");
+                            int debtDateOrdinal = reader.GetOrdinal("DebtDate");
                             int createdDateOrdinal = reader.GetOrdinal("CreatedDate");
                             int userNameOrdinal = reader.GetOrdinal("CreatedByUserName");
                             int purposeOrdinal = reader.GetOrdinal("Purpose");
 
-                            List<FinTransactionViewSummary> list = new List<FinTransactionViewSummary>();
+                            List<DebtPaymentViewSummary> list = new List<DebtPaymentViewSummary>();
 
                             while (await reader.ReadAsync())
                             {
                                 int id = Convert.ToInt32(reader[idOrdinal]);
-                                string categoryName = reader[categoryNameOrdinal] as string;
                                 decimal amount = Convert.ToDecimal(reader[amountOrdinal]);
+                                DateTime debtDate = Convert.ToDateTime(reader[debtDateOrdinal]);
                                 DateTime createdDate = Convert.ToDateTime(reader[createdDateOrdinal]);
                                 string userName = reader[userNameOrdinal] as string;
                                 string purpose = reader[purposeOrdinal] as string;
 
-                                list.Add(new FinTransactionViewSummary(id, categoryName, amount, userName, createdDate, purpose));
+                                list.Add(new DebtPaymentViewSummary(id, amount, debtDate, userName, createdDate, purpose));
                             }
+
 
                             int numberOfPages = Convert.ToInt32(outputNumberOfPages.Value);
                             int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
-                            decimal voucherValue = Convert.ToDecimal(outputVoucherValue.Value);
+                            decimal remainingAmount = Convert.ToDecimal(outputRemainingAmount.Value);
 
-                            allTransactions = new PagedResultWithValueDTO<FinTransactionViewSummary>(list, numberOfPages, recordsCount, voucherValue);
+                            allTransactions = new PagedResultWithValueDTO<DebtPaymentViewSummary>(list, numberOfPages, recordsCount, remainingAmount);
                         }
                     }
                 }
@@ -287,20 +286,20 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
 
             return handler.Success(allTransactions);
         }
-        public async Task<IResult<IEnumerable<FinTransactionExportSummary>>> GetAllForVoucher(int voucherID, int currentUserID)
+        public async Task<IResult<IEnumerable<DebtPaymentExportSummary>>> GetAllForDebt(int debtID, int currentUserID)
         {
-            List<FinTransactionExportSummary> result = null;
-            var handler = _resultFactory.Create<IEnumerable<FinTransactionExportSummary>>();
+            List<DebtPaymentExportSummary> paymentsList = null;
+            var handler = _resultFactory.Create<IEnumerable<DebtPaymentExportSummary>>();
 
             try
             {
                 using (SqlConnection connection = new SqlConnection(_databaseSettings.ConnectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("SP_IncomeAndExpenseTransactionGetAllForVoucherWithoutPaging", connection))
+                    using (SqlCommand command = new SqlCommand("SP_DebtPayment_GetAllForDebtWihtoutPaging", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
 
-                        command.Parameters.AddWithValue("@VoucherID", voucherID);
+                        command.Parameters.AddWithValue("@DebtID", debtID);
                         command.Parameters.AddWithValue("@CurrentUserID", currentUserID);
 
                         await connection.OpenAsync();
@@ -308,50 +307,46 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                         using (SqlDataReader reader = await command.ExecuteReaderAsync())
                         {
                             int idOrdinal = reader.GetOrdinal("MainTransactionID");
-                            int categoryIDOrdinal = reader.GetOrdinal("CategoryID");
-                            int categoryNameOrdinal = reader.GetOrdinal("CategoryName");
                             int amountOrdinal = reader.GetOrdinal("Amount");
-                            int transactionDateOrdinal = reader.GetOrdinal("TransactionDate");
+                            int debtDateOrdinal = reader.GetOrdinal("DebtDate");
                             int createdDateOrdinal = reader.GetOrdinal("CreatedDate");
+                            int purposeOrdinal = reader.GetOrdinal("Purpose");
                             int userIDOrdinal = reader.GetOrdinal("CreatedByUserID");
                             int userNameOrdinal = reader.GetOrdinal("CreatedByUserName");
-                            int purposeOrdinal = reader.GetOrdinal("Purpose");
                             int accountIDOrinial = reader.GetOrdinal("AccountID");
 
-                            result = new List<FinTransactionExportSummary>();
+                            paymentsList = new List<DebtPaymentExportSummary>();
 
                             while (await reader.ReadAsync())
                             {
                                 int id = Convert.ToInt32(reader[idOrdinal]);
-                                int categoryID = Convert.ToInt32(reader[categoryIDOrdinal]);
-                                string categoryName = reader[categoryNameOrdinal] as string;
                                 decimal amount = Convert.ToDecimal(reader[amountOrdinal]);
-                                DateTime transactionDate = Convert.ToDateTime(reader[transactionDateOrdinal]);
+                                DateTime debtDate = Convert.ToDateTime(reader[debtDateOrdinal]);
                                 DateTime createdDate = Convert.ToDateTime(reader[createdDateOrdinal]);
+                                string purpose = reader[purposeOrdinal] as string;
                                 int userID = Convert.ToInt32(reader[userIDOrdinal]);
                                 string userName = reader[userNameOrdinal] as string;
-                                string purpose = reader[purposeOrdinal] as string;
                                 short accountID = Convert.ToInt16(reader[accountIDOrinial]);
 
-                                result.Add(new FinTransactionExportSummary(id, categoryName, amount, userName, createdDate, purpose, categoryID, transactionDate,
-                                    userID, accountID));
+                                paymentsList.Add(new DebtPaymentExportSummary(id, amount, debtDate, userName, createdDate, purpose, userID, accountID));
                             }
+
                         }
                     }
                 }
 
-                if (result == null)
+                if (paymentsList == null)
                     throw new Exception("فشلت العملية");
             }
             catch (Exception ex)
             {
-                result = null;
+                paymentsList = null;
 
                 _logger.LogError(ex.Message);
                 return handler.Failure(ex.Message);
             }
 
-            return handler.Success(result);
+            return handler.Success(paymentsList);
         }
     }
 }

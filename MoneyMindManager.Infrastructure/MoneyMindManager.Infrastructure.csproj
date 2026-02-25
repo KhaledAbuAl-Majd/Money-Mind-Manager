@@ -55,6 +55,7 @@
     <Compile Include="General Services\Utils\FormateHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Database\SQLServer\Reports\SQLCategoriesReportRepository.cs" />
+    <Compile Include="Repositories\Database\SQLServer\SQLDebtPaymentRepository.cs" />
     <Compile Include="Repositories\Database\SQLServer\SQLDebtRepository.cs" />
     <Compile Include="Repositories\Database\SQLServer\Reports\SQLDebtsReportRepository.cs" />
     <Compile Include="Repositories\Database\SQLServer\Reports\SQLGeneralReportRepository.cs" />
