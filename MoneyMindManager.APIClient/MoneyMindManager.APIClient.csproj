@@ -46,6 +46,7 @@
     <Compile Include="Api Client Implementation\AccountApiClient.cs" />
     <Compile Include="Api Client Implementation\CurrencyApiClient.cs" />
     <Compile Include="Api Client Implementation\DatabaseAppClient.cs" />
+    <Compile Include="Api Client Implementation\DebtApiClient.cs" />
     <Compile Include="Api Client Implementation\FinCategoryApiclient.cs" />
     <Compile Include="Api Client Implementation\FinTransactionApiClient.cs" />
     <Compile Include="Api Client Implementation\FinVoucherApiClient.cs" />
