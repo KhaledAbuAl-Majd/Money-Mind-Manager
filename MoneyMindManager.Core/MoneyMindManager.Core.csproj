@@ -49,6 +49,8 @@
     <Compile Include="Enums\SearchModeEnum.cs" />
     <Compile Include="Enums\PermissionsEnum.cs" />
     <Compile Include="Extensions\PermissionsExtensions.cs" />
+    <Compile Include="Models\Debt\DebtExportSummary.cs" />
+    <Compile Include="Models\Debt\DebtViewSummary.cs" />
     <Compile Include="Models\FinTransaction\FinTransactionExportSummary.cs" />
     <Compile Include="Models\FinTransaction\FinTransactionViewSummary.cs" />
     <Compile Include="Models\FinVoucher\FinVoucherExportSummary.cs" />
