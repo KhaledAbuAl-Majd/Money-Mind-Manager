@@ -81,13 +81,13 @@ namespace MoneyMindManager.Application.Services.FinTransaction
             var result = await _finTransactionRepository.Add(_finTransactionMapper.DTOToEntity(finTransaction));
 
             if (result is null)
-                return handler.Failure("failed to add voucher!");
+                return handler.Failure("failed to add transaction!");
 
             if (!result.IsSuccess)
                 return handler.Failure(result.ErrorMessage);
 
             if (result.Data is null)
-                return handler.Failure("failed to add voucher!");
+                return handler.Failure("failed to add transaction!");
 
             var DTOResult = await Get(Convert.ToInt32(result.Data), Convert.ToInt32(currentUserID));
 
@@ -182,23 +182,23 @@ namespace MoneyMindManager.Application.Services.FinTransaction
 
             return handler.Success(DTO);
         }
-        public async Task<IResult<PagedResultWithValueDTO<FinTransactionViewSummary>>> GetAllPaged(int transactionID, int currentUserID, int pageNumber)
+        public async Task<IResult<PagedResultWithValueDTO<FinTransactionViewSummary>>> GetAllPagedForVoucher(int vouceherID, int currentUserID, int pageNumber)
         {
             var handler = _resultFactory.Create<PagedResultWithValueDTO<FinTransactionViewSummary>>();
 
             byte rowsPersPage = 15;
-            var result = await _finTransactionRepository.GetAllPaged(transactionID, currentUserID, pageNumber, rowsPersPage);
+            var result = await _finTransactionRepository.GetAllPagedForVoucher(vouceherID, currentUserID, pageNumber, rowsPersPage);
 
             if (result is null)
                 return handler.Failure("failed to get transactions list!");
 
             return result;
         }
-        public async Task<IResult<IEnumerable<FinTransactionExportSummary>>> GetAll(int transactionID, int currentUserID)
+        public async Task<IResult<IEnumerable<FinTransactionExportSummary>>> GetAllForVoucher(int voucherID, int currentUserID)
         {
             var handler = _resultFactory.Create<IEnumerable<FinTransactionExportSummary>>();
 
-            var result = await _finTransactionRepository.GetAll(transactionID, currentUserID);
+            var result = await _finTransactionRepository.GetAllForVoucher(voucherID, currentUserID);
 
             if (result is null)
                 return handler.Failure("failed to get transactions list!");

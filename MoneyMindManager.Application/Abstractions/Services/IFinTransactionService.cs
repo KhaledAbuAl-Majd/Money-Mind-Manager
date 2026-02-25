@@ -13,7 +13,7 @@ namespace MoneyMindManager.Application.Abstractions.Services
         Task<IResult<bool>> Update(FinTransactionDTO finTransaction, int currentUserID);
         Task<IResult<bool>> Delete(int transactionID, int currentUserID);
         Task<IResult<FinTransactionDTO>> Get(int transactionID, int currentUserID);
-        Task<IResult<PagedResultWithValueDTO<FinTransactionViewSummary>>> GetAllPaged(int transactionID, int currentUserID, int pageNumber);
-        Task<IResult<IEnumerable<FinTransactionExportSummary>>> GetAll(int transactionID, int currentUserID);
+        Task<IResult<PagedResultWithValueDTO<FinTransactionViewSummary>>> GetAllPagedForVoucher(int voucherID, int currentUserID, int pageNumber);
+        Task<IResult<IEnumerable<FinTransactionExportSummary>>> GetAllForVoucher(int voucherID, int currentUserID);
     }
 }
