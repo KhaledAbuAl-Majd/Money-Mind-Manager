@@ -44,6 +44,7 @@
     <Compile Include="Account\AccountBaseDTO.cs" />
     <Compile Include="Account\CreateAccountDTO.cs" />
     <Compile Include="Currency\CurrencyDTO.cs" />
+    <Compile Include="DebtPayment\DebtPaymentDTO.cs" />
     <Compile Include="Debt\DebtDTO.cs" />
     <Compile Include="Debt\DebtFilterDTO.cs" />
     <Compile Include="Debt\DebtPagedFilterDTO.cs" />
