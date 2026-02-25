@@ -14,7 +14,7 @@ namespace MoneyMindManager.Domain.Abstractions
         Task<IResult<bool>> Update(FinTransaction finTransaction, int currentUserID);
         Task<IResult<bool>> Delete(int transactionID, int currentUserID);
         Task<IResult<FinTransactionShort>> Get(int transactionID, int currentUserID);
-        Task<IResult<PagedResultWithValueDTO<FinTransactionViewSummary>>> GetAllPaged(int voucherID, int currentUserID, int pageNumber, byte rowsPerPage);
-        Task<IResult<IEnumerable<FinTransactionExportSummary>>> GetAll(int voucherID, int currentUserID);
+        Task<IResult<PagedResultWithValueDTO<FinTransactionViewSummary>>> GetAllPagedForVoucher(int voucherID, int currentUserID, int pageNumber, byte rowsPerPage);
+        Task<IResult<IEnumerable<FinTransactionExportSummary>>> GetAllForVoucher(int voucherID, int currentUserID);
     }
 }
