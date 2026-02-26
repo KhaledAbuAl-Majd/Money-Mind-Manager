@@ -22,7 +22,7 @@ namespace MoneyMindManager.Domain.Entities
             this.RemainingAmount = remaintAmount;
         }
 
-        public Debt(MainTransaction mainTransaction, int debtID, bool isLending, int personID, DateTime? paymentDueDate, decimal remaintAmount) : base(mainTransaction.MainTransactionID, mainTransaction.Amount,
+        public Debt(MainTransaction mainTransaction, int? debtID, bool isLending, int? personID, DateTime? paymentDueDate, decimal remaintAmount) : base(mainTransaction.MainTransactionID, mainTransaction.Amount,
            mainTransaction.CreatedDate, mainTransaction.AccountID, mainTransaction.CreatedByUserID, mainTransaction.TransactionTypeID, mainTransaction.Purpose,
            mainTransaction.IsLocked, mainTransaction.TransactionDate, mainTransaction.TransactionTypeName, mainTransaction.CreatedByUserName)
         {

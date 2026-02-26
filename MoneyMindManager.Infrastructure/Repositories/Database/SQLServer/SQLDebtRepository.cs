@@ -224,7 +224,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer.Report
         }
         public async Task<IResult<Debt>> Get(int debtID, int currentUserID)
         {
-            Debt voucherData = null;
+            Debt debtData = null;
             var handler = _resultFactory.Create<Debt>();
 
             try
@@ -253,7 +253,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer.Report
                                 bool isLocked = Convert.ToBoolean(reader["IsLocked"]);
                                 decimal remainingAmount = Convert.ToDecimal(reader["RemainingAmount"]);
 
-                                voucherData = new Debt()
+                                debtData = new Debt()
                                 {
                                     DebtID = debtID,
                                     IsLending = isLending,
@@ -270,18 +270,18 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer.Report
                     }
                 }
 
-                if (voucherData == null)
+                if (debtData == null)
                     throw new Exception("فشلت العملية");
             }
             catch (Exception ex)
             {
-                voucherData = null;
+                debtData = null;
 
                 _logger.LogError(ex.Message);
                 return handler.Failure(ex.Message);
             }
 
-            return handler.Success(voucherData);
+            return handler.Success(debtData);
         }
         public async Task<IResult<DebtsPagedResultDTO<DebtViewSummary>>> GetAllPaged(DebtPagedSearchCriteria criteria, int currentUserID)
         {

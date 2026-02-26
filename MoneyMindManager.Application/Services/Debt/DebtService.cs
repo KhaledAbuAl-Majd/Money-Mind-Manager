@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using MoneyMindManager.Application.Abstractions.Handlers;
 using MoneyMindManager.Application.Abstractions.Services;
 using MoneyMindManager.Application.Mappers.Abstractions;
+using MoneyMindManager.Application.Mappers.Mappers_Implementaion;
 using MoneyMindManager.Core.Abstractions;
 using MoneyMindManager.Core.Enums;
 using MoneyMindManager.Core.Models.Debt;
@@ -19,14 +20,18 @@ namespace MoneyMindManager.Application.Services.Debt
         private readonly IDebtRepository _debtRepository;
         private readonly IDebtMapper _debtMapper;
         private readonly IAuthorizationService _authorizationService;
+        private readonly IMainTransactionService _mainTransactionService;
+        private readonly IMainTransactionMapper _mainTransactionMapper;
 
         public DebtService(IResultFactory resultFactory, IDebtRepository debtRepository, IDebtMapper debtMapper,
-            IAuthorizationService authorizationService)
+            IAuthorizationService authorizationService, IMainTransactionService mainTransactionService, IMainTransactionMapper mainTransactionMapper)
         {
             this._resultFactory = resultFactory;
             this._debtRepository = debtRepository;
             this._debtMapper = debtMapper;
             this._authorizationService = authorizationService;
+            this._mainTransactionService = mainTransactionService;
+            this._mainTransactionMapper = mainTransactionMapper;
         }
         public async Task<IResult<DebtDTO>> Add(DebtDTO debtDTO, int currentUserID)
         {
@@ -165,7 +170,17 @@ namespace MoneyMindManager.Application.Services.Debt
             if (result.Data is null)
                 return handler.Failure("failed to get debt!");
 
-            return handler.Success(_debtMapper.EntityToDTO(result.Data));
+            var mainTransactionResult = await _mainTransactionService.Get(Convert.ToInt32(result.Data.MainTransactionID), currentUserID);
+
+            if (!result.IsSuccess)
+                return handler.Failure(result.ErrorMessage);
+
+            var mainTransaction = _mainTransactionMapper.DTOToEntity(mainTransactionResult.Data);
+
+            var debt = new Domain.Entities.Debt(mainTransaction, result.Data.DebtID, result.Data.IsLending,
+                result.Data.PersonID, result.Data.PaymentDueDate, result.Data.RemainingAmount);
+
+            return handler.Success(_debtMapper.EntityToDTO(debt));
         }
         public async Task<IResult<DebtsPagedResultDTO<DebtViewSummary>>> GetAllPaged(DebtPagedFilterDTO DTO, int currentUserID)
         {
