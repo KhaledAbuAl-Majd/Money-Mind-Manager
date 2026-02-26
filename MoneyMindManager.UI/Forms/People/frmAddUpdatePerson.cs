@@ -1,21 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MoneyMindManager_Business;
 using KhaledControlLibrary1;
+using MoneyMindManager.Client.Abstractions.ApiClient;
+using MoneyMindManager.Core.Enums;
+using MoneyMindManager.Shared.DTOs;
+using MoneyMindManager.UI.Abstractions;
 using MoneyMindManager_Presentation.Global;
 
 namespace MoneyMindManager_Presentation.People
 {
     public partial class frmAddUpdatePerson : Form
     {
+        private IPersonApiClient _personApiClient;
+        private IUserSession _userSession;
+        private IMessageBoxService _messageBoxService;
+
+        private bool isInitialized = false;
         /// <summary>
         /// PersonID
         /// </summary>
@@ -26,8 +28,8 @@ namespace MoneyMindManager_Presentation.People
         enMode Mode { get; set; }
 
         private int? _PersonID { get; set; }
-        private clsPerson _Person { get; set; }
-        public frmAddUpdatePerson()
+        private PersonDTO _Person { get; set; }
+        public frmAddUpdatePerson(IPersonApiClient personApiClient, IUserSession userSession, IMessageBoxService messageBoxService)
         {
             if (!_CheckPermissions())
             {
@@ -36,27 +38,34 @@ namespace MoneyMindManager_Presentation.People
             }
 
             InitializeComponent();
+            this._personApiClient = personApiClient;
+            this._userSession = userSession;
+            this._messageBoxService = messageBoxService;
             Mode = enMode.AddNew;
             _PersonID = null;
-            _Person = new clsPerson();
+            _Person = new PersonDTO();
         }
-        public frmAddUpdatePerson(int personID)
+        public bool Initialize(int personID)
         {
-            if (!_CheckPermissions())
-            {
-                this.Dispose();
-                return;
-            }
-
-            InitializeComponent();
             Mode = enMode.Update;
             this._PersonID = personID;
+            this.isInitialized = true;
+            return true;
+        }
+
+        public bool Initialize()
+        {
+            this.isInitialized = true;
+            return true;
         }
 
         bool _CheckPermissions()
         {
-            return clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.AddUpdatePerson,
-                 "ليس لديك صلاحية إضافة/تعديل شخص.");
+            if (_userSession.IsHasPermissions(enPermissions.AddUpdatePerson))
+                return true;
+
+            _messageBoxService.DisplayError("ليس لديك صلاحية إضافة/تعديل شخص.");
+            return false;
         }
 
         void ChangeHeaderValue(string txt)
@@ -69,7 +78,7 @@ namespace MoneyMindManager_Presentation.People
         {
             ChangeHeaderValue("إضافة شخص");
             _PersonID = null;
-            _Person = new clsPerson();
+            _Person = new PersonDTO();
             lblPersonID.Text = "N/A";
             kgtxtPersonName.Focus();
         }
@@ -78,14 +87,17 @@ namespace MoneyMindManager_Presentation.People
         {
             ChangeHeaderValue("تعديل بيانات شخص");
 
-            clsPerson searchedPerson = await clsPerson.FindPersonByID(Convert.ToInt32(_PersonID));
 
-            if (searchedPerson == null)
+            var result = await _personApiClient.Get(Convert.ToInt32(_PersonID), Convert.ToInt32(_userSession.UserID));
+
+            if (!result.IsSuccess || result.Data is null)
             {
-                clsPL_MessageBoxs.ShowErrorMessage("فشل تحميل بيانات الشخص");
+                _messageBoxService.DisplayError("فشل تحميل بيانات الشخص\n" + result.ErrorMessage);
                 this.Close();
                 return;
             }
+
+            PersonDTO searchedPerson = result.Data;
 
             this._PersonID = searchedPerson.PersonID;
             this._Person = searchedPerson;
@@ -100,7 +112,7 @@ namespace MoneyMindManager_Presentation.People
 
         void _ResteObject()
         {
-            _Person = new clsPerson();
+            _Person = new PersonDTO();
         }
         async Task _Save()
         {
@@ -111,7 +123,7 @@ namespace MoneyMindManager_Presentation.People
 
             if (!ValidateChildren())
             {
-                clsPL_MessageBoxs.ShowValidateChildrenFailedMessage();
+                _messageBoxService.ShowValidateChildrenFailedMessage();
                 return;
             }
 
@@ -119,50 +131,56 @@ namespace MoneyMindManager_Presentation.People
             _Person.Email = kgtxtEmail.ValidatedText;
             _Person.Phone = kgtxtPhone.ValidatedText;
 
-            if (Mode == enMode.AddNew)
-            {
-                if (!_Person.EnterAccountIDAtAddMode(Convert.ToInt16(clsPL_Global.CurrentUser.AccountID)))
-                {
-                    clsPL_MessageBoxs.ShowErrorMessage("فشل تسجيل معرف الحساب للمستخدم");
-                    _ResteObject();
-                    return;
-                }
-
-                if (!_Person.EnterCreatedByUserIDAtAddMode(Convert.ToInt32(clsPL_Global.CurrentUser.UserID)))
-                {
-                    clsPL_MessageBoxs.ShowErrorMessage("فشل تسجيل معرف منشئ الحساب");
-                    _ResteObject();
-                    return;
-                }
-            }
-
             _Person.Address = kgtxtAddress.ValidatedText;
             _Person.Notes = kgtxtNotes.ValidatedText;
 
-            if (await _Person.Save())
+            if (Mode == enMode.AddNew)
             {
-                if (Mode == enMode.AddNew)
-                {
-                    clsPL_MessageBoxs.ShowMessage($"تم إضافة الشخص بنجاج بمعرف [{_Person.PersonID}]", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                _Person.AccountID = _userSession.CurrentUser?.AccountID;
+                _Person.CreatedByUserID = _userSession.UserID;
 
-                    Mode = enMode.Update;
-                    _PersonID = _Person.PersonID;
-                    lblPersonID.Text = _PersonID.ToString();
-                    ChangeHeaderValue("تعديل بيانات شخص");
-                }
-                else if (Mode == enMode.Update)
+                var result = await _personApiClient.Add(_Person, Convert.ToInt32(_userSession.UserID));
+
+                if (!result.IsSuccess || result.Data is null)
                 {
-                    clsPL_MessageBoxs.ShowMessage("تم تعديل بيانات الشخص بنجاح", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    _messageBoxService.DisplayError(result.ErrorMessage);
+                    _ResteObject();
+                    return;
                 }
+
+                _messageBoxService.Display($"تم إضافة الشخص بنجاج بمعرف [{_Person.PersonID}]", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                Mode = enMode.Update;
+                _PersonID = _Person.PersonID;
+                lblPersonID.Text = _PersonID.ToString();
+                ChangeHeaderValue("تعديل بيانات شخص");
 
                 _isSaved = true;
             }
-            else if (Mode == enMode.AddNew)
-                _ResteObject();
+            else
+            {
+                var result = await _personApiClient.Update(_Person, Convert.ToInt32(_userSession.UserID));
+
+                if (!result.IsSuccess || !result.Data)
+                {
+                    _messageBoxService.DisplayError("فشل تحديث بيانات الشخص\n" + result.ErrorMessage);
+                    return;
+                }
+
+                _messageBoxService.Display("تم تعديل بيانات الشخص بنجاح", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                _isSaved = true;
+            }
         }
 
         private async void frmAddUpdatePerson_Load(object sender, EventArgs e)
         {
+            if (!isInitialized)
+            {
+                this.Close();
+                return;
+            }
+
             switch (Mode)
             {
                 case enMode.AddNew:
@@ -172,7 +190,7 @@ namespace MoneyMindManager_Presentation.People
                     }
                 case enMode.Update:
                     {
-                       await _UpdateMode();
+                        await _UpdateMode();
                         break;
                     }
             }
