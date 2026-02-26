@@ -20,7 +20,7 @@ namespace MoneyMindManager_Presentation.Main
 
         private readonly IServiceProvider _serviceProvider;
         private readonly IUserSession _userSession;
-        public frmMain(IServiceProvider serviceProvider,IUserSession userSession)
+        public frmMain(IServiceProvider serviceProvider, IUserSession userSession)
         {
             InitializeComponent();
             this._serviceProvider = serviceProvider;
@@ -33,22 +33,31 @@ namespace MoneyMindManager_Presentation.Main
             lblCurrentUserName.Text = clsPL_Global.CurrentUser?.UserName;
         }
 
-        public void OpenDialog<T>(Action<T> initialize = null) where T : Form
+        public bool OpenDialog<T>(Func<T, bool> initialize = null) where T : Form
         {
             var frm = _serviceProvider.GetRequiredService<T>();
 
-            initialize?.Invoke(frm);
+            if (initialize is null || !initialize.Invoke(frm))
+            {
+                frm?.Dispose();
+                return false;
+            }
 
             frm.ShowDialog(this);
+            return true;
         }
 
-        public bool OpenAtContainer<T>(Action<T> initialize = null) where T:Form
+        public bool OpenAtContainer<T>(Func<T, bool> initialize = null) where T : Form
         {
             var frm = _serviceProvider.GetRequiredService<T>();
 
-            initialize?.Invoke(frm);
+            if (initialize is null || !initialize.Invoke(frm))
+            {
+                frm?.Dispose();
+                return false;
+            }
 
-           return _LoadFormAtPanelContainer(frm, false);
+            return _LoadFormAtPanelContainer(frm, false);
         }
 
         //Violation
@@ -127,8 +136,11 @@ namespace MoneyMindManager_Presentation.Main
 
             OpenAtContainer<frmUserInfo>((frm) =>
             {
-                frm.Initialize(Convert.ToInt32(_userSession.UserID));
+                if (!frm.Initialize(Convert.ToInt32(_userSession.UserID)))
+                    return false;
+
                 frm.FormClosed += (x, y) => llblCurrentUserInfo.Enabled = true;
+                return true;
             });
         }
 
