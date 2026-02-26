@@ -1,41 +1,60 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using MoneyMindManager.Client.Abstractions.ApiClient;
+using MoneyMindManager.UI.Abstractions;
 
 namespace MoneyMindManager_Presentation.People
 {
     public partial class frmPersonInfo : Form
     {
-      public event Action OnEditingPersonAndFormClosed;
+        private IPersonApiClient _personApiClient;
+        private IUserSession _userSession;
+        private IMessageBoxService _messageBoxService;
+        private IUserApiClient _userApiClient;
+        private IFormDisplayer _formDisplayer;
+
+        private bool isInitialized = false;
+
+        public event Action OnEditingPersonAndFormClosed;
 
         bool _IsPersonEdited = false;
 
         int _personID;
 
         bool _allowEdigitringPerson;
-        public frmPersonInfo(int personID)
+
+        public frmPersonInfo(IPersonApiClient personApiClient, IUserSession userSession, IMessageBoxService messageBoxService,
+            IUserApiClient userApiClient, IFormDisplayer formDisplayer)
         {
             InitializeComponent();
-            this._personID = personID;
             this._allowEdigitringPerson = true;
+            this._personApiClient = personApiClient;
+            this._userSession = userSession;
+            this._messageBoxService = messageBoxService;
+            this._userApiClient = userApiClient;
+            this._formDisplayer = formDisplayer;
         }
 
-        public frmPersonInfo(int personID,bool allowEditingPerson)
+        public bool Initialize(int personID)
         {
-            InitializeComponent();
+            this._personID = personID;
+            this.isInitialized = true;
+            return true;
+        }
+        public bool Initialize(int personID, bool allowEditingPerson)
+        {
             this._personID = personID;
             this._allowEdigitringPerson = allowEditingPerson;
+            this.isInitialized = true;
+            return true;
         }
 
         private async void frmPersonInfo_Load(object sender, EventArgs e)
         {
-            if (!await ctrlPersonCard1.LoadPerson(_personID))
+            if (!isInitialized)
+                this.Close();
+
+            if (!ctrlPersonCard1.Initialize(_personApiClient, _userSession, _messageBoxService, _userApiClient, _formDisplayer) || !await ctrlPersonCard1.LoadPerson(_personID))
                 this.Close();
 
             ctrlPersonCard1.AllowEditingPerson = this._allowEdigitringPerson;
