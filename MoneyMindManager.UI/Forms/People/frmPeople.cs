@@ -1,35 +1,51 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using KhaledControlLibrary1;
-using MoneyMindManager_Business;
+using MoneyMindManager.Client.Abstractions.ApiClient;
+using MoneyMindManager.Core.Enums;
+using MoneyMindManager.Shared.DTOs;
+using MoneyMindManager.Shared.DTOs.Person;
+using MoneyMindManager.UI.Abstractions;
 using MoneyMindManager_Presentation.Global;
-using MoneyMindManagerGlobal;
-using static MoneyMindManager_Business.clsBLLGlobal;
 
 namespace MoneyMindManager_Presentation.People
 {
     public partial class frmPeople : Form
     {
-        public frmPeople()
+        private IPersonApiClient _personApiClient;
+        private IUserSession _userSession;
+        private IMessageBoxService _messageBoxService;
+        private IFormDisplayer _formDisplayer;
+        public frmPeople(IPersonApiClient personApiClient, IUserSession userSession, IMessageBoxService messageBoxService, IFormDisplayer formDisplayer)
         {
-            if (!clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.PeopleList,
-                "ليس لديك صلاحية قائمة الأشخاص."))
+            if (!_CheckPermissions())
             {
                 this.Dispose();
                 return;
             }
 
+            this._personApiClient = personApiClient;
+            this._userSession = userSession;
+            this._messageBoxService = messageBoxService;
+            this._formDisplayer = formDisplayer;
+
             InitializeComponent();
         }
 
-        enum enFilterBy { All, PersonID, PersonName,Email,Phone };
+        bool _CheckPermissions()
+        {
+            if (_userSession.IsHasPermissions(enPermissions.PeopleList))
+                return true;
+
+            _messageBoxService.DisplayError("ليس لديك صلاحية قائمة الأشخاص.");
+            return false;
+        }
+
+        enum enFilterBy { All, PersonID, PersonName, Email, Phone };
 
         enFilterBy _filterBy = enFilterBy.All;
 
@@ -72,40 +88,57 @@ namespace MoneyMindManager_Presentation.People
             else if (grbTextSearchMode_SubString.Checked)
                 textSearchMode = enTextSearchMode.Substring_Slow;
 
-            clsDataColumns.PersonClasses.clsGetAllPeople result = null;
-
-
+            var filterDTO = new PersonFilterDTO();
             if (filterBy == enFilterBy.All || string.IsNullOrEmpty(kgtxtFilterValue.ValidatedText))
             {
-                result = await clsPerson.GetAllPeople(textSearchMode,_pageNumber);
+                filterDTO.TextSearchMode = textSearchMode;
+                filterDTO.PageNumber = _pageNumber;
             }
             else if (filterBy == enFilterBy.PersonID)
             {
                 int personID = Convert.ToInt32(kgtxtFilterValue.ValidatedText);
-                result = await clsPerson.GetAllPeopleByPersonID(personID,textSearchMode, _pageNumber);
+                filterDTO.PersonID = personID;
+                filterDTO.TextSearchMode = textSearchMode;
+                filterDTO.PageNumber = _pageNumber;
             }
             else if (filterBy == enFilterBy.PersonName)
             {
                 string personName = kgtxtFilterValue.ValidatedText;
-                result = await clsPerson.GetAllPeopleByPersonName(personName, textSearchMode, _pageNumber);
+                filterDTO.PersonName = personName;
+                filterDTO.TextSearchMode = textSearchMode;
+                filterDTO.PageNumber = _pageNumber;
             }
             else if (filterBy == enFilterBy.Email)
             {
                 string email = kgtxtFilterValue.ValidatedText;
-                result = await clsPerson.GetAllPeopleByEmail(email, textSearchMode, _pageNumber);
+                filterDTO.Email = email;
+                filterDTO.TextSearchMode = textSearchMode;
+                filterDTO.PageNumber = _pageNumber;
             }
             else if (filterBy == enFilterBy.Phone)
             {
                 string phone = kgtxtFilterValue.ValidatedText;
-                result = await clsPerson.GetAllPeopleByPhone(phone, textSearchMode, _pageNumber);
+                filterDTO.Phone = phone;
+                filterDTO.TextSearchMode = textSearchMode;
+                filterDTO.PageNumber = _pageNumber;
             }
             else
                 return;
 
-            if (result == null)
+            var result = await _personApiClient.GetAll(filterDTO, Convert.ToInt32(_userSession.UserID));
+
+            if (!result.IsSuccess)
+            {
+                _messageBoxService.DisplayError(result.ErrorMessage);
+                return;
+            }
+
+            var DTO = result.Data;
+
+            if (DTO == null)
                 return;
 
-            if (result.dtPeople.Rows.Count == 0)
+            if (DTO.Data.Count() == 0)
             {
                 lblNoRecordsFoundMessage.Visible = true;
                 gdgvPeople.DataSource = null;
@@ -115,7 +148,7 @@ namespace MoneyMindManager_Presentation.People
             else
             {
                 lblNoRecordsFoundMessage.Visible = false;
-                gdgvPeople.DataSource = result.dtPeople;
+                gdgvPeople.DataSource = DTO.Data;
             }
 
             lblUserMessage.Visible = false;
@@ -123,32 +156,32 @@ namespace MoneyMindManager_Presentation.People
             kgtxtPageNumber.Text = _pageNumber.ToString();
             _searchByPageNumber = true;
 
-            lblTotalRecordsNumber.Text = result.RecordsCount.ToString();
-            lblCurrentPageOfNumberOfPages.Text = string.Concat(_pageNumber, "   من   ", result.NumberOfPages, "  صفحات");
+            lblTotalRecordsNumber.Text = DTO.TotalRecords.ToString();
+            lblCurrentPageOfNumberOfPages.Text = string.Concat(_pageNumber, "   من   ", DTO.TotalPages, "  صفحات");
             kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValueOption = true;
-            kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValue = (result.NumberOfPages < 1) ? 1 : result.NumberOfPages;
+            kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValue = (DTO.TotalPages < 1) ? 1 : DTO.TotalPages;
             lblCurrentPageRecordsCount.Text = gdgvPeople.Rows.Count.ToString();
 
-            gibtnNextPage.Enabled = (_pageNumber < result.NumberOfPages);
+            gibtnNextPage.Enabled = (_pageNumber < DTO.TotalPages);
             gibtnPreviousPage.Enabled = (_pageNumber > 1);
             //
 
             if (!_IsHeaderCreated && gdgvPeople.Rows.Count > 0)
             {
-                gdgvPeople.Columns["PersonID"].HeaderText = "معرف الشخص";
-                gdgvPeople.Columns["PersonID"].Width = 130;
+                gdgvPeople.Columns[nameof(PersonDTO.PersonID)].HeaderText = "معرف الشخص";
+                gdgvPeople.Columns[nameof(PersonDTO.PersonID)].Width = 130;
 
-                gdgvPeople.Columns["PersonName"].HeaderText = "اسم الشخص";
-                gdgvPeople.Columns["PersonName"].Width = 300;
+                gdgvPeople.Columns[nameof(PersonDTO.PersonName)].HeaderText = "اسم الشخص";
+                gdgvPeople.Columns[nameof(PersonDTO.PersonName)].Width = 300;
 
-                gdgvPeople.Columns["Address"].HeaderText = "العنوان";
-                gdgvPeople.Columns["Address"].Width = 285;
+                gdgvPeople.Columns[nameof(PersonDTO.Address)].HeaderText = "العنوان";
+                gdgvPeople.Columns[nameof(PersonDTO.Address)].Width = 285;
 
-                gdgvPeople.Columns["Email"].HeaderText = "البريد الإلكتروني";
-                gdgvPeople.Columns["Email"].Width = 290;
+                gdgvPeople.Columns[nameof(PersonDTO.Email)].HeaderText = "البريد الإلكتروني";
+                gdgvPeople.Columns[nameof(PersonDTO.Email)].Width = 290;
 
-                gdgvPeople.Columns["Phone"].HeaderText = "رقم الهاتف";
-                gdgvPeople.Columns["Phone"].Width = 175;
+                gdgvPeople.Columns[nameof(PersonDTO.Phone)].HeaderText = "رقم الهاتف";
+                gdgvPeople.Columns[nameof(PersonDTO.Phone)].Width = 175;
 
                 _IsHeaderCreated = true;
             }
@@ -156,9 +189,11 @@ namespace MoneyMindManager_Presentation.People
 
         void _AddNewPerson()
         {
-            frmAddUpdatePerson frm = new frmAddUpdatePerson();
-            frm.OnCloseAndSaved += x => _Refresh();
-            clsPL_Global.MainForm.AddNewFormAtContainer(frm);
+            _formDisplayer.OpenAtContainer<frmAddUpdatePerson>(frm =>
+            {
+                frm.OnCloseAndSaved += x => _Refresh();
+                return true;
+            });
         }
 
         async void _Refresh()
@@ -175,9 +210,13 @@ namespace MoneyMindManager_Presentation.People
         {
             int personID = Convert.ToInt32(gdgvPeople.CurrentRow.Cells[0].Value);
 
-            frmPersonInfo frm = new frmPersonInfo(personID);
-            frm.OnEditingPersonAndFormClosed += _Refresh;
-            clsPL_Global.MainForm.AddNewFormAtContainer(frm);
+            _formDisplayer.OpenAtContainer<frmPersonInfo>(frm =>
+            {
+                if (!frm.Initialize(personID))
+                    return false;
+                frm.OnEditingPersonAndFormClosed += _Refresh;
+                return true;
+            });
         }
 
         void _SetReadOnlyAtTextBox(KhaledGuna2TextBox kgtxt)
@@ -199,7 +238,7 @@ namespace MoneyMindManager_Presentation.People
             lblNoRecordsFoundMessage.Visible = false;
             lblUserMessage.Visible = false;
             gcbFilterBy.SelectedIndex = 0;
-            
+
         }
         private async void frmPeople_Shown(object sender, EventArgs e)
         {
@@ -257,7 +296,7 @@ namespace MoneyMindManager_Presentation.People
                 _filterBy = enFilterBy.All;
                 if (!string.IsNullOrWhiteSpace(oldText))
                     await _LoadDataAtDataGridView(_filterBy);
-                 return;
+                return;
             }
 
             _CancelReadOnlyAtTextBox(kgtxtFilterValue);
@@ -331,7 +370,7 @@ namespace MoneyMindManager_Presentation.People
             else
                 _pageNumber = 0;
 
-            
+
 
             SearchAfterTimerFinish.Stop();
             SearchAfterTimerFinish.Start();
@@ -361,24 +400,32 @@ namespace MoneyMindManager_Presentation.People
         {
             int personID = Convert.ToInt32(gdgvPeople.CurrentRow.Cells[0].Value);
 
-            frmAddUpdatePerson frm = new frmAddUpdatePerson(personID);
-            frm.OnCloseAndSaved += x => _Refresh();
-            clsPL_Global.MainForm.AddNewFormAtContainer(frm);
+            _formDisplayer.OpenAtContainer<frmAddUpdatePerson>(frm =>
+            {
+                if (!frm.Initialize(personID))
+                    return false;
+                frm.OnCloseAndSaved += x => _Refresh();
+                return true;
+            });
         }
 
         private async void gtsmDeletePerson_Click(object sender, EventArgs e)
         {
-            if (clsPL_Global.CurrentUserSettings.AskBeforeDeletePerson)
-                if (clsPL_MessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف هذا الشخص", "طلب موافقة", MessageBoxButtons.OKCancel,
+            if (_userSession.CurrentUserSettings.AskBeforeDeletePerson)
+                if (_messageBoxService.Display("هل أنت متأكد من رغبتك حذف هذا الشخص", "طلب موافقة", MessageBoxButtons.OKCancel,
                     MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.OK)
                     return;
 
             int personID = Convert.ToInt32(gdgvPeople.CurrentRow.Cells[0].Value);
 
-            if (await clsPerson.DeletePersonByID(personID))
+            var result = await _personApiClient.Delete(personID, Convert.ToInt32(_userSession.UserID));
+
+            if (!result.IsSuccess || !result.Data)
             {
-                _Refresh();
+                _messageBoxService.DisplayError("فشل حذف الحساب.\n" + result.ErrorMessage);
+                return;
             }
+            _Refresh();
         }
 
         private void gtsmPersonData_Click(object sender, EventArgs e)
