@@ -1,29 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using KhaledControlLibrary1;
-using MoneyMindManager_Business;
+using MoneyMindManager.Client.Abstractions.ApiClient;
+using MoneyMindManager.Core.Enums;
+using MoneyMindManager.Shared.DTOs;
+using MoneyMindManager.Shared.DTOs.Person;
+using MoneyMindManager.UI.Abstractions;
 using MoneyMindManager_Presentation.Global;
-using MoneyMindManagerGlobal;
-using static MoneyMindManager_Business.clsBLLGlobal;
-using static MoneyMindManagerGlobal.clsDataColumns.clsIncomeAndExpenseCategoriesClasses;
 
 namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 {
     public partial class frmSelectPerson : Form
     {
+        private IPersonApiClient _personApiClient;
+        private IUserSession _userSession;
+        private IMessageBoxService _messageBoxService;
         public class SelectPersonEventArgs : EventArgs
         {
             public int PersonID { get; }
             public string PersonName { get; }
 
-            public SelectPersonEventArgs(int personID,string personName)
+            public SelectPersonEventArgs(int personID, string personName)
             {
                 this.PersonID = personID;
                 this.PersonName = personName;
@@ -31,9 +32,12 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
         }
 
         public event EventHandler<SelectPersonEventArgs> OnPersonSelected;
-        public frmSelectPerson()
+        public frmSelectPerson(IPersonApiClient personApiClient, IUserSession userSession, IMessageBoxService messageBoxService)
         {
             InitializeComponent();
+            this._personApiClient = personApiClient;
+            this._userSession = userSession;
+            this._messageBoxService = messageBoxService;
         }
 
 
@@ -42,7 +46,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
         bool _IsHeaderCreated = false;
         void _RaiseOnPersonSelectedEvnet()
         {
-            if(gdgvPeople.SelectedRows.Count > 0)
+            if (gdgvPeople.SelectedRows.Count > 0)
             {
                 int categoryID = Convert.ToInt32(gdgvPeople.SelectedRows[0].Cells[0].Value);
                 string categoryName = gdgvPeople.SelectedRows[0].Cells[1].Value as string;
@@ -84,7 +88,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                 lblNoRecordsFoundMessage.Visible = true;
                 lblUserMessage.Text = "تم العثور على حقول غير صالحة. ضع المؤشر على العلامات الحمراء لعرض سبب الخطأ.";
                 lblUserMessage.Visible = true;
-                lblTotalRecordsNumber.Text = "0";   
+                lblTotalRecordsNumber.Text = "0";
                 lblCurrentPageRecordsCount.Text = "0";
                 lblCurrentPageOfNumberOfPages.Text = string.Concat("1", "   من   ", "0", "  صفحات");
                 _pageNumber = 1;
@@ -101,8 +105,6 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                 return;
 
 
-            clsDataColumns.PersonClasses.clsGetAllPeople result = null;
-
             enTextSearchMode textSearchMode = enTextSearchMode.WordsPrefix_Fast;
 
             if (grbTextSearchMode_WordsPrefix.Checked)
@@ -111,12 +113,20 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                 textSearchMode = enTextSearchMode.Substring_Slow;
 
             string personName = kgtxtFilterValue.ValidatedText;
-            result = await clsPerson.GetAllPeopleForSelectOne(personName, textSearchMode, _pageNumber);           
+            var result = await _personApiClient.GetAllForSelectOne(new PersonSelectFilterDTO(personName, _pageNumber, textSearchMode), Convert.ToInt32(_userSession.UserID));
 
-            if (result == null)
+            if (!result.IsSuccess)
+            {
+                _messageBoxService.DisplayError(result.ErrorMessage);
+                return;
+            }
+
+            var DTO = result.Data;
+
+            if (DTO == null)
                 return;
 
-            if (result.dtPeople.Rows.Count == 0)
+            if (DTO.Data.Count() == 0)
             {
                 lblNoRecordsFoundMessage.Visible = true;
                 gdgvPeople.DataSource = null;
@@ -126,30 +136,29 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             else
             {
                 lblNoRecordsFoundMessage.Visible = false;
-                gdgvPeople.DataSource = result.dtPeople;
+                gdgvPeople.DataSource = DTO.Data;
             }
 
             lblUserMessage.Visible = false;
             _searchByPageNumber = false;
             kgtxtPageNumber.Text = _pageNumber.ToString();
             _searchByPageNumber = true;
-
-            lblTotalRecordsNumber.Text = result.RecordsCount.ToString();
-            lblCurrentPageOfNumberOfPages.Text = string.Concat(_pageNumber, "   من   ", result.NumberOfPages, "  صفحات");
+            lblTotalRecordsNumber.Text = DTO.TotalRecords.ToString();
+            lblCurrentPageOfNumberOfPages.Text = string.Concat(_pageNumber, "   من   ", DTO.TotalPages, "  صفحات");
             kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValueOption = true;
-            kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValue = (result.NumberOfPages < 1) ? 1 : result.NumberOfPages;
+            kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValue = (DTO.TotalPages < 1) ? 1 : DTO.TotalPages;
             lblCurrentPageRecordsCount.Text = gdgvPeople.Rows.Count.ToString();
 
-            gibtnNextPage.Enabled = (_pageNumber < result.NumberOfPages);
+            gibtnNextPage.Enabled = (_pageNumber < DTO.TotalPages);
             gibtnPreviousPage.Enabled = (_pageNumber > 1);
 
             if (!_IsHeaderCreated && gdgvPeople.Rows.Count > 0)
             {
-                gdgvPeople.Columns["PersonID"].HeaderText = "معرف الشخص";
-                gdgvPeople.Columns["PersonID"].Width = 150;
+                gdgvPeople.Columns[nameof(PersonDTO.PersonID)].HeaderText = "معرف الشخص";
+                gdgvPeople.Columns[nameof(PersonDTO.PersonID)].Width = 150;
 
-                gdgvPeople.Columns["PersonName"].HeaderText = "اسم الشخص";
-                gdgvPeople.Columns["PersonName"].Width = 670;
+                gdgvPeople.Columns[nameof(PersonDTO.PersonName)].HeaderText = "اسم الشخص";
+                gdgvPeople.Columns[nameof(PersonDTO.PersonName)].Width = 670;
 
                 _IsHeaderCreated = true;
             }
@@ -196,7 +205,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             errorProvider1.SetError(kgtxt, null);
         }
 
-        
+
         private void gdgvCategories_DoubleClick(object sender, EventArgs e)
         {
             _RaiseOnPersonSelectedEvnet();
@@ -221,14 +230,14 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                 return;
             }
 
-            if(e.KeyCode == Keys.Escape)
+            if (e.KeyCode == Keys.Escape)
             {
                 this.Close();
                 e.Handled = true;
                 return;
             }
 
-            if(gdgvPeople.Focused == false && gdgvPeople.Rows.Count > 0)
+            if (gdgvPeople.Focused == false && gdgvPeople.Rows.Count > 0)
             {
                 int selectedRow = gdgvPeople.CurrentCell.RowIndex;
 
