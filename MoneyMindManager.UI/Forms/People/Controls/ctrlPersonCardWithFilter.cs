@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MoneyMindManager_Business;
+using MoneyMindManager.Client.Abstractions.ApiClient;
+using MoneyMindManager.Shared.DTOs;
+using MoneyMindManager.UI.Abstractions;
 using MoneyMindManager_Presentation.Global;
 using MoneyMindManager_Presentation.Income_And_Expense.Categories;
 
@@ -15,6 +12,9 @@ namespace MoneyMindManager_Presentation.People.Controls
 {
     public partial class ctrlPersonCardWithFilter : UserControl
     {
+        private IFormDisplayer _formDisplayer;
+
+        private bool isInitialized = false;
         public ctrlPersonCardWithFilter()
         {
             InitializeComponent();
@@ -31,12 +31,26 @@ namespace MoneyMindManager_Presentation.People.Controls
                 pnlSearchPart.Enabled = value;
             }
         }
-        public clsPerson Person
+        public PersonDTO Person
         {
             get
             {
                 return ctrlPersonCard1.Person;
             }
+        }
+
+        public bool Initialize(IPersonApiClient personApiClient, IUserSession userSession, IMessageBoxService messageBoxService,
+           IUserApiClient userApiClient, IFormDisplayer formDisplayer)
+        {
+            if (personApiClient is null || userSession is null || messageBoxService is null || userApiClient is null || formDisplayer is null)
+                return false;
+
+            if (!ctrlPersonCard1.Initialize(personApiClient, userSession, messageBoxService, userApiClient, formDisplayer)) return false;
+
+            this._formDisplayer = formDisplayer;
+            isInitialized = true;
+
+            return true;
         }
 
         /// <summary>
@@ -62,9 +76,11 @@ namespace MoneyMindManager_Presentation.People.Controls
 
         void _ShowSelectPersonForm()
         {
-            var frm = new frmSelectPerson();
-            frm.OnPersonSelected += FrmSelectPerson_OnPersonSelected;
-            clsPL_Global.MainForm.OpenDialog(frm);
+            _formDisplayer.OpenDialog<frmSelectPerson>((frm) =>
+            {
+                frm.OnPersonSelected += FrmSelectPerson_OnPersonSelected;
+                return true;
+            });
         }
 
         async Task _FindPerson(int personID)
@@ -82,10 +98,10 @@ namespace MoneyMindManager_Presentation.People.Controls
         }
         private async void FrmSelectPerson_OnPersonSelected(object sender, frmSelectPerson.SelectPersonEventArgs e)
         {
-           await _FindPerson(e.PersonID);
+            await _FindPerson(e.PersonID);
         }
 
-        private  void gibtnFindPerson_Click(object sender, EventArgs e)
+        private void gibtnFindPerson_Click(object sender, EventArgs e)
         {
             if (gibtnFindPerson.Enabled)
             {
@@ -98,9 +114,13 @@ namespace MoneyMindManager_Presentation.People.Controls
             if (!gibtnAddPerson.Enabled)
                 return;
 
-            frmAddUpdatePerson frm = new frmAddUpdatePerson();
-            frm.OnCloseAndSaved += FrmAddUpdatePerson_OnCloseAndSaved;
-            clsPL_Global.MainForm.AddNewFormAtContainer(frm);
+            _formDisplayer.OpenAtContainer<frmAddUpdatePerson>((frm) =>
+            {
+                if (!frm.Initialize())
+                    return false;
+                frm.OnCloseAndSaved += FrmAddUpdatePerson_OnCloseAndSaved;
+                return true;
+            });
         }
 
         private async void FrmAddUpdatePerson_OnCloseAndSaved(int personID)
@@ -151,7 +171,7 @@ namespace MoneyMindManager_Presentation.People.Controls
 
         private void kgtxtPersonID_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.F9)
+            if (e.KeyCode == Keys.F9)
             {
                 gibtnFindPerson.PerformClick();
             }

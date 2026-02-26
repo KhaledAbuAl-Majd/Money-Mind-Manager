@@ -16,6 +16,12 @@ namespace MoneyMindManager.Shared.DTOs.Person
             this.PersonName = null;
             this.TextSearchMode = textSearchMode;
         }
+        public PersonSelectFilterDTO(string personName,int pageNumber,enTextSearchMode textSearchMode)
+        {
+            this.PersonName = personName;
+            this.PageNumber = pageNumber;
+            this.TextSearchMode = textSearchMode;
+        }
 
         public PersonSelectFilterDTO()
         {
