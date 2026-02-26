@@ -43,7 +43,7 @@ namespace MoneyMindManager.Application.Mappers.Mappers_Implementaion
                 entity.TransactionTypeID, entity.Purpose, entity.IsLocked, entity.TransactionDate, entity.TransactionTypeName, entity.CreatedByUserName);
         }
 
-        public MainTransactionSearchCriteria MainTransactionFilterDTOToMainTransactionSearchCriteria(MainTransactionFilterDTO filterDTO)
+        public MainTransactionSearchCriteria ToSearchCriteria(MainTransactionFilterDTO filterDTO)
         {
             if (filterDTO is null)
                 return null;
@@ -85,12 +85,12 @@ namespace MoneyMindManager.Application.Mappers.Mappers_Implementaion
             };
         }
 
-        public MainTransactionPagedSearchCriteria MainTransactionPagedFilterDTOToMainTransactionPagedSearchCriteria(MainTransactionPagedFilterDTO filterDTO)
+        public MainTransactionPagedSearchCriteria ToPagedSearchCriteria(MainTransactionPagedFilterDTO filterDTO)
         {
             if (filterDTO is null)
                 return null;
 
-            var result = MainTransactionFilterDTOToMainTransactionSearchCriteria(filterDTO);
+            var result = ToSearchCriteria(filterDTO);
             return new MainTransactionPagedSearchCriteria(result)
             {
                 PageNumber = filterDTO.PageNumber

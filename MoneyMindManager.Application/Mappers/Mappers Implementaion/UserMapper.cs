@@ -48,7 +48,7 @@ namespace MoneyMindManager.Application.Mappers.Mappers_Implementaion
                 user.CreatedByUserID, user.CreatedDate);
         }
 
-        public UserSearchCriteria UserFilterDTOTOUserSearchCriteria(UserFilterDTO userFilterDTO)
+        public UserSearchCriteria ToSearchCriteria(UserFilterDTO userFilterDTO)
         {
             if (userFilterDTO is null)
                 return null;

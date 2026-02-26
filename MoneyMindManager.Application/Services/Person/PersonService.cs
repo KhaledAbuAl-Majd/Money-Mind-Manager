@@ -170,7 +170,7 @@ namespace MoneyMindManager.Application.Services
             if (personFilterDTO is null)
                 return handler.Failure("البيانات المرسلة غير صالحة");
 
-            var personSearchCriteria = _personMapper.PersonFilterDTOTOPersonSearchCriteria(personFilterDTO);
+            var personSearchCriteria = _personMapper.ToSearchCriteria(personFilterDTO);
             personSearchCriteria.RowsPerPage = 15;
             var result = await _personRepository.GetAll(personSearchCriteria, currentUserID);
 
@@ -192,7 +192,7 @@ namespace MoneyMindManager.Application.Services
             if (personFilterDTO is null)
                 return handler.Failure("البيانات المرسلة غير صالحة");
 
-            var personSearchCriteria = _personMapper.PersonSelectFilterDTOTOPersonSelectSearchCriteria(personFilterDTO);
+            var personSearchCriteria = _personMapper.ToSelectSearchCriteria(personFilterDTO);
             personSearchCriteria.RowsPerPage = 15;
             var result = await _personRepository.GetAllForSelectOne(personSearchCriteria, currentUserID);
 

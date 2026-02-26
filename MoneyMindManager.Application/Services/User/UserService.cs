@@ -323,7 +323,7 @@ namespace MoneyMindManager.Application.Services.User
             if (userFilterDTO is null)
                 return handler.Failure("البيانات المرسلة غير صالحة");
 
-            var userSearchCriteria = _userMapper.UserFilterDTOTOUserSearchCriteria(userFilterDTO);
+            var userSearchCriteria = _userMapper.ToSearchCriteria(userFilterDTO);
             userSearchCriteria.RowsPerPage = 15;
             var result = await _userRepository.GetAll(userSearchCriteria, currentUserID);
 

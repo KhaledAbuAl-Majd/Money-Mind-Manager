@@ -27,7 +27,7 @@ namespace MoneyMindManager.Application.Mappers.Mappers_Implementaion
                 person.CreatedByUserID, person.CreatedDate, person.Receivable, person.Payable);
         }
 
-        public PersonSearchCriteria PersonFilterDTOTOPersonSearchCriteria(PersonFilterDTO personFilterDTO)
+        public PersonSearchCriteria ToSearchCriteria(PersonFilterDTO personFilterDTO)
         {
             if (personFilterDTO is null)
                 return null;
@@ -43,7 +43,7 @@ namespace MoneyMindManager.Application.Mappers.Mappers_Implementaion
             };
         }
 
-        public PersonSelectSearchCriteria PersonSelectFilterDTOTOPersonSelectSearchCriteria(PersonSelectFilterDTO personFilterDTO)
+        public PersonSelectSearchCriteria ToSelectSearchCriteria(PersonSelectFilterDTO personFilterDTO)
         {
             if (personFilterDTO is null)
                 return null;

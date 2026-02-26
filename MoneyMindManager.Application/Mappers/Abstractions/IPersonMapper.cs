@@ -8,7 +8,7 @@ namespace MoneyMindManager.Application.Abstractions.Mappers
 {
     public interface IPersonMapper : IMapper<Person, PersonDTO>
     {
-        PersonSearchCriteria PersonFilterDTOTOPersonSearchCriteria(PersonFilterDTO personFilterDTO);
-        PersonSelectSearchCriteria PersonSelectFilterDTOTOPersonSelectSearchCriteria(PersonSelectFilterDTO personSelectFilterDTO);
+        PersonSearchCriteria ToSearchCriteria(PersonFilterDTO personFilterDTO);
+        PersonSelectSearchCriteria ToSelectSearchCriteria(PersonSelectFilterDTO personSelectFilterDTO);
     }
 }

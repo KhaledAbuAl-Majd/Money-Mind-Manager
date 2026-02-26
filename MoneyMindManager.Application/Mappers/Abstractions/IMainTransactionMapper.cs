@@ -7,7 +7,7 @@ namespace MoneyMindManager.Application.Mappers.Mappers_Implementaion
 {
     public interface IMainTransactionMapper : IMapper<MainTransaction, MainTransactionDTO>
     {
-        MainTransactionSearchCriteria MainTransactionFilterDTOToMainTransactionSearchCriteria(MainTransactionFilterDTO filterDTO);
-        MainTransactionPagedSearchCriteria MainTransactionPagedFilterDTOToMainTransactionPagedSearchCriteria(MainTransactionPagedFilterDTO filterDTO);
+        MainTransactionSearchCriteria ToSearchCriteria(MainTransactionFilterDTO filterDTO);
+        MainTransactionPagedSearchCriteria ToPagedSearchCriteria(MainTransactionPagedFilterDTO filterDTO);
     }
 }
