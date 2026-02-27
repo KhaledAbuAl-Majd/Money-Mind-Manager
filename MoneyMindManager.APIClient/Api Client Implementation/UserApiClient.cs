@@ -20,7 +20,7 @@ namespace MoneyMindManager.APIClient.Api_Client_Implementation
             this._userService = userService;
         }
 
-        public async Task<IResult<UserDTO>> Add(UserDTO user, int currentUserID)
+        public async Task<IResult<UserDTO>> Add(CreateUserDTO user, int currentUserID)
         {
             return await _userService.Add(user, currentUserID);
         }
@@ -88,6 +88,11 @@ namespace MoneyMindManager.APIClient.Api_Client_Implementation
         public async Task<IResult<List<PermissionInfo>>> GetPermissions(int userID)
         {
             return await _userService.GetPermissions(userID);
+        }
+
+        public async Task<IResult<List<PermissionInfo>>> GetPermissionsMetadata()
+        {
+            return await _userService.GetPermissionsMetadata();
         }
     }
 }

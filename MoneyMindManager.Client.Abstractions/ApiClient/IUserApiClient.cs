@@ -11,7 +11,7 @@ namespace MoneyMindManager.Client.Abstractions.ApiClient
 {
     public interface IUserApiClient
     {
-        Task<IResult<UserDTO>> Add(UserDTO user, int currentUserID);
+        Task<IResult<UserDTO>> Add(CreateUserDTO user, int currentUserID);
         Task<IResult<bool>> Update(UserDTO user, int currentUserID);
         Task<IResult<UserDTO>> Login(LoginRequestDTO loginRequestDTO);
         Task<IResult<UserDTO>> GetByUserID(int userID);
@@ -25,5 +25,6 @@ namespace MoneyMindManager.Client.Abstractions.ApiClient
         Task<IResult<bool>> IsExistByPersonID(int personID, bool includeDeleted = true);
         Task<IResult<bool>> IsHasPermission(int userID, enPermissions checkedPermission);
         Task<IResult<List<PermissionInfo>>> GetPermissions(int userID);
+        Task<IResult<List<PermissionInfo>>> GetPermissionsMetadata();
     }
 }
