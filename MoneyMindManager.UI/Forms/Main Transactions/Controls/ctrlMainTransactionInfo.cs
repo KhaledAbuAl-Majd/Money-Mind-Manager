@@ -1,29 +1,56 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MoneyMindManager_Business;
+using MoneyMindManager.Client.Abstractions.ApiClient;
+using MoneyMindManager.Shared.DTOs.MainTransaction;
+using MoneyMindManager.UI.Abstractions;
 using MoneyMindManager_Presentation.Users;
 
 namespace MoneyMindManager_Presentation.Transactions.Controls
 {
     public partial class ctrlMainTransactionInfo : UserControl
     {
+        private IUserSession _userSession;
+        private IMessageBoxService _messageBoxService;
+        private IMainTransactionApiClient _mainTransactionApiClient;
+        private IFormDisplayer _formDisplayer;
+
+        private bool isInitialized = false;
         public ctrlMainTransactionInfo()
         {
             InitializeComponent();
         }
 
-        public clsMainTransaction MainTransaction { get; private set; }
+        public bool Initialize(IUserSession userSession, IMessageBoxService messageBoxService, IMainTransactionApiClient mainTransactionApiClient
+          , IFormDisplayer formDisplayer)
+        {
+            if (userSession is null || messageBoxService is null || mainTransactionApiClient is null || formDisplayer is null)
+                return false;
+
+            this._userSession = userSession;
+            this._messageBoxService = messageBoxService;
+            this._mainTransactionApiClient = mainTransactionApiClient;
+            this._formDisplayer = formDisplayer;
+            isInitialized = true;
+            return true;
+        }
+
+        public MainTransactionDTO MainTransaction { get; private set; }
         public async Task<bool> LoadMainTransaction(int transactionID)
         {
+            if (!isInitialized)
+                return false;
 
-            MainTransaction = await clsMainTransaction.FindMainTransactionInfoByID(transactionID);
+            var result = await _mainTransactionApiClient.Get(transactionID, Convert.ToInt32(_userSession.UserID));
+
+            if (!result.IsSuccess || result.Data is null)
+            {
+                _messageBoxService.DisplayError(result.ErrorMessage);
+                ResetControls();
+                return false;
+            }
+
+            MainTransaction = result.Data;
 
             if (MainTransaction == null)
             {
@@ -36,8 +63,11 @@ namespace MoneyMindManager_Presentation.Transactions.Controls
             return true;
         }
 
-        public bool  LoadMainTransaction(clsMainTransaction _mainTransaction)
+        public bool LoadMainTransaction(MainTransactionDTO _mainTransaction)
         {
+            if (!isInitialized)
+                return false;
+
             MainTransaction = _mainTransaction;
 
             if (MainTransaction == null)
@@ -57,8 +87,8 @@ namespace MoneyMindManager_Presentation.Transactions.Controls
             kgtxtAmount.RefreshNumber_DateTimeFormattedText(MainTransaction?.Amount.ToString());
             kgtxtTransactionDate.RefreshNumber_DateTimeFormattedText(MainTransaction?.TransactionDate.ToString());
             kgtxtCreatedDate.RefreshNumber_DateTimeFormattedText(MainTransaction?.CreatedDate.ToString());
-            kgtxtCreatedByUserName.RefreshNumber_DateTimeFormattedText(MainTransaction?.CreatedByUserInfo?.UserName.ToString());
-            kgtxtTransactionType.RefreshNumber_DateTimeFormattedText(MainTransaction?.TransactionTypeInfo?.TransactionTypeName.ToString());
+            kgtxtCreatedByUserName.RefreshNumber_DateTimeFormattedText(MainTransaction?.CreatedByUserName.ToString());
+            kgtxtTransactionType.RefreshNumber_DateTimeFormattedText(MainTransaction?.TransactionTypeName.ToString());
             kgtxtPurpose.Text = MainTransaction?.Purpose?.ToString();
         }
 
@@ -83,8 +113,10 @@ namespace MoneyMindManager_Presentation.Transactions.Controls
             if (MainTransaction == null)
                 return;
 
-            frmUserInfo frm = new frmUserInfo(Convert.ToInt32(MainTransaction?.CreatedByUserID));
-            clsPL_Global.MainForm.AddNewFormAtContainer(frm);
+            _formDisplayer.OpenAtContainer<frmUserInfo>((frm) =>
+            {
+                return frm.Initialize(Convert.ToInt32(MainTransaction?.CreatedByUserID));
+            });
         }
     }
 }
