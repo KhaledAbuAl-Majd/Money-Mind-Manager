@@ -1,23 +1,42 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DocumentFormat.OpenXml.Spreadsheet;
-using MoneyMindManager_Business;
+using MoneyMindManager.Client.Abstractions.ApiClient;
+using MoneyMindManager.Shared.DTOs.User;
+using MoneyMindManager.UI.Abstractions;
+using MoneyMindManager_Presentation.People.Controls;
 
 namespace MoneyMindManager_Presentation.Users
 {
     public partial class ctrlUserCard : UserControl
     {
+        private IPersonApiClient _personApiClient;
+        private IUserSession _userSession;
+        private IMessageBoxService _messageBoxService;
+        private IUserApiClient _userApiClient;
+        private IFormDisplayer _formDisplayer;
+
+        private bool isInitialized = false;
         public ctrlUserCard()
         {
             InitializeComponent();
+        }
+
+        public bool Initialize(IPersonApiClient personApiClient, IUserSession userSession, IMessageBoxService messageBoxService,
+           IUserApiClient userApiClient, IFormDisplayer formDisplayer)
+        {
+            if (personApiClient is null || userSession is null || messageBoxService is null || userApiClient is null || formDisplayer is null)
+                return false;
+
+            if (!ctrlPersonCard1.Initialize(_personApiClient, _userSession, _messageBoxService, _userApiClient, _formDisplayer))
+                return false;
+            this._personApiClient = personApiClient;
+            this._userSession = userSession;
+            this._messageBoxService = messageBoxService;
+            this._userApiClient = userApiClient;
+            this._formDisplayer = formDisplayer;
+            isInitialized = true;
+            return true;
         }
 
         public event Action OnEditingPerson
@@ -29,16 +48,31 @@ namespace MoneyMindManager_Presentation.Users
 
         public event Action OnEditingUser;
 
-        public clsUser User { get; private set; }
+        public UserDTO User { get; private set; }
 
         public async Task<bool> LoadUser(int userID)
         {
+            if (!isInitialized)
+                return false;
+
             gbtnEditUser.Enabled = false;
 
-            User = await clsUser.FindUserByUserID(userID);
+            var result = await _userApiClient.GetByUserID(Convert.ToInt32(userID));
 
-            if (User == null)
+            if (!result.IsSuccess || result.Data is null)
             {
+                _messageBoxService.DisplayError(result.ErrorMessage);
+                ResetControls();
+                return false;
+            }
+
+            User = result.Data;
+
+            var userResult = await _userApiClient.GetByUserID(Convert.ToInt32(result.Data.CreatedByUserID));
+
+            if (!userResult.IsSuccess || userResult.Data is null)
+            {
+                _messageBoxService.DisplayError(userResult.ErrorMessage);
                 ResetControls();
                 return false;
             }
@@ -57,26 +91,29 @@ namespace MoneyMindManager_Presentation.Users
                 lbluserMessage.Visible = true;
             }
 
-            await _ShowData();
+            await _ShowData(userResult.Data);
 
             return true;
         }
 
-        async Task _ShowData()
+        async Task _ShowData(UserDTO userDTO)
         {
             lblUseID.Text = User.UserID.ToString();
             lblIsActive.Text = (User.IsActive) ? "فعال" : "موقوف";
-            klblCreatedDate.Text =User.CreatedDate.ToString();
+            klblCreatedDate.Text = User.CreatedDate.ToString();
             kgtxtUserName.Text = User.UserName;
-            clsUser creatingUser = await User.GetCreatedbyUserInfo();
-            kgtxtUserNameOfCreatedUser.Text = creatingUser.UserName;
+            kgtxtUserNameOfCreatedUser.Text = userDTO.UserName;
             kgtxtNotes.Text = User.Notes;
         }
         private void gbtnEditUser_Click(object sender, EventArgs e)
         {
-            frmAddUpdateUser frm = new frmAddUpdateUser(Convert.ToInt32(User.UserID));
-            frm.OnCloseAndSavedOrEditing += FrmAddUpdateUser_OnCloseAndSaved;
-            clsPL_Global.MainForm.AddNewFormAtContainer(frm);
+            _formDisplayer.OpenAtContainer<frmAddUpdateUser>(frm =>
+            {
+                if (!frm.Initialize(Convert.ToInt32(User.UserID)))
+                    return false;
+                frm.OnCloseAndSavedOrEditing += FrmAddUpdateUser_OnCloseAndSaved;
+                return true;
+            });
         }
         private void ctrlUserCard_Load(object sender, EventArgs e)
         {
@@ -118,8 +155,12 @@ namespace MoneyMindManager_Presentation.Users
             if (User == null)
                 return;
 
-            frmUserInfo frm = new frmUserInfo(Convert.ToInt32(User?.CreatedByUserID));
-            clsPL_Global.MainForm.AddNewFormAtContainer(frm);
+            _formDisplayer.OpenAtContainer<frmUserInfo>(frm =>
+            {
+                if (!frm.Initialize(Convert.ToInt32(User?.CreatedByUserID)))
+                    return false;
+                return true;
+            });
         }
     }
 }
