@@ -40,7 +40,7 @@ namespace MoneyMindManager.Application.Services.User
             this._accountService = accountService;
         }
 
-        public async Task<IResult<UserDTO>> Add(UserDTO userDTO, int currentUserID)
+        public async Task<IResult<UserDTO>> Add(CreateUserDTO userDTO, int currentUserID)
         {
             var handler = _resultFactory.Create<UserDTO>();
 
@@ -57,10 +57,16 @@ namespace MoneyMindManager.Application.Services.User
             if (!accessResult.Data)
                 return handler.Failure("ليس لديك صلاحية إضافة/تعديل مستخدم.");
 
-            userDTO.CreatedDate = DateTime.Now;
             userDTO.CreatedByUserID = currentUserID;
 
-            var result = await _userRepository.Add(_userMapper.DTOToEntity(userDTO));
+            var user = _userMapper.CreateDTOToEntity(userDTO);
+            string newSalt;
+            var newHashedPassword = _passwordHasher.HashPasswordOutSalt(userDTO.Password, out newSalt);
+            user.Password = newHashedPassword;
+            user.Salt = newSalt;
+            user.CreatedDate = DateTime.Now;
+
+            var result = await _userRepository.Add(user);
 
             if (result is null)
                 return handler.Failure("failed to add user");
@@ -71,22 +77,11 @@ namespace MoneyMindManager.Application.Services.User
             if (result.Data is null)
                 return handler.Failure("failed to add user");
 
-            userDTO.UserID = result.Data;
+            var returnUserResult = await GetByUserID(Convert.ToInt32(result.Data));
+            if (!returnUserResult.IsSuccess)
+                return handler.Success(_userMapper.EntityToDTO(user));
 
-            var personDTOResult = await _personService.Get(Convert.ToInt32(userDTO?.PersonID), Convert.ToInt32(userDTO?.UserID));
-
-            //if (!personDTOResult.IsSuccess)
-            //    return handler.Failure(personDTOResult.ErrorMessage);
-
-            var accountDTOResult = await _accountService.Get(Convert.ToInt16(userDTO?.AccountID));
-
-            //if (!accountDTOResult.IsSuccess)
-            //    return handler.Failure(accountDTOResult.ErrorMessage);
-
-            userDTO.PersonInfo = personDTOResult?.Data;
-            userDTO.AccountInfo = accountDTOResult?.Data;
-
-            return handler.Success(userDTO);
+            return returnUserResult;
         }
 
         public async Task<IResult<bool>> Update(UserDTO userDTO, int currentUserID)
@@ -400,6 +395,11 @@ namespace MoneyMindManager.Application.Services.User
                 return handler.Failure("فشل جلب قائمة الصلاحيات");
 
             return handler.Success(result);
+        }
+        public async Task<IResult<List<PermissionInfo>>> GetPermissionsMetadata()
+        {
+            var handler = _resultFactory.Create<List<PermissionInfo>>();
+            return  handler.Success(_permissionService.GetPermissionMetadata(0));
         }
     }
 }
