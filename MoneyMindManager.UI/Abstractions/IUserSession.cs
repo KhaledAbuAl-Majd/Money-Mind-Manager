@@ -21,5 +21,6 @@ namespace MoneyMindManager.UI.Abstractions
         void ClearSession();
         Task<bool> Refresh();
         bool IsHasPermissions(enPermissions permissions);
+        void RefreshSettings(UserSettings userSettings);
     }
 }

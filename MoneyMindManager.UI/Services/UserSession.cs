@@ -163,5 +163,13 @@ namespace MoneyMindManager.UI.Services
 
             return CurrentUser.Permissions.IsHasPermission(permissions);
         }
+
+        public void RefreshSettings(UserSettings userSettings)
+        {
+            if (userSettings is null)
+                return;
+
+            this.CurrentUserSettings = userSettings;
+        }
     }
 }
