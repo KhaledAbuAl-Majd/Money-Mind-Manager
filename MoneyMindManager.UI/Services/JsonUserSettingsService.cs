@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using MoneyMindManager.Core;
 using MoneyMindManager.UI.Abstractions;
 using MoneyMindManager.UI.Models;
-using MoneyMindManagerGlobal;
 using Newtonsoft.Json;
 
 namespace MoneyMindManager.UI.Services
@@ -141,6 +140,39 @@ namespace MoneyMindManager.UI.Services
             userSettings.AskBeforeDeleteCategory = true;
 
             return userSettings;
+        }
+
+        public UserSettings Clone(UserSettings userSettings)
+        {
+            return new UserSettings(userSettings.UserID)
+            {
+                AskBeforeDeletePerson = userSettings.AskBeforeDeletePerson,
+
+                AskBeforeDeleteUser = userSettings.AskBeforeDeleteUser,
+
+                AskBeforeDeleteIncomeVoucher = userSettings.AskBeforeDeleteIncomeVoucher,
+                AskBeforeDeleteIncomeTransactions = userSettings.AskBeforeDeleteIncomeTransactions,
+                Income_TodayAsDefaultDate = userSettings.Income_TodayAsDefaultDate,
+                IncomeTransaction_AutoAddNewDefault = userSettings.IncomeTransaction_AutoAddNewDefault,
+
+                AskBeforeDeleteExpenseVoucher = userSettings.AskBeforeDeleteExpenseVoucher,
+                AskBeforeDeleteExpenseTransactions = userSettings.AskBeforeDeleteExpenseTransactions,
+                Expense_TodayAsDefaultDate = userSettings.Expense_TodayAsDefaultDate,
+                ExpenseTransaction_AutoAddNewDefault = userSettings.ExpenseTransaction_AutoAddNewDefault,
+
+                AskBeforeDeleteExpenseReturnVoucher = userSettings.AskBeforeDeleteExpenseReturnVoucher,
+                AskBeforeDeleteExpenseReturnTransactions = userSettings.AskBeforeDeleteExpenseReturnTransactions,
+                ExpenseReturn_TodayAsDefaultDate = userSettings.ExpenseReturn_TodayAsDefaultDate,
+                ExpenseReturnTransaction_AutoAddNewDefault = userSettings.ExpenseReturnTransaction_AutoAddNewDefault,
+
+                AskBeforeDeleteDebts = userSettings.AskBeforeDeleteDebts,
+                AskBeforeDeleteDebtPayments = userSettings.AskBeforeDeleteDebtPayments,
+                Debts_TodayAsDefaultDate = userSettings.Debts_TodayAsDefaultDate,
+                DebtPayments_TodayAsDefaultDate = userSettings.DebtPayments_TodayAsDefaultDate,
+                DebtPayment_AutoAddNewDefault = userSettings.DebtPayment_AutoAddNewDefault,
+
+                AskBeforeDeleteCategory = userSettings.AskBeforeDeleteCategory
+            };
         }
     }
 }

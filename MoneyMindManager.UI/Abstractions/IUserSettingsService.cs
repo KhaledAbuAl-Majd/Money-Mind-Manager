@@ -8,5 +8,6 @@ namespace MoneyMindManager.UI.Abstractions
         Task<UserSettings> Get(int userID, bool defaultIfFailed = true);
         Task<bool> Save(UserSettings userSettings);
         UserSettings GetDefault(int userID);
+        UserSettings Clone(UserSettings userSettings);
     }
 }
