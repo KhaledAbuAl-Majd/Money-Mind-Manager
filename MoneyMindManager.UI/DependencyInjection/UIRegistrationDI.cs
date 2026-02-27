@@ -43,6 +43,7 @@ namespace MoneyMindManager.UI.DependencyInjection
             services.AddTransient<frmUserInfo>();
             services.AddTransient<FrmUsers>();
 
+            services.AddTransient<frmSettings>();
 
             return services;
         }

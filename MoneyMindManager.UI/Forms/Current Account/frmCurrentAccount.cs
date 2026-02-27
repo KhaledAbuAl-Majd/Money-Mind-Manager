@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using KhaledControlLibrary1;
@@ -12,7 +8,6 @@ using MoneyMindManager.Client.Abstractions.ApiClient;
 using MoneyMindManager.Core.Enums;
 using MoneyMindManager.Shared.DTOs.Account;
 using MoneyMindManager.UI.Abstractions;
-using MoneyMindManager_Business;
 using MoneyMindManager_Presentation.Global;
 using MoneyMindManager_Presentation.Users;
 
@@ -28,8 +23,8 @@ namespace MoneyMindManager_Presentation
 
         enum enMode { UpdatAble, ReadOnly };
         enMode _Mode = enMode.ReadOnly;
-        public frmCurrentAccount(IAccountApiClient accountApiClient,IMessageBoxService messageBoxService,
-            IUserSession userSession,IUserApiClient userApiClient,IFormDisplayer formDisplayer)
+        public frmCurrentAccount(IAccountApiClient accountApiClient, IMessageBoxService messageBoxService,
+            IUserSession userSession, IUserApiClient userApiClient, IFormDisplayer formDisplayer)
         {
             InitializeComponent();
             this._accountApiClient = accountApiClient;
@@ -124,7 +119,7 @@ namespace MoneyMindManager_Presentation
             kgtxtDiscription.Text = _AccountInfo.Description;
             kgtxtBalance.RefreshNumber_DateTimeFormattedText(_AccountInfo.Balance.ToString());
             kgtxtCreatedDate.RefreshNumber_DateTimeFormattedText(_AccountInfo.CreatedDate.ToString());
-               var result = await _userApiClient.GetByUserID(_AccountInfo.AccountOwnerUserID);
+            var result = await _userApiClient.GetByUserID(_AccountInfo.AccountOwnerUserID);
             if (result.IsSuccess)
             {
                 var ownerUser = result.Data;
@@ -202,7 +197,7 @@ namespace MoneyMindManager_Presentation
 
             _formDisplayer.OpenAtContainer<frmUserInfo>((frm) =>
             {
-                frm.Initialize(_AccountInfo.AccountOwnerUserID);
+                return frm.Initialize(_AccountInfo.AccountOwnerUserID);
             });
         }
 

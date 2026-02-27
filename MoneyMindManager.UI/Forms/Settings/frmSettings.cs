@@ -1,23 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DocumentFormat.OpenXml.Wordprocessing;
-using KhaledControlLibrary1;
-using MoneyMindManager_Business;
-using MoneyMindManager_Presentation.Global;
-using MoneyMindManager_Presentation.Users;
-using MoneyMindManagerGlobal;
+using MoneyMindManager.UI.Abstractions;
+using MoneyMindManager.UI.Models;
 
 namespace MoneyMindManager_Presentation
 {
     public partial class frmSettings : Form
     {
+        private readonly IUserSession _userSession;
+        private readonly IMessageBoxService _messageBoxService;
+        private readonly IUserSettingsService _userSettingsService;
         enum enMode { UpdatAble, ReadOnly };
         enMode _Mode = enMode.ReadOnly;
         public frmSettings()
@@ -25,7 +18,7 @@ namespace MoneyMindManager_Presentation
             InitializeComponent();
         }
 
-        private clsUserSettings _Settings;
+        private UserSettings _Settings;
 
         async Task _Save()
         {
@@ -61,10 +54,10 @@ namespace MoneyMindManager_Presentation
 
             _Settings.AskBeforeDeleteCategory = gtswAskBeforeDeleteCategory.Checked;
 
-            if (await _Settings.Save())
+            if (await _userSettingsService.Save(_Settings))
             {
-                clsPL_Global.CurrentUserSettings.AssingNewSettings(_Settings);
-                clsPL_MessageBoxs.ShowMessage("تم حفظ الإعدادات بنجاح", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                _userSession.RefreshSettings(_Settings);
+                _messageBoxService.Display("تم حفظ الإعدادات بنجاح", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -99,13 +92,13 @@ namespace MoneyMindManager_Presentation
         }
         private void frmSettings_Load(object sender, EventArgs e)
         {
-            if (clsPL_Global.CurrentUserSettings == null)
+            if (_userSession.CurrentUserSettings == null)
             {
                 this.Close();
                 return;
             }
 
-            this._Settings = clsPL_Global.CurrentUserSettings.Clone();
+            this._Settings = _userSettingsService.Clone(_userSession.CurrentUserSettings);
 
             _LoadSettings();
         }
@@ -118,7 +111,7 @@ namespace MoneyMindManager_Presentation
 
         private void gbtnResetSettings_Click(object sender, EventArgs e)
         {
-            _Settings.ResetSettings();
+            _Settings = _userSettingsService.GetDefault(_Settings.UserID);
             _LoadSettings();
         }
     }
