@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using MoneyMindManager.Client.Abstractions.ApiClient;
 using MoneyMindManager.UI.Abstractions;
+using MoneyMindManager_Presentation.People.Controls;
 
 namespace MoneyMindManager_Presentation.People
 {
@@ -37,12 +38,16 @@ namespace MoneyMindManager_Presentation.People
 
         public bool Initialize(int personID)
         {
+            if (!ctrlPersonCard1.Initialize(_personApiClient, _userSession, _messageBoxService, _userApiClient, _formDisplayer))
+                return false;
             this._personID = personID;
             this.isInitialized = true;
             return true;
         }
         public bool Initialize(int personID, bool allowEditingPerson)
         {
+            if (!ctrlPersonCard1.Initialize(_personApiClient, _userSession, _messageBoxService, _userApiClient, _formDisplayer))
+                return false;
             this._personID = personID;
             this._allowEdigitringPerson = allowEditingPerson;
             this.isInitialized = true;
@@ -54,7 +59,7 @@ namespace MoneyMindManager_Presentation.People
             if (!isInitialized)
                 this.Close();
 
-            if (!ctrlPersonCard1.Initialize(_personApiClient, _userSession, _messageBoxService, _userApiClient, _formDisplayer) || !await ctrlPersonCard1.LoadPerson(_personID))
+            if (!await ctrlPersonCard1.LoadPerson(_personID))
                 this.Close();
 
             ctrlPersonCard1.AllowEditingPerson = this._allowEdigitringPerson;

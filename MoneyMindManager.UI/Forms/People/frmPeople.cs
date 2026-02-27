@@ -422,7 +422,7 @@ namespace MoneyMindManager_Presentation.People
 
             if (!result.IsSuccess || !result.Data)
             {
-                _messageBoxService.DisplayError("فشل حذف الحساب.\n" + result.ErrorMessage);
+                _messageBoxService.DisplayError("فشل حذف الشخص.\n" + result.ErrorMessage);
                 return;
             }
             _Refresh();

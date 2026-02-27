@@ -77,7 +77,7 @@ namespace MoneyMindManager_Presentation.People.Controls
 
             if (!userResult.IsSuccess || userResult.Data is null)
             {
-                _messageBoxService.DisplayError(result.ErrorMessage);
+                _messageBoxService.DisplayError(userResult.ErrorMessage);
                 ResetControls();
                 return false;
             }
