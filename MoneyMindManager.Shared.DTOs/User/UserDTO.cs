@@ -20,7 +20,7 @@ namespace MoneyMindManager.Shared.DTOs.User
         /// </summary>
         public Nullable<int> PersonID { get; set; }
 
-        public IEnumerable<PermissionInfo> PermissionsList { get; set; }
+        public List<PermissionInfo> PermissionsList { get; set; }
 
         public int Permissions { get; }
 
@@ -55,7 +55,7 @@ namespace MoneyMindManager.Shared.DTOs.User
         // composition
         public PersonDTO PersonInfo { get; set; }
         public AccountBaseDTO AccountInfo { get; set; }
-        public UserDTO(int? userID, string userName, int? personID, IEnumerable<PermissionInfo> permissionsList, int permissions
+        public UserDTO(int? userID, string userName, int? personID, List<PermissionInfo> permissionsList, int permissions
             , bool isActive, string notes, short? accountID, bool isDeleted, int? createdByUserID, DateTime createdDate)
         {
             this.UserID = userID;
