@@ -7,5 +7,6 @@ namespace MoneyMindManager.Application.Abstractions.Mappers
     public interface IUserMapper : IMapper<User, UserDTO>
     {
         UserSearchCriteria ToSearchCriteria(UserFilterDTO userFilterDTO);
+        User CreateDTOToEntity(CreateUserDTO userDTO);
     }
 }

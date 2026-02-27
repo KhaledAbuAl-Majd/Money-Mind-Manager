@@ -21,7 +21,8 @@ namespace MoneyMindManager.Application.Mappers.Mappers_Implementaion
             if (userDTO is null || userDTO.PermissionsList is null)
                 return null;
 
-            int permissions = _permissionService.CalculatePermissions(userDTO.PermissionsList.Select(permission => permission.ItemValue));
+            int permissions = _permissionService.CalculatePermissions(userDTO.PermissionsList.Where(permission => permission.Checked)
+                .Select(permission => permission.ItemValue));
 
             return new User()
             {
@@ -37,17 +38,15 @@ namespace MoneyMindManager.Application.Mappers.Mappers_Implementaion
                 PersonID = userDTO.PersonID
             };
         }
-
         public UserDTO EntityToDTO(User user)
         {
             if (user is null)
                 return null;
 
             var permissionsList = _permissionService.GetPermissionMetadata(user.Permissions);
-            return new UserDTO(user.UserID, user.UserName, user.PersonID, permissionsList,user.Permissions, user.IsActive, user.Notes, user.AccountID, user.IsDeleted,
+            return new UserDTO(user.UserID, user.UserName, user.PersonID, permissionsList, user.Permissions, user.IsActive, user.Notes, user.AccountID, user.IsDeleted,
                 user.CreatedByUserID, user.CreatedDate);
         }
-
         public UserSearchCriteria ToSearchCriteria(UserFilterDTO userFilterDTO)
         {
             if (userFilterDTO is null)
@@ -61,6 +60,23 @@ namespace MoneyMindManager.Application.Mappers.Mappers_Implementaion
                 UserID = userFilterDTO.UserID,
                 UserName = userFilterDTO.UserName,
                 TextSearchMode = (byte)userFilterDTO.TextSearchMode
+            };
+        }
+        public User CreateDTOToEntity(CreateUserDTO userDTO)
+        {
+            if (userDTO is null || userDTO.PermissionsList is null)
+                return null;
+
+            int permissions = _permissionService.CalculatePermissions(userDTO.PermissionsList);
+
+            return new User()
+            {
+                UserName = userDTO.UserName,
+                PersonID = userDTO.PersonID,
+                IsActive = userDTO.IsActive,
+                Notes = userDTO.Notes,
+                CreatedByUserID = userDTO.CreatedByUserID,
+                Permissions = permissions
             };
         }
     }
