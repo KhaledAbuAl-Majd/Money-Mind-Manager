@@ -1,31 +1,50 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DocumentFormat.OpenXml.Spreadsheet;
 using KhaledControlLibrary1;
-using MoneyMindManager_Business;
-using MoneyMindManager_Presentation.Global;
+using MoneyMindManager.Client.Abstractions.ApiClient;
+using MoneyMindManager.Shared.DTOs.User;
+using MoneyMindManager.UI.Abstractions;
 using MoneyMindManager.UI.Properties;
+using MoneyMindManager_Presentation.Global;
 
 namespace MoneyMindManager_Presentation.Users
 {
     public partial class frmChangePassword : Form
     {
-        public frmChangePassword(int userID)
+        private IPersonApiClient _personApiClient;
+        private IUserSession _userSession;
+        private IMessageBoxService _messageBoxService;
+        private IUserApiClient _userApiClient;
+        private IFormDisplayer _formDisplayer;
+        private bool isInitialized = false;
+        public frmChangePassword(IPersonApiClient personApiClient, IUserSession userSession, IMessageBoxService messageBoxService,
+           IUserApiClient userApiClient, IFormDisplayer formDisplayer)
         {
             InitializeComponent();
-            _userID = userID;
+            this._personApiClient = personApiClient;
+            this._userSession = userSession;
+            this._messageBoxService = messageBoxService;
+            this._userApiClient = userApiClient;
+            this._formDisplayer = formDisplayer;
+        }
+
+
+
+        public bool Initialize(int UserID)
+        {
+            if (!ctrlUserCard1.Initialize(_personApiClient, _userSession, _messageBoxService, _userApiClient, _formDisplayer))
+                return false;
+
+            this._userID = UserID;
+            this.isInitialized = true;
+            return true;
         }
 
         int _userID;
 
-         clsUser _User
+        UserDTO _User
         {
             get
             {
@@ -42,24 +61,35 @@ namespace MoneyMindManager_Presentation.Users
 
             if (!ValidateChildren())
             {
-                clsPL_MessageBoxs.ShowValidateChildrenFailedMessage();
+                _messageBoxService.ShowValidateChildrenFailedMessage();
                 return;
             }
 
             string oldPassword = kgtxtOldPassword.ValidatedText;
             string newPassword = kgtxtNewpassword.ValidatedText;
 
-            if (await _User.ChangePassword(oldPassword,newPassword))
-            {
-                clsPL_MessageBoxs.ShowMessage($"تم تغيير كلمة السر بنجاح", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            var result = await _userApiClient.ChangePassword(_userID, oldPassword, newPassword, Convert.ToInt32(_userSession.UserID));
 
-                kgtxtOldPassword.Text = null;
-                kgtxtNewpassword.Text = null;
-                kgtxtConfirmNewPassword.Text = null;
+            if (!result.IsSuccess || !result.Data)
+            {
+                _messageBoxService.DisplayError("فشل تغيير كلمة السر !\n" + result.ErrorMessage);
+                return;
             }
+
+            _messageBoxService.Display($"تم تغيير كلمة السر بنجاح", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            kgtxtOldPassword.Text = null;
+            kgtxtNewpassword.Text = null;
+            kgtxtConfirmNewPassword.Text = null;
         }
         private async void frmChangePassword_Load(object sender, EventArgs e)
         {
+            if (!isInitialized)
+            {
+                this.Close();
+                return;
+            }
+
             if (!await ctrlUserCard1.LoadUser(_userID))
                 this.Close();
         }
