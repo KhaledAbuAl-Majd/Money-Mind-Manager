@@ -13,9 +13,12 @@ namespace MoneyMindManager_Presentation
         private readonly IUserSettingsService _userSettingsService;
         enum enMode { UpdatAble, ReadOnly };
         enMode _Mode = enMode.ReadOnly;
-        public frmSettings()
+        public frmSettings(IUserSession userSession,IMessageBoxService messageBoxService, IUserSettingsService userSettingsService) 
         {
             InitializeComponent();
+            this._userSession = userSession;
+            this._messageBoxService = messageBoxService;
+            this._userSettingsService = userSettingsService;
         }
 
         private UserSettings _Settings;

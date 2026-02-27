@@ -164,6 +164,9 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstractions\IDataConverter.cs" />
+    <Compile Include="Abstractions\IExportExcelService.cs" />
+    <Compile Include="Abstractions\IExportWithDialogService.cs" />
     <Compile Include="Abstractions\IFolderService.cs" />
     <Compile Include="Abstractions\IFormDisplayer.cs" />
     <Compile Include="Abstractions\IMessageService.cs" />
@@ -202,6 +205,9 @@
     </Compile>
     <Compile Include="Models\UserSettings.cs" />
     <Compile Include="Services\ActiveFormTracker.cs" />
+    <Compile Include="Services\DataConverterService.cs" />
+    <Compile Include="Services\ExcelExportService.cs" />
+    <Compile Include="Services\ExportWithDialogSevice.cs" />
     <Compile Include="Services\FolderService.cs" />
     <Compile Include="Services\JsonUserSettingsService.cs" />
     <Compile Include="Services\MessageBoxService.cs" />

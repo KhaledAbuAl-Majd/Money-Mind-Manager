@@ -4,23 +4,30 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using KhaledControlLibrary1;
-using MoneyMindManager_Business;
+using MoneyMindManager.Client.Abstractions.ApiClient;
+using MoneyMindManager.Core.Enums;
+using MoneyMindManager.Shared.DTOs.MainTransaction;
+using MoneyMindManager.Shared.DTOs.TransactionTypes;
+using MoneyMindManager.UI.Abstractions;
 using MoneyMindManager_Presentation.Global;
-using MoneyMindManager_Presentation.People;
 using MoneyMindManager_Presentation.Transactions;
-using MoneyMindManagerGlobal;
-using static MoneyMindManager_Business.clsBLLGlobal;
-using static MoneyMindManager_Business.clsIncomeAndExpenseVoucher;
 
 namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 {
     public partial class frmMainTransactionsList : Form
     {
-        public frmMainTransactionsList()
+        private IUserSession _userSession;
+        private IMessageBoxService _messageBoxService;
+        private IMainTransactionApiClient _mainTransactionApiClient;
+        private IFormDisplayer _formDisplayer;
+        private ITransactionTypeApiClient _transactionTypeApi;
+        private IDataConverter _dataConverter;
+        private IExportWithDialogService _exportWithDialogService;
+        public frmMainTransactionsList(IUserSession userSession, IMessageBoxService messageBoxService, IMainTransactionApiClient mainTransactionApiClient
+          , IFormDisplayer formDisplayer, ITransactionTypeApiClient transactionTypeApiClient, IDataConverter dataConverter, IExportWithDialogService exportWithDialogService)
         {
             if (!_CheckPermissions())
             {
@@ -28,15 +35,26 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 return;
             }
 
+            this._userSession = userSession;
+            this._messageBoxService = messageBoxService;
+            this._mainTransactionApiClient = mainTransactionApiClient;
+            this._formDisplayer = formDisplayer;
+            this._transactionTypeApi = transactionTypeApiClient;
+            this._dataConverter = dataConverter;
+            this._exportWithDialogService = exportWithDialogService;
+
             InitializeComponent();
         }
 
         bool _CheckPermissions()
         {
-            return clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.MainTransactionsList,
-                "ليس لديك صلاحية قائمة المعاملات.");
+            if (_userSession.IsHasPermissions(enPermissions.MainTransactionsList))
+                return true;
+
+            _messageBoxService.DisplayError("ليس لديك صلاحية قائمة المعاملات.");
+            return false;
         }
-        enum enFilterBy { All, TransactionID,UserName,Purpose};
+        enum enFilterBy { All, TransactionID, UserName, Purpose };
 
         enFilterBy _filterBy = enFilterBy.All;
 
@@ -45,7 +63,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
         int _pageNumber = 1;
 
-        void _SetForColorForLabels(KhaledLabel klbl,decimal amount)
+        void _SetForColorForLabels(KhaledLabel klbl, decimal amount)
         {
             if (amount > 0)
             {
@@ -85,7 +103,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
         {
             List<int> selectedIDs = new List<int>();
 
-            foreach(var item in chklbTransactionTypes.CheckedItems)
+            foreach (var item in chklbTransactionTypes.CheckedItems)
             {
                 DataRowView rowView = item as DataRowView;
 
@@ -93,7 +111,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 {
                     object idValue = rowView["TransactionTypeID"];
 
-                    if(int.TryParse(idValue?.ToString(),out int id))
+                    if (int.TryParse(idValue?.ToString(), out int id))
                     {
                         selectedIDs.Add(id);
                     }
@@ -117,8 +135,6 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             else if (grbTextSearchMode_SubString.Checked)
                 textSearchMode = enTextSearchMode.Substring_Slow;
 
-            clsDataColumns.clsMainTransactionClasses.clsGetAllMainTransactions result = null;
-
             bool filterByCreatedDate = false;
 
             if (gcbFilterByDate.Text == "تاريخ الإنشاء")
@@ -130,37 +146,66 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             var transactionTypes = _GetCheckedTransactionTypes();
 
+            var filterDTO = new MainTransactionPagedFilterDTO();
             if (filterBy == enFilterBy.All || string.IsNullOrEmpty(kgtxtFilterValue.ValidatedText))
             {
-                result = await clsMainTransaction.GetAllTransactions(transactionTypes, filterByCreatedDate, kgtxtFromDate.ValidatedText,
-                    kgtxtToDate.ValidatedText ,textSearchMode, _pageNumber);
+                filterDTO.TransactionTypes = transactionTypes;
+                filterDTO.IsByCreatedDate = filterByCreatedDate;
+                filterDTO.FromDateString = kgtxtFromDate.ValidatedText;
+                filterDTO.ToDateString = kgtxtToDate.ValidatedText;
+                filterDTO.TextSearchMode = textSearchMode;
+                filterDTO.PageNumber = _pageNumber;
             }
             else if (filterBy == enFilterBy.TransactionID)
             {
                 int transactionID = Convert.ToInt32(kgtxtFilterValue.ValidatedText);
-
-                result = await clsMainTransaction.GetAllTransactionsByTransactionID(transactionID,transactionTypes, filterByCreatedDate, kgtxtFromDate.ValidatedText,
-                    kgtxtToDate.ValidatedText, textSearchMode, _pageNumber);
+                filterDTO.TransactionID = transactionID;
+                filterDTO.TransactionTypes = transactionTypes;
+                filterDTO.IsByCreatedDate = filterByCreatedDate;
+                filterDTO.FromDateString = kgtxtFromDate.ValidatedText;
+                filterDTO.ToDateString = kgtxtToDate.ValidatedText;
+                filterDTO.TextSearchMode = textSearchMode;
+                filterDTO.PageNumber = _pageNumber;
             }
             else if (filterBy == enFilterBy.UserName)
             {
                 string userName = kgtxtFilterValue.ValidatedText;
-                result = await clsMainTransaction.GetAllTransactionsByUserName(userName,transactionTypes, filterByCreatedDate, kgtxtFromDate.ValidatedText,
-                    kgtxtToDate.ValidatedText, textSearchMode, _pageNumber);
+                filterDTO.CreatedByUserName = userName;
+                filterDTO.TransactionTypes = transactionTypes;
+                filterDTO.IsByCreatedDate = filterByCreatedDate;
+                filterDTO.FromDateString = kgtxtFromDate.ValidatedText;
+                filterDTO.ToDateString = kgtxtToDate.ValidatedText;
+                filterDTO.TextSearchMode = textSearchMode;
+                filterDTO.PageNumber = _pageNumber;
             }
             else if (filterBy == enFilterBy.Purpose)
             {
                 string purpose = kgtxtFilterValue.ValidatedText;
-                result = await clsMainTransaction.GetAllTransactionsByPurpose(purpose, transactionTypes, filterByCreatedDate, kgtxtFromDate.ValidatedText,
-                    kgtxtToDate.ValidatedText, textSearchMode, _pageNumber);
+                filterDTO.Purpose = purpose;
+                filterDTO.TransactionTypes = transactionTypes;
+                filterDTO.IsByCreatedDate = filterByCreatedDate;
+                filterDTO.FromDateString = kgtxtFromDate.ValidatedText;
+                filterDTO.ToDateString = kgtxtToDate.ValidatedText;
+                filterDTO.TextSearchMode = textSearchMode;
+                filterDTO.PageNumber = _pageNumber;
             }
             else
                 return;
 
-            if (result == null)
+            var result = await _mainTransactionApiClient.GetAllPaged(filterDTO, Convert.ToInt32(_userSession.UserID));
+
+            if (!result.IsSuccess)
+            {
+                _messageBoxService.DisplayError(result.ErrorMessage);
+                return;
+            }
+
+            var DTO = result.Data;
+
+            if (DTO == null)
                 return;
 
-            if (result.dtTransactions.Rows.Count == 0)
+            if (DTO.Data.Count() == 0)
             {
                 lblNoRecordsFoundMessage.Visible = true;
                 dgvTransactions.DataSource = null;
@@ -170,7 +215,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             else
             {
                 lblNoRecordsFoundMessage.Visible = false;
-                dgvTransactions.DataSource = result.dtTransactions;
+                dgvTransactions.DataSource = DTO.Data;
             }
 
             lblUserMessage.Visible = false;
@@ -178,46 +223,47 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             kgtxtPageNumber.Text = _pageNumber.ToString();
             _searchByPageNumber = true;
 
-            lblTotalRecordsNumber.Text = result.RecordsCount.ToString();
-            lblCurrentPageOfNumberOfPages.Text = string.Concat(_pageNumber, "   من   ", result.NumberOfPages, "  صفحات");
+            lblTotalRecordsNumber.Text = DTO.TotalRecords.ToString();
+            lblCurrentPageOfNumberOfPages.Text = string.Concat(_pageNumber, "   من   ", DTO.TotalPages, "  صفحات");
             kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValueOption = true;
-            kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValue = (result.NumberOfPages < 1) ? 1 : result.NumberOfPages;
+            kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValue = (DTO.TotalPages < 1) ? 1 : DTO.TotalPages;
             lblCurrentPageRecordsCount.Text = dgvTransactions.Rows.Count.ToString();
 
-            gibtnNextPage.Enabled = (_pageNumber < result.NumberOfPages);
+            gibtnNextPage.Enabled = (_pageNumber < DTO.TotalPages);
             gibtnPreviousPage.Enabled = (_pageNumber > 1);
 
-            klblAllTransactionsAmount.Text = result.TotalAmount.ToString();
-            klblCurrentPageTransactionsValue.Text = result.CurrentPageAmount.ToString();
+            klblAllTransactionsAmount.Text = DTO.TotalValue.ToString();
+            klblCurrentPageTransactionsValue.Text = DTO.CurrentPageValue.ToString();
 
-            _SetForColorForLabels(klblAllTransactionsAmount, result.TotalAmount);
-            _SetForColorForLabels(klblCurrentPageTransactionsValue, result.CurrentPageAmount);
+            _SetForColorForLabels(klblAllTransactionsAmount, DTO.TotalValue);
+            _SetForColorForLabels(klblCurrentPageTransactionsValue, DTO.CurrentPageValue);
 
             if (!_IsHeaderCreated && dgvTransactions.Rows.Count > 0)
             {
-                dgvTransactions.Columns["TransactionID"].HeaderText = "معرف المعاملة";
-                dgvTransactions.Columns["TransactionID"].Width = 125;
 
-                dgvTransactions.Columns["Amount"].HeaderText = "قيمة المعاملة";
-                dgvTransactions.Columns["Amount"].Width = 215;
-                dgvTransactions.Columns["Amount"].DefaultCellStyle.Format = "N2";
+                dgvTransactions.Columns[nameof(MainTransactionDTO.MainTransactionID)].HeaderText = "معرف المعاملة";
+                dgvTransactions.Columns[nameof(MainTransactionDTO.MainTransactionID)].Width = 125;
 
-                dgvTransactions.Columns["TransactionDate"].HeaderText = "تاريخ المعاملة";
-                dgvTransactions.Columns["TransactionDate"].Width = 115;
-                dgvTransactions.Columns["TransactionDate"].DefaultCellStyle.Format = "dd-MM-yyyy";
+                dgvTransactions.Columns[nameof(MainTransactionDTO.Amount)].HeaderText = "قيمة المعاملة";
+                dgvTransactions.Columns[nameof(MainTransactionDTO.Amount)].Width = 215;
+                dgvTransactions.Columns[nameof(MainTransactionDTO.Amount)].DefaultCellStyle.Format = "N2";
 
-                dgvTransactions.Columns["CreatedDate"].HeaderText = "تاريخ الإنشاء";
-                dgvTransactions.Columns["CreatedDate"].Width = 190;
-                dgvTransactions.Columns["CreatedDate"].DefaultCellStyle.Format = "hh:mm:ss tt dd-MM-yyyy";
+                dgvTransactions.Columns[nameof(MainTransactionDTO.TransactionDate)].HeaderText = "تاريخ المعاملة";
+                dgvTransactions.Columns[nameof(MainTransactionDTO.TransactionDate)].Width = 115;
+                dgvTransactions.Columns[nameof(MainTransactionDTO.TransactionDate)].DefaultCellStyle.Format = "dd-MM-yyyy";
 
-                dgvTransactions.Columns["TransactionTypeName"].HeaderText = "نوع المعاملة";
-                dgvTransactions.Columns["TransactionTypeName"].Width = 100;
+                dgvTransactions.Columns[nameof(MainTransactionDTO.CreatedDate)].HeaderText = "تاريخ الإنشاء";
+                dgvTransactions.Columns[nameof(MainTransactionDTO.CreatedDate)].Width = 190;
+                dgvTransactions.Columns[nameof(MainTransactionDTO.CreatedDate)].DefaultCellStyle.Format = "hh:mm:ss tt dd-MM-yyyy";
 
-                dgvTransactions.Columns["CreatedByUserName"].HeaderText = "اسم المستخدم المنشئ";
-                dgvTransactions.Columns["CreatedByUserName"].Width = 265;
+                dgvTransactions.Columns[nameof(MainTransactionDTO.TransactionTypeName)].HeaderText = "نوع المعاملة";
+                dgvTransactions.Columns[nameof(MainTransactionDTO.TransactionTypeName)].Width = 100;
 
-                dgvTransactions.Columns["Purpose"].HeaderText = "البيان";
-                dgvTransactions.Columns["Purpose"].Width = 265;
+                dgvTransactions.Columns[nameof(MainTransactionDTO.CreatedByUserName)].HeaderText = "اسم المستخدم المنشئ";
+                dgvTransactions.Columns[nameof(MainTransactionDTO.CreatedByUserName)].Width = 265;
+
+                dgvTransactions.Columns[nameof(MainTransactionDTO.Purpose)].HeaderText = "البيان";
+                dgvTransactions.Columns[nameof(MainTransactionDTO.Purpose)].Width = 265;
 
                 _IsHeaderCreated = true;
 
@@ -231,8 +277,10 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             int transactionID = Convert.ToInt32(dgvTransactions.SelectedRows[0].Cells[0].Value);
 
-            var frm = new frmMainTransactionInfo(transactionID);
-            clsPL_Global.MainForm.AddNewFormAtContainer(frm);
+            _formDisplayer.OpenAtContainer<frmMainTransactionInfo>(frm =>
+            {
+                return frm.Initilize(transactionID);
+            });
         }
 
         void _SetReadOnlyAtTextBox(KhaledGuna2TextBox kgtxt)
@@ -249,7 +297,13 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
         async Task _LoadTransactionTypes()
         {
-            var dt = await clsTransactionType.GetAllTransactionTypes();
+            var result = await _transactionTypeApi.GetAll();
+
+            if (!result.IsSuccess)
+            {
+                _messageBoxService.DisplayError(result.ErrorMessage);
+                return;
+            }
 
             // NOTE:
             // Sometimes Windows Forms throws a non-critical internal exception when assigning
@@ -257,30 +311,30 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             // This happens inconsistently and does NOT affect the execution or data binding.
             // The code continues to work normally, so this warning can be safely ignored.
 
-            chklbTransactionTypes.DataSource = dt;
-            chklbTransactionTypes.DisplayMember = "TransactionTypeName";
-            chklbTransactionTypes.ValueMember = "TransactionTypeID";
+            chklbTransactionTypes.DataSource = result.Data;
+            chklbTransactionTypes.DisplayMember = nameof(TransactionTypeDTO.TransactionTypeName);
+            chklbTransactionTypes.ValueMember = nameof(TransactionTypeDTO.TransactionTypeID);
 
             for (byte i = 0; i < chklbTransactionTypes.Items.Count; i++)
             {
                 chklbTransactionTypes.SetItemChecked(i, true);
             }
         }
-        private  void frmMainTransactionsList_Load(object sender, EventArgs e)
-        {    
+        private void frmMainTransactionsList_Load(object sender, EventArgs e)
+        {
             _IsHeaderCreated = false;
             _searchByPageNumber = false;
             kgtxtPageNumber.Text = "1";
             lblNoRecordsFoundMessage.Visible = false;
             lblUserMessage.Visible = false;
-            gcbFilterBy.SelectedIndex = 0;       
+            gcbFilterBy.SelectedIndex = 0;
         }
 
         private async void frmMainTransactionsList_Shown(object sender, EventArgs e)
         {
             await _LoadTransactionTypes();
             chklbTransactionTypes.ClearSelected();
-            await  _LoadDataAtDataGridView(enFilterBy.All);
+            await _LoadDataAtDataGridView(enFilterBy.All);
         }
 
         private void kgtxt_OnValidationError(object sender, KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs e)
@@ -430,11 +484,11 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 e.CellStyle.ForeColor = Color.Red;
                 e.CellStyle.SelectionForeColor = Color.Orange;
             }
-            else 
+            else
             {
-                if(e.ColumnIndex == 1)
+                if (e.ColumnIndex == 1)
                 {
-                    if(Convert.ToInt32(e.Value) > 0)
+                    if (Convert.ToInt32(e.Value) > 0)
                     {
                         e.CellStyle.ForeColor = Color.Green;
                     }
@@ -494,8 +548,6 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             else if (grbTextSearchMode_SubString.Checked)
                 textSearchMode = enTextSearchMode.Substring_Slow;
 
-            DataTable dtTransactions = null;
-
             bool filterByCreatedDate = false;
 
             if (gcbFilterByDate.Text == "تاريخ الإنشاء")
@@ -507,54 +559,59 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             var transactionTypes = _GetCheckedTransactionTypes();
 
+            var filterDTO = new MainTransactionFilterDTO();
+            filterDTO.TransactionTypes = transactionTypes;
+            filterDTO.IsByCreatedDate = filterByCreatedDate;
+            filterDTO.FromDateString = kgtxtFromDate.ValidatedText;
+            filterDTO.ToDateString = kgtxtToDate.ValidatedText;
+            filterDTO.TextSearchMode = textSearchMode;
+
             if (_filterBy == enFilterBy.All || string.IsNullOrEmpty(kgtxtFilterValue.ValidatedText))
             {
-                dtTransactions = await clsMainTransaction.GetAllTransactionsWithoutPaging(transactionTypes, filterByCreatedDate, kgtxtFromDate.ValidatedText,
-                    kgtxtToDate.ValidatedText,textSearchMode);
+
             }
             else if (_filterBy == enFilterBy.TransactionID)
             {
                 int transactionID = Convert.ToInt32(kgtxtFilterValue.ValidatedText);
-
-                dtTransactions = await clsMainTransaction.GetAllTransactionsWithoutPagingByTransactionID(transactionID, transactionTypes, filterByCreatedDate, kgtxtFromDate.ValidatedText,
-                    kgtxtToDate.ValidatedText, textSearchMode);
+                filterDTO.TransactionID = transactionID;
             }
             else if (_filterBy == enFilterBy.UserName)
             {
                 string userName = kgtxtFilterValue.ValidatedText;
-                dtTransactions = await clsMainTransaction.GetAllTransactionsWithoutPagingByUserName(userName, transactionTypes, filterByCreatedDate, kgtxtFromDate.ValidatedText,
-                    kgtxtToDate.ValidatedText, textSearchMode);
+                filterDTO.CreatedByUserName = userName;
             }
             else if (_filterBy == enFilterBy.Purpose)
             {
                 string purpose = kgtxtFilterValue.ValidatedText;
-                dtTransactions = await clsMainTransaction.GetAllTransactionsWithoutPagingByPurpose(purpose, transactionTypes, filterByCreatedDate, kgtxtFromDate.ValidatedText,
-                    kgtxtToDate.ValidatedText, textSearchMode);
             }
             else
                 return;
 
-            if (dtTransactions == null)
+            var result = await _mainTransactionApiClient.GetAll(filterDTO, Convert.ToInt32(_userSession.UserID));
+
+            if (!result.IsSuccess || result.Data is null)
             {
-                clsPL_MessageBoxs.ShowErrorMessage("فشل تصدير البيانات !");
+                _messageBoxService.DisplayError(result.ErrorMessage);
                 return;
             }
 
-            dtTransactions.Columns["TransactionID"].ColumnName = "معرف المعاملة";
-            dtTransactions.Columns["Amount"].ColumnName = "قيمة المعاملة";
-            dtTransactions.Columns["TransactionDate"].ColumnName = "تاريخ المعاملة";
-            dtTransactions.Columns["CreatedDate"].ColumnName = "تاريخ الإنشاء";
-            dtTransactions.Columns["TransactionTypeID"].ColumnName = "معرف نوع المعاملة";
-            dtTransactions.Columns["TransactionTypeName"].ColumnName = "نوع المعاملة";
-            dtTransactions.Columns["CreatedByUserID"].ColumnName = "معرف المستخدم المنشئ";
-            dtTransactions.Columns["CreatedByUserName"].ColumnName = "اسم المستخدم المنشئ";
-            dtTransactions.Columns["Purpose"].ColumnName = "البيان";
-            dtTransactions.Columns["AccountID"].ColumnName = "معرف الحساب";
+            DataTable dt = _dataConverter.ToDataTable<MainTransactionDTO>(result.Data);
 
-           await clsExportHelper.ExportToExcelWithDialog(dtTransactions, "تقرير المعاملات");
+            dt.Columns[nameof(MainTransactionDTO.MainTransactionID)].ColumnName = "معرف المعاملة";
+            dt.Columns[nameof(MainTransactionDTO.Amount)].ColumnName = "قيمة المعاملة";
+            dt.Columns[nameof(MainTransactionDTO.TransactionDate)].ColumnName = "تاريخ المعاملة";
+            dt.Columns[nameof(MainTransactionDTO.CreatedDate)].ColumnName = "تاريخ الإنشاء";
+            dt.Columns[nameof(MainTransactionDTO.TransactionTypeID)].ColumnName = "معرف نوع المعاملة";
+            dt.Columns[nameof(MainTransactionDTO.TransactionTypeName)].ColumnName = "نوع المعاملة";
+            dt.Columns[nameof(MainTransactionDTO.CreatedByUserID)].ColumnName = "معرف المستخدم المنشئ";
+            dt.Columns[nameof(MainTransactionDTO.CreatedByUserName)].ColumnName = "اسم المستخدم المنشئ";
+            dt.Columns[nameof(MainTransactionDTO.Purpose)].ColumnName = "البيان";
+            dt.Columns[nameof(MainTransactionDTO.AccountID)].ColumnName = "معرف الحساب";
+
+            await _exportWithDialogService.ExportToExcel(dt, "تقرير المعاملات");
         }
 
- 
+
         private void kgtxtDate_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)

@@ -4,9 +4,11 @@ using MoneyMindManager.UI.Abstractions;
 using MoneyMindManager.UI.Services;
 using MoneyMindManager_Presentation;
 using MoneyMindManager_Presentation.Income_And_Expense.Categories;
+using MoneyMindManager_Presentation.Income_And_Expense.Vouchers;
 using MoneyMindManager_Presentation.Login;
 using MoneyMindManager_Presentation.Main;
 using MoneyMindManager_Presentation.People;
+using MoneyMindManager_Presentation.Transactions;
 using MoneyMindManager_Presentation.Users;
 
 namespace MoneyMindManager.UI.DependencyInjection
@@ -20,6 +22,9 @@ namespace MoneyMindManager.UI.DependencyInjection
             services.AddScoped<IFormDisplayer, frmMain>();
             services.AddSingleton<IActiveFormTracker, ActiveFormTracker>();
             services.AddSingleton<IMessageBoxService, MessageBoxService>();
+            services.AddSingleton<IDataConverter, DataConverterService>();
+            services.AddSingleton<IExportExcelService, ExcelExportService>();
+            services.AddSingleton<IExportWithDialogService, ExportWithDialogSevice>();
 
             services.AddScoped<IUserSettingsService, JsonUserSettingsService>();
             services.AddScoped<IUserSession, UserSession>();
@@ -44,6 +49,9 @@ namespace MoneyMindManager.UI.DependencyInjection
             services.AddTransient<FrmUsers>();
 
             services.AddTransient<frmSettings>();
+
+            services.AddTransient<frmMainTransactionInfo>();
+            services.AddTransient<frmMainTransactionsList>();
 
             return services;
         }
