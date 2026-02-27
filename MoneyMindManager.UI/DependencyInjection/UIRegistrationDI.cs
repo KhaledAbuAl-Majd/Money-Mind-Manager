@@ -3,8 +3,10 @@ using Microsoft.Extensions.DependencyInjection;
 using MoneyMindManager.UI.Abstractions;
 using MoneyMindManager.UI.Services;
 using MoneyMindManager_Presentation;
+using MoneyMindManager_Presentation.Income_And_Expense.Categories;
 using MoneyMindManager_Presentation.Login;
 using MoneyMindManager_Presentation.Main;
+using MoneyMindManager_Presentation.People;
 using MoneyMindManager_Presentation.Users;
 
 namespace MoneyMindManager.UI.DependencyInjection
@@ -30,7 +32,16 @@ namespace MoneyMindManager.UI.DependencyInjection
             //forms
             services.AddSingleton<frmLogin>();
             services.AddTransient<frmCurrentAccount>();
+            services.AddTransient<frmPersonInfo>();
+            services.AddTransient<frmAddUpdatePerson>();
+            services.AddTransient<frmSelectPerson>();
+            services.AddTransient<frmPeople>();
+
             services.AddTransient<frmUserInfo>();
+            services.AddTransient<frmAddUpdateUser>();
+            services.AddTransient<frmChangePassword>();
+            services.AddTransient<frmUserInfo>();
+            services.AddTransient<FrmUsers>();
 
 
             return services;
