@@ -1,55 +1,72 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DocumentFormat.OpenXml.Spreadsheet;
 using KhaledControlLibrary1;
-using MoneyMindManager_Business;
-using MoneyMindManager_Presentation.Global;
+using MoneyMindManager.Client.Abstractions.ApiClient;
+using MoneyMindManager.Core.Enums;
+using MoneyMindManager.Shared.DTOs.Permissions;
+using MoneyMindManager.Shared.DTOs.User;
+using MoneyMindManager.UI.Abstractions;
 using MoneyMindManager.UI.Properties;
-using MoneyMindManagerGlobal;
-using static Guna.UI2.Native.WinApi;
+using MoneyMindManager_Presentation.Global;
 
 namespace MoneyMindManager_Presentation.Users
 {
     public partial class frmAddUpdateUser : Form
     {
-        public frmAddUpdateUser()
+        private IPersonApiClient _personApiClient;
+        private IUserSession _userSession;
+        private IMessageBoxService _messageBoxService;
+        private IUserApiClient _userApiClient;
+        private IFormDisplayer _formDisplayer;
+        private bool isInitialized = false;
+        public frmAddUpdateUser(IPersonApiClient personApiClient, IUserSession userSession, IMessageBoxService messageBoxService,
+           IUserApiClient userApiClient, IFormDisplayer formDisplayer)
         {
             if (!_CheckUserPermissions())
             {
                 this.Dispose();
                 return;
             }
+            this._personApiClient = personApiClient;
+            this._userSession = userSession;
+            this._messageBoxService = messageBoxService;
+            this._userApiClient = userApiClient;
+            this._formDisplayer = formDisplayer;
 
             InitializeComponent();
             Mode = enMode.AddNew;
             _UserID = null;
-            _User = new clsUser();
+            _User = new UserDTO();
         }
 
-        public frmAddUpdateUser(int UserID)
+        public bool Initialize()
         {
-            if (!_CheckUserPermissions())
-            {
-                this.Dispose();
-                return;
-            }
+            if (!ctrlPersonCardWithFilter1.Initialize(_personApiClient, _userSession, _messageBoxService, _userApiClient, _formDisplayer))
+                return false;
+            this.isInitialized = true;
+            return true;
+        }
 
-            InitializeComponent();
+        public bool Initialize(int UserID)
+        {
+            if (!ctrlPersonCardWithFilter1.Initialize(_personApiClient, _userSession, _messageBoxService, _userApiClient, _formDisplayer))
+                return false;
             Mode = enMode.Update;
             this._UserID = UserID;
+            this.isInitialized = true;
+            return true;
         }
 
         bool _CheckUserPermissions()
         {
-            return clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.Admin,
-                  "ليس لديك صلاحية إضافة/تعديل المستخدمين.");
+            if (_userSession.IsHasPermissions(enPermissions.Admin))
+                return true;
+
+            _messageBoxService.DisplayError("ليس لديك صلاحية إضافة/تعديل المستخدمين.");
+            return false;
         }
 
         bool _IsPersonEdited = false;
@@ -64,7 +81,7 @@ namespace MoneyMindManager_Presentation.Users
         enMode Mode { get; set; }
 
         private int? _UserID { get; set; }
-        private clsUser _User { get; set; }
+        private UserDTO _User { get; set; }
         private void kgtxtpassword_IconRightClick(object sender, EventArgs e)
         {
             KhaledGuna2TextBox kgtxt = (KhaledGuna2TextBox)sender;
@@ -110,7 +127,7 @@ namespace MoneyMindManager_Presentation.Users
             chklbUserPermissions.Enabled = value;
         }
 
-        void _AddNewMode()
+        async Task _AddNewMode()
         {
             _ChangeEnablityOfUserControls(false);
             kgtxtpassword.IsRequired = true;
@@ -118,7 +135,19 @@ namespace MoneyMindManager_Presentation.Users
 
             ChangeHeaderValue("إضافة مستخدم");
             _UserID = null;
-            _User = new clsUser();
+            _User = new UserDTO();
+
+            var result = await _userApiClient.GetPermissionsMetadata();
+
+            if (!result.IsSuccess)
+            {
+                _messageBoxService.DisplayError(result.ErrorMessage);
+                this.Close();
+                return;
+            }
+
+            _User.PermissionsList = result.Data;
+
             lblUserID.Text = "N/A";
             ctrlPersonCardWithFilter1.FocusOnTextBox();
         }
@@ -127,21 +156,23 @@ namespace MoneyMindManager_Presentation.Users
         {
             ChangeHeaderValue("تعديل بيانات مستخدم");
 
-            clsUser searchedUser = await clsUser.FindUserByUserID(Convert.ToInt32(_UserID));
+            var result = await _userApiClient.GetByUserID(Convert.ToInt32(_UserID));
 
-            if (searchedUser == null)
+            if (!result.IsSuccess || result.Data is null)
             {
-                clsPL_MessageBoxs.ShowErrorMessage("فشل تحميل بيانات المستخدم");
+                _messageBoxService.DisplayError("فشل تحميل بيانات المستخدم\n" + result.ErrorMessage);
                 this.Close();
                 return;
             }
+
+            UserDTO searchedUser = result.Data;
 
             this._UserID = searchedUser.UserID;
             this._User = searchedUser;
 
             if (!await this.ctrlPersonCardWithFilter1.LoadPerson(Convert.ToInt32(_User.PersonID)))
             {
-                clsPL_MessageBoxs.ShowErrorMessage("فشل تحميل بيانات الشخص");
+                _messageBoxService.DisplayError("فشل تحميل بيانات الشخص");
                 this.Close();
                 return;
             }
@@ -169,7 +200,7 @@ namespace MoneyMindManager_Presentation.Users
 
         void _ResteObject()
         {
-            _User = new clsUser();
+            _User = new UserDTO();
         }
 
         List<int> _GetCheckedPermissions()
@@ -178,7 +209,7 @@ namespace MoneyMindManager_Presentation.Users
 
             foreach (var item in chklbUserPermissions.CheckedItems)
             {
-                var permissionItem = item as clsUser.clsPermissionItems;
+                var permissionItem = item as PermissionInfo;
 
                 if (permissionItem != null)
                 {
@@ -198,7 +229,7 @@ namespace MoneyMindManager_Presentation.Users
 
             if (!ValidateChildren())
             {
-                clsPL_MessageBoxs.ShowValidateChildrenFailedMessage();
+                _messageBoxService.ShowValidateChildrenFailedMessage();
                 return;
             }
 
@@ -206,66 +237,67 @@ namespace MoneyMindManager_Presentation.Users
             _User.UserName = kgtxtUserName.ValidatedText;
             _User.Notes = kgtxtNotes.ValidatedText;
 
+            lbluserMessage.Visible = false;
+
             if (Mode == enMode.AddNew)
             {
-                if (!_User.EnterPasswordAtAddMode(kgtxtpassword.ValidatedText))
+                string password = kgtxtpassword.ValidatedText;
+                var permissionsList = _GetCheckedPermissions();
+                int personID = Convert.ToInt32(ctrlPersonCardWithFilter1.Person.PersonID);
+                var createDTO = new CreateUserDTO(_User.UserName, personID, password, _User.IsActive, _User.Notes, Convert.ToInt32(-_userSession.UserID), permissionsList);
+
+                var result = await _userApiClient.Add(createDTO, Convert.ToInt32(_userSession.UserID));
+
+                if (!result.IsSuccess || result.Data is null)
                 {
-                    clsPL_MessageBoxs.ShowErrorMessage("فشل تكوين كلمة المرور");
+                    _messageBoxService.DisplayError(result.ErrorMessage);
                     _ResteObject();
                     return;
                 }
 
-                if (!_User.EnterPersonIDAtAddMode(Convert.ToInt32(ctrlPersonCardWithFilter1.Person.PersonID)))
-                {
-                    clsPL_MessageBoxs.ShowErrorMessage("فشل تسجيل معرف الشخص للمستخدم");
-                    _ResteObject();
-                    return;
-                }
+                _messageBoxService.Display($"تم إضافة المستخدم بنجاج بمعرف [{_User.UserID}]", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                _User = result.Data;
+
+                Mode = enMode.Update;
+                _UserID = _User.UserID;
+                lblUserID.Text = _UserID.ToString();
+                ChangeHeaderValue("تعديل بيانات المستخدم");
+                kgtxtpassword.Enabled = false;
+                kgtxtConfirmPassword.Enabled = false;
+                ctrlPersonCardWithFilter1.EnablityOfSearchPart = false;
+                _isSaved = true;
             }
             else if (Mode == enMode.Update)
             {
-                if (_User.UserID == clsGlobalSession.CurrentUserID && !_User.IsActive)
+                if (_User.UserID == _userSession.UserID && !_User.IsActive)
                 {
                     lbluserMessage.Text = "لا يمكنك إلغاء نشاط المستخدم الحالي";
                     lbluserMessage.Visible = true;
                     return;
                 }
-            }
 
-            if (!_User.IsAdmin)
-                _User.AssingUserPermissions(_GetCheckedPermissions());
-
-            lbluserMessage.Visible = false;
-
-            if (await _User.Save())
-            {
-                if (Mode == enMode.AddNew)
+                if (!_User.IsAdmin)
                 {
-                    clsPL_MessageBoxs.ShowMessage($"تم إضافة المستخدم بنجاج بمعرف [{_User.UserID}]", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    var permissions = new HashSet<int>(_GetCheckedPermissions());
+                    _User.PermissionsList.ForEach(item => item.Checked = permissions.Contains(item.ItemValue));
+                }
 
-                    Mode = enMode.Update;
-                    _UserID = _User.PersonID;
-                    lblUserID.Text = _UserID.ToString();
-                    ChangeHeaderValue("تعديل بيانات المستخدم");
-                    kgtxtpassword.Enabled = false;
-                    kgtxtConfirmPassword.Enabled = false;
-                    ctrlPersonCardWithFilter1.EnablityOfSearchPart = false;
-                }
-                else if (Mode == enMode.Update)
+                var result = await _userApiClient.Update(_User, Convert.ToInt32(_userSession.UserID));
+                if (!result.IsSuccess || !result.Data)
                 {
-                    clsPL_MessageBoxs.ShowMessage("تم تعديل بيانات المستخدم بنجاح", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    _messageBoxService.DisplayError("فشل تحديث بيانات المستخدم\n" + result.ErrorMessage);
+                    return;
                 }
+
+                _messageBoxService.Display("تم تعديل بيانات المستخدم بنجاح", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 _isSaved = true;
             }
-            else if (Mode == enMode.AddNew)
-                _ResteObject();
         }
 
         void _LoadUserPermissions()
         {
-            var items = _User.GetUserPermissionItems();
-
             // NOTE:
             // Sometimes Windows Forms throws a non-critical internal exception when assigning
             // a DataSource to checked list controls (like CheckedListBox).
@@ -273,26 +305,33 @@ namespace MoneyMindManager_Presentation.Users
             // The code continues to work normally, so this warning can be safely ignored.
 
 
-            chklbUserPermissions.DataSource = items;
-            chklbUserPermissions.DisplayMember = "ItemName";
-            chklbUserPermissions.ValueMember = "ItemValue";
+            chklbUserPermissions.DataSource = _User.PermissionsList;
+            chklbUserPermissions.DisplayMember = nameof(PermissionInfo.ItemName);
+            chklbUserPermissions.ValueMember = nameof(PermissionInfo.ItemValue);
 
             byte index = 0;
-            foreach (var item in items)
+            foreach (var item in _User.PermissionsList)
             {
                 chklbUserPermissions.SetItemChecked(index, item.Checked);
                 index++;
             }
         }
+
         private async void frmAddUpdateUser_Load(object sender, EventArgs e)
         {
+            if(!isInitialized)
+            {
+                this.Close();
+                return;
+            }
+
             lbluserMessage.Visible = false;
 
             switch (Mode)
             {
                 case enMode.AddNew:
                     {
-                        _AddNewMode();
+                        await _AddNewMode();
                         break;
                     }
                 case enMode.Update:
@@ -332,12 +371,11 @@ namespace MoneyMindManager_Presentation.Users
             if (_isSaved || _IsPersonEdited)
                 OnCloseAndSavedOrEditing?.Invoke(userID);
 
-            if (userID == clsGlobalSession.CurrentUserID)
-                await clsPL_Global.RefreshCurrentUser();
+            if (userID == _userSession.UserID)
+                await _userSession.Refresh();
 
             this.Close();
         }
-
 
         private void kgtxtUserName_After_kgtxt_Validating_1(object sender, KhaledGuna2TextBox.AfterMyValidatingEventArgs e)
         {
@@ -347,7 +385,17 @@ namespace MoneyMindManager_Presentation.Users
 
                 if ((Mode == enMode.AddNew) || (Mode == enMode.Update && _User.UserName != userName))
                 {
-                    if (clsUser.IsUserExistByUserName(userName))
+                    var result = _userApiClient.IsExistByUserName(userName).GetAwaiter().GetResult();
+
+                    if (!result.IsSuccess)
+                    {
+                        _messageBoxService.DisplayError(result.ErrorMessage);
+                        e.CancelEventArgs.Cancel = false;
+                        errorProvider1.SetError(kgtxtUserName, null);
+                        return;
+                    }
+
+                    if (result.Data)
                     {
                         e.CancelEventArgs.Cancel = true;
                         errorProvider1.SetError(kgtxtUserName, "اسم المستخدم مستخدم, قم بتجربة اسم آخر");
@@ -418,23 +466,26 @@ namespace MoneyMindManager_Presentation.Users
 
             lbluserMessage.Visible = false;
 
-            if (clsPL_Global.CurrentUserSettings.AskBeforeDeleteUser)
-                if (clsPL_MessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف هذا المستخدم", "طلب موافقة", MessageBoxButtons.OKCancel,
+            if (_userSession.CurrentUserSettings.AskBeforeDeleteUser)
+                if (_messageBoxService.Display("هل أنت متأكد من رغبتك حذف هذا المستخدم", "طلب موافقة", MessageBoxButtons.OKCancel,
                MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.OK)
                     return;
 
-            if (Convert.ToInt32(_UserID) == clsGlobalSession.CurrentUserID)
+            if (_UserID == _userSession.UserID)
             {
-                clsPL_MessageBoxs.ShowErrorMessage("لا يمكنك حذف المستخدم الحالي");
+                _messageBoxService.DisplayError("لا يمكنك حذف المستخدم الحالي");
                 return;
             }
 
-            if (await _User.DeleteUserByUserID())
-            {
-                _isSaved = true;
-                gbtnClose.PerformClick();
-            }
+            var deleteResult = await _userApiClient.Delete(Convert.ToInt32(_UserID), Convert.ToInt32(_userSession.UserID));
 
+            if (!deleteResult.IsSuccess || !deleteResult.Data)
+            {
+                _messageBoxService.DisplayError("فشل حذف المستخدم\n" + deleteResult.ErrorMessage);
+                return;
+            }
+            _isSaved = true;
+            gbtnClose.PerformClick();
         }
     }
 }
