@@ -11,9 +11,9 @@ using MoneyMindManager_Business;
 
 namespace MoneyMindManager_Presentation.Transactions
 {
-    public partial class frmIncomeAndExpenseTransactionInfo : Form
+    public partial class frmFinTransactionInfo : Form
     {
-        public frmIncomeAndExpenseTransactionInfo(int transactionID)
+        public frmFinTransactionInfo(int transactionID)
         {
             InitializeComponent();
             this._transactionID = transactionID;

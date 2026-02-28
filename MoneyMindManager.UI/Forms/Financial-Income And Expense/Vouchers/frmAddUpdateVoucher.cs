@@ -469,7 +469,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             int transactionID = Convert.ToInt32(gdgvTransactions.SelectedRows[0].Cells[0].Value);
 
-            var frm = new frmIncomeAndExpenseTransactionInfo(transactionID);
+            var frm = new frmFinTransactionInfo(transactionID);
             clsPL_Global.MainForm.AddNewFormAtContainer(frm);
         }
 

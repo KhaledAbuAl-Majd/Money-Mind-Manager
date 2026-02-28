@@ -1,6 +1,6 @@
 ﻿namespace MoneyMindManager_Presentation.Transactions
 {
-    partial class frmIncomeAndExpenseTransactionInfo
+    partial class frmFinTransactionInfo
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmIncomeAndExpenseTransactionInfo));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmFinTransactionInfo));
             this.lblHeader = new System.Windows.Forms.Label();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             this.label16 = new System.Windows.Forms.Label();
