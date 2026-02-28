@@ -1,28 +1,34 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using MoneyMindManager_Presentation.OverView.Controls;
 
 namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 {
     public partial class frmCategoryMonthlyFlow : Form
     {
-        public frmCategoryMonthlyFlow(int categoryID)
+        private bool isInitialized = false;
+        public frmCategoryMonthlyFlow()
         {
             InitializeComponent();
+        }
+
+
+        public bool Initialize(int categoryID)
+        {
             this.CategoryID = categoryID;
+            this.isInitialized = true;
+            return true;
         }
 
         int CategoryID;
 
         private async void frmCategoryMonthlyFlow_Load(object sender, EventArgs e)
         {
+            if (!isInitialized)
+            {
+                this.Close();
+                return;
+            }
+
             guna2WinProgressIndicator1.BringToFront();
             guna2WinProgressIndicator1.Start();
             guna2WinProgressIndicator1.Show();

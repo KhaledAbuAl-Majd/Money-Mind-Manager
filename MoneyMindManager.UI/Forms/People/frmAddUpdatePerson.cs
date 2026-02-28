@@ -149,7 +149,7 @@ namespace MoneyMindManager_Presentation.People
                 }
 
                 _messageBoxService.Display($"تم إضافة الشخص بنجاج بمعرف [{_Person.PersonID}]", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                _Person = result.Data;
                 Mode = enMode.Update;
                 _PersonID = _Person.PersonID;
                 lblPersonID.Text = _PersonID.ToString();
