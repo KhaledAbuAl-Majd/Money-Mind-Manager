@@ -1,22 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using KhaledControlLibrary1;
-using MoneyMindManager_Business;
-using MoneyMindManager_Presentation.Global;
+using MoneyMindManager.Client.Abstractions.ApiClient;
+using MoneyMindManager.Core.Enums;
+using MoneyMindManager.Shared.DTOs.FinTransaction;
+using MoneyMindManager.Shared.DTOs.FinVoucher;
+using MoneyMindManager.Shared.DTOs.IncomeAndExpenseCategory;
+using MoneyMindManager.UI.Abstractions;
 using MoneyMindManager.UI.Properties;
-using static MoneyMindManager_Business.clsIncomeAndExpenseVoucher;
+using MoneyMindManager_Presentation.Global;
 
 namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 {
-    public partial class frmAddUpdateIncomeAndExpeseTransction : Form
+    public partial class frmFinTransction : Form
     {
+        private IUserSession _userSession;
+        private IMessageBoxService _messageBoxService;
+        private IFormDisplayer _formDisplayer;
+        private IFinTransactionApiClient _finTransactionApi;
+        private IFinVoucherApiClient _finVoucherApi;
+        private IFinCategoryApiClient _finCategoryApi;
+        private bool isInitialized = false;
+
         /// <summary>
         /// TransactionID
         /// </summary>
@@ -29,54 +37,61 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
         //bool _isIncome;
         //bool _isReturn;
-        clsIncomeAndExpenseVoucher _Voucher;
+        FinVoucherDTO _Voucher;
         enum enMode { AddNew, Update };
         enMode Mode { get; set; }
 
-        public frmAddUpdateIncomeAndExpeseTransction(clsIncomeAndExpenseVoucher voucher)
+        public frmFinTransction(IUserSession userSession, IMessageBoxService messageBoxService, IFormDisplayer formDisplayer,
+            IFinTransactionApiClient finTransactionApiClient,IFinVoucherApiClient finVoucherApiClient,IFinCategoryApiClient finCategoryApiClient)
         {
             if (!_CheckPermissions())
             {
                 this.Dispose();
                 return;
             }
-
-            if(voucher == null)
-            {
-                clsPL_MessageBoxs.ShowErrorMessage("المستند لا يمكن ان يكون بدون قيمة");
-                this.Dispose();
-                return;
-            }
+            this._userSession = userSession;
+            this._messageBoxService = messageBoxService;
+            this._formDisplayer = formDisplayer;
+            this._finTransactionApi = finTransactionApiClient;
+            this._finVoucherApi = finVoucherApiClient;
+            this._finCategoryApi = finCategoryApiClient;
 
             InitializeComponent();
-            Mode = enMode.AddNew;
-            this._Voucher = voucher;
             _TransactionID = null;
-            _Transaction = new clsIncomeAndExpenseTransaction();
+            _Transaction = null;
+            _Voucher = null;
+            Mode = enMode.AddNew;
         }
 
-        public frmAddUpdateIncomeAndExpeseTransction(int transactionID)
+        public bool Initilize(int transactionID)
         {
-            if (!_CheckPermissions())
-            {
-                this.Dispose();
-                return;
-            }
-
-            InitializeComponent();
+            this.isInitialized = true;
             Mode = enMode.Update;
             this._TransactionID = transactionID;
+            return true;
+        }
+        public bool Initilize(FinVoucherDTO voucher)
+        {
+            if (voucher is null)
+                return false;
+
+            this.isInitialized = true;
+            this._Voucher = voucher;
+            return true;
         }
 
         bool _CheckPermissions()
         {
-            return clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.AddUpdateIETVoucher_Transactions,
-                "ليس لديك صلاحية إضافة/تعديل مستندات - معاملات (واردات - مصروفات - مرتجعات مصروفات)");
+            if (_userSession.IsHasPermissions(enPermissions.AddUpdateIETVoucher_Transactions))
+                return true;
+
+            _messageBoxService.DisplayError("ليس لديك صلاحية إضافة/تعديل مستندات - معاملات (واردات - مصروفات - مرتجعات مصروفات)");
+            return false;
         }
 
         private int? _TransactionID { get; set; }
 
-        private clsIncomeAndExpenseTransaction _Transaction { get; set; }
+        private FinTransactionDTO _Transaction { get; set; }
 
         void ChangeHeaderValue(string txt)
         {
@@ -123,7 +138,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
         void _AddNewMode()
         {
             _TransactionID = null;
-            _Transaction = new clsIncomeAndExpenseTransaction();
+            _Transaction = new FinTransactionDTO();
             lblTransactionID.Text = "N/A";
             kgtxtCategoryName.Text = null;
             kgtxtCategoryName.Tag = null;
@@ -138,18 +153,30 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
         async Task _UpdateMode()
         {
-            var searchedTransaction = await clsIncomeAndExpenseTransaction.FindTransactionByTransactionID(Convert.ToInt32(_TransactionID));
+            var transactionResult = await _finTransactionApi.Get(Convert.ToInt32(_TransactionID), Convert.ToInt32(_userSession.UserID));
 
-            if (searchedTransaction == null)
+            if (!transactionResult.IsSuccess || transactionResult.Data is null)
             {
-                clsPL_MessageBoxs.ShowErrorMessage("فشل تحميل بيانات المعاملة");
+                _messageBoxService.DisplayError("فشل تحميل بيانات المعاملة\n" + transactionResult.ErrorMessage);
                 this.Close();
                 return;
             }
 
+            var voucherResult = await _finVoucherApi.Get(Convert.ToInt32(transactionResult.Data.VoucherID), Convert.ToInt32(_userSession.UserID));
+
+            if (!voucherResult.IsSuccess || voucherResult.Data is null)
+            {
+                _messageBoxService.DisplayError("فشل تحميل بيانات المستند\n" + voucherResult.ErrorMessage);
+                this.Close();
+                return;
+            }
+
+            var searchedTransaction = transactionResult.Data;
+            var voucherInfo = voucherResult.Data;
+
             this._Transaction = searchedTransaction;
 
-            this._Voucher = _Transaction.VouhcerInfo;
+            this._Voucher = voucherInfo;
 
             switch (_Voucher.VoucherType)
             {
@@ -176,7 +203,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             _isLocked = _Transaction.IsLocked;
             LockAndUnLockMode(_Transaction.IsLocked);
 
-            gibtnDeleteTransaction.Enabled = !_Transaction.IsLocked;      
+            gibtnDeleteTransaction.Enabled = !_Transaction.IsLocked;
 
             gtswNewTransactionAfterAdd.Checked = false;
             gtswNewTransactionAfterAdd.Enabled = false;
@@ -186,7 +213,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
         void _ResteObject()
         {
-            _Transaction = new clsIncomeAndExpenseTransaction();
+            _Transaction = new FinTransactionDTO();
         }
 
         void _ShowChooseCategoryForm()
@@ -194,10 +221,13 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             if (_isLocked)
                 return;
 
-            var frm = new frmSelectCategory(Convert.ToBoolean(_Voucher.IsIncome));
-            frm.OnCategorySelected += Frm_OnCategorySelected;
-            //frm.ShowDialog(clsGlobal_UI.MainForm);
-            clsPL_Global.MainForm.OpenDialog(frm);
+            _formDisplayer.OpenDialog<frmSelectCategory>(frm =>
+            {
+                if (!frm.Initialize(Convert.ToBoolean(Convert.ToBoolean(_Voucher.IsIncome))))
+                    return false;
+                frm.OnCategorySelected += Frm_OnCategorySelected;
+                return true;
+            });
         }
         async Task _Save()
         {
@@ -234,67 +264,85 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             _Transaction.Purpose = kgtxtPurpose.ValidatedText;
             _Transaction.Amount = Convert.ToDecimal(kgtxtAmount.ValidatedText);
 
-
-
-            if (Mode == enMode.AddNew)
-            {
-                if (!_Transaction.AssignVoucherIDAtAddMode(Convert.ToInt32(_Voucher.VoucherID)))
-                {
-                    clsPL_MessageBoxs.ShowErrorMessage("فشل تسجيل معرف المستند !");
-                    _ResteObject();
-                    return;
-                }
-            }
-
             _Transaction.TransactionDate = _Voucher.VoucherDate;
-
-            bool isExceededBudget = false;
 
             if (!_Voucher.IsIncome)
             {
-                if (await _Transaction.IsExceedCategoryMonthlyBudget(_Voucher.IsReturn))
-                {
-                    isExceededBudget = true;
+                var isExeedResult = await _finCategoryApi.IsExceedMonthlyBudget(new BudgetCheckDTO(Convert.ToInt32(_Transaction.CategoryID),
+               _Transaction.MainTransactionID, _Transaction.Amount, _Transaction.TransactionDate, _Voucher.IsReturn), Convert.ToInt32(_userSession.UserID));
 
-                    if (clsPL_MessageBoxs.ShowMessage("بهذا المبلغ ستتخطى الميزانية الشهرية!. هل تود الإستمرار ؟",
+                if (!isExeedResult.IsSuccess)
+                {
+                    _messageBoxService.DisplayError(isExeedResult.ErrorMessage);
+                    return;
+                }
+
+                if (isExeedResult.Data)
+                {
+
+                    if (_messageBoxService.Display("بهذا المبلغ ستتخطى الميزانية الشهرية!. هل تود الإستمرار ؟",
                         "تحذير", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
                         return;
                 }
             }
 
 
-            if (await _Transaction.Save(isExceededBudget))
+            if (Mode == enMode.AddNew)
             {
-                if (Mode == enMode.AddNew)
-                {
-                    clsPL_MessageBoxs.ShowMessage($"تم إضافة المعاملة بنجاج بمعرف [{_Transaction.MainTransactionID}]", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                _Transaction.VoucherID = Convert.ToInt32(_Voucher.VoucherID);
 
-                    if (gtswNewTransactionAfterAdd.Checked && gtswNewTransactionAfterAdd.Enabled)
-                    {
-                        gbtnNewTransaction.PerformClick();
-                    }
-                    else
-                    {
-                        Mode = enMode.Update;
-                        _TransactionID = _Transaction.MainTransactionID;
-                        lblTransactionID.Text = _TransactionID.ToString();
-                        ChangeHeaderValue("تعديل بيانات المعاملة");
-                        gibtnDeleteTransaction.Enabled = !_Transaction.IsLocked;
-                    }
-                }
-                else if (Mode == enMode.Update)
+                var result = await _finTransactionApi.Add(_Transaction, _Voucher.IsReturn, Convert.ToInt32(_userSession.UserID));
+
+                if (!result.IsSuccess || result.Data is null)
                 {
-                    clsPL_MessageBoxs.ShowMessage("تم تعديل بيانات المعاملة بنجاح", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    _messageBoxService.DisplayError(result.ErrorMessage);
+                    _ResteObject();
+                    return;
+                }
+
+                _messageBoxService.Display($"تم إضافة المعاملة بنجاج بمعرف [{_Transaction.MainTransactionID}]", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                _Transaction = result.Data;
+                if (gtswNewTransactionAfterAdd.Checked && gtswNewTransactionAfterAdd.Enabled)
+                {
+                    gbtnNewTransaction.PerformClick();
+                }
+                else
+                {
+                    Mode = enMode.Update;
+                    _TransactionID = _Transaction.MainTransactionID;
+                    lblTransactionID.Text = _TransactionID.ToString();
+                    ChangeHeaderValue("تعديل بيانات المعاملة");
+                    gibtnDeleteTransaction.Enabled = !_Transaction.IsLocked;
                 }
 
                 _isSaved = true;
             }
-            else if (Mode == enMode.AddNew)
-                _ResteObject();
+            else if (Mode == enMode.Update)
+            {
+                var result = await _finTransactionApi.Update(_Transaction, Convert.ToInt32(_userSession.UserID));
+
+                if (!result.IsSuccess || !result.Data)
+                {
+                    _messageBoxService.DisplayError("فشل تحديث المعاملة\n" + result.ErrorMessage);
+                    _ResteObject();
+                    return;
+                }
+
+                _messageBoxService.Display("تم تعديل بيانات المعاملة بنجاح", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                _isSaved = true;
+            }
         }
 
         private async void frmAddUpdateIncomeAndExpenseTransaction_Load(object sender, EventArgs e)
         {
+            if (!isInitialized)
+            {
+                this.Close();
+                return;
+            }
+
             lblUserMessage.Visible = false;
 
             switch (Mode)
@@ -306,17 +354,17 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                         switch (_Voucher.VoucherType)
                         {
                             case enVoucherType.Incomes:
-                                result = clsPL_Global.CurrentUserSettings.IncomeTransaction_AutoAddNewDefault;
+                                result = _userSession.CurrentUserSettings.IncomeTransaction_AutoAddNewDefault;
                                 ChangeHeaderValue("إضافة معاملة واردات");
                                 break;
 
                             case enVoucherType.Expenses:
-                                result = clsPL_Global.CurrentUserSettings.ExpenseTransaction_AutoAddNewDefault;
+                                result = _userSession.CurrentUserSettings.ExpenseTransaction_AutoAddNewDefault;
                                 ChangeHeaderValue("إضافة معاملة مصروفات");
                                 break;
 
                             case enVoucherType.ExpensesReturn:
-                                result = clsPL_Global.CurrentUserSettings.ExpenseReturnTransaction_AutoAddNewDefault;
+                                result = _userSession.CurrentUserSettings.ExpenseReturnTransaction_AutoAddNewDefault;
                                 ChangeHeaderValue("إضافة معاملة مرتجعات مصروفات");
                                 break;
                         }
@@ -396,28 +444,34 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             switch (_Voucher.VoucherType)
             {
                 case enVoucherType.Incomes:
-                    asking = clsPL_Global.CurrentUserSettings.AskBeforeDeleteIncomeTransactions;
+                    asking = _userSession.CurrentUserSettings.AskBeforeDeleteIncomeTransactions;
                     break;
 
                 case enVoucherType.Expenses:
-                    asking = clsPL_Global.CurrentUserSettings.AskBeforeDeleteExpenseTransactions;
+                    asking = _userSession.CurrentUserSettings.AskBeforeDeleteExpenseTransactions;
                     break;
 
                 case enVoucherType.ExpensesReturn:
-                    asking = clsPL_Global.CurrentUserSettings.AskBeforeDeleteExpenseReturnTransactions;
+                    asking = _userSession.CurrentUserSettings.AskBeforeDeleteExpenseReturnTransactions;
                     break;
             }
 
             if (asking)
-                if (clsPL_MessageBoxs.ShowMessage("هل أنت متأكد من رغبتك حذف المعاملة ؟ ", "طلب موافقة", MessageBoxButtons.OKCancel,
+                if (_messageBoxService.Display("هل أنت متأكد من رغبتك حذف المعاملة ؟ ", "طلب موافقة", MessageBoxButtons.OKCancel,
                    MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.OK)
                     return;
 
-            if (await clsIncomeAndExpenseTransaction.DeleteIncomeAndExpenseTransactionByID(Convert.ToInt32(_TransactionID)))
+            var result = await _finTransactionApi.Delete(Convert.ToInt32(_TransactionID), Convert.ToInt32(_userSession.UserID));
+
+            if (!result.IsSuccess || !result.Data)
             {
-                _isSaved = true;
-                gbtnClose.PerformClick();
+                _messageBoxService.DisplayError("فشل حذف المعاملة\n" + result.ErrorMessage);
+                _ResteObject();
+                return;
             }
+
+            _isSaved = true;
+            gbtnClose.PerformClick();
         }
 
 

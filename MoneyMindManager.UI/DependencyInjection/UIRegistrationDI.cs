@@ -58,6 +58,10 @@ namespace MoneyMindManager.UI.DependencyInjection
             services.AddTransient<frmCategoryMonthlyFlow>();
             services.AddTransient<frmCategoriesList>();
 
+            services.AddTransient<frmFinTransactionInfo>();
+            services.AddTransient<frmFinTransction>();
+
+
             return services;
         }
     }

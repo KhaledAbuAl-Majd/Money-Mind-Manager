@@ -225,58 +225,58 @@
       <DependentUpon>frmCurrentAccount.cs</DependentUpon>
     </Compile>
     <Compile Include="Global\clsExportHelper.cs" />
-    <Compile Include="Forms\Income And Expense\Categories\frmAddUpdateCategory.cs">
+    <Compile Include="Forms\Financial-Income And Expense\Categories\frmAddUpdateCategory.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Income And Expense\Categories\frmAddUpdateCategory.Designer.cs">
+    <Compile Include="Forms\Financial-Income And Expense\Categories\frmAddUpdateCategory.Designer.cs">
       <DependentUpon>frmAddUpdateCategory.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Income And Expense\Categories\frmCategoriesList.cs">
+    <Compile Include="Forms\Financial-Income And Expense\Categories\frmCategoriesList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Income And Expense\Categories\frmCategoriesList.Designer.cs">
+    <Compile Include="Forms\Financial-Income And Expense\Categories\frmCategoriesList.Designer.cs">
       <DependentUpon>frmCategoriesList.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Income And Expense\Categories\frmCategoryMonthlyFlow.cs">
+    <Compile Include="Forms\Financial-Income And Expense\Categories\frmCategoryMonthlyFlow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Income And Expense\Categories\frmCategoryMonthlyFlow.Designer.cs">
+    <Compile Include="Forms\Financial-Income And Expense\Categories\frmCategoryMonthlyFlow.Designer.cs">
       <DependentUpon>frmCategoryMonthlyFlow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Income And Expense\Categories\frmSelectCategory.cs">
+    <Compile Include="Forms\Financial-Income And Expense\Categories\frmSelectCategory.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Income And Expense\Categories\frmSelectCategory.Designer.cs">
+    <Compile Include="Forms\Financial-Income And Expense\Categories\frmSelectCategory.Designer.cs">
       <DependentUpon>frmSelectCategory.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Income And Expense\frmIncomeAndExpense.cs">
+    <Compile Include="Forms\Financial-Income And Expense\frmIncomeAndExpense.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Income And Expense\frmIncomeAndExpense.Designer.cs">
+    <Compile Include="Forms\Financial-Income And Expense\frmIncomeAndExpense.Designer.cs">
       <DependentUpon>frmIncomeAndExpense.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Income And Expense\IAE_Transactions\frmAddUpdateIncomeAndExpeseTransaction.cs">
+    <Compile Include="Forms\Financial-Income And Expense\Financial-IAE_Transactions\frmAddUpdateFinTransaction.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Income And Expense\IAE_Transactions\frmAddUpdateIncomeAndExpeseTransaction.Designer.cs">
-      <DependentUpon>frmAddUpdateIncomeAndExpeseTransaction.cs</DependentUpon>
+    <Compile Include="Forms\Financial-Income And Expense\Financial-IAE_Transactions\frmAddUpdateFinTransaction.Designer.cs">
+      <DependentUpon>frmAddUpdateFinTransaction.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Income And Expense\IAE_Transactions\frmIncomeAndExpenseTransactionInfo.cs">
+    <Compile Include="Forms\Financial-Income And Expense\Financial-IAE_Transactions\frmFinTransactionInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Income And Expense\IAE_Transactions\frmIncomeAndExpenseTransactionInfo.Designer.cs">
-      <DependentUpon>frmIncomeAndExpenseTransactionInfo.cs</DependentUpon>
+    <Compile Include="Forms\Financial-Income And Expense\Financial-IAE_Transactions\frmFinTransactionInfo.Designer.cs">
+      <DependentUpon>frmFinTransactionInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Income And Expense\Vouchers\frmAddUpdateVoucher.cs">
+    <Compile Include="Forms\Financial-Income And Expense\Vouchers\frmAddUpdateVoucher.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Income And Expense\Vouchers\frmAddUpdateVoucher.Designer.cs">
+    <Compile Include="Forms\Financial-Income And Expense\Vouchers\frmAddUpdateVoucher.Designer.cs">
       <DependentUpon>frmAddUpdateVoucher.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Income And Expense\Vouchers\frmVouhcersList.cs">
+    <Compile Include="Forms\Financial-Income And Expense\Vouchers\frmVouhcersList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Income And Expense\Vouchers\frmVouhcersList.Designer.cs">
+    <Compile Include="Forms\Financial-Income And Expense\Vouchers\frmVouhcersList.Designer.cs">
       <DependentUpon>frmVouhcersList.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Login\frmLogin.cs">
@@ -467,31 +467,31 @@
     <EmbeddedResource Include="Forms\Current Account\frmCurrentAccount.resx">
       <DependentUpon>frmCurrentAccount.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Income And Expense\Categories\frmAddUpdateCategory.resx">
+    <EmbeddedResource Include="Forms\Financial-Income And Expense\Categories\frmAddUpdateCategory.resx">
       <DependentUpon>frmAddUpdateCategory.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Income And Expense\Categories\frmCategoriesList.resx">
+    <EmbeddedResource Include="Forms\Financial-Income And Expense\Categories\frmCategoriesList.resx">
       <DependentUpon>frmCategoriesList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Income And Expense\Categories\frmCategoryMonthlyFlow.resx">
+    <EmbeddedResource Include="Forms\Financial-Income And Expense\Categories\frmCategoryMonthlyFlow.resx">
       <DependentUpon>frmCategoryMonthlyFlow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Income And Expense\Categories\frmSelectCategory.resx">
+    <EmbeddedResource Include="Forms\Financial-Income And Expense\Categories\frmSelectCategory.resx">
       <DependentUpon>frmSelectCategory.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Income And Expense\frmIncomeAndExpense.resx">
+    <EmbeddedResource Include="Forms\Financial-Income And Expense\frmIncomeAndExpense.resx">
       <DependentUpon>frmIncomeAndExpense.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Income And Expense\IAE_Transactions\frmAddUpdateIncomeAndExpeseTransaction.resx">
-      <DependentUpon>frmAddUpdateIncomeAndExpeseTransaction.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Financial-Income And Expense\Financial-IAE_Transactions\frmAddUpdateFinTransaction.resx">
+      <DependentUpon>frmAddUpdateFinTransaction.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Income And Expense\IAE_Transactions\frmIncomeAndExpenseTransactionInfo.resx">
-      <DependentUpon>frmIncomeAndExpenseTransactionInfo.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Financial-Income And Expense\Financial-IAE_Transactions\frmFinTransactionInfo.resx">
+      <DependentUpon>frmFinTransactionInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Income And Expense\Vouchers\frmAddUpdateVoucher.resx">
+    <EmbeddedResource Include="Forms\Financial-Income And Expense\Vouchers\frmAddUpdateVoucher.resx">
       <DependentUpon>frmAddUpdateVoucher.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Income And Expense\Vouchers\frmVouhcersList.resx">
+    <EmbeddedResource Include="Forms\Financial-Income And Expense\Vouchers\frmVouhcersList.resx">
       <DependentUpon>frmVouhcersList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Login\frmLogin.ar.resx">
@@ -641,9 +641,7 @@
     <None Include="Resources\unlocked %281%29.png" />
     <None Include="Resources\lock %281%29.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Forms\Income And Expense\Vouchers\Controls\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
       <Visible>False</Visible>

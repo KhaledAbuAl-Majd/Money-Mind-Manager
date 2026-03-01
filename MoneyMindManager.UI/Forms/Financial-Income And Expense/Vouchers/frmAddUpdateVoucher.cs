@@ -433,7 +433,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             lblUserMessage.Visible = false;
 
-            var frm = new frmAddUpdateIncomeAndExpeseTransction(_Voucher);
+            var frm = new frmFinTransction(_Voucher);
             frm.OnCloseAndSaved += FrmAddUpdateTransactions_OnCloseAndSaved;
             clsPL_Global.MainForm.AddNewFormAtContainer(frm);
         }
@@ -451,7 +451,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             int transactionID = Convert.ToInt32(gdgvTransactions.SelectedRows[0].Cells[0].Value);
 
-            var frm = new frmAddUpdateIncomeAndExpeseTransction(transactionID);
+            var frm = new frmFinTransction(transactionID);
             frm.OnCloseAndSaved += FrmAddUpdateTransactions_OnCloseAndSaved;
             clsPL_Global.MainForm.AddNewFormAtContainer(frm);
         }
