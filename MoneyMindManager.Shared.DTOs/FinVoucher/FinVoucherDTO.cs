@@ -1,4 +1,5 @@
 ﻿using System;
+using MoneyMindManager.Core.Enums;
 using MoneyMindManager.Shared.DTOs.User;
 
 namespace MoneyMindManager.Shared.DTOs.FinVoucher
@@ -16,6 +17,29 @@ namespace MoneyMindManager.Shared.DTOs.FinVoucher
         public bool IsIncome { get; set; }
         public bool IsReturn { get; set; }
         public Decimal VoucherValue { get; set; }
+
+        public enVoucherType VoucherType
+        {
+            get
+            {
+                if (IsIncome)
+                {
+                    if (IsReturn)
+                        return enVoucherType.UnKnown;
+                    else
+                        return enVoucherType.Incomes;
+
+                }
+                else
+                {
+                    if (IsReturn)
+                        return enVoucherType.ExpensesReturn;
+                    else
+                        return enVoucherType.Expenses;
+                }
+            }
+        }
+
         public UserDTO UserInfo { get; set; }
 
         public FinVoucherDTO(int? voucherID, string voucherName, string notes, bool isLocked,
