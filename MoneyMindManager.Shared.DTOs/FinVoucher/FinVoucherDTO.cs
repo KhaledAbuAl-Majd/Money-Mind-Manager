@@ -38,6 +38,26 @@ namespace MoneyMindManager.Shared.DTOs.FinVoucher
                         return enVoucherType.Expenses;
                 }
             }
+            set
+            {
+                switch (value)
+                {
+                    case enVoucherType.Incomes:
+                        IsIncome = true;
+                        IsReturn = false;
+                        break;
+
+                    case enVoucherType.Expenses:
+                        IsIncome = false;
+                        IsReturn = false;
+                        break;
+
+                    case enVoucherType.ExpensesReturn:
+                        IsIncome = false;
+                        IsReturn = true;
+                        break;
+                }
+            }
         }
 
         public UserDTO UserInfo { get; set; }
