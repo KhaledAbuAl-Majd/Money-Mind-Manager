@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using MoneyMindManager.UI.Abstractions;
 using MoneyMindManager.UI.Services;
 using MoneyMindManager_Presentation;
+using MoneyMindManager_Presentation.Income_And_Expense;
 using MoneyMindManager_Presentation.Income_And_Expense.Categories;
 using MoneyMindManager_Presentation.Income_And_Expense.Vouchers;
 using MoneyMindManager_Presentation.Login;
@@ -63,6 +64,8 @@ namespace MoneyMindManager.UI.DependencyInjection
 
             services.AddTransient<frmAddUpdateVoucher>();
             services.AddTransient<frmVouhcersList>();
+
+            services.AddTransient<frmIncomeAndExpense>();
 
 
             return services;

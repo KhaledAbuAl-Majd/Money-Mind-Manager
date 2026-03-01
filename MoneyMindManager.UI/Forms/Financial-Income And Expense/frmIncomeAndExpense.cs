@@ -1,80 +1,94 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Guna.UI2.WinForms;
-using MoneyMindManager_Business;
+using Microsoft.Extensions.DependencyInjection;
+using MoneyMindManager.Core.Enums;
+using MoneyMindManager.UI.Abstractions;
 using MoneyMindManager_Presentation.Global;
 using MoneyMindManager_Presentation.Income_And_Expense.Categories;
 using MoneyMindManager_Presentation.Income_And_Expense.Vouchers;
-using static MoneyMindManager_Business.clsIncomeAndExpenseVoucher;
+
 
 namespace MoneyMindManager_Presentation.Income_And_Expense
 {
     public partial class frmIncomeAndExpense : Form
     {
-        public frmIncomeAndExpense(enVoucherType voucherType)
+        private readonly IServiceProvider _serviceProvider;
+        private readonly IMessageBoxService _messageBoxService;
+        private readonly IUserSession _userSession;
+
+        private bool isInitialized = false;
+        public frmIncomeAndExpense(IServiceProvider serviceProvider, IMessageBoxService messageBoxService, IUserSession userSession)
         {
-            if (voucherType == enVoucherType.UnKnown)
-            {
-                clsPL_MessageBoxs.ShowErrorMessage("نوع المستند غير معروف !");
-                this.Dispose();
-                return;
-            }
-
-            _voucherType = voucherType;
-            InitializeComponent();
-
             if (!_CheckPermissions())
             {
                 this.Dispose();
                 return;
             }
+
+            this._serviceProvider = serviceProvider;
+            this._messageBoxService = messageBoxService;
+            this._userSession = userSession;
+
+            InitializeComponent();
+
+        }
+
+        public bool Initilize(enVoucherType voucherType)
+        {
+            if (voucherType == enVoucherType.UnKnown)
+            {
+                _messageBoxService.DisplayError("نوع المستند غير معروف !");
+                return false;
+            }
+
+            this._voucherType = voucherType;
+            this.isInitialized = true;
+            return true;
         }
         bool _CheckPermissions()
         {
             string errorMessage = "";
-            clsUser.enPermissions permission;
+            enPermissions permission;
 
             switch (_voucherType)
             {
                 case enVoucherType.Incomes:
                     errorMessage = "ليس لديك صلاحية قائمة مستندات الواردات";
-                    permission = clsUser.enPermissions.IncomeVouchersList;
+                    permission = enPermissions.IncomeVouchersList;
                     break;
 
                 case enVoucherType.Expenses:
                     errorMessage = "ليس لديك صلاحية قائمة مستندات المصروفات";
-                    permission = clsUser.enPermissions.ExpenseVouchersList;
+                    permission = enPermissions.ExpenseVouchersList;
                     break;
 
                 case enVoucherType.ExpensesReturn:
                     errorMessage = "ليس لديك صلاحية قائمة مستندات مرتجعات المصروفات";
-                    permission = clsUser.enPermissions.ExpenseReturnVouchersList;
+                    permission = enPermissions.ExpenseReturnVouchersList;
                     break;
 
                 default:
                     return false;
             }
 
-            if (clsUser.CheckLogedInUserPermissions(permission))
+            if (_userSession.IsHasPermissions(permission))
             {
                 prevButton = gbtnVouchers;
                 return true;
             }
 
-            if (clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.CategoriesList,
-                errorMessage + "/قائمة الفئات"))
+            if (_userSession.IsHasPermissions(enPermissions.CategoriesList))
             {
                 prevButton = gbtnCategories;
                 return true;
             }
+            else
+            {
+                errorMessage += "/قائمة الفئات";
+            }
 
+            _messageBoxService.DisplayError(errorMessage);
             return false;
         }
 
@@ -88,6 +102,19 @@ namespace MoneyMindManager_Presentation.Income_And_Expense
             lblHeader.Text = txt;
         }
 
+
+        private bool OpenAtContainer<T>(Func<T, bool> initialize = null) where T : Form
+        {
+            var frm = _serviceProvider.GetRequiredService<T>();
+
+            if (initialize is null || !initialize.Invoke(frm))
+            {
+                frm?.Dispose();
+                return false;
+            }
+
+            return _LoadFormAtPanelContainer(frm);
+        }
         bool _LoadFormAtPanelContainer(Form frm)
         {
             if (frm == null)
@@ -120,14 +147,26 @@ namespace MoneyMindManager_Presentation.Income_And_Expense
             return true;
         }
 
+
         private void frmIncomeAndExpense_Load(object sender, EventArgs e)
         {
+            if (!isInitialized)
+            {
+                this.Close();
+                return;
+            }
+
             prevButton.PerformClick();
         }
 
         private void gbtnVouchers_Click(object sender, EventArgs e)
         {
-            if (_LoadFormAtPanelContainer(new frmVouhcersList(_voucherType)))
+            var loading = OpenAtContainer<frmVouhcersList>(frm =>
+            {
+                return frm.Initialize(_voucherType);
+            });
+
+            if (loading)
             {
                 prevButton = gbtnVouchers;
 
@@ -160,13 +199,13 @@ namespace MoneyMindManager_Presentation.Income_And_Expense
             {
                 case enVoucherType.Incomes:
                     ciiExepnsesReturn.Visible = false;
-                    headerText= "فئات الإيرادات";
+                    headerText = "فئات الإيرادات";
                     isIncome = true;
                     break;
 
                 case enVoucherType.Expenses:
                     ciiExepnsesReturn.Visible = false;
-                    headerText="فئات المصروفات";
+                    headerText = "فئات المصروفات";
                     isIncome = false;
                     break;
                 case enVoucherType.ExpensesReturn:
@@ -177,7 +216,12 @@ namespace MoneyMindManager_Presentation.Income_And_Expense
 
             }
 
-            if (_LoadFormAtPanelContainer(new frmCategoriesList(isIncome)))
+            var loading = OpenAtContainer<frmCategoriesList>(frm =>
+            {
+                return frm.Initialize(isIncome);
+            });
+
+            if (loading)
             {
                 prevButton = gbtnCategories;
                 ChangeHeaderValue(headerText);

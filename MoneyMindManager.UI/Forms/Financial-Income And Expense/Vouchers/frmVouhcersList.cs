@@ -42,7 +42,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             InitializeComponent();
         }
 
-        public bool Initilize(enVoucherType voucherType)
+        public bool Initialize(enVoucherType voucherType)
         {
             if (voucherType == enVoucherType.UnKnown)
             {
