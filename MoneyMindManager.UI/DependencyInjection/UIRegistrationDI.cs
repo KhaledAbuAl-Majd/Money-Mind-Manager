@@ -59,7 +59,10 @@ namespace MoneyMindManager.UI.DependencyInjection
             services.AddTransient<frmCategoriesList>();
 
             services.AddTransient<frmFinTransactionInfo>();
-            services.AddTransient<frmFinTransction>();
+            services.AddTransient<frmAddUpdateFinTransction>();
+
+            services.AddTransient<frmAddUpdateVoucher>();
+            services.AddTransient<frmVouhcersList>();
 
 
             return services;

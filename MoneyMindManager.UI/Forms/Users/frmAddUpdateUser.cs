@@ -255,9 +255,9 @@ namespace MoneyMindManager_Presentation.Users
                     return;
                 }
 
+                _User = result.Data;
                 _messageBoxService.Display($"تم إضافة المستخدم بنجاج بمعرف [{_User.UserID}]", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                _User = result.Data;
 
                 Mode = enMode.Update;
                 _UserID = _User.UserID;

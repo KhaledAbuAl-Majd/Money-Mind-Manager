@@ -1,71 +1,90 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using KhaledControlLibrary1;
-using MoneyMindManager_Business;
+using MoneyMindManager.Client.Abstractions.ApiClient;
+using MoneyMindManager.Core.Enums;
+using MoneyMindManager.Core.Models.FinVoucher;
+using MoneyMindManager.Shared.DTOs.FinVoucher;
+using MoneyMindManager.UI.Abstractions;
 using MoneyMindManager_Presentation.Global;
-using MoneyMindManager_Presentation.People;
-using MoneyMindManagerGlobal;
-using static MoneyMindManager_Business.clsBLLGlobal;
-using static MoneyMindManager_Business.clsIncomeAndExpenseVoucher;
-
 namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 {
     public partial class frmVouhcersList : Form
     {
-        public frmVouhcersList(enVoucherType voucherType)
+        private readonly IUserSession _userSession;
+        private readonly IMessageBoxService _messageBoxService;
+        private readonly IFormDisplayer _formDisplayer;
+        private readonly IFinVoucherApiClient _finVoucherApi;
+        private readonly IDataConverter _dataConverter;
+        private readonly IExportWithDialogService _exportWithDialogService;
+        private bool isInitialized = false;
+        public frmVouhcersList(IUserSession userSession, IMessageBoxService messageBoxService, IFormDisplayer formDisplayer, IFinVoucherApiClient finVoucherApiClient,
+            IDataConverter dataConverter, IExportWithDialogService exportWithDialogService)
         {
-            if (voucherType == enVoucherType.UnKnown)
-            {
-                clsPL_MessageBoxs.ShowErrorMessage("نوع المستند غير معروف !");
-                this.Dispose();
-                return;
-            }
-
-            _voucherType = voucherType;
-
             if (!_CheckPermissions())
             {
                 this.Dispose();
                 return;
             }
 
+            this._userSession = userSession;
+            this._messageBoxService = messageBoxService;
+            this._formDisplayer = formDisplayer;
+            this._finVoucherApi = finVoucherApiClient;
+            this._dataConverter = dataConverter;
+            this._exportWithDialogService = exportWithDialogService;
+
             InitializeComponent();
         }
 
+        public bool Initilize(enVoucherType voucherType)
+        {
+            if (voucherType == enVoucherType.UnKnown)
+            {
+                _messageBoxService.DisplayError("نوع المستند غير معروف !");
+                return false;
+            }
+
+            this._voucherType = voucherType;
+            this.isInitialized = true;
+            return true;
+        }
         bool _CheckPermissions()
         {
             string errorMessage = "";
-            clsUser.enPermissions permission;
+            enPermissions permission;
 
             switch (_voucherType)
             {
                 case enVoucherType.Incomes:
                     errorMessage = "ليس لديك صلاحية قائمة مستندات الواردات.";
-                    permission = clsUser.enPermissions.IncomeVouchersList;
+                    permission = enPermissions.IncomeVouchersList;
                     break;
 
                 case enVoucherType.Expenses:
                     errorMessage = "ليس لديك صلاحية قائمة مستندات المصروفات.";
-                    permission = clsUser.enPermissions.ExpenseVouchersList;
+                    permission = enPermissions.ExpenseVouchersList;
                     break;
 
                 case enVoucherType.ExpensesReturn:
                     errorMessage = "ليس لديك صلاحية قائمة مستندات مرتجعات المصروفات.";
-                    permission = clsUser.enPermissions.ExpenseReturnVouchersList;
+                    permission = enPermissions.ExpenseReturnVouchersList;
                     break;
 
                 default:
                     return false;
             }
 
-            return clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(permission, errorMessage);
+            if (_userSession.IsHasPermissions(permission))
+                return true;
+
+            _messageBoxService.DisplayError(errorMessage);
+            return false;
         }
 
         enVoucherType _voucherType;
@@ -115,8 +134,6 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             else if (grbTextSearchMode_SubString.Checked)
                 textSearchMode = enTextSearchMode.Substring_Slow;
 
-            clsDataColumns.clsIncomeAndExpenseVoucherClasses.clsGetAllVouchers result = null;
-
             bool filterByCreatedDate = false;
 
             if (gcbFilterByDate.Text == "تاريخ الإنشاء")
@@ -128,36 +145,50 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             else
                 return;
 
+            var filterDTO = new FinVoucherPagedFilterDTO();
+            filterDTO.IsByCreatedDate = filterByCreatedDate;
+            filterDTO.FromDateString = kgtxtFromData.ValidatedText;
+            filterDTO.ToDateString = kgtxtToDate.ValidatedText;
+            filterDTO.VoucherType = _voucherType;
+            filterDTO.TextSearchMode = textSearchMode;
+            filterDTO.PageNumber = _pageNumber;
+
             if (filterBy == enFilterBy.All || string.IsNullOrEmpty(kgtxtFilterValue.ValidatedText))
             {
-                result = await clsIncomeAndExpenseVoucher.GetAllVouchers(filterByCreatedDate, kgtxtFromData.ValidatedText,
-                    kgtxtToDate.ValidatedText, _voucherType,textSearchMode,_pageNumber);
+
             }
             else if (filterBy == enFilterBy.VoucherID)
             {
-         int voucherID = Convert.ToInt32(kgtxtFilterValue.ValidatedText);
-                result = await clsIncomeAndExpenseVoucher.GetAllVouchersByVoucherID(voucherID, filterByCreatedDate, kgtxtFromData.ValidatedText,
-                    kgtxtToDate.ValidatedText, _voucherType, textSearchMode, _pageNumber);
+                int voucherID = Convert.ToInt32(kgtxtFilterValue.ValidatedText);
+                filterDTO.VoucherID = voucherID;
             }
             else if (filterBy == enFilterBy.VoucherName)
             {
                 string voucherName = kgtxtFilterValue.ValidatedText;
-                result = await clsIncomeAndExpenseVoucher.GetAllVouchersByVoucherName(voucherName, filterByCreatedDate, kgtxtFromData.ValidatedText,
-                    kgtxtToDate.ValidatedText, _voucherType, textSearchMode, _pageNumber);
+                filterDTO.VoucherName = voucherName;
             }
             else if (filterBy == enFilterBy.UserName)
             {
                 string userName = kgtxtFilterValue.ValidatedText;
-                result = await clsIncomeAndExpenseVoucher.GetAllVouchersByUserName(userName, filterByCreatedDate, kgtxtFromData.ValidatedText,
-                    kgtxtToDate.ValidatedText, _voucherType, textSearchMode, _pageNumber);
+                filterDTO.UserName = userName;
             }
             else
                 return;
 
-            if (result == null)
+            var result = await _finVoucherApi.GetAllPaged(filterDTO, Convert.ToInt32(_userSession.UserID));
+
+            if (!result.IsSuccess)
+            {
+                _messageBoxService.DisplayError(result.ErrorMessage);
+                return;
+            }
+
+            var DTO = result.Data;
+
+            if (DTO == null)
                 return;
 
-            if (result.dtVouchers.Rows.Count == 0)
+            if (DTO.Data.Count() == 0)
             {
                 lblNoRecordsFoundMessage.Visible = true;
                 gdgvVouchers.DataSource = null;
@@ -167,7 +198,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             else
             {
                 lblNoRecordsFoundMessage.Visible = false;
-                gdgvVouchers.DataSource = result.dtVouchers;
+                gdgvVouchers.DataSource = DTO.Data;
             }
 
             lblUserMessage.Visible = false;
@@ -175,44 +206,45 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             kgtxtPageNumber.Text = _pageNumber.ToString();
             _searchByPageNumber = true;
 
-            lblTotalRecordsNumber.Text = result.RecordsCount.ToString();
-            lblCurrentPageOfNumberOfPages.Text = string.Concat(_pageNumber, "   من   ", result.NumberOfPages, "  صفحات");
+            lblTotalRecordsNumber.Text = DTO.TotalRecords.ToString();
+            lblCurrentPageOfNumberOfPages.Text = string.Concat(_pageNumber, "   من   ", DTO.TotalPages, "  صفحات");
             kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValueOption = true;
-            kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValue = (result.NumberOfPages < 1) ? 1 : result.NumberOfPages;
+            kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValue = (DTO.TotalPages < 1) ? 1 : DTO.TotalPages;
             lblCurrentPageRecordsCount.Text = gdgvVouchers.Rows.Count.ToString();
 
-            gibtnNextPage.Enabled = (_pageNumber < result.NumberOfPages);
+            gibtnNextPage.Enabled = (_pageNumber < DTO.TotalPages);
             gibtnPreviousPage.Enabled = (_pageNumber > 1);
 
-            klblAllVouchersValue.Text = result.TotalVouchersValue.ToString();
-            klblCurrentPageVouchersValue.Text = result.CurrentPageVouchersValue.ToString();
+            klblAllVouchersValue.Text = DTO.TotalValue.ToString();
+            klblCurrentPageVouchersValue.Text = DTO.CurrentPageValue.ToString();
             //
 
             if (!_IsHeaderCreated && gdgvVouchers.Rows.Count > 0)
             {
-                gdgvVouchers.Columns["VoucherID"].HeaderText = "معرف المستند";
-                gdgvVouchers.Columns["VoucherID"].Width = 125;
 
-                gdgvVouchers.Columns["VoucherName"].HeaderText = "اسم المستند";
-                gdgvVouchers.Columns["VoucherName"].Width = 265;
+                gdgvVouchers.Columns[nameof(FinVoucherViewSummary.VoucherID)].HeaderText = "معرف المستند";
+                gdgvVouchers.Columns[nameof(FinVoucherViewSummary.VoucherID)].Width = 125;
 
-                gdgvVouchers.Columns["VoucherValue"].HeaderText = "قيمة المستند";
-                gdgvVouchers.Columns["VoucherValue"].Width = 250;
-                gdgvVouchers.Columns["VoucherValue"].DefaultCellStyle.Format = "N2";
+                gdgvVouchers.Columns[nameof(FinVoucherViewSummary.VoucherName)].HeaderText = "اسم المستند";
+                gdgvVouchers.Columns[nameof(FinVoucherViewSummary.VoucherName)].Width = 265;
 
-                gdgvVouchers.Columns["TransactionsCount"].HeaderText = "عدد المعاملات";
-                gdgvVouchers.Columns["TransactionsCount"].Width = 125;
+                gdgvVouchers.Columns[nameof(FinVoucherViewSummary.VoucherValue)].HeaderText = "قيمة المستند";
+                gdgvVouchers.Columns[nameof(FinVoucherViewSummary.VoucherValue)].Width = 250;
+                gdgvVouchers.Columns[nameof(FinVoucherViewSummary.VoucherValue)].DefaultCellStyle.Format = "N2";
 
-                gdgvVouchers.Columns["VoucherDate"].HeaderText = "تاريخ المستند";
-                gdgvVouchers.Columns["VoucherDate"].Width = 135;
-                gdgvVouchers.Columns["VoucherDate"].DefaultCellStyle.Format = "dd-MM-yyyy";
+                gdgvVouchers.Columns[nameof(FinVoucherViewSummary.TransactionsCount)].HeaderText = "عدد المعاملات";
+                gdgvVouchers.Columns[nameof(FinVoucherViewSummary.TransactionsCount)].Width = 125;
 
-                gdgvVouchers.Columns["CreatedDate"].HeaderText = "تاريخ الإنشاء";
-                gdgvVouchers.Columns["CreatedDate"].Width = 235;
-                gdgvVouchers.Columns["CreatedDate"].DefaultCellStyle.Format = "hh:mm:ss tt dd-MM-yyyy";
+                gdgvVouchers.Columns[nameof(FinVoucherViewSummary.VoucherDate)].HeaderText = "تاريخ المستند";
+                gdgvVouchers.Columns[nameof(FinVoucherViewSummary.VoucherDate)].Width = 135;
+                gdgvVouchers.Columns[nameof(FinVoucherViewSummary.VoucherDate)].DefaultCellStyle.Format = "dd-MM-yyyy";
 
-                gdgvVouchers.Columns["CreatedByUserName"].HeaderText = "اسم المستخدم المنشئ";
-                gdgvVouchers.Columns["CreatedByUserName"].Width = 265;
+                gdgvVouchers.Columns[nameof(FinVoucherViewSummary.CreatedDate)].HeaderText = "تاريخ الإنشاء";
+                gdgvVouchers.Columns[nameof(FinVoucherViewSummary.CreatedDate)].Width = 235;
+                gdgvVouchers.Columns[nameof(FinVoucherViewSummary.CreatedDate)].DefaultCellStyle.Format = "hh:mm:ss tt dd-MM-yyyy";
+
+                gdgvVouchers.Columns[nameof(FinVoucherViewSummary.CreatedByUserName)].HeaderText = "اسم المستخدم المنشئ";
+                gdgvVouchers.Columns[nameof(FinVoucherViewSummary.CreatedByUserName)].Width = 265;
 
                 _IsHeaderCreated = true;
 
@@ -221,9 +253,12 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
         void _AddNewVoucher()
         {
-            frmAddUpdateVoucher frm = new frmAddUpdateVoucher(_voucherType);
-            frm.OnCloseAndSaved += _Refresh;
-            clsPL_Global.MainForm.AddNewFormAtContainer(frm);
+            _formDisplayer.OpenAtContainer<frmAddUpdateVoucher>(frm =>
+            {
+                if (!frm.Initilize(_voucherType)) return false;
+                frm.OnCloseAndSaved += _Refresh;
+                return true;
+            });
         }
 
         void _UpdateVoucher()
@@ -233,9 +268,12 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             int voucherID = Convert.ToInt32(gdgvVouchers.SelectedRows[0].Cells[0].Value);
 
-            frmAddUpdateVoucher frm = new frmAddUpdateVoucher(voucherID);
-            frm.OnCloseAndSaved += _Refresh;
-            clsPL_Global.MainForm.AddNewFormAtContainer(frm);
+            _formDisplayer.OpenAtContainer<frmAddUpdateVoucher>(frm =>
+            {
+                if (!frm.Initilize(voucherID)) return false;
+                frm.OnCloseAndSaved += _Refresh;
+                return true;
+            });
         }
 
         async void _Refresh()
@@ -263,6 +301,12 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
         private void VouhcersList_Load(object sender, EventArgs e)
         {
+            if (!isInitialized)
+            {
+                this.Close();
+                return;
+            }
+
             _IsHeaderCreated = false;
             _searchByPageNumber = false;
             kgtxtPageNumber.Text = "1";
@@ -464,8 +508,6 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             else if (grbTextSearchMode_SubString.Checked)
                 textSearchMode = enTextSearchMode.Substring_Slow;
 
-            DataTable result = null;
-
             bool filterByCreatedDate = false;
 
             if (gcbFilterByDate.Text == "تاريخ الإنشاء")
@@ -478,50 +520,54 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 return;
 
 
+            var filterDTO = new FinVoucherFilterDTO();
+            filterDTO.IsByCreatedDate = filterByCreatedDate;
+            filterDTO.FromDateString = kgtxtFromData.ValidatedText;
+            filterDTO.ToDateString = kgtxtToDate.ValidatedText;
+            filterDTO.VoucherType = _voucherType;
+            filterDTO.TextSearchMode = textSearchMode;
+
             if (_filterBy == enFilterBy.All || string.IsNullOrEmpty(kgtxtFilterValue.ValidatedText))
             {
-                result = await clsIncomeAndExpenseVoucher.GetAllVouchersWithoutPaging(filterByCreatedDate, kgtxtFromData.ValidatedText,
-                    kgtxtToDate.ValidatedText, _voucherType,textSearchMode);
+
             }
             else if (_filterBy == enFilterBy.VoucherID)
             {
                 int voucherID = Convert.ToInt32(kgtxtFilterValue.ValidatedText);
-                result = await clsIncomeAndExpenseVoucher.GetAllVouchersByVoucherIDWithoutPaging(voucherID, filterByCreatedDate, kgtxtFromData.ValidatedText,
-                    kgtxtToDate.ValidatedText, _voucherType, textSearchMode);
+                filterDTO.VoucherID = voucherID;
             }
             else if (_filterBy == enFilterBy.VoucherName)
             {
                 string voucherName = kgtxtFilterValue.ValidatedText;
-                result = await clsIncomeAndExpenseVoucher.GetAllVouchersByVoucherNameWithoutPaging(voucherName, filterByCreatedDate, kgtxtFromData.ValidatedText,
-                    kgtxtToDate.ValidatedText, _voucherType, textSearchMode);
+                filterDTO.VoucherName = voucherName;
             }
             else if (_filterBy == enFilterBy.UserName)
             {
                 string userName = kgtxtFilterValue.ValidatedText;
-                result = await clsIncomeAndExpenseVoucher.GetAllVouchersByUserNameWithoutPaging(userName, filterByCreatedDate, kgtxtFromData.ValidatedText,
-                    kgtxtToDate.ValidatedText, _voucherType, textSearchMode);
+                filterDTO.UserName = userName;
             }
             else
                 return;
 
-            if (result == null)
-                return;
+            var result = await _finVoucherApi.GetAll(filterDTO, Convert.ToInt32(_userSession.UserID));
 
-            if (result == null)
+            if (!result.IsSuccess || result.Data is null)
             {
-                clsPL_MessageBoxs.ShowErrorMessage("فشل تصدير البيانات !");
+                _messageBoxService.DisplayError(result.ErrorMessage);
                 return;
             }
 
-            result.Columns["VoucherID"].ColumnName = "معرف المستند";
-            result.Columns["VoucherName"].ColumnName = "اسم المستند";
-            result.Columns["VoucherValue"].ColumnName = "قيمة المستند";
-            result.Columns["TransactionsCount"].ColumnName = "عدد المعاملات";
-            result.Columns["VoucherDate"].ColumnName = "تاريخ المستند";
-            result.Columns["CreatedDate"].ColumnName = "تاريخ الإنشاء";
-            result.Columns["CreatedByUserID"].ColumnName = "معرف المستخدم المنشئ";
-            result.Columns["CreatedByUserName"].ColumnName = "اسم المستخدم المنشئ";
-            result.Columns["AccountID"].ColumnName = "معرف الحساب";
+            DataTable dt = _dataConverter.ToDataTable<FinVoucherExportSummary>(result.Data);
+
+            dt.Columns[nameof(FinVoucherExportSummary.VoucherID)].ColumnName = "معرف المستند";
+            dt.Columns[nameof(FinVoucherExportSummary.VoucherName)].ColumnName = "اسم المستند";
+            dt.Columns[nameof(FinVoucherExportSummary.VoucherValue)].ColumnName = "قيمة المستند";
+            dt.Columns[nameof(FinVoucherExportSummary.TransactionsCount)].ColumnName = "عدد المعاملات";
+            dt.Columns[nameof(FinVoucherExportSummary.VoucherDate)].ColumnName = "تاريخ المستند";
+            dt.Columns[nameof(FinVoucherExportSummary.CreatedDate)].ColumnName = "تاريخ الإنشاء";
+            dt.Columns[nameof(FinVoucherExportSummary.CreatedByUserID)].ColumnName = "معرف المستخدم المنشئ";
+            dt.Columns[nameof(FinVoucherExportSummary.CreatedByUserName)].ColumnName = "اسم المستخدم المنشئ";
+            dt.Columns[nameof(FinVoucherExportSummary.AccountID)].ColumnName = "معرف الحساب";
 
             string vouchersTypeName = null;
 
@@ -544,7 +590,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                     break;
             }
 
-            await clsExportHelper.ExportToExcelWithDialog(result, $"تقرير مستندات {vouchersTypeName}");
+            await _exportWithDialogService.ExportToExcel(dt, $"تقرير مستندات {vouchersTypeName}");
         }
 
     }
