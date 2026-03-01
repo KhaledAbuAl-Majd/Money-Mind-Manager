@@ -15,7 +15,7 @@ using MoneyMindManager_Presentation.Global;
 
 namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 {
-    public partial class frmFinTransction : Form
+    public partial class frmAddUpdateFinTransction : Form
     {
         private IUserSession _userSession;
         private IMessageBoxService _messageBoxService;
@@ -41,7 +41,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
         enum enMode { AddNew, Update };
         enMode Mode { get; set; }
 
-        public frmFinTransction(IUserSession userSession, IMessageBoxService messageBoxService, IFormDisplayer formDisplayer,
+        public frmAddUpdateFinTransction(IUserSession userSession, IMessageBoxService messageBoxService, IFormDisplayer formDisplayer,
             IFinTransactionApiClient finTransactionApiClient,IFinVoucherApiClient finVoucherApiClient,IFinCategoryApiClient finCategoryApiClient)
         {
             if (!_CheckPermissions())
@@ -300,9 +300,9 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                     return;
                 }
 
+                _Transaction = result.Data;
                 _messageBoxService.Display($"تم إضافة المعاملة بنجاج بمعرف [{_Transaction.MainTransactionID}]", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                _Transaction = result.Data;
                 if (gtswNewTransactionAfterAdd.Checked && gtswNewTransactionAfterAdd.Enabled)
                 {
                     gbtnNewTransaction.PerformClick();
@@ -325,7 +325,6 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                 if (!result.IsSuccess || !result.Data)
                 {
                     _messageBoxService.DisplayError("فشل تحديث المعاملة\n" + result.ErrorMessage);
-                    _ResteObject();
                     return;
                 }
 
@@ -466,7 +465,6 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             if (!result.IsSuccess || !result.Data)
             {
                 _messageBoxService.DisplayError("فشل حذف المعاملة\n" + result.ErrorMessage);
-                _ResteObject();
                 return;
             }
 
