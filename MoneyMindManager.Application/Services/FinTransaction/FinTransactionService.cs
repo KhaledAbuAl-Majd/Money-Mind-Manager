@@ -180,6 +180,12 @@ namespace MoneyMindManager.Application.Services.FinTransaction
             var DTO = _finTransactionMapper.EntityToDTO(new Domain.Entities.FinTransaction.FinTransaction(mainTransactionDTO,
                 Convert.ToInt32(result.Data.VoucherID), Convert.ToInt32(result.Data.CategoryID)));
 
+            var categoryResult = await _finCategoryService.GetByID(Convert.ToInt32(DTO.CategoryID), currentUserID);
+            if(!categoryResult.IsSuccess)
+                return handler.Failure(categoryResult.ErrorMessage);
+
+            DTO.CategoryInfo = categoryResult.Data;
+
             return handler.Success(DTO);
         }
         public async Task<IResult<PagedResultWithValueDTO<FinTransactionViewSummary>>> GetAllPagedForVoucher(int vouceherID, int currentUserID, int pageNumber)
