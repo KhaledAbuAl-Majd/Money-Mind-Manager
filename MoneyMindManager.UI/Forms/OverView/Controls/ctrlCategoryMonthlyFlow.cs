@@ -2,32 +2,51 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Media;
-using DocumentFormat.OpenXml.Drawing;
-using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using KhaledControlLibrary1;
 using LiveCharts;
 using LiveCharts.Wpf;
-using MoneyMindManager_Business;
+using MoneyMindManager.Client.Abstractions.ApiClient;
+using MoneyMindManager.Core.Models.Reports.Categories;
+using MoneyMindManager.UI.Abstractions;
 using MoneyMindManager_Presentation.Global;
 using MoneyMindManager_Presentation.Income_And_Expense.Categories;
-using static MoneyMindManagerGlobal.clsDataColumns.clsReportClassess;
 
 namespace MoneyMindManager_Presentation.OverView.Controls
 {
     public partial class ctrlCategoryMonthlyFlow : UserControl
     {
+        private IUserSession _userSession;
+        private IMessageBoxService _messageBoxService;
+        private IReportApiClient _reportApi;
+        private IFormDisplayer _formDisplayer;
+        private IFinCategoryApiClient _finCategoryApi;
+
+        private bool isInitialized = false;
         public ctrlCategoryMonthlyFlow()
         {
             InitializeComponent();
         }
 
-        List<clsCategoryMonthlyFlow> _chartData;
+        public bool Initilaize(IUserSession userSession, IMessageBoxService messageBoxService, IReportApiClient reportApiClient,
+            IFormDisplayer formDisplayer, IFinCategoryApiClient finCategoryApiClient)
+        {
+            if (userSession is null || messageBoxService is null || reportApiClient is null || formDisplayer is null || finCategoryApiClient is null)
+                return false;
+
+            this._userSession = userSession;
+            this._messageBoxService = messageBoxService;
+            this._reportApi = reportApiClient;
+            this._formDisplayer = formDisplayer;
+            this._finCategoryApi = finCategoryApiClient;
+            isInitialized = true;
+            return true;
+        }
+
+        List<CategoryMonthlyFlowReportModel> _chartData;
 
         int? _CategoryID = null;
         void _EmptyChart()
@@ -46,45 +65,62 @@ namespace MoneyMindManager_Presentation.OverView.Controls
                 LoadChartLiner(_chartData);
         }
 
-        async Task _SelectCategory(int categoryID,string categoryName)
+        async Task<bool> _SelectCategory(int categoryID, string categoryName)
         {
             kgtxtCategoryName.Text = categoryName + "     ";
             _CategoryID = categoryID;
-            await LoadData();
+            return await LoadData();
         }
         public async Task<bool> LoadData(int categoryID)
         {
-            var category = await clsIncomeAndExpenseCategory.FindCategoryByCategoryID(categoryID);
+            if (!isInitialized)
+                return false;
+
+            var result = await _finCategoryApi.GetByID(categoryID, Convert.ToInt32(_userSession.UserID));
+
+            if (!result.IsSuccess)
+            {
+                _messageBoxService.DisplayError(result.ErrorMessage);
+                return false;
+            }
+
+            var category = result.Data;
 
             if (category == null)
                 return false;
 
-            await _SelectCategory(categoryID, category.CategoryName);
-
-            return true;
+            return await _SelectCategory(categoryID, category.CategoryName);
         }
 
-        private async Task LoadData()
+        private async Task<bool> LoadData()
         {
             if (!ValidateChildren() || _CategoryID == null)
             {
                 _EmptyChart();
-                return;
+                return false;
             }
 
             DateTime startDate = Convert.ToDateTime(kgtxtFromData.ValidatedText);
             DateTime endDate = Convert.ToDateTime(kgtxtToDate.ValidatedText);
 
+            var result = await _reportApi.GetCategoryMonthlyFlow(Convert.ToInt32(_CategoryID), startDate, endDate, Convert.ToInt16(_userSession.CurrentUser.AccountID));
 
-            _chartData = await clsReport.GetCategoryMonthlyFlow(Convert.ToInt32(_CategoryID),startDate, endDate, Convert.ToInt16(clsPL_Global.CurrentUser.AccountID));
+            if (!result.IsSuccess)
+            {
+                _messageBoxService.DisplayError(result.ErrorMessage);
+                return false;
+            }
+
+            _chartData = result.Data.ToList();
 
             LoadMonthlyChart();
+            return true;
         }
         public System.Windows.Media.Brush GetBrush(string hexColor)
         {
             return new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(hexColor));
         }
-        void LoadChartColumn(List<clsCategoryMonthlyFlow> chartData)
+        void LoadChartColumn(List<CategoryMonthlyFlowReportModel> chartData)
         {
             if (chartData == null || chartData.Count == 0) return;
 
@@ -111,7 +147,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
                     LabelPoint = point => point.Y.ToString("N0")
                 },
 
-                new LineSeries 
+                new LineSeries
                 {
                     Title = "الإجمالي",
                     Values = new ChartValues<decimal>(chartData.Select(x => x.Total)),
@@ -158,7 +194,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
             return new DateTime(year, monthNumber, 1).ToString("MMM - yyyy");
         }
 
-        void LoadChartLiner(List<clsCategoryMonthlyFlow> chartData)
+        void LoadChartLiner(List<CategoryMonthlyFlowReportModel> chartData)
         {
             if (chartData == null || chartData.Count == 0) return;
 
@@ -256,7 +292,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
             errorProvider1.SetError(kgtxt, null);
         }
 
-        bool _IsSkipNumberOfMonths(DateTime startDate,DateTime endDate,byte numOfMonths)
+        bool _IsSkipNumberOfMonths(DateTime startDate, DateTime endDate, byte numOfMonths)
         {
             int months = Math.Abs((12 * (startDate.Year - endDate.Year)) + (startDate.Month - endDate.Month));
 
@@ -296,14 +332,18 @@ namespace MoneyMindManager_Presentation.OverView.Controls
 
         private void kgtxtCategoryName_IconLeftClick(object sender, EventArgs e)
         {
-            var frm = new frmSelectCategory();
-            frm.OnCategorySelected += Frm_OnCategorySelected;
-            clsPL_Global.MainForm.OpenDialog(frm);
+            _formDisplayer.OpenDialog<frmSelectCategory>(frm =>
+            {
+                if (!frm.Initialize())
+                    return false;
+                frm.OnCategorySelected += Frm_OnCategorySelected;
+                return true;
+            });
         }
 
         private async void Frm_OnCategorySelected(object sender, frmSelectCategory.SelecteCategoryEventArgs e)
         {
-            await _SelectCategory(e.CategoryID, e.CategoryName); 
+            await _SelectCategory(e.CategoryID, e.CategoryName);
         }
 
     }

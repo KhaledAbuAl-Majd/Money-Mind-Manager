@@ -2,28 +2,44 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Media;
-using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using KhaledControlLibrary1;
 using LiveCharts;
 using LiveCharts.Wpf;
-using MoneyMindManager_Business;
+using MoneyMindManager.Client.Abstractions.ApiClient;
+using MoneyMindManager.Core.Models.Reports.Categories;
+using MoneyMindManager.UI.Abstractions;
 using MoneyMindManager_Presentation.Global;
 using MoneyMindManagerGlobal;
-using static MoneyMindManagerGlobal.clsDataColumns.clsReportClassess;
+
 
 namespace MoneyMindManager_Presentation.OverView.Controls
 {
     public partial class ctrlTopCategories : UserControl
     {
+        private IUserSession _userSession;
+        private IMessageBoxService _messageBoxService;
+        private IReportApiClient _reportApi;
+
+        private bool isInitialized = false;
         public ctrlTopCategories()
         {
             InitializeComponent();
+        }
+
+        public bool Initilaize(IUserSession userSession, IMessageBoxService messageBoxService, IReportApiClient reportApiClient)
+        {
+            if (userSession is null || messageBoxService is null || reportApiClient is null)
+                return false;
+
+            this._userSession = userSession;
+            this._messageBoxService = messageBoxService;
+            this._reportApi = reportApiClient;
+            isInitialized = true;
+            return true;
         }
 
         bool _IsIncome;
@@ -32,7 +48,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
         {
             get
             {
-              return  _IsIncome;
+                return _IsIncome;
             }
 
             set
@@ -48,23 +64,35 @@ namespace MoneyMindManager_Presentation.OverView.Controls
             PieChart1.Series = new SeriesCollection();
         }
 
-        public async Task LoadData()
+        public async Task<bool> LoadData()
         {
             if (!ValidateChildren())
             {
                 _EmptyChart();
-                return;
+                return false;
             }
+
+            if (!isInitialized)
+                return false;
 
             DateTime? startDate = clsFormat.TryConvertToDateTime(kgtxtFromData.ValidatedText);
             DateTime? endDate = clsFormat.TryConvertToDateTime(kgtxtToDate.ValidatedText);
 
-            var _chartData = await clsReport.GetTopCategories(startDate, endDate,_IsIncome, Convert.ToInt16(clsPL_Global.CurrentUser.AccountID));
+            var result = await _reportApi.GetTopCategories(startDate, endDate, _IsIncome, Convert.ToInt16(_userSession.CurrentUser.AccountID));
+
+            if (!result.IsSuccess)
+            {
+                _messageBoxService.DisplayError(result.ErrorMessage);
+                return false;
+            }
+
+            var _chartData = result.Data.ToList();
 
             LoadTopCategoriesPieChart(_chartData);
+            return true;
         }
 
-        public void LoadTopCategoriesPieChart(List<clsTopCategories> chartData)
+        public void LoadTopCategoriesPieChart(List<TopCategoriesReportModel> chartData)
         {
             // 1. تحقق من وجود بيانات
             if (chartData == null || chartData.Count == 0)
@@ -101,7 +129,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
 
             PieChart1.Series = pieSeries;
 
-            PieChart1.Update(); 
+            PieChart1.Update();
         }
 
         private void ctrlTopCategories_Load(object sender, EventArgs e)
