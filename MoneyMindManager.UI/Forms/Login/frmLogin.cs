@@ -309,11 +309,15 @@ namespace MoneyMindManager_Presentation.Login
 
             if (gchkLogin_RemeberMe.Checked)
             {
-                _ = _userCredentailService.RememberUsernameAndPassword(userName, password);
+                var result = await _userCredentailService.RememberUsernameAndPassword(userName, password);
+                if (!result)
+                {
+                    _messageBoxService.DisplayError("فشل حفظ اسم المتسخدم وكلمة السر!");
+                }
             }
             else
             {
-                _ = clsPL_Global.RememberUsernameAndPassword(null, null);
+                _ = await _userCredentailService.RememberUsernameAndPassword(null, null);
             }
 
             _ = Task.Run(() => _logger.LogSuccess($"[LOGIN SUCCESS] User ID = {user.UserID}, Username = {user.UserName}, Login Time = {DateTime.Now}"));
