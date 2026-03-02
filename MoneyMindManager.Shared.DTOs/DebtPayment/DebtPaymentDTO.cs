@@ -12,5 +12,10 @@ namespace MoneyMindManager.Shared.DTOs.DebtPayment
         {
             this.DebtID = debtID;
         }
+
+        public DebtPaymentDTO() : base(null, default, default, default, null, null, null, default, default, default, default)
+        {
+
+        }
     }
 }
