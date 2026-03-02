@@ -37,7 +37,9 @@ namespace MoneyMindManager.UI.DependencyInjection
 
             //forms
             services.AddSingleton<frmLogin>();
+
             services.AddTransient<frmCurrentAccount>();
+
             services.AddTransient<frmPersonInfo>();
             services.AddTransient<frmAddUpdatePerson>();
             services.AddTransient<frmSelectPerson>();
@@ -66,6 +68,11 @@ namespace MoneyMindManager.UI.DependencyInjection
             services.AddTransient<frmVouhcersList>();
 
             services.AddTransient<frmIncomeAndExpense>();
+
+            services.AddTransient<frmAddUpdateDebtPayment>();
+
+            services.AddTransient<frmAddUpdateDebt>();
+            services.AddTransient<frmDebtsList>();
 
 
             return services;

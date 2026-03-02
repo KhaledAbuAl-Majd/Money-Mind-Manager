@@ -1,26 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.Common;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using KhaledControlLibrary1;
-using MoneyMindManager_Business;
+using MoneyMindManager.Client.Abstractions.ApiClient;
+using MoneyMindManager.Core.Enums;
+using MoneyMindManager.Core.Models.Debt;
+using MoneyMindManager.Shared.DTOs.Debt;
+using MoneyMindManager.UI.Abstractions;
 using MoneyMindManager_Presentation.Global;
-using MoneyMindManager_Presentation.People;
-using MoneyMindManagerGlobal;
-using static MoneyMindManager_Business.clsBLLGlobal;
-using static MoneyMindManager_Business.clsIncomeAndExpenseVoucher;
+
 
 namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 {
     public partial class frmDebtsList : Form
     {
-        public frmDebtsList()
+        private readonly IUserSession _userSession;
+        private readonly IMessageBoxService _messageBoxService;
+        private readonly IFormDisplayer _formDisplayer;
+        private readonly IDebtApiClient _debtApi;
+        private readonly IDataConverter _dataConverter;
+        private readonly IExportWithDialogService _exportWithDialogService;
+
+        public frmDebtsList(IUserSession userSession, IMessageBoxService messageBoxService, IFormDisplayer formDisplayer,
+             IDebtApiClient debtApiClient, IDataConverter dataConverter, IExportWithDialogService exportWithDialogService)
         {
             if (!_CheckPermissions())
             {
@@ -28,15 +34,24 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 return;
             }
 
+            this._userSession = userSession;
+            this._messageBoxService = messageBoxService;
+            this._formDisplayer = formDisplayer;
+            this._debtApi = debtApiClient;
+            this._dataConverter = dataConverter;
+            this._exportWithDialogService = exportWithDialogService;
             InitializeComponent();
         }
 
         bool _CheckPermissions()
         {
-            return clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.DebtsList,
-                "ليس لديك صلاحية قائمة سندات الديون.");
+            if (_userSession.IsHasPermissions(enPermissions.DebtsList))
+                return true;
+
+            _messageBoxService.DisplayError("ليس لديك صلاحية قائمة سندات الديون.");
+            return false;
         }
-        enum enFilterBy { All, DebtID, PersonName,UserName };
+        enum enFilterBy { All, DebtID, PersonName, UserName };
 
         enFilterBy _filterBy = enFilterBy.All;
 
@@ -85,8 +100,6 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             else if (grbTextSearchMode_SubString.Checked)
                 textSearchMode = enTextSearchMode.Substring_Slow;
 
-            clsDataColumns.clsDebtsClasses.clsGetAllDebts result = null;
-
             bool filterByCreatedDate = false;
 
             if (gcbFilterByDate.Text == "تاريخ الإنشاء")
@@ -108,42 +121,57 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             bool? isPaid = null;
 
             if (gcbFilterbyPaymentStatus.Text == "مسدد")
-                isPaid = true;  
+                isPaid = true;
             else if (gcbFilterbyPaymentStatus.Text == "غير مسدد")
                 isPaid = false;
             else
                 isPaid = null;
 
+            var filterDTO = new DebtPagedFilterDTO();
+            filterDTO.IsLending = isLending;
+            filterDTO.IsByCreatedDate = filterByCreatedDate;
+            filterDTO.FromDateString = kgtxtFromData.ValidatedText;
+            filterDTO.ToDateString = kgtxtToDate.ValidatedText;
+            filterDTO.IsPaid = isPaid;
+            filterDTO.TextSearchMode = textSearchMode;
+            filterDTO.PageNumber = _pageNumber;
+
             if (filterBy == enFilterBy.All || string.IsNullOrEmpty(kgtxtFilterValue.ValidatedText))
             {
-                result = await clsDebt.GetAllDebts(isLending, filterByCreatedDate, kgtxtFromData.ValidatedText, kgtxtToDate.ValidatedText,
-                    isPaid,textSearchMode, _pageNumber);
+
             }
             else if (filterBy == enFilterBy.DebtID)
             {
                 int debtID = Convert.ToInt32(kgtxtFilterValue.ValidatedText);
-                result = await clsDebt.GetAllDebts(debtID,isLending, filterByCreatedDate, kgtxtFromData.ValidatedText, kgtxtToDate.ValidatedText,
-                      isPaid, textSearchMode, _pageNumber);
+                filterDTO.DebtID = debtID;
             }
             else if (filterBy == enFilterBy.PersonName)
             {
                 string personName = kgtxtFilterValue.ValidatedText;
-                result = await clsDebt.GetAllDebts(personName,isLending, filterByCreatedDate, kgtxtFromData.ValidatedText, kgtxtToDate.ValidatedText,
-                    isPaid, textSearchMode, _pageNumber);
+                filterDTO.PersonName = personName;
             }
             else if (filterBy == enFilterBy.UserName)
             {
                 string userName = kgtxtFilterValue.ValidatedText;
-                result = await clsDebt.GetAllDebtsByUserName(userName,isLending, filterByCreatedDate, kgtxtFromData.ValidatedText, kgtxtToDate.ValidatedText,
-                    isPaid, textSearchMode, _pageNumber);
+                filterDTO.UserName = userName;
             }
             else
                 return;
 
-            if (result == null)
+            var result = await _debtApi.GetAllPaged(filterDTO, Convert.ToInt32(_userSession.UserID));
+
+            if (!result.IsSuccess)
+            {
+                _messageBoxService.DisplayError(result.ErrorMessage);
+                return;
+            }
+
+            var DTO = result.Data;
+
+            if (DTO == null)
                 return;
 
-            if (result.dtDebts.Rows.Count == 0)
+            if (DTO.Data.Count() == 0)
             {
                 lblNoRecordsFoundMessage.Visible = true;
                 gdgvDebts.DataSource = null;
@@ -153,7 +181,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             else
             {
                 lblNoRecordsFoundMessage.Visible = false;
-                gdgvDebts.DataSource = result.dtDebts;
+                gdgvDebts.DataSource = DTO.Data;
             }
 
             lblUserMessage.Visible = false;
@@ -161,50 +189,51 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             kgtxtPageNumber.Text = _pageNumber.ToString();
             _searchByPageNumber = true;
 
-            lblTotalRecordsNumber.Text = result.RecordsCount.ToString();
-            lblCurrentPageOfNumberOfPages.Text = string.Concat(_pageNumber, "   من   ", result.NumberOfPages, "  صفحات");
+            lblTotalRecordsNumber.Text = DTO.TotalRecords.ToString();
+            lblCurrentPageOfNumberOfPages.Text = string.Concat(_pageNumber, "   من   ", DTO.TotalPages, "  صفحات");
             kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValueOption = true;
-            kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValue = (result.NumberOfPages < 1) ? 1 : result.NumberOfPages;
+            kgtxtPageNumber.NumberProperties.IntegerNumberProperties.MaxValue = (DTO.TotalPages < 1) ? 1 : DTO.TotalPages;
             lblCurrentPageRecordsCount.Text = gdgvDebts.Rows.Count.ToString();
 
-            gibtnNextPage.Enabled = (_pageNumber < result.NumberOfPages);
+            gibtnNextPage.Enabled = (_pageNumber < DTO.TotalPages);
             gibtnPreviousPage.Enabled = (_pageNumber > 1);
 
-            klblAllDebtsValue.Text = result.TotalDebtsValue.ToString();
-            klblCurrentPageDebtsValue.Text = result.CurrentPageDebtsValue.ToString();
-            klblTotalRemainingAmount.Text = result.TotalRemainingAmount.ToString();
-            klblCurrentPageRemainingAmount.Text = result.CurrentPageRemainingAmount.ToString();
+            klblAllDebtsValue.Text = DTO.TotalValue.ToString();
+            klblCurrentPageDebtsValue.Text = DTO.CurrentPageValue.ToString();
+            klblTotalRemainingAmount.Text = DTO.TotalRemainingAmount.ToString();
+            klblCurrentPageRemainingAmount.Text = DTO.CurrentPageRemainingAmount.ToString();
             //
 
             if (!_IsHeaderCreated && gdgvDebts.Rows.Count > 0)
             {
-                gdgvDebts.Columns["DebtID"].HeaderText = "معرف سند الدين";
-                gdgvDebts.Columns["DebtID"].Width = 125;
 
-                gdgvDebts.Columns["PersonName"].HeaderText = "اسم الشخص";
-                gdgvDebts.Columns["PersonName"].Width = 265;
+                gdgvDebts.Columns[nameof(DebtViewSummary.DebtID)].HeaderText = "معرف سند الدين";
+                gdgvDebts.Columns[nameof(DebtViewSummary.DebtID)].Width = 125;
 
-                gdgvDebts.Columns["DebtValue"].HeaderText = "قيمة الدين";
-                gdgvDebts.Columns["DebtValue"].Width = 215;
-                gdgvDebts.Columns["DebtValue"].DefaultCellStyle.Format = "N2";
+                gdgvDebts.Columns[nameof(DebtViewSummary.PersonName)].HeaderText = "اسم الشخص";
+                gdgvDebts.Columns[nameof(DebtViewSummary.PersonName)].Width = 265;
 
-                gdgvDebts.Columns["RemainingAmount"].HeaderText = "القيمة المتبقية للسداد";
-                gdgvDebts.Columns["RemainingAmount"].Width = 215;
-                gdgvDebts.Columns["RemainingAmount"].DefaultCellStyle.Format = "N2";
+                gdgvDebts.Columns[nameof(DebtViewSummary.DebtValue)].HeaderText = "قيمة الدين";
+                gdgvDebts.Columns[nameof(DebtViewSummary.DebtValue)].Width = 215;
+                gdgvDebts.Columns[nameof(DebtViewSummary.DebtValue)].DefaultCellStyle.Format = "N2";
 
-                gdgvDebts.Columns["DebtDate"].HeaderText = "تاريخ السند";
-                gdgvDebts.Columns["DebtDate"].Width = 115;
-                gdgvDebts.Columns["DebtDate"].DefaultCellStyle.Format = "dd-MM-yyyy";
+                gdgvDebts.Columns[nameof(DebtViewSummary.RemainingAmount)].HeaderText = "القيمة المتبقية للسداد";
+                gdgvDebts.Columns[nameof(DebtViewSummary.RemainingAmount)].Width = 215;
+                gdgvDebts.Columns[nameof(DebtViewSummary.RemainingAmount)].DefaultCellStyle.Format = "N2";
 
-                gdgvDebts.Columns["CreatedDate"].HeaderText = "تاريخ الإنشاء";
-                gdgvDebts.Columns["CreatedDate"].Width = 190;
-                gdgvDebts.Columns["CreatedDate"].DefaultCellStyle.Format = "hh:mm:ss tt dd-MM-yyyy";
+                gdgvDebts.Columns[nameof(DebtViewSummary.DebtDate)].HeaderText = "تاريخ السند";
+                gdgvDebts.Columns[nameof(DebtViewSummary.DebtDate)].Width = 115;
+                gdgvDebts.Columns[nameof(DebtViewSummary.DebtDate)].DefaultCellStyle.Format = "dd-MM-yyyy";
 
-                gdgvDebts.Columns["DebtType"].HeaderText = "نوع الدين";
-                gdgvDebts.Columns["DebtType"].Width = 70;
+                gdgvDebts.Columns[nameof(DebtViewSummary.CreatedDate)].HeaderText = "تاريخ الإنشاء";
+                gdgvDebts.Columns[nameof(DebtViewSummary.CreatedDate)].Width = 190;
+                gdgvDebts.Columns[nameof(DebtViewSummary.CreatedDate)].DefaultCellStyle.Format = "hh:mm:ss tt dd-MM-yyyy";
 
-                gdgvDebts.Columns["CreatedByUserName"].HeaderText = "اسم المستخدم المنشئ";
-                gdgvDebts.Columns["CreatedByUserName"].Width = 265;
+                gdgvDebts.Columns[nameof(DebtViewSummary.DebtType)].HeaderText = "نوع الدين";
+                gdgvDebts.Columns[nameof(DebtViewSummary.DebtType)].Width = 70;
+
+                gdgvDebts.Columns[nameof(DebtViewSummary.CreatedByUserName)].HeaderText = "اسم المستخدم المنشئ";
+                gdgvDebts.Columns[nameof(DebtViewSummary.CreatedByUserName)].Width = 265;
 
                 _IsHeaderCreated = true;
 
@@ -213,9 +242,12 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
         void _AddNewDebt()
         {
-            frmAddUpdateDebt frm = new frmAddUpdateDebt();
-            frm.OnCloseAndSaved += _Refresh;
-            clsPL_Global.MainForm.AddNewFormAtContainer(frm);
+            _formDisplayer.OpenAtContainer<frmAddUpdateDebt>(frm =>
+            {
+                if (!frm.Initialize()) return false;
+                frm.OnCloseAndSaved += _Refresh;
+                return true;
+            });
         }
 
         void _UpdateDebt()
@@ -225,9 +257,12 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             int debtID = Convert.ToInt32(gdgvDebts.SelectedRows[0].Cells[0].Value);
 
-            frmAddUpdateDebt frm = new frmAddUpdateDebt(debtID);
-            frm.OnCloseAndSaved += _Refresh;
-            clsPL_Global.MainForm.AddNewFormAtContainer(frm);
+            _formDisplayer.OpenAtContainer<frmAddUpdateDebt>(frm =>
+            {
+                if (!frm.Initialize(debtID)) return false;
+                frm.OnCloseAndSaved += _Refresh;
+                return true;
+            });
         }
 
         async void _Refresh()
@@ -497,54 +532,59 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             else
                 isPaid = null;
 
+            var filterDTO = new DebtFilterDTO();
+            filterDTO.IsLending = isLending;
+            filterDTO.IsByCreatedDate = filterByCreatedDate;
+            filterDTO.FromDateString = kgtxtFromData.ValidatedText;
+            filterDTO.ToDateString = kgtxtToDate.ValidatedText;
+            filterDTO.IsPaid = isPaid;
+            filterDTO.TextSearchMode = textSearchMode;
+
             if (_filterBy == enFilterBy.All || string.IsNullOrEmpty(kgtxtFilterValue.ValidatedText))
             {
-                dtDebts = await clsDebt.GetAllDebtsWithoutPaging(isLending, filterByCreatedDate, kgtxtFromData.ValidatedText, kgtxtToDate.ValidatedText,
-                    isPaid, textSearchMode);
+
             }
             else if (_filterBy == enFilterBy.DebtID)
             {
                 int debtID = Convert.ToInt32(kgtxtFilterValue.ValidatedText);
-                dtDebts = await clsDebt.GetAllDebtsWithoutPaging(debtID, isLending, filterByCreatedDate, kgtxtFromData.ValidatedText, kgtxtToDate.ValidatedText,
-                      isPaid, textSearchMode);
+                filterDTO.DebtID = debtID;
             }
             else if (_filterBy == enFilterBy.PersonName)
             {
                 string personName = kgtxtFilterValue.ValidatedText;
-                dtDebts = await clsDebt.GetAllDebtsWithoutPaging(personName, isLending, filterByCreatedDate, kgtxtFromData.ValidatedText, kgtxtToDate.ValidatedText,
-                    isPaid, textSearchMode);
+                filterDTO.PersonName = personName;
             }
             else if (_filterBy == enFilterBy.UserName)
             {
                 string userName = kgtxtFilterValue.ValidatedText;
-                dtDebts = await clsDebt.GetAllDebtsByUserNameWithoutPaging(userName, isLending, filterByCreatedDate, kgtxtFromData.ValidatedText, kgtxtToDate.ValidatedText,
-                    isPaid, textSearchMode);
+                filterDTO.UserName = userName;
             }
             else
                 return;
 
-            if (dtDebts == null)
-                return;
+            var result = await _debtApi.GetAll(filterDTO, Convert.ToInt32(_userSession.UserID));
 
-            if (dtDebts == null)
+            if (!result.IsSuccess || result.Data is null)
             {
-                clsPL_MessageBoxs.ShowErrorMessage("فشل تصدير البيانات !");
+                _messageBoxService.DisplayError(result.ErrorMessage);
                 return;
             }
 
-            dtDebts.Columns["DebtID"].ColumnName = "معرف سند الدين";
-            dtDebts.Columns["PersonID"].ColumnName = "معرف الشخص";
-            dtDebts.Columns["PersonName"].ColumnName = "اسم الشخص";
-            dtDebts.Columns["DebtValue"].ColumnName = "قيمة الدين";
-            dtDebts.Columns["RemainingAmount"].ColumnName = "القيمة المتبقية للسداد";
-            dtDebts.Columns["DebtDate"].ColumnName = "تاريخ سند الدين";
-            dtDebts.Columns["CreatedDate"].ColumnName = "تاريخ الإنشاء";
-            dtDebts.Columns["DebtType"].ColumnName = "نوع الدين";
-            dtDebts.Columns["CreatedByUserID"].ColumnName = "معرف المستخدم المنشئ";
-            dtDebts.Columns["CreatedByUserName"].ColumnName = "اسم المستخدم المنشئ";
-            dtDebts.Columns["AccountID"].ColumnName = "معرف الحساب";
+            DataTable dt = _dataConverter.ToDataTable<DebtExportSummary>(result.Data);
 
-            await clsExportHelper.ExportToExcelWithDialog(dtDebts, "تقرير سند الديون");
+            dtDebts.Columns[nameof(DebtExportSummary.DebtID)].ColumnName = "معرف سند الدين";
+            dtDebts.Columns[nameof(DebtExportSummary.PersonID)].ColumnName = "معرف الشخص";
+            dtDebts.Columns[nameof(DebtExportSummary.PersonName)].ColumnName = "اسم الشخص";
+            dtDebts.Columns[nameof(DebtExportSummary.DebtValue)].ColumnName = "قيمة الدين";
+            dtDebts.Columns[nameof(DebtExportSummary.RemainingAmount)].ColumnName = "القيمة المتبقية للسداد";
+            dtDebts.Columns[nameof(DebtExportSummary.DebtDate)].ColumnName = "تاريخ سند الدين";
+            dtDebts.Columns[nameof(DebtExportSummary.CreatedDate)].ColumnName = "تاريخ الإنشاء";
+            dtDebts.Columns[nameof(DebtExportSummary.DebtType)].ColumnName = "نوع الدين";
+            dtDebts.Columns[nameof(DebtExportSummary.CreatedByUserID)].ColumnName = "معرف المستخدم المنشئ";
+            dtDebts.Columns[nameof(DebtExportSummary.CreatedByUserName)].ColumnName = "اسم المستخدم المنشئ";
+            dtDebts.Columns[nameof(DebtExportSummary.AccounntID)].ColumnName = "معرف الحساب";
+
+            await _exportWithDialogService.ExportToExcel(dtDebts, "تقرير سند الديون");
         }
     }
 }
