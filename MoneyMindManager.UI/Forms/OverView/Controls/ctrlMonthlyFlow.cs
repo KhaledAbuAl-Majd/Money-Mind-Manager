@@ -2,31 +2,46 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Media;
-using DocumentFormat.OpenXml.Drawing;
-using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using KhaledControlLibrary1;
 using LiveCharts;
 using LiveCharts.Wpf;
-using MoneyMindManager_Business;
+using MoneyMindManager.Client.Abstractions.ApiClient;
+using MoneyMindManager.Core.Models.Reports;
+using MoneyMindManager.UI.Abstractions;
 using MoneyMindManager_Presentation.Global;
-using static MoneyMindManagerGlobal.clsDataColumns.clsReportClassess;
+
 
 namespace MoneyMindManager_Presentation.OverView.Controls
 {
     public partial class ctrlMonthlyFlow : UserControl
     {
+        private IUserSession _userSession;
+        private IMessageBoxService _messageBoxService;
+        private IReportApiClient _reportApi;
+
+        private bool isInitialized = false;
         public ctrlMonthlyFlow()
         {
             InitializeComponent();
         }
 
-        List<clsMonthlyFlow> _chartData;
+        public bool Initilaize(IUserSession userSession, IMessageBoxService messageBoxService, IReportApiClient reportApiClient)
+        {
+            if (userSession is null || messageBoxService is null || reportApiClient is null)
+                return false;
+
+            this._userSession = userSession;
+            this._messageBoxService = messageBoxService;
+            this._reportApi = reportApiClient;
+            isInitialized = true;
+            return true;
+        }
+
+        List<MonthlyFlowReportModel> _chartData;
 
         void _EmptyChart()
         {
@@ -44,28 +59,39 @@ namespace MoneyMindManager_Presentation.OverView.Controls
                 LoadMonthlyChartLiner(_chartData);
         }
 
-        public async Task LoadData()
+        public async Task<bool> LoadData()
         {
             if (!ValidateChildren())
             {
                 _EmptyChart();
-                return;
+                return false;
             }
+
+            if (!isInitialized)
+                return false;
 
             DateTime startDate = Convert.ToDateTime(kgtxtFromData.ValidatedText);
             DateTime endDate = Convert.ToDateTime(kgtxtToDate.ValidatedText);
 
+            var result = await _reportApi.GetMonthlyFlow(startDate, endDate, Convert.ToInt16(_userSession.CurrentUser.AccountID));
 
-            _chartData = await clsReport.GetMonthlyFlow(startDate, endDate, Convert.ToInt16(clsPL_Global.CurrentUser.AccountID));
+            if (!result.IsSuccess)
+            {
+                _messageBoxService.DisplayError(result.ErrorMessage);
+                return false;
+            }
+
+            _chartData = result.Data.ToList();
 
             kgtxtTotalIncome.RefreshNumber_DateTimeFormattedText(_chartData[0].TotalIncome.ToString());
             kgtxtTotalNetExpense.RefreshNumber_DateTimeFormattedText(_chartData[0].TotalNetExpense.ToString());
             kgtxtTotalNetCashFlow.RefreshNumber_DateTimeFormattedText(_chartData[0].TotalNetCashFlow.ToString());
 
             LoadMonthlyChart();
+            return true;
         }
 
-        void LoadMonthlyChartColumn(List<clsMonthlyFlow> chartData)
+        void LoadMonthlyChartColumn(List<MonthlyFlowReportModel> chartData)
         {
             if (chartData == null || chartData.Count == 0) return;
 
@@ -139,7 +165,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
             return new DateTime(year, monthNumber, 1).ToString("MMM - yyyy");
         }
 
-        void LoadMonthlyChartLiner(List<clsMonthlyFlow> chartData)
+        void LoadMonthlyChartLiner(List<MonthlyFlowReportModel> chartData)
         {
             if (chartData == null || chartData.Count == 0) return;
 
@@ -152,11 +178,11 @@ namespace MoneyMindManager_Presentation.OverView.Controls
                     Title = "الإيرادات",
                     Values = new ChartValues<decimal>(chartData.Select(x => x.Income)),
 
-                    Fill = System.Windows.Media.Brushes.Transparent, 
+                    Fill = System.Windows.Media.Brushes.Transparent,
 
                     Stroke = System.Windows.Media.Brushes.DarkGreen,
                     StrokeThickness = 2.5,
-            
+
                     PointGeometry = DefaultGeometries.Circle,
                     PointGeometrySize = 10,
                     LineSmoothness = 0.8,
@@ -168,7 +194,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
                 {
                     Title = "صافي المصروفات",
                     Values = new ChartValues<decimal>(chartData.Select(x => x.NetExpense)),
-                    
+
                     Fill = System.Windows.Media.Brushes.Transparent,
                     Stroke = System.Windows.Media.Brushes.DarkRed,
                     StrokeThickness = 2.5,
@@ -239,7 +265,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
             errorProvider1.SetError(kgtxt, null);
         }
 
-        bool _IsSkipNumberOfMonths(DateTime startDate,DateTime endDate,byte numOfMonths)
+        bool _IsSkipNumberOfMonths(DateTime startDate, DateTime endDate, byte numOfMonths)
         {
             int months = Math.Abs((12 * (startDate.Year - endDate.Year)) + (startDate.Month - endDate.Month));
 
@@ -265,7 +291,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
         {
             DateTime bofore12Month = DateTime.Today.AddMonths(-11);
             kgtxtToDate.RefreshNumber_DateTimeFormattedText(DateTime.Today.ToString());
-            kgtxtFromData.RefreshNumber_DateTimeFormattedText(new DateTime(bofore12Month.Year,bofore12Month.Month,1).ToString());
+            kgtxtFromData.RefreshNumber_DateTimeFormattedText(new DateTime(bofore12Month.Year, bofore12Month.Month, 1).ToString());
 
             CartesianChart1.LegendLocation = LegendLocation.Top;
             CartesianChart1.DefaultLegend.FontSize = 15;
@@ -276,6 +302,5 @@ namespace MoneyMindManager_Presentation.OverView.Controls
         {
             await LoadData();
         }
-
     }
 }
