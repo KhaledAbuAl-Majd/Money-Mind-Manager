@@ -1,30 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Media;
-using DocumentFormat.OpenXml.Drawing;
-using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
-using KhaledControlLibrary1;
 using LiveCharts;
-using LiveCharts.Helpers;
 using LiveCharts.Wpf;
-using MoneyMindManager_Business;
-using MoneyMindManager_Presentation.Global;
-using static MoneyMindManagerGlobal.clsDataColumns.clsReportClassess;
+using MoneyMindManager.Client.Abstractions.ApiClient;
+using MoneyMindManager.Core.Models.Reports.Debts;
+using MoneyMindManager.UI.Abstractions;
+
 
 namespace MoneyMindManager_Presentation.OverView.Controls
 {
     public partial class ctrlTopDebtorsRanking : UserControl
     {
+        private IUserSession _userSession;
+        private IMessageBoxService _messageBoxService;
+        private IReportApiClient _reportApi;
+
+        private bool isInitialized = false;
         public ctrlTopDebtorsRanking()
         {
             InitializeComponent();
+        }
+
+        public bool Initilaize(IUserSession userSession, IMessageBoxService messageBoxService, IReportApiClient reportApiClient)
+        {
+            if (userSession is null || messageBoxService is null || reportApiClient is null)
+                return false;
+
+            this._userSession = userSession;
+            this._messageBoxService = messageBoxService;
+            this._reportApi = reportApiClient;
+            isInitialized = true;
+            return true;
         }
 
         //List<clsTopDebtorsRanking> _chartData;
@@ -42,8 +52,11 @@ namespace MoneyMindManager_Presentation.OverView.Controls
         //    LoadChartColumn(_chartData);
         //}
 
-        public async Task LoadData()
+        public async Task<bool> LoadData()
         {
+            if (!isInitialized)
+                return false;
+
             bool isLending = false;
 
             if (gcbDebtType.Text == "الدائنون لي")
@@ -52,18 +65,26 @@ namespace MoneyMindManager_Presentation.OverView.Controls
                 isLending = true;
             else
             {
-                clsPL_MessageBoxs.ShowErrorMessage("خطأ في تحديد نوع الدين !");
-                return;
+                _messageBoxService.DisplayError("خطأ في تحديد نوع الدين !");
+                return false;
             }
 
-           var chartData = await clsReport.GetTopDebtorsRanking(isLending, Convert.ToInt16(clsPL_Global.CurrentUser.AccountID));
+            var result = await _reportApi.GetTopDebtorsRanking(isLending, Convert.ToInt16(_userSession.CurrentUser.AccountID));
 
-            //LoadChart();
+            if (!result.IsSuccess)
+            {
+                _messageBoxService.DisplayError(result.ErrorMessage);
+                return false;
+            }
+
+            var chartData = result.Data.ToList();
+
             _EmptyChart();
             LoadChartColumn(chartData);
+            return true;
         }
 
-        void LoadChartColumn(List<clsTopDebtorsRanking> chartData)
+        void LoadChartColumn(List<TopDebtorsRankingReportModel> chartData)
         {
             if (chartData == null || chartData.Count == 0) return;
 
@@ -117,7 +138,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
 
         private async void gcbDebtType_SelectedIndexChanged(object sender, EventArgs e)
         {
-          await  LoadData();
+            await LoadData();
         }
     }
 }

@@ -2,33 +2,46 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-
-//using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Media;
-using DocumentFormat.OpenXml.Drawing;
-using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using KhaledControlLibrary1;
 using LiveCharts;
 using LiveCharts.Wpf;
-using MoneyMindManager_Business;
+using MoneyMindManager.Client.Abstractions.ApiClient;
+using MoneyMindManager.Core.Models.Reports.Debts;
+using MoneyMindManager.UI.Abstractions;
 using MoneyMindManager_Presentation.Global;
-using static MoneyMindManagerGlobal.clsDataColumns.clsReportClassess;
+
 
 namespace MoneyMindManager_Presentation.OverView.Controls
 {
     public partial class ctrlDebtsMonthlyFlow : UserControl
     {
+        private IUserSession _userSession;
+        private IMessageBoxService _messageBoxService;
+        private IReportApiClient _reportApi;
+
+        private bool isInitialized = false;
         public ctrlDebtsMonthlyFlow()
         {
             InitializeComponent();
         }
 
-        List<clsDebtsMonthlyFlow> _chartData;
+        List<DebtsMonthlyFlowReportModel> _chartData;
+
+        public bool Initilaize(IUserSession userSession, IMessageBoxService messageBoxService, IReportApiClient reportApiClient)
+        {
+            if (userSession is null || messageBoxService is null || reportApiClient is null)
+                return false;
+
+            this._userSession = userSession;
+            this._messageBoxService = messageBoxService;
+            this._reportApi = reportApiClient;
+            isInitialized = true;
+            return true;
+        }
 
         void _EmptyChart()
         {
@@ -46,28 +59,39 @@ namespace MoneyMindManager_Presentation.OverView.Controls
                 LoadChartLiner(_chartData);
         }
 
-        public async Task LoadData()
+        public async Task<bool> LoadData()
         {
             if (!ValidateChildren())
             {
                 _EmptyChart();
-                return;
+                return false;
             }
 
             DateTime startDate = Convert.ToDateTime(kgtxtFromData.ValidatedText);
             DateTime endDate = Convert.ToDateTime(kgtxtToDate.ValidatedText);
 
+            if (!isInitialized)
+                return false;
 
-            _chartData = await clsReport.GetDebtsMonthlyFlow(startDate, endDate, Convert.ToInt16(clsPL_Global.CurrentUser.AccountID));
+            var result = await _reportApi.GetDebtsMonthlyFlow(startDate, endDate, Convert.ToInt16(_userSession.CurrentUser.AccountID));
+
+            if (!result.IsSuccess)
+            {
+                _messageBoxService.DisplayError(result.ErrorMessage);
+                return false;
+            }
+
+            _chartData = result.Data.ToList();
 
             LoadChart();
+            return true;
         }
 
         public System.Windows.Media.Brush GetBrush(string hexColor)
         {
             return new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(hexColor));
         }
-        void LoadChartColumn(List<clsDebtsMonthlyFlow> chartData)
+        void LoadChartColumn(List<DebtsMonthlyFlowReportModel> chartData)
         {
             if (chartData == null || chartData.Count == 0) return;
 
@@ -144,10 +168,10 @@ namespace MoneyMindManager_Presentation.OverView.Controls
             return new DateTime(year, monthNumber, 1).ToString("MMM - yyyy");
         }
 
-        void LoadChartLiner(List<clsDebtsMonthlyFlow> chartData)
+        void LoadChartLiner(List<DebtsMonthlyFlowReportModel> chartData)
         {
             if (chartData == null || chartData.Count == 0) return;
-     
+
             string[] labels = chartData.Select(x => GetMonthName(x.mon, x.Year)).ToArray();
 
 
@@ -161,7 +185,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
                    Stroke = GetBrush("#0A66C2"),
                     PointForeground = GetBrush("#0A66C2"),
                     StrokeThickness = 3,
-        
+
                     PointGeometry = DefaultGeometries.Circle,
                     PointGeometrySize = 10,
                    LineSmoothness = 0.8,
@@ -186,11 +210,11 @@ namespace MoneyMindManager_Presentation.OverView.Controls
                     Title = "سداد الإقراض",
                     Values = new ChartValues<decimal>(chartData.Select(x => x.LendingPaymentsSum)),
                     Fill = System.Windows.Media.Brushes.Transparent,
-                    Stroke = System.Windows.Media.Brushes.SlateBlue, 
-                    StrokeThickness = 3, 
+                    Stroke = System.Windows.Media.Brushes.SlateBlue,
+                    StrokeThickness = 3,
                     StrokeDashArray = new DoubleCollection { 4, 4 }, // إضافة تنقيط (Dash) لتمييز السداد
                     LineSmoothness = 0.8,
-                    PointGeometry = DefaultGeometries.Diamond, 
+                    PointGeometry = DefaultGeometries.Diamond,
                     PointGeometrySize = 7,
                     PointForeground = System.Windows.Media.Brushes.SlateBlue
                 },
@@ -205,7 +229,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
                     StrokeThickness = 3,
                     StrokeDashArray = new DoubleCollection { 4, 4 },
                     LineSmoothness = 0.8,
-                    PointGeometry = DefaultGeometries.Diamond, 
+                    PointGeometry = DefaultGeometries.Diamond,
                     PointGeometrySize = 7,
                 }
             };
@@ -254,11 +278,11 @@ namespace MoneyMindManager_Presentation.OverView.Controls
             errorProvider1.SetError(kgtxt, null);
         }
 
-        bool _IsSkipNumberOfMonths(DateTime startDate,DateTime endDate,byte numOfMonths)
+        bool _IsSkipNumberOfMonths(DateTime startDate, DateTime endDate, byte numOfMonths)
         {
             int months = Math.Abs((12 * (startDate.Year - endDate.Year)) + (startDate.Month - endDate.Month));
 
-                months++;
+            months++;
 
             return months > numOfMonths;
         }
@@ -280,7 +304,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
         {
             DateTime bofore12Month = DateTime.Today.AddMonths(-3);
             kgtxtToDate.RefreshNumber_DateTimeFormattedText(DateTime.Today.ToString());
-            kgtxtFromData.RefreshNumber_DateTimeFormattedText(new DateTime(bofore12Month.Year,bofore12Month.Month,1).ToString());
+            kgtxtFromData.RefreshNumber_DateTimeFormattedText(new DateTime(bofore12Month.Year, bofore12Month.Month, 1).ToString());
 
             CartesianChart1.LegendLocation = LegendLocation.Top;
             CartesianChart1.DefaultLegend.FontSize = 15;

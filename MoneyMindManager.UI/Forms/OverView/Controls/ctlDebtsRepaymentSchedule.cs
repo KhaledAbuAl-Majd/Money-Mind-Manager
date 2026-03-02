@@ -1,32 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Media;
-using DocumentFormat.OpenXml.Drawing;
-using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
-using KhaledControlLibrary1;
 using LiveCharts;
 using LiveCharts.Wpf;
-using MoneyMindManager_Business;
-using MoneyMindManager_Presentation.Global;
-using static MoneyMindManagerGlobal.clsDataColumns.clsReportClassess;
+using MoneyMindManager.Client.Abstractions.ApiClient;
+using MoneyMindManager.Core.Models.Reports.Debts;
+using MoneyMindManager.UI.Abstractions;
+
 
 namespace MoneyMindManager_Presentation.OverView.Controls
 {
     public partial class ctlDebtsRepaymentSchedule : UserControl
     {
+        private IUserSession _userSession;
+        private IMessageBoxService _messageBoxService;
+        private IReportApiClient _reportApi;
+
+        private bool isInitialized = false;
         public ctlDebtsRepaymentSchedule()
         {
             InitializeComponent();
         }
 
-        List<clsDebtRepaymentSchedule> _chartData;
+        public bool Initilaize(IUserSession userSession, IMessageBoxService messageBoxService, IReportApiClient reportApiClient)
+        {
+            if (userSession is null || messageBoxService is null || reportApiClient is null)
+                return false;
+
+            this._userSession = userSession;
+            this._messageBoxService = messageBoxService;
+            this._reportApi = reportApiClient;
+            isInitialized = true;
+            return true;
+        }
+
+        List<DebtRepaymentScheduleReportModel> _chartData;
 
         void _EmptyChart()
         {
@@ -45,15 +57,27 @@ namespace MoneyMindManager_Presentation.OverView.Controls
                 LoadChartLiner(_chartData);
         }
 
-        public async Task LoadData()
+        public async Task<bool> LoadData()
         {
+            if (!isInitialized)
+                return false;
 
-            _chartData = await clsReport.GetDebtsRepaymentSchedule(Convert.ToInt16(clsPL_Global.CurrentUser.AccountID));
+            var result = await _reportApi.GetDebtsRepaymentSchedule(Convert.ToInt16(_userSession.CurrentUser.AccountID));
+
+            if (!result.IsSuccess)
+            {
+                _messageBoxService.DisplayError(result.ErrorMessage);
+                return false;
+            }
+
+            _chartData = result.Data.ToList();
 
             LoadChart();
+
+            return true;
         }
 
-        void LoadChartColumn(List<clsDebtRepaymentSchedule> chartData)
+        void LoadChartColumn(List<DebtRepaymentScheduleReportModel> chartData)
         {
             if (chartData == null || chartData.Count == 0) return;
 
@@ -115,7 +139,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
             {
                 Title = $"القيمة ({currency})",
                 LabelFormatter = value => value.ToString("N0"),
-                
+
                 Foreground = System.Windows.Media.Brushes.Black,
                 FontSize = 15
             });
@@ -131,7 +155,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
             return new DateTime(Convert.ToInt32(year), Convert.ToInt32(monthNumber), 1).ToString("MMM - yyyy");
         }
 
-        void LoadChartLiner(List<clsDebtRepaymentSchedule> chartData)
+        void LoadChartLiner(List<DebtRepaymentScheduleReportModel> chartData)
         {
             if (chartData == null || chartData.Count == 0) return;
 
@@ -139,7 +163,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
 
             CartesianChart1.Series = new SeriesCollection
             {
-                new LineSeries 
+                new LineSeries
                 {
                     Title = "المستحقات لك",
                     Values = new ChartValues<decimal>(chartData.Select(x => x.Receivable)),
@@ -161,7 +185,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
                 {
                    Title = "المستحقات عليك",
                     Values = new ChartValues<decimal>(chartData.Select(x => x.Payables)),
-                    
+
                     Fill = System.Windows.Media.Brushes.Transparent,
                     LineSmoothness = 0.8,
                     StrokeThickness = 2.5,
