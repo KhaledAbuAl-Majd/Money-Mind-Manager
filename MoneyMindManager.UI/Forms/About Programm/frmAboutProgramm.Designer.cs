@@ -31,11 +31,10 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAboutProgramm));
             this.guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
-            this.gibtnTelegram = new Guna.UI2.WinForms.Guna2ImageButton();
+            this.gibtnDevWebsite = new Guna.UI2.WinForms.Guna2ImageButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.gibtnGmail = new Guna.UI2.WinForms.Guna2ImageButton();
-            this.label1 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // guna2TextBox1
@@ -69,61 +68,30 @@
             this.guna2TextBox1.Size = new System.Drawing.Size(905, 702);
             this.guna2TextBox1.TabIndex = 44;
             // 
-            // gibtnTelegram
+            // gibtnDevWebsite
             // 
-            this.gibtnTelegram.AnimatedGIF = true;
-            this.gibtnTelegram.BackColor = System.Drawing.Color.Transparent;
-            this.gibtnTelegram.CheckedState.ImageSize = new System.Drawing.Size(64, 64);
-            this.gibtnTelegram.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.gibtnTelegram.HoverState.ImageSize = new System.Drawing.Size(45, 45);
-            this.gibtnTelegram.Image = ((System.Drawing.Image)(resources.GetObject("gibtnTelegram.Image")));
-            this.gibtnTelegram.ImageOffset = new System.Drawing.Point(0, 0);
-            this.gibtnTelegram.ImageRotate = 0F;
-            this.gibtnTelegram.ImageSize = new System.Drawing.Size(40, 40);
-            this.gibtnTelegram.IndicateFocus = true;
-            this.gibtnTelegram.Location = new System.Drawing.Point(439, 737);
-            this.gibtnTelegram.Name = "gibtnTelegram";
-            this.gibtnTelegram.PressedState.ImageSize = new System.Drawing.Size(64, 64);
-            this.gibtnTelegram.Size = new System.Drawing.Size(60, 60);
-            this.gibtnTelegram.TabIndex = 100;
-            this.toolTip1.SetToolTip(this.gibtnTelegram, "تواصل عن طريق تليجرام");
-            this.gibtnTelegram.UseTransparentBackground = true;
-            this.gibtnTelegram.Click += new System.EventHandler(this.gibtnTelegram_Click);
+            this.gibtnDevWebsite.AnimatedGIF = true;
+            this.gibtnDevWebsite.BackColor = System.Drawing.Color.Transparent;
+            this.gibtnDevWebsite.CheckedState.ImageSize = new System.Drawing.Size(64, 64);
+            this.gibtnDevWebsite.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gibtnDevWebsite.HoverState.ImageSize = new System.Drawing.Size(45, 45);
+            this.gibtnDevWebsite.Image = ((System.Drawing.Image)(resources.GetObject("gibtnDevWebsite.Image")));
+            this.gibtnDevWebsite.ImageOffset = new System.Drawing.Point(0, 0);
+            this.gibtnDevWebsite.ImageRotate = 0F;
+            this.gibtnDevWebsite.ImageSize = new System.Drawing.Size(40, 40);
+            this.gibtnDevWebsite.IndicateFocus = true;
+            this.gibtnDevWebsite.Location = new System.Drawing.Point(458, 735);
+            this.gibtnDevWebsite.Name = "gibtnDevWebsite";
+            this.gibtnDevWebsite.PressedState.ImageSize = new System.Drawing.Size(64, 64);
+            this.gibtnDevWebsite.Size = new System.Drawing.Size(60, 60);
+            this.gibtnDevWebsite.TabIndex = 100;
+            this.toolTip1.SetToolTip(this.gibtnDevWebsite, "الموقع الشخصي الخاص بالمطور");
+            this.gibtnDevWebsite.UseTransparentBackground = true;
+            this.gibtnDevWebsite.Click += new System.EventHandler(this.gibtnDevWebsite_Click);
             // 
             // toolTip1
             // 
             this.toolTip1.IsBalloon = true;
-            // 
-            // gibtnGmail
-            // 
-            this.gibtnGmail.AnimatedGIF = true;
-            this.gibtnGmail.BackColor = System.Drawing.Color.Transparent;
-            this.gibtnGmail.CheckedState.ImageSize = new System.Drawing.Size(64, 64);
-            this.gibtnGmail.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.gibtnGmail.HoverState.ImageSize = new System.Drawing.Size(45, 45);
-            this.gibtnGmail.Image = ((System.Drawing.Image)(resources.GetObject("gibtnGmail.Image")));
-            this.gibtnGmail.ImageOffset = new System.Drawing.Point(0, 0);
-            this.gibtnGmail.ImageRotate = 0F;
-            this.gibtnGmail.ImageSize = new System.Drawing.Size(40, 40);
-            this.gibtnGmail.IndicateFocus = true;
-            this.gibtnGmail.Location = new System.Drawing.Point(370, 737);
-            this.gibtnGmail.Name = "gibtnGmail";
-            this.gibtnGmail.PressedState.ImageSize = new System.Drawing.Size(64, 64);
-            this.gibtnGmail.Size = new System.Drawing.Size(60, 60);
-            this.gibtnGmail.TabIndex = 102;
-            this.toolTip1.SetToolTip(this.gibtnGmail, "تواصل عن طريق البريد الإلكتروني");
-            this.gibtnGmail.UseTransparentBackground = true;
-            this.gibtnGmail.Click += new System.EventHandler(this.gibtnGmail_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(524, 755);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(153, 25);
-            this.label1.TabIndex = 101;
-            this.label1.Text = "تواصل مع المطور";
             // 
             // label7
             // 
@@ -138,16 +106,31 @@
             this.label7.Text = "Developed By\r\nKhaled Abu Al-Majd";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.linkLabel1.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold);
+            this.linkLabel1.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.linkLabel1.LinkColor = System.Drawing.Color.Black;
+            this.linkLabel1.Location = new System.Drawing.Point(524, 751);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(153, 25);
+            this.linkLabel1.TabIndex = 104;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "تواصل مع المطور";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            this.linkLabel1.Click += new System.EventHandler(this.gibtnDevWebsite_Click);
+            // 
             // frmAboutProgramm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1210, 809);
+            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.gibtnGmail);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.gibtnTelegram);
+            this.Controls.Add(this.gibtnDevWebsite);
             this.Controls.Add(this.guna2TextBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmAboutProgramm";
@@ -159,10 +142,9 @@
 
         #endregion
         private Guna.UI2.WinForms.Guna2TextBox guna2TextBox1;
-        private Guna.UI2.WinForms.Guna2ImageButton gibtnTelegram;
+        private Guna.UI2.WinForms.Guna2ImageButton gibtnDevWebsite;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Label label1;
-        private Guna.UI2.WinForms.Guna2ImageButton gibtnGmail;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }

@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Guna.UI2.WinForms;
 
@@ -40,14 +33,15 @@ namespace MoneyMindManager_Presentation.Global
             btn.Enabled = true;
             Cursor = Cursors.Default;
         }
-        private void gibtnTelegram_Click(object sender, EventArgs e)
+        private void gibtnDevWebsite_Click(object sender, EventArgs e)
         {
-            _OpenLink((Guna2ImageButton)sender, "https://t.me/KhaledAbuAlMajd1");
+            _OpenLink((Guna2ImageButton)sender, "https://khaledabual-majd.github.io/");
         }
 
-        private void gibtnGmail_Click(object sender, EventArgs e)
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            _OpenLink((Guna2ImageButton)sender, "mailto:khaledabualmajd06@gmail.com");
+            gibtnDevWebsite_Click(sender, null);
         }
     }
 }
