@@ -255,7 +255,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
         {
             _formDisplayer.OpenAtContainer<frmAddUpdateVoucher>(frm =>
             {
-                if (!frm.Initilize(_voucherType)) return false;
+                if (!frm.Initialize(_voucherType)) return false;
                 frm.OnCloseAndSaved += _Refresh;
                 return true;
             });
@@ -270,7 +270,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             _formDisplayer.OpenAtContainer<frmAddUpdateVoucher>(frm =>
             {
-                if (!frm.Initilize(voucherID)) return false;
+                if (!frm.Initialize(voucherID)) return false;
                 frm.OnCloseAndSaved += _Refresh;
                 return true;
             });

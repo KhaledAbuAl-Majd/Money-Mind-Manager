@@ -63,14 +63,14 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             Mode = enMode.AddNew;
         }
 
-        public bool Initilize(int transactionID)
+        public bool Initialize(int transactionID)
         {
             this.isInitialized = true;
             Mode = enMode.Update;
             this._TransactionID = transactionID;
             return true;
         }
-        public bool Initilize(FinVoucherDTO voucher)
+        public bool Initialize(FinVoucherDTO voucher)
         {
             if (voucher is null)
                 return false;

@@ -67,14 +67,14 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             this._Voucher = null;
         }
 
-        public bool Initilize(int voucherID)
+        public bool Initialize(int voucherID)
         {
             this.isInitialized = true;
             this._voucherMode = enVoucherMode.Update;
             this._VoucherID = voucherID;
             return true;
         }
-        public bool Initilize(enVoucherType voucherType)
+        public bool Initialize(enVoucherType voucherType)
         {
             if (voucherType == enVoucherType.UnKnown)
             {
@@ -293,9 +293,10 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                     break;
             }
 
+            _Voucher = new FinVoucherDTO();
 
             _VoucherID = null;
-            _ReseteObject();
+            _ResetObject();
             kgtxtVoucherName.Text = null;
             kgtxtNotes.Text = null;
             kgtxtVoucherDate.RefreshNumber_DateTimeFormattedText((result) ? DateTime.Today.ToString() : null);
@@ -405,7 +406,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 if (!result.IsSuccess || result.Data is null)
                 {
                     _messageBoxService.DisplayError(result.ErrorMessage);
-                    _ReseteObject();
+                    _ResetObject();
                     return;
                 }
 
@@ -443,7 +444,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             }
         }
 
-        void _ReseteObject()
+        void _ResetObject()
         {
             _Voucher = new FinVoucherDTO();
         }
@@ -461,7 +462,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             _formDisplayer.OpenAtContainer<frmAddUpdateFinTransction>(frm =>
             {
-                if (!frm.Initilize(_Voucher))
+                if (!frm.Initialize(_Voucher))
                     return false;
                 frm.OnCloseAndSaved += FrmAddUpdateTransactions_OnCloseAndSaved;
                 return true;
@@ -483,7 +484,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             _formDisplayer.OpenAtContainer<frmAddUpdateFinTransction>(frm =>
             {
-                if (!frm.Initilize(transactionID))
+                if (!frm.Initialize(transactionID))
                     return false;
                 frm.OnCloseAndSaved += FrmAddUpdateTransactions_OnCloseAndSaved;
                 return true;
@@ -777,26 +778,6 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             }
 
             DataTable dt = _dataConverter.ToDataTable<FinTransactionExportSummary>(result.Data);
-
-            gdgvTransactions.Columns[nameof(FinTransactionViewSummary.MainTransactionID)].HeaderText = "معرف المعاملة";
-            gdgvTransactions.Columns[nameof(FinTransactionViewSummary.MainTransactionID)].Width = 125;
-
-            gdgvTransactions.Columns[nameof(FinTransactionViewSummary.CategoryName)].HeaderText = "اسم الفئة";
-            gdgvTransactions.Columns[nameof(FinTransactionViewSummary.CategoryName)].Width = 280;
-
-            gdgvTransactions.Columns[nameof(FinTransactionViewSummary.Amount)].HeaderText = "المبلغ";
-            gdgvTransactions.Columns[nameof(FinTransactionViewSummary.Amount)].Width = 250;
-            gdgvTransactions.Columns[nameof(FinTransactionViewSummary.Amount)].DefaultCellStyle.Format = "N2";
-
-            gdgvTransactions.Columns[nameof(FinTransactionViewSummary.CreatedDate)].HeaderText = "تاريخ الإنشاء";
-            gdgvTransactions.Columns[nameof(FinTransactionViewSummary.CreatedDate)].Width = 235;
-            gdgvTransactions.Columns[nameof(FinTransactionViewSummary.CreatedDate)].DefaultCellStyle.Format = "hh:mm:ss tt dd-MM-yyyy";
-
-            gdgvTransactions.Columns[nameof(FinTransactionViewSummary.CreatedByUserName)].HeaderText = "اسم المستخدم المنشئ";
-            gdgvTransactions.Columns[nameof(FinTransactionViewSummary.CreatedByUserName)].Width = 260;
-
-            gdgvTransactions.Columns[nameof(FinTransactionViewSummary.Purpose)].HeaderText = "البيان";
-            gdgvTransactions.Columns[nameof(FinTransactionViewSummary.Purpose)].Width = 250;
 
             dt.Columns[nameof(FinTransactionExportSummary.MainTransactionID)].ColumnName = "معرف المعاملة";
             dt.Columns[nameof(FinTransactionExportSummary.CategoryID)].ColumnName = "معرف الفئة";

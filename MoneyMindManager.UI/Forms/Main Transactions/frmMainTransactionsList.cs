@@ -279,7 +279,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             _formDisplayer.OpenAtContainer<frmMainTransactionInfo>(frm =>
             {
-                return frm.Initilize(transactionID);
+                return frm.Initialize(transactionID);
             });
         }
 

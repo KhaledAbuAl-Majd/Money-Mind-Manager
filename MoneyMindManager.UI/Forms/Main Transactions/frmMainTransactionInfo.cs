@@ -22,7 +22,7 @@ namespace MoneyMindManager_Presentation.Transactions
             this._formDisplayer = formDisplayer;
         }
 
-        public bool Initilize(int transactionID)
+        public bool Initialize(int transactionID)
         {
             if (!ctrlMainTransactionInfo1.Initialize(_userSession, _messageBoxService, _mainTransactionApiClient, _formDisplayer))
                 return false;
