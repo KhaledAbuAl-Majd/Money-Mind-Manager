@@ -83,7 +83,6 @@
             this.label1.Size = new System.Drawing.Size(194, 24);
             this.label1.TabIndex = 104;
             this.label1.Text = "معاملة جديدة بعد الإضافة تلقائيا";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // gtswNewTransactionAfterAdd
             // 
@@ -105,7 +104,6 @@
             this.gtswNewTransactionAfterAdd.UncheckedState.FillColor = System.Drawing.Color.White;
             this.gtswNewTransactionAfterAdd.UncheckedState.InnerBorderColor = System.Drawing.Color.WhiteSmoke;
             this.gtswNewTransactionAfterAdd.UncheckedState.InnerColor = System.Drawing.Color.Gray;
-            this.gtswNewTransactionAfterAdd.CheckedChanged += new System.EventHandler(this.gtswNewTransactionAfterAdd_CheckedChanged);
             // 
             // toolTip1
             // 
@@ -171,7 +169,7 @@
             this.lblUserMessage.TabIndex = 106;
             this.lblUserMessage.Text = "\"تم العثور على حقول غير صالحة. ضع المؤشر على العلامات الحمراء لعرض سبب الخطأ.\"";
             this.lblUserMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblUserMessage.Click += new System.EventHandler(this.lblUserMessage_Click);
+
             // 
             // guna2Panel2
             // 
@@ -198,7 +196,6 @@
             this.guna2Panel2.ShadowDecoration.Enabled = true;
             this.guna2Panel2.Size = new System.Drawing.Size(359, 419);
             this.guna2Panel2.TabIndex = 107;
-            this.guna2Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2Panel2_Paint);
             // 
             // label5
             // 
