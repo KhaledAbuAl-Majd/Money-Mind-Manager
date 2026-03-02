@@ -8,6 +8,7 @@ using MoneyMindManager_Presentation.Income_And_Expense.Categories;
 using MoneyMindManager_Presentation.Income_And_Expense.Vouchers;
 using MoneyMindManager_Presentation.Login;
 using MoneyMindManager_Presentation.Main;
+using MoneyMindManager_Presentation.OverView;
 using MoneyMindManager_Presentation.People;
 using MoneyMindManager_Presentation.Transactions;
 using MoneyMindManager_Presentation.Users;
@@ -74,6 +75,10 @@ namespace MoneyMindManager.UI.DependencyInjection
             services.AddTransient<frmAddUpdateDebt>();
             services.AddTransient<frmDebtsList>();
 
+            services.AddTransient<frmOverviewGeneral>();
+            services.AddTransient<frmOverViewDebts>();
+            services.AddTransient<frmOverViewCategories>();
+            services.AddTransient<frmOverView>();
 
             return services;
         }

@@ -1,34 +1,57 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using MoneyMindManager_Business;
+using Microsoft.Extensions.DependencyInjection;
+using MoneyMindManager.Core.Enums;
+using MoneyMindManager.UI.Abstractions;
 
 namespace MoneyMindManager_Presentation.OverView
 {
     public partial class frmOverView : Form
     {
-        public frmOverView()
+        private readonly IServiceProvider _serviceProvider;
+        private readonly IMessageBoxService _messageBoxService;
+        private readonly IUserSession _userSession;
+
+        public frmOverView(IServiceProvider serviceProvider, IMessageBoxService messageBoxService, IUserSession userSession)
         {
-            if (!clsUser.CheckLogedInUserPermissions_RaiseErrorEvent(clsUser.enPermissions.OverView,
-                "ليس لديك صلاحية شاشة لمحة عامة."))
+            if (!_CheckPermissions())
             {
                 this.Dispose();
                 return;
             }
 
+            this._serviceProvider = serviceProvider;
+            this._messageBoxService = messageBoxService;
+            this._userSession = userSession;
+
             InitializeComponent();
         }
 
-        void _LoadFormAtPanelContainer(Form frm)
+        bool _CheckPermissions()
+        {
+            if (_userSession.IsHasPermissions(enPermissions.OverView))
+                return true;
+
+            _messageBoxService.DisplayError("ليس لديك صلاحية شاشة لمحة عامة.");
+            return false;
+        }
+
+        private bool OpenAtContainer<T>(Func<T, bool> initialize = null) where T : Form
+        {
+            var frm = _serviceProvider.GetRequiredService<T>();
+
+            if (initialize is null || !initialize.Invoke(frm))
+            {
+                frm?.Dispose();
+                return false;
+            }
+
+            return _LoadFormAtPanelContainer(frm);
+        }
+        bool _LoadFormAtPanelContainer(Form frm)
         {
             if (frm == null)
-                return;
+                return false;
 
             frm.TopLevel = false;
             frm.FormBorderStyle = FormBorderStyle.None;
@@ -41,7 +64,9 @@ namespace MoneyMindManager_Presentation.OverView
                 gpnlFormContainer.Controls.Add(frm);
                 frm.Show();
                 frm.BringToFront();
-            } 
+            }
+
+            return true;
         }
         private void frmOverView_Shown(object sender, EventArgs e)
         {
@@ -50,19 +75,27 @@ namespace MoneyMindManager_Presentation.OverView
 
         private void gbtnGeneral_Click(object sender, EventArgs e)
         {
-            _LoadFormAtPanelContainer(new frmOverviewGeneral());
+            OpenAtContainer<frmOverviewGeneral>(frm =>
+            {
+                return frm.Initilaize();
+            });
         }
 
 
         private void gbtnDebts_Click(object sender, EventArgs e)
         {
-            _LoadFormAtPanelContainer(new frmOverViewDebts());
+            OpenAtContainer<frmOverViewDebts>(frm =>
+            {
+                return frm.Initilaize();
+            });
         }
 
         private void gbtnCategories_Click(object sender, EventArgs e)
         {
-            _LoadFormAtPanelContainer(new frmOverViewCategories());
+            OpenAtContainer<frmOverViewCategories>(frm =>
+            {
+                return frm.Initilaize();
+            });
         }
-
     }
 }
