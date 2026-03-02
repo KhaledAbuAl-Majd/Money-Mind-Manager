@@ -32,7 +32,7 @@
             this.guna2WinProgressIndicator1 = new Guna.UI2.WinForms.Guna2WinProgressIndicator();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
-            this.ctlDebtsRepaymentSchedule2 = new MoneyMindManager_Presentation.OverView.Controls.ctlDebtsRepaymentSchedule();
+            this.ctrDebtsRepaymentSchedule2 = new MoneyMindManager_Presentation.OverView.Controls.ctlDebtsRepaymentSchedule();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.ctrlTopDebtorsRanking2 = new MoneyMindManager_Presentation.OverView.Controls.ctrlTopDebtorsRanking();
             this.guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
@@ -72,7 +72,7 @@
             this.guna2Panel2.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.guna2Panel2.BorderRadius = 20;
             this.guna2Panel2.BorderThickness = 2;
-            this.guna2Panel2.Controls.Add(this.ctlDebtsRepaymentSchedule2);
+            this.guna2Panel2.Controls.Add(this.ctrDebtsRepaymentSchedule2);
             this.guna2Panel2.FillColor = System.Drawing.SystemColors.ButtonHighlight;
             this.guna2Panel2.Location = new System.Drawing.Point(418, 20);
             this.guna2Panel2.Name = "guna2Panel2";
@@ -85,11 +85,11 @@
             // 
             // ctlDebtsRepaymentSchedule2
             // 
-            this.ctlDebtsRepaymentSchedule2.BackColor = System.Drawing.Color.White;
-            this.ctlDebtsRepaymentSchedule2.Location = new System.Drawing.Point(6, 9);
-            this.ctlDebtsRepaymentSchedule2.Name = "ctlDebtsRepaymentSchedule2";
-            this.ctlDebtsRepaymentSchedule2.Size = new System.Drawing.Size(757, 445);
-            this.ctlDebtsRepaymentSchedule2.TabIndex = 0;
+            this.ctrDebtsRepaymentSchedule2.BackColor = System.Drawing.Color.White;
+            this.ctrDebtsRepaymentSchedule2.Location = new System.Drawing.Point(6, 9);
+            this.ctrDebtsRepaymentSchedule2.Name = "ctlDebtsRepaymentSchedule2";
+            this.ctrDebtsRepaymentSchedule2.Size = new System.Drawing.Size(757, 445);
+            this.ctrDebtsRepaymentSchedule2.TabIndex = 0;
             // 
             // guna2Panel1
             // 
@@ -132,7 +132,6 @@
             this.guna2Panel3.ShadowDecoration.Enabled = true;
             this.guna2Panel3.Size = new System.Drawing.Size(401, 466);
             this.guna2Panel3.TabIndex = 21;
-
             // 
             // ctrlTopPersonDebtsSumRanking1
             // 
@@ -229,6 +228,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmOverViewDebts";
             this.Text = "frmOverViewDebts";
+            this.Load += new System.EventHandler(this.frmOverViewDebts_Load);
             this.Shown += new System.EventHandler(this.frmOverViewDebts_Shown);
             this.guna2Panel2.ResumeLayout(false);
             this.guna2Panel1.ResumeLayout(false);
@@ -245,7 +245,7 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
-        private Controls.ctlDebtsRepaymentSchedule ctlDebtsRepaymentSchedule2;
+        private Controls.ctlDebtsRepaymentSchedule ctrDebtsRepaymentSchedule2;
         private Controls.ctrlTopDebtorsRanking ctrlTopDebtorsRanking2;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel3;
         private Controls.ctrlTopPersonDebtsSumRanking ctrlTopPersonDebtsSumRanking1;

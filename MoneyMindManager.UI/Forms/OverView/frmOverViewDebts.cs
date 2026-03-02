@@ -1,18 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MoneyMindManager.Client.Abstractions.ApiClient;
+using MoneyMindManager.UI.Abstractions;
 
 namespace MoneyMindManager_Presentation.OverView
 {
     public partial class frmOverViewDebts : Form
     {
-        public frmOverViewDebts()
+        private readonly IUserSession _userSession;
+        private readonly IMessageBoxService _messageBoxService;
+        private readonly IReportApiClient _reportApi;
+
+        private bool isInitialized = false;
+        public frmOverViewDebts(IUserSession userSession, IMessageBoxService messageBoxService, IReportApiClient reportApiClient)
         {
             InitializeComponent();
 
@@ -20,8 +21,26 @@ namespace MoneyMindManager_Presentation.OverView
                 ControlStyles.AllPaintingInWmPaint |
                 ControlStyles.OptimizedDoubleBuffer, true);
             this.UpdateStyles();
+
+            this._userSession = userSession;
+            this._messageBoxService = messageBoxService;
+            this._reportApi = reportApiClient;
         }
 
+        public bool Initilaize()
+        {
+            if (!ctrlDebtsMonthlyFlow1.Initilaize(_userSession, _messageBoxService, _reportApi))
+                return false;
+            if (!ctrDebtsRepaymentSchedule2.Initilaize(_userSession, _messageBoxService, _reportApi))
+                return false;
+            if (!ctrlTopDebtorsRanking2.Initilaize(_userSession, _messageBoxService, _reportApi))
+                return false;
+            if (!ctrlTopPersonDebtsSumRanking1.Initilaize(_userSession, _messageBoxService, _reportApi))
+                return false;
+
+            isInitialized = true;
+            return true;
+        }
 
         private async void frmOverViewDebts_Shown(object sender, EventArgs e)
         {
@@ -30,7 +49,7 @@ namespace MoneyMindManager_Presentation.OverView
             guna2WinProgressIndicator1.Show();
             this.UseWaitCursor = true;
 
-            Task task1 = ctlDebtsRepaymentSchedule2.LoadData();
+            Task task1 = ctrDebtsRepaymentSchedule2.LoadData();
             Task task2 = ctrlTopDebtorsRanking2.LoadData();
             Task task3 = ctrlTopPersonDebtsSumRanking1.LoadData();
             Task task4 = ctrlDebtsMonthlyFlow1.LoadData();
@@ -40,6 +59,15 @@ namespace MoneyMindManager_Presentation.OverView
             this.UseWaitCursor = false;
             guna2WinProgressIndicator1.Stop();
             guna2WinProgressIndicator1.Hide();
+        }
+
+        private void frmOverViewDebts_Load(object sender, EventArgs e)
+        {
+            if (!isInitialized)
+            {
+                this.Close();
+                return;
+            }
         }
     }
 }
