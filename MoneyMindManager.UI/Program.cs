@@ -4,30 +4,35 @@ using System.Reflection;
 using System.Security.Principal;
 using System.Windows.Forms;
 using Microsoft.Extensions.DependencyInjection;
+using MoneyMindManager.Application.Abstractions.Infrastructure;
+using MoneyMindManager.Core;
 using MoneyMindManager.IoC;
 using MoneyMindManager.UI.DependencyInjection;
 using MoneyMindManager_Presentation.Login;
-using MoneyMindManagerGlobal;
 
 namespace MoneyMindManager_Presentation
 {
     internal static class Program
     {
+        private static ILogger _logger;
+        private static IEventLogLoggerSettings _eventLogLoggerSettings;
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
         {
+            var services = new ServiceCollection();
+            DependencyContainer.RegisterServices(services);
+
+            var serviceProvider = services.BuildServiceProvider();
+            _logger = serviceProvider.GetRequiredService<ILogger>();
+            _eventLogLoggerSettings = serviceProvider.GetRequiredService<IEventLogLoggerSettings>();
+
             if (HandleEventSourceSetup())
             {
-                clsPL_Global.SubscribeToErrorOcrruedEvent();
-
-                var services = new ServiceCollection();
-                DependencyContainer.RegisterServices(services);
                 services.AddUI();//register Ui DI
-
-                var serviceProvider = services.BuildServiceProvider();
 
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
@@ -39,7 +44,7 @@ namespace MoneyMindManager_Presentation
 
         private static bool HandleEventSourceSetup()
         {
-            if (clsLogger.LogAtEventLog("Test Logging", EventLogEntryType.Information))
+            if (_logger.LogInfo("Test Logging"))
             {
                 return true;
             }
@@ -52,7 +57,7 @@ namespace MoneyMindManager_Presentation
             {
                 try
                 {
-                    EventLog.CreateEventSource(clsLogger.SourceName, clsLogger.LogName);
+                    EventLog.CreateEventSource(_eventLogLoggerSettings.SourceName, "Application");
                     MessageBox.Show($"تم إنشاء مصدر تسجيل الأحداث بنجاح. البرنامج سيغلق الآن ويُعاد تشغيله بشكل عادي.", "إعداد النظام",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
