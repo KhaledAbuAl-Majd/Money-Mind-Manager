@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
+            this.ctrlTest1 = new MoneyMindManager_Presentation.OverView.Controls.ctrlMonthlyFlow();
             this.guna2WinProgressIndicator1 = new Guna.UI2.WinForms.Guna2WinProgressIndicator();
             this.guna2Panel5 = new Guna.UI2.WinForms.Guna2Panel();
             this.klblTotalReceivables = new KhaledControlLibrary1.KhaledLabel();
@@ -58,7 +59,6 @@
             this.label16 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label1 = new System.Windows.Forms.Label();
-            this.ctrlTest1 = new MoneyMindManager_Presentation.OverView.Controls.ctrlMonthlyFlow();
             this.guna2Panel2.SuspendLayout();
             this.guna2Panel5.SuspendLayout();
             this.guna2Panel6.SuspendLayout();
@@ -86,6 +86,14 @@
             this.guna2Panel2.ShadowDecoration.Enabled = true;
             this.guna2Panel2.Size = new System.Drawing.Size(1167, 582);
             this.guna2Panel2.TabIndex = 1;
+            // 
+            // ctrlTest1
+            // 
+            this.ctrlTest1.BackColor = System.Drawing.Color.White;
+            this.ctrlTest1.Location = new System.Drawing.Point(13, 10);
+            this.ctrlTest1.Name = "ctrlTest1";
+            this.ctrlTest1.Size = new System.Drawing.Size(1143, 560);
+            this.ctrlTest1.TabIndex = 0;
             // 
             // guna2WinProgressIndicator1
             // 
@@ -543,14 +551,6 @@
             this.label1.TabIndex = 112;
             this.label1.Text = "تحليل الأداء المالي";
             // 
-            // ctrlTest1
-            // 
-            this.ctrlTest1.BackColor = System.Drawing.Color.White;
-            this.ctrlTest1.Location = new System.Drawing.Point(13, 10);
-            this.ctrlTest1.Name = "ctrlTest1";
-            this.ctrlTest1.Size = new System.Drawing.Size(1143, 560);
-            this.ctrlTest1.TabIndex = 0;
-            // 
             // frmOverviewGeneral
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -572,6 +572,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmOverviewGeneral";
             this.Text = "frmOverview";
+            this.Load += new System.EventHandler(this.frmOverviewGeneral_Load);
             this.Shown += new System.EventHandler(this.frmOverviewGeneral_Shown);
             this.guna2Panel2.ResumeLayout(false);
             this.guna2Panel5.ResumeLayout(false);
