@@ -1,24 +1,47 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MoneyMindManager.Client.Abstractions.ApiClient;
+using MoneyMindManager.UI.Abstractions;
 
 namespace MoneyMindManager_Presentation.OverView
 {
     public partial class frmOverViewCategories : Form
     {
-        public frmOverViewCategories()
+        private IUserSession _userSession;
+        private IMessageBoxService _messageBoxService;
+        private IReportApiClient _reportApi;
+        private IFormDisplayer _formDisplayer;
+        private IFinCategoryApiClient _finCategoryApi;
+
+        private bool isInitialized = false;
+        public frmOverViewCategories(IUserSession userSession, IMessageBoxService messageBoxService, IReportApiClient reportApiClient,
+            IFormDisplayer formDisplayer, IFinCategoryApiClient finCategoryApiClient)
         {
             InitializeComponent();
             this.SetStyle(ControlStyles.UserPaint |
                 ControlStyles.AllPaintingInWmPaint |
                 ControlStyles.OptimizedDoubleBuffer, true);
             this.UpdateStyles();
+
+            this._userSession = userSession;
+            this._messageBoxService = messageBoxService;
+            this._reportApi = reportApiClient;
+            this._formDisplayer = formDisplayer;
+            this._finCategoryApi = finCategoryApiClient;
+        }
+
+        public bool Initilaize()
+        {
+            if (!ctrlCategoryMonthlyFlow1.Initilaize(_userSession, _messageBoxService, _reportApi, _formDisplayer, _finCategoryApi))
+                return false;
+            if (!ctrlTopCategories_Income.Initilaize(_userSession, _messageBoxService, _reportApi))
+                return false;
+            if (!ctrlTopCategories_NetExpense.Initilaize(_userSession, _messageBoxService, _reportApi))
+                return false;
+
+            isInitialized = true;
+            return true;
         }
 
         private async void frmOverViewCategories_Shown(object sender, EventArgs e)
@@ -28,7 +51,7 @@ namespace MoneyMindManager_Presentation.OverView
             guna2WinProgressIndicator1.Show();
             this.UseWaitCursor = true;
 
-            Task task1 =  ctrlTopCategories_Income.LoadData();
+            Task task1 = ctrlTopCategories_Income.LoadData();
             Task task2 = ctrlTopCategories_NetExpense.LoadData();
 
             await Task.WhenAll(task1, task2);
@@ -36,6 +59,15 @@ namespace MoneyMindManager_Presentation.OverView
             this.UseWaitCursor = false;
             guna2WinProgressIndicator1.Stop();
             guna2WinProgressIndicator1.Hide();
+        }
+
+        private void frmOverViewCategories_Load(object sender, EventArgs e)
+        {
+            if (!isInitialized)
+            {
+                this.Close();
+                return;
+            }
         }
     }
 }
