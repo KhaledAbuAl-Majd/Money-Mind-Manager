@@ -25,5 +25,10 @@ namespace MoneyMindManager.Shared.DTOs.Debt
             this.PaymentDueDate = paymentDueDate;
             this.RemainingAmount = remaintAmount;
         }
+
+        public DebtDTO() : base(null, default, default, default, null, null, null, default, default, default, default)
+        {
+
+        }
     }
 }
