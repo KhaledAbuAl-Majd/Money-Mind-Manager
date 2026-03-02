@@ -50,6 +50,11 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             this.isInitialized = true;
             return true;
         }
+        public bool Initialize()
+        {
+            this.isInitialized = true;
+            return true;
+        }
 
         bool? _isIncome;
 

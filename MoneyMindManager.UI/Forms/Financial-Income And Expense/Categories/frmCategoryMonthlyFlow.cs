@@ -1,19 +1,35 @@
 ﻿using System;
 using System.Windows.Forms;
+using MoneyMindManager.Client.Abstractions.ApiClient;
+using MoneyMindManager.UI.Abstractions;
 
 namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 {
     public partial class frmCategoryMonthlyFlow : Form
     {
+        private IUserSession _userSession;
+        private IMessageBoxService _messageBoxService;
+        private IReportApiClient _reportApi;
+        private IFormDisplayer _formDisplayer;
+        private IFinCategoryApiClient _finCategoryApi;
         private bool isInitialized = false;
-        public frmCategoryMonthlyFlow()
+        public frmCategoryMonthlyFlow(IUserSession userSession, IMessageBoxService messageBoxService, IReportApiClient reportApiClient,
+            IFormDisplayer formDisplayer, IFinCategoryApiClient finCategoryApiClient)
         {
             InitializeComponent();
+            this._userSession = userSession;
+            this._messageBoxService = messageBoxService;
+            this._reportApi = reportApiClient;
+            this._formDisplayer = formDisplayer;
+            this._finCategoryApi = finCategoryApiClient;
         }
 
 
         public bool Initialize(int categoryID)
         {
+            if (!ctrlCategoryMonthlyFlow1.Initilaize(_userSession, _messageBoxService, _reportApi, _formDisplayer, _finCategoryApi))
+                return false;
+
             this.CategoryID = categoryID;
             this.isInitialized = true;
             return true;
