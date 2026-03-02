@@ -2,8 +2,8 @@
 using System.Windows.Forms;
 using Guna.UI2.WinForms;
 using Microsoft.Extensions.DependencyInjection;
+using MoneyMindManager.Core.Enums;
 using MoneyMindManager.UI.Abstractions;
-using MoneyMindManager_Business;
 using MoneyMindManager_Presentation.Global;
 using MoneyMindManager_Presentation.Income_And_Expense;
 using MoneyMindManager_Presentation.Income_And_Expense.Vouchers;
@@ -28,9 +28,9 @@ namespace MoneyMindManager_Presentation.Main
         }
 
         Guna2Button prevButton;
-        public void LoadMainFormLabels()
+        private void LoadMainFormLabels()
         {
-            lblCurrentUserName.Text = clsPL_Global.CurrentUser?.UserName;
+            lblCurrentUserName.Text = _userSession.CurrentUser?.UserName;
         }
 
         public bool OpenDialog<T>(Func<T, bool> initialize = null) where T : Form
@@ -60,17 +60,17 @@ namespace MoneyMindManager_Presentation.Main
             return _LoadFormAtPanelContainer(frm, false);
         }
 
-        //Violation
-        public void OpenDialog(Form frm)
+        private bool OpenAtContainer<T>(Func<T, bool> initialize = null, bool clearOldControls = false) where T : Form
         {
-            if (frm == null || frm.IsDisposed)
-                return;
+            var frm = _serviceProvider.GetRequiredService<T>();
 
-            frm.ShowDialog(this);
-        }
-        public void AddNewFormAtContainer(Form frm)
-        {
-            _LoadFormAtPanelContainer(frm, false);
+            if (initialize is null || !initialize.Invoke(frm))
+            {
+                frm?.Dispose();
+                return false;
+            }
+
+            return _LoadFormAtPanelContainer(frm, clearOldControls);
         }
 
         bool _LoadFormAtPanelContainer(Form frm, bool clearOldControls)
@@ -112,16 +112,8 @@ namespace MoneyMindManager_Presentation.Main
             LoadMainFormLabels();
 
             prevButton = null;
-            //if (clsUser.CheckLogedInUserPermissions(clsUser.enPermissions.OverView))
-            //{
-            //    prevButton = gbtnOverOview;
-            //    gbtnOverOview.PerformClick();
-            //}
-            //else
-            //{
-            //    prevButton = gbtnAccount;
-            //    gbtnAccount.PerformClick();
-            //}
+
+            _userSession.OnUserRefreshed += LoadMainFormLabels;
 
             prevButton = gbtnAccount;
             gbtnAccount.PerformClick();
@@ -130,9 +122,6 @@ namespace MoneyMindManager_Presentation.Main
         private void llblCurrentUserInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             llblCurrentUserInfo.Enabled = false;
-            //var frm = new frmUserInfo(Convert.ToInt32(_userSession.CurrentUser?.UserID));
-            //frm.FormClosed += (x, y) => llblCurrentUserInfo.Enabled = true;
-            //AddNewFormAtContainer(frm);
 
             OpenAtContainer<frmUserInfo>((frm) =>
             {
@@ -147,28 +136,52 @@ namespace MoneyMindManager_Presentation.Main
         private void llblChangePassword_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             llblChangePassword.Enabled = false;
-            var frm = new frmChangePassword(Convert.ToInt32(_userSession.CurrentUser?.UserID));
-            frm.FormClosed += (x, y) => llblChangePassword.Enabled = true;
-            AddNewFormAtContainer(frm);
+
+            OpenAtContainer<frmChangePassword>((frm) =>
+            {
+                if (!frm.Initialize(Convert.ToInt32(_userSession.UserID)))
+                    return false;
+
+                frm.FormClosed += (x, y) => llblChangePassword.Enabled = true;
+                return true;
+            });
         }
 
         private void gbtnOverOview_Click(object sender, EventArgs e)
         {
             ((Guna2Button)sender).Focus();
-            if (_LoadFormAtPanelContainer(new frmOverView(), true))
+
+            var result = OpenAtContainer<frmOverView>(frm =>
+            {
+                return true;
+            }, true);
+
+            if (result)
                 prevButton = gbtnOverOview;
         }
         private void gbtnPeople_Click(object sender, EventArgs e)
         {
             ((Guna2Button)sender).Focus();
-            if (_LoadFormAtPanelContainer(new frmPeople(), true))
+
+            var result = OpenAtContainer<frmPeople>(frm =>
+            {
+                return true;
+            }, true);
+
+            if (result)
                 prevButton = gbtnPeople;
         }
 
         private void gbtnUsers_Click(object sender, EventArgs e)
         {
             ((Guna2Button)sender).Focus();
-            if (_LoadFormAtPanelContainer(new FrmUsers(), true))
+
+            var result = OpenAtContainer<FrmUsers>(frm =>
+            {
+                return true;
+            }, true);
+
+            if (result)
                 prevButton = gbtnUsers;
         }
 
@@ -176,56 +189,100 @@ namespace MoneyMindManager_Presentation.Main
         private void gbtnIncome_Click(object sender, EventArgs e)
         {
             ((Guna2Button)sender).Focus();
-            if (_LoadFormAtPanelContainer(new frmIncomeAndExpense(clsIncomeAndExpenseVoucher.enVoucherType.Incomes), true))
+
+            var result = OpenAtContainer<frmIncomeAndExpense>(frm =>
+            {
+                return frm.Initialize(enVoucherType.Incomes);
+            }, true);
+
+            if (result)
                 prevButton = gbtnIncome;
         }
 
         private void gbtnExpense_Click(object sender, EventArgs e)
         {
             ((Guna2Button)sender).Focus();
-            if (_LoadFormAtPanelContainer(new frmIncomeAndExpense(clsIncomeAndExpenseVoucher.enVoucherType.Expenses), true))
+
+            var result = OpenAtContainer<frmIncomeAndExpense>(frm =>
+            {
+                return frm.Initialize(enVoucherType.Expenses);
+            }, true);
+
+            if (result)
                 prevButton = gbtnExpense;
         }
 
         private void gbtnExpensesReturn_Click(object sender, EventArgs e)
         {
             ((Guna2Button)sender).Focus();
-            if (_LoadFormAtPanelContainer(new frmIncomeAndExpense(clsIncomeAndExpenseVoucher.enVoucherType.ExpensesReturn), true))
+
+            var result = OpenAtContainer<frmIncomeAndExpense>(frm =>
+            {
+                return frm.Initialize(enVoucherType.ExpensesReturn);
+            }, true);
+
+            if (result)
                 prevButton = gbtnExpensesReturn;
         }
 
         private void gbtnDebts_Click(object sender, EventArgs e)
         {
             ((Guna2Button)sender).Focus();
-            if (_LoadFormAtPanelContainer(new frmDebtsList(), true))
+            var result = OpenAtContainer<frmDebtsList>(frm =>
+            {
+                return true;
+            }, true);
+
+            if (result)
                 prevButton = gbtnDebts;
         }
 
         private void gbtnTransactions_Click(object sender, EventArgs e)
         {
             ((Guna2Button)sender).Focus();
-            if (_LoadFormAtPanelContainer(new frmMainTransactionsList(), true))
+
+            var result = OpenAtContainer<frmMainTransactionsList>(frm =>
+            {
+                return true;
+            }, true);
+            if (result)
                 prevButton = gbtnTransactions;
         }
 
         private void gbtnAccount_Click(object sender, EventArgs e)
         {
             ((Guna2Button)sender).Focus();
-            if (OpenAtContainer<frmCurrentAccount>(null))
+            var result = OpenAtContainer<frmCurrentAccount>(frm =>
+            {
+                return true;
+            }, true);
+
+            if (result)
                 prevButton = gbtnAccount;
         }
 
         private void gbtnSettings_Click(object sender, EventArgs e)
         {
             ((Guna2Button)sender).Focus();
-            if (_LoadFormAtPanelContainer(new frmSettings(), true))
+            var result = OpenAtContainer<frmSettings>(frm =>
+            {
+                return true;
+            }, true);
+
+            if (result)
                 prevButton = gbtnSettings;
         }
 
         private void gbtnAboutProgramm_Click(object sender, EventArgs e)
         {
             ((Guna2Button)sender).Focus();
-            if (_LoadFormAtPanelContainer(new frmAboutProgramm(), true))
+
+            var result = OpenAtContainer<frmAboutProgramm>(frm =>
+            {
+                return true;
+            }, true);
+
+            if (result)
                 prevButton = gbtnAboutProgramm;
         }
 
