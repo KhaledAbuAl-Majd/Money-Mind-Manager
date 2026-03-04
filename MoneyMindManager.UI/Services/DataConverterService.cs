@@ -19,7 +19,14 @@ namespace MoneyMindManager.UI.Services
 
             foreach (var property in proprties)
             {
-                dt.Columns.Add(property.Name, property.PropertyType);
+                var propertyType = property.PropertyType;
+
+                if(propertyType.IsGenericType && propertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
+                {
+                    propertyType = Nullable.GetUnderlyingType(propertyType);
+                }
+
+                dt.Columns.Add(property.Name,propertyType);
             }
 
             foreach (var item in data)
