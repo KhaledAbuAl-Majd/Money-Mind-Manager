@@ -22,9 +22,11 @@ namespace MoneyMindManager.Application.Services.Debt
         private readonly IAuthorizationService _authorizationService;
         private readonly IMainTransactionService _mainTransactionService;
         private readonly IMainTransactionMapper _mainTransactionMapper;
+        private readonly IPersonService _personService;
 
         public DebtService(IResultFactory resultFactory, IDebtRepository debtRepository, IDebtMapper debtMapper,
-            IAuthorizationService authorizationService, IMainTransactionService mainTransactionService, IMainTransactionMapper mainTransactionMapper)
+            IAuthorizationService authorizationService, IMainTransactionService mainTransactionService, IMainTransactionMapper mainTransactionMapper,
+            IPersonService personService)
         {
             this._resultFactory = resultFactory;
             this._debtRepository = debtRepository;
@@ -32,6 +34,7 @@ namespace MoneyMindManager.Application.Services.Debt
             this._authorizationService = authorizationService;
             this._mainTransactionService = mainTransactionService;
             this._mainTransactionMapper = mainTransactionMapper;
+            this._personService = personService;
         }
         public async Task<IResult<DebtDTO>> Add(DebtDTO debtDTO, int currentUserID)
         {
@@ -51,7 +54,7 @@ namespace MoneyMindManager.Application.Services.Debt
             if (!accessResult.Data)
                 return handler.Failure("ليس لديك صلاحية إضافة/تعديل (سندات - معاملات سداد) الديون.");
 
-
+            debtDTO.CreatedByUserID = currentUserID;
             var result = await _debtRepository.Add(_debtMapper.DTOToEntity(debtDTO));
 
             if (result is null)
@@ -180,7 +183,15 @@ namespace MoneyMindManager.Application.Services.Debt
             var debt = new Domain.Entities.Debt(mainTransaction, result.Data.DebtID, result.Data.IsLending,
                 result.Data.PersonID, result.Data.PaymentDueDate, result.Data.RemainingAmount);
 
-            return handler.Success(_debtMapper.EntityToDTO(debt));
+            var personDTOResult = await _personService.Get(Convert.ToInt32(result.Data?.PersonID), currentUserID);
+
+            if (!personDTOResult.IsSuccess)
+                return handler.Failure(personDTOResult.ErrorMessage);
+
+            var dto = _debtMapper.EntityToDTO(debt);
+            dto.PersonInfo = personDTOResult.Data;
+
+            return handler.Success(dto);
         }
         public async Task<IResult<DebtsPagedResultDTO<DebtViewSummary>>> GetAllPaged(DebtPagedFilterDTO DTO, int currentUserID)
         {
