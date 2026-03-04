@@ -109,7 +109,7 @@ namespace MoneyMindManager_Presentation
             gbtnDeleteAccount.Enabled = true;
             gbtnSave.Enabled = true;
             //clsPL_Global.MainForm.Enabled = true;
-            this.ParentForm.Enabled = false;
+            this.ParentForm.Enabled = true;
         }
 
         async Task _LoadData()

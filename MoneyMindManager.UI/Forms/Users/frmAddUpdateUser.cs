@@ -385,26 +385,26 @@ namespace MoneyMindManager_Presentation.Users
 
                 if ((Mode == enMode.AddNew) || (Mode == enMode.Update && _User.UserName != userName))
                 {
-                    var result = _userApiClient.IsExistByUserName(userName).GetAwaiter().GetResult();
+                    //var result = _userApiClient.IsExistByUserName(userName).GetAwaiter().GetResult();
 
-                    if (!result.IsSuccess)
-                    {
-                        _messageBoxService.DisplayError(result.ErrorMessage);
-                        e.CancelEventArgs.Cancel = false;
-                        errorProvider1.SetError(kgtxtUserName, null);
-                        return;
-                    }
+                    //if (!result.IsSuccess)
+                    //{
+                    //    _messageBoxService.DisplayError(result.ErrorMessage);
+                    //    e.CancelEventArgs.Cancel = false;
+                    //    errorProvider1.SetError(kgtxtUserName, null);
+                    //    return;
+                    //}
 
-                    if (result.Data)
-                    {
-                        e.CancelEventArgs.Cancel = true;
-                        errorProvider1.SetError(kgtxtUserName, "اسم المستخدم مستخدم, قم بتجربة اسم آخر");
-                    }
-                    else
-                    {
-                        e.CancelEventArgs.Cancel = false;
-                        errorProvider1.SetError(kgtxtUserName, null);
-                    }
+                    //if (result.Data)
+                    //{
+                    //    e.CancelEventArgs.Cancel = true;
+                    //    errorProvider1.SetError(kgtxtUserName, "اسم المستخدم مستخدم, قم بتجربة اسم آخر");
+                    //}
+                    //else
+                    //{
+                    //    e.CancelEventArgs.Cancel = false;
+                    //    errorProvider1.SetError(kgtxtUserName, null);
+                    //}
                 }
             }
         }

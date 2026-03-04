@@ -216,60 +216,60 @@ namespace MoneyMindManager_Presentation.Login
 
         private void kgtxtCreateAccount_UserName_After_kgtxt_Validating(object sender, KhaledGuna2TextBox.AfterMyValidatingEventArgs e)
         {
-            if (e.ValidationgResult)
-            {
-                string userName = kgtxtCreateAccount_UserName.ValidatedText;
+            //if (e.ValidationgResult)
+            //{
+            //    string userName = kgtxtCreateAccount_UserName.ValidatedText;
 
-                if (_Mode == enMode.CreateAccount)
-                {
-                    var result = _userApiClient.IsExistByUserName(userName).GetAwaiter().GetResult();
-                    if (!result.IsSuccess)
-                    {
-                        _messageBoxService.DisplayError($"{result.ErrorMessage}\nبرجاء إعادة تشغيل البرنامج!");
-                        return;
-                    }
+            //    if (_Mode == enMode.CreateAccount)
+            //    {
+            //        var result = _userApiClient.IsExistByUserName(userName).GetAwaiter().GetResult();
+            //        if (!result.IsSuccess)
+            //        {
+            //            _messageBoxService.DisplayError($"{result.ErrorMessage}\nبرجاء إعادة تشغيل البرنامج!");
+            //            return;
+            //        }
 
-                    if (result.Data)
-                    {
-                        e.CancelEventArgs.Cancel = true;
-                        errorProvider1.SetError(kgtxtCreateAccount_UserName, "اسم المستخدم مستخدم, قم بتجربة اسم آخر");
-                    }
-                    else
-                    {
-                        e.CancelEventArgs.Cancel = false;
-                        errorProvider1.SetError(kgtxtCreateAccount_UserName, null);
-                    }
-                }
-            }
+            //        if (result.Data)
+            //        {
+            //            e.CancelEventArgs.Cancel = true;
+            //            errorProvider1.SetError(kgtxtCreateAccount_UserName, "اسم المستخدم مستخدم, قم بتجربة اسم آخر");
+            //        }
+            //        else
+            //        {
+            //            e.CancelEventArgs.Cancel = false;
+            //            errorProvider1.SetError(kgtxtCreateAccount_UserName, null);
+            //        }
+            //    }
+            //}
         }
 
         private void kgtxtCreateAccount_AccountName_After_kgtxt_Validating(object sender, KhaledGuna2TextBox.AfterMyValidatingEventArgs e)
         {
-            if (e.ValidationgResult)
-            {
-                string accountName = kgtxtCreateAccount_AccountName.ValidatedText;
+            //if (e.ValidationgResult)
+            //{
+            //    string accountName = kgtxtCreateAccount_AccountName.ValidatedText;
 
-                var result = _accountApiClient.IsExistByAccountName(accountName).GetAwaiter().GetResult();
-                if (!result.IsSuccess)
-                {
-                    _messageBoxService.DisplayError($"{result.ErrorMessage}\nبرجاء إعادة تشغيل البرنامج!");
-                    return;
-                }
+            //    var result = _accountApiClient.IsExistByAccountName(accountName).GetAwaiter().GetResult();
+            //    if (!result.IsSuccess)
+            //    {
+            //        _messageBoxService.DisplayError($"{result.ErrorMessage}\nبرجاء إعادة تشغيل البرنامج!");
+            //        return;
+            //    }
 
-                if (_Mode == enMode.CreateAccount)
-                {
-                    if (result.Data)
-                    {
-                        e.CancelEventArgs.Cancel = true;
-                        errorProvider1.SetError(kgtxtCreateAccount_AccountName, "اسم الحساب مستخدم, قم بتجربة اسم آخر");
-                    }
-                    else
-                    {
-                        e.CancelEventArgs.Cancel = false;
-                        errorProvider1.SetError(kgtxtCreateAccount_AccountName, null);
-                    }
-                }
-            }
+            //    if (_Mode == enMode.CreateAccount)
+            //    {
+            //        if (result.Data)
+            //        {
+            //            e.CancelEventArgs.Cancel = true;
+            //            errorProvider1.SetError(kgtxtCreateAccount_AccountName, "اسم الحساب مستخدم, قم بتجربة اسم آخر");
+            //        }
+            //        else
+            //        {
+            //            e.CancelEventArgs.Cancel = false;
+            //            errorProvider1.SetError(kgtxtCreateAccount_AccountName, null);
+            //        }
+            //    }
+            //}
         }
 
         private async void ggbtnLogin_Click(object sender, EventArgs e)
@@ -373,6 +373,9 @@ namespace MoneyMindManager_Presentation.Login
 
             var creatingResult = await _accountApiClient.Add(new CreateAccountDTO(accountName, defaultCurrencyID, null, personName, null, null, null, null, userName, password));
 
+            this.UseWaitCursor = false;
+            this.Cursor = Cursors.Default;
+
             if (!creatingResult.IsSuccess)
             {
                 _messageBoxService.DisplayError(creatingResult.ErrorMessage);
@@ -383,8 +386,6 @@ namespace MoneyMindManager_Presentation.Login
 
             _ = Task.Run(() => _logger.LogInfo($"New Account created with ID {newAccountID} at {DateTime.Now}"));
 
-            this.UseWaitCursor = false;
-            this.Cursor = Cursors.Default;
 
             if (newAccountID != null)
             {

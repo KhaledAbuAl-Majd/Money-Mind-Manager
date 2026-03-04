@@ -220,6 +220,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             }
 
             _Category.Notes = kgtxtNotes.ValidatedText;
+            _Category.IsActive = gtswIsActive.Checked;
 
             if (Mode == enMode.AddNew)
             {
@@ -398,31 +399,31 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
         {
             kgtxt_OnValidationSuccess(sender, e);
 
-            string categoryName = kgtxtCategoryName.ValidatedText;
+            //string categoryName = kgtxtCategoryName.ValidatedText;
 
-            if ((Mode == enMode.AddNew) || (Mode == enMode.Update && _Category.CategoryName != categoryName))
-            {
-                var result = _finCategoryApi.IsExistByName(categoryName, Convert.ToInt32(_userSession.UserID)).GetAwaiter().GetResult();
+            //if ((Mode == enMode.AddNew) || (Mode == enMode.Update && _Category.CategoryName != categoryName))
+            //{
+            //var result = _finCategoryApi.IsExistByName(categoryName, Convert.ToInt32(_userSession.UserID)).GetAwaiter().GetResult();
 
-                if (!result.IsSuccess)
-                {
-                    _messageBoxService.DisplayError(result.ErrorMessage);
-                    e.Cancel = false;
-                    errorProvider1.SetError(kgtxtCategoryName, null);
-                    return;
-                }
+            //if (!result.IsSuccess)
+            //{
+            //    _messageBoxService.DisplayError(result.ErrorMessage);
+            //    e.Cancel = false;
+            //    errorProvider1.SetError(kgtxtCategoryName, null);
+            //    return;
+            //}
 
-                if (result.Data)
-                {
-                    e.Cancel = true;
-                    errorProvider1.SetError(kgtxtCategoryName, "اسم الفئة مستخدم, قم بتجربة اسم آخر");
-                }
-                else
-                {
-                    e.Cancel = false;
-                    errorProvider1.SetError(kgtxtCategoryName, null);
-                }
-            }
+            //if (result.Data)
+            //{
+            //    e.Cancel = true;
+            //    errorProvider1.SetError(kgtxtCategoryName, "اسم الفئة مستخدم, قم بتجربة اسم آخر");
+            //}
+            //else
+            //{
+            //    e.Cancel = false;
+            //    errorProvider1.SetError(kgtxtCategoryName, null);
+            //}
+            //}
         }
 
         private async void gibtnDeleteVoucher_Click(object sender, EventArgs e)

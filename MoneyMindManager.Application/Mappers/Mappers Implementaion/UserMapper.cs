@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using MoneyMindManager.Application.Abstractions.Mappers;
+using MoneyMindManager.Core.Enums;
 using MoneyMindManager.Domain.Abstractions.Services;
 using MoneyMindManager.Domain.Criteria;
 using MoneyMindManager.Domain.Entities;
@@ -21,7 +22,10 @@ namespace MoneyMindManager.Application.Mappers.Mappers_Implementaion
             if (userDTO is null || userDTO.PermissionsList is null)
                 return null;
 
-            int permissions = _permissionService.CalculatePermissions(userDTO.PermissionsList.Where(permission => permission.Checked)
+
+
+            int permissions = _permissionService.IsHasPermission(userDTO.Permissions, enPermissions.Admin) ? userDTO.Permissions : 
+                _permissionService.CalculatePermissions(userDTO.PermissionsList.Where(permission => permission.Checked)
                 .Select(permission => permission.ItemValue));
 
             return new User()
