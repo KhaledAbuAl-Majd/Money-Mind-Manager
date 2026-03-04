@@ -11,12 +11,15 @@ namespace MoneyMindManager.UI.Services
         private readonly IExportExcelService _exportExcelService;
         private readonly INotificationService _notificationService;
         private readonly IActiveFormTracker _activeFormTracker;
+        private readonly IFolderService _folderService;
 
-        public ExportWithDialogSevice(IExportExcelService exportExcelService, INotificationService notificationService, IActiveFormTracker activeFormTracker)
+        public ExportWithDialogSevice(IExportExcelService exportExcelService, INotificationService notificationService,
+            IActiveFormTracker activeFormTracker, IFolderService folderService)
         {
             this._exportExcelService = exportExcelService;
             this._notificationService = notificationService;
             this._activeFormTracker = activeFormTracker;
+            this._folderService = folderService;
         }
 
         private void UpdateProgress(byte percentage)
@@ -49,7 +52,7 @@ namespace MoneyMindManager.UI.Services
                     if (result == true)
                     {
                         _notificationService.DisplayWithOnClick(_activeFormTracker.ActiveForm.Icon, ToolTipIcon.Info, true, "نجاح العملية", "تم تصدير الملف بنجاح ✅", 10000,
-                          (e, s) => System.IO.Path.GetDirectoryName(saveFile.FileName));
+                          (e, s) => _folderService.Open(System.IO.Path.GetDirectoryName(saveFile.FileName)));
                     }
                 }
             }
