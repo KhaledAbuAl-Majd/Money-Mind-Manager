@@ -9,7 +9,7 @@ namespace MoneyMindManager.Shared.DTOs.Paged_Result_DTOs
 
         public decimal CurrentPageValue { get; set; }
 
-        public PagedResultWithTotal_CurrentDTO(IEnumerable<T> data, int totalPages, int totalRecords, decimal totalValue,
+        public PagedResultWithTotal_CurrentDTO(List<T> data, int totalPages, int totalRecords, decimal totalValue,
                     decimal currentPageValue) : base(data, totalPages, totalRecords)
         {
             this.TotalValue = totalValue;

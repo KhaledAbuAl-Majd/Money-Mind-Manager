@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace MoneyMindManager.Shared.DTOs.Paged_Result_DTOs
 {
@@ -12,7 +8,7 @@ namespace MoneyMindManager.Shared.DTOs.Paged_Result_DTOs
 
         public decimal CurrentPageRemainingAmount { get; set; }
 
-        public DebtsPagedResultDTO(IEnumerable<T> data, int totalPages, int totalRecords, decimal totalValue,
+        public DebtsPagedResultDTO(List<T> data, int totalPages, int totalRecords, decimal totalValue,
                     decimal currentPageValue, decimal totalRemainingAmount, decimal currentPageRemainingAmount) : base(data, totalPages, totalRecords, totalValue, currentPageValue)
         {
             this.TotalRemainingAmount = totalRemainingAmount;

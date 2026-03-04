@@ -6,7 +6,7 @@ namespace MoneyMindManager.Core.Paged_Result_DTOs
     {
         public decimal Value { get; set; }
 
-        public PagedResultWithValueDTO(IEnumerable<T> data, int totalPages, int totalRecords, decimal value) : base(data, totalPages, totalRecords)
+        public PagedResultWithValueDTO(List<T> data, int totalPages, int totalRecords, decimal value) : base(data, totalPages, totalRecords)
         {
             this.Value = value;
         }
