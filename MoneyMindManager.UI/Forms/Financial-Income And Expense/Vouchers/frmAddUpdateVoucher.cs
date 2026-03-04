@@ -47,12 +47,6 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
         public frmAddUpdateVoucher(IUserSession userSession, IMessageBoxService messageBoxService, IFormDisplayer formDisplayer,
             IFinTransactionApiClient finTransactionApiClient, IFinVoucherApiClient finVoucherApiClient, IDataConverter dataConverter, IExportWithDialogService exportWithDialogService)
         {
-            if (!_CheckPermissions())
-            {
-                this.Dispose();
-                return;
-            }
-
             this._userSession = userSession;
             this._messageBoxService = messageBoxService;
             this._formDisplayer = formDisplayer;
@@ -60,6 +54,12 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             this._finVoucherApi = finVoucherApiClient;
             this._dataConverter = dataConverter;
             this._exportWithDialogService = exportWithDialogService;
+            if (!_CheckPermissions())
+            {
+                this.Dispose();
+                return;
+            }
+
 
             InitializeComponent();
             this._voucherMode = enVoucherMode.AddNew;
@@ -629,7 +629,8 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
         {
             if (this._voucherMode == enVoucherMode.Update && _LockingChangingEvent)
             {
-                var result = await _finVoucherApi.ChangeLockingByID(Convert.ToInt32(_VoucherID), _Voucher.IsLocked, Convert.ToInt32(_userSession.UserID));
+                bool isLocked = gchkIsLocked.Checked;
+                var result = await _finVoucherApi.ChangeLockingByID(Convert.ToInt32(_VoucherID), isLocked, Convert.ToInt32(_userSession.UserID));
 
                 if (!result.IsSuccess)
                 {
@@ -639,6 +640,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
                 if (result.Data)
                 {
+                    _Voucher.IsLocked = isLocked;
                     LockAndUnLockMode(_Voucher.IsLocked);
                 }
                 else

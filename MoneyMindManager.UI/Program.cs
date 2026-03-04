@@ -25,6 +25,7 @@ namespace MoneyMindManager_Presentation
         {
             var services = new ServiceCollection();
             DependencyContainer.RegisterServices(services);
+            services.AddUI();//register Ui DI
 
             var serviceProvider = services.BuildServiceProvider();
             _logger = serviceProvider.GetRequiredService<ILogger>();
@@ -32,7 +33,6 @@ namespace MoneyMindManager_Presentation
 
             if (HandleEventSourceSetup())
             {
-                services.AddUI();//register Ui DI
 
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);

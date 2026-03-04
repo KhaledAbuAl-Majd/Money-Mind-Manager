@@ -45,7 +45,6 @@
   <ItemGroup>
     <Compile Include="Abstractions\Handlers\IResultFactory.cs" />
     <Compile Include="Abstractions\Handlers\IResultHandler.cs" />
-    <Compile Include="Abstractions\Infrastructure\IEventLogLoggerSettings.cs" />
     <Compile Include="Abstractions\Services\IDebtPyamentService.cs" />
     <Compile Include="Abstractions\Services\IDebtService.cs" />
     <Compile Include="Abstractions\Services\IFinTransactionService.cs" />
@@ -118,6 +117,8 @@
       <Name>MoneyMindManager.Shared.DTOs</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Abstractions\Infrastructure\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

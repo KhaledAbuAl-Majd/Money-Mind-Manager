@@ -306,10 +306,10 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                         command.Parameters.Add(outputRecordsCount);
 
                         await connection.OpenAsync();
-
+                        List<Person> people;
                         using (SqlDataReader reader = await command.ExecuteReaderAsync())
                         {
-                            List<Person> people = new List<Person>();
+                            people = new List<Person>();
 
                             int personOrdianl = reader.GetOrdinal("PersonID");
                             int personNameOrdinal = reader.GetOrdinal("PersonName");
@@ -337,11 +337,11 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                                 people.Add(person);
                             }
 
-                            int numberOfPages = Convert.ToInt32(outputNumberOfPages.Value);
-                            int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
-
-                            PeoplePaged = new PagedResultDTO<Person>(people, numberOfPages, recordsCount);
                         }
+                        int numberOfPages = Convert.ToInt32(outputNumberOfPages.Value);
+                        int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
+
+                        PeoplePaged = new PagedResultDTO<Person>(people, numberOfPages, recordsCount);
                     }
                 }
 
@@ -391,10 +391,10 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                         command.Parameters.Add(outputRecordsCount);
 
                         await connection.OpenAsync();
-
+                        List<Person> people;
                         using (SqlDataReader reader = await command.ExecuteReaderAsync())
                         {
-                            List<Person> people = new List<Person>();
+                            people = new List<Person>();
 
                             int personOrdianl = reader.GetOrdinal("PersonID");
                             int personNameOrdinal = reader.GetOrdinal("PersonName");
@@ -413,11 +413,11 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                                 people.Add(person);
                             }
 
-                            int numberOfPages = Convert.ToInt32(outputNumberOfPages.Value);
-                            int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
-
-                            peoplePaged = new PagedResultDTO<Person>(people, numberOfPages, recordsCount);
                         }
+                        int numberOfPages = Convert.ToInt32(outputNumberOfPages.Value);
+                        int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
+
+                        peoplePaged = new PagedResultDTO<Person>(people, numberOfPages, recordsCount);
                     }
                 }
 

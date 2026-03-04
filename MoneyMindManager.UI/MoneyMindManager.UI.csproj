@@ -195,14 +195,13 @@
       <DependentUpon>frmDebtsList.cs</DependentUpon>
     </Compile>
     <Compile Include="DependencyInjection\UIRegistrationDI.cs" />
-    <Compile Include="Global\clsFileSystemHelper.cs" />
-    <Compile Include="Global\clsUserSettings.cs" />
     <Compile Include="Forms\About Programm\frmAboutProgramm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\About Programm\frmAboutProgramm.Designer.cs">
       <DependentUpon>frmAboutProgramm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Global\clsPL_Utils.cs" />
     <Compile Include="Models\UserSettings.cs" />
     <Compile Include="Services\ActiveFormTracker.cs" />
     <Compile Include="Services\DataConverterService.cs" />
@@ -224,7 +223,6 @@
     <Compile Include="Forms\Current Account\frmCurrentAccount.Designer.cs">
       <DependentUpon>frmCurrentAccount.cs</DependentUpon>
     </Compile>
-    <Compile Include="Global\clsExportHelper.cs" />
     <Compile Include="Forms\Financial-Income And Expense\Categories\frmAddUpdateCategory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -411,9 +409,6 @@
     <Compile Include="Forms\Users\FrmUsers.Designer.cs">
       <DependentUpon>FrmUsers.cs</DependentUpon>
     </Compile>
-    <Compile Include="Global\clsPL_MessageBoxs.cs" />
-    <Compile Include="Global\clsPL_Global.cs" />
-    <Compile Include="Global\clsPL_Utils.cs" />
     <Compile Include="Forms\Main\frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -620,14 +615,6 @@
     <ProjectReference Include="..\MoneyMindManager.Shared.DTOs\MoneyMindManager.Shared.DTOs.csproj">
       <Project>{e91f0830-3641-4e5e-8486-5c2878937c17}</Project>
       <Name>MoneyMindManager.Shared.DTOs</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MoneyMindManagerGlobal\MoneyMindManagerGlobal.csproj">
-      <Project>{a14d0a64-2290-4f9e-8bc5-0055dbb3d8c7}</Project>
-      <Name>MoneyMindManagerGlobal</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MoneyMindManager_Business\MoneyMindManager_Business.csproj">
-      <Project>{f9541440-5dd1-4791-b0f2-0ffa87a7ce59}</Project>
-      <Name>MoneyMindManager_Business</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

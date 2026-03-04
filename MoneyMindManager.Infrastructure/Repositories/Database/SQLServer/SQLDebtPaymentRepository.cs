@@ -238,7 +238,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                         command.Parameters.Add(outputRemainingAmount);
 
                         await connection.OpenAsync();
-
+                        List<DebtPaymentViewSummary> list;
                         using (SqlDataReader reader = await command.ExecuteReaderAsync())
                         {
 
@@ -249,7 +249,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                             int userNameOrdinal = reader.GetOrdinal("CreatedByUserName");
                             int purposeOrdinal = reader.GetOrdinal("Purpose");
 
-                            List<DebtPaymentViewSummary> list = new List<DebtPaymentViewSummary>();
+                            list = new List<DebtPaymentViewSummary>();
 
                             while (await reader.ReadAsync())
                             {
@@ -262,14 +262,12 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
 
                                 list.Add(new DebtPaymentViewSummary(id, amount, debtDate, userName, createdDate, purpose));
                             }
-
-
-                            int numberOfPages = Convert.ToInt32(outputNumberOfPages.Value);
-                            int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
-                            decimal remainingAmount = Convert.ToDecimal(outputRemainingAmount.Value);
-
-                            allTransactions = new PagedResultWithValueDTO<DebtPaymentViewSummary>(list, numberOfPages, recordsCount, remainingAmount);
                         }
+                        int numberOfPages = Convert.ToInt32(outputNumberOfPages.Value);
+                        int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
+                        decimal remainingAmount = Convert.ToDecimal(outputRemainingAmount.Value);
+
+                        allTransactions = new PagedResultWithValueDTO<DebtPaymentViewSummary>(list, numberOfPages, recordsCount, remainingAmount);
                     }
                 }
 

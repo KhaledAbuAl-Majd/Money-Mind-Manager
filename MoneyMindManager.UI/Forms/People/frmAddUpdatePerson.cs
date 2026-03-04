@@ -31,16 +31,17 @@ namespace MoneyMindManager_Presentation.People
         private PersonDTO _Person { get; set; }
         public frmAddUpdatePerson(IPersonApiClient personApiClient, IUserSession userSession, IMessageBoxService messageBoxService)
         {
+            InitializeComponent();
+            this._personApiClient = personApiClient;
+            this._userSession = userSession;
+            this._messageBoxService = messageBoxService;
+
             if (!_CheckPermissions())
             {
                 this.Dispose();
                 return;
             }
 
-            InitializeComponent();
-            this._personApiClient = personApiClient;
-            this._userSession = userSession;
-            this._messageBoxService = messageBoxService;
             Mode = enMode.AddNew;
             _PersonID = null;
             _Person = new PersonDTO();

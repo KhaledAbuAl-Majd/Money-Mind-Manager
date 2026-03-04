@@ -25,13 +25,12 @@ namespace MoneyMindManager_Presentation.Login
         private readonly IMessageBoxService _messageBoxService;
         private readonly ILogger _logger;
         private readonly IUserCredentialsService _userCredentailService;
-        private readonly IUserSession _userSession;
         private readonly IActiveFormTracker _activeFormTracker;
         private readonly IDatabaseAppApiClient _databaseAppApiClient;
 
         public frmLogin(IServiceProvider serviceProvider, ICurrencyApiClient currencyApiClient, IMessageBoxService messageBoxService,
             ILogger logger, IUserCredentialsService userCredentialsService, IUserApiClient userApiClient, IAccountApiClient accountApiClient,
-            IUserSession userSession, IActiveFormTracker activeFormTracker, IDatabaseAppApiClient databaseAppApiClient)
+           IActiveFormTracker activeFormTracker, IDatabaseAppApiClient databaseAppApiClient)
         {
             InitializeComponent();
             this._serviceProvider = serviceProvider;
@@ -41,7 +40,6 @@ namespace MoneyMindManager_Presentation.Login
             this._messageBoxService = messageBoxService;
             this._logger = logger;
             this._userCredentailService = userCredentialsService;
-            this._userSession = userSession;
             this._activeFormTracker = activeFormTracker;
             this._databaseAppApiClient = databaseAppApiClient;
 
@@ -322,31 +320,19 @@ namespace MoneyMindManager_Presentation.Login
 
             _ = Task.Run(() => _logger.LogSuccess($"[LOGIN SUCCESS] User ID = {user.UserID}, Username = {user.UserName}, Login Time = {DateTime.Now}"));
 
-            frmMain frm = _serviceProvider.GetRequiredService<frmMain>();
 
-            if (!await _userSession.StartSession(user))
+            using (var scope = _serviceProvider.CreateScope())
             {
-                _activeFormTracker.ChangeActiveForm(this);
-                _messageBoxService.DisplayError("فشل تسجيل الدخول !");
-                //clsPL_MessageBoxs.ShowErrorMessage("فشل تسجيل الدخول !");
-                return;
+                frmMain frm = scope.ServiceProvider.GetRequiredService<frmMain>();
+                frm.Initialize(user);
+
+                this.Hide();
+
+                frm.OnCloseProgramm += frmMain_OnCloseProgramm;
+                _activeFormTracker.ChangeActiveForm(frm);
+                frm.ShowDialog();
+
             }
-            _userSession.OnSessionExpired += async () =>
-            {
-                if (frm != null && !frm.IsDisposed)
-                {
-                    frm.Dispose();
-                    await OnLogout();
-                    return;
-                }
-            };
-
-            this.Hide();
-
-            frm.OnCloseProgramm += frmMain_OnCloseProgramm;
-            _activeFormTracker.ChangeActiveForm(frm);
-            frm.ShowDialog();
-
             if (!this.IsDisposed)
             {
                 await OnLogout();

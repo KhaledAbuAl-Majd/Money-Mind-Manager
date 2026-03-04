@@ -1,22 +1,21 @@
 ﻿using System;
 using System.Windows.Forms;
 using MoneyMindManager.UI.Abstractions;
-using MoneyMindManager_Presentation;
 
 namespace MoneyMindManager.UI.Services
 {
     public class NotificationService : INotificationService
     {
-        private readonly Func<Form> _activeFormProvider;
+        private readonly IActiveFormTracker _activeFormTracker;
 
-        public NotificationService(Func<Form> activeFormProvider)
+        public NotificationService(IActiveFormTracker activeFormTracker)
         {
-            this._activeFormProvider = activeFormProvider;
+            this._activeFormTracker = activeFormTracker;
         }
 
         public void Display(System.Drawing.Icon notifyIcon, ToolTipIcon ballonTipIcon, bool visible, string title, string text, int timeOut)
         {
-            var activeForm = _activeFormProvider();
+            var activeForm = _activeFormTracker.ActiveForm;
 
             if (activeForm == null)
                 return;
@@ -40,7 +39,7 @@ namespace MoneyMindManager.UI.Services
 
         public void DisplayWithOnClick(System.Drawing.Icon notifyIcon, ToolTipIcon ballonTipIcon, bool visible, string title, string text, int timeOut, EventHandler onClick)
         {
-            var activeForm = _activeFormProvider();
+            var activeForm = _activeFormTracker.ActiveForm;
 
             if (activeForm == null)
                 return;

@@ -53,7 +53,7 @@ namespace MoneyMindManager.Application.Services.DeptPayment
             if (!accessResult.Data)
                 return handler.Failure("ليس لديك صلاحية إضافة/تعديل (سندات - معاملات سداد) الديون.");
 
-
+            debtPayment.CreatedByUserID = currentUserID;
             var result = await _debtPaymentRepository.Add(_debtPaymentMapper.DTOToEntity(debtPayment));
 
             if (result is null)

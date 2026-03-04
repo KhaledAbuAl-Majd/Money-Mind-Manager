@@ -22,16 +22,16 @@ namespace MoneyMindManager_Presentation.People
         private IFormDisplayer _formDisplayer;
         public frmPeople(IPersonApiClient personApiClient, IUserSession userSession, IMessageBoxService messageBoxService, IFormDisplayer formDisplayer)
         {
+            this._personApiClient = personApiClient;
+            this._userSession = userSession;
+            this._messageBoxService = messageBoxService;
+            this._formDisplayer = formDisplayer;
+
             if (!_CheckPermissions())
             {
                 this.Dispose();
                 return;
             }
-
-            this._personApiClient = personApiClient;
-            this._userSession = userSession;
-            this._messageBoxService = messageBoxService;
-            this._formDisplayer = formDisplayer;
 
             InitializeComponent();
         }

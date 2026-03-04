@@ -682,6 +682,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                         await connection.OpenAsync();
 
 
+                        List<UserSummary> userSummariesList;
                         using (SqlDataReader reader = await command.ExecuteReaderAsync())
                         {
                             int userIDOrdinal = reader.GetOrdinal("UserID");
@@ -691,7 +692,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                             int emailOrdianl = reader.GetOrdinal("Email");
                             int isActiveOrdianl = reader.GetOrdinal("IsActive");
 
-                            List<UserSummary> userSummariesList = new List<UserSummary>();
+                            userSummariesList = new List<UserSummary>();
 
                             while (await reader.ReadAsync())
                             {
@@ -715,11 +716,11 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                                 userSummariesList.Add(user);
                             }
 
-                            int numberOfPages = Convert.ToInt32(outputNumberOfPages.Value);
-                            int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
-
-                            userPaged = new PagedResultDTO<UserSummary>(userSummariesList, numberOfPages, recordsCount);
                         }
+                        int numberOfPages = Convert.ToInt32(outputNumberOfPages.Value);
+                        int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
+
+                        userPaged = new PagedResultDTO<UserSummary>(userSummariesList, numberOfPages, recordsCount);
                     }
                 }
 

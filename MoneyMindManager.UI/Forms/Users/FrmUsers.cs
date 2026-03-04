@@ -24,16 +24,16 @@ namespace MoneyMindManager_Presentation
         public FrmUsers(IUserSession userSession, IMessageBoxService messageBoxService,
            IUserApiClient userApiClient, IFormDisplayer formDisplayer)
         {
+            this._userSession = userSession;
+            this._messageBoxService = messageBoxService;
+            this._userApiClient = userApiClient;
+            this._formDisplayer = formDisplayer;
+
             if (!_CheckPermissions())
             {
                 this.Dispose();
                 return;
             }
-
-            this._userSession = userSession;
-            this._messageBoxService = messageBoxService;
-            this._userApiClient = userApiClient;
-            this._formDisplayer = formDisplayer;
 
             InitializeComponent();
         }

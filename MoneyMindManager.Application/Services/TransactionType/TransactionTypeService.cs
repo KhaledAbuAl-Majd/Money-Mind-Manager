@@ -77,7 +77,7 @@ namespace MoneyMindManager.Application.Services.TransactionType
             if (result.Data is null)
                 return handler.Failure("failed to get transaction types list!");
 
-            var DTOList = result.Data.Select(entity => _transactionTypeMapper.EntityToDTO(entity));
+            var DTOList = result.Data.Select(entity => _transactionTypeMapper.EntityToDTO(entity)).ToList();
             return handler.Success(DTOList);
         }
     }

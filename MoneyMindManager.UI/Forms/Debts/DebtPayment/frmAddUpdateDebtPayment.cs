@@ -40,16 +40,16 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
         public frmAddUpdateDebtPayment(IUserSession userSession, IMessageBoxService messageBoxService, IFormDisplayer formDisplayer,
             IDebtPaymentApiClient debtPaymentApiClient)
         {
+            this._userSession = userSession;
+            this._messageBoxService = messageBoxService;
+            this._formDisplayer = formDisplayer;
+            this._debtPaymentApi = debtPaymentApiClient;
             if (!_CheckPermissions())
             {
                 this.Dispose();
                 return;
             }
 
-            this._userSession = userSession;
-            this._messageBoxService = messageBoxService;
-            this._formDisplayer = formDisplayer;
-            this._debtPaymentApi = debtPaymentApiClient;
 
             InitializeComponent();
             Mode = enMode.AddNew;
@@ -192,7 +192,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
             if (!ValidateChildren())
             {
-                clsPL_MessageBoxs.ShowValidateChildrenFailedMessage();
+                _messageBoxService.ShowValidateChildrenFailedMessage();
                 lblUserMessage.Text = "تم العثور على حقول غير صالحة. ضع المؤشر على العلامات الحمراء لعرض سبب الخطأ.";
                 lblUserMessage.Visible = true;
                 return;

@@ -10,6 +10,7 @@ using MoneyMindManager.Core.Enums;
 using MoneyMindManager.Core.Models.FinTransaction;
 using MoneyMindManager.Core.Paged_Result_DTOs;
 using MoneyMindManager.Domain.Abstractions;
+using MoneyMindManager.Domain.Entities.DebtPayment;
 using MoneyMindManager.Shared.DTOs.FinTransaction;
 using MoneyMindManager.Shared.DTOs.IncomeAndExpenseCategory;
 
@@ -77,7 +78,7 @@ namespace MoneyMindManager.Application.Services.FinTransaction
             }
 
             //
-
+            finTransaction.CreatedByUserID = currentUserID;
             var result = await _finTransactionRepository.Add(_finTransactionMapper.DTOToEntity(finTransaction));
 
             if (result is null)

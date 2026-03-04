@@ -64,7 +64,7 @@ namespace MoneyMindManager.Application.Services.MainTransaction
             if (result.Data is null)
                 return handler.Failure("failed to get main transactions list");
 
-            var dtosList = result.Data.Data.Select(entity => _mainTransactionMapper.EntityToDTO(entity));
+            var dtosList = result.Data.Data.Select(entity => _mainTransactionMapper.EntityToDTO(entity)).ToList();
             var returnData = new PagedResultWithTotal_CurrentDTO<MainTransactionDTO>(dtosList, result.Data.TotalPages, result.Data.TotalRecords, result.Data.TotalValue,
                 result.Data.CurrentPageValue);
             return handler.Success(returnData);
@@ -91,7 +91,7 @@ namespace MoneyMindManager.Application.Services.MainTransaction
             if (result.Data is null)
                 return handler.Failure("failed to get main transactions list");
 
-            var dtosList = result.Data.Select(entity => _mainTransactionMapper.EntityToDTO(entity));
+            var dtosList = result.Data.Select(entity => _mainTransactionMapper.EntityToDTO(entity)).ToList();
             return handler.Success(dtosList);
         }
     }

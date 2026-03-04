@@ -10,10 +10,10 @@ using KhaledControlLibrary1;
 using LiveCharts;
 using LiveCharts.Wpf;
 using MoneyMindManager.Client.Abstractions.ApiClient;
+using MoneyMindManager.Core.Abstractions;
 using MoneyMindManager.Core.Models.Reports.Categories;
 using MoneyMindManager.UI.Abstractions;
 using MoneyMindManager_Presentation.Global;
-using MoneyMindManagerGlobal;
 
 
 namespace MoneyMindManager_Presentation.OverView.Controls
@@ -23,6 +23,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
         private IUserSession _userSession;
         private IMessageBoxService _messageBoxService;
         private IReportApiClient _reportApi;
+        private IFormateHelper _formateHelper;
 
         private bool isInitialized = false;
         public ctrlTopCategories()
@@ -30,14 +31,15 @@ namespace MoneyMindManager_Presentation.OverView.Controls
             InitializeComponent();
         }
 
-        public bool Initilaize(IUserSession userSession, IMessageBoxService messageBoxService, IReportApiClient reportApiClient)
+        public bool Initilaize(IUserSession userSession, IMessageBoxService messageBoxService, IReportApiClient reportApiClient,IFormateHelper formateHelper)
         {
-            if (userSession is null || messageBoxService is null || reportApiClient is null)
+            if (userSession is null || messageBoxService is null || reportApiClient is null || formateHelper is null)
                 return false;
 
             this._userSession = userSession;
             this._messageBoxService = messageBoxService;
             this._reportApi = reportApiClient;
+            this._formateHelper = formateHelper;
             isInitialized = true;
             return true;
         }
@@ -75,8 +77,8 @@ namespace MoneyMindManager_Presentation.OverView.Controls
             if (!isInitialized)
                 return false;
 
-            DateTime? startDate = clsFormat.TryConvertToDateTime(kgtxtFromData.ValidatedText);
-            DateTime? endDate = clsFormat.TryConvertToDateTime(kgtxtToDate.ValidatedText);
+            DateTime? startDate = _formateHelper.TryConvertToDateTime(kgtxtFromData.ValidatedText);
+            DateTime? endDate = _formateHelper.TryConvertToDateTime(kgtxtToDate.ValidatedText);
 
             var result = await _reportApi.GetTopCategories(startDate, endDate, _IsIncome, Convert.ToInt16(_userSession.CurrentUser.AccountID));
 

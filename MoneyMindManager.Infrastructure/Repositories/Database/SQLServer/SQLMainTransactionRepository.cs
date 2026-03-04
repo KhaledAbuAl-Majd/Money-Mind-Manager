@@ -138,7 +138,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                         command.Parameters.Add(outputCurrentPageTransactionsValue);
 
                         await connection.OpenAsync();
-
+                        List<MainTransaction> transactionsList;
                         using (SqlDataReader reader = await command.ExecuteReaderAsync())
                         {
                             int idOrdinal = reader.GetOrdinal("TransactionID");
@@ -149,7 +149,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                             int userNameOrdinal = reader.GetOrdinal("CreatedByUserName");
                             int purposeOrdinal = reader.GetOrdinal("Purpose");
 
-                            List<MainTransaction> transactionsList = new List<MainTransaction>();
+                            transactionsList = new List<MainTransaction>();
 
                             while (await reader.ReadAsync())
                             {
@@ -173,12 +173,12 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                                 transactionsList.Add(transaction);
                             }
 
-                            int numberOfPages = Convert.ToInt32(outputNumberOfPages.Value);
-                            int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
-
-                            data = new PagedResultWithTotal_CurrentDTO<MainTransaction>(transactionsList, numberOfPages, recordsCount,
-                                Convert.ToDecimal(outputTotalTransactionsValue.Value), Convert.ToDecimal(outputCurrentPageTransactionsValue.Value));
                         }
+                        int numberOfPages = Convert.ToInt32(outputNumberOfPages.Value);
+                        int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
+
+                        data = new PagedResultWithTotal_CurrentDTO<MainTransaction>(transactionsList, numberOfPages, recordsCount,
+                            Convert.ToDecimal(outputTotalTransactionsValue.Value), Convert.ToDecimal(outputCurrentPageTransactionsValue.Value));
                     }
                 }
 

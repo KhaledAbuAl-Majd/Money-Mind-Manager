@@ -14,15 +14,15 @@ namespace MoneyMindManager_Presentation.OverView
 
         public frmOverView(IServiceProvider serviceProvider, IMessageBoxService messageBoxService, IUserSession userSession)
         {
+            this._serviceProvider = serviceProvider;
+            this._messageBoxService = messageBoxService;
+            this._userSession = userSession;
+
             if (!_CheckPermissions())
             {
                 this.Dispose();
                 return;
             }
-
-            this._serviceProvider = serviceProvider;
-            this._messageBoxService = messageBoxService;
-            this._userSession = userSession;
 
             InitializeComponent();
         }

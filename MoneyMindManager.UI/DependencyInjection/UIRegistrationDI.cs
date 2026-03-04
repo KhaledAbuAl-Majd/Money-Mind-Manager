@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using MoneyMindManager.UI.Abstractions;
 using MoneyMindManager.UI.Services;
 using MoneyMindManager_Presentation;
+using MoneyMindManager_Presentation.Global;
 using MoneyMindManager_Presentation.Income_And_Expense;
 using MoneyMindManager_Presentation.Income_And_Expense.Categories;
 using MoneyMindManager_Presentation.Income_And_Expense.Vouchers;
@@ -19,18 +20,17 @@ namespace MoneyMindManager.UI.DependencyInjection
     {
         public static IServiceCollection AddUI(this IServiceCollection services)
         {
-            services.AddScoped<frmMain>();
-
-            services.AddScoped<IFormDisplayer, frmMain>();
             services.AddSingleton<IActiveFormTracker, ActiveFormTracker>();
             services.AddSingleton<IMessageBoxService, MessageBoxService>();
+            services.AddSingleton<INotificationService, NotificationService>();
             services.AddSingleton<IDataConverter, DataConverterService>();
             services.AddSingleton<IExportExcelService, ExcelExportService>();
             services.AddSingleton<IExportWithDialogService, ExportWithDialogSevice>();
 
             services.AddScoped<IUserSettingsService, JsonUserSettingsService>();
             services.AddScoped<IUserSession, UserSession>();
-            services.AddScoped<IFolderService, FolderService>();
+
+            services.AddSingleton<IFolderService, FolderService>();
 
 
             services.AddSingleton<IWindowsRegisterysettings, WindowsRegistrysettings>();
@@ -38,6 +38,9 @@ namespace MoneyMindManager.UI.DependencyInjection
 
             //forms
             services.AddSingleton<frmLogin>();
+
+            services.AddScoped<frmMain>();
+            services.AddScoped<IFormDisplayer>(sp => sp.GetRequiredService<frmMain>());
 
             services.AddTransient<frmCurrentAccount>();
 
@@ -79,6 +82,8 @@ namespace MoneyMindManager.UI.DependencyInjection
             services.AddTransient<frmOverViewDebts>();
             services.AddTransient<frmOverViewCategories>();
             services.AddTransient<frmOverView>();
+
+            services.AddTransient<frmAboutProgramm>();
 
             return services;
         }

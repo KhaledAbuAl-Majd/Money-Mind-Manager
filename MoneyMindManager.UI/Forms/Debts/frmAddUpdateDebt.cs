@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using Guna.UI2.WinForms;
 using KhaledControlLibrary1;
 using MoneyMindManager.Client.Abstractions.ApiClient;
+using MoneyMindManager.Core.Abstractions;
 using MoneyMindManager.Core.Enums;
 using MoneyMindManager.Core.Models.DebtPayment;
 using MoneyMindManager.Core.Models.FinTransaction;
@@ -18,7 +19,6 @@ using MoneyMindManager_Presentation.Income_And_Expense.Categories;
 using MoneyMindManager_Presentation.People;
 using MoneyMindManager_Presentation.Transactions;
 using MoneyMindManager_Presentation.Users;
-using MoneyMindManagerGlobal;
 
 namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 {
@@ -31,6 +31,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
         private readonly IDebtApiClient _debtApi;
         private readonly IDataConverter _dataConverter;
         private readonly IExportWithDialogService _exportWithDialogService;
+        private IFormateHelper _formateHelper;
 
         private bool isInitialized = false;
 
@@ -50,14 +51,9 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
         int? _DebtID;
 
         public frmAddUpdateDebt(IUserSession userSession, IMessageBoxService messageBoxService, IFormDisplayer formDisplayer,
-            IDebtPaymentApiClient debtPaymentApiClient, IDebtApiClient debtApiClient, IDataConverter dataConverter, IExportWithDialogService exportWithDialogService)
+            IDebtPaymentApiClient debtPaymentApiClient, IDebtApiClient debtApiClient, IDataConverter dataConverter,
+            IExportWithDialogService exportWithDialogService, IFormateHelper formateHelper)
         {
-            if (!_CheckPermissions())
-            {
-                this.Dispose();
-                return;
-            }
-
             this._userSession = userSession;
             this._messageBoxService = messageBoxService;
             this._formDisplayer = formDisplayer;
@@ -65,6 +61,14 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             this._debtApi = debtApiClient;
             this._dataConverter = dataConverter;
             this._exportWithDialogService = exportWithDialogService;
+            this._formateHelper = formateHelper;
+
+            if (!_CheckPermissions())
+            {
+                this.Dispose();
+                return;
+            }
+
 
             InitializeComponent();
             this._DebtMode = enDebtMode.AddNew;
@@ -364,7 +368,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             if (!ValidateChildren())
             {
-                clsPL_MessageBoxs.ShowValidateChildrenFailedMessage();
+                _messageBoxService.ShowValidateChildrenFailedMessage();
                 return;
             }
 
@@ -376,7 +380,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             _Debt.Purpose = notes;
             _Debt.TransactionDate = debtDate;
 
-            _Debt.PaymentDueDate = clsFormat.TryConvertToDateTime(kgtxtPaymentDueDate.ValidatedText);
+            _Debt.PaymentDueDate = _formateHelper.TryConvertToDateTime(kgtxtPaymentDueDate.ValidatedText);
             if (_DebtMode == enDebtMode.AddNew)
             {
                 bool isLending = (gcbDebtType.SelectedIndex == (int)enDebtType.إقراض) ? true : false;
@@ -423,6 +427,8 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 }
 
                 _Debt.RemainingAmount = result.Data.RemainingAmount;
+
+                _messageBoxService.Display("تم تعديل بيانات السند بنجاح", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 kgtxtRemainingAmount.RefreshNumber_DateTimeFormattedText(_Debt.RemainingAmount.ToString());
                 _isSaved = true;
@@ -614,7 +620,8 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
         {
             if (this._DebtMode == enDebtMode.Update && _LockingChangingEvent)
             {
-                var result = await _debtApi.ChangeLockingByID(Convert.ToInt32(_DebtID), _Debt.IsLocked, Convert.ToInt32(_userSession.UserID));
+                bool isLocked = gchkIsLocked.Checked;
+                var result = await _debtApi.ChangeLockingByID(Convert.ToInt32(_DebtID), isLocked, Convert.ToInt32(_userSession.UserID));
 
                 if (!result.IsSuccess)
                 {
@@ -624,6 +631,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
                 if (result.Data)
                 {
+                    _Debt.IsLocked = isLocked;
                     LockAndUnLockMode(_Debt.IsLocked);
                 }
                 else

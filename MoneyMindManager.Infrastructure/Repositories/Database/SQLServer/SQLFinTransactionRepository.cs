@@ -241,7 +241,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                         command.Parameters.Add(outputVoucherValue);
 
                         await connection.OpenAsync();
-
+                        List<FinTransactionViewSummary> list;
                         using (SqlDataReader reader = await command.ExecuteReaderAsync())
                         {
                             int idOrdinal = reader.GetOrdinal("MainTransactionID");
@@ -251,7 +251,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                             int userNameOrdinal = reader.GetOrdinal("CreatedByUserName");
                             int purposeOrdinal = reader.GetOrdinal("Purpose");
 
-                            List<FinTransactionViewSummary> list = new List<FinTransactionViewSummary>();
+                            list = new List<FinTransactionViewSummary>();
 
                             while (await reader.ReadAsync())
                             {
@@ -265,12 +265,12 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                                 list.Add(new FinTransactionViewSummary(id, categoryName, amount, userName, createdDate, purpose));
                             }
 
-                            int numberOfPages = Convert.ToInt32(outputNumberOfPages.Value);
-                            int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
-                            decimal voucherValue = Convert.ToDecimal(outputVoucherValue.Value);
-
-                            allTransactions = new PagedResultWithValueDTO<FinTransactionViewSummary>(list, numberOfPages, recordsCount, voucherValue);
                         }
+                        int numberOfPages = Convert.ToInt32(outputNumberOfPages.Value);
+                        int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
+                        decimal voucherValue = Convert.ToDecimal(outputVoucherValue.Value);
+
+                        allTransactions = new PagedResultWithValueDTO<FinTransactionViewSummary>(list, numberOfPages, recordsCount, voucherValue);
                     }
                 }
 

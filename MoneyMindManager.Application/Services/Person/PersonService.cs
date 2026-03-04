@@ -180,7 +180,7 @@ namespace MoneyMindManager.Application.Services
             if (!result.IsSuccess)
                 return handler.Failure(result.ErrorMessage);
 
-            PagedResultDTO<PersonDTO> returnResult = new PagedResultDTO<PersonDTO>(result.Data.Data.Select(entity => _personMapper.EntityToDTO(entity)),
+            PagedResultDTO<PersonDTO> returnResult = new PagedResultDTO<PersonDTO>(result.Data.Data.Select(entity => _personMapper.EntityToDTO(entity)).ToList(),
                 result.Data.TotalPages, result.Data.TotalRecords);
 
             return handler.Success(returnResult);
@@ -202,7 +202,7 @@ namespace MoneyMindManager.Application.Services
             if (!result.IsSuccess)
                 return handler.Failure(result.ErrorMessage);
 
-            PagedResultDTO<PersonDTO> returnResult = new PagedResultDTO<PersonDTO>(result.Data.Data.Select(entity => _personMapper.EntityToDTO(entity)),
+            PagedResultDTO<PersonDTO> returnResult = new PagedResultDTO<PersonDTO>(result.Data.Data.Select(entity => _personMapper.EntityToDTO(entity)).ToList(),
                 result.Data.TotalPages, result.Data.TotalRecords);
 
             return handler.Success(returnResult);

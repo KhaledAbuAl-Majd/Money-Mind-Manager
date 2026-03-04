@@ -189,6 +189,7 @@ namespace MoneyMindManager.Application.Services.Debt
                 return handler.Failure("البيانات المرسلة غير صالحة");
 
             var criteria = _debtMapper.ToPagedSearchCriteria(DTO);
+            criteria.RowsPerPage = 15;
             var result = await _debtRepository.GetAllPaged(criteria, currentUserID);
 
             if (result is null)

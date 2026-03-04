@@ -29,12 +29,6 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
         public frmMainTransactionsList(IUserSession userSession, IMessageBoxService messageBoxService, IMainTransactionApiClient mainTransactionApiClient
           , IFormDisplayer formDisplayer, ITransactionTypeApiClient transactionTypeApiClient, IDataConverter dataConverter, IExportWithDialogService exportWithDialogService)
         {
-            if (!_CheckPermissions())
-            {
-                this.Dispose();
-                return;
-            }
-
             this._userSession = userSession;
             this._messageBoxService = messageBoxService;
             this._mainTransactionApiClient = mainTransactionApiClient;
@@ -42,6 +36,12 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             this._transactionTypeApi = transactionTypeApiClient;
             this._dataConverter = dataConverter;
             this._exportWithDialogService = exportWithDialogService;
+
+            if (!_CheckPermissions())
+            {
+                this.Dispose();
+                return;
+            }
 
             InitializeComponent();
         }
@@ -105,16 +105,17 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             foreach (var item in chklbTransactionTypes.CheckedItems)
             {
-                DataRowView rowView = item as DataRowView;
+                //DataRowView rowView = item as DataRowView;
+                var rowView = item as TransactionTypeDTO;
 
                 if (rowView != null)
                 {
-                    object idValue = rowView["TransactionTypeID"];
+                    //object idValue = rowView["TransactionTypeID"];
 
-                    if (int.TryParse(idValue?.ToString(), out int id))
-                    {
-                        selectedIDs.Add(id);
-                    }
+                    //if (int.TryParse(idValue?.ToString(), out int id))
+                    //{
+                    //}
+                        selectedIDs.Add(rowView.TransactionTypeID);
                 }
             }
 
@@ -311,7 +312,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             // This happens inconsistently and does NOT affect the execution or data binding.
             // The code continues to work normally, so this warning can be safely ignored.
 
-            chklbTransactionTypes.DataSource = result.Data;
+            chklbTransactionTypes.DataSource = result.Data.ToList();
             chklbTransactionTypes.DisplayMember = nameof(TransactionTypeDTO.TransactionTypeName);
             chklbTransactionTypes.ValueMember = nameof(TransactionTypeDTO.TransactionTypeID);
 

@@ -2,13 +2,20 @@
 using System.Data;
 using System.Threading.Tasks;
 using ClosedXML.Excel;
+using MoneyMindManager.Core;
 using MoneyMindManager.UI.Abstractions;
-using MoneyMindManagerGlobal;
 
 namespace MoneyMindManager.UI.Services
 {
     public class ExcelExportService : IExportExcelService
     {
+        private readonly ILogger _logger;
+
+        public ExcelExportService(ILogger logger)
+        {
+            this._logger = logger;
+        }
+
         public event Action<byte> OnProgressChanged;
         public async Task<bool> Export(DataTable dt, string filePath, string sheetName = "Data")
         {
@@ -42,7 +49,7 @@ namespace MoneyMindManager.UI.Services
                 }
                 catch (Exception ex)
                 {
-                    clsGlobalEvents.RaiseErrorEvent(ex.Message, true);
+                    _logger.LogError(ex.Message);
                     OnProgressChanged.Invoke(100);
                     return false;
                 }

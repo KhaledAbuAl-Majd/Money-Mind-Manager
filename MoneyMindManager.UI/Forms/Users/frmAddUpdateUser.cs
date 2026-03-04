@@ -25,16 +25,16 @@ namespace MoneyMindManager_Presentation.Users
         public frmAddUpdateUser(IPersonApiClient personApiClient, IUserSession userSession, IMessageBoxService messageBoxService,
            IUserApiClient userApiClient, IFormDisplayer formDisplayer)
         {
-            if (!_CheckUserPermissions())
-            {
-                this.Dispose();
-                return;
-            }
             this._personApiClient = personApiClient;
             this._userSession = userSession;
             this._messageBoxService = messageBoxService;
             this._userApiClient = userApiClient;
             this._formDisplayer = formDisplayer;
+            if (!_CheckUserPermissions())
+            {
+                this.Dispose();
+                return;
+            }
 
             InitializeComponent();
             Mode = enMode.AddNew;

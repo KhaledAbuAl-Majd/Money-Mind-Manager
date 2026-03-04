@@ -28,7 +28,7 @@ namespace MoneyMindManager_Presentation.Users
             if (personApiClient is null || userSession is null || messageBoxService is null || userApiClient is null || formDisplayer is null)
                 return false;
 
-            if (!ctrlPersonCard1.Initialize(_personApiClient, _userSession, _messageBoxService, _userApiClient, _formDisplayer))
+            if (!ctrlPersonCard1.Initialize(personApiClient, userSession, messageBoxService, userApiClient, formDisplayer))
                 return false;
             this._personApiClient = personApiClient;
             this._userSession = userSession;

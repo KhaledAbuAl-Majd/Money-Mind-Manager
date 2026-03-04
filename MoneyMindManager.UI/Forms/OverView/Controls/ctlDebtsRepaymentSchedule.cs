@@ -133,7 +133,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
             });
 
 
-            string currency = clsPL_Global.CurrentUser?.AccountInfo?.DefaultCurrencyInfo?.CurrencySymbol;
+            string currency = _userSession.CurrentUser?.AccountInfo?.DefaultCurrencyInfo?.CurrencySymbol;
 
             CartesianChart1.AxisY.Add(new LiveCharts.Wpf.Axis
             {
@@ -215,7 +215,7 @@ namespace MoneyMindManager_Presentation.OverView.Controls
 
             };
 
-            string currency = clsPL_Global.CurrentUser?.AccountInfo?.DefaultCurrencyInfo?.CurrencySymbol;
+            string currency = _userSession.CurrentUser?.AccountInfo?.DefaultCurrencyInfo?.CurrencySymbol;
 
             CartesianChart1.AxisX.Add(new LiveCharts.Wpf.Axis
             {

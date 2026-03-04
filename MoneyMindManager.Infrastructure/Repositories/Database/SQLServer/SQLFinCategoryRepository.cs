@@ -349,7 +349,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer.Report
                         command.Parameters.Add(outputRecordsCount);
 
                         await connection.OpenAsync();
-
+                        List<FinCategory> list;
                         using (SqlDataReader reader = await command.ExecuteReaderAsync())
                         {
                             int idOrdinal = reader.GetOrdinal("CategoryID");
@@ -357,7 +357,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer.Report
                             int parentCategoryNameOrdinal = reader.GetOrdinal("ParentCategoryName");
                             int mainCategoryNameOrdinal = reader.GetOrdinal("MainCategoryName");
 
-                            List<FinCategory> list = new List<FinCategory>();
+                            list = new List<FinCategory>();
 
                             while (await reader.ReadAsync())
                             {
@@ -378,11 +378,11 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer.Report
                                 list.Add(category);
                             }
 
-                            int numberOfPages = Convert.ToInt32(outputNumberOfPages.Value);
-                            int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
-
-                            allCategories = new PagedResultDTO<FinCategory>(list, numberOfPages, recordsCount);
                         }
+                        int numberOfPages = Convert.ToInt32(outputNumberOfPages.Value);
+                        int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
+
+                        allCategories = new PagedResultDTO<FinCategory>(list, numberOfPages, recordsCount);
                     }
                 }
 
@@ -439,7 +439,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer.Report
                         command.Parameters.Add(outputRecordsCount);
 
                         await connection.OpenAsync();
-
+                        List<FinCategory> list;
                         using (SqlDataReader reader = await command.ExecuteReaderAsync())
                         {
                             int idOrdinal = reader.GetOrdinal("CategoryID");
@@ -449,7 +449,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer.Report
                             int createdDateOrdinal = reader.GetOrdinal("CreatedDate");
                             int isActiveOrdinal = reader.GetOrdinal("IsActive");
 
-                            List<FinCategory> list = new List<FinCategory>();
+                            list = new List<FinCategory>();
 
                             while (await reader.ReadAsync())
                             {
@@ -473,11 +473,11 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer.Report
                                 list.Add(category);
                             }
 
-                            int numberOfPages = Convert.ToInt32(outputNumberOfPages.Value);
-                            int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
-
-                            allCategories = new PagedResultDTO<FinCategory>(list, numberOfPages, recordsCount);
                         }
+                        int numberOfPages = Convert.ToInt32(outputNumberOfPages.Value);
+                        int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
+
+                        allCategories = new PagedResultDTO<FinCategory>(list, numberOfPages, recordsCount);
                     }
                 }
 

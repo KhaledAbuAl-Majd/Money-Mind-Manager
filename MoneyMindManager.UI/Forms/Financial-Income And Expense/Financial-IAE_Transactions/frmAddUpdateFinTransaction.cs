@@ -44,11 +44,6 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
         public frmAddUpdateFinTransction(IUserSession userSession, IMessageBoxService messageBoxService, IFormDisplayer formDisplayer,
             IFinTransactionApiClient finTransactionApiClient,IFinVoucherApiClient finVoucherApiClient,IFinCategoryApiClient finCategoryApiClient)
         {
-            if (!_CheckPermissions())
-            {
-                this.Dispose();
-                return;
-            }
             this._userSession = userSession;
             this._messageBoxService = messageBoxService;
             this._formDisplayer = formDisplayer;
@@ -56,6 +51,11 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             this._finVoucherApi = finVoucherApiClient;
             this._finCategoryApi = finCategoryApiClient;
 
+            if (!_CheckPermissions())
+            {
+                this.Dispose();
+                return;
+            }
             InitializeComponent();
             _TransactionID = null;
             _Transaction = null;
@@ -242,7 +242,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
             if (!ValidateChildren())
             {
-                clsPL_MessageBoxs.ShowValidateChildrenFailedMessage();
+                _messageBoxService.ShowValidateChildrenFailedMessage();
                 lblUserMessage.Text = "تم العثور على حقول غير صالحة. ضع المؤشر على العلامات الحمراء لعرض سبب الخطأ.";
                 lblUserMessage.Visible = true;
                 return;
@@ -256,7 +256,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             }
             else
             {
-                clsPL_MessageBoxs.ShowErrorMessage("فشل تحويل معرف الفئة, برجاء التواصل مع منشئ البرنامج");
+                _messageBoxService.DisplayError("فشل تحويل معرف الفئة, برجاء التواصل مع منشئ البرنامج");
                 _ResteObject();
                 return;
             }

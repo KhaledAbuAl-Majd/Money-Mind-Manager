@@ -8,6 +8,7 @@ using MoneyMindManager.Core.Abstractions;
 using MoneyMindManager.Core.Enums;
 using MoneyMindManager.Core.Models.FinVoucher;
 using MoneyMindManager.Domain.Abstractions.Repositories;
+using MoneyMindManager.Domain.Entities.DebtPayment;
 using MoneyMindManager.Shared.DTOs.FinVoucher;
 using MoneyMindManager.Shared.DTOs.Paged_Result_DTOs;
 
@@ -48,7 +49,7 @@ namespace MoneyMindManager.Application.Services.FinVoucher
             if (!accessResult.Data)
                 return handler.Failure("ليس لديك صلاحية إضافة/تعديل مستندات - معاملات (واردات - مصروفات - مرتجعات مصروفات)");
 
-
+            voucherDTO.CreatedByUserID = currentUserID;
             var result = await _finVoucherRepository.Add(_finVoucherMapper.DTOToEntity(voucherDTO));
 
             if (result is null)
@@ -195,6 +196,7 @@ namespace MoneyMindManager.Application.Services.FinVoucher
                 return handler.Failure("البيانات المرسلة غير صالحة");
 
             var criteria = _finVoucherMapper.ToPagedSearchCriteria(DTO);
+            criteria.RowsPerPage = 15;
             var result = await _finVoucherRepository.GetAllPaged(criteria, currentUserID);
 
             if (result is null)

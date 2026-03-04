@@ -11,16 +11,21 @@ namespace MoneyMindManager_Presentation.Global
         {
             InitializeComponent();
         }
-        void _OpenLink(Guna2ImageButton btn, string link)
+        private void gibtnDevWebsite_Click(object sender, EventArgs e)
         {
-            btn.Enabled = false;
-            Cursor = Cursors.WaitCursor;
+            ((Guna2ImageButton)sender).Enabled = false;
+            _OpenLink();
+            ((Guna2ImageButton)sender).Enabled = true;
+        }
 
+        void _OpenLink()
+        {
+            Cursor = Cursors.WaitCursor;
             try
             {
                 System.Diagnostics.Process.Start(new ProcessStartInfo
                 {
-                    FileName = link,
+                    FileName = "https://khaledabual-majd.github.io/",
                     UseShellExecute = true
                 });
             }
@@ -29,19 +34,20 @@ namespace MoneyMindManager_Presentation.Global
                 MessageBox.Show("حدث خطأ أثناء محاولة فتح الرابط.\n\n" + ex.Message,
                     "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            btn.Enabled = true;
             Cursor = Cursors.Default;
         }
-        private void gibtnDevWebsite_Click(object sender, EventArgs e)
-        {
-            _OpenLink((Guna2ImageButton)sender, "https://khaledabual-majd.github.io/");
-        }
-
-
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            gibtnDevWebsite_Click(sender, null);
+            ((LinkLabel)sender).Enabled = false;
+            _OpenLink();
+            ((LinkLabel)sender).Enabled = true;
+        }
+
+        private void linkLabel1_Click(object sender, EventArgs e)
+        {
+            ((LinkLabel)sender).Enabled = false;
+            _OpenLink();
+            ((LinkLabel)sender).Enabled = true;
         }
     }
 }

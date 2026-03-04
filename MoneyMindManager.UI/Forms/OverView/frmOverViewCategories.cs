@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MoneyMindManager.Client.Abstractions.ApiClient;
+using MoneyMindManager.Core.Abstractions;
 using MoneyMindManager.UI.Abstractions;
 
 namespace MoneyMindManager_Presentation.OverView
@@ -13,10 +14,11 @@ namespace MoneyMindManager_Presentation.OverView
         private IReportApiClient _reportApi;
         private IFormDisplayer _formDisplayer;
         private IFinCategoryApiClient _finCategoryApi;
+        private IFormateHelper _formateHelper;
 
         private bool isInitialized = false;
         public frmOverViewCategories(IUserSession userSession, IMessageBoxService messageBoxService, IReportApiClient reportApiClient,
-            IFormDisplayer formDisplayer, IFinCategoryApiClient finCategoryApiClient)
+            IFormDisplayer formDisplayer, IFinCategoryApiClient finCategoryApiClient, IFormateHelper formateHelper)
         {
             InitializeComponent();
             this.SetStyle(ControlStyles.UserPaint |
@@ -29,15 +31,16 @@ namespace MoneyMindManager_Presentation.OverView
             this._reportApi = reportApiClient;
             this._formDisplayer = formDisplayer;
             this._finCategoryApi = finCategoryApiClient;
+            this._formateHelper = formateHelper;
         }
 
         public bool Initilaize()
         {
             if (!ctrlCategoryMonthlyFlow1.Initilaize(_userSession, _messageBoxService, _reportApi, _formDisplayer, _finCategoryApi))
                 return false;
-            if (!ctrlTopCategories_Income.Initilaize(_userSession, _messageBoxService, _reportApi))
+            if (!ctrlTopCategories_Income.Initilaize(_userSession, _messageBoxService, _reportApi, _formateHelper))
                 return false;
-            if (!ctrlTopCategories_NetExpense.Initilaize(_userSession, _messageBoxService, _reportApi))
+            if (!ctrlTopCategories_NetExpense.Initilaize(_userSession, _messageBoxService, _reportApi, _formateHelper))
                 return false;
 
             isInitialized = true;

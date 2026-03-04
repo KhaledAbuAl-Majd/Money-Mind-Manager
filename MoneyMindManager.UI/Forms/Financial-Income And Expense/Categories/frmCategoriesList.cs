@@ -25,6 +25,10 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
         public frmCategoriesList(IFinCategoryApiClient finCategoryApiClient, IUserSession userSession, IMessageBoxService messageBoxService, IFormDisplayer formDisplayer)
         {
+            this._finCategoryApi = finCategoryApiClient;
+            this._userSession = userSession;
+            this._messageBoxService = messageBoxService;
+            this._formDisplayer = formDisplayer;
             if (!_CheckPermissions())
             {
                 this.Dispose();
@@ -32,10 +36,6 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             }
 
             InitializeComponent();
-            this._finCategoryApi = finCategoryApiClient;
-            this._userSession = userSession;
-            this._messageBoxService = messageBoxService;
-            this._formDisplayer = formDisplayer;
         }
 
         public bool Initialize(bool isIncome)

@@ -355,7 +355,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer.Report
                         command.Parameters.Add(outputCurrentPageRemainingAmount);
 
                         await connection.OpenAsync();
-
+                        List<DebtViewSummary> list;
                         using (SqlDataReader reader = await command.ExecuteReaderAsync())
                         {
 
@@ -368,7 +368,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer.Report
                             int debtTypeOrdinal = reader.GetOrdinal("DebtType");
                             int userNameOrdinal = reader.GetOrdinal("CreatedByUserName");
 
-                            var list = new List<DebtViewSummary>();
+                            list = new List<DebtViewSummary>();
 
                             while (await reader.ReadAsync())
                             {
@@ -384,16 +384,16 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer.Report
                                 list.Add(new DebtViewSummary(id, personName, debtValue, remainingAmount, debtDate, createdDate, debtType, userName));
                             }
 
-                            int numberOfPages = Convert.ToInt32(outputNumberOfPages.Value);
-                            int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
-                            decimal totalDebtsValue = Convert.ToDecimal(outputTotalDebtsValue.Value);
-                            decimal currentPageDebtsValue = Convert.ToDecimal(outputCurrentPageDebtsValue.Value);
-                            decimal totalRemainingAmount = Convert.ToDecimal(outputTotalRemainingAmount.Value);
-                            decimal currentPageRemainingAmount = Convert.ToDecimal(outputCurrentPageRemainingAmount.Value);
-
-                            allDebts = new DebtsPagedResultDTO<DebtViewSummary>(list, numberOfPages, recordsCount, totalDebtsValue,
-                                currentPageDebtsValue, totalRemainingAmount, currentPageRemainingAmount);
                         }
+                        int numberOfPages = Convert.ToInt32(outputNumberOfPages.Value);
+                        int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
+                        decimal totalDebtsValue = Convert.ToDecimal(outputTotalDebtsValue.Value);
+                        decimal currentPageDebtsValue = Convert.ToDecimal(outputCurrentPageDebtsValue.Value);
+                        decimal totalRemainingAmount = Convert.ToDecimal(outputTotalRemainingAmount.Value);
+                        decimal currentPageRemainingAmount = Convert.ToDecimal(outputCurrentPageRemainingAmount.Value);
+
+                        allDebts = new DebtsPagedResultDTO<DebtViewSummary>(list, numberOfPages, recordsCount, totalDebtsValue,
+                            currentPageDebtsValue, totalRemainingAmount, currentPageRemainingAmount);
                     }
                 }
 

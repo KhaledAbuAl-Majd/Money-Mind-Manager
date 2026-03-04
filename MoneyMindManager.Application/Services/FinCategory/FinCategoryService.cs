@@ -8,6 +8,7 @@ using MoneyMindManager.Core.Abstractions;
 using MoneyMindManager.Core.Enums;
 using MoneyMindManager.Core.Paged_Result_DTOs;
 using MoneyMindManager.Domain.Abstractions.Repositories;
+using MoneyMindManager.Domain.Entities.DebtPayment;
 using MoneyMindManager.Shared.DTOs;
 using MoneyMindManager.Shared.DTOs.IncomeAndExpenseCategory;
 
@@ -49,7 +50,7 @@ namespace MoneyMindManager.Application.Services
             if (!accessResult.Data)
                 return handler.Failure("ليس لديك صلاحية إضافة/تعديل فئة.");
 
-
+            categoryDTO.CreatedByUserID = currentUserID;
             var result = await _finCategoryRepository.Add(_finCategoryMapper.DTOToEntity(categoryDTO));
 
             if (result is null)
@@ -229,7 +230,7 @@ namespace MoneyMindManager.Application.Services
             if (result.Data is null)
                 return handler.Failure("failed to get categoies list!");
 
-            var returnResult = new PagedResultDTO<FinCategoryDTO>(result.Data.Data.Select(entity => _finCategoryMapper.EntityToDTO(entity)),
+            var returnResult = new PagedResultDTO<FinCategoryDTO>(result.Data.Data.Select(entity => _finCategoryMapper.EntityToDTO(entity)).ToList(),
                 result.Data.TotalPages, result.Data.TotalRecords);
 
             return handler.Success(returnResult);
@@ -253,7 +254,7 @@ namespace MoneyMindManager.Application.Services
             if (result.Data is null)
                 return handler.Failure("failed to get categoies list!");
 
-            var returnResult = new PagedResultDTO<FinCategoryDTO>(result.Data.Data.Select(entity => _finCategoryMapper.EntityToDTO(entity)),
+            var returnResult = new PagedResultDTO<FinCategoryDTO>(result.Data.Data.Select(entity => _finCategoryMapper.EntityToDTO(entity)).ToList(),
                 result.Data.TotalPages, result.Data.TotalRecords);
 
             return handler.Success(returnResult);

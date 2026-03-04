@@ -70,7 +70,7 @@ namespace MoneyMindManager.Application.Services.Currency
             if (result.Data is null)
                 return handler.Failure("The Data Is null at get all currencies");
 
-            return handler.Success(result.Data.Select(entity => _currencyMapper.EntityToDTO(entity)));
+            return handler.Success(result.Data.Select(entity => _currencyMapper.EntityToDTO(entity)).ToList());
         }
     }
 }

@@ -20,21 +20,18 @@ namespace MoneyMindManager_Presentation.Income_And_Expense
         private bool isInitialized = false;
         public frmIncomeAndExpense(IServiceProvider serviceProvider, IMessageBoxService messageBoxService, IUserSession userSession)
         {
+            this._serviceProvider = serviceProvider;
+            this._messageBoxService = messageBoxService;
+            this._userSession = userSession;
+            InitializeComponent();
             if (!_CheckPermissions())
             {
                 this.Dispose();
                 return;
             }
-
-            this._serviceProvider = serviceProvider;
-            this._messageBoxService = messageBoxService;
-            this._userSession = userSession;
-
-            InitializeComponent();
-
         }
 
-        public bool Initilize(enVoucherType voucherType)
+        public bool Initialize(enVoucherType voucherType)
         {
             if (voucherType == enVoucherType.UnKnown)
             {

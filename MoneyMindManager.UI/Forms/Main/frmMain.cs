@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using Guna.UI2.WinForms;
 using Microsoft.Extensions.DependencyInjection;
 using MoneyMindManager.Core.Enums;
+using MoneyMindManager.Shared.DTOs.User;
 using MoneyMindManager.UI.Abstractions;
 using MoneyMindManager_Presentation.Global;
 using MoneyMindManager_Presentation.Income_And_Expense;
@@ -20,6 +21,8 @@ namespace MoneyMindManager_Presentation.Main
 
         private readonly IServiceProvider _serviceProvider;
         private readonly IUserSession _userSession;
+
+        private bool isInitialized = false;
         public frmMain(IServiceProvider serviceProvider, IUserSession userSession)
         {
             InitializeComponent();
@@ -31,6 +34,16 @@ namespace MoneyMindManager_Presentation.Main
         private void LoadMainFormLabels()
         {
             lblCurrentUserName.Text = _userSession.CurrentUser?.UserName;
+        }
+
+
+
+        UserDTO user;
+        public bool Initialize(UserDTO userDTO)
+        {
+            this.user = userDTO;
+            this.isInitialized = true;
+            return true;
         }
 
         public bool OpenDialog<T>(Func<T, bool> initialize = null) where T : Form
@@ -49,15 +62,7 @@ namespace MoneyMindManager_Presentation.Main
 
         public bool OpenAtContainer<T>(Func<T, bool> initialize = null) where T : Form
         {
-            var frm = _serviceProvider.GetRequiredService<T>();
-
-            if (initialize is null || !initialize.Invoke(frm))
-            {
-                frm?.Dispose();
-                return false;
-            }
-
-            return _LoadFormAtPanelContainer(frm, false);
+            return OpenAtContainer<T>(initialize, false);
         }
 
         private bool OpenAtContainer<T>(Func<T, bool> initialize = null, bool clearOldControls = false) where T : Form
@@ -107,6 +112,27 @@ namespace MoneyMindManager_Presentation.Main
             return true;
         }
 
+
+        private async void frmMain_Load(object sender, EventArgs e)
+        {
+            if (!isInitialized)
+            {
+                this.Close();
+                return;
+            }
+
+            if (!await _userSession.StartSession(user))
+            {
+                this.Close();
+                return;
+            }
+
+            _userSession.OnSessionExpired += () =>
+            {
+                this.Close();
+                return;
+            };
+        }
         private void frmMain_Shown(object sender, EventArgs e)
         {
             LoadMainFormLabels();

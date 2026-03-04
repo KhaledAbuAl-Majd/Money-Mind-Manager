@@ -28,18 +28,18 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
         public frmDebtsList(IUserSession userSession, IMessageBoxService messageBoxService, IFormDisplayer formDisplayer,
              IDebtApiClient debtApiClient, IDataConverter dataConverter, IExportWithDialogService exportWithDialogService)
         {
-            if (!_CheckPermissions())
-            {
-                this.Dispose();
-                return;
-            }
-
             this._userSession = userSession;
             this._messageBoxService = messageBoxService;
             this._formDisplayer = formDisplayer;
             this._debtApi = debtApiClient;
             this._dataConverter = dataConverter;
             this._exportWithDialogService = exportWithDialogService;
+            if (!_CheckPermissions())
+            {
+                this.Dispose();
+                return;
+            }
+
             InitializeComponent();
         }
 

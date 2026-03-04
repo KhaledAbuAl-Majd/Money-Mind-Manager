@@ -352,7 +352,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                         command.Parameters.Add(outputCurrentPageVouchersValue);
 
                         await connection.OpenAsync();
-
+                        List<FinVoucherViewSummary> list;
                         using (SqlDataReader reader = await command.ExecuteReaderAsync())
                         {
                             int idOrdinal = reader.GetOrdinal("VoucherID");
@@ -363,7 +363,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                             int createdDateOrdinal = reader.GetOrdinal("CreatedDate");
                             int userNameOrdinal = reader.GetOrdinal("CreatedByUserName");
 
-                            List<FinVoucherViewSummary> list = new List<FinVoucherViewSummary>();
+                            list = new List<FinVoucherViewSummary>();
 
                             while (await reader.ReadAsync())
                             {
@@ -378,12 +378,12 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                                 list.Add(new FinVoucherViewSummary(id, voucherName, transactionsCount, userName, createdDate, voucerDate, voucherValue));
                             }
 
-                            int numberOfPages = Convert.ToInt32(outputNumberOfPages.Value);
-                            int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
-
-                            allVouchers = new PagedResultWithTotal_CurrentDTO<FinVoucherViewSummary>(list, numberOfPages, recordsCount,
-                                Convert.ToDecimal(outputTotalVouchersValue.Value), Convert.ToDecimal(outputCurrentPageVouchersValue.Value));
                         }
+                        int numberOfPages = Convert.ToInt32(outputNumberOfPages.Value);
+                        int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
+
+                        allVouchers = new PagedResultWithTotal_CurrentDTO<FinVoucherViewSummary>(list, numberOfPages, recordsCount,
+                            Convert.ToDecimal(outputTotalVouchersValue.Value), Convert.ToDecimal(outputCurrentPageVouchersValue.Value));
                     }
                 }
 
