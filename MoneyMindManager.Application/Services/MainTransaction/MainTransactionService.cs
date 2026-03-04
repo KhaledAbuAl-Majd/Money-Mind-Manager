@@ -5,6 +5,7 @@ using MoneyMindManager.Application.Abstractions.Handlers;
 using MoneyMindManager.Application.Abstractions.Services;
 using MoneyMindManager.Application.Mappers.Mappers_Implementaion;
 using MoneyMindManager.Core.Abstractions;
+using MoneyMindManager.Core.Models.MainTransaction;
 using MoneyMindManager.Domain.Abstractions.Repositories.Reports;
 using MoneyMindManager.Shared.DTOs.MainTransaction;
 using MoneyMindManager.Shared.DTOs.Paged_Result_DTOs;
@@ -43,9 +44,9 @@ namespace MoneyMindManager.Application.Services.MainTransaction
             return handler.Success(dto);
         }
 
-        public async Task<IResult<PagedResultWithTotal_CurrentDTO<MainTransactionDTO>>> GetAllPaged(MainTransactionPagedFilterDTO filterDTO, int currentUserID)
+        public async Task<IResult<PagedResultWithTotal_CurrentDTO<MainTransactionViewSummary>>> GetAllPaged(MainTransactionPagedFilterDTO filterDTO, int currentUserID)
         {
-            var handler = _resultFactory.Create<PagedResultWithTotal_CurrentDTO<MainTransactionDTO>>();
+            var handler = _resultFactory.Create<PagedResultWithTotal_CurrentDTO<MainTransactionViewSummary>>();
 
             if (filterDTO is null)
                 return handler.Failure("البيانات المرسلة غير صالحة");
@@ -64,15 +65,12 @@ namespace MoneyMindManager.Application.Services.MainTransaction
             if (result.Data is null)
                 return handler.Failure("failed to get main transactions list");
 
-            var dtosList = result.Data.Data.Select(entity => _mainTransactionMapper.EntityToDTO(entity)).ToList();
-            var returnData = new PagedResultWithTotal_CurrentDTO<MainTransactionDTO>(dtosList, result.Data.TotalPages, result.Data.TotalRecords, result.Data.TotalValue,
-                result.Data.CurrentPageValue);
-            return handler.Success(returnData);
+            return result;
         }
 
-        public async Task<IResult<IEnumerable<MainTransactionDTO>>> GetAll(MainTransactionFilterDTO filterDTO, int currentUserID)
+        public async Task<IResult<IEnumerable<MainTransactionExportSummary>>> GetAll(MainTransactionFilterDTO filterDTO, int currentUserID)
         {
-            var handler = _resultFactory.Create<IEnumerable<MainTransactionDTO>>();
+            var handler = _resultFactory.Create<IEnumerable<MainTransactionExportSummary>>();
 
             if (filterDTO is null)
                 return handler.Failure("البيانات المرسلة غير صالحة");
@@ -91,8 +89,7 @@ namespace MoneyMindManager.Application.Services.MainTransaction
             if (result.Data is null)
                 return handler.Failure("failed to get main transactions list");
 
-            var dtosList = result.Data.Select(entity => _mainTransactionMapper.EntityToDTO(entity)).ToList();
-            return handler.Success(dtosList);
+            return result;
         }
     }
 }

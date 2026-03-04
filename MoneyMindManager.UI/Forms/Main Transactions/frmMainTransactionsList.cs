@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using KhaledControlLibrary1;
 using MoneyMindManager.Client.Abstractions.ApiClient;
 using MoneyMindManager.Core.Enums;
+using MoneyMindManager.Core.Models.MainTransaction;
 using MoneyMindManager.Shared.DTOs.MainTransaction;
 using MoneyMindManager.Shared.DTOs.TransactionTypes;
 using MoneyMindManager.UI.Abstractions;
@@ -115,7 +116,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                     //if (int.TryParse(idValue?.ToString(), out int id))
                     //{
                     //}
-                        selectedIDs.Add(rowView.TransactionTypeID);
+                    selectedIDs.Add(rowView.TransactionTypeID);
                 }
             }
 
@@ -242,29 +243,29 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             if (!_IsHeaderCreated && dgvTransactions.Rows.Count > 0)
             {
 
-                dgvTransactions.Columns[nameof(MainTransactionDTO.MainTransactionID)].HeaderText = "معرف المعاملة";
-                dgvTransactions.Columns[nameof(MainTransactionDTO.MainTransactionID)].Width = 125;
+                dgvTransactions.Columns[nameof(MainTransactionViewSummary.MainTransactionID)].HeaderText = "معرف المعاملة";
+                dgvTransactions.Columns[nameof(MainTransactionViewSummary.MainTransactionID)].Width = 125;
 
-                dgvTransactions.Columns[nameof(MainTransactionDTO.Amount)].HeaderText = "قيمة المعاملة";
-                dgvTransactions.Columns[nameof(MainTransactionDTO.Amount)].Width = 215;
-                dgvTransactions.Columns[nameof(MainTransactionDTO.Amount)].DefaultCellStyle.Format = "N2";
+                dgvTransactions.Columns[nameof(MainTransactionViewSummary.Amount)].HeaderText = "قيمة المعاملة";
+                dgvTransactions.Columns[nameof(MainTransactionViewSummary.Amount)].Width = 215;
+                dgvTransactions.Columns[nameof(MainTransactionViewSummary.Amount)].DefaultCellStyle.Format = "N2";
 
-                dgvTransactions.Columns[nameof(MainTransactionDTO.TransactionDate)].HeaderText = "تاريخ المعاملة";
-                dgvTransactions.Columns[nameof(MainTransactionDTO.TransactionDate)].Width = 115;
-                dgvTransactions.Columns[nameof(MainTransactionDTO.TransactionDate)].DefaultCellStyle.Format = "dd-MM-yyyy";
+                dgvTransactions.Columns[nameof(MainTransactionViewSummary.TransactionDate)].HeaderText = "تاريخ المعاملة";
+                dgvTransactions.Columns[nameof(MainTransactionViewSummary.TransactionDate)].Width = 115;
+                dgvTransactions.Columns[nameof(MainTransactionViewSummary.TransactionDate)].DefaultCellStyle.Format = "dd-MM-yyyy";
 
-                dgvTransactions.Columns[nameof(MainTransactionDTO.CreatedDate)].HeaderText = "تاريخ الإنشاء";
-                dgvTransactions.Columns[nameof(MainTransactionDTO.CreatedDate)].Width = 190;
-                dgvTransactions.Columns[nameof(MainTransactionDTO.CreatedDate)].DefaultCellStyle.Format = "hh:mm:ss tt dd-MM-yyyy";
+                dgvTransactions.Columns[nameof(MainTransactionViewSummary.CreatedDate)].HeaderText = "تاريخ الإنشاء";
+                dgvTransactions.Columns[nameof(MainTransactionViewSummary.CreatedDate)].Width = 190;
+                dgvTransactions.Columns[nameof(MainTransactionViewSummary.CreatedDate)].DefaultCellStyle.Format = "hh:mm:ss tt dd-MM-yyyy";
 
-                dgvTransactions.Columns[nameof(MainTransactionDTO.TransactionTypeName)].HeaderText = "نوع المعاملة";
-                dgvTransactions.Columns[nameof(MainTransactionDTO.TransactionTypeName)].Width = 100;
+                dgvTransactions.Columns[nameof(MainTransactionViewSummary.TransactionTypeName)].HeaderText = "نوع المعاملة";
+                dgvTransactions.Columns[nameof(MainTransactionViewSummary.TransactionTypeName)].Width = 100;
 
-                dgvTransactions.Columns[nameof(MainTransactionDTO.CreatedByUserName)].HeaderText = "اسم المستخدم المنشئ";
-                dgvTransactions.Columns[nameof(MainTransactionDTO.CreatedByUserName)].Width = 265;
+                dgvTransactions.Columns[nameof(MainTransactionViewSummary.CreatedByUserName)].HeaderText = "اسم المستخدم المنشئ";
+                dgvTransactions.Columns[nameof(MainTransactionViewSummary.CreatedByUserName)].Width = 265;
 
-                dgvTransactions.Columns[nameof(MainTransactionDTO.Purpose)].HeaderText = "البيان";
-                dgvTransactions.Columns[nameof(MainTransactionDTO.Purpose)].Width = 265;
+                dgvTransactions.Columns[nameof(MainTransactionViewSummary.Purpose)].HeaderText = "البيان";
+                dgvTransactions.Columns[nameof(MainTransactionViewSummary.Purpose)].Width = 265;
 
                 _IsHeaderCreated = true;
 
@@ -596,18 +597,18 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 return;
             }
 
-            DataTable dt = _dataConverter.ToDataTable<MainTransactionDTO>(result.Data);
+            DataTable dt = _dataConverter.ToDataTable<MainTransactionExportSummary>(result.Data);
 
-            dt.Columns[nameof(MainTransactionDTO.MainTransactionID)].ColumnName = "معرف المعاملة";
-            dt.Columns[nameof(MainTransactionDTO.Amount)].ColumnName = "قيمة المعاملة";
-            dt.Columns[nameof(MainTransactionDTO.TransactionDate)].ColumnName = "تاريخ المعاملة";
-            dt.Columns[nameof(MainTransactionDTO.CreatedDate)].ColumnName = "تاريخ الإنشاء";
-            dt.Columns[nameof(MainTransactionDTO.TransactionTypeID)].ColumnName = "معرف نوع المعاملة";
-            dt.Columns[nameof(MainTransactionDTO.TransactionTypeName)].ColumnName = "نوع المعاملة";
-            dt.Columns[nameof(MainTransactionDTO.CreatedByUserID)].ColumnName = "معرف المستخدم المنشئ";
-            dt.Columns[nameof(MainTransactionDTO.CreatedByUserName)].ColumnName = "اسم المستخدم المنشئ";
-            dt.Columns[nameof(MainTransactionDTO.Purpose)].ColumnName = "البيان";
-            dt.Columns[nameof(MainTransactionDTO.AccountID)].ColumnName = "معرف الحساب";
+            dt.Columns[nameof(MainTransactionExportSummary.MainTransactionID)].ColumnName = "معرف المعاملة";
+            dt.Columns[nameof(MainTransactionExportSummary.Amount)].ColumnName = "قيمة المعاملة";
+            dt.Columns[nameof(MainTransactionExportSummary.TransactionDate)].ColumnName = "تاريخ المعاملة";
+            dt.Columns[nameof(MainTransactionExportSummary.CreatedDate)].ColumnName = "تاريخ الإنشاء";
+            dt.Columns[nameof(MainTransactionExportSummary.TransactionTypeID)].ColumnName = "معرف نوع المعاملة";
+            dt.Columns[nameof(MainTransactionExportSummary.TransactionTypeName)].ColumnName = "نوع المعاملة";
+            dt.Columns[nameof(MainTransactionExportSummary.CreatedByUserID)].ColumnName = "معرف المستخدم المنشئ";
+            dt.Columns[nameof(MainTransactionExportSummary.CreatedByUserName)].ColumnName = "اسم المستخدم المنشئ";
+            dt.Columns[nameof(MainTransactionExportSummary.Purpose)].ColumnName = "البيان";
+            dt.Columns[nameof(MainTransactionExportSummary.AccountID)].ColumnName = "معرف الحساب";
 
             await _exportWithDialogService.ExportToExcel(dt, "تقرير المعاملات");
         }

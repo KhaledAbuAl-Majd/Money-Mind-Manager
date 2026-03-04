@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MoneyMindManager.Application.Abstractions.Handlers;
 using MoneyMindManager.Core;
 using MoneyMindManager.Core.Abstractions;
+using MoneyMindManager.Core.Models.MainTransaction;
 using MoneyMindManager.Domain.Abstractions;
 using MoneyMindManager.Domain.Abstractions.Repositories.Reports;
 using MoneyMindManager.Domain.Criteria;
@@ -82,10 +83,10 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
             return handler.Success(data);
         }
 
-        public async Task<IResult<PagedResultWithTotal_CurrentDTO<MainTransaction>>> GetAllPaged(MainTransactionPagedSearchCriteria searchCriteria, int currentUserID)
+        public async Task<IResult<PagedResultWithTotal_CurrentDTO<MainTransactionViewSummary>>> GetAllPaged(MainTransactionPagedSearchCriteria searchCriteria, int currentUserID)
         {
-            PagedResultWithTotal_CurrentDTO<MainTransaction> data = null;
-            var handler = _resultFactory.Create<PagedResultWithTotal_CurrentDTO<MainTransaction>>();
+            PagedResultWithTotal_CurrentDTO<MainTransactionViewSummary> data = null;
+            var handler = _resultFactory.Create<PagedResultWithTotal_CurrentDTO<MainTransactionViewSummary>>();
 
             try
             {
@@ -138,7 +139,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                         command.Parameters.Add(outputCurrentPageTransactionsValue);
 
                         await connection.OpenAsync();
-                        List<MainTransaction> transactionsList;
+                        List<MainTransactionViewSummary> transactionsList;
                         using (SqlDataReader reader = await command.ExecuteReaderAsync())
                         {
                             int idOrdinal = reader.GetOrdinal("TransactionID");
@@ -149,7 +150,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                             int userNameOrdinal = reader.GetOrdinal("CreatedByUserName");
                             int purposeOrdinal = reader.GetOrdinal("Purpose");
 
-                            transactionsList = new List<MainTransaction>();
+                            transactionsList = new List<MainTransactionViewSummary>();
 
                             while (await reader.ReadAsync())
                             {
@@ -157,18 +158,12 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                                 decimal amount = Convert.ToDecimal(reader[amountOrdinal]);
                                 DateTime transactionDate = Convert.ToDateTime(reader[transactionDateOrdinal]);
                                 DateTime createdDate = Convert.ToDateTime(reader[createdDateOrdinal]);
+                                string transactionTypeName = reader[transactionTypeOrdianal] as string;
                                 string userName = reader[userNameOrdinal] as string;
                                 string purpose = reader[purposeOrdinal] as string;
 
-                                MainTransaction transaction = new MainTransaction()
-                                {
-                                    MainTransactionID = id,
-                                    Amount = amount,
-                                    TransactionDate = transactionDate,
-                                    CreatedDate = createdDate,
-                                    CreatedByUserName = userName,
-                                    Purpose = purpose
-                                };
+                                MainTransactionViewSummary transaction = new MainTransactionViewSummary(id, amount, createdDate, purpose,
+                                    transactionDate, userName, transactionTypeName);
 
                                 transactionsList.Add(transaction);
                             }
@@ -177,7 +172,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                         int numberOfPages = Convert.ToInt32(outputNumberOfPages.Value);
                         int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
 
-                        data = new PagedResultWithTotal_CurrentDTO<MainTransaction>(transactionsList, numberOfPages, recordsCount,
+                        data = new PagedResultWithTotal_CurrentDTO<MainTransactionViewSummary>(transactionsList, numberOfPages, recordsCount,
                             Convert.ToDecimal(outputTotalTransactionsValue.Value), Convert.ToDecimal(outputCurrentPageTransactionsValue.Value));
                     }
                 }
@@ -196,10 +191,10 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
             return handler.Success(data);
         }
 
-        public async Task<IResult<IEnumerable<MainTransaction>>> GetAll(MainTransactionSearchCriteria searchCriteria, int currentUserID)
+        public async Task<IResult<IEnumerable<MainTransactionExportSummary>>> GetAll(MainTransactionSearchCriteria searchCriteria, int currentUserID)
         {
-            List<MainTransaction> transactionsList = null;
-            var handler = _resultFactory.Create<IEnumerable<MainTransaction>>();
+            List<MainTransactionExportSummary> transactionsList = null;
+            var handler = _resultFactory.Create<IEnumerable<MainTransactionExportSummary>>();
 
             try
             {
@@ -236,7 +231,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                             int userIDOrdinal = reader.GetOrdinal("CreatedByUserID");
                             int accountIDOrdinal = reader.GetOrdinal("AccountID");
 
-                            transactionsList = new List<MainTransaction>();
+                            transactionsList = new List<MainTransactionExportSummary>();
 
                             while (await reader.ReadAsync())
                             {
@@ -244,24 +239,15 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                                 decimal amount = Convert.ToDecimal(reader[amountOrdinal]);
                                 DateTime transactionDate = Convert.ToDateTime(reader[transactionDateOrdinal]);
                                 DateTime createdDate = Convert.ToDateTime(reader[createdDateOrdinal]);
+                                string transactionTypeName = reader[transactionTypeOrdianal] as string;
                                 string userName = reader[userNameOrdinal] as string;
                                 string purpose = reader[purposeOrdinal] as string;
                                 byte transactionTypeID = Convert.ToByte(reader[transactionTypeIDOrdinal]);
                                 int userID = Convert.ToInt32(reader[userIDOrdinal]);
                                 short accountID = Convert.ToInt16(reader[accountIDOrdinal]);
 
-                                MainTransaction transaction = new MainTransaction()
-                                {
-                                    MainTransactionID = id,
-                                    Amount = amount,
-                                    TransactionDate = transactionDate,
-                                    CreatedDate = createdDate,
-                                    CreatedByUserName = userName,
-                                    Purpose = purpose,
-                                    TransactionTypeID = transactionTypeID,
-                                    CreatedByUserID = userID,
-                                    AccountID = accountID
-                                };
+                                MainTransactionExportSummary transaction = new MainTransactionExportSummary(id, amount, createdDate, accountID,
+                                    userID, transactionTypeID, purpose, transactionDate, userName, transactionTypeName);
 
                                 transactionsList.Add(transaction);
                             }
