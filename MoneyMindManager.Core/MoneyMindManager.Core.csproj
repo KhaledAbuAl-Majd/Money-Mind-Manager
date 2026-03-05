@@ -54,6 +54,8 @@
     <Compile Include="Models\DebtPayment\DebtPaymentViewSummary.cs" />
     <Compile Include="Models\Debt\DebtExportSummary.cs" />
     <Compile Include="Models\Debt\DebtViewSummary.cs" />
+    <Compile Include="Models\FinCategory\FinCategoryFullSummary.cs" />
+    <Compile Include="Models\FinCategory\FinCategorySelectSummary.cs" />
     <Compile Include="Models\FinTransaction\FinTransactionExportSummary.cs" />
     <Compile Include="Models\FinTransaction\FinTransactionViewSummary.cs" />
     <Compile Include="Models\FinVoucher\FinVoucherExportSummary.cs" />
