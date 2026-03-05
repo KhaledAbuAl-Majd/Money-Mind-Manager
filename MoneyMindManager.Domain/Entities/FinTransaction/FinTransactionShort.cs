@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MoneyMindManager.Domain.Entities.FinTransaction
+﻿namespace MoneyMindManager.Domain.Entities.FinTransaction
 {
     public class FinTransactionShort
     {
@@ -12,8 +6,9 @@ namespace MoneyMindManager.Domain.Entities.FinTransaction
         public int? VoucherID { get; set; }
         public int? CategoryID { get; set; }
 
-        public FinTransactionShort(int transactionID, int voucherID, int categoryID) 
+        public FinTransactionShort(int transactionID, int voucherID, int categoryID)
         {
+            this.TransactionID = transactionID;
             this.VoucherID = voucherID;
             this.CategoryID = categoryID;
         }

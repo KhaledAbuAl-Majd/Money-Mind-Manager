@@ -14,9 +14,9 @@ namespace MoneyMindManager.Application.Abstractions.Services
         Task<IResult<UserDTO>> Add(CreateUserDTO user, int currentUserID);
         Task<IResult<bool>> Update(UserDTO user, int currentUserID);
         Task<IResult<UserDTO>> Login(LoginRequestDTO loginRequestDTO);
-        Task<IResult<UserDTO>> GetByUserID(int userID);
-        Task<IResult<UserDTO>> GetByUserName(string userName);
-        Task<IResult<UserDTO>> GetByPersonID(int personID);
+        Task<IResult<UserDTO>> GetByUserID(int userID, int currentUserID);
+        Task<IResult<UserDTO>> GetByUserName(string userName, int currentUserID);
+        Task<IResult<UserDTO>> GetByPersonID(int personID, int currentUserID);
         Task<IResult<bool>> Delete(int userID, int currentUserID);
         Task<IResult<bool>> ChangePassword(int userID, string oldPassword, string newPassword, int currentUserID);
         Task<IResult<PagedResultDTO<UserSummary>>> GetAll(UserFilterDTO userFilterDTO, int currentUserID);

@@ -168,7 +168,7 @@ namespace MoneyMindManager.Application.Services.FinVoucher
             if (result.Data is null)
                 return handler.Failure("failed to get voucher!");
 
-            var userResult = await _userService.GetByUserID(Convert.ToInt32(result.Data.CreatedByUserID));
+            var userResult = await _userService.GetByUserID(Convert.ToInt32(result.Data.CreatedByUserID),currentUserID);
 
             if (!userResult.IsSuccess)
                 return handler.Failure(result.ErrorMessage);

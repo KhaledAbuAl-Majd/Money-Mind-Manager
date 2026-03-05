@@ -156,7 +156,7 @@ namespace MoneyMindManager_Presentation.Users
         {
             ChangeHeaderValue("تعديل بيانات مستخدم");
 
-            var result = await _userApiClient.GetByUserID(Convert.ToInt32(_UserID));
+            var result = await _userApiClient.GetByUserID(Convert.ToInt32(_UserID),Convert.ToInt32(_userSession.UserID));
 
             if (!result.IsSuccess || result.Data is null)
             {

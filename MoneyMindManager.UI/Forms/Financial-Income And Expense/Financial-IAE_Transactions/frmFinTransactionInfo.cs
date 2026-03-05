@@ -52,7 +52,7 @@ namespace MoneyMindManager_Presentation.Transactions
 
             if (!result.IsSuccess || result.Data is null)
             {
-                _messageBoxService.DisplayError(result.ErrorMessage);
+                _messageBoxService.DisplayError("فشل تحميل المعاملة !" + result.ErrorMessage);
                 this.Close();
                 return;
             }

@@ -119,7 +119,7 @@ namespace MoneyMindManager_Presentation
             kgtxtDiscription.Text = _AccountInfo.Description;
             kgtxtBalance.RefreshNumber_DateTimeFormattedText(_AccountInfo.Balance.ToString());
             kgtxtCreatedDate.RefreshNumber_DateTimeFormattedText(_AccountInfo.CreatedDate.ToString());
-            var result = await _userApiClient.GetByUserID(_AccountInfo.AccountOwnerUserID);
+            var result = await _userApiClient.GetByUserID(_AccountInfo.AccountOwnerUserID, Convert.ToInt32(_userSession.UserID));
             if (result.IsSuccess)
             {
                 var ownerUser = result.Data;

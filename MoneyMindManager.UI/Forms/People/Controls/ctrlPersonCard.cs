@@ -73,7 +73,7 @@ namespace MoneyMindManager_Presentation.People.Controls
                 return false;
             }
 
-            var userResult = await _userApiClient.GetByUserID(Convert.ToInt32(result.Data.CreatedByUserID));
+            var userResult = await _userApiClient.GetByUserID(Convert.ToInt32(result.Data.CreatedByUserID), Convert.ToInt32(_userSession.UserID));
 
             if (!userResult.IsSuccess || userResult.Data is null)
             {

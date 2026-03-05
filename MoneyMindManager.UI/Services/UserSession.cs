@@ -50,7 +50,7 @@ namespace MoneyMindManager.UI.Services
 
         public async Task<bool> StartSession(int userID)
         {
-            var userResult = await _userApiClient.GetByUserID(userID);
+            var userResult = await _userApiClient.GetByUserID(userID, userID);
 
             if (userResult == null || userResult.Data is null)
             {
@@ -128,7 +128,7 @@ namespace MoneyMindManager.UI.Services
                 CurrentUser = null;
             else
             {
-                var result = await _userApiClient.GetByUserID(Convert.ToInt32(CurrentUser?.UserID));
+                var result = await _userApiClient.GetByUserID(Convert.ToInt32(CurrentUser?.UserID), Convert.ToInt32(CurrentUser?.UserID));
 
                 if (!result.IsSuccess || result.Data is null)
                 {

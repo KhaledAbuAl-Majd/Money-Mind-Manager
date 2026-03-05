@@ -77,7 +77,7 @@ namespace MoneyMindManager.Application.Services.User
             if (result.Data is null)
                 return handler.Failure("failed to add user");
 
-            var returnUserResult = await GetByUserID(Convert.ToInt32(result.Data));
+            var returnUserResult = await GetByUserID(Convert.ToInt32(result.Data), currentUserID);
             if (!returnUserResult.IsSuccess)
                 return handler.Success(_userMapper.EntityToDTO(user));
 
@@ -156,7 +156,7 @@ namespace MoneyMindManager.Application.Services.User
             return handler.Success(userDTO);
         }
 
-        public async Task<IResult<UserDTO>> GetByUserID(int userID)
+        public async Task<IResult<UserDTO>> GetByUserID(int userID, int currentUserID)
         {
             var result = await _userRepository.GetByUserID(userID);
 
@@ -171,7 +171,7 @@ namespace MoneyMindManager.Application.Services.User
             if (result.Data is null)
                 return handler.Failure("failed to get user");
 
-            var personDTOResult = await _personService.Get(Convert.ToInt32(result.Data?.PersonID), Convert.ToInt32(result.Data?.UserID));
+            var personDTOResult = await _personService.Get(Convert.ToInt32(result.Data?.PersonID), currentUserID);
 
             if (!personDTOResult.IsSuccess)
                 return handler.Failure(personDTOResult.ErrorMessage);
@@ -188,7 +188,7 @@ namespace MoneyMindManager.Application.Services.User
             return handler.Success(userDTO);
         }
 
-        public async Task<IResult<UserDTO>> GetByUserName(string userName)
+        public async Task<IResult<UserDTO>> GetByUserName(string userName, int currentUserID)
         {
             var result = await _userRepository.GetByUserName(userName);
 
@@ -203,7 +203,7 @@ namespace MoneyMindManager.Application.Services.User
             if (result.Data is null)
                 return handler.Failure("failed to get user");
 
-            var personDTOResult = await _personService.Get(Convert.ToInt32(result.Data?.PersonID), Convert.ToInt32(result.Data?.UserID));
+            var personDTOResult = await _personService.Get(Convert.ToInt32(result.Data?.PersonID), currentUserID);
 
             if (!personDTOResult.IsSuccess)
                 return handler.Failure(personDTOResult.ErrorMessage);
@@ -220,7 +220,7 @@ namespace MoneyMindManager.Application.Services.User
             return handler.Success(userDTO);
         }
 
-        public async Task<IResult<UserDTO>> GetByPersonID(int personID)
+        public async Task<IResult<UserDTO>> GetByPersonID(int personID, int currentUserID)
         {
             var result = await _userRepository.GetByPersonID(personID);
 
@@ -235,7 +235,7 @@ namespace MoneyMindManager.Application.Services.User
             if (result.Data is null)
                 return handler.Failure("failed to get user");
 
-            var personDTOResult = await _personService.Get(Convert.ToInt32(result.Data?.PersonID), Convert.ToInt32(result.Data?.UserID));
+            var personDTOResult = await _personService.Get(Convert.ToInt32(result.Data?.PersonID), currentUserID);
 
             if (!personDTOResult.IsSuccess)
                 return handler.Failure(personDTOResult.ErrorMessage);
@@ -283,7 +283,7 @@ namespace MoneyMindManager.Application.Services.User
             if (userID != currentUserID)
                 return handler.Failure("غير مسموح بتغيير كلمة السر لمستخدم آخر");
 
-            if (oldPassword != newPassword)
+            if (oldPassword == newPassword)
                 return handler.Failure("كلمة السر الجديدة يجب أن تكون مختلفة عن كلمة السر القديمة ! ");
 
             var saltResult = await _userRepository.GetSaltByUserID(userID);
@@ -399,7 +399,7 @@ namespace MoneyMindManager.Application.Services.User
         public async Task<IResult<List<PermissionInfo>>> GetPermissionsMetadata()
         {
             var handler = _resultFactory.Create<List<PermissionInfo>>();
-            return  handler.Success(_permissionService.GetPermissionMetadata(0));
+            return handler.Success(_permissionService.GetPermissionMetadata(0));
         }
     }
 }

@@ -57,7 +57,7 @@ namespace MoneyMindManager_Presentation.Users
 
             gbtnEditUser.Enabled = false;
 
-            var result = await _userApiClient.GetByUserID(Convert.ToInt32(userID));
+            var result = await _userApiClient.GetByUserID(Convert.ToInt32(userID),Convert.ToInt32(_userSession.UserID));
 
             if (!result.IsSuccess || result.Data is null)
             {
@@ -68,7 +68,7 @@ namespace MoneyMindManager_Presentation.Users
 
             User = result.Data;
 
-            var userResult = await _userApiClient.GetByUserID(Convert.ToInt32(result.Data.CreatedByUserID));
+            var userResult = await _userApiClient.GetByUserID(Convert.ToInt32(result.Data.CreatedByUserID), Convert.ToInt32(_userSession.UserID));
 
             if (!userResult.IsSuccess || userResult.Data is null)
             {

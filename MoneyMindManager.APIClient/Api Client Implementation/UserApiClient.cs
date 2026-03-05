@@ -35,19 +35,19 @@ namespace MoneyMindManager.APIClient.Api_Client_Implementation
             return await _userService.Login(loginRequestDTO);
         }
 
-        public async Task<IResult<UserDTO>> GetByUserID(int userID)
+        public async Task<IResult<UserDTO>> GetByUserID(int userID, int currentUserID)
         {
-            return await _userService.GetByUserID(userID);
+            return await _userService.GetByUserID(userID, currentUserID);
         }
 
-        public async Task<IResult<UserDTO>> GetByUserName(string userName)
+        public async Task<IResult<UserDTO>> GetByUserName(string userName, int currentUserID)
         {
-            return await _userService.GetByUserName(userName);
+            return await _userService.GetByUserName(userName, currentUserID);
         }
 
-        public async Task<IResult<UserDTO>> GetByPersonID(int personID)
+        public async Task<IResult<UserDTO>> GetByPersonID(int personID, int currentUserID)
         {
-            return await _userService.GetByPersonID(personID);
+            return await _userService.GetByPersonID(personID, currentUserID);
         }
 
         public async Task<IResult<bool>> Delete(int userID, int currentUserID)

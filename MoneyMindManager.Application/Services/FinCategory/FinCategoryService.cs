@@ -160,7 +160,7 @@ namespace MoneyMindManager.Application.Services
             if (result.Data is null)
                 return handler.Failure("failed to get category!");
 
-            var userResult = await _userService.GetByUserID(Convert.ToInt32(result.Data.CreatedByUserID));
+            var userResult = await _userService.GetByUserID(Convert.ToInt32(result.Data.CreatedByUserID), currentUserID);
 
             if (!userResult.IsSuccess)
                 return handler.Failure(result.ErrorMessage);
@@ -186,7 +186,7 @@ namespace MoneyMindManager.Application.Services
             if (result.Data is null)
                 return handler.Failure("failed to get category!");
 
-            var userResult = await _userService.GetByUserID(Convert.ToInt32(result.Data.CreatedByUserID));
+            var userResult = await _userService.GetByUserID(Convert.ToInt32(result.Data.CreatedByUserID), currentUserID);
 
             if (!userResult.IsSuccess)
                 return handler.Failure(result.ErrorMessage);
