@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0BABE5CA-52AF-4906-B36E-6CD4AB1CA4FC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MoneyMindManager.APIClient</RootNamespace>
+    <AssemblyName>MoneyMindManager.APIClient</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=9.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=9.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Api Client Implementation\AccountApiClient.cs" />
+    <Compile Include="Api Client Implementation\CurrencyApiClient.cs" />
+    <Compile Include="Api Client Implementation\DatabaseAppClient.cs" />
+    <Compile Include="Api Client Implementation\DebtApiClient.cs" />
+    <Compile Include="Api Client Implementation\DebtPaymentApiClient.cs" />
+    <Compile Include="Api Client Implementation\FinCategoryApiclient.cs" />
+    <Compile Include="Api Client Implementation\FinTransactionApiClient.cs" />
+    <Compile Include="Api Client Implementation\FinVoucherApiClient.cs" />
+    <Compile Include="Api Client Implementation\MainTransactionApiClient.cs" />
+    <Compile Include="Api Client Implementation\PersonApiClient.cs" />
+    <Compile Include="Api Client Implementation\ReportApiClient.cs" />
+    <Compile Include="Api Client Implementation\TransactionTypeApiClient.cs" />
+    <Compile Include="Api Client Implementation\UserApiClient.cs" />
+    <Compile Include="DependencyInjection\ApiClientRegistration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MoneyMindManager.Application\MoneyMindManager.Application.csproj">
+      <Project>{84682969-071d-4577-a41d-0df818096add}</Project>
+      <Name>MoneyMindManager.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MoneyMindManager.Client.Abstractions\MoneyMindManager.Client.Abstractions.csproj">
+      <Project>{869f3547-b42c-4e06-b177-41a654fdff63}</Project>
+      <Name>MoneyMindManager.Client.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MoneyMindManager.Core\MoneyMindManager.Core.csproj">
+      <Project>{207acf87-b108-4ce1-ac9e-f7dd5273a7cc}</Project>
+      <Name>MoneyMindManager.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MoneyMindManager.Shared.DTOs\MoneyMindManager.Shared.DTOs.csproj">
+      <Project>{e91f0830-3641-4e5e-8486-5c2878937c17}</Project>
+      <Name>MoneyMindManager.Shared.DTOs</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
