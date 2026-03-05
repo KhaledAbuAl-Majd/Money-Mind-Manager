@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using KhaledControlLibrary1;
 using MoneyMindManager.Client.Abstractions.ApiClient;
 using MoneyMindManager.Core.Enums;
-using MoneyMindManager.Shared.DTOs;
+using MoneyMindManager.Core.Models.FinCategory;
 using MoneyMindManager.Shared.DTOs.IncomeAndExpenseCategory;
 using MoneyMindManager.UI.Abstractions;
 using MoneyMindManager_Presentation.Global;
@@ -191,24 +191,24 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             if (!_IsHeaderCreated && gdgvCategories.Rows.Count > 0)
             {
 
-                gdgvCategories.Columns[nameof(FinCategoryDTO.CategoryID)].HeaderText = "معرف الفئة";
-                gdgvCategories.Columns[nameof(FinCategoryDTO.CategoryID)].Width = 120;
+                gdgvCategories.Columns[nameof(FinCategoryFullSummary.CategoryID)].HeaderText = "معرف الفئة";
+                gdgvCategories.Columns[nameof(FinCategoryFullSummary.CategoryID)].Width = 120;
 
-                gdgvCategories.Columns[nameof(FinCategoryDTO.CategoryName)].HeaderText = "اسم الفئة";
-                gdgvCategories.Columns[nameof(FinCategoryDTO.CategoryName)].Width = 270;
+                gdgvCategories.Columns[nameof(FinCategoryFullSummary.CategoryName)].HeaderText = "اسم الفئة";
+                gdgvCategories.Columns[nameof(FinCategoryFullSummary.CategoryName)].Width = 270;
 
-                gdgvCategories.Columns[nameof(FinCategoryDTO.ParentCategoryName)].HeaderText = "الفئة التابعة لها";
-                gdgvCategories.Columns[nameof(FinCategoryDTO.ParentCategoryName)].Width = 250;
+                gdgvCategories.Columns[nameof(FinCategoryFullSummary.ParentCategoryName)].HeaderText = "الفئة التابعة لها";
+                gdgvCategories.Columns[nameof(FinCategoryFullSummary.ParentCategoryName)].Width = 250;
 
-                gdgvCategories.Columns[nameof(FinCategoryDTO.MainCategoryName)].HeaderText = "الفئة الرئيسية التابعة لها";
-                gdgvCategories.Columns[nameof(FinCategoryDTO.MainCategoryName)].Width = 250;
+                gdgvCategories.Columns[nameof(FinCategoryFullSummary.MainCategoryName)].HeaderText = "الفئة الرئيسية التابعة لها";
+                gdgvCategories.Columns[nameof(FinCategoryFullSummary.MainCategoryName)].Width = 250;
 
-                gdgvCategories.Columns[nameof(FinCategoryDTO.CreatedDate)].HeaderText = "تاريخ الإنشاء";
-                gdgvCategories.Columns[nameof(FinCategoryDTO.CreatedDate)].Width = 220;
-                gdgvCategories.Columns[nameof(FinCategoryDTO.CreatedDate)].DefaultCellStyle.Format = "hh:mm:ss tt dd-MM-yyyy";
+                gdgvCategories.Columns[nameof(FinCategoryFullSummary.CreatedDate)].HeaderText = "تاريخ الإنشاء";
+                gdgvCategories.Columns[nameof(FinCategoryFullSummary.CreatedDate)].Width = 220;
+                gdgvCategories.Columns[nameof(FinCategoryFullSummary.CreatedDate)].DefaultCellStyle.Format = "hh:mm:ss tt dd-MM-yyyy";
 
-                gdgvCategories.Columns[nameof(FinCategoryDTO.IsActive)].HeaderText = "الفعالية";
-                gdgvCategories.Columns[nameof(FinCategoryDTO.IsActive)].Width = 70;
+                gdgvCategories.Columns[nameof(FinCategoryFullSummary.IsActive)].HeaderText = "الفعالية";
+                gdgvCategories.Columns[nameof(FinCategoryFullSummary.IsActive)].Width = 70;
 
                 _IsHeaderCreated = true;
 

@@ -223,7 +223,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                 personData = null;
 
                 _logger.LogError(ex.Message);
-                handler.Failure(ex.Message);
+              return  handler.Failure(ex.Message);
             }
 
             return handler.Success(personData);

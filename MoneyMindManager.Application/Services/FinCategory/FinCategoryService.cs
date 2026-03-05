@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using MoneyMindManager.Application.Abstractions.Handlers;
 using MoneyMindManager.Application.Abstractions.Services;
 using MoneyMindManager.Application.Mappers.Abstractions;
 using MoneyMindManager.Core.Abstractions;
 using MoneyMindManager.Core.Enums;
+using MoneyMindManager.Core.Models.FinCategory;
 using MoneyMindManager.Core.Paged_Result_DTOs;
 using MoneyMindManager.Domain.Abstractions.Repositories;
-using MoneyMindManager.Domain.Entities.DebtPayment;
 using MoneyMindManager.Shared.DTOs;
 using MoneyMindManager.Shared.DTOs.IncomeAndExpenseCategory;
 
@@ -23,7 +22,7 @@ namespace MoneyMindManager.Application.Services
         private readonly IUserService _userService;
 
         public FinCategoryService(IResultFactory resultFactory, IFinCategoryRepository finCategoryRepository, IAuthorizationService authorizationService,
-            IFinCategoryMapper finCategoryMapper,IUserService userService)
+            IFinCategoryMapper finCategoryMapper, IUserService userService)
         {
             this._resultFactory = resultFactory;
             this._finCategoryRepository = finCategoryRepository;
@@ -211,9 +210,9 @@ namespace MoneyMindManager.Application.Services
 
             return handler.Success(result.Data);
         }
-        public async Task<IResult<PagedResultDTO<FinCategoryDTO>>> GetAllForSelectOne(FinCategorySelectPagedFilterDTO DTO, int currentUserID)
+        public async Task<IResult<PagedResultDTO<FinCategorySelectSummary>>> GetAllForSelectOne(FinCategorySelectPagedFilterDTO DTO, int currentUserID)
         {
-            var handler = _resultFactory.Create<PagedResultDTO<FinCategoryDTO>>();
+            var handler = _resultFactory.Create<PagedResultDTO<FinCategorySelectSummary>>();
             if (DTO is null)
                 return handler.Failure("البيانات المرسلة غير صالحة");
 
@@ -230,14 +229,11 @@ namespace MoneyMindManager.Application.Services
             if (result.Data is null)
                 return handler.Failure("failed to get categoies list!");
 
-            var returnResult = new PagedResultDTO<FinCategoryDTO>(result.Data.Data.Select(entity => _finCategoryMapper.EntityToDTO(entity)).ToList(),
-                result.Data.TotalPages, result.Data.TotalRecords);
-
-            return handler.Success(returnResult);
+            return result;
         }
-        public async Task<IResult<PagedResultDTO<FinCategoryDTO>>> GetAll(FinCategoryPagedFilterDTO DTO, int currentUserID)
+        public async Task<IResult<PagedResultDTO<FinCategoryFullSummary>>> GetAll(FinCategoryPagedFilterDTO DTO, int currentUserID)
         {
-            var handler = _resultFactory.Create<PagedResultDTO<FinCategoryDTO>>();
+            var handler = _resultFactory.Create<PagedResultDTO<FinCategoryFullSummary>>();
             if (DTO is null)
                 return handler.Failure("البيانات المرسلة غير صالحة");
 
@@ -254,10 +250,7 @@ namespace MoneyMindManager.Application.Services
             if (result.Data is null)
                 return handler.Failure("failed to get categoies list!");
 
-            var returnResult = new PagedResultDTO<FinCategoryDTO>(result.Data.Data.Select(entity => _finCategoryMapper.EntityToDTO(entity)).ToList(),
-                result.Data.TotalPages, result.Data.TotalRecords);
-
-            return handler.Success(returnResult);
+            return result;
         }
         public async Task<IResult<bool>> IsExceedMonthlyBudget(BudgetCheckDTO DTO, int currentUserID)
         {

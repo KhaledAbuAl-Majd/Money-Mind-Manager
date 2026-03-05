@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using KhaledControlLibrary1;
 using MoneyMindManager.Client.Abstractions.ApiClient;
 using MoneyMindManager.Core.Enums;
+using MoneyMindManager.Core.Models.FinCategory;
 using MoneyMindManager.Shared.DTOs;
 using MoneyMindManager.Shared.DTOs.IncomeAndExpenseCategory;
 using MoneyMindManager.UI.Abstractions;
@@ -182,17 +183,17 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             if (!_IsHeaderCreated && gdgvCategories.Rows.Count > 0)
             {
 
-                gdgvCategories.Columns[nameof(FinCategoryDTO.CategoryID)].HeaderText = "معرف الفئة";
-                gdgvCategories.Columns[nameof(FinCategoryDTO.CategoryID)].Width = 120;
+                gdgvCategories.Columns[nameof(FinCategorySelectSummary.CategoryID)].HeaderText = "معرف الفئة";
+                gdgvCategories.Columns[nameof(FinCategorySelectSummary.CategoryID)].Width = 120;
 
-                gdgvCategories.Columns[nameof(FinCategoryDTO.CategoryName)].HeaderText = "اسم الفئة";
-                gdgvCategories.Columns[nameof(FinCategoryDTO.CategoryName)].Width = 280;
+                gdgvCategories.Columns[nameof(FinCategorySelectSummary.CategoryName)].HeaderText = "اسم الفئة";
+                gdgvCategories.Columns[nameof(FinCategorySelectSummary.CategoryName)].Width = 280;
 
-                gdgvCategories.Columns[nameof(FinCategoryDTO.ParentCategoryName)].HeaderText = "الفئة التابعة لها";
-                gdgvCategories.Columns[nameof(FinCategoryDTO.ParentCategoryName)].Width = 260;
+                gdgvCategories.Columns[nameof(FinCategorySelectSummary.ParentCategoryName)].HeaderText = "الفئة التابعة لها";
+                gdgvCategories.Columns[nameof(FinCategorySelectSummary.ParentCategoryName)].Width = 260;
 
-                gdgvCategories.Columns[nameof(FinCategoryDTO.MainCategoryName)].HeaderText = "الفئة الرئيسية التابعة لها";
-                gdgvCategories.Columns[nameof(FinCategoryDTO.MainCategoryName)].Width = 260;
+                gdgvCategories.Columns[nameof(FinCategorySelectSummary.MainCategoryName)].HeaderText = "الفئة الرئيسية التابعة لها";
+                gdgvCategories.Columns[nameof(FinCategorySelectSummary.MainCategoryName)].Width = 260;
 
                 _IsHeaderCreated = true;
             }

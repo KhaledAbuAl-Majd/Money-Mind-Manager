@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MoneyMindManager.Application.Abstractions.Handlers;
 using MoneyMindManager.Core;
 using MoneyMindManager.Core.Abstractions;
+using MoneyMindManager.Core.Models.FinCategory;
 using MoneyMindManager.Core.Paged_Result_DTOs;
 using MoneyMindManager.Domain.Abstractions;
 using MoneyMindManager.Domain.Abstractions.Repositories;
@@ -315,10 +316,10 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer.Report
 
             return handler.Success(isExist);
         }
-        public async Task<IResult<PagedResultDTO<FinCategory>>> GetAllForSelectOne(FinCategorySelectPagedSearchCriteria criteria, int currentUserID)
+        public async Task<IResult<PagedResultDTO<FinCategorySelectSummary>>> GetAllForSelectOne(FinCategorySelectPagedSearchCriteria criteria, int currentUserID)
         {
-            PagedResultDTO<FinCategory> allCategories = null;
-            var handler = _resultFactory.Create<PagedResultDTO<FinCategory>>();
+            PagedResultDTO<FinCategorySelectSummary> allCategories = null;
+            var handler = _resultFactory.Create<PagedResultDTO<FinCategorySelectSummary>>();
 
             try
             {
@@ -349,7 +350,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer.Report
                         command.Parameters.Add(outputRecordsCount);
 
                         await connection.OpenAsync();
-                        List<FinCategory> list;
+                        List<FinCategorySelectSummary> list;
                         using (SqlDataReader reader = await command.ExecuteReaderAsync())
                         {
                             int idOrdinal = reader.GetOrdinal("CategoryID");
@@ -357,7 +358,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer.Report
                             int parentCategoryNameOrdinal = reader.GetOrdinal("ParentCategoryName");
                             int mainCategoryNameOrdinal = reader.GetOrdinal("MainCategoryName");
 
-                            list = new List<FinCategory>();
+                            list = new List<FinCategorySelectSummary>();
 
                             while (await reader.ReadAsync())
                             {
@@ -367,13 +368,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer.Report
                                 string mainCategoryName = reader[mainCategoryNameOrdinal] as string;
 
 
-                                var category = new FinCategory()
-                                {
-                                    CategoryID = categoryID,
-                                    CategoryName = categoryName,
-                                    ParentCategoryName = parentCategoryName,
-                                    MainCategoryName = mainCategoryName
-                                };
+                                var category = new FinCategorySelectSummary(categoryID, categoryName, mainCategoryName, parentCategoryName);
 
                                 list.Add(category);
                             }
@@ -382,7 +377,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer.Report
                         int numberOfPages = Convert.ToInt32(outputNumberOfPages.Value);
                         int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
 
-                        allCategories = new PagedResultDTO<FinCategory>(list, numberOfPages, recordsCount);
+                        allCategories = new PagedResultDTO<FinCategorySelectSummary>(list, numberOfPages, recordsCount);
                     }
                 }
 
@@ -399,10 +394,10 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer.Report
 
             return handler.Success(allCategories);
         }
-        public async Task<IResult<PagedResultDTO<FinCategory>>> GetAll(FinCategoryPagedSearchCriteria criteria, int currentUserID)
+        public async Task<IResult<PagedResultDTO<FinCategoryFullSummary>>> GetAll(FinCategoryPagedSearchCriteria criteria, int currentUserID)
         {
-            PagedResultDTO<FinCategory> allCategories = null;
-            var handler = _resultFactory.Create<PagedResultDTO<FinCategory>>();
+            PagedResultDTO<FinCategoryFullSummary> allCategories = null;
+            var handler = _resultFactory.Create<PagedResultDTO<FinCategoryFullSummary>>();
 
             try
             {
@@ -439,7 +434,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer.Report
                         command.Parameters.Add(outputRecordsCount);
 
                         await connection.OpenAsync();
-                        List<FinCategory> list;
+                        List<FinCategoryFullSummary> list;
                         using (SqlDataReader reader = await command.ExecuteReaderAsync())
                         {
                             int idOrdinal = reader.GetOrdinal("CategoryID");
@@ -449,7 +444,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer.Report
                             int createdDateOrdinal = reader.GetOrdinal("CreatedDate");
                             int isActiveOrdinal = reader.GetOrdinal("IsActive");
 
-                            list = new List<FinCategory>();
+                            list = new List<FinCategoryFullSummary>();
 
                             while (await reader.ReadAsync())
                             {
@@ -460,15 +455,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer.Report
                                 DateTime createdDate = Convert.ToDateTime(reader[createdDateOrdinal]);
                                 bool isActive = Convert.ToBoolean(reader[isActiveOrdinal]);
 
-                                var category = new FinCategory()
-                                {
-                                    CategoryID = categoryID,
-                                    CategoryName = categoryName,
-                                    ParentCategoryName = parentCategoryName,
-                                    MainCategoryName = mainCategoryName,
-                                    CreatedDate = createdDate,
-                                    IsActive = isActive
-                                };
+                                var category = new FinCategoryFullSummary(categoryID, categoryName, createdDate, isActive, mainCategoryName, parentCategoryName);
 
                                 list.Add(category);
                             }
@@ -477,7 +464,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer.Report
                         int numberOfPages = Convert.ToInt32(outputNumberOfPages.Value);
                         int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
 
-                        allCategories = new PagedResultDTO<FinCategory>(list, numberOfPages, recordsCount);
+                        allCategories = new PagedResultDTO<FinCategoryFullSummary>(list, numberOfPages, recordsCount);
                     }
                 }
 

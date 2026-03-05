@@ -2,6 +2,7 @@
 using MoneyMindManager.Application.Abstractions.Services;
 using MoneyMindManager.Client.Abstractions.ApiClient;
 using MoneyMindManager.Core.Abstractions;
+using MoneyMindManager.Core.Models.FinCategory;
 using MoneyMindManager.Core.Paged_Result_DTOs;
 using MoneyMindManager.Shared.DTOs;
 using MoneyMindManager.Shared.DTOs.IncomeAndExpenseCategory;
@@ -40,11 +41,11 @@ namespace MoneyMindManager.APIClient.Api_Client_Implementation
         {
             return await _finCategoryService.IsExistByName(categoryName, currentUserID);
         }
-        public async Task<IResult<PagedResultDTO<FinCategoryDTO>>> GetAllForSelectOne(FinCategorySelectPagedFilterDTO DTO, int currentUserID)
+        public async Task<IResult<PagedResultDTO<FinCategorySelectSummary>>> GetAllForSelectOne(FinCategorySelectPagedFilterDTO DTO, int currentUserID)
         {
             return await _finCategoryService.GetAllForSelectOne(DTO, currentUserID);
         }
-        public async Task<IResult<PagedResultDTO<FinCategoryDTO>>> GetAll(FinCategoryPagedFilterDTO DTO, int currentUserID)
+        public async Task<IResult<PagedResultDTO<FinCategoryFullSummary>>> GetAll(FinCategoryPagedFilterDTO DTO, int currentUserID)
         {
             return await _finCategoryService.GetAll(DTO, currentUserID);
         }

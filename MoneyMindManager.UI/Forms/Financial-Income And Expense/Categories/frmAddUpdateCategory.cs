@@ -226,13 +226,13 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             {
                 if (int.TryParse(kgtxtParentCategoryName.Tag?.ToString(), out int parentCategoryID))
                 {
-                    if (!string.IsNullOrWhiteSpace(kgtxtParentCategoryName.ValidatedText))
+                    if (string.IsNullOrWhiteSpace(kgtxtParentCategoryName.ValidatedText))
                     {
-                        _Category.ParentCategoryID = parentCategoryID;
                         _messageBoxService.DisplayError("فشل تسجيل معرف الفئة التابعة لها");
                         _ResteObject();
                         return;
                     }
+                    _Category.ParentCategoryID = parentCategoryID;
                 }
 
                 _Category.IsIncome = Convert.ToBoolean(_isIncome);
