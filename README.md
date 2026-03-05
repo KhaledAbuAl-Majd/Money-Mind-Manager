@@ -1,6 +1,29 @@
-# Money Mind Manager 💰🧠
+# Money Mind Manager 💰🧠 (Version 2.0 - Clean Architecture)
 
-**Money Mind Manager** is an advanced, database-centric **Personal Financial Management (PFM)** desktop application built with **C# Windows Forms** and a robust **SQL Server** backend. The project supports **multi-user financial tracking** with strong emphasis on **data integrity**, **security**, and **scalable architecture**.
+**Money Mind Manager** is an advanced, database-centric **Personal Financial Management (PFM)** application. Originally built as a desktop tool, the **V2 overhaul** transitions the project into a modular, highly decoupled system following **Clean Architecture** and **SOLID principles**, making it officially **REST-Ready**.
+
+---
+
+## 🏗️ Architectural Overhaul (V2 Updates)
+
+The application has been re-engineered from a traditional 3-tier structure to a modern **Multi-Project Clean Architecture**. This ensures a strict separation of concerns and inward-pointing dependencies.
+
+### Architecture Layers:
+- **MoneyMindManager.Core:** Centralized shared abstractions (`IResult`, `ILogger`), Utilities, and Enums used across all projects.
+- **MoneyMindManager.IoC:** A dedicated **Inversion of Control** layer that centralizes **Dependency Injection (DI)** registration and manages service lifetimes.
+- **MoneyMindManager.Domain:** The core of the system containing pure **Domain Entities** and **Repository Interfaces** (Abstractions).
+- **MoneyMindManager.Application:** Implements the core business logic through dedicated services, handlers, and mappers.
+- **MoneyMindManager.Infrastructure:** Handles technical concerns like **ADO.NET** implementations for SQL Server, logging, and cryptography.
+- - **MoneyMindManager.APIClient.Abstractions:** Contains the interfaces and contracts for the API Client, ensuring the UI remains independent of the implementation.
+- **MoneyMindManager.APIClient:** Provides the concrete implementation of the API abstractions, prepared to handle future RESTful HTTP communication.
+- **MoneyMindManager.APIClient (Proxy):** Acts as an abstraction layer between the UI and services, ensuring the system is **REST-Ready** for future API integration.
+- **MoneyMindManager.Shared.DTOs:** A standalone project for data contracts to maintain consistency across boundaries.
+- **MoneyMindManager.UI:** A "Thin Client" WinForms implementation focused strictly on presentation logic.
+
+### Key Engineering Patterns:
+- **SOLID Principles:** Strict adherence to Single Responsibility and Dependency Inversion to ensure scalability.
+- **Dependency Injection (DI):** Comprehensive use of constructor-based injection managed by the IoC container.
+- **Result Pattern (IResult):** Standardized operation outcomes for clean error handling and status reporting without exception-driven logic.
 
 ---
 
@@ -32,7 +55,7 @@
   - **Document Management:** Transactions logged via **Vouchers (Income, Expense, Returns)** that can be **locked** to prevent modification.
 
 - **Advanced Search & Reporting**
-  - **Full-Text Search** for fast lookups , in addition to standard `LIKE` searches (SubString).
+  - **Full-Text Search** for fast lookups in Arabic and English, in addition to standard `LIKE` searches.
   - **Excel Export:** All grids exportable via **ClosedXML**.
   - **Dynamic Dashboards:** Monthly cash flow, debt reports, top spending categories.
 
@@ -44,13 +67,15 @@
 
 ## Technology Stack
 
-| Component        | Technology / Library        |
+| Component         | Technology / Library        |
 |-----------------|-----------------------------|
 | Frontend        | C# .NET (Windows Forms)     |
-| UI Library      | Guna.UI2                   |
+| UI Library      | Guna.UI2                    |
+| Architecture    | Clean Architecture     |
+| DI Container    | Microsoft.Extensions.DependencyInjection |
 | Database        | SQL Server (T-SQL)          |
-| Data Export     | ClosedXML                  |
-| Configuration   | JSON & Windows Registry      |
+| Data Export     | ClosedXML                   |
+| Configuration   | JSON & Windows Registry     |
 
 ---
 
@@ -80,6 +105,5 @@
 ## Notes
 
 - Ensure **Full-Text Search** is installed and enabled on your SQL Server instance.
-- Application follows a **3-tier architecture**: Presentation, Business Logic, and Data Access layers.
 - **Bitwise permissions** provide a highly flexible, scalable, and efficient user permission system.
 - Sensitive data (passwords and "Remember Me" tokens) is securely encrypted.
