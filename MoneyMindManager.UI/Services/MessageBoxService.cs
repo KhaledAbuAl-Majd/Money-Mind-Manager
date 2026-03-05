@@ -23,6 +23,9 @@ namespace MoneyMindManager.UI.Services
         /// </summary>
         public DialogResult Display(string message, string caption, MessageBoxButtons buttons, MessageBoxIcon icon, MessageBoxDefaultButton defaultButton = MessageBoxDefaultButton.Button1)
         {
+            if (message is null)
+                return DialogResult.None;
+
             var activeForm = _activeFormTracker.ActiveForm;
 
             if (activeForm == null)
