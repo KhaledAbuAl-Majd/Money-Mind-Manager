@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C65BF29E-4BDA-4B9A-906A-5C87B5B2A1E3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MoneyMindManager.Domain</RootNamespace>
+    <AssemblyName>MoneyMindManager.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Abstractions\Repositories\IDebtPaymentRepository.cs" />
+    <Compile Include="Abstractions\Repositories\IDebtRepository.cs" />
+    <Compile Include="Abstractions\Repositories\IFinTransactionRepository.cs" />
+    <Compile Include="Abstractions\Repositories\IAccountRepository.cs" />
+    <Compile Include="Abstractions\Repositories\ICurrencyRepository.cs" />
+    <Compile Include="Abstractions\Repositories\IDatabaseSettings.cs" />
+    <Compile Include="Abstractions\Repositories\IFinCategoryRepository.cs" />
+    <Compile Include="Abstractions\Repositories\IFinVoucherRepository.cs" />
+    <Compile Include="Abstractions\Repositories\IPersonRepository.cs" />
+    <Compile Include="Abstractions\Repositories\ITransactionTypeRepository.cs" />
+    <Compile Include="Abstractions\Repositories\IUserRepository.cs" />
+    <Compile Include="Abstractions\Repositories\Reports\ICategoriesReportRepository.cs" />
+    <Compile Include="Abstractions\Repositories\Reports\IDebtsReportRepository.cs" />
+    <Compile Include="Abstractions\Repositories\Reports\IGeneralReportRepository.cs" />
+    <Compile Include="Abstractions\Repositories\IMainTransactionRepository.cs" />
+    <Compile Include="Abstractions\Services\IDatabaseMaintenanceService.cs" />
+    <Compile Include="Abstractions\Services\IHashingService.cs" />
+    <Compile Include="Abstractions\Services\IHashingSettings.cs" />
+    <Compile Include="Abstractions\Services\IPasswordHasher.cs" />
+    <Compile Include="Abstractions\Services\IPermissionService.cs" />
+    <Compile Include="Abstractions\Services\IRandomGenerator.cs" />
+    <Compile Include="Abstractions\Services\ISymmetricEncryptionSettings.cs" />
+    <Compile Include="Criteria\Debt\DebtPagedSearchCriteria.cs" />
+    <Compile Include="Criteria\Debt\DebtSearchCriteria.cs" />
+    <Compile Include="Criteria\FinVoucher\FinVoucherPagedSearchCriteria.cs" />
+    <Compile Include="Criteria\FinVoucher\FinVoucherSearchCriteria.cs" />
+    <Compile Include="Criteria\IncomeAndExpenseCategory\BudgetCheckCriteria.cs" />
+    <Compile Include="Criteria\IncomeAndExpenseCategory\FinCategoryPagedSearchCriteria.cs" />
+    <Compile Include="Criteria\IncomeAndExpenseCategory\FinCategorySelectPagedSearchCriteria.cs" />
+    <Compile Include="Criteria\MainTransactionPagedSearchCriteria.cs" />
+    <Compile Include="Criteria\MainTransactionSearchCriteria.cs" />
+    <Compile Include="Criteria\PersonSelectSearchCriteria.cs" />
+    <Compile Include="Criteria\UserSearchCriteria.cs" />
+    <Compile Include="Entities\Account.cs" />
+    <Compile Include="Entities\Currency.cs" />
+    <Compile Include="Entities\Debt.cs" />
+    <Compile Include="Entities\DebtPayment\DebtPayment.cs" />
+    <Compile Include="Entities\DebtPayment\DebtPaymentShort.cs" />
+    <Compile Include="Entities\FinCategory.cs" />
+    <Compile Include="Entities\FinTransaction\FinTransaction.cs" />
+    <Compile Include="Entities\FinTransaction\FinTransactionShort.cs" />
+    <Compile Include="Entities\FinVoucher.cs" />
+    <Compile Include="Entities\MainTransaction.cs" />
+    <Compile Include="Entities\Person.cs" />
+    <Compile Include="Entities\TransactionType.cs" />
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="Criteria\PersonSearchCriteria.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MoneyMindManager.Core\MoneyMindManager.Core.csproj">
+      <Project>{207acf87-b108-4ce1-ac9e-f7dd5273a7cc}</Project>
+      <Name>MoneyMindManager.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
