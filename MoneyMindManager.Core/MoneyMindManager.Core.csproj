@@ -62,6 +62,8 @@
     <Compile Include="Models\FinVoucher\FinVoucherViewSummary.cs" />
     <Compile Include="Models\MainTransaction\MainTransactionExportSummary.cs" />
     <Compile Include="Models\MainTransaction\MainTransactionViewSummary.cs" />
+    <Compile Include="Models\Person\PersonFullSummary.cs" />
+    <Compile Include="Models\Person\PersonSelectSummary.cs" />
     <Compile Include="Models\Reports\Categories\CategoryMonthlyFlowReportModel.cs" />
     <Compile Include="Models\Reports\Categories\TopCategoriesReportModel.cs" />
     <Compile Include="Models\Reports\Debts\DebtRepaymentScheduleReportModel.cs" />
