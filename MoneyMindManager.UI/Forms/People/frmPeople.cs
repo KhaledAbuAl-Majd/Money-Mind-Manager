@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using KhaledControlLibrary1;
 using MoneyMindManager.Client.Abstractions.ApiClient;
 using MoneyMindManager.Core.Enums;
+using MoneyMindManager.Core.Models.Person;
 using MoneyMindManager.Shared.DTOs;
 using MoneyMindManager.Shared.DTOs.Person;
 using MoneyMindManager.UI.Abstractions;
@@ -168,20 +169,20 @@ namespace MoneyMindManager_Presentation.People
 
             if (!_IsHeaderCreated && gdgvPeople.Rows.Count > 0)
             {
-                gdgvPeople.Columns[nameof(PersonDTO.PersonID)].HeaderText = "معرف الشخص";
-                gdgvPeople.Columns[nameof(PersonDTO.PersonID)].Width = 130;
+                gdgvPeople.Columns[nameof(PersonFullSummary.PersonID)].HeaderText = "معرف الشخص";
+                gdgvPeople.Columns[nameof(PersonFullSummary.PersonID)].Width = 130;
 
-                gdgvPeople.Columns[nameof(PersonDTO.PersonName)].HeaderText = "اسم الشخص";
-                gdgvPeople.Columns[nameof(PersonDTO.PersonName)].Width = 300;
+                gdgvPeople.Columns[nameof(PersonFullSummary.PersonName)].HeaderText = "اسم الشخص";
+                gdgvPeople.Columns[nameof(PersonFullSummary.PersonName)].Width = 300;
 
-                gdgvPeople.Columns[nameof(PersonDTO.Address)].HeaderText = "العنوان";
-                gdgvPeople.Columns[nameof(PersonDTO.Address)].Width = 285;
+                gdgvPeople.Columns[nameof(PersonFullSummary.Address)].HeaderText = "العنوان";
+                gdgvPeople.Columns[nameof(PersonFullSummary.Address)].Width = 285;
 
-                gdgvPeople.Columns[nameof(PersonDTO.Email)].HeaderText = "البريد الإلكتروني";
-                gdgvPeople.Columns[nameof(PersonDTO.Email)].Width = 290;
+                gdgvPeople.Columns[nameof(PersonFullSummary.Email)].HeaderText = "البريد الإلكتروني";
+                gdgvPeople.Columns[nameof(PersonFullSummary.Email)].Width = 290;
 
-                gdgvPeople.Columns[nameof(PersonDTO.Phone)].HeaderText = "رقم الهاتف";
-                gdgvPeople.Columns[nameof(PersonDTO.Phone)].Width = 175;
+                gdgvPeople.Columns[nameof(PersonFullSummary.Phone)].HeaderText = "رقم الهاتف";
+                gdgvPeople.Columns[nameof(PersonFullSummary.Phone)].Width = 175;
 
                 _IsHeaderCreated = true;
             }

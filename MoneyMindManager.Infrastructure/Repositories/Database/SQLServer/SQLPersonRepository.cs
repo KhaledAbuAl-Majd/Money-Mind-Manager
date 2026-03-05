@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MoneyMindManager.Application.Abstractions.Handlers;
 using MoneyMindManager.Core;
 using MoneyMindManager.Core.Abstractions;
+using MoneyMindManager.Core.Models.Person;
 using MoneyMindManager.Core.Paged_Result_DTOs;
 using MoneyMindManager.Domain.Abstractions;
 using MoneyMindManager.Domain.Criteria;
@@ -223,7 +224,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                 personData = null;
 
                 _logger.LogError(ex.Message);
-              return  handler.Failure(ex.Message);
+                return handler.Failure(ex.Message);
             }
 
             return handler.Success(personData);
@@ -270,10 +271,10 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
             return handler.Success(isExist);
         }
 
-        public async Task<IResult<PagedResultDTO<Person>>> GetAll(PersonSearchCriteria personSearchCriteria, int currentUserID)
+        public async Task<IResult<PagedResultDTO<PersonFullSummary>>> GetAll(PersonSearchCriteria personSearchCriteria, int currentUserID)
         {
-            PagedResultDTO<Person> PeoplePaged = null;
-            var handler = _resultFactory.Create<PagedResultDTO<Person>>();
+            PagedResultDTO<PersonFullSummary> PeoplePaged = null;
+            var handler = _resultFactory.Create<PagedResultDTO<PersonFullSummary>>();
 
             try
             {
@@ -306,10 +307,10 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                         command.Parameters.Add(outputRecordsCount);
 
                         await connection.OpenAsync();
-                        List<Person> people;
+                        List<PersonFullSummary> people;
                         using (SqlDataReader reader = await command.ExecuteReaderAsync())
                         {
-                            people = new List<Person>();
+                            people = new List<PersonFullSummary>();
 
                             int personOrdianl = reader.GetOrdinal("PersonID");
                             int personNameOrdinal = reader.GetOrdinal("PersonName");
@@ -325,14 +326,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                                 string email = reader[emailOrdinal] as string;
                                 string phone = reader[phoneOrdinal] as string;
 
-                                var person = new Person()
-                                {
-                                    PersonID = personID,
-                                    PersonName = personName,
-                                    Address = address,
-                                    Email = email,
-                                    Phone = phone
-                                };
+                                var person = new PersonFullSummary(personID, personName, address, email, phone);
 
                                 people.Add(person);
                             }
@@ -341,7 +335,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                         int numberOfPages = Convert.ToInt32(outputNumberOfPages.Value);
                         int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
 
-                        PeoplePaged = new PagedResultDTO<Person>(people, numberOfPages, recordsCount);
+                        PeoplePaged = new PagedResultDTO<PersonFullSummary>(people, numberOfPages, recordsCount);
                     }
                 }
 
@@ -359,10 +353,10 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
             return handler.Success(PeoplePaged);
         }
 
-        public async Task<IResult<PagedResultDTO<Person>>> GetAllForSelectOne(PersonSelectSearchCriteria personSearchCriteria, int currentUserID)
+        public async Task<IResult<PagedResultDTO<PersonSelectSummary>>> GetAllForSelectOne(PersonSelectSearchCriteria personSearchCriteria, int currentUserID)
         {
-            PagedResultDTO<Person> peoplePaged = null;
-            var handler = _resultFactory.Create<PagedResultDTO<Person>>();
+            PagedResultDTO<PersonSelectSummary> peoplePaged = null;
+            var handler = _resultFactory.Create<PagedResultDTO<PersonSelectSummary>>();
             try
             {
                 using (SqlConnection connection = new SqlConnection(_databaseSettings.ConnectionString))
@@ -391,10 +385,10 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                         command.Parameters.Add(outputRecordsCount);
 
                         await connection.OpenAsync();
-                        List<Person> people;
+                        List<PersonSelectSummary> people;
                         using (SqlDataReader reader = await command.ExecuteReaderAsync())
                         {
-                            people = new List<Person>();
+                            people = new List<PersonSelectSummary>();
 
                             int personOrdianl = reader.GetOrdinal("PersonID");
                             int personNameOrdinal = reader.GetOrdinal("PersonName");
@@ -404,12 +398,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                                 int personID = Convert.ToInt32(reader[personOrdianl]);
                                 string personName = reader[personNameOrdinal] as string;
 
-                                var person = new Person()
-                                {
-                                    PersonID = personID,
-                                    PersonName = personName
-                                };
-
+                                var person = new PersonSelectSummary(personID, personName);
                                 people.Add(person);
                             }
 
@@ -417,7 +406,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                         int numberOfPages = Convert.ToInt32(outputNumberOfPages.Value);
                         int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
 
-                        peoplePaged = new PagedResultDTO<Person>(people, numberOfPages, recordsCount);
+                        peoplePaged = new PagedResultDTO<PersonSelectSummary>(people, numberOfPages, recordsCount);
                     }
                 }
 

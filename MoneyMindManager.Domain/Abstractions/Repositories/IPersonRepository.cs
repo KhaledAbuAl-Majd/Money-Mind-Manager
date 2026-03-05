@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using MoneyMindManager.Core.Abstractions;
+using MoneyMindManager.Core.Models.Person;
 using MoneyMindManager.Core.Paged_Result_DTOs;
 using MoneyMindManager.Domain.Criteria;
 using MoneyMindManager.Domain.Entities;
@@ -27,8 +28,8 @@ namespace MoneyMindManager.Domain.Abstractions
         /// Get All People For Account Using Paging , if variable null will not filter by it.
         /// </summary>
         /// <returns>object of PagedResultDTO<Person> : if error happend, return null</returns>
-        Task<IResult<PagedResultDTO<Person>>> GetAll(PersonSearchCriteria personSearchCriteria, int currentUserID);
+        Task<IResult<PagedResultDTO<PersonFullSummary>>> GetAll(PersonSearchCriteria personSearchCriteria, int currentUserID);
 
-        Task<IResult<PagedResultDTO<Person>>> GetAllForSelectOne(PersonSelectSearchCriteria personSearchCriteria, int currentUserID);
+        Task<IResult<PagedResultDTO<PersonSelectSummary>>> GetAllForSelectOne(PersonSelectSearchCriteria personSearchCriteria, int currentUserID);
     }
 }

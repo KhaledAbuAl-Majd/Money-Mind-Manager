@@ -2,6 +2,7 @@
 using MoneyMindManager.Application.Abstractions.Services;
 using MoneyMindManager.Client.Abstractions.ApiClient;
 using MoneyMindManager.Core.Abstractions;
+using MoneyMindManager.Core.Models.Person;
 using MoneyMindManager.Core.Paged_Result_DTOs;
 using MoneyMindManager.Shared.DTOs;
 using MoneyMindManager.Shared.DTOs.Person;
@@ -42,12 +43,12 @@ namespace MoneyMindManager.APIClient.Api_Client_Implementation
             return await _personService.IsExist(personID);
         }
 
-        public async Task<IResult<PagedResultDTO<PersonDTO>>> GetAll(PersonFilterDTO personFilterDTO, int currentUserID)
+        public async Task<IResult<PagedResultDTO<PersonFullSummary>>> GetAll(PersonFilterDTO personFilterDTO, int currentUserID)
         {
             return await _personService.GetAll(personFilterDTO, currentUserID);
         }
 
-        public async Task<IResult<PagedResultDTO<PersonDTO>>> GetAllForSelectOne(PersonSelectFilterDTO personFilterDTO, int currentUserID)
+        public async Task<IResult<PagedResultDTO<PersonSelectSummary>>> GetAllForSelectOne(PersonSelectFilterDTO personFilterDTO, int currentUserID)
         {
             return await _personService.GetAllForSelectOne(personFilterDTO, currentUserID);
         }

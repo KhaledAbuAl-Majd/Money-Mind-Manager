@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using MoneyMindManager.Application.Abstractions.Handlers;
 using MoneyMindManager.Application.Abstractions.Mappers;
 using MoneyMindManager.Application.Abstractions.Services;
 using MoneyMindManager.Core.Abstractions;
 using MoneyMindManager.Core.Enums;
+using MoneyMindManager.Core.Models.Person;
 using MoneyMindManager.Core.Paged_Result_DTOs;
 using MoneyMindManager.Domain.Abstractions;
 using MoneyMindManager.Shared.DTOs;
@@ -20,7 +20,7 @@ namespace MoneyMindManager.Application.Services
         private readonly IAuthorizationService _authorizationService;
         private readonly IAccountService _accountService;
         public PersonService(IPersonRepository personRepository, IPersonMapper personMapper, IResultFactory resultFactory,
-            IAuthorizationService authorizationService,IAccountService accountService)
+            IAuthorizationService authorizationService, IAccountService accountService)
         {
             this._personRepository = personRepository;
             this._personMapper = personMapper;
@@ -164,9 +164,9 @@ namespace MoneyMindManager.Application.Services
             return result;
         }
 
-        public async Task<IResult<PagedResultDTO<PersonDTO>>> GetAll(PersonFilterDTO personFilterDTO, int currentUserID)
+        public async Task<IResult<PagedResultDTO<PersonFullSummary>>> GetAll(PersonFilterDTO personFilterDTO, int currentUserID)
         {
-            var handler = _resultFactory.Create<PagedResultDTO<PersonDTO>>();
+            var handler = _resultFactory.Create<PagedResultDTO<PersonFullSummary>>();
             if (personFilterDTO is null)
                 return handler.Failure("البيانات المرسلة غير صالحة");
 
@@ -180,15 +180,12 @@ namespace MoneyMindManager.Application.Services
             if (!result.IsSuccess)
                 return handler.Failure(result.ErrorMessage);
 
-            PagedResultDTO<PersonDTO> returnResult = new PagedResultDTO<PersonDTO>(result.Data.Data.Select(entity => _personMapper.EntityToDTO(entity)).ToList(),
-                result.Data.TotalPages, result.Data.TotalRecords);
-
-            return handler.Success(returnResult);
+            return result;
         }
 
-        public async Task<IResult<PagedResultDTO<PersonDTO>>> GetAllForSelectOne(PersonSelectFilterDTO personFilterDTO, int currentUserID)
+        public async Task<IResult<PagedResultDTO<PersonSelectSummary>>> GetAllForSelectOne(PersonSelectFilterDTO personFilterDTO, int currentUserID)
         {
-            var handler = _resultFactory.Create<PagedResultDTO<PersonDTO>>();
+            var handler = _resultFactory.Create<PagedResultDTO<PersonSelectSummary>>();
             if (personFilterDTO is null)
                 return handler.Failure("البيانات المرسلة غير صالحة");
 
@@ -202,10 +199,7 @@ namespace MoneyMindManager.Application.Services
             if (!result.IsSuccess)
                 return handler.Failure(result.ErrorMessage);
 
-            PagedResultDTO<PersonDTO> returnResult = new PagedResultDTO<PersonDTO>(result.Data.Data.Select(entity => _personMapper.EntityToDTO(entity)).ToList(),
-                result.Data.TotalPages, result.Data.TotalRecords);
-
-            return handler.Success(returnResult);
+            return result;
         }
     }
 }

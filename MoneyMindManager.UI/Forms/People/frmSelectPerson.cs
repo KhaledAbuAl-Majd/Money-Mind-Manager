@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using KhaledControlLibrary1;
 using MoneyMindManager.Client.Abstractions.ApiClient;
 using MoneyMindManager.Core.Enums;
+using MoneyMindManager.Core.Models.Person;
 using MoneyMindManager.Shared.DTOs;
 using MoneyMindManager.Shared.DTOs.Person;
 using MoneyMindManager.UI.Abstractions;
@@ -154,11 +155,11 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
             if (!_IsHeaderCreated && gdgvPeople.Rows.Count > 0)
             {
-                gdgvPeople.Columns[nameof(PersonDTO.PersonID)].HeaderText = "معرف الشخص";
-                gdgvPeople.Columns[nameof(PersonDTO.PersonID)].Width = 150;
+                gdgvPeople.Columns[nameof(PersonSelectSummary.PersonID)].HeaderText = "معرف الشخص";
+                gdgvPeople.Columns[nameof(PersonSelectSummary.PersonID)].Width = 150;
 
-                gdgvPeople.Columns[nameof(PersonDTO.PersonName)].HeaderText = "اسم الشخص";
-                gdgvPeople.Columns[nameof(PersonDTO.PersonName)].Width = 670;
+                gdgvPeople.Columns[nameof(PersonSelectSummary.PersonName)].HeaderText = "اسم الشخص";
+                gdgvPeople.Columns[nameof(PersonSelectSummary.PersonName)].Width = 670;
 
                 _IsHeaderCreated = true;
             }
