@@ -1,4 +1,4 @@
-# Money Mind Manager 💰🧠 (Version 2.0 - Clean Architecture)
+# Money Mind Manager 💰🧠 (Version 2.0 - Clean Architecture and SOLID principles)
 
 **Money Mind Manager** is an advanced, database-centric **Personal Financial Management (PFM)** application. Originally built as a desktop tool, the **V2 overhaul** transitions the project into a modular, highly decoupled system following **Clean Architecture** and **SOLID principles**, making it officially **REST-Ready**.
 
@@ -9,14 +9,13 @@
 The application has been re-engineered from a traditional 3-tier structure to a modern **Multi-Project Clean Architecture**. This ensures a strict separation of concerns and inward-pointing dependencies.
 
 ### Architecture Layers:
-- **MoneyMindManager.Core:** Centralized shared abstractions (`IResult`, `ILogger`), Utilities, and Enums used across all projects.
-- **MoneyMindManager.IoC:** A dedicated **Inversion of Control** layer that centralizes **Dependency Injection (DI)** registration and manages service lifetimes.
 - **MoneyMindManager.Domain:** The core of the system containing pure **Domain Entities** and **Repository Interfaces** (Abstractions).
 - **MoneyMindManager.Application:** Implements the core business logic through dedicated services, handlers, and mappers.
 - **MoneyMindManager.Infrastructure:** Handles technical concerns like **ADO.NET** implementations for SQL Server, logging, and cryptography.
-- - **MoneyMindManager.APIClient.Abstractions:** Contains the interfaces and contracts for the API Client, ensuring the UI remains independent of the implementation.
+- **MoneyMindManager.Core:** Centralized shared abstractions , Utilities, and Enums used across all projects.
+- **MoneyMindManager.IoC:** A dedicated **Inversion of Control** layer that centralizes **Dependency Injection (DI)** registration and manages service lifetimes.
+- **MoneyMindManager.Client.Abstractions:** Contains the interfaces and contracts for the API Client, ensuring the UI remains independent of the implementation and the system is **REST-Ready** for future API integration.
 - **MoneyMindManager.APIClient:** Provides the concrete implementation of the API abstractions, prepared to handle future RESTful HTTP communication.
-- **MoneyMindManager.APIClient (Proxy):** Acts as an abstraction layer between the UI and services, ensuring the system is **REST-Ready** for future API integration.
 - **MoneyMindManager.Shared.DTOs:** A standalone project for data contracts to maintain consistency across boundaries.
 - **MoneyMindManager.UI:** A "Thin Client" WinForms implementation focused strictly on presentation logic.
 
