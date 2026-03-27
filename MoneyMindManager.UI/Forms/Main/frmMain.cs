@@ -132,9 +132,7 @@ namespace MoneyMindManager_Presentation.Main
                 this.Close();
                 return;
             };
-        }
-        private void frmMain_Shown(object sender, EventArgs e)
-        {
+
             LoadMainFormLabels();
 
             prevButton = null;
