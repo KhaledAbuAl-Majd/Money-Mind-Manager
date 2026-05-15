@@ -40,6 +40,7 @@ namespace MoneyMindManager.Infrastructure
             services.AddScoped<IFinTransactionRepository, SQLFinTransactionRepository>();
             services.AddScoped<IDebtRepository, SQLDebtRepository>();
             services.AddScoped<IDebtPaymentRepository, SQLDebtPaymentRepository>();
+            services.AddScoped<IDebtEntryRepository, SQLDebtEntryRepository>();
 
             services.AddSingleton<IEventLogLoggerSettings, EventLogLoggerSettings>();
             services.AddSingleton<ILogger, EventLogLogger>();
