@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstractions\Repositories\IDebtEntryRepository.cs" />
     <Compile Include="Abstractions\Repositories\IDebtPaymentRepository.cs" />
     <Compile Include="Abstractions\Repositories\IDebtRepository.cs" />
     <Compile Include="Abstractions\Repositories\IFinTransactionRepository.cs" />
@@ -77,6 +78,8 @@
     <Compile Include="Entities\Account.cs" />
     <Compile Include="Entities\Currency.cs" />
     <Compile Include="Entities\Debt.cs" />
+    <Compile Include="Entities\DebtEntry\DebtEntry.cs" />
+    <Compile Include="Entities\DebtEntry\DebtEntryShort.cs" />
     <Compile Include="Entities\DebtPayment\DebtPayment.cs" />
     <Compile Include="Entities\DebtPayment\DebtPaymentShort.cs" />
     <Compile Include="Entities\FinCategory.cs" />

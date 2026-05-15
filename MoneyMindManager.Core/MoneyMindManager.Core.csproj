@@ -50,8 +50,8 @@
     <Compile Include="Enums\SearchModeEnum.cs" />
     <Compile Include="Enums\PermissionsEnum.cs" />
     <Compile Include="Extensions\PermissionsExtensions.cs" />
-    <Compile Include="Models\DebtPayment\DebtPaymentExportSummary.cs" />
-    <Compile Include="Models\DebtPayment\DebtPaymentViewSummary.cs" />
+    <Compile Include="Models\DebtTransactions\DebtTransactionsExportSummary.cs" />
+    <Compile Include="Models\DebtTransactions\DebtTransactionsViewSummary.cs" />
     <Compile Include="Models\Debt\DebtExportSummary.cs" />
     <Compile Include="Models\Debt\DebtViewSummary.cs" />
     <Compile Include="Models\FinCategory\FinCategoryFullSummary.cs" />
