@@ -198,10 +198,10 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
 
             return handler.Success(debtPayment);
         }
-        public async Task<IResult<PagedResultWithValueDTO<DebtPaymentViewSummary>>> GetAllPagedForDebt(int debtID, int currentUserID, int pageNumber, byte rowsPerPage)
+        public async Task<IResult<PagedResultWithValueDTO<DebtTransactionsViewSummary>>> GetAllPagedForDebt(int debtID, int currentUserID, int pageNumber, byte rowsPerPage)
         {
-            PagedResultWithValueDTO<DebtPaymentViewSummary> allTransactions = null;
-            var handler = _resultFactory.Create<PagedResultWithValueDTO<DebtPaymentViewSummary>>();
+            PagedResultWithValueDTO<DebtTransactionsViewSummary> allTransactions = null;
+            var handler = _resultFactory.Create<PagedResultWithValueDTO<DebtTransactionsViewSummary>>();
 
             try
             {
@@ -238,7 +238,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                         command.Parameters.Add(outputRemainingAmount);
 
                         await connection.OpenAsync();
-                        List<DebtPaymentViewSummary> list;
+                        List<DebtTransactionsViewSummary> list;
                         using (SqlDataReader reader = await command.ExecuteReaderAsync())
                         {
 
@@ -249,7 +249,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                             int userNameOrdinal = reader.GetOrdinal("CreatedByUserName");
                             int purposeOrdinal = reader.GetOrdinal("Purpose");
 
-                            list = new List<DebtPaymentViewSummary>();
+                            list = new List<DebtTransactionsViewSummary>();
 
                             while (await reader.ReadAsync())
                             {
@@ -260,14 +260,14 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                                 string userName = reader[userNameOrdinal] as string;
                                 string purpose = reader[purposeOrdinal] as string;
 
-                                list.Add(new DebtPaymentViewSummary(id, amount, debtDate, userName, createdDate, purpose));
+                                list.Add(new DebtTransactionsViewSummary(id, amount, debtDate, userName, createdDate, purpose));
                             }
                         }
                         int numberOfPages = Convert.ToInt32(outputNumberOfPages.Value);
                         int recordsCount = Convert.ToInt32(outputRecordsCount.Value);
                         decimal remainingAmount = Convert.ToDecimal(outputRemainingAmount.Value);
 
-                        allTransactions = new PagedResultWithValueDTO<DebtPaymentViewSummary>(list, numberOfPages, recordsCount, remainingAmount);
+                        allTransactions = new PagedResultWithValueDTO<DebtTransactionsViewSummary>(list, numberOfPages, recordsCount, remainingAmount);
                     }
                 }
 
@@ -284,10 +284,10 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
 
             return handler.Success(allTransactions);
         }
-        public async Task<IResult<IEnumerable<DebtPaymentExportSummary>>> GetAllForDebt(int debtID, int currentUserID)
+        public async Task<IResult<IEnumerable<DebtTransactionsExportSummary>>> GetAllForDebt(int debtID, int currentUserID)
         {
-            List<DebtPaymentExportSummary> paymentsList = null;
-            var handler = _resultFactory.Create<IEnumerable<DebtPaymentExportSummary>>();
+            List<DebtTransactionsExportSummary> paymentsList = null;
+            var handler = _resultFactory.Create<IEnumerable<DebtTransactionsExportSummary>>();
 
             try
             {
@@ -313,7 +313,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                             int userNameOrdinal = reader.GetOrdinal("CreatedByUserName");
                             int accountIDOrinial = reader.GetOrdinal("AccountID");
 
-                            paymentsList = new List<DebtPaymentExportSummary>();
+                            paymentsList = new List<DebtTransactionsExportSummary>();
 
                             while (await reader.ReadAsync())
                             {
@@ -326,7 +326,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                                 string userName = reader[userNameOrdinal] as string;
                                 short accountID = Convert.ToInt16(reader[accountIDOrinial]);
 
-                                paymentsList.Add(new DebtPaymentExportSummary(id, amount, debtDate, userName, createdDate, purpose, userID, accountID));
+                                paymentsList.Add(new DebtTransactionsExportSummary(id, amount, debtDate, userName, createdDate, purpose, userID, accountID));
                             }
 
                         }

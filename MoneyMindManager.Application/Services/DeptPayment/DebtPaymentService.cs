@@ -149,9 +149,9 @@ namespace MoneyMindManager.Application.Services.DeptPayment
 
             return handler.Success(DTO);
         }
-        public async Task<IResult<PagedResultWithValueDTO<DebtPaymentViewSummary>>> GetAllPagedForDebt(int debtID, int currentUserID, int pageNumber)
+        public async Task<IResult<PagedResultWithValueDTO<DebtTransactionsViewSummary>>> GetAllPagedForDebt(int debtID, int currentUserID, int pageNumber)
         {
-            var handler = _resultFactory.Create<PagedResultWithValueDTO<DebtPaymentViewSummary>>();
+            var handler = _resultFactory.Create<PagedResultWithValueDTO<DebtTransactionsViewSummary>>();
 
             byte rowsPersPage = 15;
             var result = await _debtPaymentRepository.GetAllPagedForDebt(debtID, currentUserID, pageNumber, rowsPersPage);
@@ -161,9 +161,9 @@ namespace MoneyMindManager.Application.Services.DeptPayment
 
             return result;
         }
-        public async Task<IResult<IEnumerable<DebtPaymentExportSummary>>> GetAllForDebt(int debtID, int currentUserID)
+        public async Task<IResult<IEnumerable<DebtTransactionsExportSummary>>> GetAllForDebt(int debtID, int currentUserID)
         {
-            var handler = _resultFactory.Create<IEnumerable<DebtPaymentExportSummary>>();
+            var handler = _resultFactory.Create<IEnumerable<DebtTransactionsExportSummary>>();
 
             var result = await _debtPaymentRepository.GetAllForDebt(debtID, currentUserID);
 

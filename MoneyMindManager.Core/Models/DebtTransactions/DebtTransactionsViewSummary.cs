@@ -2,7 +2,7 @@
 
 namespace MoneyMindManager.Core.Models.DebtPayment
 {
-    public class DebtPaymentViewSummary
+    public class DebtTransactionsViewSummary
     {
         public int? MainTransactionID { get; set; }
         public Decimal Amount { get; set; }
@@ -11,7 +11,7 @@ namespace MoneyMindManager.Core.Models.DebtPayment
         public string CreatedByUserName { get; set; }
         public string Purpose { get; set; }
 
-        public DebtPaymentViewSummary(int transactionID, decimal amount, DateTime debtDate, string createdByUserName,
+        public DebtTransactionsViewSummary(int transactionID, decimal amount, DateTime debtDate, string createdByUserName,
             DateTime createdDate, string purpose)
         {
             this.MainTransactionID = transactionID;

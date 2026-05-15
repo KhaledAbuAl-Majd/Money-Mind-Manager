@@ -194,26 +194,26 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             if (!_IsHeaderCreated && gdgvDebtPaymentTransctions.Rows.Count > 0)
             {
 
-                gdgvDebtPaymentTransctions.Columns[nameof(DebtPaymentViewSummary.MainTransactionID)].HeaderText = "معرف المعاملة";
-                gdgvDebtPaymentTransctions.Columns[nameof(DebtPaymentViewSummary.MainTransactionID)].Width = 125;
+                gdgvDebtPaymentTransctions.Columns[nameof(DebtTransactionsViewSummary.MainTransactionID)].HeaderText = "معرف المعاملة";
+                gdgvDebtPaymentTransctions.Columns[nameof(DebtTransactionsViewSummary.MainTransactionID)].Width = 125;
 
-                gdgvDebtPaymentTransctions.Columns[nameof(DebtPaymentViewSummary.Amount)].HeaderText = "المبلغ";
-                gdgvDebtPaymentTransctions.Columns[nameof(DebtPaymentViewSummary.Amount)].Width = 250;
-                gdgvDebtPaymentTransctions.Columns[nameof(DebtPaymentViewSummary.Amount)].DefaultCellStyle.Format = "N2";
+                gdgvDebtPaymentTransctions.Columns[nameof(DebtTransactionsViewSummary.Amount)].HeaderText = "المبلغ";
+                gdgvDebtPaymentTransctions.Columns[nameof(DebtTransactionsViewSummary.Amount)].Width = 250;
+                gdgvDebtPaymentTransctions.Columns[nameof(DebtTransactionsViewSummary.Amount)].DefaultCellStyle.Format = "N2";
 
-                gdgvDebtPaymentTransctions.Columns[nameof(DebtPaymentViewSummary.DebtDate)].HeaderText = "تاريخ المعاملة";
-                gdgvDebtPaymentTransctions.Columns[nameof(DebtPaymentViewSummary.DebtDate)].Width = 130;
-                gdgvDebtPaymentTransctions.Columns[nameof(DebtPaymentViewSummary.DebtDate)].DefaultCellStyle.Format = "dd-MM-yyyy";
+                gdgvDebtPaymentTransctions.Columns[nameof(DebtTransactionsViewSummary.DebtDate)].HeaderText = "تاريخ المعاملة";
+                gdgvDebtPaymentTransctions.Columns[nameof(DebtTransactionsViewSummary.DebtDate)].Width = 130;
+                gdgvDebtPaymentTransctions.Columns[nameof(DebtTransactionsViewSummary.DebtDate)].DefaultCellStyle.Format = "dd-MM-yyyy";
 
-                gdgvDebtPaymentTransctions.Columns[nameof(DebtPaymentViewSummary.CreatedDate)].HeaderText = "تاريخ الإنشاء";
-                gdgvDebtPaymentTransctions.Columns[nameof(DebtPaymentViewSummary.CreatedDate)].Width = 250;
-                gdgvDebtPaymentTransctions.Columns[nameof(DebtPaymentViewSummary.CreatedDate)].DefaultCellStyle.Format = "hh:mm:ss tt dd-MM-yyyy";
+                gdgvDebtPaymentTransctions.Columns[nameof(DebtTransactionsViewSummary.CreatedDate)].HeaderText = "تاريخ الإنشاء";
+                gdgvDebtPaymentTransctions.Columns[nameof(DebtTransactionsViewSummary.CreatedDate)].Width = 250;
+                gdgvDebtPaymentTransctions.Columns[nameof(DebtTransactionsViewSummary.CreatedDate)].DefaultCellStyle.Format = "hh:mm:ss tt dd-MM-yyyy";
 
-                gdgvDebtPaymentTransctions.Columns[nameof(DebtPaymentViewSummary.CreatedByUserName)].HeaderText = "اسم المستخدم المنشئ";
-                gdgvDebtPaymentTransctions.Columns[nameof(DebtPaymentViewSummary.CreatedByUserName)].Width = 250;
+                gdgvDebtPaymentTransctions.Columns[nameof(DebtTransactionsViewSummary.CreatedByUserName)].HeaderText = "اسم المستخدم المنشئ";
+                gdgvDebtPaymentTransctions.Columns[nameof(DebtTransactionsViewSummary.CreatedByUserName)].Width = 250;
 
-                gdgvDebtPaymentTransctions.Columns[nameof(DebtPaymentViewSummary.Purpose)].HeaderText = "البيان";
-                gdgvDebtPaymentTransctions.Columns[nameof(DebtPaymentViewSummary.Purpose)].Width = 300;
+                gdgvDebtPaymentTransctions.Columns[nameof(DebtTransactionsViewSummary.Purpose)].HeaderText = "البيان";
+                gdgvDebtPaymentTransctions.Columns[nameof(DebtTransactionsViewSummary.Purpose)].Width = 300;
 
                 _IsHeaderCreated = true;
             }
@@ -777,7 +777,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 return;
             }
 
-            DataTable dt = _dataConverter.ToDataTable<DebtPaymentExportSummary>(result.Data);
+            DataTable dt = _dataConverter.ToDataTable<DebtTransactionsExportSummary>(result.Data);
 
             dt.Columns[nameof(FinTransactionExportSummary.MainTransactionID)].ColumnName = "معرف المعاملة";
             dt.Columns[nameof(FinTransactionExportSummary.Amount)].ColumnName = "المبلغ";

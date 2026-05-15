@@ -33,11 +33,11 @@ namespace MoneyMindManager.APIClient.Api_Client_Implementation
         {
             return await _debtPyamentService.Get(transactionID, currentUserID);
         }
-        public async Task<IResult<PagedResultWithValueDTO<DebtPaymentViewSummary>>> GetAllPagedForDebt(int debtID, int currentUserID, int pageNumber)
+        public async Task<IResult<PagedResultWithValueDTO<DebtTransactionsViewSummary>>> GetAllPagedForDebt(int debtID, int currentUserID, int pageNumber)
         {
             return await _debtPyamentService.GetAllPagedForDebt(debtID, currentUserID, pageNumber);
         }
-        public async Task<IResult<IEnumerable<DebtPaymentExportSummary>>> GetAllForDebt(int debtID, int currentUserID)
+        public async Task<IResult<IEnumerable<DebtTransactionsExportSummary>>> GetAllForDebt(int debtID, int currentUserID)
         {
             return await _debtPyamentService.GetAllForDebt(debtID, currentUserID);
         }
