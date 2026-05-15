@@ -68,6 +68,7 @@ namespace MoneyMindManager.Application
             services.AddSingleton<IFinTransactionMapper, FinTransactionMapper>();
             services.AddSingleton<IDebtMapper, DebtMapper>();
             services.AddSingleton<IDebtPaymentMapper, DebtPaymentMapper>();
+            services.AddSingleton<IDebtEntryMapper, DebtEntryMapper>();
         }
     }
 }
