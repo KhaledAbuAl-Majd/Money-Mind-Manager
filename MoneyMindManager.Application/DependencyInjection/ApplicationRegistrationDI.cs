@@ -10,6 +10,7 @@ using MoneyMindManager.Application.Services.Authorization;
 using MoneyMindManager.Application.Services.Currency;
 using MoneyMindManager.Application.Services.Database;
 using MoneyMindManager.Application.Services.Debt;
+using MoneyMindManager.Application.Services.DebtEntry;
 using MoneyMindManager.Application.Services.DeptPayment;
 using MoneyMindManager.Application.Services.FinTransaction;
 using MoneyMindManager.Application.Services.FinVoucher;
@@ -52,6 +53,7 @@ namespace MoneyMindManager.Application
             services.AddScoped<IFinTransactionService, FinTransactionService>();
             services.AddScoped<IDebtService, DebtService>();
             services.AddScoped<IDebtPyamentService, DebtPaymentService>();
+            services.AddScoped<IDebtEntryService, DebtEntryService>();
         }
 
         static void _mappers(IServiceCollection services)
