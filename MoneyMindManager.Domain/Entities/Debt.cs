@@ -2,36 +2,42 @@
 
 namespace MoneyMindManager.Domain.Entities
 {
-    public class Debt : MainTransaction
+    public class Debt
     {
         public int? DebtID { get; set; }
         public bool IsLending { get; set; }
         public int? PersonID { get; set; }
         public DateTime? PaymentDueDate { get; set; }
+        public short? AccountID { get; set; }
+        public int? CreatedByUserID { get; set; }
+        public string CreatedByUserName { get; set; }
+        public bool IsLocked { get; set; }
+        public decimal TotalValue { get; set; }
+        public decimal TotalPaid { get; set; }
         public decimal RemainingAmount { get; set; }
+        public DateTime DebtDate { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public string Notes { get; set; }
 
-        public Debt(int? transactionID, decimal amount, DateTime createdDate, short? accountID, int? createdByUserID, byte? tranasactionTypeID, string purpose, bool isLocked,
-            DateTime transactionDate, string transactionTypeName, string createdByUserName, int debtID, bool isLending, int personID, DateTime? paymentDueDate, decimal remaintAmount)
-             : base(transactionID, amount, createdDate, accountID, createdByUserID, tranasactionTypeID, purpose, isLocked,
-                   transactionDate, transactionTypeName, createdByUserName)
+        public Debt(int debtID, bool isLending, int personID, DateTime? paymentDueDate, short? accountID, int? createdByUserID, string createdByUserName, bool isLocked,
+            decimal totalValue, decimal totalPaid, decimal remaintAmount, DateTime debtDate, DateTime createdDate, string notes)
         {
             this.DebtID = debtID;
             this.IsLending = isLending;
             this.PersonID = personID;
             this.PaymentDueDate = paymentDueDate;
+            this.AccountID = accountID;
+            this.CreatedByUserID = createdByUserID;
+            this.CreatedByUserName = createdByUserName;
+            this.IsLocked = isLocked;
+            this.TotalValue = totalValue;
+            this.TotalPaid = totalPaid;
             this.RemainingAmount = remaintAmount;
+            this.DebtDate = DebtDate;
+            this.CreatedDate = createdDate;
+            this.Notes = notes;
         }
 
-        public Debt(MainTransaction mainTransaction, int? debtID, bool isLending, int? personID, DateTime? paymentDueDate, decimal remaintAmount) : base(mainTransaction.MainTransactionID, mainTransaction.Amount,
-           mainTransaction.CreatedDate, mainTransaction.AccountID, mainTransaction.CreatedByUserID, mainTransaction.TransactionTypeID, mainTransaction.Purpose,
-           mainTransaction.IsLocked, mainTransaction.TransactionDate, mainTransaction.TransactionTypeName, mainTransaction.CreatedByUserName)
-        {
-            this.DebtID = debtID;
-            this.IsLending = isLending;
-            this.PersonID = personID;
-            this.PaymentDueDate = paymentDueDate;
-            this.RemainingAmount = remaintAmount;
-        }
 
         public Debt()
         {
@@ -40,6 +46,9 @@ namespace MoneyMindManager.Domain.Entities
             this.PersonID = null;
             this.PaymentDueDate = null;
             this.RemainingAmount = -9999999999;
+            this.CreatedDate = DateTime.MaxValue; ;
+            this.AccountID = null;
+            this.CreatedByUserID = null;
         }
     }
 }

@@ -27,12 +27,12 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer.Report
             this._resultFactory = resultFactory;
             this._logger = logger;
         }
-        public async Task<IResult<(int? NewDebtID, int? NewDebtTransactionID)>> Add(Debt debt)
+        public async Task<IResult<int?>> Add(Debt debt)
         {
-            int? newDebtID = null, newDebtTransactionID;
-            _resultFactory.Create<(int? NewDebtID, int? NewDebtTransactionID)>();
+            int? newDebtID = null;
+            _resultFactory.Create<int?>();
 
-            var handler = _resultFactory.Create<(int? NewDebtID, int? NewDebtTransactionID)>();
+            var handler = _resultFactory.Create<int?>();
 
             try
             {
@@ -45,10 +45,9 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer.Report
                         command.Parameters.AddWithValue("@IsLending", debt.IsLending);
                         command.Parameters.AddWithValue("@PersonID", debt.PersonID);
                         command.Parameters.AddWithValue("@PaymentDueDate", (object)debt.PaymentDueDate ?? DBNull.Value);
-                        command.Parameters.AddWithValue("@Amount", debt.Amount);
-                        command.Parameters.AddWithValue("@Purpose", string.IsNullOrWhiteSpace(debt.Purpose) ? DBNull.Value : (object)debt.Purpose);
+                        command.Parameters.AddWithValue("@Notes", string.IsNullOrWhiteSpace(debt.Notes) ? DBNull.Value : (object)debt.Notes);
                         command.Parameters.AddWithValue("@IsLocked", debt.IsLocked);
-                        command.Parameters.AddWithValue("@DebtDate", debt.TransactionDate);
+                        command.Parameters.AddWithValue("@DebtDate", debt.DebtDate);
                         command.Parameters.AddWithValue("@CreatedByUserID", debt.CreatedByUserID);
 
                         SqlParameter outParmNewDebt = new SqlParameter("@NewDebtID", System.Data.SqlDbType.Int)
@@ -56,35 +55,28 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer.Report
                             Direction = System.Data.ParameterDirection.Output
                         };
 
-                        SqlParameter outParmNewDebtTransactionID = new SqlParameter("@NewTransactionID", System.Data.SqlDbType.Int)
-                        {
-                            Direction = System.Data.ParameterDirection.Output
-                        };
-
                         command.Parameters.Add(outParmNewDebt);
-                        command.Parameters.Add(outParmNewDebtTransactionID);
 
                         await connection.OpenAsync();
                         await command.ExecuteNonQueryAsync();
 
                         newDebtID = outParmNewDebt.Value as int?;
-                        newDebtTransactionID = outParmNewDebtTransactionID.Value as int?;
                     }
                 }
 
-                if (newDebtID == null || newDebtTransactionID == null)
+                if (newDebtID == null)
                     throw new Exception("فشلت العمية");
             }
             catch (Exception ex)
             {
                 newDebtID = null;
-                newDebtTransactionID = null;
+
 
                 _logger.LogError(ex.Message);
                 return handler.Failure(ex.Message);
             }
 
-            return handler.Success((newDebtID, newDebtTransactionID));
+            return handler.Success(newDebtID);
         }
         public async Task<IResult<(bool UpdateResult, decimal RemainingAmount)>> Update(Debt debt, int currentUserID)
         {
@@ -103,9 +95,8 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer.Report
 
                         command.Parameters.AddWithValue("@DebtID", debt.DebtID);
                         command.Parameters.AddWithValue("@PaymentDueDate", (object)debt.PaymentDueDate ?? DBNull.Value);
-                        command.Parameters.AddWithValue("@Amount", debt.Amount);
-                        command.Parameters.AddWithValue("@Purpose", string.IsNullOrWhiteSpace(debt.Purpose) ? DBNull.Value : (object)debt.Purpose);
-                        command.Parameters.AddWithValue("@DebtDate", debt.TransactionDate);
+                        command.Parameters.AddWithValue("@Notes", string.IsNullOrWhiteSpace(debt.Notes) ? DBNull.Value : (object)debt.Notes);
+                        command.Parameters.AddWithValue("@DebtDate", debt.DebtDate);
                         command.Parameters.AddWithValue("@CurrentUserID", currentUserID);
 
                         SqlParameter retunValue = new SqlParameter("@ReturnVal", SqlDbType.Int)
@@ -247,11 +238,16 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer.Report
                                 bool isLending = Convert.ToBoolean(reader["IsLending"]);
                                 int personID = Convert.ToInt32(reader["PersonID"]);
                                 DateTime? paymentDueDate = (reader["PaymentDueDate"] == DBNull.Value) ? null : Convert.ToDateTime(reader["PaymentDueDate"]) as DateTime?;
-                                int debtTransactionID = Convert.ToInt32(reader["DebtTransactionID"]);
                                 short accountID = Convert.ToInt16(reader["AccountID"]);
                                 int createdByUserID = Convert.ToInt32(reader["CreatedByUserID"]);
+                                string userName = reader["UserName"] as string;
                                 bool isLocked = Convert.ToBoolean(reader["IsLocked"]);
+                                decimal totalValue = Convert.ToDecimal(reader["TotalValue"]);
+                                decimal totalPaid = Convert.ToDecimal(reader["TotalPaid"]);
                                 decimal remainingAmount = Convert.ToDecimal(reader["RemainingAmount"]);
+                                DateTime debtDate = Convert.ToDateTime(reader["DebtDate"]);
+                                DateTime createdDate = Convert.ToDateTime(reader["CreatedDate"]);
+                                string notes = reader["Notes"] as string;
 
                                 debtData = new Debt()
                                 {
@@ -259,11 +255,16 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer.Report
                                     IsLending = isLending,
                                     PersonID = personID,
                                     PaymentDueDate = paymentDueDate,
-                                    MainTransactionID = debtTransactionID,
                                     AccountID = accountID,
                                     CreatedByUserID = createdByUserID,
+                                    CreatedByUserName = userName,
                                     IsLocked = isLocked,
-                                    RemainingAmount = remainingAmount
+                                    TotalValue = totalValue,
+                                    TotalPaid = totalPaid,
+                                    RemainingAmount = remainingAmount,
+                                    DebtDate = debtDate,
+                                    CreatedDate = createdDate,
+                                    Notes = notes
                                 };
                             }
                         }

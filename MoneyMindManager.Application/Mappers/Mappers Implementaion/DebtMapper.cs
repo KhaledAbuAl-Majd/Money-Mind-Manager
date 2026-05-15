@@ -24,21 +24,19 @@ namespace MoneyMindManager.Application.Mappers.Mappers_Implementaion
             return new Debt()
             {
                 AccountID = DTO.AccountID,
-                Amount = DTO.Amount,
                 CreatedByUserID = DTO.CreatedByUserID,
                 CreatedByUserName = DTO.CreatedByUserName,
                 CreatedDate = DTO.CreatedDate,
                 DebtID = DTO.DebtID,
                 IsLending = DTO.IsLending,
                 IsLocked = DTO.IsLocked,
-                MainTransactionID = DTO.MainTransactionID,
                 PaymentDueDate = DTO.PaymentDueDate,
                 PersonID = DTO.PersonID,
-                Purpose = DTO.Purpose,
                 RemainingAmount = DTO.RemainingAmount,
-                TransactionDate = DTO.TransactionDate,
-                TransactionTypeID = DTO.TransactionTypeID,
-                TransactionTypeName = DTO.TransactionTypeName
+                Notes = DTO.Notes,
+                DebtDate = DTO.DebtDate,
+                TotalPaid = DTO.TotalPaid,
+                TotalValue = DTO.TotalValue
             };
         }
         public DebtDTO EntityToDTO(Debt entity)
@@ -46,9 +44,9 @@ namespace MoneyMindManager.Application.Mappers.Mappers_Implementaion
             if (entity is null)
                 return null;
 
-            return new DebtDTO(entity.MainTransactionID, entity.Amount, entity.CreatedDate, entity.AccountID, entity.CreatedByUserID, entity.TransactionTypeID,
-                entity.Purpose, entity.IsLocked, entity.TransactionDate, entity.TransactionTypeName, entity.CreatedByUserName, entity.DebtID,
-                entity.IsLending, entity.PersonID, entity.PaymentDueDate, entity.RemainingAmount);
+            return new DebtDTO(Convert.ToInt32(entity.DebtID), entity.IsLending, Convert.ToInt32(entity.PersonID), entity.PaymentDueDate, entity.AccountID,
+                entity.CreatedByUserID, entity.CreatedByUserName, entity.IsLocked, entity.TotalValue, entity.TotalPaid, entity.RemainingAmount,
+                entity.DebtDate, entity.CreatedDate, entity.Notes);
         }
         public DebtSearchCriteria ToSearchCriteria(DebtFilterDTO DTO)
         {
