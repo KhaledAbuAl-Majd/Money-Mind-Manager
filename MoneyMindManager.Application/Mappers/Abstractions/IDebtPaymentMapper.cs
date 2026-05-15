@@ -4,7 +4,7 @@ using MoneyMindManager.Shared.DTOs.DebtPayment;
 
 namespace MoneyMindManager.Application.Mappers.Abstractions
 {
-    public interface IDebtPaymentMapper : IMapper<DebtPayment, DebtPaymentDTO>
+    public interface IDebtPaymentMapper : IMapper<DebtPayment, DebtTransactionDTO>
     {
     }
 }

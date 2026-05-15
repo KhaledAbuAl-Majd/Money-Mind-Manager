@@ -9,10 +9,10 @@ namespace MoneyMindManager.Application.Abstractions.Services
 {
     public interface IDebtPyamentService
     {
-        Task<IResult<DebtPaymentDTO>> Add(DebtPaymentDTO debtPayment, int currentUserID);
-        Task<IResult<bool>> Update(DebtPaymentDTO debtPayment, int currentUserID);
+        Task<IResult<DebtTransactionDTO>> Add(DebtTransactionDTO debtPayment, int currentUserID);
+        Task<IResult<bool>> Update(DebtTransactionDTO debtPayment, int currentUserID);
         Task<IResult<bool>> Delete(int transactionID, int currentUserID);
-        Task<IResult<DebtPaymentDTO>> Get(int transactionID, int currentUserID);
+        Task<IResult<DebtTransactionDTO>> Get(int transactionID, int currentUserID);
         Task<IResult<PagedResultWithValueDTO<DebtTransactionsViewSummary>>> GetAllPagedForDebt(int debtID, int currentUserID, int pageNumber);
         Task<IResult<IEnumerable<DebtTransactionsExportSummary>>> GetAllForDebt(int debtID, int currentUserID);
     }

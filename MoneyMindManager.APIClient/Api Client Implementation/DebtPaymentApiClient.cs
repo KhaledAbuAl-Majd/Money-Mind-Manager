@@ -17,11 +17,11 @@ namespace MoneyMindManager.APIClient.Api_Client_Implementation
             this._debtPyamentService = debtPyamentService;
         }
 
-        public async Task<IResult<DebtPaymentDTO>> Add(DebtPaymentDTO debtPayment, int currentUserID)
+        public async Task<IResult<DebtTransactionDTO>> Add(DebtTransactionDTO debtPayment, int currentUserID)
         {
             return await _debtPyamentService.Add(debtPayment, currentUserID);
         }
-        public async Task<IResult<bool>> Update(DebtPaymentDTO debtPayment, int currentUserID)
+        public async Task<IResult<bool>> Update(DebtTransactionDTO debtPayment, int currentUserID)
         {
             return await _debtPyamentService.Update(debtPayment, currentUserID);
         }
@@ -29,7 +29,7 @@ namespace MoneyMindManager.APIClient.Api_Client_Implementation
         {
             return await _debtPyamentService.Delete(transactionID, currentUserID);
         }
-        public async Task<IResult<DebtPaymentDTO>> Get(int transactionID, int currentUserID)
+        public async Task<IResult<DebtTransactionDTO>> Get(int transactionID, int currentUserID)
         {
             return await _debtPyamentService.Get(transactionID, currentUserID);
         }

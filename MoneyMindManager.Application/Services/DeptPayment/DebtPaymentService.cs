@@ -35,9 +35,9 @@ namespace MoneyMindManager.Application.Services.DeptPayment
             this._mainTransactionService = mainTransactionService;
             this._mainTransactionMapper = mainTransactionMapper;
         }
-        public async Task<IResult<DebtPaymentDTO>> Add(DebtPaymentDTO debtPayment, int currentUserID)
+        public async Task<IResult<DebtTransactionDTO>> Add(DebtTransactionDTO debtPayment, int currentUserID)
         {
-            var handler = _resultFactory.Create<DebtPaymentDTO>();
+            var handler = _resultFactory.Create<DebtTransactionDTO>();
 
             if (debtPayment is null)
                 return handler.Failure("البيانات المرسلة غير صالحة");
@@ -73,7 +73,7 @@ namespace MoneyMindManager.Application.Services.DeptPayment
 
             return handler.Success(DTOResult.Data);
         }
-        public async Task<IResult<bool>> Update(DebtPaymentDTO debtDTO, int currentUserID)
+        public async Task<IResult<bool>> Update(DebtTransactionDTO debtDTO, int currentUserID)
         {
             var errorMessage = "failed to update debt payment!";
 
@@ -124,9 +124,9 @@ namespace MoneyMindManager.Application.Services.DeptPayment
 
             return result;
         }
-        public async Task<IResult<DebtPaymentDTO>> Get(int transactionID, int currentUserID)
+        public async Task<IResult<DebtTransactionDTO>> Get(int transactionID, int currentUserID)
         {
-            var handler = _resultFactory.Create<DebtPaymentDTO>();
+            var handler = _resultFactory.Create<DebtTransactionDTO>();
 
             var result = await _debtPaymentRepository.Get(transactionID, currentUserID);
 

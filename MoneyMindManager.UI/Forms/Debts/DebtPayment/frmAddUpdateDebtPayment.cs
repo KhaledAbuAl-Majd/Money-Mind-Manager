@@ -81,7 +81,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
         }
         private int? _TransactionID { get; set; }
 
-        private DebtPaymentDTO _DebtPayment { get; set; }
+        private DebtTransactionDTO _DebtPayment { get; set; }
 
         void ChangeHeaderValue(string txt)
         {
@@ -128,7 +128,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
         void _AddNewMode()
         {
             _TransactionID = null;
-            _DebtPayment = new DebtPaymentDTO();
+            _DebtPayment = new DebtTransactionDTO();
             lblTransactionID.Text = "N/A";
             kgtxtPaymentDate.RefreshNumber_DateTimeFormattedText((_userSession.CurrentUserSettings.DebtPayments_TodayAsDefaultDate) ? DateTime.Today.ToString() : null);
             kgtxtPurpose.Text = null;
@@ -178,7 +178,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
         void _ResteObject()
         {
-            _DebtPayment = new DebtPaymentDTO();
+            _DebtPayment = new DebtTransactionDTO();
         }
 
         async Task _Save()
