@@ -35,7 +35,7 @@ namespace MoneyMindManager.Shared.DTOs.Debt
             this.TotalValue = totalValue;
             this.TotalPaid = totalPaid;
             this.RemainingAmount = remaintAmount;
-            this.DebtDate = DebtDate;
+            this.DebtDate = debtDate;
             this.CreatedDate = createdDate;
             this.Notes = notes;
         }

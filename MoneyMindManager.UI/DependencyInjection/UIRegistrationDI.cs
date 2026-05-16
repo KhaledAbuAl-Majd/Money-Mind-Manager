@@ -1,6 +1,6 @@
-﻿using System;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using MoneyMindManager.UI.Abstractions;
+using MoneyMindManager.UI.Forms.Debts.DebtEntry;
 using MoneyMindManager.UI.Services;
 using MoneyMindManager_Presentation;
 using MoneyMindManager_Presentation.Global;
@@ -74,6 +74,8 @@ namespace MoneyMindManager.UI.DependencyInjection
             services.AddTransient<frmIncomeAndExpense>();
 
             services.AddTransient<frmAddUpdateDebtPayment>();
+
+            services.AddTransient<frmAddUpdateDebtEntry>();
 
             services.AddTransient<frmAddUpdateDebt>();
             services.AddTransient<frmDebtsList>();

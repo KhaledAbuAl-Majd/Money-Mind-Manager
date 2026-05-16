@@ -41,7 +41,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
 
                         command.Parameters.AddWithValue("@DebtID", debtEntry.DebtID);
                         command.Parameters.AddWithValue("@Amount", debtEntry.Amount);
-                        command.Parameters.AddWithValue("@PaymentDate", debtEntry.TransactionDate);
+                        command.Parameters.AddWithValue("@DebtDate", debtEntry.TransactionDate);
                         command.Parameters.AddWithValue("@Purpose", string.IsNullOrWhiteSpace(debtEntry.Purpose) ? DBNull.Value : (object)debtEntry.Purpose);
                         command.Parameters.AddWithValue("@CreatedByUserID", debtEntry.CreatedByUserID);
 

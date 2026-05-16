@@ -39,7 +39,7 @@ namespace MoneyMindManager.Application.Services.DebtEntry
             if (debtEntry is null)
                 return handler.Failure("البيانات المرسلة غير صالحة");
 
-            var accessResult = await _authorizationService.CheckAccess(currentUserID, enPermissions.AddUpdateDebt_Payments);
+            var accessResult = await _authorizationService.CheckAccess(currentUserID, enPermissions.AddUpdateDebt_DebtTransactions);
 
             if (accessResult is null)
                 return handler.Failure("failed to check permissions!");
@@ -79,7 +79,7 @@ namespace MoneyMindManager.Application.Services.DebtEntry
             if (debtDTO is null)
                 return handler.Failure("البيانات المرسلة غير صالحة");
 
-            var accessResult = await _authorizationService.CheckAccess(currentUserID, enPermissions.AddUpdateDebt_Payments);
+            var accessResult = await _authorizationService.CheckAccess(currentUserID, enPermissions.AddUpdateDebt_DebtTransactions);
 
             if (accessResult is null)
                 return handler.Failure("failed to check permissions!");

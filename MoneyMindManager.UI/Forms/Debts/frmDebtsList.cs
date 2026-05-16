@@ -207,7 +207,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             if (!_IsHeaderCreated && gdgvDebts.Rows.Count > 0)
             {
 
-                gdgvDebts.Columns[nameof(DebtViewSummary.DebtID)].HeaderText = "معرف سند الدين";
+                gdgvDebts.Columns[nameof(DebtViewSummary.DebtID)].HeaderText = "معرف مستند الدين";
                 gdgvDebts.Columns[nameof(DebtViewSummary.DebtID)].Width = 125;
 
                 gdgvDebts.Columns[nameof(DebtViewSummary.PersonName)].HeaderText = "اسم الشخص";
@@ -221,7 +221,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 gdgvDebts.Columns[nameof(DebtViewSummary.RemainingAmount)].Width = 215;
                 gdgvDebts.Columns[nameof(DebtViewSummary.RemainingAmount)].DefaultCellStyle.Format = "N2";
 
-                gdgvDebts.Columns[nameof(DebtViewSummary.DebtDate)].HeaderText = "تاريخ السند";
+                gdgvDebts.Columns[nameof(DebtViewSummary.DebtDate)].HeaderText = "تاريخ المستند";
                 gdgvDebts.Columns[nameof(DebtViewSummary.DebtDate)].Width = 115;
                 gdgvDebts.Columns[nameof(DebtViewSummary.DebtDate)].DefaultCellStyle.Format = "dd-MM-yyyy";
 
@@ -572,19 +572,19 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
 
             DataTable dt = _dataConverter.ToDataTable<DebtExportSummary>(result.Data);
 
-            dtDebts.Columns[nameof(DebtExportSummary.DebtID)].ColumnName = "معرف سند الدين";
+            dtDebts.Columns[nameof(DebtExportSummary.DebtID)].ColumnName = "معرف مستند الدين";
             dtDebts.Columns[nameof(DebtExportSummary.PersonID)].ColumnName = "معرف الشخص";
             dtDebts.Columns[nameof(DebtExportSummary.PersonName)].ColumnName = "اسم الشخص";
             dtDebts.Columns[nameof(DebtExportSummary.DebtValue)].ColumnName = "قيمة الدين";
             dtDebts.Columns[nameof(DebtExportSummary.RemainingAmount)].ColumnName = "القيمة المتبقية للسداد";
-            dtDebts.Columns[nameof(DebtExportSummary.DebtDate)].ColumnName = "تاريخ سند الدين";
+            dtDebts.Columns[nameof(DebtExportSummary.DebtDate)].ColumnName = "تاريخ مستند الدين";
             dtDebts.Columns[nameof(DebtExportSummary.CreatedDate)].ColumnName = "تاريخ الإنشاء";
             dtDebts.Columns[nameof(DebtExportSummary.DebtType)].ColumnName = "نوع الدين";
             dtDebts.Columns[nameof(DebtExportSummary.CreatedByUserID)].ColumnName = "معرف المستخدم المنشئ";
             dtDebts.Columns[nameof(DebtExportSummary.CreatedByUserName)].ColumnName = "اسم المستخدم المنشئ";
             dtDebts.Columns[nameof(DebtExportSummary.AccounntID)].ColumnName = "معرف الحساب";
 
-            await _exportWithDialogService.ExportToExcel(dtDebts, "تقرير سند الديون");
+            await _exportWithDialogService.ExportToExcel(dtDebts, "تقرير مستند الديون");
         }
     }
 }
