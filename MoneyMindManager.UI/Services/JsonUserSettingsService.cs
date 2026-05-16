@@ -94,7 +94,7 @@ namespace MoneyMindManager.UI.Services
 
                 try
                 {
-                    string jsonString = JsonConvert.SerializeObject(this, Formatting.Indented);
+                    string jsonString = JsonConvert.SerializeObject(userSettings, Formatting.Indented);
                     File.WriteAllText(path, jsonString);
                 }
                 catch (Exception ex)
