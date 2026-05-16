@@ -47,7 +47,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
         int? _DebtID;
 
         public frmAddUpdateDebt(IUserSession userSession, IMessageBoxService messageBoxService, IFormDisplayer formDisplayer,
-            IDebtPaymentApiClient debtPaymentApiClient,IDebtEntryApiClient debtEntryApiClient, IDebtApiClient debtApiClient, IDataConverter dataConverter,
+            IDebtPaymentApiClient debtPaymentApiClient, IDebtEntryApiClient debtEntryApiClient, IDebtApiClient debtApiClient, IDataConverter dataConverter,
             IExportWithDialogService exportWithDialogService, IFormateHelper formateHelper)
         {
             this._userSession = userSession;
@@ -151,10 +151,10 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
             _LockingChangingEvent = true;
 
             ctrDebtPaymentsList1.IsLocked = _Debt.IsLocked;
-            ctrDebtPaymentsList1._Debt = _Debt;
+            ctrDebtPaymentsList1.Debt = _Debt;
 
             ctrDebtEntriesList1.IsLocked = _Debt.IsLocked;
-            ctrDebtEntriesList1._Debt = _Debt;
+            ctrDebtEntriesList1.Debt = _Debt;
 
             return true;
         }
@@ -308,6 +308,8 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Vouchers
                 }
 
                 _Debt = result.Data;
+                ctrDebtPaymentsList1.Debt = _Debt;
+                ctrDebtEntriesList1.Debt = _Debt;
 
                 _messageBoxService.Display($"تم إضافة مستند الدين بنجاج بمعرف [{_Debt.DebtID}]", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

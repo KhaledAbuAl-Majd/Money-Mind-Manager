@@ -236,7 +236,7 @@
             this.kgtxtDebtDate.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
             this.kgtxtDebtDate.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
             this.kgtxtDebtDate.PlaceholderForeColor = System.Drawing.Color.Gray;
-            this.kgtxtDebtDate.PlaceholderText = "تاريخ السند (مطلوب)";
+            this.kgtxtDebtDate.PlaceholderText = "تاريخ المستند (مطلوب)";
             this.kgtxtDebtDate.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.kgtxtDebtDate.SelectedText = "";
             this.kgtxtDebtDate.ShadowDecoration.BorderRadius = 2;
@@ -265,11 +265,11 @@
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(761, 85);
+            this.label4.Location = new System.Drawing.Point(749, 85);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(66, 17);
+            this.label4.Size = new System.Drawing.Size(78, 17);
             this.label4.TabIndex = 106;
-            this.label4.Text = "تاريخ السند";
+            this.label4.Text = "تاريخ المستند";
             // 
             // label5
             // 
@@ -998,10 +998,10 @@
             this.gtabcDebtTransactions.Controls.Add(this.gtabDebtPayments);
             this.gtabcDebtTransactions.Cursor = System.Windows.Forms.Cursors.Hand;
             this.gtabcDebtTransactions.ItemSize = new System.Drawing.Size(140, 50);
-            this.gtabcDebtTransactions.Location = new System.Drawing.Point(3, 252);
+            this.gtabcDebtTransactions.Location = new System.Drawing.Point(5, 252);
             this.gtabcDebtTransactions.Name = "gtabcDebtTransactions";
             this.gtabcDebtTransactions.SelectedIndex = 0;
-            this.gtabcDebtTransactions.Size = new System.Drawing.Size(1205, 610);
+            this.gtabcDebtTransactions.Size = new System.Drawing.Size(1200, 610);
             this.gtabcDebtTransactions.TabButtonHoverState.BorderColor = System.Drawing.Color.Empty;
             this.gtabcDebtTransactions.TabButtonHoverState.FillColor = System.Drawing.Color.BlueViolet;
             this.gtabcDebtTransactions.TabButtonHoverState.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
@@ -1030,7 +1030,7 @@
             this.gtabDebtEntries.Location = new System.Drawing.Point(4, 54);
             this.gtabDebtEntries.Name = "gtabDebtEntries";
             this.gtabDebtEntries.Padding = new System.Windows.Forms.Padding(3);
-            this.gtabDebtEntries.Size = new System.Drawing.Size(1197, 552);
+            this.gtabDebtEntries.Size = new System.Drawing.Size(1192, 552);
             this.gtabDebtEntries.TabIndex = 0;
             this.gtabDebtEntries.Text = "سندات الديون";
             // 
@@ -1042,7 +1042,7 @@
             this.gtabDebtPayments.Location = new System.Drawing.Point(4, 54);
             this.gtabDebtPayments.Name = "gtabDebtPayments";
             this.gtabDebtPayments.Padding = new System.Windows.Forms.Padding(3);
-            this.gtabDebtPayments.Size = new System.Drawing.Size(1197, 552);
+            this.gtabDebtPayments.Size = new System.Drawing.Size(1192, 552);
             this.gtabDebtPayments.TabIndex = 1;
             this.gtabDebtPayments.Text = "معاملات السداد";
             // 
@@ -1228,7 +1228,7 @@
             // 
             // ctrDebtEntriesList1
             // 
-            this.ctrDebtEntriesList1._Debt = null;
+            this.ctrDebtEntriesList1.Debt = null;
             this.ctrDebtEntriesList1.AutoScroll = true;
             this.ctrDebtEntriesList1.BackColor = System.Drawing.Color.White;
             this.ctrDebtEntriesList1.IsLocked = true;
@@ -1240,7 +1240,7 @@
             // 
             // ctrDebtPaymentsList1
             // 
-            this.ctrDebtPaymentsList1._Debt = null;
+            this.ctrDebtPaymentsList1.Debt = null;
             this.ctrDebtPaymentsList1.AutoScroll = true;
             this.ctrDebtPaymentsList1.BackColor = System.Drawing.Color.White;
             this.ctrDebtPaymentsList1.IsLocked = true;

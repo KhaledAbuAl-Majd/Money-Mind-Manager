@@ -33,7 +33,21 @@ namespace MoneyMindManager.UI.Forms.Debts.DebtEntry
 
         private bool isInitialized = false;
         int? _DebtID;
-        public DebtDTO _Debt { get; set; }
+        private DebtDTO _Debt;
+
+        public DebtDTO Debt
+        {
+            get => _Debt;
+            set
+            {
+                _Debt = value;
+                if (value != null)
+                {
+                    _DebtID = _Debt.DebtID;
+                    IsLocked = _Debt.IsLocked;
+                }
+            }
+        }
 
         bool _IsHeaderCreated = false;
         bool _searchByPageNumber = false;
@@ -78,9 +92,11 @@ namespace MoneyMindManager.UI.Forms.Debts.DebtEntry
             if (!isInitialized)
                 return false;
 
-            this.IsLocked = debt.IsLocked;
-            this._Debt = debt;
-            this._DebtID = debt.DebtID;
+            this.Debt = debt;
+
+            //this.IsLocked = debt.IsLocked;
+            //this._Debt = debt;
+            //this._DebtID = debt.DebtID;
 
             _searchByPageNumber = false;
             kgtxtPageNumber.Text = "1";

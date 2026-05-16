@@ -435,7 +435,6 @@
             this.gpnlCreateAccount.Size = new System.Drawing.Size(399, 462);
             this.gpnlCreateAccount.TabIndex = 9;
             this.gpnlCreateAccount.UseTransparentBackground = true;
-            
             // 
             // label4
             // 
@@ -997,7 +996,6 @@
             this.guna2ControlBox2.TabIndex = 10;
             this.guna2ControlBox2.TabStop = false;
             this.guna2ControlBox2.UseTransparentBackground = true;
-
             // 
             // lblHeader
             // 
@@ -1010,7 +1008,6 @@
             this.lblHeader.TabIndex = 11;
             this.lblHeader.Text = "Money Mind Manager";
             this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-
             // 
             // guna2DragControl2
             // 
@@ -1047,7 +1044,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(128, 33);
             this.label6.TabIndex = 14;
-            this.label6.Text = "Version 1.0";
+            this.label6.Text = "Version 2.1";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // frmLogin
