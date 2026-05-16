@@ -2,7 +2,7 @@
 
 USE [master]
 GO
-/****** Object:  Database [MoneyMindManager]    Script Date: 16/05/2026 6:42:06 PM ******/
+/****** Object:  Database [MoneyMindManager]    Script Date: 16/05/2026 7:19:35 PM ******/
 IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = N'MoneyMindManager')
 BEGIN
 CREATE DATABASE [MoneyMindManager]
@@ -89,18 +89,18 @@ ALTER DATABASE [MoneyMindManager] SET QUERY_STORE (OPERATION_MODE = READ_WRITE, 
 GO
 USE [MoneyMindManager]
 GO
-/****** Object:  User [NT AUTHORITY\SYSTEM]    Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  User [NT AUTHORITY\SYSTEM]    Script Date: 16/05/2026 7:19:36 PM ******/
 IF NOT EXISTS (SELECT * FROM sys.database_principals WHERE name = N'NT AUTHORITY\SYSTEM')
 CREATE USER [NT AUTHORITY\SYSTEM] FOR LOGIN [NT AUTHORITY\SYSTEM] WITH DEFAULT_SCHEMA=[dbo]
 GO
 ALTER ROLE [db_owner] ADD MEMBER [NT AUTHORITY\SYSTEM]
 GO
-/****** Object:  FullTextCatalog [ft_MoneyMindManager]    Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  FullTextCatalog [ft_MoneyMindManager]    Script Date: 16/05/2026 7:19:36 PM ******/
 IF NOT EXISTS (SELECT * FROM sysfulltextcatalogs ftc WHERE ftc.name = N'ft_MoneyMindManager')
 CREATE FULLTEXT CATALOG [ft_MoneyMindManager] WITH ACCENT_SENSITIVITY = OFF
 AS DEFAULT
 GO
-/****** Object:  UserDefinedFunction [dbo].[AccountTypeNameBasedOnIsCurrentAccount]    Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  UserDefinedFunction [dbo].[AccountTypeNameBasedOnIsCurrentAccount]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -121,7 +121,7 @@ BEGIN
 END' 
 END
 GO
-/****** Object:  UserDefinedFunction [dbo].[GetAccountOwnerUserID]    Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  UserDefinedFunction [dbo].[GetAccountOwnerUserID]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -142,7 +142,7 @@ END;
 ' 
 END
 GO
-/****** Object:  UserDefinedFunction [dbo].[GetBalanceForAccountAfterCalculate]    Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  UserDefinedFunction [dbo].[GetBalanceForAccountAfterCalculate]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -162,7 +162,7 @@ BEGIN
 END' 
 END
 GO
-/****** Object:  UserDefinedFunction [dbo].[GetCategoryHierarchicalString]    Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  UserDefinedFunction [dbo].[GetCategoryHierarchicalString]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -192,7 +192,7 @@ BEGIN
 END' 
 END
 GO
-/****** Object:  UserDefinedFunction [dbo].[GetMainCategoryNameForCategoryByCategoryID]    Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  UserDefinedFunction [dbo].[GetMainCategoryNameForCategoryByCategoryID]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -220,7 +220,7 @@ BEGIN
 END' 
 END
 GO
-/****** Object:  UserDefinedFunction [dbo].[GetMoneyPerformance]    Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  UserDefinedFunction [dbo].[GetMoneyPerformance]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -253,7 +253,7 @@ BEGIN
 END' 
 END
 GO
-/****** Object:  UserDefinedFunction [dbo].[GetVoucherValue]    Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  UserDefinedFunction [dbo].[GetVoucherValue]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -273,7 +273,7 @@ BEGIN
 END' 
 END
 GO
-/****** Object:  Table [dbo].[IncomeAndExpenseCategories]    Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  Table [dbo].[IncomeAndExpenseCategories]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -299,7 +299,7 @@ CREATE TABLE [dbo].[IncomeAndExpenseCategories](
 ) ON [PRIMARY]
 END
 GO
-/****** Object:  UserDefinedFunction [dbo].[GetCategoryWithHerChildren]    Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  UserDefinedFunction [dbo].[GetCategoryWithHerChildren]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -324,7 +324,7 @@ RETURN
 )' 
 END
 GO
-/****** Object:  Table [dbo].[Accounts]    Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  Table [dbo].[Accounts]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -350,7 +350,7 @@ CREATE TABLE [dbo].[Accounts](
 ) ON [PRIMARY]
 END
 GO
-/****** Object:  Table [dbo].[Currencies]    Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  Table [dbo].[Currencies]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -376,7 +376,7 @@ CREATE TABLE [dbo].[Currencies](
 ) ON [PRIMARY]
 END
 GO
-/****** Object:  Table [dbo].[DebtEntries]    Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  Table [dbo].[DebtEntries]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -393,7 +393,7 @@ CREATE TABLE [dbo].[DebtEntries](
 ) ON [PRIMARY]
 END
 GO
-/****** Object:  Table [dbo].[DebtPayments]    Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  Table [dbo].[DebtPayments]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -411,7 +411,7 @@ CREATE TABLE [dbo].[DebtPayments](
 ) ON [PRIMARY]
 END
 GO
-/****** Object:  Table [dbo].[Debts]    Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  Table [dbo].[Debts]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -439,7 +439,7 @@ CREATE TABLE [dbo].[Debts](
 ) ON [PRIMARY]
 END
 GO
-/****** Object:  Table [dbo].[ErrorLogs]    Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  Table [dbo].[ErrorLogs]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -455,7 +455,7 @@ CREATE TABLE [dbo].[ErrorLogs](
 ) ON [PRIMARY]
 END
 GO
-/****** Object:  Table [dbo].[IncomeAndExpenseTransactions]    Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  Table [dbo].[IncomeAndExpenseTransactions]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -473,7 +473,7 @@ CREATE TABLE [dbo].[IncomeAndExpenseTransactions](
 ) ON [PRIMARY]
 END
 GO
-/****** Object:  Table [dbo].[IncomeAndExpenseVouchers]    Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  Table [dbo].[IncomeAndExpenseVouchers]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -499,7 +499,7 @@ CREATE TABLE [dbo].[IncomeAndExpenseVouchers](
 ) ON [PRIMARY]
 END
 GO
-/****** Object:  Table [dbo].[MainTransactions]    Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  Table [dbo].[MainTransactions]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -523,7 +523,7 @@ CREATE TABLE [dbo].[MainTransactions](
 ) ON [PRIMARY]
 END
 GO
-/****** Object:  Table [dbo].[People]    Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  Table [dbo].[People]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -547,7 +547,7 @@ CREATE TABLE [dbo].[People](
 ) ON [PRIMARY]
 END
 GO
-/****** Object:  Table [dbo].[SystemSettings]    Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  Table [dbo].[SystemSettings]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -564,7 +564,7 @@ CREATE TABLE [dbo].[SystemSettings](
 ) ON [PRIMARY]
 END
 GO
-/****** Object:  Table [dbo].[TransactionTypes]    Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  Table [dbo].[TransactionTypes]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -585,7 +585,7 @@ CREATE TABLE [dbo].[TransactionTypes](
 ) ON [PRIMARY]
 END
 GO
-/****** Object:  Table [dbo].[Users]    Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  Table [dbo].[Users]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -616,14 +616,14 @@ CREATE TABLE [dbo].[Users](
 ) ON [PRIMARY]
 END
 GO
-/****** Object:  Index [IX_DebtID_DebtPayments]    Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  Index [IX_DebtID_DebtPayments]    Script Date: 16/05/2026 7:19:36 PM ******/
 IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[DebtPayments]') AND name = N'IX_DebtID_DebtPayments')
 CREATE NONCLUSTERED INDEX [IX_DebtID_DebtPayments] ON [dbo].[DebtPayments]
 (
 	[DebtID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_ErrorLogs]    Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  Index [IX_ErrorLogs]    Script Date: 16/05/2026 7:19:36 PM ******/
 IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[ErrorLogs]') AND name = N'IX_ErrorLogs')
 CREATE NONCLUSTERED INDEX [IX_ErrorLogs] ON [dbo].[ErrorLogs]
 (
@@ -632,7 +632,7 @@ CREATE NONCLUSTERED INDEX [IX_ErrorLogs] ON [dbo].[ErrorLogs]
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [UX_Account_CategoryName_Comprehensive]    Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  Index [UX_Account_CategoryName_Comprehensive]    Script Date: 16/05/2026 7:19:36 PM ******/
 IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[IncomeAndExpenseCategories]') AND name = N'UX_Account_CategoryName_Comprehensive')
 CREATE UNIQUE NONCLUSTERED INDEX [UX_Account_CategoryName_Comprehensive] ON [dbo].[IncomeAndExpenseCategories]
 (
@@ -641,21 +641,21 @@ CREATE UNIQUE NONCLUSTERED INDEX [UX_Account_CategoryName_Comprehensive] ON [dbo
 )
 INCLUDE([IsIncome],[IsActive],[ParentCategoryID],[MainCategoryID],[CreatedDate]) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_IAETransactions_CategoryID]    Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  Index [IX_IAETransactions_CategoryID]    Script Date: 16/05/2026 7:19:36 PM ******/
 IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[IncomeAndExpenseTransactions]') AND name = N'IX_IAETransactions_CategoryID')
 CREATE NONCLUSTERED INDEX [IX_IAETransactions_CategoryID] ON [dbo].[IncomeAndExpenseTransactions]
 (
 	[CategoryID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_IAETransactions_VoucherID]    Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  Index [IX_IAETransactions_VoucherID]    Script Date: 16/05/2026 7:19:36 PM ******/
 IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[IncomeAndExpenseTransactions]') AND name = N'IX_IAETransactions_VoucherID')
 CREATE NONCLUSTERED INDEX [IX_IAETransactions_VoucherID] ON [dbo].[IncomeAndExpenseTransactions]
 (
 	[VoucherID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_Vouchers_ComprehensiveSearch]    Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  Index [IX_Vouchers_ComprehensiveSearch]    Script Date: 16/05/2026 7:19:36 PM ******/
 IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[IncomeAndExpenseVouchers]') AND name = N'IX_Vouchers_ComprehensiveSearch')
 CREATE NONCLUSTERED INDEX [IX_Vouchers_ComprehensiveSearch] ON [dbo].[IncomeAndExpenseVouchers]
 (
@@ -666,7 +666,7 @@ CREATE NONCLUSTERED INDEX [IX_Vouchers_ComprehensiveSearch] ON [dbo].[IncomeAndE
 )
 INCLUDE([VoucherName],[VoucherValue],[CreatedDate],[CreatedByUserID]) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_MainTransactions_Comprehensive]    Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  Index [IX_MainTransactions_Comprehensive]    Script Date: 16/05/2026 7:19:36 PM ******/
 IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[MainTransactions]') AND name = N'IX_MainTransactions_Comprehensive')
 CREATE NONCLUSTERED INDEX [IX_MainTransactions_Comprehensive] ON [dbo].[MainTransactions]
 (
@@ -676,21 +676,21 @@ CREATE NONCLUSTERED INDEX [IX_MainTransactions_Comprehensive] ON [dbo].[MainTran
 )
 INCLUDE([Amount],[CreatedByUserID],[Purpose],[CreatedDate]) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_MainTransactions_CreatedDate]    Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  Index [IX_MainTransactions_CreatedDate]    Script Date: 16/05/2026 7:19:36 PM ******/
 IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[MainTransactions]') AND name = N'IX_MainTransactions_CreatedDate')
 CREATE NONCLUSTERED INDEX [IX_MainTransactions_CreatedDate] ON [dbo].[MainTransactions]
 (
 	[CreatedDate] DESC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_MainTransactions_TransactionDate]    Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  Index [IX_MainTransactions_TransactionDate]    Script Date: 16/05/2026 7:19:36 PM ******/
 IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[MainTransactions]') AND name = N'IX_MainTransactions_TransactionDate')
 CREATE NONCLUSTERED INDEX [IX_MainTransactions_TransactionDate] ON [dbo].[MainTransactions]
 (
 	[TransactionDate] DESC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_People_ComprehensiveSearch]    Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  Index [IX_People_ComprehensiveSearch]    Script Date: 16/05/2026 7:19:36 PM ******/
 IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[People]') AND name = N'IX_People_ComprehensiveSearch')
 CREATE NONCLUSTERED INDEX [IX_People_ComprehensiveSearch] ON [dbo].[People]
 (
@@ -700,7 +700,7 @@ INCLUDE([PersonName],[Email],[Phone],[Address]) WITH (PAD_INDEX = OFF, STATISTIC
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_People_Email]    Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  Index [IX_People_Email]    Script Date: 16/05/2026 7:19:36 PM ******/
 IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[People]') AND name = N'IX_People_Email')
 CREATE NONCLUSTERED INDEX [IX_People_Email] ON [dbo].[People]
 (
@@ -709,14 +709,14 @@ CREATE NONCLUSTERED INDEX [IX_People_Email] ON [dbo].[People]
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_People_Phone]    Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  Index [IX_People_Phone]    Script Date: 16/05/2026 7:19:36 PM ******/
 IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[People]') AND name = N'IX_People_Phone')
 CREATE NONCLUSTERED INDEX [IX_People_Phone] ON [dbo].[People]
 (
 	[Phone] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_Users_AccountID_Covering]    Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  Index [IX_Users_AccountID_Covering]    Script Date: 16/05/2026 7:19:36 PM ******/
 IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[Users]') AND name = N'IX_Users_AccountID_Covering')
 CREATE NONCLUSTERED INDEX [IX_Users_AccountID_Covering] ON [dbo].[Users]
 (
@@ -725,7 +725,7 @@ CREATE NONCLUSTERED INDEX [IX_Users_AccountID_Covering] ON [dbo].[Users]
 )
 INCLUDE([IsActive]) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [UX_Users_PersonID_IsDeleted]    Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  Index [UX_Users_PersonID_IsDeleted]    Script Date: 16/05/2026 7:19:36 PM ******/
 IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[Users]') AND name = N'UX_Users_PersonID_IsDeleted')
 CREATE UNIQUE NONCLUSTERED INDEX [UX_Users_PersonID_IsDeleted] ON [dbo].[Users]
 (
@@ -734,7 +734,7 @@ CREATE UNIQUE NONCLUSTERED INDEX [UX_Users_PersonID_IsDeleted] ON [dbo].[Users]
 WHERE ([IsDeleted]=(0))
 WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  FullTextIndex     Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  FullTextIndex     Script Date: 16/05/2026 7:19:36 PM ******/
 IF not EXISTS (SELECT * FROM sys.fulltext_indexes fti WHERE fti.object_id = OBJECT_ID(N'[dbo].[IncomeAndExpenseCategories]'))
 CREATE FULLTEXT INDEX ON [dbo].[IncomeAndExpenseCategories](
 [CategoryName] LANGUAGE 'Arabic')
@@ -742,7 +742,7 @@ KEY INDEX [PK_Categories]ON ([ft_MoneyMindManager], FILEGROUP [PRIMARY])
 WITH (CHANGE_TRACKING = AUTO, STOPLIST = OFF)
 
 GO
-/****** Object:  FullTextIndex     Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  FullTextIndex     Script Date: 16/05/2026 7:19:36 PM ******/
 IF not EXISTS (SELECT * FROM sys.fulltext_indexes fti WHERE fti.object_id = OBJECT_ID(N'[dbo].[IncomeAndExpenseVouchers]'))
 CREATE FULLTEXT INDEX ON [dbo].[IncomeAndExpenseVouchers](
 [VoucherName] LANGUAGE 'Arabic')
@@ -750,7 +750,7 @@ KEY INDEX [PK_IncomeAndExpenseVouchers]ON ([ft_MoneyMindManager], FILEGROUP [PRI
 WITH (CHANGE_TRACKING = AUTO, STOPLIST = SYSTEM)
 
 GO
-/****** Object:  FullTextIndex     Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  FullTextIndex     Script Date: 16/05/2026 7:19:36 PM ******/
 IF not EXISTS (SELECT * FROM sys.fulltext_indexes fti WHERE fti.object_id = OBJECT_ID(N'[dbo].[MainTransactions]'))
 CREATE FULLTEXT INDEX ON [dbo].[MainTransactions](
 [Purpose] LANGUAGE 'Arabic')
@@ -758,7 +758,7 @@ KEY INDEX [PK_AllTransactions]ON ([ft_MoneyMindManager], FILEGROUP [PRIMARY])
 WITH (CHANGE_TRACKING = AUTO, STOPLIST = SYSTEM)
 
 GO
-/****** Object:  FullTextIndex     Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  FullTextIndex     Script Date: 16/05/2026 7:19:36 PM ******/
 IF not EXISTS (SELECT * FROM sys.fulltext_indexes fti WHERE fti.object_id = OBJECT_ID(N'[dbo].[People]'))
 CREATE FULLTEXT INDEX ON [dbo].[People](
 [PersonName] LANGUAGE 'Arabic')
@@ -766,7 +766,7 @@ KEY INDEX [PK_People]ON ([ft_MoneyMindManager], FILEGROUP [PRIMARY])
 WITH (CHANGE_TRACKING = AUTO, STOPLIST = OFF)
 
 GO
-/****** Object:  FullTextIndex     Script Date: 16/05/2026 6:42:07 PM ******/
+/****** Object:  FullTextIndex     Script Date: 16/05/2026 7:19:36 PM ******/
 IF not EXISTS (SELECT * FROM sys.fulltext_indexes fti WHERE fti.object_id = OBJECT_ID(N'[dbo].[Users]'))
 CREATE FULLTEXT INDEX ON [dbo].[Users](
 [UserName] LANGUAGE 'Arabic')
@@ -1058,7 +1058,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.check_constraints WHERE object_id = OBJECT_ID(N'[dbo].[CK_IncomeAndExpenseVouchers]') AND parent_object_id = OBJECT_ID(N'[dbo].[IncomeAndExpenseVouchers]'))
 ALTER TABLE [dbo].[IncomeAndExpenseVouchers] CHECK CONSTRAINT [CK_IncomeAndExpenseVouchers]
 GO
-/****** Object:  StoredProcedure [dbo].[SP_Account_AddNew]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_Account_AddNew]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1088,7 +1088,7 @@ BEGIN
 	END CATCH;
 END;
 GO
-/****** Object:  StoredProcedure [dbo].[SP_Account_Create]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_Account_Create]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1155,7 +1155,7 @@ BEGIN
 		END CATCH;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_Account_DeleteByID]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_Account_DeleteByID]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1215,7 +1215,7 @@ BEGIN
 	END CATCH;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_Account_GetByAccountID]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_Account_GetByAccountID]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1255,7 +1255,7 @@ BEGIN
 	END CATCH;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_Account_IsExistByAccountName]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_Account_IsExistByAccountName]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1283,7 +1283,7 @@ BEGIN
 	END CATCH;
 END;
 GO
-/****** Object:  StoredProcedure [dbo].[SP_Account_UpdateByUserID]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_Account_UpdateByUserID]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1327,7 +1327,7 @@ BEGIN
 	END CATCH;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_Currencies_GetAll]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_Currencies_GetAll]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1350,7 +1350,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_Currency_GetByCurrencyID]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_Currency_GetByCurrencyID]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1380,7 +1380,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_Currency_GetByCurrencyName]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_Currency_GetByCurrencyName]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1410,7 +1410,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_DebtEntries_AddNew]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_DebtEntries_AddNew]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1485,7 +1485,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_DebtEntries_DeleteByID]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_DebtEntries_DeleteByID]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1536,7 +1536,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_DebtEntries_GetAllForDebt]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_DebtEntries_GetAllForDebt]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1599,7 +1599,7 @@ BEGIN
 	END CATCH;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_DebtEntries_GetAllForDebtWihtoutPaging]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_DebtEntries_GetAllForDebtWihtoutPaging]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1645,7 +1645,7 @@ BEGIN
 	END CATCH;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_DebtEntries_UpdateByID]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_DebtEntries_UpdateByID]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1724,7 +1724,7 @@ BEGIN
 		END CATCH;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_DebtEntry_GetByID]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_DebtEntry_GetByID]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1766,7 +1766,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_DebtPayment_AddNew]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_DebtPayment_AddNew]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1839,7 +1839,7 @@ BEGIN
 	END CATCH;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_DebtPayment_DeleteByID]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_DebtPayment_DeleteByID]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1891,7 +1891,7 @@ BEGIN
 	END CATCH;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_DebtPayment_GetAllForDebt]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_DebtPayment_GetAllForDebt]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1954,7 +1954,7 @@ BEGIN
 	END CATCH;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_DebtPayment_GetAllForDebtWihtoutPaging]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_DebtPayment_GetAllForDebtWihtoutPaging]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2000,7 +2000,7 @@ BEGIN
 	END CATCH;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_DebtPayment_GetByID]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_DebtPayment_GetByID]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2042,7 +2042,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_DebtPayment_UpdateByID]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_DebtPayment_UpdateByID]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2121,7 +2121,7 @@ BEGIN
 		END CATCH;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_Debts_AddNew]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_Debts_AddNew]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2166,7 +2166,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_Debts_ChangeLocking]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_Debts_ChangeLocking]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2220,7 +2220,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_Debts_DeleteByDebtID]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_Debts_DeleteByDebtID]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2270,7 +2270,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_Debts_GetAll]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_Debts_GetAll]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2411,7 +2411,7 @@ BEGIN
 	END CATCH;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_Debts_GetAllWithoutPaging]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_Debts_GetAllWithoutPaging]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2498,7 +2498,7 @@ BEGIN
 	END CATCH;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_Debts_GetByID]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_Debts_GetByID]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2542,7 +2542,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_Debts_UpdateByDebtID]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_Debts_UpdateByDebtID]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2606,7 +2606,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_DeleteFormAccountsTable]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_DeleteFormAccountsTable]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2624,7 +2624,7 @@ GO
              where AccountID = @AccountID
             end
 GO
-/****** Object:  StoredProcedure [dbo].[SP_DeleteFormCurrenciesTable]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_DeleteFormCurrenciesTable]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2642,7 +2642,7 @@ GO
              where CurrencyID = @CurrencyID
             end
 GO
-/****** Object:  StoredProcedure [dbo].[SP_DeleteFormIncomeAndExpenseCategoriesTable]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_DeleteFormIncomeAndExpenseCategoriesTable]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2660,7 +2660,7 @@ GO
              where CategoryID = @CategoryID
             end
 GO
-/****** Object:  StoredProcedure [dbo].[SP_DeleteFormPeopleTable]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_DeleteFormPeopleTable]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2678,7 +2678,7 @@ GO
              where PersonID = @PersonID
             end
 GO
-/****** Object:  StoredProcedure [dbo].[SP_FindFormAccountsTable]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_FindFormAccountsTable]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2696,7 +2696,7 @@ GO
              where AccountID = @AccountID
             end
 GO
-/****** Object:  StoredProcedure [dbo].[SP_FindFormCurrenciesTable]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_FindFormCurrenciesTable]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2714,7 +2714,7 @@ GO
              where CurrencyID = @CurrencyID
             end
 GO
-/****** Object:  StoredProcedure [dbo].[SP_FindFormIncomeAndExpenseCategoriesTable]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_FindFormIncomeAndExpenseCategoriesTable]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2732,7 +2732,7 @@ GO
              where CategoryID = @CategoryID
             end
 GO
-/****** Object:  StoredProcedure [dbo].[SP_FindFormPeopleTable]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_FindFormPeopleTable]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2750,7 +2750,7 @@ GO
              where PersonID = @PersonID
             end
 GO
-/****** Object:  StoredProcedure [dbo].[SP_Global_DatabaseRoutineMaintenance]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_Global_DatabaseRoutineMaintenance]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2812,7 +2812,7 @@ BEGIN
 	END CATCH;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseCategories_AddNew]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseCategories_AddNew]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2872,7 +2872,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseCategories_DeleteByCategoryID]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseCategories_DeleteByCategoryID]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2920,7 +2920,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseCategories_GetAll]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseCategories_GetAll]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3050,7 +3050,7 @@ BEGIN
 END;
 		
 GO
-/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseCategories_GetAllForSelectOne]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseCategories_GetAllForSelectOne]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3149,7 +3149,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseCategories_GetByCategoryName]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseCategories_GetByCategoryName]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3198,7 +3198,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseCategories_GetByID]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseCategories_GetByID]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3245,7 +3245,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseCategories_IsExistByCategoryName]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseCategories_IsExistByCategoryName]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3283,7 +3283,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseCategories_UpdateByCategoryID]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseCategories_UpdateByCategoryID]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3340,7 +3340,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseCategory_IsExceedMonthlyBudget]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseCategory_IsExceedMonthlyBudget]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3432,7 +3432,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseTransaction_AddNew]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseTransaction_AddNew]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3447,6 +3447,7 @@ ALTER PROCEDURE [dbo].[SP_IncomeAndExpenseTransaction_AddNew]
 	@VoucherID INT,
 	@CategoryID INT ,
 	@Amount decimal(19, 4),
+	@TransactionDate date,
 	@CreatedByUserID INT,
 	@Purpose NVARCHAR(150) NULL,
 	@NewTransactionID INT OUTPUT
@@ -3465,8 +3466,7 @@ BEGIN
 		DECLARE @IsIncome BIT;
 		DECLARE @IsReturn BIT;
 		DECLARE @IsLocked BIT;
-		DECLARE @VoucherDate DATE;
-		SELECT @IsIncome = IsIncome, @IsReturn = IsReturn,@IsLocked = IsLocked,@VoucherDate = VoucherDate FROM IncomeAndExpenseVouchers WHERE VoucherID = @VoucherID;
+		SELECT @IsIncome = IsIncome, @IsReturn = IsReturn,@IsLocked = IsLocked FROM IncomeAndExpenseVouchers WHERE VoucherID = @VoucherID;
 
 		IF (@IsIncome IS NULL)
 		BEGIN
@@ -3510,7 +3510,7 @@ BEGIN
 			@TransactionTypeID = @TransactionTypeID,
 			@Purpose = @Purpose,
 			@IsLocked = @IsLocked,
-			@TransactionDate = @VoucherDate,
+			@TransactionDate = @TransactionDate,
 			@NewTransactionID = @NewTransactionID OUTPUT;
 
 		INSERT INTO IncomeAndExpenseTransactions(MainTransactionID,VoucherID,CategoryID)
@@ -3528,7 +3528,7 @@ BEGIN
 	END CATCH;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseTransaction_GetByID]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseTransaction_GetByID]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3570,7 +3570,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseTransactionGetAllForVoucher]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseTransactionGetAllForVoucher]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3633,7 +3633,7 @@ BEGIN
 	END CATCH;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseTransactionGetAllForVoucherWithoutPaging]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseTransactionGetAllForVoucherWithoutPaging]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3681,7 +3681,7 @@ BEGIN
 	END CATCH;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseTransactions_DeleteByID]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseTransactions_DeleteByID]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3731,7 +3731,7 @@ BEGIN
 	END CATCH;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseTransactions_UpdateByID]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseTransactions_UpdateByID]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3747,6 +3747,7 @@ ALTER PROCEDURE [dbo].[SP_IncomeAndExpenseTransactions_UpdateByID]
 	@TransactionID INT,
 	@Amount decimal(19, 4),
 	@CategoryID INT ,
+	@TransactionDate date,
 	@Purpose NVARCHAR(150) NULL,
 	@CurrentUserID INT
 AS
@@ -3770,9 +3771,8 @@ BEGIN
 
 		DECLARE @IsIncome BIT;
 		DECLARE @IsReturn BIT;
-		DECLARE @VoucherDate DATE;
 
-		SELECT @IsIncome = IsIncome, @IsReturn = IsReturn,@VoucherDate = VoucherDate
+		SELECT @IsIncome = IsIncome, @IsReturn = IsReturn
 		FROM IncomeAndExpenseVouchers WHERE VoucherID = @VoucherID;
 
 		IF (@IsIncome IS NULL)
@@ -3802,7 +3802,7 @@ BEGIN
 								@Amount = @Amount,
 								@Purpose = @Purpose,
 								@CurrentUserID = @CurrentUserID,
-								@TransactionDate = @VoucherDate,
+								@TransactionDate = @TransactionDate,
 								@LogErrors = 0;
 		
 			UPDATE IncomeAndExpenseTransactions
@@ -3829,7 +3829,7 @@ BEGIN
 		END CATCH;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseVouchers_AddNew]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseVouchers_AddNew]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3873,7 +3873,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseVouchers_ChangeLocking]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseVouchers_ChangeLocking]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3927,7 +3927,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseVouchers_DeleteByVoucherID]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseVouchers_DeleteByVoucherID]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3975,7 +3975,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseVouchers_GetAllBy]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseVouchers_GetAllBy]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4115,7 +4115,7 @@ BEGIN
 	END CATCH;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseVouchers_GetAllByWithoutPaging]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseVouchers_GetAllByWithoutPaging]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4206,7 +4206,7 @@ BEGIN
 	END CATCH;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseVouchers_GetByID]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseVouchers_GetByID]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4249,7 +4249,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseVouchers_GetVoucherValue]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseVouchers_GetVoucherValue]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4295,7 +4295,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseVouchers_UpdateByVoucherID]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_IncomeAndExpenseVouchers_UpdateByVoucherID]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4353,7 +4353,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_InsertIntoAccountsTable]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_InsertIntoAccountsTable]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4397,7 +4397,7 @@ SET @AccountID=SCOPE_IDENTITY();
 
             end
 GO
-/****** Object:  StoredProcedure [dbo].[SP_InsertIntoCurrenciesTable]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_InsertIntoCurrenciesTable]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4429,7 +4429,7 @@ SET @CurrencyID=SCOPE_IDENTITY();
 
             end
 GO
-/****** Object:  StoredProcedure [dbo].[SP_InsertIntoIncomeAndExpenseCategoriesTable]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_InsertIntoIncomeAndExpenseCategoriesTable]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4485,7 +4485,7 @@ SET @CategoryID=SCOPE_IDENTITY();
 
             end
 GO
-/****** Object:  StoredProcedure [dbo].[SP_InsertIntoPeopleTable]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_InsertIntoPeopleTable]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4535,7 +4535,7 @@ SET @PersonID=SCOPE_IDENTITY();
 
             end
 GO
-/****** Object:  StoredProcedure [dbo].[SP_LogError]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_LogError]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4553,7 +4553,7 @@ BEGIN
 	VALUES(ERROR_MESSAGE(),ERROR_NUMBER(),ERROR_PROCEDURE(),ERROR_LINE(),SYSDATETIME());
 END;
 GO
-/****** Object:  StoredProcedure [dbo].[SP_MainTransaction_CheckBalanceBeforeDelete]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_MainTransaction_CheckBalanceBeforeDelete]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4599,7 +4599,7 @@ BEGIN
 	END CATCH;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_MainTransactions_AddNew]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_MainTransactions_AddNew]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4639,7 +4639,7 @@ BEGIN
 	END CATCH;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_MainTransactions_DeleteByID]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_MainTransactions_DeleteByID]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4700,7 +4700,7 @@ BEGIN
 	END CATCH;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_MainTransactions_GetAll]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_MainTransactions_GetAll]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4843,7 +4843,7 @@ BEGIN
 	END CATCH;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_MainTransactions_GetAllWithoutPaging]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_MainTransactions_GetAllWithoutPaging]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4935,7 +4935,7 @@ BEGIN
 	END CATCH;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_MainTransactions_GetByID]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_MainTransactions_GetByID]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4972,7 +4972,7 @@ BEGIN
 	END CATCH;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_MainTransactions_UpdateByID]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_MainTransactions_UpdateByID]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -5037,7 +5037,7 @@ BEGIN
 	END CATCH;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_People_GetAll]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_People_GetAll]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -5143,7 +5143,7 @@ BEGIN
 
 END;
 GO
-/****** Object:  StoredProcedure [dbo].[SP_People_GetAllForSelectOne]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_People_GetAllForSelectOne]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -5240,7 +5240,7 @@ BEGIN
 
 END;
 GO
-/****** Object:  StoredProcedure [dbo].[SP_Person_AddNew]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_Person_AddNew]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -5281,7 +5281,7 @@ BEGIN
 	END CATCH
 END;
 GO
-/****** Object:  StoredProcedure [dbo].[SP_Person_DeleteByID]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_Person_DeleteByID]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -5320,7 +5320,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_Person_GetByID]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_Person_GetByID]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -5392,7 +5392,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_Person_IsExistByID]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_Person_IsExistByID]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -5419,7 +5419,7 @@ BEGIN
 	END CATCH;
 END;
 GO
-/****** Object:  StoredProcedure [dbo].[SP_Person_UpdateByID]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_Person_UpdateByID]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -5473,7 +5473,7 @@ BEGIN
 	END CATCH;
 END;
 GO
-/****** Object:  StoredProcedure [dbo].[SP_ReCalculateBalanceForAccount]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_ReCalculateBalanceForAccount]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -5512,7 +5512,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_ReCalculateVoucherValue]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_ReCalculateVoucherValue]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -5546,7 +5546,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_Report_GetCategoryMonthlyFlow]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_Report_GetCategoryMonthlyFlow]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -5626,7 +5626,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_Report_GetDebtsMonthlyFlow]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_Report_GetDebtsMonthlyFlow]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -5713,7 +5713,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_Report_GetDebtsRepaymentSchedule]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_Report_GetDebtsRepaymentSchedule]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -5801,7 +5801,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_Report_GetMainKPIS]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_Report_GetMainKPIS]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -5903,7 +5903,7 @@ BEGIN
 	END CATCH;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_Report_GetMonthlyFlow]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_Report_GetMonthlyFlow]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -5980,7 +5980,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_Report_GetTopCategories]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_Report_GetTopCategories]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -6041,7 +6041,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_Report_Top5DebtorsRanking]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_Report_Top5DebtorsRanking]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -6081,7 +6081,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_Report_Top5PeopleDebtsSumRanking]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_Report_Top5PeopleDebtsSumRanking]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -6122,7 +6122,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_SelectFormAccountsTable]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_SelectFormAccountsTable]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -6139,7 +6139,7 @@ GO
               order by  AccountID  desc 
             end
 GO
-/****** Object:  StoredProcedure [dbo].[SP_SelectFormCurrenciesTable]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_SelectFormCurrenciesTable]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -6156,7 +6156,7 @@ GO
               order by  CurrencyID  desc 
             end
 GO
-/****** Object:  StoredProcedure [dbo].[SP_SelectFormIncomeAndExpenseCategoriesTable]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_SelectFormIncomeAndExpenseCategoriesTable]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -6173,7 +6173,7 @@ GO
               order by  CategoryID  desc 
             end
 GO
-/****** Object:  StoredProcedure [dbo].[SP_SelectFormPeopleTable]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_SelectFormPeopleTable]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -6190,7 +6190,7 @@ GO
               order by  PersonID  desc 
             end
 GO
-/****** Object:  StoredProcedure [dbo].[SP_TransactionType_GetByID]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_TransactionType_GetByID]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -6220,7 +6220,7 @@ BEGIN
 	END CATCH;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_TransactionType_GetByName]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_TransactionType_GetByName]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -6250,7 +6250,7 @@ BEGIN
 	END CATCH;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_TransactionTypes_GetAll]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_TransactionTypes_GetAll]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -6274,7 +6274,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_User_AddNew]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_User_AddNew]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -6340,7 +6340,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_User_ChangePassword]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_User_ChangePassword]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -6391,7 +6391,7 @@ BEGIN
 		END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_User_DeleteByUserID]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_User_DeleteByUserID]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -6426,7 +6426,7 @@ BEGIN
 	END CATCH;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_User_GetByPersonID]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_User_GetByPersonID]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -6474,7 +6474,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_User_GetByUserID]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_User_GetByUserID]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -6521,7 +6521,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_User_GetByUserName]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_User_GetByUserName]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -6569,7 +6569,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_User_GetByUserNameAndPassword_Login]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_User_GetByUserNameAndPassword_Login]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -6620,7 +6620,7 @@ BEGIN
 	END CATCH;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_User_GetPermissionsByUserID]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_User_GetPermissionsByUserID]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -6652,7 +6652,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_User_GetSaltByUserID]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_User_GetSaltByUserID]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -6684,7 +6684,7 @@ BEGIN
 	END CATCH;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_User_GetSaltByUserName]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_User_GetSaltByUserName]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -6716,7 +6716,7 @@ BEGIN
 	END CATCH;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_User_IsExistByPersonID]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_User_IsExistByPersonID]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -6745,7 +6745,7 @@ BEGIN
 	END CATCH;
 END;
 GO
-/****** Object:  StoredProcedure [dbo].[SP_User_IsExistByUserID]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_User_IsExistByUserID]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -6773,7 +6773,7 @@ BEGIN
 	END CATCH;
 END;
 GO
-/****** Object:  StoredProcedure [dbo].[SP_User_IsExistByUserName]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_User_IsExistByUserName]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -6802,7 +6802,7 @@ BEGIN
 	END CATCH;
 END;
 GO
-/****** Object:  StoredProcedure [dbo].[SP_User_UpdateByUserID]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_User_UpdateByUserID]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -6861,7 +6861,7 @@ BEGIN
 	END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_Users_GetAll]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_Users_GetAll]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -6975,7 +6975,7 @@ BEGIN
 
 END;
 GO
-/****** Object:  StoredProcedure [dbo].[SP_Validating_CheckUserValid]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_Validating_CheckUserValid]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -6997,7 +6997,7 @@ BEGIN
 	END;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_Validating_CheckUserValid_OutAccountID]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_Validating_CheckUserValid_OutAccountID]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -7022,7 +7022,7 @@ BEGIN
 	END;
 END
 GO
-/****** Object:  Trigger [dbo].[trg_PreventChangeCurrency_AfterUpdate]    Script Date: 16/05/2026 6:42:08 PM ******/
+/****** Object:  Trigger [dbo].[trg_PreventChangeCurrency_AfterUpdate]    Script Date: 16/05/2026 7:19:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -7045,7 +7045,7 @@ END
 GO
 ALTER TABLE [dbo].[Accounts] ENABLE TRIGGER [trg_PreventChangeCurrency_AfterUpdate]
 GO
-/****** Object:  Trigger [dbo].[trg_DebtEntries_PreventChangeFixedData]    Script Date: 16/05/2026 6:42:09 PM ******/
+/****** Object:  Trigger [dbo].[trg_DebtEntries_PreventChangeFixedData]    Script Date: 16/05/2026 7:19:37 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -7064,7 +7064,7 @@ END;'
 GO
 ALTER TABLE [dbo].[DebtEntries] ENABLE TRIGGER [trg_DebtEntries_PreventChangeFixedData]
 GO
-/****** Object:  Trigger [dbo].[trg_DeleteMainTransactionAfterDeleteDebtEntry]    Script Date: 16/05/2026 6:42:09 PM ******/
+/****** Object:  Trigger [dbo].[trg_DeleteMainTransactionAfterDeleteDebtEntry]    Script Date: 16/05/2026 7:19:37 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -7080,7 +7080,7 @@ END'
 GO
 ALTER TABLE [dbo].[DebtEntries] ENABLE TRIGGER [trg_DeleteMainTransactionAfterDeleteDebtEntry]
 GO
-/****** Object:  Trigger [dbo].[trg_MakeDebtValue_AfterInsert_Delete_DebtEntry]    Script Date: 16/05/2026 6:42:09 PM ******/
+/****** Object:  Trigger [dbo].[trg_MakeDebtValue_AfterInsert_Delete_DebtEntry]    Script Date: 16/05/2026 7:19:38 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -7118,7 +7118,7 @@ END
 GO
 ALTER TABLE [dbo].[DebtEntries] ENABLE TRIGGER [trg_MakeDebtValue_AfterInsert_Delete_DebtEntry]
 GO
-/****** Object:  Trigger [dbo].[trg_DebtPayments_PreventChangeFixedData]    Script Date: 16/05/2026 6:42:09 PM ******/
+/****** Object:  Trigger [dbo].[trg_DebtPayments_PreventChangeFixedData]    Script Date: 16/05/2026 7:19:38 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -7137,7 +7137,7 @@ END;
 GO
 ALTER TABLE [dbo].[DebtPayments] ENABLE TRIGGER [trg_DebtPayments_PreventChangeFixedData]
 GO
-/****** Object:  Trigger [dbo].[trg_DeleteMainTransactionAfterDeleteDebtPayment]    Script Date: 16/05/2026 6:42:09 PM ******/
+/****** Object:  Trigger [dbo].[trg_DeleteMainTransactionAfterDeleteDebtPayment]    Script Date: 16/05/2026 7:19:38 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -7153,7 +7153,7 @@ END
 GO
 ALTER TABLE [dbo].[DebtPayments] ENABLE TRIGGER [trg_DeleteMainTransactionAfterDeleteDebtPayment]
 GO
-/****** Object:  Trigger [dbo].[trg_MakeDebtPaid_AfterInsert_Delete_DebtPayment]    Script Date: 16/05/2026 6:42:09 PM ******/
+/****** Object:  Trigger [dbo].[trg_MakeDebtPaid_AfterInsert_Delete_DebtPayment]    Script Date: 16/05/2026 7:19:38 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -7191,56 +7191,7 @@ END
 GO
 ALTER TABLE [dbo].[DebtPayments] ENABLE TRIGGER [trg_MakeDebtPaid_AfterInsert_Delete_DebtPayment]
 GO
-/****** Object:  Trigger [dbo].[trg_MakeDebtRemaintAmount_AfterInsert_Delete_DebtPayment]    Script Date: 16/05/2026 6:42:09 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-IF NOT EXISTS (SELECT * FROM sys.triggers WHERE object_id = OBJECT_ID(N'[dbo].[trg_MakeDebtRemaintAmount_AfterInsert_Delete_DebtPayment]'))
-EXEC dbo.sp_executesql @statement = N'CREATE TRIGGER [dbo].[trg_MakeDebtRemaintAmount_AfterInsert_Delete_DebtPayment] ON [dbo].[DebtPayments]
-AFTER INSERT,DELETE
-AS
-BEGIN
-	WITH ChangedDebts AS
-		(
-			SELECT DebtID FROM  inserted 
-
-			UNION 
-
-			SELECT DebtID FROM  deleted 
-		),
-		DebtTransactions AS
-		(
-			SELECT d.DebtID,SUM(ABS(mt.Amount)) as DebtValue FROM Debts d INNER JOIN ChangedDebts cd ON d.DebtID = cd.DebtID
-			INNER JOIN MainTransactions mt ON d.DebtTransactionID = mt.TransactionID GROUP BY d.DebtID
-		),
-		DebtPaymentTransactions AS
-		(
-			SELECT d.DebtID,(-1 * ABS((SUM(mt.Amount)))) as DebtPaidValue FROM DebtPayments d INNER JOIN ChangedDebts cd ON d.DebtID = cd.DebtID
-			INNER JOIN MainTransactions mt ON d.MainTransactionID = mt.TransactionID GROUP BY d.DebtID
-		),
-		AllChangedDebtsWithPayment AS
-		(
-			SELECT d.DebtID,d.DebtValue  FROM DebtTransactions d
-
-			UNION ALL
-
-			SELECT d.DebtID,d.DebtPaidValue FROM DebtPaymentTransactions d
-		),
-		ChangedDebtsWithRemaningAmount AS
-		(
-			SELECT acdwp.DebtID,SUM(acdwp.DebtValue) AS RemainingAmount
-			FROM AllChangedDebtsWithPayment acdwp GROUP BY acdwp.DebtID
-		)
-		UPDATE Debts
-		SET RemainingAmount = ISNULL(cdwra.RemainingAmount,0)
-		FROM ChangedDebtsWithRemaningAmount cdwra INNER JOIN Debts d ON d.DebtID = cdwra.DebtID
-END
-' 
-GO
-ALTER TABLE [dbo].[DebtPayments] DISABLE TRIGGER [trg_MakeDebtRemaintAmount_AfterInsert_Delete_DebtPayment]
-GO
-/****** Object:  Trigger [dbo].[trg_Debts_MakeIsLockedConsistent]    Script Date: 16/05/2026 6:42:10 PM ******/
+/****** Object:  Trigger [dbo].[trg_Debts_MakeIsLockedConsistent]    Script Date: 16/05/2026 7:19:38 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -7278,7 +7229,7 @@ END
 GO
 ALTER TABLE [dbo].[Debts] ENABLE TRIGGER [trg_Debts_MakeIsLockedConsistent]
 GO
-/****** Object:  Trigger [dbo].[trg_Debts_PreventChangeFixedData]    Script Date: 16/05/2026 6:42:10 PM ******/
+/****** Object:  Trigger [dbo].[trg_Debts_PreventChangeFixedData]    Script Date: 16/05/2026 7:19:38 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -7299,7 +7250,7 @@ END;
 GO
 ALTER TABLE [dbo].[Debts] ENABLE TRIGGER [trg_Debts_PreventChangeFixedData]
 GO
-/****** Object:  Trigger [dbo].[trg_Debts_PreventUpdateItLocked]    Script Date: 16/05/2026 6:42:10 PM ******/
+/****** Object:  Trigger [dbo].[trg_Debts_PreventUpdateItLocked]    Script Date: 16/05/2026 7:19:38 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -7319,7 +7270,7 @@ END
 GO
 ALTER TABLE [dbo].[Debts] ENABLE TRIGGER [trg_Debts_PreventUpdateItLocked]
 GO
-/****** Object:  Trigger [dbo].[trg_CheckMonthlyBadgetIsEnabledOnlyForMainCategory]    Script Date: 16/05/2026 6:42:10 PM ******/
+/****** Object:  Trigger [dbo].[trg_CheckMonthlyBadgetIsEnabledOnlyForMainCategory]    Script Date: 16/05/2026 7:19:38 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -7336,7 +7287,7 @@ END
 GO
 ALTER TABLE [dbo].[IncomeAndExpenseCategories] ENABLE TRIGGER [trg_CheckMonthlyBadgetIsEnabledOnlyForMainCategory]
 GO
-/****** Object:  Trigger [dbo].[trg_ConfirmsThatTheParentIsActiveWhenDeActive]    Script Date: 16/05/2026 6:42:10 PM ******/
+/****** Object:  Trigger [dbo].[trg_ConfirmsThatTheParentIsActiveWhenDeActive]    Script Date: 16/05/2026 7:19:39 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -7357,7 +7308,7 @@ END
 GO
 ALTER TABLE [dbo].[IncomeAndExpenseCategories] ENABLE TRIGGER [trg_ConfirmsThatTheParentIsActiveWhenDeActive]
 GO
-/****** Object:  Trigger [dbo].[trg_DeActiveSonsCategoriesBasedOnParent]    Script Date: 16/05/2026 6:42:10 PM ******/
+/****** Object:  Trigger [dbo].[trg_DeActiveSonsCategoriesBasedOnParent]    Script Date: 16/05/2026 7:19:39 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -7390,7 +7341,7 @@ END
 GO
 ALTER TABLE [dbo].[IncomeAndExpenseCategories] ENABLE TRIGGER [trg_DeActiveSonsCategoriesBasedOnParent]
 GO
-/****** Object:  Trigger [dbo].[trg_EnsureParentCategoryIDConsistency]    Script Date: 16/05/2026 6:42:10 PM ******/
+/****** Object:  Trigger [dbo].[trg_EnsureParentCategoryIDConsistency]    Script Date: 16/05/2026 7:19:39 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -7411,7 +7362,7 @@ END
 GO
 ALTER TABLE [dbo].[IncomeAndExpenseCategories] ENABLE TRIGGER [trg_EnsureParentCategoryIDConsistency]
 GO
-/****** Object:  Trigger [dbo].[trg_MakeDataConsistecy]    Script Date: 16/05/2026 6:42:10 PM ******/
+/****** Object:  Trigger [dbo].[trg_MakeDataConsistecy]    Script Date: 16/05/2026 7:19:39 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -7433,7 +7384,7 @@ END
 GO
 ALTER TABLE [dbo].[IncomeAndExpenseCategories] ENABLE TRIGGER [trg_MakeDataConsistecy]
 GO
-/****** Object:  Trigger [dbo].[trg_PreventChangeIncomeAndExpenseCategory_IsIncomeColumns]    Script Date: 16/05/2026 6:42:10 PM ******/
+/****** Object:  Trigger [dbo].[trg_PreventChangeIncomeAndExpenseCategory_IsIncomeColumns]    Script Date: 16/05/2026 7:19:39 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -7453,7 +7404,7 @@ END;
 GO
 ALTER TABLE [dbo].[IncomeAndExpenseCategories] ENABLE TRIGGER [trg_PreventChangeIncomeAndExpenseCategory_IsIncomeColumns]
 GO
-/****** Object:  Trigger [dbo].[trg_PreventChangeIncomeAndExpenseCategory_ParentCategoryColumn]    Script Date: 16/05/2026 6:42:11 PM ******/
+/****** Object:  Trigger [dbo].[trg_PreventChangeIncomeAndExpenseCategory_ParentCategoryColumn]    Script Date: 16/05/2026 7:19:39 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -7475,7 +7426,7 @@ END;
 GO
 ALTER TABLE [dbo].[IncomeAndExpenseCategories] ENABLE TRIGGER [trg_PreventChangeIncomeAndExpenseCategory_ParentCategoryColumn]
 GO
-/****** Object:  Trigger [dbo].[trg_CheckTheCategoryIsActive]    Script Date: 16/05/2026 6:42:11 PM ******/
+/****** Object:  Trigger [dbo].[trg_CheckTheCategoryIsActive]    Script Date: 16/05/2026 7:19:39 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -7493,7 +7444,7 @@ END'
 GO
 ALTER TABLE [dbo].[IncomeAndExpenseTransactions] ENABLE TRIGGER [trg_CheckTheCategoryIsActive]
 GO
-/****** Object:  Trigger [dbo].[trg_CheckTheVoucherAndCategoryIsSameType_IsIncome]    Script Date: 16/05/2026 6:42:11 PM ******/
+/****** Object:  Trigger [dbo].[trg_CheckTheVoucherAndCategoryIsSameType_IsIncome]    Script Date: 16/05/2026 7:19:39 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -7511,7 +7462,7 @@ END'
 GO
 ALTER TABLE [dbo].[IncomeAndExpenseTransactions] ENABLE TRIGGER [trg_CheckTheVoucherAndCategoryIsSameType_IsIncome]
 GO
-/****** Object:  Trigger [dbo].[trg_DeleteMaintTransactionsAfterIncomeAndExpenseTransactionDeleted]    Script Date: 16/05/2026 6:42:11 PM ******/
+/****** Object:  Trigger [dbo].[trg_DeleteMaintTransactionsAfterIncomeAndExpenseTransactionDeleted]    Script Date: 16/05/2026 7:19:40 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -7526,7 +7477,7 @@ END'
 GO
 ALTER TABLE [dbo].[IncomeAndExpenseTransactions] ENABLE TRIGGER [trg_DeleteMaintTransactionsAfterIncomeAndExpenseTransactionDeleted]
 GO
-/****** Object:  Trigger [dbo].[trg_MakeVouhcerValueConsistent_AfterDelete]    Script Date: 16/05/2026 6:42:11 PM ******/
+/****** Object:  Trigger [dbo].[trg_MakeVouhcerValueConsistent_AfterDelete]    Script Date: 16/05/2026 7:19:40 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -7556,7 +7507,7 @@ END'
 GO
 ALTER TABLE [dbo].[IncomeAndExpenseTransactions] ENABLE TRIGGER [trg_MakeVouhcerValueConsistent_AfterDelete]
 GO
-/****** Object:  Trigger [dbo].[trg_MakeVouhcerValueConsistent_AfterInsert]    Script Date: 16/05/2026 6:42:11 PM ******/
+/****** Object:  Trigger [dbo].[trg_MakeVouhcerValueConsistent_AfterInsert]    Script Date: 16/05/2026 7:19:40 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -7584,7 +7535,7 @@ END'
 GO
 ALTER TABLE [dbo].[IncomeAndExpenseTransactions] ENABLE TRIGGER [trg_MakeVouhcerValueConsistent_AfterInsert]
 GO
-/****** Object:  Trigger [dbo].[trg_PreventChangeVoucherID]    Script Date: 16/05/2026 6:42:11 PM ******/
+/****** Object:  Trigger [dbo].[trg_PreventChangeVoucherID]    Script Date: 16/05/2026 7:19:40 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -7606,7 +7557,7 @@ END;'
 GO
 ALTER TABLE [dbo].[IncomeAndExpenseTransactions] ENABLE TRIGGER [trg_PreventChangeVoucherID]
 GO
-/****** Object:  Trigger [dbo].[trg_PreventUpdateIncomeAndExpenseTransactionsIfItLocked]    Script Date: 16/05/2026 6:42:11 PM ******/
+/****** Object:  Trigger [dbo].[trg_PreventUpdateIncomeAndExpenseTransactionsIfItLocked]    Script Date: 16/05/2026 7:19:40 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -7631,7 +7582,7 @@ END'
 GO
 ALTER TABLE [dbo].[IncomeAndExpenseTransactions] ENABLE TRIGGER [trg_PreventUpdateIncomeAndExpenseTransactionsIfItLocked]
 GO
-/****** Object:  Trigger [dbo].[trg_ConfirmThatIsReturnIsEnabledOnlyWithEXpense]    Script Date: 16/05/2026 6:42:11 PM ******/
+/****** Object:  Trigger [dbo].[trg_ConfirmThatIsReturnIsEnabledOnlyWithEXpense]    Script Date: 16/05/2026 7:19:40 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -7648,7 +7599,7 @@ END;
 GO
 ALTER TABLE [dbo].[IncomeAndExpenseVouchers] ENABLE TRIGGER [trg_ConfirmThatIsReturnIsEnabledOnlyWithEXpense]
 GO
-/****** Object:  Trigger [dbo].[trg_MakeIsLockedConsistent]    Script Date: 16/05/2026 6:42:11 PM ******/
+/****** Object:  Trigger [dbo].[trg_MakeIsLockedConsistent]    Script Date: 16/05/2026 7:19:40 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -7675,35 +7626,7 @@ END
 GO
 ALTER TABLE [dbo].[IncomeAndExpenseVouchers] ENABLE TRIGGER [trg_MakeIsLockedConsistent]
 GO
-/****** Object:  Trigger [dbo].[trg_MakeTransactionDateConsistent]    Script Date: 16/05/2026 6:42:12 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-IF NOT EXISTS (SELECT * FROM sys.triggers WHERE object_id = OBJECT_ID(N'[dbo].[trg_MakeTransactionDateConsistent]'))
-EXEC dbo.sp_executesql @statement = N'
-
-CREATE   TRIGGER [dbo].[trg_MakeTransactionDateConsistent] ON [dbo].[IncomeAndExpenseVouchers]
-AFTER UPDATE
-AS
-BEGIN
-	IF UPDATE(VoucherDate)
-	BEGIN
-		WITH CTE AS
-		(
-			SELECT VoucherID,VoucherDate FROM inserted
-		)
-		UPDATE MainTransactions 
-		SET TransactionDate = CTE.VoucherDate
-		FROM IncomeAndExpenseTransactions IET INNER JOIN CTE ON IET.VoucherID = CTE.VoucherID
-		INNER JOIN MainTransactions MT ON MT.TransactionID = IET.MainTransactionID
-		WHERE CTE.VoucherDate <> MT.TransactionDate
-	END
-END' 
-GO
-ALTER TABLE [dbo].[IncomeAndExpenseVouchers] DISABLE TRIGGER [trg_MakeTransactionDateConsistent]
-GO
-/****** Object:  Trigger [dbo].[trg_PreventChangeVoucher_CategoryType_IsIncomeColumns]    Script Date: 16/05/2026 6:42:12 PM ******/
+/****** Object:  Trigger [dbo].[trg_PreventChangeVoucher_CategoryType_IsIncomeColumns]    Script Date: 16/05/2026 7:19:40 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -7723,7 +7646,7 @@ END;
 GO
 ALTER TABLE [dbo].[IncomeAndExpenseVouchers] ENABLE TRIGGER [trg_PreventChangeVoucher_CategoryType_IsIncomeColumns]
 GO
-/****** Object:  Trigger [dbo].[trg_PreventUpdateIncomeAndExpenseVoucherIfItLocked]    Script Date: 16/05/2026 6:42:12 PM ******/
+/****** Object:  Trigger [dbo].[trg_PreventUpdateIncomeAndExpenseVoucherIfItLocked]    Script Date: 16/05/2026 7:19:41 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -7754,7 +7677,7 @@ END
 GO
 ALTER TABLE [dbo].[IncomeAndExpenseVouchers] ENABLE TRIGGER [trg_PreventUpdateIncomeAndExpenseVoucherIfItLocked]
 GO
-/****** Object:  Trigger [dbo].[trg_CheckAllTransactionIsCorrect_AfterInsert_Update]    Script Date: 16/05/2026 6:42:12 PM ******/
+/****** Object:  Trigger [dbo].[trg_CheckAllTransactionIsCorrect_AfterInsert_Update]    Script Date: 16/05/2026 7:19:41 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -7771,7 +7694,7 @@ END
 GO
 ALTER TABLE [dbo].[MainTransactions] ENABLE TRIGGER [trg_CheckAllTransactionIsCorrect_AfterInsert_Update]
 GO
-/****** Object:  Trigger [dbo].[trg_MakeDebtPaidConsistent_AfterUpdate_MainTransaction]    Script Date: 16/05/2026 6:42:12 PM ******/
+/****** Object:  Trigger [dbo].[trg_MakeDebtPaidConsistent_AfterUpdate_MainTransaction]    Script Date: 16/05/2026 7:19:41 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -7806,59 +7729,7 @@ END'
 GO
 ALTER TABLE [dbo].[MainTransactions] ENABLE TRIGGER [trg_MakeDebtPaidConsistent_AfterUpdate_MainTransaction]
 GO
-/****** Object:  Trigger [dbo].[trg_MakeDebtRemainingAmountConsistent_AfterUpdate]    Script Date: 16/05/2026 6:42:12 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-IF NOT EXISTS (SELECT * FROM sys.triggers WHERE object_id = OBJECT_ID(N'[dbo].[trg_MakeDebtRemainingAmountConsistent_AfterUpdate]'))
-EXEC dbo.sp_executesql @statement = N'
-CREATE TRIGGER [dbo].[trg_MakeDebtRemainingAmountConsistent_AfterUpdate] ON [dbo].[MainTransactions]
-AFTER UPDATE
-AS
-BEGIN
-	IF UPDATE(Amount) AND EXISTS(SELECT TOP 1 1 FROM inserted i INNER JOIN deleted d ON i.TransactionID = d.TransactionID AND i.Amount <> d.Amount)
-	BEGIN
-		WITH ChangedDebts AS
-		(
-			SELECT DebtID FROM Debts d INNER JOIN inserted i ON d.DebtTransactionID = i.TransactionID
-
-			UNION 
-
-			SELECT DebtID FROM DebtPayments d INNER JOIN inserted i ON d.MainTransactionID = i.TransactionID
-		),
-		DebtTransactions AS
-		(
-			SELECT d.DebtID,SUM(ABS(mt.Amount)) as DebtValue FROM Debts d INNER JOIN ChangedDebts cd ON d.DebtID = cd.DebtID
-			INNER JOIN MainTransactions mt ON d.DebtTransactionID = mt.TransactionID GROUP BY d.DebtID
-		),
-		DebtPaymentTransactions AS
-		(
-			SELECT d.DebtID,(-1 * ABS((SUM(mt.Amount)))) as DebtPaidValue FROM DebtPayments d INNER JOIN ChangedDebts cd ON d.DebtID = cd.DebtID
-			INNER JOIN MainTransactions mt ON d.MainTransactionID = mt.TransactionID GROUP BY d.DebtID
-		),
-		AllChangedDebtsWithPayment AS
-		(
-			SELECT d.DebtID,d.DebtValue  FROM DebtTransactions d
-
-			UNION ALL
-
-			SELECT d.DebtID,d.DebtPaidValue FROM DebtPaymentTransactions d
-		),
-		ChangedDebtsWithRemaningAmount AS
-		(
-			SELECT acdwp.DebtID,SUM(acdwp.DebtValue) AS RemainingAmount
-			FROM AllChangedDebtsWithPayment acdwp GROUP BY acdwp.DebtID
-		)
-		UPDATE Debts
-		SET RemainingAmount = ISNULL(cdwra.RemainingAmount,0)
-		FROM ChangedDebtsWithRemaningAmount cdwra INNER JOIN Debts d ON d.DebtID = cdwra.DebtID
-	END
-END' 
-GO
-ALTER TABLE [dbo].[MainTransactions] DISABLE TRIGGER [trg_MakeDebtRemainingAmountConsistent_AfterUpdate]
-GO
-/****** Object:  Trigger [dbo].[trg_MakeDebtValueConsistent_AfterUpdate_MainTransaction]    Script Date: 16/05/2026 6:42:12 PM ******/
+/****** Object:  Trigger [dbo].[trg_MakeDebtValueConsistent_AfterUpdate_MainTransaction]    Script Date: 16/05/2026 7:19:41 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -7893,7 +7764,7 @@ END'
 GO
 ALTER TABLE [dbo].[MainTransactions] ENABLE TRIGGER [trg_MakeDebtValueConsistent_AfterUpdate_MainTransaction]
 GO
-/****** Object:  Trigger [dbo].[trg_MakeVoucherValuesConsistent_AfterUpdate]    Script Date: 16/05/2026 6:42:12 PM ******/
+/****** Object:  Trigger [dbo].[trg_MakeVoucherValuesConsistent_AfterUpdate]    Script Date: 16/05/2026 7:19:41 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -7925,7 +7796,7 @@ END'
 GO
 ALTER TABLE [dbo].[MainTransactions] ENABLE TRIGGER [trg_MakeVoucherValuesConsistent_AfterUpdate]
 GO
-/****** Object:  Trigger [dbo].[trg_PreventChangeCreatedDateForAllTransactions]    Script Date: 16/05/2026 6:42:12 PM ******/
+/****** Object:  Trigger [dbo].[trg_PreventChangeCreatedDateForAllTransactions]    Script Date: 16/05/2026 7:19:41 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -7947,7 +7818,7 @@ END
 GO
 ALTER TABLE [dbo].[MainTransactions] ENABLE TRIGGER [trg_PreventChangeCreatedDateForAllTransactions]
 GO
-/****** Object:  Trigger [dbo].[trg_PreventDeleteMainTransactionIfItLocked]    Script Date: 16/05/2026 6:42:13 PM ******/
+/****** Object:  Trigger [dbo].[trg_PreventDeleteMainTransactionIfItLocked]    Script Date: 16/05/2026 7:19:41 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -7966,7 +7837,7 @@ END'
 GO
 ALTER TABLE [dbo].[MainTransactions] ENABLE TRIGGER [trg_PreventDeleteMainTransactionIfItLocked]
 GO
-/****** Object:  Trigger [dbo].[trg_PreventUpdateMainTransactionIfItLocked]    Script Date: 16/05/2026 6:42:13 PM ******/
+/****** Object:  Trigger [dbo].[trg_PreventUpdateMainTransactionIfItLocked]    Script Date: 16/05/2026 7:19:41 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -7986,7 +7857,7 @@ END;
 GO
 ALTER TABLE [dbo].[MainTransactions] ENABLE TRIGGER [trg_PreventUpdateMainTransactionIfItLocked]
 GO
-/****** Object:  Trigger [dbo].[trg_ReCalculateBalanceAfterAnyStatement]    Script Date: 16/05/2026 6:42:13 PM ******/
+/****** Object:  Trigger [dbo].[trg_ReCalculateBalanceAfterAnyStatement]    Script Date: 16/05/2026 7:19:41 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -8025,7 +7896,7 @@ END
 GO
 ALTER TABLE [dbo].[MainTransactions] ENABLE TRIGGER [trg_ReCalculateBalanceAfterAnyStatement]
 GO
-/****** Object:  Trigger [dbo].[trg_InsteadOfDeleteUser]    Script Date: 16/05/2026 6:42:13 PM ******/
+/****** Object:  Trigger [dbo].[trg_InsteadOfDeleteUser]    Script Date: 16/05/2026 7:19:42 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -8059,7 +7930,7 @@ END;
 GO
 ALTER TABLE [dbo].[Users] ENABLE TRIGGER [trg_InsteadOfDeleteUser]
 GO
-/****** Object:  Trigger [dbo].[trg_OnlyOneAdminPerAccount]    Script Date: 16/05/2026 6:42:13 PM ******/
+/****** Object:  Trigger [dbo].[trg_OnlyOneAdminPerAccount]    Script Date: 16/05/2026 7:19:42 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -8083,7 +7954,7 @@ END
 GO
 ALTER TABLE [dbo].[Users] ENABLE TRIGGER [trg_OnlyOneAdminPerAccount]
 GO
-/****** Object:  Trigger [dbo].[trg_PreventAdminPermissionChange]    Script Date: 16/05/2026 6:42:13 PM ******/
+/****** Object:  Trigger [dbo].[trg_PreventAdminPermissionChange]    Script Date: 16/05/2026 7:19:42 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -8107,7 +7978,7 @@ END
 GO
 ALTER TABLE [dbo].[Users] ENABLE TRIGGER [trg_PreventAdminPermissionChange]
 GO
-/****** Object:  Trigger [dbo].[trg_PreventChangePersonID]    Script Date: 16/05/2026 6:42:13 PM ******/
+/****** Object:  Trigger [dbo].[trg_PreventChangePersonID]    Script Date: 16/05/2026 7:19:42 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -8132,7 +8003,7 @@ END
 GO
 ALTER TABLE [dbo].[Users] ENABLE TRIGGER [trg_PreventChangePersonID]
 GO
-/****** Object:  Trigger [dbo].[trg_PreventDeActiveAdmin]    Script Date: 16/05/2026 6:42:13 PM ******/
+/****** Object:  Trigger [dbo].[trg_PreventDeActiveAdmin]    Script Date: 16/05/2026 7:19:42 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -8156,7 +8027,7 @@ END
 GO
 ALTER TABLE [dbo].[Users] ENABLE TRIGGER [trg_PreventDeActiveAdmin]
 GO
-/****** Object:  Trigger [dbo].[trg_PreventDeleteAdminUsingIsDeletedColumn]    Script Date: 16/05/2026 6:42:14 PM ******/
+/****** Object:  Trigger [dbo].[trg_PreventDeleteAdminUsingIsDeletedColumn]    Script Date: 16/05/2026 7:19:42 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -8179,7 +8050,7 @@ END
 GO
 ALTER TABLE [dbo].[Users] ENABLE TRIGGER [trg_PreventDeleteAdminUsingIsDeletedColumn]
 GO
-/****** Object:  Trigger [dbo].[trg_VerifyThatUserAndPersonForSameAccount]    Script Date: 16/05/2026 6:42:14 PM ******/
+/****** Object:  Trigger [dbo].[trg_VerifyThatUserAndPersonForSameAccount]    Script Date: 16/05/2026 7:19:42 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON

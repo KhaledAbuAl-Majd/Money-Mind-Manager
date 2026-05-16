@@ -42,7 +42,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
         enMode Mode { get; set; }
 
         public frmAddUpdateFinTransction(IUserSession userSession, IMessageBoxService messageBoxService, IFormDisplayer formDisplayer,
-            IFinTransactionApiClient finTransactionApiClient,IFinVoucherApiClient finVoucherApiClient,IFinCategoryApiClient finCategoryApiClient)
+            IFinTransactionApiClient finTransactionApiClient, IFinVoucherApiClient finVoucherApiClient, IFinCategoryApiClient finCategoryApiClient)
         {
             this._userSession = userSession;
             this._messageBoxService = messageBoxService;
@@ -142,6 +142,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             lblTransactionID.Text = "N/A";
             kgtxtCategoryName.Text = null;
             kgtxtCategoryName.Tag = null;
+            kgtxtTransactionDate.RefreshNumber_DateTimeFormattedText(DateTime.Today.ToString());
             kgtxtPurpose.Text = null;
             kgtxtAmount.Text = null;
             _isLocked = false;
@@ -196,6 +197,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             lblTransactionID.Text = _Transaction.MainTransactionID.ToString();
             kgtxtCategoryName.Text = _Transaction.CategoryInfo?.CategoryName;
             kgtxtCategoryName.Tag = _Transaction.CategoryID;
+            kgtxtTransactionDate.RefreshNumber_DateTimeFormattedText(_Transaction.TransactionDate.ToString());
             kgtxtPurpose.Text = _Transaction?.Purpose;
             kgtxtAmount.Text = _Transaction.Amount.ToString();
             kgtxtAmount.RefreshNumber_DateTimeFormattedText();
@@ -261,10 +263,9 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                 return;
             }
 
+            _Transaction.TransactionDate = Convert.ToDateTime(kgtxtTransactionDate.ValidatedText);
             _Transaction.Purpose = kgtxtPurpose.ValidatedText;
             _Transaction.Amount = Convert.ToDecimal(kgtxtAmount.ValidatedText);
-
-            _Transaction.TransactionDate = _Voucher.VoucherDate;
 
             if (!_Voucher.IsIncome)
             {

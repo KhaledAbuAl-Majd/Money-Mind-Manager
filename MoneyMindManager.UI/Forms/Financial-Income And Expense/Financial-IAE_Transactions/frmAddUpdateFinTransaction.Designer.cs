@@ -52,6 +52,8 @@
             this.gibtnDeleteTransaction = new Guna.UI2.WinForms.Guna2ImageButton();
             this.gbtnNewTransaction = new Guna.UI2.WinForms.Guna2Button();
             this.lblUserMessage = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.kgtxtTransactionDate = new KhaledControlLibrary1.KhaledGuna2TextBox();
             this.guna2Panel2.SuspendLayout();
             this.guna2Panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ctrlInfoIcon_Status_IsLocked.PictureBoxControl)).BeginInit();
@@ -64,6 +66,8 @@
             this.guna2Panel2.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.guna2Panel2.BorderRadius = 20;
             this.guna2Panel2.BorderThickness = 2;
+            this.guna2Panel2.Controls.Add(this.label6);
+            this.guna2Panel2.Controls.Add(this.kgtxtTransactionDate);
             this.guna2Panel2.Controls.Add(this.label5);
             this.guna2Panel2.Controls.Add(this.label2);
             this.guna2Panel2.Controls.Add(this.label4);
@@ -82,16 +86,15 @@
             this.guna2Panel2.ShadowDecoration.Color = System.Drawing.Color.DarkGray;
             this.guna2Panel2.ShadowDecoration.Depth = 20;
             this.guna2Panel2.ShadowDecoration.Enabled = true;
-            this.guna2Panel2.Size = new System.Drawing.Size(359, 419);
+            this.guna2Panel2.Size = new System.Drawing.Size(359, 469);
             this.guna2Panel2.TabIndex = 1;
-       
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(283, 238);
+            this.label5.Location = new System.Drawing.Point(283, 290);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(39, 17);
             this.label5.TabIndex = 111;
@@ -102,7 +105,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(287, 118);
+            this.label2.Location = new System.Drawing.Point(287, 170);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 17);
             this.label2.TabIndex = 110;
@@ -163,7 +166,7 @@
             this.gbtnClose.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnClose.ImageSize = new System.Drawing.Size(25, 25);
             this.gbtnClose.IndicateFocus = true;
-            this.gbtnClose.Location = new System.Drawing.Point(37, 358);
+            this.gbtnClose.Location = new System.Drawing.Point(37, 410);
             this.gbtnClose.Name = "gbtnClose";
             this.gbtnClose.PressedColor = System.Drawing.Color.White;
             this.gbtnClose.Size = new System.Drawing.Size(283, 41);
@@ -194,7 +197,7 @@
             this.gbtnSave.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnSave.ImageSize = new System.Drawing.Size(25, 25);
             this.gbtnSave.IndicateFocus = true;
-            this.gbtnSave.Location = new System.Drawing.Point(37, 304);
+            this.gbtnSave.Location = new System.Drawing.Point(37, 356);
             this.gbtnSave.Name = "gbtnSave";
             this.gbtnSave.PressedColor = System.Drawing.Color.White;
             this.gbtnSave.Size = new System.Drawing.Size(283, 41);
@@ -281,7 +284,7 @@
             this.kgtxtPurpose.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtPurpose.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Normal;
             this.kgtxtPurpose.IsRequired = false;
-            this.kgtxtPurpose.Location = new System.Drawing.Point(37, 130);
+            this.kgtxtPurpose.Location = new System.Drawing.Point(37, 182);
             this.kgtxtPurpose.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtPurpose.MaxLength = 150;
             this.kgtxtPurpose.Multiline = true;
@@ -362,7 +365,7 @@
             this.kgtxtAmount.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.kgtxtAmount.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Number;
             this.kgtxtAmount.IsRequired = true;
-            this.kgtxtAmount.Location = new System.Drawing.Point(37, 250);
+            this.kgtxtAmount.Location = new System.Drawing.Point(37, 302);
             this.kgtxtAmount.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kgtxtAmount.MaxLength = 25;
             this.kgtxtAmount.Name = "kgtxtAmount";
@@ -527,13 +530,12 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(596, 528);
+            this.label1.Location = new System.Drawing.Point(596, 578);
             this.label1.Name = "label1";
             this.label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label1.Size = new System.Drawing.Size(194, 24);
             this.label1.TabIndex = 104;
             this.label1.Text = "معاملة جديدة بعد الإضافة تلقائيا";
-        
             // 
             // gtswNewTransactionAfterAdd
             // 
@@ -545,7 +547,7 @@
             this.gtswNewTransactionAfterAdd.CheckedState.InnerBorderColor = System.Drawing.Color.White;
             this.gtswNewTransactionAfterAdd.CheckedState.InnerColor = System.Drawing.Color.White;
             this.gtswNewTransactionAfterAdd.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.gtswNewTransactionAfterAdd.Location = new System.Drawing.Point(556, 531);
+            this.gtswNewTransactionAfterAdd.Location = new System.Drawing.Point(556, 581);
             this.gtswNewTransactionAfterAdd.Name = "gtswNewTransactionAfterAdd";
             this.gtswNewTransactionAfterAdd.Size = new System.Drawing.Size(35, 20);
             this.gtswNewTransactionAfterAdd.TabIndex = 5;
@@ -555,7 +557,6 @@
             this.gtswNewTransactionAfterAdd.UncheckedState.FillColor = System.Drawing.Color.White;
             this.gtswNewTransactionAfterAdd.UncheckedState.InnerBorderColor = System.Drawing.Color.WhiteSmoke;
             this.gtswNewTransactionAfterAdd.UncheckedState.InnerColor = System.Drawing.Color.Gray;
-           
             // 
             // toolTip1
             // 
@@ -571,7 +572,7 @@
             this.gibtnDeleteTransaction.ImageOffset = new System.Drawing.Point(0, 0);
             this.gibtnDeleteTransaction.ImageRotate = 0F;
             this.gibtnDeleteTransaction.ImageSize = new System.Drawing.Size(28, 28);
-            this.gibtnDeleteTransaction.Location = new System.Drawing.Point(497, 520);
+            this.gibtnDeleteTransaction.Location = new System.Drawing.Point(497, 570);
             this.gibtnDeleteTransaction.Name = "gibtnDeleteTransaction";
             this.gibtnDeleteTransaction.PressedState.ImageSize = new System.Drawing.Size(64, 64);
             this.gibtnDeleteTransaction.Size = new System.Drawing.Size(40, 42);
@@ -602,7 +603,7 @@
             this.gbtnNewTransaction.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.gbtnNewTransaction.ImageSize = new System.Drawing.Size(25, 25);
             this.gbtnNewTransaction.IndicateFocus = true;
-            this.gbtnNewTransaction.Location = new System.Drawing.Point(464, 572);
+            this.gbtnNewTransaction.Location = new System.Drawing.Point(464, 622);
             this.gbtnNewTransaction.Name = "gbtnNewTransaction";
             this.gbtnNewTransaction.Size = new System.Drawing.Size(283, 41);
             this.gbtnNewTransaction.TabIndex = 7;
@@ -621,9 +622,101 @@
             this.lblUserMessage.TabIndex = 106;
             this.lblUserMessage.Text = "\"تم العثور على حقول غير صالحة. ضع المؤشر على العلامات الحمراء لعرض سبب الخطأ.\"";
             this.lblUserMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-
             // 
-            // frmAddUpdateIncomeAndExpeseTransction
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(240, 120);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(82, 17);
+            this.label6.TabIndex = 113;
+            this.label6.Text = "تاريخ المعاملة";
+            // 
+            // kgtxtTransactionDate
+            // 
+            this.kgtxtTransactionDate.AllowWhiteSpace = false;
+            this.kgtxtTransactionDate.ApplyTrimAtTextBoxValue = false;
+            this.kgtxtTransactionDate.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.kgtxtTransactionDate.BackColor = System.Drawing.Color.Transparent;
+            this.kgtxtTransactionDate.BorderColor = System.Drawing.Color.DimGray;
+            this.kgtxtTransactionDate.BorderRadius = 10;
+            this.kgtxtTransactionDate.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.kgtxtTransactionDate.DefaultText = "";
+            this.kgtxtTransactionDate.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.kgtxtTransactionDate.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.kgtxtTransactionDate.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.kgtxtTransactionDate.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.kgtxtTransactionDate.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.kgtxtTransactionDate.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kgtxtTransactionDate.ForeColor = System.Drawing.Color.Black;
+            this.kgtxtTransactionDate.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.kgtxtTransactionDate.IconLeftCursor = System.Windows.Forms.Cursors.Hand;
+            this.kgtxtTransactionDate.IconRightCursor = System.Windows.Forms.Cursors.Hand;
+            this.kgtxtTransactionDate.InputType = KhaledControlLibrary1.KhaledGuna2TextBox.enInputType.Text;
+            this.kgtxtTransactionDate.IsRequired = true;
+            this.kgtxtTransactionDate.Location = new System.Drawing.Point(39, 131);
+            this.kgtxtTransactionDate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.kgtxtTransactionDate.MaxLength = 255;
+            this.kgtxtTransactionDate.Name = "kgtxtTransactionDate";
+            this.kgtxtTransactionDate.NumberProperties.DecimalNumberProperties.AllowNegative = true;
+            this.kgtxtTransactionDate.NumberProperties.DecimalNumberProperties.MaxValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.kgtxtTransactionDate.NumberProperties.DecimalNumberProperties.MaxValueIncluded = true;
+            this.kgtxtTransactionDate.NumberProperties.DecimalNumberProperties.MaxValueOption = false;
+            this.kgtxtTransactionDate.NumberProperties.DecimalNumberProperties.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.kgtxtTransactionDate.NumberProperties.DecimalNumberProperties.MinValueIncluded = true;
+            this.kgtxtTransactionDate.NumberProperties.DecimalNumberProperties.MinValueOption = false;
+            this.kgtxtTransactionDate.NumberProperties.FloatNumberProperties.AllowNegative = true;
+            this.kgtxtTransactionDate.NumberProperties.FloatNumberProperties.MaxValue = 0F;
+            this.kgtxtTransactionDate.NumberProperties.FloatNumberProperties.MaxValueIncluded = true;
+            this.kgtxtTransactionDate.NumberProperties.FloatNumberProperties.MaxValueOption = false;
+            this.kgtxtTransactionDate.NumberProperties.FloatNumberProperties.MinValue = 0F;
+            this.kgtxtTransactionDate.NumberProperties.FloatNumberProperties.MinValueIncluded = true;
+            this.kgtxtTransactionDate.NumberProperties.FloatNumberProperties.MinValueOption = false;
+            this.kgtxtTransactionDate.NumberProperties.IntegerNumberProperties.AllowNegative = true;
+            this.kgtxtTransactionDate.NumberProperties.IntegerNumberProperties.MaxValue = 0;
+            this.kgtxtTransactionDate.NumberProperties.IntegerNumberProperties.MaxValueIncluded = true;
+            this.kgtxtTransactionDate.NumberProperties.IntegerNumberProperties.MaxValueOption = false;
+            this.kgtxtTransactionDate.NumberProperties.IntegerNumberProperties.MinValue = 0;
+            this.kgtxtTransactionDate.NumberProperties.IntegerNumberProperties.MinValueIncluded = true;
+            this.kgtxtTransactionDate.NumberProperties.IntegerNumberProperties.MinValueOption = false;
+            this.kgtxtTransactionDate.NumberProperties.NumberFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberFormat.None;
+            this.kgtxtTransactionDate.NumberProperties.NumberInputTypes = KhaledControlLibrary1.KhaledGuna2TextBox.clsNumberProperties.enNumberInputTypes.IntegerNumber;
+            this.kgtxtTransactionDate.PlaceholderForeColor = System.Drawing.Color.Gray;
+            this.kgtxtTransactionDate.PlaceholderText = " تاريخ المعاملة (مطلوب)";
+            this.kgtxtTransactionDate.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
+            this.kgtxtTransactionDate.SelectedText = "";
+            this.kgtxtTransactionDate.ShadowDecoration.BorderRadius = 2;
+            this.kgtxtTransactionDate.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.kgtxtTransactionDate.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(2);
+            this.kgtxtTransactionDate.Size = new System.Drawing.Size(283, 41);
+            this.kgtxtTransactionDate.TabIndex = 112;
+            this.kgtxtTransactionDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.kgtxtTransactionDate.TextProperties.DateTimeProperties.DayFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enDayFormate.dd__01;
+            this.kgtxtTransactionDate.TextProperties.DateTimeProperties.MonthFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enMonthFormate.MM__01;
+            this.kgtxtTransactionDate.TextProperties.DateTimeProperties.SeparatorFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enSeparator.Dash;
+            this.kgtxtTransactionDate.TextProperties.DateTimeProperties.TimeFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enTimeFormate.None;
+            this.kgtxtTransactionDate.TextProperties.DateTimeProperties.YearFormate = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.clsDateTimeProperties.enYearFormate.yyyy__2025;
+            this.kgtxtTransactionDate.TextProperties.MinLength = ((short)(0));
+            this.kgtxtTransactionDate.TextProperties.MinLengthOption = false;
+            this.kgtxtTransactionDate.TextProperties.PhoneProperties.AllowPlusSign = true;
+            this.kgtxtTransactionDate.TextProperties.PhoneProperties.MaxPhoneLength = ((byte)(15));
+            this.kgtxtTransactionDate.TextProperties.TextFormat = KhaledControlLibrary1.KhaledGuna2TextBox.clsText.enTextFormat.Date;
+            this.kgtxtTransactionDate.TrimEnd = true;
+            this.kgtxtTransactionDate.TrimStart = true;
+            this.kgtxtTransactionDate.OnValidationError += new System.EventHandler<KhaledControlLibrary1.KhaledGuna2TextBox.ValidatingErrorEventArgs>(this.kgtxt_OnValidationError);
+            this.kgtxtTransactionDate.OnValidationSuccess += new System.EventHandler<System.ComponentModel.CancelEventArgs>(this.kgtxt_OnValidationSuccess);
+            // 
+            // frmAddUpdateFinTransction
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -639,7 +732,7 @@
             this.Controls.Add(this.lblHeader);
             this.Controls.Add(this.guna2Panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "frmAddUpdateIncomeAndExpeseTransction";
+            this.Name = "frmAddUpdateFinTransction";
             this.Text = "frmAddUpdateIncomeAndExpeseTransction";
             this.Load += new System.EventHandler(this.frmAddUpdateIncomeAndExpenseTransaction_Load);
             this.guna2Panel2.ResumeLayout(false);
@@ -677,5 +770,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label6;
+        private KhaledControlLibrary1.KhaledGuna2TextBox kgtxtTransactionDate;
     }
 }

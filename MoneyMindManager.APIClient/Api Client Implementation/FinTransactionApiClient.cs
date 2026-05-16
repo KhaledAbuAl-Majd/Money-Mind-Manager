@@ -36,7 +36,7 @@ namespace MoneyMindManager.APIClient.Api_Client_Implementation
         }
         public async Task<IResult<PagedResultWithValueDTO<FinTransactionViewSummary>>> GetAllPagedForVoucher(int voucherID, int currentUserID, int pageNumber)
         {
-            return await _finTransactionService.GetAllPagedForVoucher(voucherID, currentUserID, currentUserID);
+            return await _finTransactionService.GetAllPagedForVoucher(voucherID, currentUserID, pageNumber);
         }
         public async Task<IResult<IEnumerable<FinTransactionExportSummary>>> GetAllForVoucher(int voucherID, int currentUserID)
         {
