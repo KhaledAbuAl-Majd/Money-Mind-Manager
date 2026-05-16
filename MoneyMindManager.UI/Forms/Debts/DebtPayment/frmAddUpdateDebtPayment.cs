@@ -73,7 +73,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
         bool _CheckPermissions()
         {
-            if (_userSession.IsHasPermissions(enPermissions.AddUpdateDebt_Payments))
+            if (_userSession.IsHasPermissions(enPermissions.AddUpdateDebt_DebtTransactions))
                 return true;
 
             _messageBoxService.DisplayError("ليس لديك صلاحية إضافة/تعديل (سندات - معاملات سداد) الديون.");
