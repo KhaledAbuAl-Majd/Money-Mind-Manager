@@ -41,6 +41,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                         command.Parameters.AddWithValue("@VoucherID", finTransaction.VoucherID);
                         command.Parameters.AddWithValue("@categoryID", finTransaction.CategoryID);
                         command.Parameters.AddWithValue("@Amount", finTransaction.Amount);
+                        command.Parameters.AddWithValue("@TransactionDate", finTransaction.TransactionDate);
                         command.Parameters.AddWithValue("@Purpose", string.IsNullOrWhiteSpace(finTransaction.Purpose) ? DBNull.Value : (object)finTransaction.Purpose);
                         command.Parameters.AddWithValue("@CreatedByUserID", finTransaction.CreatedByUserID);
 
@@ -87,6 +88,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                         command.Parameters.AddWithValue("@TransactionID", finTransaction.MainTransactionID);
                         command.Parameters.AddWithValue("@Amount", finTransaction.Amount);
                         command.Parameters.AddWithValue("@categoryID", finTransaction.CategoryID);
+                        command.Parameters.AddWithValue("@TransactionDate", finTransaction.TransactionDate);
                         command.Parameters.AddWithValue("@Purpose", string.IsNullOrWhiteSpace(finTransaction.Purpose) ? DBNull.Value : (object)finTransaction.Purpose);
                         command.Parameters.AddWithValue("@CurrentUserID", currentUserID);
 
