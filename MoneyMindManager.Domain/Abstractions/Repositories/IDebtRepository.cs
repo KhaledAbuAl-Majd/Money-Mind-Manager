@@ -10,7 +10,7 @@ namespace MoneyMindManager.Domain.Abstractions.Repositories
 {
     public interface IDebtRepository
     {
-        Task<IResult<(int? NewDebtID, int? NewDebtTransactionID)>> Add(Debt debt);
+        Task<IResult<int?>> Add(Debt debt);
         Task<IResult<(bool UpdateResult, decimal RemainingAmount)>> Update(Debt debt, int currentUserID);
         Task<IResult<bool>> ChangeLockingByID(int debtID, bool isLocked, int currentUserID);
         Task<IResult<bool>> Delete(int debtID, int currentUserID);

@@ -9,37 +9,37 @@ using MoneyMindManager.Shared.DTOs.DebtPayment;
 
 namespace MoneyMindManager.APIClient.Api_Client_Implementation
 {
-    public class DebtPaymentApiClient : IDebtPaymentApiClient
+    public class DebtEntryApiClient : IDebtEntryApiClient
     {
-        private readonly IDebtPyamentService _debtPyamentService;
-        public DebtPaymentApiClient(IDebtPyamentService debtPyamentService)
+        private readonly IDebtEntryService _debtEntryService;
+        public DebtEntryApiClient(IDebtEntryService debtEntryService)
         {
-            this._debtPyamentService = debtPyamentService;
+            this._debtEntryService = debtEntryService;
         }
 
         public async Task<IResult<DebtTransactionDTO>> Add(DebtTransactionDTO debtPayment, int currentUserID)
         {
-            return await _debtPyamentService.Add(debtPayment, currentUserID);
+            return await _debtEntryService.Add(debtPayment, currentUserID);
         }
         public async Task<IResult<bool>> Update(DebtTransactionDTO debtPayment, int currentUserID)
         {
-            return await _debtPyamentService.Update(debtPayment, currentUserID);
+            return await _debtEntryService.Update(debtPayment, currentUserID);
         }
         public async Task<IResult<bool>> Delete(int transactionID, int currentUserID)
         {
-            return await _debtPyamentService.Delete(transactionID, currentUserID);
+            return await _debtEntryService.Delete(transactionID, currentUserID);
         }
         public async Task<IResult<DebtTransactionDTO>> Get(int transactionID, int currentUserID)
         {
-            return await _debtPyamentService.Get(transactionID, currentUserID);
+            return await _debtEntryService.Get(transactionID, currentUserID);
         }
         public async Task<IResult<PagedResultWithValueDTO<DebtTransactionsViewSummary>>> GetAllPagedForDebt(int debtID, int currentUserID, int pageNumber)
         {
-            return await _debtPyamentService.GetAllPagedForDebt(debtID, currentUserID, pageNumber);
+            return await _debtEntryService.GetAllPagedForDebt(debtID, currentUserID, pageNumber);
         }
         public async Task<IResult<IEnumerable<DebtTransactionsExportSummary>>> GetAllForDebt(int debtID, int currentUserID)
         {
-            return await _debtPyamentService.GetAllForDebt(debtID, currentUserID);
+            return await _debtEntryService.GetAllForDebt(debtID, currentUserID);
         }
     }
 }

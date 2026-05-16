@@ -10,23 +10,23 @@ using MoneyMindManager.Core.Models.DebtPayment;
 using MoneyMindManager.Core.Paged_Result_DTOs;
 using MoneyMindManager.Domain.Abstractions;
 using MoneyMindManager.Domain.Abstractions.Repositories;
-using MoneyMindManager.Domain.Entities.DebtPayment;
+using MoneyMindManager.Domain.Entities.DebtEntry;
 
 namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
 {
-    internal class SQLDebtPaymentRepository : IDebtPaymentRepository
+    public class SQLDebtEntryRepository : IDebtEntryRepository
     {
         private readonly IDatabaseSettings _databaseSettings;
         private readonly IResultFactory _resultFactory;
         private readonly ILogger _logger;
 
-        public SQLDebtPaymentRepository(IDatabaseSettings databaseSettings, IResultFactory resultFactory, ILogger logger)
+        public SQLDebtEntryRepository(IDatabaseSettings databaseSettings, IResultFactory resultFactory, ILogger logger)
         {
             this._databaseSettings = databaseSettings;
             this._resultFactory = resultFactory;
             this._logger = logger;
         }
-        public async Task<IResult<int?>> Add(DebtPayment debtPayment)
+        public async Task<IResult<int?>> Add(DebtEntry debtEntry)
         {
             int? newTransactionID = null;
             var handler = _resultFactory.Create<int?>();
@@ -35,15 +35,15 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
             {
                 using (SqlConnection connection = new SqlConnection(_databaseSettings.ConnectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_DebtPayment_AddNew]", connection))
+                    using (SqlCommand command = new SqlCommand("[dbo].[SP_DebtEntries_AddNew]", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
-                        command.Parameters.AddWithValue("@DebtID", debtPayment.DebtID);
-                        command.Parameters.AddWithValue("@Amount", debtPayment.Amount);
-                        command.Parameters.AddWithValue("@PaymentDate", debtPayment.TransactionDate);
-                        command.Parameters.AddWithValue("@Purpose", string.IsNullOrWhiteSpace(debtPayment.Purpose) ? DBNull.Value : (object)debtPayment.Purpose);
-                        command.Parameters.AddWithValue("@CreatedByUserID", debtPayment.CreatedByUserID);
+                        command.Parameters.AddWithValue("@DebtID", debtEntry.DebtID);
+                        command.Parameters.AddWithValue("@Amount", debtEntry.Amount);
+                        command.Parameters.AddWithValue("@DebtDate", debtEntry.TransactionDate);
+                        command.Parameters.AddWithValue("@Purpose", string.IsNullOrWhiteSpace(debtEntry.Purpose) ? DBNull.Value : (object)debtEntry.Purpose);
+                        command.Parameters.AddWithValue("@CreatedByUserID", debtEntry.CreatedByUserID);
 
                         SqlParameter outParmNewCategory = new SqlParameter("@NewTransactionID", System.Data.SqlDbType.Int)
                         {
@@ -72,7 +72,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
 
             return handler.Success(newTransactionID);
         }
-        public async Task<IResult<bool>> Update(DebtPayment debtPayment, int currentUserID)
+        public async Task<IResult<bool>> Update(DebtEntry debtEntry, int currentUserID)
         {
             bool result = false;
             var handler = _resultFactory.Create<bool>();
@@ -81,14 +81,14 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
             {
                 using (SqlConnection connection = new SqlConnection(_databaseSettings.ConnectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_DebtPayment_UpdateByID]", connection))
+                    using (SqlCommand command = new SqlCommand("[dbo].[SP_DebtEntries_UpdateByID]", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
-                        command.Parameters.AddWithValue("@TransactionID", debtPayment.MainTransactionID);
-                        command.Parameters.AddWithValue("@Amount", debtPayment.Amount);
-                        command.Parameters.AddWithValue("@Purpose", string.IsNullOrWhiteSpace(debtPayment.Purpose) ? DBNull.Value : (object)debtPayment.Purpose);
-                        command.Parameters.AddWithValue("@PaymentDate", debtPayment.TransactionDate);
+                        command.Parameters.AddWithValue("@TransactionID", debtEntry.MainTransactionID);
+                        command.Parameters.AddWithValue("@Amount", debtEntry.Amount);
+                        command.Parameters.AddWithValue("@Purpose", string.IsNullOrWhiteSpace(debtEntry.Purpose) ? DBNull.Value : (object)debtEntry.Purpose);
+                        command.Parameters.AddWithValue("@DebtDate", debtEntry.TransactionDate);
                         command.Parameters.AddWithValue("@CurrentUserID", currentUserID);
 
 
@@ -125,7 +125,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
             {
                 using (SqlConnection connection = new SqlConnection(_databaseSettings.ConnectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_DebtPayment_DeleteByID]", connection))
+                    using (SqlCommand command = new SqlCommand("[dbo].[SP_DebtEntries_DeleteByID]", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
@@ -157,16 +157,16 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
 
             return handler.Success(result);
         }
-        public async Task<IResult<DebtPaymentShort>> Get(int transactionID, int currentUserID)
+        public async Task<IResult<DebtEntryShort>> Get(int transactionID, int currentUserID)
         {
-            DebtPaymentShort debtPayment = null;
-            var handler = _resultFactory.Create<DebtPaymentShort>();
+            DebtEntryShort debtEntry = null;
+            var handler = _resultFactory.Create<DebtEntryShort>();
 
             try
             {
                 using (SqlConnection connection = new SqlConnection(_databaseSettings.ConnectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("[dbo].[SP_DebtPayment_GetByID]", connection))
+                    using (SqlCommand command = new SqlCommand("[dbo].[SP_DebtEntry_GetByID]", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.AddWithValue("@TransactionID", transactionID);
@@ -179,24 +179,24 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
                             if (await reader.ReadAsync())
                             {
                                 int debtID = Convert.ToInt32(reader["DebtID"]);
-                                debtPayment = new DebtPaymentShort(debtID);
+                                debtEntry = new DebtEntryShort(debtID);
                             }
                         }
                     }
                 }
 
-                if (debtPayment == null)
+                if (debtEntry == null)
                     throw new Exception("فشلت العملية");
             }
             catch (Exception ex)
             {
-                debtPayment = null;
+                debtEntry = null;
 
                 _logger.LogError(ex.Message);
                 return handler.Failure(ex.Message);
             }
 
-            return handler.Success(debtPayment);
+            return handler.Success(debtEntry);
         }
         public async Task<IResult<PagedResultWithValueDTO<DebtTransactionsViewSummary>>> GetAllPagedForDebt(int debtID, int currentUserID, int pageNumber, byte rowsPerPage)
         {
@@ -207,7 +207,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
             {
                 using (SqlConnection connection = new SqlConnection(_databaseSettings.ConnectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("SP_DebtPayment_GetAllForDebt", connection))
+                    using (SqlCommand command = new SqlCommand("[dbo].[SP_DebtEntries_GetAllForDebt]", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
 
@@ -293,7 +293,7 @@ namespace MoneyMindManager.Infrastructure.Repositories.Database.SQLServer
             {
                 using (SqlConnection connection = new SqlConnection(_databaseSettings.ConnectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("SP_DebtPayment_GetAllForDebtWihtoutPaging", connection))
+                    using (SqlCommand command = new SqlCommand("[dbo].[SP_DebtEntries_GetAllForDebtWihtoutPaging]", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
 

@@ -7,10 +7,10 @@ using MoneyMindManager.Shared.DTOs.DebtPayment;
 
 namespace MoneyMindManager.Application.Abstractions.Services
 {
-    public interface IDebtPyamentService
+    public interface IDebtEntryService
     {
-        Task<IResult<DebtTransactionDTO>> Add(DebtTransactionDTO debtPayment, int currentUserID);
-        Task<IResult<bool>> Update(DebtTransactionDTO debtPayment, int currentUserID);
+        Task<IResult<DebtTransactionDTO>> Add(DebtTransactionDTO debtEntry, int currentUserID);
+        Task<IResult<bool>> Update(DebtTransactionDTO debtEntry, int currentUserID);
         Task<IResult<bool>> Delete(int transactionID, int currentUserID);
         Task<IResult<DebtTransactionDTO>> Get(int transactionID, int currentUserID);
         Task<IResult<PagedResultWithValueDTO<DebtTransactionsViewSummary>>> GetAllPagedForDebt(int debtID, int currentUserID, int pageNumber);

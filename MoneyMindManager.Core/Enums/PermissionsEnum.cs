@@ -46,7 +46,7 @@ namespace MoneyMindManager.Core.Enums
         ChangeDebtsLocking = 2048,//done
 
         [Description("إضافة/تعديل (سندات - معاملات سداد) الديون")]
-        AddUpdateDebt_Payments = 4096,//done
+        AddUpdateDebt_DebtTransactions = 4096,//done
 
         [Description("حذف (سندات - معاملات سداد) الديون")]
         DeleteDebt_Payments = 8192,//done

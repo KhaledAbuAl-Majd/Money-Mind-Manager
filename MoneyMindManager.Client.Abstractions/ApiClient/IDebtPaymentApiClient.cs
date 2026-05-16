@@ -9,11 +9,11 @@ namespace MoneyMindManager.Client.Abstractions.ApiClient
 {
     public interface IDebtPaymentApiClient
     {
-        Task<IResult<DebtPaymentDTO>> Add(DebtPaymentDTO debtPayment, int currentUserID);
-        Task<IResult<bool>> Update(DebtPaymentDTO debtPayment, int currentUserID);
+        Task<IResult<DebtTransactionDTO>> Add(DebtTransactionDTO debtPayment, int currentUserID);
+        Task<IResult<bool>> Update(DebtTransactionDTO debtPayment, int currentUserID);
         Task<IResult<bool>> Delete(int transactionID, int currentUserID);
-        Task<IResult<DebtPaymentDTO>> Get(int transactionID, int currentUserID);
-        Task<IResult<PagedResultWithValueDTO<DebtPaymentViewSummary>>> GetAllPagedForDebt(int debtID, int currentUserID, int pageNumber);
-        Task<IResult<IEnumerable<DebtPaymentExportSummary>>> GetAllForDebt(int debtID, int currentUserID);
+        Task<IResult<DebtTransactionDTO>> Get(int transactionID, int currentUserID);
+        Task<IResult<PagedResultWithValueDTO<DebtTransactionsViewSummary>>> GetAllPagedForDebt(int debtID, int currentUserID, int pageNumber);
+        Task<IResult<IEnumerable<DebtTransactionsExportSummary>>> GetAllForDebt(int debtID, int currentUserID);
     }
 }

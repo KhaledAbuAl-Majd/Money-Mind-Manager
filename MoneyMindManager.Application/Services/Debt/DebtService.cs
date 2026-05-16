@@ -43,7 +43,7 @@ namespace MoneyMindManager.Application.Services.Debt
             if (debtDTO is null)
                 return handler.Failure("البيانات المرسلة غير صالحة");
 
-            var accessResult = await _authorizationService.CheckAccess(currentUserID, enPermissions.AddUpdateDebt_Payments);
+            var accessResult = await _authorizationService.CheckAccess(currentUserID, enPermissions.AddUpdateDebt_DebtTransactions);
 
             if (accessResult is null)
                 return handler.Failure("failed to check permissions!");
@@ -63,12 +63,12 @@ namespace MoneyMindManager.Application.Services.Debt
             if (!result.IsSuccess)
                 return handler.Failure(result.ErrorMessage);
 
-            if (result.Data.NewDebtID is null)
+            if (result.Data is null)
                 return handler.Failure("failed to add debt!");
 
-            var DTOResult = await Get(Convert.ToInt32(result.Data.NewDebtID), Convert.ToInt32(currentUserID));
+            var DTOResult = await Get(Convert.ToInt32(result.Data), Convert.ToInt32(currentUserID));
 
-            (debtDTO.DebtID, debtDTO.MainTransactionID) = result.Data;
+            debtDTO.DebtID = result.Data;
             if (!DTOResult.IsSuccess)
                 return handler.Success(debtDTO);
 
@@ -83,7 +83,7 @@ namespace MoneyMindManager.Application.Services.Debt
             if (debtDTO is null)
                 return handler.Failure("البيانات المرسلة غير صالحة");
 
-            var accessResult = await _authorizationService.CheckAccess(currentUserID, enPermissions.AddUpdateDebt_Payments);
+            var accessResult = await _authorizationService.CheckAccess(currentUserID, enPermissions.AddUpdateDebt_DebtTransactions);
 
             if (accessResult is null)
                 return handler.Failure("failed to check permissions!");
@@ -173,22 +173,15 @@ namespace MoneyMindManager.Application.Services.Debt
             if (result.Data is null)
                 return handler.Failure("failed to get debt!");
 
-            var mainTransactionResult = await _mainTransactionService.Get(Convert.ToInt32(result.Data.MainTransactionID), currentUserID);
-
             if (!result.IsSuccess)
                 return handler.Failure(result.ErrorMessage);
-
-            var mainTransaction = _mainTransactionMapper.DTOToEntity(mainTransactionResult.Data);
-
-            var debt = new Domain.Entities.Debt(mainTransaction, result.Data.DebtID, result.Data.IsLending,
-                result.Data.PersonID, result.Data.PaymentDueDate, result.Data.RemainingAmount);
 
             var personDTOResult = await _personService.Get(Convert.ToInt32(result.Data?.PersonID), currentUserID);
 
             if (!personDTOResult.IsSuccess)
                 return handler.Failure(personDTOResult.ErrorMessage);
 
-            var dto = _debtMapper.EntityToDTO(debt);
+            var dto = _debtMapper.EntityToDTO(result.Data);
             dto.PersonInfo = personDTOResult.Data;
 
             return handler.Success(dto);

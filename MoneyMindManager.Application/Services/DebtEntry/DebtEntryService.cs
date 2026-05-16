@@ -10,36 +10,33 @@ using MoneyMindManager.Core.Enums;
 using MoneyMindManager.Core.Models.DebtPayment;
 using MoneyMindManager.Core.Paged_Result_DTOs;
 using MoneyMindManager.Domain.Abstractions.Repositories;
-using MoneyMindManager.Domain.Entities.DebtPayment;
 using MoneyMindManager.Shared.DTOs.DebtPayment;
 
-namespace MoneyMindManager.Application.Services.DeptPayment
+namespace MoneyMindManager.Application.Services.DebtEntry
 {
-    public class DebtPaymentService : IDebtPyamentService
+    public class DebtEntryService : IDebtEntryService
     {
         private readonly IResultFactory _resultFactory;
-        private readonly IDebtPaymentRepository _debtPaymentRepository;
+        private readonly IDebtEntryRepository _debtEntryRepository;
         private readonly IAuthorizationService _authorizationService;
-        private readonly IDebtPaymentMapper _debtPaymentMapper;
-        private readonly IFinCategoryService _finCategoryService;
+        private readonly IDebtEntryMapper _debtEntryMapper;
         private readonly IMainTransactionService _mainTransactionService;
         private readonly IMainTransactionMapper _mainTransactionMapper;
-        public DebtPaymentService(IResultFactory resultFactory, IDebtPaymentRepository DebtPaymentRepository, IAuthorizationService authorizationService,
-            IDebtPaymentMapper DebtPaymentMapper, IFinCategoryService finCategoryService, IMainTransactionService mainTransactionService, IMainTransactionMapper mainTransactionMapper)
+        public DebtEntryService(IResultFactory resultFactory, IDebtEntryRepository DebtEntryRepository, IAuthorizationService authorizationService,
+            IDebtEntryMapper DebtEntryMapper, IMainTransactionService mainTransactionService, IMainTransactionMapper mainTransactionMapper)
         {
             this._resultFactory = resultFactory;
-            this._debtPaymentRepository = DebtPaymentRepository;
+            this._debtEntryRepository = DebtEntryRepository;
             this._authorizationService = authorizationService;
-            this._debtPaymentMapper = DebtPaymentMapper;
-            this._finCategoryService = finCategoryService;
+            this._debtEntryMapper = DebtEntryMapper;
             this._mainTransactionService = mainTransactionService;
             this._mainTransactionMapper = mainTransactionMapper;
         }
-        public async Task<IResult<DebtTransactionDTO>> Add(DebtTransactionDTO debtPayment, int currentUserID)
+        public async Task<IResult<DebtTransactionDTO>> Add(DebtTransactionDTO debtEntry, int currentUserID)
         {
             var handler = _resultFactory.Create<DebtTransactionDTO>();
 
-            if (debtPayment is null)
+            if (debtEntry is null)
                 return handler.Failure("البيانات المرسلة غير صالحة");
 
             var accessResult = await _authorizationService.CheckAccess(currentUserID, enPermissions.AddUpdateDebt_DebtTransactions);
@@ -53,11 +50,11 @@ namespace MoneyMindManager.Application.Services.DeptPayment
             if (!accessResult.Data)
                 return handler.Failure("ليس لديك صلاحية إضافة/تعديل (سندات - معاملات سداد) الديون.");
 
-            debtPayment.CreatedByUserID = currentUserID;
-            var result = await _debtPaymentRepository.Add(_debtPaymentMapper.DTOToEntity(debtPayment));
+            debtEntry.CreatedByUserID = currentUserID;
+            var result = await _debtEntryRepository.Add(_debtEntryMapper.DTOToEntity(debtEntry));
 
             if (result is null)
-                return handler.Failure("failed to add debt payment!");
+                return handler.Failure("failed to add debt entry!");
 
             if (!result.IsSuccess)
                 return handler.Failure(result.ErrorMessage);
@@ -67,15 +64,15 @@ namespace MoneyMindManager.Application.Services.DeptPayment
 
             var DTOResult = await Get(Convert.ToInt32(result.Data), Convert.ToInt32(currentUserID));
 
-            debtPayment.MainTransactionID = result.Data;
+            debtEntry.MainTransactionID = result.Data;
             if (!DTOResult.IsSuccess)
-                return handler.Success(debtPayment);
+                return handler.Success(debtEntry);
 
             return handler.Success(DTOResult.Data);
         }
         public async Task<IResult<bool>> Update(DebtTransactionDTO debtDTO, int currentUserID)
         {
-            var errorMessage = "failed to update debt payment!";
+            var errorMessage = "failed to update debt entry!";
 
             var handler = _resultFactory.Create<bool>();
 
@@ -93,7 +90,7 @@ namespace MoneyMindManager.Application.Services.DeptPayment
             if (!accessResult.Data)
                 return handler.Failure("ليس لديك صلاحية إضافة/تعديل (سندات - معاملات سداد) الديون.");
 
-            var result = await _debtPaymentRepository.Update(_debtPaymentMapper.DTOToEntity(debtDTO), currentUserID);
+            var result = await _debtEntryRepository.Update(_debtEntryMapper.DTOToEntity(debtDTO), currentUserID);
 
             if (result is null)
                 return handler.Failure(errorMessage);
@@ -102,7 +99,7 @@ namespace MoneyMindManager.Application.Services.DeptPayment
         }
         public async Task<IResult<bool>> Delete(int transactionID, int currentUserID)
         {
-            var errorMessage = "failed to delete debt payment!";
+            var errorMessage = "failed to delete debt entry!";
 
             var handler = _resultFactory.Create<bool>();
 
@@ -117,7 +114,7 @@ namespace MoneyMindManager.Application.Services.DeptPayment
             if (!accessResult.Data)
                 return handler.Failure("ليس لديك صلاحية حذف (سندات - معاملات سداد) الديون.");
 
-            var result = await _debtPaymentRepository.Delete(transactionID, currentUserID);
+            var result = await _debtEntryRepository.Delete(transactionID, currentUserID);
 
             if (result is null)
                 return handler.Failure(errorMessage);
@@ -128,16 +125,16 @@ namespace MoneyMindManager.Application.Services.DeptPayment
         {
             var handler = _resultFactory.Create<DebtTransactionDTO>();
 
-            var result = await _debtPaymentRepository.Get(transactionID, currentUserID);
+            var result = await _debtEntryRepository.Get(transactionID, currentUserID);
 
             if (result is null)
-                return handler.Failure("failed to get debt payment!");
+                return handler.Failure("failed to get debt entry!");
 
             if (!result.IsSuccess)
                 return handler.Failure(result.ErrorMessage);
 
             if (result.Data is null)
-                return handler.Failure("failed to get debt payment!");
+                return handler.Failure("failed to get debt entry!");
 
             var mainTransactionResult = await _mainTransactionService.Get(transactionID, currentUserID);
 
@@ -145,7 +142,7 @@ namespace MoneyMindManager.Application.Services.DeptPayment
                 return handler.Failure(result.ErrorMessage);
 
             var mainTransactionEntity = _mainTransactionMapper.DTOToEntity(mainTransactionResult.Data);
-            var DTO = _debtPaymentMapper.EntityToDTO(new DebtPayment(mainTransactionEntity, Convert.ToInt32(result.Data.DebtID)));
+            var DTO = _debtEntryMapper.EntityToDTO(new Domain.Entities.DebtEntry.DebtEntry(mainTransactionEntity, Convert.ToInt32(result.Data.DebtID)));
 
             return handler.Success(DTO);
         }
@@ -154,10 +151,10 @@ namespace MoneyMindManager.Application.Services.DeptPayment
             var handler = _resultFactory.Create<PagedResultWithValueDTO<DebtTransactionsViewSummary>>();
 
             byte rowsPersPage = 15;
-            var result = await _debtPaymentRepository.GetAllPagedForDebt(debtID, currentUserID, pageNumber, rowsPersPage);
+            var result = await _debtEntryRepository.GetAllPagedForDebt(debtID, currentUserID, pageNumber, rowsPersPage);
 
             if (result is null)
-                return handler.Failure("failed to get debt payments list!");
+                return handler.Failure("failed to get debt entrys list!");
 
             return result;
         }
@@ -165,10 +162,10 @@ namespace MoneyMindManager.Application.Services.DeptPayment
         {
             var handler = _resultFactory.Create<IEnumerable<DebtTransactionsExportSummary>>();
 
-            var result = await _debtPaymentRepository.GetAllForDebt(debtID, currentUserID);
+            var result = await _debtEntryRepository.GetAllForDebt(debtID, currentUserID);
 
             if (result is null)
-                return handler.Failure("failed to get debt payments list!");
+                return handler.Failure("failed to get debt entrys list!");
 
             return result;
         }

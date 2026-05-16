@@ -176,6 +176,24 @@
     <Compile Include="Abstractions\IUserSession.cs" />
     <Compile Include="Abstractions\IUserSettingsService.cs" />
     <Compile Include="Abstractions\IWindowsRegistrysettings.cs" />
+    <Compile Include="Forms\Debts\DebtEntry\ctrDebtEntriesList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Debts\DebtEntry\ctrDebtEntriesList.Designer.cs">
+      <DependentUpon>ctrDebtEntriesList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Debts\DebtEntry\frmAddUpdateDebtEntry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Debts\DebtEntry\frmAddUpdateDebtEntry.Designer.cs">
+      <DependentUpon>frmAddUpdateDebtEntry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Debts\DebtPayment\ctrDebtPaymentsList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Debts\DebtPayment\ctrDebtPaymentsList.Designer.cs">
+      <DependentUpon>ctrDebtPaymentsList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Debts\DebtPayment\frmAddUpdateDebtPayment.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -444,6 +462,15 @@
     <Compile Include="Services\UserSession.cs" />
     <Compile Include="Services\WindowsRegistrysettings.cs" />
     <Compile Include="Services\WindowsRegistryUserCredentialsService.cs" />
+    <EmbeddedResource Include="Forms\Debts\DebtEntry\ctrDebtEntriesList.resx">
+      <DependentUpon>ctrDebtEntriesList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Debts\DebtEntry\frmAddUpdateDebtEntry.resx">
+      <DependentUpon>frmAddUpdateDebtEntry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Debts\DebtPayment\ctrDebtPaymentsList.resx">
+      <DependentUpon>ctrDebtPaymentsList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Debts\DebtPayment\frmAddUpdateDebtPayment.resx">
       <DependentUpon>frmAddUpdateDebtPayment.cs</DependentUpon>
     </EmbeddedResource>

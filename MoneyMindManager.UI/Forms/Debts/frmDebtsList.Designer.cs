@@ -917,7 +917,7 @@
             this.gbtnAddDebt.PressedColor = System.Drawing.Color.White;
             this.gbtnAddDebt.Size = new System.Drawing.Size(180, 41);
             this.gbtnAddDebt.TabIndex = 8;
-            this.gbtnAddDebt.Text = "إضافة سند دين";
+            this.gbtnAddDebt.Text = "إضافة مستند دين";
             this.gbtnAddDebt.Click += new System.EventHandler(this.gbtnAddVoucher_Click);
             // 
             // gcbFilterByDate
@@ -957,7 +957,7 @@
             this.lblHeader.Name = "lblHeader";
             this.lblHeader.Size = new System.Drawing.Size(1210, 60);
             this.lblHeader.TabIndex = 101;
-            this.lblHeader.Text = "سندات الديون";
+            this.lblHeader.Text = "مستندات الديون";
             this.lblHeader.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // gcbFilterByDebtType

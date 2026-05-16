@@ -1,20 +1,20 @@
 ﻿using MoneyMindManager.Application.Mappers.Abstractions;
-using MoneyMindManager.Domain.Entities.DebtPayment;
+using MoneyMindManager.Domain.Entities.DebtEntry;
 using MoneyMindManager.Shared.DTOs.DebtPayment;
 
 namespace MoneyMindManager.Application.Mappers.Mappers_Implementaion
 {
-    public class DebtPaymentMapper : IDebtPaymentMapper
+    public class DebtEntryMapper : IDebtEntryMapper
     {
-        public DebtPayment DTOToEntity(DebtTransactionDTO DTO)
+        public DebtEntry DTOToEntity(DebtTransactionDTO DTO)
         {
             if (DTO is null)
                 return null;
 
-            return new DebtPayment(DTO.MainTransactionID, DTO.Amount, DTO.CreatedDate, DTO.AccountID, DTO.CreatedByUserID, DTO.TransactionTypeID,
+            return new DebtEntry(DTO.MainTransactionID, DTO.Amount, DTO.CreatedDate, DTO.AccountID, DTO.CreatedByUserID, DTO.TransactionTypeID,
                 DTO.Purpose, DTO.IsLocked, DTO.TransactionDate, DTO.TransactionTypeName, DTO.CreatedByUserName, DTO.DebtID);
         }
-        public DebtTransactionDTO EntityToDTO(DebtPayment entity)
+        public DebtTransactionDTO EntityToDTO(DebtEntry entity)
         {
             if (entity is null)
                 return null;

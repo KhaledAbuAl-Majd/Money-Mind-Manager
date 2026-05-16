@@ -11,15 +11,14 @@ using MoneyMindManager.UI.Abstractions;
 using MoneyMindManager.UI.Properties;
 using MoneyMindManager_Presentation.Global;
 
-
-namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
+namespace MoneyMindManager.UI.Forms.Debts.DebtEntry
 {
-    public partial class frmAddUpdateDebtPayment : Form
+    public partial class frmAddUpdateDebtEntry : Form
     {
         private readonly IUserSession _userSession;
         private readonly IMessageBoxService _messageBoxService;
         private readonly IFormDisplayer _formDisplayer;
-        private readonly IDebtPaymentApiClient _debtPaymentApi;
+        private readonly IDebtEntryApiClient _debtEntryApi;
         private bool isInitialized = false;
 
         /// <summary>
@@ -37,13 +36,13 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
         enum enMode { AddNew, Update };
         enMode Mode { get; set; }
 
-        public frmAddUpdateDebtPayment(IUserSession userSession, IMessageBoxService messageBoxService, IFormDisplayer formDisplayer,
-            IDebtPaymentApiClient debtPaymentApiClient)
+        public frmAddUpdateDebtEntry(IUserSession userSession, IMessageBoxService messageBoxService, IFormDisplayer formDisplayer,
+            IDebtEntryApiClient debtEntryApiClient)
         {
             this._userSession = userSession;
             this._messageBoxService = messageBoxService;
             this._formDisplayer = formDisplayer;
-            this._debtPaymentApi = debtPaymentApiClient;
+            this._debtEntryApi = debtEntryApiClient;
             if (!_CheckPermissions())
             {
                 this.Dispose();
@@ -54,7 +53,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             InitializeComponent();
             Mode = enMode.AddNew;
             _TransactionID = null;
-            _DebtPayment = null;
+            _DebtEntry = null;
         }
 
         public bool Initialize(int transactionID)
@@ -81,7 +80,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
         }
         private int? _TransactionID { get; set; }
 
-        private DebtTransactionDTO _DebtPayment { get; set; }
+        private DebtTransactionDTO _DebtEntry { get; set; }
 
         void ChangeHeaderValue(string txt)
         {
@@ -105,7 +104,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
         {
             if (isLocked)
             {
-                _SetReadOnlyAtTextBox(kgtxtPaymentDate);
+                _SetReadOnlyAtTextBox(kgtxtDebtDate);
                 _SetReadOnlyAtTextBox(kgtxtPurpose);
                 _SetReadOnlyAtTextBox(kgtxtAmount);
 
@@ -114,7 +113,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             }
             else
             {
-                _CancelReadOnlyAtTextBox(kgtxtPaymentDate);
+                _CancelReadOnlyAtTextBox(kgtxtDebtDate);
                 _CancelReadOnlyAtTextBox(kgtxtPurpose);
                 _CancelReadOnlyAtTextBox(kgtxtAmount);
 
@@ -128,21 +127,22 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
         void _AddNewMode()
         {
             _TransactionID = null;
-            _DebtPayment = new DebtTransactionDTO();
+            _DebtEntry = new DebtTransactionDTO();
             lblTransactionID.Text = "N/A";
-            kgtxtPaymentDate.RefreshNumber_DateTimeFormattedText((_userSession.CurrentUserSettings.DebtPayments_TodayAsDefaultDate) ? DateTime.Today.ToString() : null);
+            kgtxtDebtDate.RefreshNumber_DateTimeFormattedText((_userSession.CurrentUserSettings.DebtPayments_TodayAsDefaultDate) ? DateTime.Today.ToString() : null);
             kgtxtPurpose.Text = null;
             kgtxtAmount.Text = null;
             _isLocked = false;
             LockAndUnLockMode(_isLocked);
             ctrlInfoIcon_Status_IsLocked.Visible = false;
             gibtnDeleteTransaction.Enabled = false;
-            kgtxtPaymentDate.Focus();
+            kgtxtDebtDate.Focus();
+            ChangeHeaderValue("إضافة معاملة سند دين");
         }
 
         async Task _UpdateMode()
         {
-            var transactionResult = await _debtPaymentApi.Get(Convert.ToInt32(_TransactionID), Convert.ToInt32(_userSession.UserID));
+            var transactionResult = await _debtEntryApi.Get(Convert.ToInt32(_TransactionID), Convert.ToInt32(_userSession.UserID));
 
             if (!transactionResult.IsSuccess || transactionResult.Data is null)
             {
@@ -151,24 +151,24 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                 return;
             }
 
-            ChangeHeaderValue("تعديل بيانات معاملة سداد دين");
+            ChangeHeaderValue("تعديل بيانات معاملة سند دين");
 
-            var searchedDebtPayment = transactionResult.Data;
+            var searchedDebtEntry = transactionResult.Data;
 
 
-            this._DebtPayment = searchedDebtPayment;
+            this._DebtEntry = searchedDebtEntry;
 
-            lblTransactionID.Text = _DebtPayment.MainTransactionID.ToString();
-            kgtxtPaymentDate.Text = _DebtPayment.TransactionDate.ToString();
-            kgtxtPaymentDate.RefreshNumber_DateTimeFormattedText();
-            kgtxtPurpose.Text = _DebtPayment?.Purpose;
-            kgtxtAmount.Text = _DebtPayment.Amount.ToString();
+            lblTransactionID.Text = _DebtEntry.MainTransactionID.ToString();
+            kgtxtDebtDate.Text = _DebtEntry.TransactionDate.ToString();
+            kgtxtDebtDate.RefreshNumber_DateTimeFormattedText();
+            kgtxtPurpose.Text = _DebtEntry?.Purpose;
+            kgtxtAmount.Text = _DebtEntry.Amount.ToString();
             kgtxtAmount.RefreshNumber_DateTimeFormattedText();
 
-            _isLocked = _DebtPayment.IsLocked;
-            LockAndUnLockMode(_DebtPayment.IsLocked);
+            _isLocked = _DebtEntry.IsLocked;
+            LockAndUnLockMode(_DebtEntry.IsLocked);
 
-            gibtnDeleteTransaction.Enabled = !_DebtPayment.IsLocked;
+            gibtnDeleteTransaction.Enabled = !_DebtEntry.IsLocked;
 
             gtswNewTransactionAfterAdd.Checked = false;
             gtswNewTransactionAfterAdd.Enabled = false;
@@ -178,7 +178,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
         void _ResteObject()
         {
-            _DebtPayment = new DebtTransactionDTO();
+            _DebtEntry = new DebtTransactionDTO();
         }
 
         async Task _Save()
@@ -202,15 +202,15 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
 
             lblUserMessage.Visible = false;
 
-            _DebtPayment.TransactionDate = Convert.ToDateTime(kgtxtPaymentDate.ValidatedText);
-            _DebtPayment.Purpose = kgtxtPurpose.ValidatedText;
-            _DebtPayment.Amount = Convert.ToDecimal(kgtxtAmount.ValidatedText);
+            _DebtEntry.TransactionDate = Convert.ToDateTime(kgtxtDebtDate.ValidatedText);
+            _DebtEntry.Purpose = kgtxtPurpose.ValidatedText;
+            _DebtEntry.Amount = Convert.ToDecimal(kgtxtAmount.ValidatedText);
 
             if (Mode == enMode.AddNew)
             {
-                _DebtPayment.DebtID = _DebtID;
+                _DebtEntry.DebtID = _DebtID;
 
-                var result = await _debtPaymentApi.Add(_DebtPayment, Convert.ToInt32(_userSession.UserID));
+                var result = await _debtEntryApi.Add(_DebtEntry, Convert.ToInt32(_userSession.UserID));
 
                 if (!result.IsSuccess || result.Data is null)
                 {
@@ -219,9 +219,9 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                     return;
                 }
 
-                _DebtPayment = result.Data;
+                _DebtEntry = result.Data;
 
-                _messageBoxService.Display($"تم إضافة معاملة السداد بنجاج بمعرف [{_DebtPayment.MainTransactionID}]", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                _messageBoxService.Display($"تم إضافة معاملة سند الدين بنجاج بمعرف [{_DebtEntry.MainTransactionID}]", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 if (gtswNewTransactionAfterAdd.Checked && gtswNewTransactionAfterAdd.Enabled)
                 {
@@ -230,17 +230,17 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                 else
                 {
                     Mode = enMode.Update;
-                    _TransactionID = _DebtPayment.MainTransactionID;
+                    _TransactionID = _DebtEntry.MainTransactionID;
                     lblTransactionID.Text = _TransactionID.ToString();
-                    ChangeHeaderValue("تعديل بيانات معاملة سداد دين");
-                    gibtnDeleteTransaction.Enabled = !_DebtPayment.IsLocked;
+                    ChangeHeaderValue("تعديل بيانات معاملة سند دين");
+                    gibtnDeleteTransaction.Enabled = !_DebtEntry.IsLocked;
                 }
 
                 _isSaved = true;
             }
             else if (Mode == enMode.Update)
             {
-                var result = await _debtPaymentApi.Update(_DebtPayment, Convert.ToInt32(_userSession.UserID));
+                var result = await _debtEntryApi.Update(_DebtEntry, Convert.ToInt32(_userSession.UserID));
 
                 if (!result.IsSuccess || !result.Data)
                 {
@@ -248,7 +248,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                     return;
                 }
 
-                _messageBoxService.Display("تم تعديل بيانات معاملة السداد بنجاح", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                _messageBoxService.Display("تم تعديل بيانات معاملة سند الدين بنجاح", "نجاح العملية", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 _isSaved = true;
             }
         }
@@ -305,7 +305,7 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
         private void gbtnClose_Click(object sender, EventArgs e)
         {
             if (_isSaved)
-                OnCloseAndSaved?.Invoke(Convert.ToInt32(_DebtPayment.MainTransactionID));
+                OnCloseAndSaved?.Invoke(Convert.ToInt32(_DebtEntry.MainTransactionID));
 
             this.Close();
         }
@@ -325,11 +325,11 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
                 return;
 
             if (_userSession.CurrentUserSettings.AskBeforeDeleteDebtPayments)
-                if (_messageBoxService.Display("هل أنت متأكد من رغبتك حذف معاملة السداد هذه ؟ ", "طلب موافقة", MessageBoxButtons.OKCancel,
+                if (_messageBoxService.Display("هل أنت متأكد من رغبتك حذف معاملة سند الدين هذه ؟ ", "طلب موافقة", MessageBoxButtons.OKCancel,
                MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.OK)
                     return;
 
-            var result = await _debtPaymentApi.Delete(Convert.ToInt32(_TransactionID), Convert.ToInt32(_userSession.UserID));
+            var result = await _debtEntryApi.Delete(Convert.ToInt32(_TransactionID), Convert.ToInt32(_userSession.UserID));
 
             if (!result.IsSuccess || !result.Data)
             {
@@ -340,5 +340,6 @@ namespace MoneyMindManager_Presentation.Income_And_Expense.Categories
             _isSaved = true;
             gbtnClose.PerformClick();
         }
+
     }
 }

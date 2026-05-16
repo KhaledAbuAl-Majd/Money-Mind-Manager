@@ -1,10 +1,10 @@
 ﻿using MoneyMindManager.Application.Abstractions.Mappers;
-using MoneyMindManager.Domain.Entities.DebtPayment;
+using MoneyMindManager.Domain.Entities.DebtEntry;
 using MoneyMindManager.Shared.DTOs.DebtPayment;
 
 namespace MoneyMindManager.Application.Mappers.Abstractions
 {
-    public interface IDebtPaymentMapper : IMapper<DebtPayment, DebtTransactionDTO>
+    public interface IDebtEntryMapper : IMapper<DebtEntry, DebtTransactionDTO>
     {
     }
 }
